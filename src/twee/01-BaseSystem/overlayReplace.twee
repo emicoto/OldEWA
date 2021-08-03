@@ -7,7 +7,7 @@
 			<<run $(".customOverlay").attr("data-overlay",$currentOverlay)>>
 			<<switch $args[0]>>
 
-			<<case "status">>
+			<<case "profile">>
 				<<replace #customOverlayTitle>><<OverlayTitle "Profile">><</replace>>
 				<<replace #customOverlayContent>><<status>><</replace>>
 			<<case "options">>

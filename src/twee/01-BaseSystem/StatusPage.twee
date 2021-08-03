@@ -1,6 +1,6 @@
-﻿:: Status [widget]
-<<widget "status">>
-<div id="status">
+﻿:: Profile [widget]
+<<widget "profile">>
+<div id="profile">
 <<set _like to random(($PC.魅力/100),($PC.魅力/10))>>
 
 ＠<<print $PC.名字>>　　关注　1　　粉丝　<<print $follower>><br>

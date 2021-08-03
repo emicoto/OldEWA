@@ -39,7 +39,7 @@
 </div>
 
 
-<<button STATUS>><<overlayReplace "status">><</button>>
+<<button PROFILE>><<overlayReplace "profile">><</button>>
 
 <!-- 隐藏元素 */ -->
 <<set $currentOverlay to null>>
