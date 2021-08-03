@@ -30,8 +30,6 @@ A world similar to our modern Earth 2021, but with supernatural beings hidden in
 
 :: 垃圾桶
 
-<<test>>
-
 自定义链接
 
 <a class="class1" data-passage="passage name" data-setter="$variableName to 'variableValue'">link text</a>
