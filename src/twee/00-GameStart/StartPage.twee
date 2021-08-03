@@ -1,0 +1,70 @@
+:: StoryData
+{
+"ifid": "731DEBA3-F846-4AA9-97C0-8137F28469AC",
+"format": "SugarCube",
+"format-version": "2.23.4"
+}
+
+:: StoryTitle
+失乐园物语
+
+:: StoryBanner
+<img src="image/banner.png">
+
+:: StorySubtitle
+Elysion World Adventure
+
+:: Start [nosave]
+
+<div id="startpage">
+这是一个发生在名叫Elysion的星球的故事。<br>
+Elysion是一个类似现代——2021年地球的世界，虽然表面上平平无奇，实际上隐藏着各种超自然存在。<br>
+例如：超能力、幽灵、兽化人、魔鬼、修仙者等等……<br>
+你本来是平平无奇的一员，但某天一觉醒来你察觉到有什么不一样了……<br>
+在这个不寻常的世界中，你要管理好自身、培养能力，适应新的世界新的秩序，并在日渐混乱的世界中活下去……<br>
+新的故事即将开始……<br>
+
+<span style="line-height:40px;font-size:13px;padding:0px;margin:0px">　
+<<link [[＞ 开始游戏|开始]]>>
+<</link>></span><br>
+
+<<include "初始设定">>
+
+<<link "⇧⇧">>
+	<<script>>
+		document.body.scrollTop = 0;
+		document.documentElement.scrollTop = 0;
+	<</script>>
+<</link>>
+
+</div>
+
+:: 初始设定
+<<set $activepage to "QuickStart">>
+
+<div id="StartingPageMenu">
+    <<button "快速开始">><<replace #StartingPage>><<set $activepage to "QuickStart">><<QuickStart>><</replace>><</button>>
+    <<button "创建角色">><<replace #StartingPage>><<set $activepage to "CharaMaking">><<CharaMaking>><</replace>><</button>>
+    <<button "游戏设定">><<replace #StartingPage>><<set $activepage to "GameSetting">><<GameSetting>><</replace>><</button>>
+    <<if $achivement.points gt 0>>
+    <<button "周回特典">><<replace #StartingPage>><<set $activepage to "StartBonus">><<StartBonus>><</replace>><</button>><</if>>
+</div>
+
+<<dashline>><br>
+
+<div id="StartingPage" >
+    <<QuickStart>>
+</div>
+
+<br>
+<<dashline>>
+
+:: 开始
+
+你的名字是 $PC.名字 <br>
+怎么样？有变化了吗？
+
+
+:: 测试
+
+测试123456

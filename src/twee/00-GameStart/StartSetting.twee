@@ -1,0 +1,131 @@
+﻿:: 快速开始 [widget]
+<<widget "QuickStart">>
+
+<div style="margin-left:16px">∵ 预设人物卡：
+<select id="preset" name="preset" onchange="V.preset = this.value; showcharainfo()">
+	<option value="魔女" selected>魔女</option>
+	<option value="羽轩">羽轩</option>
+	<option value="月棂">月棂</option>
+	<option value="沐歌">沐歌</option>
+	<option value="云鹿">云鹿</option>
+	<option value="若秋">若秋</option>
+    <option value="魔女" hidden="hidden" selected="selected">魔女</option>
+</select>
+</div>
+
+<div id="charainfo" style="margin-left:30px;font-size:15px;color:gray;"><<charainfo>></div><br>
+
+
+<</widget>>
+
+:: 创建人物 [widget]
+<<widget "CharaMaking">>
+
+<<if $PC.trait.泌乳体质 is undefined>>
+    <<set $PC.trait.泌乳体质 to 0>>
+<</if>>
+
+<li>角色名字： <<textbox "$PC.名字" $PC.名字>></li>
+<li>性别属性： <<CMGender>></li>
+<li>兴趣特长： <<CMMainclass>></li>
+<li>　性观念： <<CMChara>></li>
+
+<<dashline>>
+<span id="charamaking">
+<li>外貌体征</li>
+　体型　<<CMBodytype>>　　肤色　<<CMSkin>>　　特殊　<<CMRace>><br>
+　发色　<<CMHairColor>>　　发型　<<CMHair>>　　<span id="CMEyeoption">瞳色　<<CMEyeColor>></span><br>
+　罩杯　<<CMBreast>>　　臀型　<<CMButts>>　　<label><<print '<<checkbox "$PC.trait.泌乳体质" 0 1 ' + ($PC.trait.泌乳体质 is 1 ? "checked" : "") + '>>'>>泌乳体质？</label><br>
+<<dashline>>
+<li>感官特征</li>
+　嘴巴感度　<<CMMouth>><br>
+　胸部感度　<<CMChest>><br>
+<span id="CMgenital"></span>
+　肛门感度　<<CMAnal>><br>
+<<dashline>>
+<li>特殊素质</li>
+<span style="font-size:11px;color:gray">　备注：部分素质会影响成就的获得。</span><br>
+<label>　<<radiobutton "$starttrait" "菜鸟" autocheck>> 菜鸟</label>　　<span class="description">没什么特别的，只有一点新手补助。</span><br>
+<label>　<<radiobutton "$starttrait" "好色" autocheck>> 好色</label>　　<span class="description">对性行为抵抗下降，欲望更容易上升。</span><br>
+<label>　<<radiobutton "$starttrait" "轻浮" autocheck>> 轻浮</label>　　<span class="description">对滥交接受度良好，容易从负面心理状态中恢复。</span><br>
+<label>　<<radiobutton "$starttrait" "偶像" autocheck>> 偶像</label>　　<span class="description">人气、魅力、金钱都有加成，但容易触发严重事件。</span><br>
+<label>　<<radiobutton "$starttrait" "天使心" autocheck>> 天使心</label>　<span class="description">天使一般的心肠，不再有怨恨，但也无法拒绝别人的任何请求。</span><br>
+<label>　<<radiobutton "$starttrait" "露出癖" autocheck>> 露出癖</label>　<span class="description">喜欢暴露的穿着，但面对裸奔还是会害羞的。</span><br>
+<label>　<<radiobutton "$starttrait" "福瑞爱" autocheck>> 福瑞爱</label>　<span class="description">对福瑞的接受度良好，容易提升兽交癖好。</span><br>
+<label>　<<radiobutton "$starttrait" "抖M体质" autocheck>> 抖M</label>　　<span class="description">抖M体质，疼痛减免。</span><br>
+<label>　<<radiobutton "$starttrait" "倾国倾城" autocheck>> 倾国倾城</label> <span class="description">一眼万年。招来狂蜂浪蝶，事件永不中断。</span><br>
+<label>　<<radiobutton "$starttrait" "经商头脑" autocheck>> 经商头脑</label> <span class="description">生财有道，摆摊卖东西有加成。但要注意强盗或小偷。</span><br>
+<span id="racetrait"></span>
+<span id="omegatrait"></span>
+<!-- 自动纠正 -->
+<<silently>>
+    <<repeat 1s>>
+        <<if $activepage is "CharaMaking">>
+            <<if $PC.种族 is "夜族">>
+                <<set $PC.eye to "银色">><<replace #CMEyeoption>>瞳色　<<CMEyeColor>><</replace>>
+            <<elseif $PC.种族 is "灵族">>
+                <<set $PC.eye to "金色">><<replace #CMEyeoption>>瞳色　<<CMEyeColor>><</replace>>
+            <</if>>
+            <<switch $PC.性别>>
+                <<case "伪娘">>
+                    <<replace #CMgenital>><<CMBoy>><</replace>>
+                    <<replace #omegatrait>>
+                    <label>　<<radiobutton "$starttrait" "OMEGA" autocheck>> OMEGA</label>　<span class="description">向女装山脉祈愿，获得孕囊，实现肛内怀孕。</span><br>
+                    <</replace>>
+                <<case "正太">>
+                    <<replace #CMgenital>><<CMBoy>><</replace>>
+                <<case "美少女">>
+                    <<replace #CMgenital>><<CMGirl>><</replace>>
+                <<case "扶她">>
+                    <<replace #CMgenital>><<CMGirl>><<CMBoy>><</replace>>
+            <</switch>>
+            <<if $PC.种族 is "兽族">>
+                <<replace #racetrait>>
+                <label>　<<radiobutton "$starttrait" "兽角" autocheck>> 兽角</label>　　<span class="description">头上增加兽角，增加一点魅力和攻击力。</span><br>
+                <</replace>>
+            <<else>>
+                <<replace #racetrait>><</replace>>
+            <</if>>
+            <<CMChangeApply>>
+        <<else>>
+            <<stop>>
+        <</if>>
+    <</repeat>>
+<</silently>>
+<!-- Event -->
+
+<</widget>>
+
+<<widget "CMBoy">>
+　阴茎大小　<<CMPsize>><br>
+　阴茎感度　<<CMPenis>><br>
+<</widget>>
+
+<<widget "CMGirl">>
+　阴道感度　<<CMVagina>><br>
+<</widget>>
+
+<<widget "charainfo">>
+    <<switch $preset>>
+        <<case "魔女">>
+            大家的魔女<br> 是个伪娘。既然是魔女，那当然擅长魔法。
+        <<case "羽轩">>
+            小网红<br> 可爱的女装游戏主播，知名扳手。既然是扳手，那理科应该挺不错。
+        <<case "月棂">>
+            二次元绘师<br> 网络上小有名气的扶她绘师。同时还是个COSER。擅长文艺创作。
+        <<case "沐歌">>
+            小歌手<br> 初露头角的美少女歌手。除了唱歌，跳舞和演艺也不错。
+        <<case "云鹿">>
+            修仙爱好者<br> 小正太，热衷修仙文学。从小跟着爷爷练武术，身体素质很好。
+        <<case "若秋">>
+             医馆继承人<br> 出生于医学世家的扶她少女，在家人的影响下，小小年纪就精通人体。
+        <<default>>
+            大家的魔女<br> 是个伪娘。既然是魔女，那当然擅长魔法。
+    <</switch>>
+<</widget>>
+
+
+:: 游戏设定 [widget]
+<<widget "GameSetting">>
+    游戏各种设定（制作中）……
+<</widget>>

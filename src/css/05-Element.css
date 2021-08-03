@@ -1,0 +1,65 @@
+﻿#startpage input {
+    max-width: 100px;
+    max-height: 20px;
+    font-size: 14px;
+  }
+
+#StartingPageMenu {
+    width:100%;
+}
+
+#StartingPageMenu button {
+    width:150px;
+    font-size: 14px;
+    letter-spacing:2px;
+    margin: 4px;
+    background-color: white;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    color: olive;
+}
+
+#StartingPageMenu button:hover {
+    background-color: white;
+    border: 1px solid olive;
+    color: black;
+}
+
+#StartingPage li {
+    font-size: 14px;
+    line-height: 24px;
+    list-style: "∵ ";
+}
+
+#StartingPage select {
+    font-size: 12px;
+    width: 80px;
+    color: olive;
+}
+
+#StartingPage select:hover {
+    color: black;
+    border-color: olive;
+}
+
+#StartingPage .dashline {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+#charamaking {
+    font-size: 14px;
+}
+
+#charamaking li {
+    font-size: 14px;
+    list-style: "・";
+    font-weight: 600;
+    color:olive;
+}
+
+.description {
+    margin-left: 10px;
+    font-size: 14px;
+    color:gray;
+}

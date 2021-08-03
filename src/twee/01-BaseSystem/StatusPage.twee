@@ -1,0 +1,31 @@
+﻿:: Status [widget]
+<<widget "status">>
+<div id="status">
+<<set _like to random(($PC.魅力/100),($PC.魅力/10))>>
+
+＠<<print $PC.名字>>　　关注　1　　粉丝　<<print $follower>><br>
+<span class="selfinfo">一名<<print $PC.性别>>菜鸟魔法师，人已死，无念，无CUE。</span><<link "修改简介">><</link>>
+<<dashline>>
+[ 一张自拍照 ]<br>
+<span style="font-size:13px;color:olive">照片中的<<you>>有着一头奶茶色的微卷及脖短发，棕色的眼睛，白皙的皮肤，长得很可爱。身材看着娇小，单薄的衬衫下是微微隆起的胸部，从衣服轮廓线中隐隐露出少年应有的臀部线条。虽然照片上看不出来，但<<you>>的腹部有一个爱心模样的刺青。</span><br>
+<span style="font-size:11px;color:gray">照片下面，一共有 <span style="color:deeppink"><<print _like>></span> 个赞。</span><br>
+<<dashline>>
+[ 现在状态 ]<br>
+<div id="meter" class="metername">体力</div> <<meterbar 80>> <div id="meter" class="metername">健康</div> <<meterbar 80>> <div id="meter" class="metername">理智</div> <<meterbar 80>><br>
+<div id="meter" class="metername">魔力</div> <<meterbar 80>> <div id="meter" class="metername">欲望</div> <<meterbar 80>> <div id="meter" class="metername">压力</div> <<meterbar 80>><br>
+<div id="meter" class="metername">疼痛</div> <<meterbar 80>> <div id="meter" class="metername">恐惧</div> <<meterbar 80>> <div id="meter" class="metername">屈服</div> <<meterbar 80>><br>
+<<dashline>>
+[ 秘密 ]<br>
+<<you>>的身体很干爽。<br>
+<<you>>的初吻还在。童贞。肛门至今还未被任何人贯穿。<br>
+<<you>>的胸部能分泌少量乳汁。现在有50cc的分量。<br>
+<<you>>的阴茎很小，能生产少量精液。囊袋中现在是满的。<br>
+<<you>>的肛门很紧，需要润滑扩张才能进去。<br>
+<<dashline>>
+[ 学生档案 ]<br>
+<<dashline>>
+[ 技能档案 ]<br>
+<<dashline>>
+[ 秘密档案 ]<br>
+</div>
+<</widget>>

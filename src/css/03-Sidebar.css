@@ -1,0 +1,250 @@
+﻿
+#ui-bar {
+    background-color: #eee;
+    border-color: #ccc;
+    letter-spacing: 1px;
+    font-family: "Times New Roman", 筑紫黑体;
+}
+#ui-bar hr {
+    border-color: #ccc;
+}
+
+#ui-bar button {
+    font-family: 'Times New Roman', 微软雅黑;
+    font-size: 15px;
+    letter-spacing: 4px;
+}
+
+#ui-bar-toggle{
+    color: rgb(59, 58, 49);
+    border-color: rgb(219, 219, 211);
+}
+
+#ui-bar-history [id|="history"] {
+    color: #111;
+    border-color: #ccc;
+    width: 24px;
+    height: 24px;
+    font-size: 12px;
+    margin: 0px 30px 0px 30px;
+    text-align: center;
+}
+
+#ui-bar-toggle:hover{
+    background-color: #eee;
+    border-color: rgb(59, 58, 49);
+}
+
+#ui-bar-history [id|="history"]:hover {
+    background-color: #eee;
+    border-color: #111;
+}
+
+#ui-bar-history [id|="history"]:disabled {
+    color: rgb(219, 218, 200);
+    background-color: transparent;
+    border-color: rgb(204, 203, 190);
+}
+
+/* Default dialog styling */
+#ui-overlay {
+    background-color: #777;
+}
+#ui-dialog-titlebar {
+    background-color: #ccc;
+}
+#ui-dialog-close:hover {
+    background-color: #b44;
+    border-color: #a33;
+}
+#ui-dialog-body {
+    background-color: #fff;
+    border-color: #ccc;
+}
+#ui-dialog-body hr {
+    background-color: #ccc;
+}
+
+/* List-based dialog styling */
+#ui-dialog-body.list li:not(:first-child) {
+    border-top-color: #ccc;
+}
+#ui-dialog-body.list li a {
+    color: #111;
+}
+#ui-dialog-body.list li a:hover {
+    background-color: #ddd;
+    border-color: #111;
+}
+
+/* Saves dialog styling */
+#ui-dialog-body.saves > *:not(:first-child),
+#ui-dialog-body.saves tr:not(:first-child) {
+    border-top-color: #ccc;
+}
+#ui-dialog-body.saves .empty {
+    color: #777;
+}
+
+/* Settings dialog styling */
+#ui-dialog-body.settings button[id|="setting-control"] {
+    color: #111;
+    border-color: #ccc;
+}
+#ui-dialog-body.settings button[id|="setting-control"]:hover {
+    background-color: #ddd;
+    border-color: #111;
+}
+#ui-dialog-body.settings button[id|="setting-control"].enabled {
+    background-color: #9e9;
+    border-color: #7c7;
+}
+#ui-dialog-body.settings button[id|="setting-control"].enabled:hover {
+    background-color: #7c7;
+    border-color: #5a5;
+}
+
+
+#menu {
+    display: none;
+}
+
+#menu ul {
+    border-color: #ccc;
+}
+#menu li:not(:first-child) {
+    border-top-color: #ccc;
+}
+#menu li a {
+    color: #111;
+}
+#menu li a:hover {
+    background-color: #ddd;
+    border-color: #111;
+}
+
+
+#versioninfo ,#story-title {
+    position:relative;
+    z-index: 2;
+}
+  
+#story-title {
+    font-size: 40px;
+    line-height: 45px;
+    font-family: "筑紫古典";
+    color:#7F793C;
+    font-style: normal;
+}
+
+#story-subtitle {
+    font-size: 12px;
+    font-family: Georgia;
+    font-style: italic;
+    color:#9A9242;
+    letter-spacing: 2px;
+}
+
+#gameVersionDisplay {
+    position: fixed;
+    left: 2px;
+    bottom: 2px;
+    font-size: 8px;
+    color: rgb(177, 179, 160);
+    z-index: 1000;
+}
+
+#TimeContainer {
+    border-top: 2px solid #716617;
+    border-bottom: 2px solid #716617;
+    position: fixed;
+    top:188px;
+    left:0px;
+    overflow: hidden;
+    width: 280px;
+    height: 22px;
+    z-index: 99;
+}
+
+#InGameDate {
+    border-top: 1px solid rgb(223, 220, 198,0.5);
+    border-bottom: 1px solid rgb(223, 220, 198,0.5);
+    background-color: #57522e;
+    position: fixed;
+    top:190px;
+    left:0px;
+    overflow: hidden;
+    width: 280px;
+    height: 20px;
+    z-index: 100;
+    font-family: 稚艺简体,'Times New Roman';
+    letter-spacing: 3px;
+    align-items: center;
+    line-height: 18px;  
+}
+
+.showtime {
+    font-size: 14px; 
+    color:rgb(240, 239, 231);
+}
+
+.money {
+    font-size: 18px;
+    color:rgb(172, 169, 2);
+    vertical-align:middle;
+    background-image: url("image/moneyicon.png");
+    background-repeat: no-repeat;
+    background-position-x: 0px;
+    font-family: 稚艺简体,'Times New Roman';
+    font-weight: 600;
+    letter-spacing: 3px;
+}
+
+#notice {
+    width: 100%;
+    height:fit-content;
+    font-size: 12px;
+    font-family: 'Times New Roman', 微软雅黑;
+    color:#8b8b7e;
+    padding: 5px;
+}
+
+#playerstats {
+    width: 180px;
+    align-content: center;
+    z-index: 0;
+    margin-left: 12%;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    line-height: 20px;
+}
+
+.metername { 
+    width:40px; 
+    height:18px; 
+    font-size: 14px;
+    font-family:微软雅黑;
+    float:left;
+    z-index:1;
+}   
+
+#status .metername{
+    margin-left: 10px;
+}
+.metercon {
+    z-index:1;
+    width:120px;
+    height: 6px;
+    margin-top: 8px;
+    background-color: #ddd;
+    border:1px solid #ccc;
+    float: left;
+}
+
+.bar {
+    z-index:2;
+    max-width: 120px;
+    min-width: 0px;
+    height:6px;
+    background-color: #ccc;
+}

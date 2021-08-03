@@ -1,0 +1,12 @@
+:: Upgrade Waiting Room
+
+欢迎来到失乐园物语（Elysion Wolrd Adventure） <<print StartConfig.version>>。 游戏升级中，请稍后。<br>
+
+<<silently>>
+<<variablesVersionUpdate>>
+<</silently>>
+
+升级完毕。<br>
+
+[[继续|$navigation.stack.last()][$navigation.stack.pop()]]
+

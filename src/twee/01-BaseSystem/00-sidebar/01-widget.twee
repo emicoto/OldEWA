@@ -1,0 +1,38 @@
+﻿:: SidebarWidget [widget]
+
+<<widget "showtitle">>
+    <div align="center">
+        <img src="image/banner.png">
+        <div id="story-title">失乐园物语</div>
+        <div id="story-subtitle">Elysion World Adventure</div>
+    </div>
+<</widget>>
+
+<<widget "versioninfo">>
+
+失乐园物语 ver.<<print StartConfig.version>><br>
+<br>
+一切都还只是个框架<br>
+
+<</widget>>
+
+<<widget "timestats">>
+    <div id="TimeContainer">
+        <div id="InGameDate">
+            <span class="showtime"><<print $date.year>>.<<if $date.month lt 10>>0<</if>><<print $date.month>>.<<if $date.day lt 10>>0<</if>><<print $date.day>> <<print $date.weekday>> <<if $date.hour lt 10>>0<</if>><<print $date.hour>>:<<if $date.min lt 10>>0<</if>><<print $date.min>> (<<print $date.zone>>)</span><br>
+        </div>
+    </div>
+<</widget>>
+
+<<widget "notification">>
+    <div id="notice">
+        现在是暑假
+    </div>
+<</widget>>
+
+<<widget "playerstatus">>
+
+<</widget>>
+
+
+

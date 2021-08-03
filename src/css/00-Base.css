@@ -1,0 +1,194 @@
+﻿@font-face{
+font-family : "硬笔楷书";
+src : url("CSS/FZYBKSJW.TTF");
+}
+
+@font-face{
+font-family: "细倩简体";
+src: url("CSS/FZXQJW.woff") format('woff'),
+     url("CSS/FZXQJW.woff2") format('woff2');
+font-weight: normal;
+font-style: normal;
+font-display: swap;
+}
+
+@font-face{
+font-family: "稚艺简体";
+src: url("CSS/FZZHYJW.woff") format('woff'),
+     url("CSS/FZZHYJW.woff2") format('woff2');
+font-weight: normal;
+font-style: normal;
+font-display: swap;
+}
+
+@font-face{
+font-family: "筑紫古典";
+src: url("CSS/FZFWZhuZGDSMCJW.TTF");
+}
+
+@font-face{
+font-family: "珍珠体";
+src: url("CSS/FZFWZZTJW.TTF");
+}
+
+@font-face{
+font-family: "筑紫A圆";
+src: url("CSS/FZFWZhuZiAYuanJWL.TTF");
+}
+
+@font-face{
+font-family: "筑紫黑体";
+src: url("CSS/FZFWZhuZiHeiR.TTF");
+}
+
+html {
+    /* Vertical colour gradient */
+  background-image: linear-gradient(
+    to bottom,
+    rgb(241, 241, 236),
+    rgb(179, 180, 178)
+  );
+  background-image: -webkit-linear-gradient(
+    top,
+    rgb(241, 241, 236),
+    rgb(179, 180, 178)
+  );
+    background-attachment: fixed;
+
+    /* Fallback colour */
+    background-color: silver;
+}
+
+body {
+    /* Remove default styles */
+    background-color: transparent;
+    margin: 5% 0 0 0;
+    font-family: "Times New Roman", Georgia, Verdana;
+    /* Used to center the box */
+    text-align: left;
+    color: #707556;
+}
+
+#passages {
+    /* Box background (white with 70% opacity) */
+    background-color: rgba(255, 255, 255, 0.7);
+    border: 2px solid white;
+    /* Rounded corners */
+    border-radius: 1em;
+    /* Box width */
+    width: 95%;
+    min-width: 480px;
+    max-width: 1200px;
+    /* Center the box */
+    display: inline-block;
+    min-height: 40%;
+    margin:left;
+    margin-bottom: 5%;
+    padding: 0px;
+    z-index: -2;
+}
+
+.passage {
+    margin: 0px;
+    /* Inner margin within the box */
+    padding: 24px;
+    /* Text formatting */
+    color: black;
+    font-size: 100%;
+    line-height:180%;
+    text-align:justify;
+}
+
+/* Shrink the page when viewed on devices with a low screen width */
+@media screen and (max-width: 1200px) {
+    .passage {
+    font-size: 90%;
+    }
+    #passages {
+    width: 95%;
+    }
+}
+@media screen and (max-width: 960px) {
+  .passage {
+    font-size: 90%;
+  }
+  #passages {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 840px) {
+  .passage {
+    font-size: 87.5%;
+  }
+  #passages {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 720px) {
+  .passage {
+    font-size: 75%;
+  }
+  #passages {
+    width: 100%;
+  }
+}
+
+#passages button {
+  background-color: #eee;
+  border-color: #ccc;
+  width: fit-content;
+}
+
+#passages button:hover {
+  background-color: #ddd;
+  border-color: #111;
+  cursor: pointer;
+}
+
+#widget button {
+  background-color: #eee;
+    border-color: #ccc;
+  width: fit-content;
+}
+
+#widget button:hover {
+  background-color: #ddd;
+    border-color: rgb(126, 122, 108);
+  cursor: pointer;
+}
+
+  /* Debug view styling */
+html:not([data-debug-view]) #debug-view-toggle {
+    color: #111;
+    border-color: #ccc;
+}
+
+html:not([data-debug-view]) #debug-view-toggle:hover {
+    background-color: #eee;
+    border-color: #111;
+}
+
+html[data-debug-view] #debug-view-toggle {
+    background-color: #9e9;
+    border-color: #7c7;
+}
+
+html[data-debug-view] #debug-view-toggle:hover {
+    background-color: #7c7;
+    border-color: #5a5;
+}
+
+html[data-debug-view] .debug {
+    background-color: #dc9;
+}
+
+html[data-debug-view] .debug.hidden,
+html[data-debug-view] .debug.hidden .debug {
+    background-color: #bbb;
+}
+
+label {
+	cursor: pointer;
+}

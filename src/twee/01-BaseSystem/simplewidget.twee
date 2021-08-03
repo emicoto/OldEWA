@@ -1,0 +1,51 @@
+﻿:: Widget [widget]
+
+<<widget "dashline">>
+    <div class="dashline"></div>
+<</widget>>
+
+<<widget "meterbar">>
+    <<if $args[0]>>
+        <<set _percent to $args[0]>>
+    <<else>>
+        <<set _percent to 100>>
+    <</if>>
+        <<set _percent2 to (100-_percent) >>
+    <<if $args[1]>>
+        <<set _color to $args[1]>>
+    <<else>>
+        <<set _color to "#bbb">>
+    <</if>>
+    <<print '<div id="meter" class="metercon"><div id="meter" class="bar" style="width:'+_percent+'%;background-color:'+_color+'"></div></div>'>>
+<</widget>>
+
+<<widget "fixvalue">>  
+    <<set $money to Math.clamp($money,0,9999999999)>>
+    
+<</widget>>
+
+<<widget "showbasebar">>
+
+<<if $args[0]>>
+    <<set _percent to basepercent($args[0])>>
+    <div class="metername">$args[0]</div><<meterbar _percent $args[1]>>
+<<else>>
+    <div class="error-view">error：no args</div>
+<</if>>
+
+<</widget>>
+
+<<widget "timer">>
+<div id="timer"><<print $gametime>></div>
+<<silently>>
+    <<repeat 1s>>
+        <<set $gametime to $gametime + 1>>
+        <<replace #timer>><<print $gametime>><</replace>>
+    <</repeat>>
+<</silently>>
+
+<</widget>>
+
+<<widget "showtimer">>
+    
+<</widget>>

@@ -1,0 +1,76 @@
+<!-- 左侧边栏 -->
+:: StoryCaption
+<div @class="(Errors.log.length==0?'hidden':'') + ' error-reporter-btn'" onclick="Errors.Reporter.toggle()"></div>
+<!-- 游戏还没开始时 */ -->
+<<if $intro is 1>>
+<<versioninfo>>
+
+<<else>>
+
+<!-- 游戏内日期和时钟 -->
+<<timestats>>
+<span class="money">　<<printmoney $money>></span><br>
+<!-- 简短通知 -->
+<<notification>>
+
+<!-- 玩家状态 -->
+<div id="playerstats">
+	<<showbasebar "健康" "#BBFA5F">><br>
+	<<showbasebar "体力" "#FEDF45">><br>
+	<<showbasebar "魔力" "#C2A5FF">><br>
+	<<showbasebar "理智" "#A7C2FF">><br>
+	<<dashline>>
+	<<showbasebar "欲望" "#FF7377">><br>
+	<<showbasebar "快感" "#FB92C7">><br>
+
+	<<if $PC.base.酒精 gt 0>>
+		<<showbasebar "酒精" "#D1CE89">><br>
+	<</if>>
+	<<if $PC.base.药物 gt 0>>
+		<<showbasebar "药物" "#A398EA">><br>
+	<</if>>
+
+	<<if $combatmode is true>>
+		<<dashline>>
+		<<showbasebar "压力" "#8690C8">><br>
+		<<showbasebar "疼痛" "#7C68C5">><br>
+		<<showbasebar "恐惧" "#B86D4C">><br>
+	<</if>>
+</div>
+
+
+<<button STATUS>><<overlayReplace "status">><</button>>
+
+<!-- 隐藏元素 */ -->
+<<set $currentOverlay to null>>
+	
+<div id="customOverlay" class="customOverlay hidden">
+	<div id="customOverlayTitle" class="fixedClose"></div>
+	<div id="customOverlayContent"></div>
+</div>
+
+<<script>>
+	dragElement(document.getElementById("customOverlay"))
+	function dragElement(event) {
+		// Passage is about to be displayed.
+		var dragID = "#customOverlay", jQIntervalID = 0;
+		function ActivatejQueryUI() {  // Function to see if jQuery UI is loaded yet.
+			if (setup.JSLoaded) {
+				clearInterval(jQIntervalID);  // Stop looking, it's loaded.
+				if ($(dragID).length > 0) {  // Make sure an element with a "draggable" ID exists.
+					$(dragID).draggable();  // Make it draggable.
+				}
+			}
+		}
+
+		if (setup.JSLoaded) {  // See if jQuery UI is loaded yet.
+			// It's loaded, so set up the draggable element.
+			$(event.content).find(dragID).draggable();
+		} else {  // Wait for jQuery UI to load using the ActivatejQueryUI function.
+			jQIntervalID = setInterval(ActivatejQueryUI, 100);
+		}
+	}
+<</script>>
+
+<</if>>
+

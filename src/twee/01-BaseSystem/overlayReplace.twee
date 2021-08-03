@@ -1,0 +1,93 @@
+﻿:: overlayReplace [widget]
+
+<<widget "overlayReplace">>
+	<<if $args[0]>>
+		<<if $currentOverlay isnot $args[0]>>
+			<<set $currentOverlay to $args[0]>>
+			<<run $(".customOverlay").attr("data-overlay",$currentOverlay)>>
+			<<switch $args[0]>>
+
+			<<case "status">>
+				<<replace #customOverlayTitle>><<OverlayTitle "Profile">><</replace>>
+				<<replace #customOverlayContent>><<status>><</replace>>
+			<<case "options">>
+				<<replace #customOverlayTitle>><<OverlayTitle "options">><</replace>>
+				<<replace #customOverlayContent>><<options>><</replace>>
+			<<case "saves">>
+				<<replace #customOverlayTitle>><<OverlayTitle "saves">><</replace>>
+				<<replace #customOverlayContent>>
+					<h3>Saves</h3>
+					<div id="saveList">
+						<<saveList>>
+					</div>
+				<</replace>>
+			<</switch>>
+			<<removeclass "#customOverlay" "hidden">>
+			<<run document.getElementById("customOverlay").scrollTop = 0>>
+		<<else>>
+			<<set $currentOverlay to null>>
+			<<addclass "#customOverlay" "hidden">>
+		<</if>>
+	<</if>>
+<</widget>>
+
+<<widget "OverlayTitle">>
+<div id="overlaytitle"> 
+
+	<div id="closebutton">
+	<<button X>>
+		<<addclass "#customOverlay" "hidden">>
+		<<set $currentOverlay to null>>
+	<</button>>
+	</div>
+
+	<<if $args[0] is "test">>
+	<div id="button1">
+	<<button TEST>><</button>>
+	</div>
+
+	<div id="button2">
+	<<button TEST2>><</button>>
+	</div>
+	<</if>>
+
+	<<if $args[0] is "saves">>
+		<<button "Export/Import Save">>
+			<<overlayReplace "optionsExportImport">>
+			<<set $currentOverlay to null>>
+		<</button>>
+	<</if>>
+
+	<<if $args[0] is "optionsExportImport">>
+		<<button "Return to Options">>
+			<<overlayReplace "saves">>
+			<<set $currentOverlay to "saves">>
+		<</button>>
+	<</if>>
+
+	<<if $args[0] is "statistics">>
+		<<button "Extra Stats (Spoilers)">>
+			<<if $skipStatisticsConfirmation>>
+				<<overlayReplace "extraStatistics">>
+			<<else>>
+				<<overlayReplace "extraStatisticsWarning">>
+			<</if>>
+			<<set $currentOverlay to null>>
+		<</button>>
+	<</if>>
+
+	<<if $args[0] is "extraStatistics">>
+		<<button "Statistics">>
+			<<overlayReplace "statistics">>
+			<<set $currentOverlay to null>>
+		<</button>>
+	<</if>>
+
+<<if $args[0]>><li>$args[0]</li><<else>>　　<</if>>
+
+<<dashline>>
+
+</div>
+
+<br><br>
+<</widget>>

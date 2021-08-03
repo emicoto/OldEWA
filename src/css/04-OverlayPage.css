@@ -1,0 +1,152 @@
+﻿.customOverlay {
+    display: block;
+    position: absolute;
+    top: 5%;
+    bottom: 5%;
+    left: 5%;
+    right:5%;
+    height: 80%;
+    width: 80%;
+    border: 2px rgb(194, 193, 181) solid;
+    background-color: rgba(238, 238, 238, 0.9);
+    text-align: left;
+    padding: 5px;
+    overflow-y: scroll;
+    z-index: 1000;
+    max-width: 800px;
+  user-select: none;
+}
+  
+.customOverlay[data-overlay="canvasLayers"],
+.customOverlay[data-overlay="canvasColours"],
+.customOverlay[data-overlay="canvasModel"] {
+    max-width: unset;
+}
+  
+.customOverlay[data-overlay="status"]{
+    min-width: 600px;
+    max-width: 1000px;
+    max-height: 800px;
+    border-radius: 10px;
+}
+
+.customOverlayTitle {
+    cursor: move;
+}
+
+.overlayMenu ul {
+	text-align: left;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.overlayMenu ul li {
+	float: left;
+	height: 35px;
+	margin-right: 1px;
+}
+
+.debugOverlay {
+	display: block;
+	position: fixed;
+	top: 20px;
+	bottom: 20px;
+	right: 20px;
+	height: 80%;
+	width: auto;
+	max-width: 700px;
+	z-index: 1001;
+	padding: 3px;
+	border: 2px #fff solid;
+	background-color: #333;
+	overflow-y: scroll;
+}
+
+.debugOverlay ul li input {
+	width: 80px;
+	margin: 0;
+}
+
+.overlayItem {
+	border-top: 2px #fff solid;
+	clear: both;
+}
+
+#statsHelp {
+	overflow-y: scroll;
+	height: auto;
+	max-height: 200px;
+}
+
+@media only screen and (min-width: 720px) {
+      .customOverlay {
+          left: 300px;
+      }
+}
+
+#overlaytitle {
+    width: 98%;
+    height: 50px;
+    font-size: 20px;
+    font-style: border;
+    position: absolute;
+    top:5px;
+    left:5px;
+    float: left;
+    cursor: move;
+}
+  
+#overlaytitle li {
+    list-style: "※　";
+    list-style-position: inside;
+}
+
+#overlaytitle button{
+    float: right;
+    top:5px;
+    right:5px;
+    margin-right: 2px;
+    font-size: 10px;
+    width: fit-content;
+    min-width: 24px;
+    height: 24px;
+    border: 1px #ccc solid;
+}
+
+#customOverlay {
+    font-family: 'Times New Roman', 微软雅黑;
+}
+
+#customOverlay button {
+    background-color: #eee;
+    border-color: rgb(182, 174, 153);
+    width: fit-content;
+    font-size: 12px;
+    height: 24px;
+  }
+  
+#customOverlay button:hover {
+    background-color: rgb(230, 228, 223);
+  border-color: rgb(173, 159, 106);
+    cursor: pointer;
+}
+
+
+#customOverlayContent li {
+    height: 22px;
+    margin-left:10px;
+    font-size: 14px;
+    list-style:"・ ";
+    list-style-position: inside;
+}
+
+#status {
+    margin-left: 10px;
+    font-size: 14px;
+}
+
+#status .dashline {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}

@@ -1,0 +1,20 @@
+{
+  "name": "templatetwee",
+  "version": "0.0.1",
+  "main": "index.js",
+  "license": "mit",
+  "scripts": {
+    "watchsrc": "build.bat",
+    "watchcode": "node esbuild.config.js",
+    "serve": "gulp webserver"
+  },
+  "devDependencies": {
+    "esbuild": "^0.12.17",
+    "esbuild-plugin-dsv": "^0.0.2",
+    "esbuild-plugin-yaml": "^0.0.1",
+    "gulp": "^4.0.2",
+    "gulp-webserver": "^0.9.1",
+    "js-yaml": "^4.1.0"
+  },
+  "dependencies": {}
+}

@@ -1,0 +1,90 @@
+sugarcube-2:
+  macros:
+    dashline:
+      name: dashline
+    QuickStart:
+      name: QuickStart
+    StartBonus:
+      name: StartBonus
+    GameSetting:
+      name: GameSetting
+    CharaMaking:
+      name: CharaMaking
+    printmoney:
+      name: printmoney
+    notification:
+      name: notification
+    meterbar:
+      name: meterbar
+    you:
+      name: you
+    time:
+      name: time
+    fixvalue:
+      name: fixvalue
+    OverlayTitle:
+      name: OverlayTitle
+    status:
+      name: status
+    options:
+      name: options
+    saveList:
+      name: saveList
+    overlayReplace:
+      name: overlayReplace
+    timestats:
+      name: timestats
+    versioninfo:
+      name: versioninfo
+    variablesVersionUpdate:
+      name: variablesVersionUpdate
+    CMPenis:
+      name: CMPenis
+    CMVagina:
+      name: CMVagina
+    CMApply:
+      name: CMApply
+    CMMainclass:
+      name: CMMainclass
+    CMChara:
+      name: CMChara
+    CMGender:
+      name: CMGender
+    CMBodytype:
+      name: CMBodytype
+    CMSkin:
+      name: CMSkin
+    CMRace:
+      name: CMRace
+    CMHair:
+      name: CMHair
+    CMEyeColor:
+      name: CMEyeColor
+    CMButts:
+      name: CMButts
+    CMBreast:
+      name: CMBreast
+    CMHairColor:
+      name: CMHairColor
+    CMChest:
+      name: CMChest
+    CMMouth:
+      name: CMMouth
+    CMAnal:
+      name: CMAnal
+    CMBoy:
+      name: CMBoy
+    CMGirl:
+      name: CMGirl
+    CMChangeApply:
+      name: CMChangeApply
+    CMPsize:
+      name: CMPsize
+    showbasebar:
+      name: showbasebar
+    variablesStatic:
+      name: variablesStatic
+    DataBaseInstall:
+      name: DataBaseInstall
+    charainfo:
+      name: charainfo

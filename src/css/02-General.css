@@ -1,0 +1,91 @@
+/* Links */
+a, a.internalLink, a.externalLink {
+    color: rgb(139, 148, 12);
+}
+
+a:hover, a.internalLink:hover, a.externalLink:hover {
+	color: rgb(226, 155, 0);
+	text-decoration: none;
+  border-bottom:1px solid;
+}
+  
+span.link-disabled {
+	color: #ACBCBB;
+}
+  
+button {
+	color: #111;
+}
+
+input, select, textarea {
+    color: #111;
+    border-color: #ccc;
+    max-width:200px;
+}
+
+input:not(:disabled):focus, select:not(:disabled):focus, textarea:not(:disabled):focus,
+input:not(:disabled):hover, select:not(:disabled):hover, textarea:not(:disabled):hover {
+    background-color: white;
+    border-color: rgb(88, 94, 43);
+}
+
+input[type="text"] {
+  background-color:white;
+  border-style:dashed;
+  border-radius: 5px;
+  border-color:rgb(203, 204, 167);
+  min-width: 80px;
+  min-height: 20px;
+  color: olive;
+}
+
+input[type="text"]:hover {
+  background-color: rgb(247, 246, 240);
+  border-color:rgb(88, 94, 43);
+  color:black;
+}
+
+.dashline {
+  width:auto;
+  height:1px;
+  border-bottom: 1px rgb(184, 182, 173) dashed;
+  position: relative;
+}
+
+hr {
+    border-color: rgb(88, 94, 43);
+}
+
+.hidden {
+	display: none !important;
+}
+
+.close {
+	background-color: gray;
+}
+
+.macro-button {
+  background-color: #eee;
+  border-color: #ccc;
+  width: 100%;
+}
+
+.macro-button:hover {
+  background-color: #ddd;
+  border-color: #111;
+  cursor: pointer;
+}
+
+
+
+
+
+
+  
+
+
+  
+
+  
+  
+

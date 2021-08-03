@@ -1,0 +1,60 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		
+		{
+			"type": "shell",
+			"label": "[编译网页]监听SRC文件夹",
+			"command": "yarn watchsrc",
+			"group": "build",
+			"presentation": {
+				"reveal": "always",
+				"panel": "shared",
+				"showReuseMessage": true,
+				"clear": true,
+				"group": "BOTGROUP",
+				"echo": true
+			}
+		},
+		{
+			"label": "[编译JS]监听CODE文件夹",
+			"type": "shell",
+			"command": "yarn watchcode",
+			"group": "build",
+			"presentation": {
+				"reveal": "always",
+				"panel": "new",
+				"showReuseMessage": true,
+				"clear": true,
+				"group": "BOTGROUP",
+				"echo": true
+			},
+			
+
+		},{
+			"label": "[刷新网页]监听根目录文件夹",
+			"type": "shell",
+			"command": "yarn serve",
+			"group": "build",
+			"presentation": {
+				"reveal": "always",
+				"panel": "new",
+				"showReuseMessage": true,
+				"clear": true,
+				"group": "BOTGROUP",
+				"echo": true
+			},
+			
+
+		},{
+
+			"dependsOrder": "parallel",
+			"dependsOn": [ "[编译网页]监听SRC文件夹", "[编译JS]监听CODE文件夹" ,"[刷新网页]监听根目录文件夹"],
+			"label": "Build",
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+		  },
+	]
+  }
