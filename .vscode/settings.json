@@ -5,9 +5,10 @@
 	"search.exclude" : {
 		"/.vscode":true,
 		"/code": true,
-		"devTools":true,
-		"jquery-ui-1.12.1":true,
-		"node_modules":true,
-		"tweetest":true
+		"/devTools":true,
+		"/jquery-ui-1.12.1":true,
+		"/node_modules":true,
+		"/tweetest":true,
+		"/dist":true,
 	},
 }
