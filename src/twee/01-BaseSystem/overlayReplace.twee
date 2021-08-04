@@ -9,7 +9,7 @@
 
 			<<case "profile">>
 				<<replace #customOverlayTitle>><<OverlayTitle "Profile">><</replace>>
-				<<replace #customOverlayContent>><<status>><</replace>>
+				<<replace #customOverlayContent>><<profile>><</replace>>
 			<<case "options">>
 				<<replace #customOverlayTitle>><<OverlayTitle "options">><</replace>>
 				<<replace #customOverlayContent>><<options>><</replace>>

@@ -72,9 +72,9 @@
                     <<replace #omegatrait>>
                     <label>　<<radiobutton "$starttrait" "OMEGA" autocheck>> OMEGA</label>　<span class="description">向女装山脉祈愿，获得孕囊，实现肛内怀孕。</span><br>
                     <</replace>>
-                <<case "正太">>
+                <<case "少年">>
                     <<replace #CMgenital>><<CMBoy>><</replace>>
-                <<case "美少女">>
+                <<case "少女">>
                     <<replace #CMgenital>><<CMGirl>><</replace>>
                 <<case "扶她">>
                     <<replace #CMgenital>><<CMGirl>><<CMBoy>><</replace>>

@@ -30,3 +30,142 @@ window.basepercent = function(name) {
 window.showcharainfo = function () {
 	new Wikifier(null, '<<replace #charainfo>><<charainfo>><</replace>><<CMApply>>');
 }
+
+function hair(){
+  const select = new SelectCase();
+  var num = V.PC.发长
+  select.add(0, 49, "超短发");
+  select.add(50, 99, "齐耳短发");
+  select.add(100, 249, "及脖中发");
+  select.add(250, 499, "及肩中发");
+  select.add(500, 799, "及胸长发");
+  select.add(800, 1200, "及腰长发");
+  select.default = "超长长发";
+  const hairlenth = select.has(num);
+  return `${V.PC.发色 + V.PC.发型 + hairlenth}`;
+}
+
+DefineMacroS("hair",hair);
+
+function beauty(){
+  var num = V.PC.魅力
+  const select = new SelectCase()
+  select.add(0,100,"脸部被毁容，丑得惨绝人寰")
+  select.add(101,200,"脸上有重大伤痕，显得很狰狞")
+  select.add(201,300,"脸看着像被打成了猪头")
+  select.add(301,500,"长得有点丑")
+  select.add(501,700,"脸上有点脏，看着有点丑")
+  select.add(701,1000,"长得很一般，扔人群里就找不着的样子")
+  select.add(1001,1200,"长得还不错")
+  select.add(1201,1500,"长得有点可爱")
+  select.add(1501,1800,"长得很可爱")
+  select.add(1801,2300,"长得挺漂亮")
+  select.add(2300,3000,"长得很漂亮，一眼就能从人群中找到")
+  select.add(3001,4500,"气质出众，长得十分有魅力")
+  select.add(4501,6000,"有着倾国倾城的美貌")
+  select.default = "有着能颠覆世界的绝美神颜";
+  return `${select.has(num)}`
+}
+
+DefineMacroS("beauty", beauty);
+
+function displayskillrank(num){
+  const select = new SelectCase()
+  select.add(0,100,"<span style='color:#839EC0;'><b>F</b></span>")
+  select.add(101,200,"<span style='color:#B07455;'><b>E</b></span>")
+  select.add(201,400,"<span style='color:#8E57E6;'><b>D</b></span>")
+  select.add(401,600,"<span style='color:#4DE4C1;'><b>C</b></span>")
+  select.add(601,800,"<span style='color:#2AAAFF;'><b>B</b></span>")
+  select.add(800,1000,"<span style='color:#FF2A52;'><b>A</b></span>")
+  select.add(1000,1200,"<span style='color:#D7A800;'><b>S</b></span>")
+  return `${select.has(num)}`
+}
+
+DefineMacroS("displayskillrank", displayskillrank);
+
+window.skillrank = function(num){
+  const select = new SelectCase()
+  select
+  select.add(0,100,"F")
+  select.add(101,200,"E")
+  select.add(201,400,"D")
+  select.add(401,600,"C")
+  select.add(601,800,"B")
+  select.add(801,1000,"A")
+  select.add(1000,1200,"S")
+    
+  return `${select.has(num)}`
+}
+
+function skillrank(num){
+  const select = new SelectCase()
+  select
+  select.add(0,100,"F")
+  select.add(101,200,"E")
+  select.add(201,400,"D")
+  select.add(401,600,"C")
+  select.add(601,800,"B")
+  select.add(801,1000,"A")
+  select.add(1000,1200,"S")
+    
+  return `${select.has(num)}`
+}
+
+DefineMacroS("skillrank", skillrank);
+
+window.skillrequire = function(args){
+  switch(args){
+    case "E":
+      return 101;
+    case "D":
+      return 201;
+    case "C":
+      return 401;
+    case "B":
+      return 601;
+    case "A":
+      return 801;
+    case "S":
+      return 1000;
+  }
+}
+
+window.skillprocess = function (num){
+  var rank = skillrank(num)
+  switch(rank){
+    case "F":
+      return num
+    case "E":
+      return (num-100)
+    case "D":
+      return ((num-200)/2)
+    case "C":
+      return ((num-400)/2)
+    case "B":
+      return ((num-600)/2)
+    case "A":
+      return ((num-800)/2)
+    case "S":
+      return ((num-1000)/2)
+  }
+}
+
+window.rankcolor = function(num){
+  var rank = skillrank(num)
+  switch(rank){
+    case "F":
+      return "#839EC0";
+    case "E":
+      return "#B07455";
+    case "D":
+      return "#8E57E6";
+    case "C":
+      return "#4DE4C1";
+    case "B":
+      return "#2AAAFF";
+    case "A":
+      return "#FF2A52";
+    case "S":
+      return "#D7A800";
+  }
+}

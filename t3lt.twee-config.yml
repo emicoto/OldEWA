@@ -88,3 +88,35 @@ sugarcube-2:
       name: DataBaseInstall
     charainfo:
       name: charainfo
+    changeinfo:
+      name: changeinfo
+    profile:
+      name: profile
+    hair:
+      name: hair
+    eye:
+      name: eye
+    skin:
+      name: skin
+    beauty:
+      name: beauty
+    lookbody:
+      name: lookbody
+    breast:
+      name: breast
+    lookhips:
+      name: lookhips
+    looktatoos:
+      name: looktatoos
+    skillrate:
+      name: skillrate
+    showchooldata:
+      name: showchooldata
+    showschooldata:
+      name: showschooldata
+    displayskillrank:
+      name: displayskillrank
+    skillprocess:
+      name: skillprocess
+    showskilldata:
+      name: showskilldata

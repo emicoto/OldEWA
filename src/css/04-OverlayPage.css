@@ -23,7 +23,7 @@
     max-width: unset;
 }
   
-.customOverlay[data-overlay="status"]{
+.customOverlay[data-overlay="profile"]{
     min-width: 600px;
     max-width: 1000px;
     max-height: 800px;
@@ -141,12 +141,83 @@
     list-style-position: inside;
 }
 
-#status {
+#profile {
     margin-left: 10px;
     font-size: 14px;
 }
 
-#status .dashline {
+#profile .dashline {
     margin-top: 5px;
     margin-bottom: 5px;
+}
+
+#profile .metername{
+    margin-left: 10px;
+}
+
+#sensationbar .metername{
+    font-family: Georgia, Verdana, 微软雅黑;
+}
+
+#sensationbar .metercon {
+    max-width:60px;
+}
+
+#sensationbar .bar {
+    max-width:60px;
+}
+
+#skilldata {
+    width: 100%;
+    align-items: center;
+}
+
+#skilldata .classdata {
+    float:left;
+    width: 100px;
+    height: 30px;
+    
+    line-height: 15px;
+    border:1px solid rgb(214, 213, 211);
+    margin: 4px;
+    z-index: 0;
+}
+
+#skilldata .classdata:hover{
+    background-color: rgba(245, 245, 245);
+}
+
+#skilldata .metercon {
+    max-width: 100px;
+    max-height: 2px;
+    margin: 8px 0px 0px 0px;
+    padding: 0px;
+}
+
+#skilldata .bar {
+    max-width: 100px;
+    max-height: 2px;
+    margin: 0px;
+    padding: 0px;
+}
+
+#skilldata .metername {
+    float: left;
+    height: 14px;
+    text-align: center;
+    z-index: 0;
+    font-size: 12px;
+    font-family: 'Times New Roman', 微软雅黑;
+    margin-top: 5px;
+}
+
+#skilldata .skillrank {
+    float: right;
+    height: 14px;
+    text-align: center;
+    z-index: 0;
+    margin-right: 20px;
+    font-size: 11px;
+    font-family: 'Times New Roman', 微软雅黑;
+    margin-top: 5px;
 }

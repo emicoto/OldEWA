@@ -1,19 +1,29 @@
 ﻿:: Profile [widget]
 <<widget "profile">>
 <div id="profile">
+
 <<set _like to random(($PC.魅力/100),($PC.魅力/10))>>
+<<set _infochange to false>>
 
 ＠<<print $PC.名字>>　　关注　1　　粉丝　<<print $follower>><br>
-<span class="selfinfo">一名<<print $PC.性别>>菜鸟魔法师，人已死，无念，无CUE。</span><<link "修改简介">><</link>>
+<span id="shortinfo" class="selfinfo">
+    <<changeinfo>>
+</span>
 <<dashline>>
 [ 一张自拍照 ]<br>
-<span style="font-size:13px;color:olive">照片中的<<you>>有着一头奶茶色的微卷及脖短发，棕色的眼睛，白皙的皮肤，长得很可爱。身材看着娇小，单薄的衬衫下是微微隆起的胸部，从衣服轮廓线中隐隐露出少年应有的臀部线条。虽然照片上看不出来，但<<you>>的腹部有一个爱心模样的刺青。</span><br>
+<span style="font-size:13px;color:olive">照片中的<<you>>有着一头<<hair>>，<<eye>>，<<skin>>，<<beauty>>。<<lookbody>>，单薄的衬衫下是<<breast>>，从衣服轮廓线中可看出<<lookhips>>。<<looktatoos>></span><br>
 <span style="font-size:11px;color:gray">照片下面，一共有 <span style="color:deeppink"><<print _like>></span> 个赞。</span><br>
 <<dashline>>
 [ 现在状态 ]<br>
-<div id="meter" class="metername">体力</div> <<meterbar 80>> <div id="meter" class="metername">健康</div> <<meterbar 80>> <div id="meter" class="metername">理智</div> <<meterbar 80>><br>
-<div id="meter" class="metername">魔力</div> <<meterbar 80>> <div id="meter" class="metername">欲望</div> <<meterbar 80>> <div id="meter" class="metername">压力</div> <<meterbar 80>><br>
-<div id="meter" class="metername">疼痛</div> <<meterbar 80>> <div id="meter" class="metername">恐惧</div> <<meterbar 80>> <div id="meter" class="metername">屈服</div> <<meterbar 80>><br>
+<<showbasebar "健康" "#BBFA5F">>　<<showbasebar "体力" "#FEDF45">>　<<showbasebar "理智" "#A7C2FF">><br>
+<<showbasebar "魔力" "#C2A5FF">>　<<showbasebar "欲望" "#FF7377">>　<<showbasebar "压力" "#8690C8">><br>
+<<showbasebar "疼痛" "#7C68C5">>　<<showbasebar "恐惧" "#B86D4C">>　<<showbasebar "屈服" "#72B3C2">><br>
+<<dashline>>
+<<showbasebar "快感" "#FB92C7">><br>
+<div id="sensationbar">
+<<showbasebar "快M" "#FB92C7">>　<<showbasebar "快B" "#FB92C7">>　<<showbasebar "快A" "#FB92C7">>　<<showbasebar "快U" "#FB92C7">><br>
+<<showbasebar "快P" "#FB92C7">>　<<showbasebar "快V" "#FB92C7">><br>
+</div>
 <<dashline>>
 [ 秘密 ]<br>
 <<you>>的身体很干爽。<br>
@@ -23,9 +33,117 @@
 <<you>>的肛门很紧，需要润滑扩张才能进去。<br>
 <<dashline>>
 [ 学生档案 ]<br>
+<div id="skilldata">
+<<showskilldata "school" "文学">>　<<showskilldata "school" "数学">>　<<showskilldata "school" "物理">>　<<showskilldata "school" "生理">>
+<br><br>
+<<showskilldata "school" "自然">>　<<showskilldata "school" "表演">>　<<showskilldata "school" "艺术">>
+<br><br>
+</div>
 <<dashline>>
 [ 技能档案 ]<br>
+<div id="skilldata">
+<<showskilldata "ability" "异能">>　<<showskilldata "ability" "奥术">>　<<showskilldata "ability" "格斗">>　<<showskilldata "ability" "运动">>
+<br><br>
+<<showskilldata "ability" "灵巧">>　<<showskilldata "ability" "意志">>　<<showskilldata "ability" "性技">>
+<br><br>
+</div>
 <<dashline>>
 [ 秘密档案 ]<br>
+<div id="lewddata">
+纯洁 S　露出 F　滥交 F　受虐 F<br>
+顺从 F　兽交 F　药隐 F　性瘾 F<br>
 </div>
+<div id="lewdinfo">
+现在<<you>>的子宫里有0ml精液。<br>
+现在<<you>>的肠道内有500ml精液在游动，大量的精液将小腹撑起，看着像怀孕了几个月一般。<br>
+</div>
+<div id="lewdrecord">
+<<you>>今天的高潮次数：M 0　 B 0　P 0　V 0　U 0　A 0　Total 0<br>
+浴精总量：0ml　饮精总量：0ml <br>
+</div>
+
+</div>
+<</widget>>
+
+<<widget "changeinfo">>
+
+<<if _infochange is true>>
+    一名<<print $PC.性别>><<print $PC.头衔>><<textbox "$shortinfo" $shortinfo>> <<link "保存修改">><<set _infochange to false>><<replace #shortinfo>><<changeinfo>><</replace>><</link>><br>
+<<else>>
+    一名<<print $PC.性别>><<print $PC.头衔>><<print $shortinfo>> <<link "修改简介">><<set _infochange to true>><<replace #shortinfo>><<changeinfo>><</replace>><</link>>
+<</if>>
+
+<</widget>>
+
+<<widget "eye">>
+<<print $PC.瞳色>>的眼睛
+<</widget>>
+
+<<widget "skin">>
+<<print $PC.皮肤>>的肌肤
+<</widget>>
+
+<<widget "lookbody">>
+    <<switch $PC.体型>>
+        <<case 1>>
+            纤细娇小的身体
+        <<case 2>>
+            普通身高和普通线条的身体
+        <<case 3>>
+            高挑健美的身体
+    <</switch>>
+<</widget>>
+
+<<widget "breast">>
+    <<switch $PC.胸部>>
+        <<case 1>>
+            微微隆起的胸部
+        <<case 2>>
+            可爱小巧的胸部
+        <<case 3>>
+            小山峰一样的胸部
+        <<case 4>>
+            有着傲人曲线的胸部
+        <<case 5>>
+            有着惊人吸引力的胸部
+        <<default>>
+            平坦的胸部
+    <</switch>>
+<</widget>>
+
+<<widget "lookhips">>
+    <<switch $PC.臀部>>
+        <<case 1>>
+            少年般的臀部线条
+        <<case 2>>
+            少女般的臀部线条
+        <<case 3>>
+            圆润的臀部线条
+        <<case 4>>
+            丰满的臀部线条
+        <<case 5>>
+            圆润而丰满、安产型的臀部线条
+    <</switch>>
+<</widget>>
+
+<<widget "looktatoos">>
+    
+<</widget>>
+
+<<widget "wetness">>
+
+<</widget>>
+
+<<widget "vaginity">>
+
+<</widget>>
+
+<<widget "showskilldata">>
+    <<set _num to $PC[$args[0]][$args[1]]>>
+    <<set _percent to Math.clamp(skillprocess(_num),1,100)>>
+    <<set _color to rankcolor(_num)>>
+    <div class="classdata">
+        <div class="metername"><<print $args[1]>></div><div class="skillrank"><<displayskillrank _num>></div>
+        <<meterbar _percent _color>>
+    </div>
 <</widget>>

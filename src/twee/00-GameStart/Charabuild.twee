@@ -1,6 +1,6 @@
 ﻿:: 创建人物组件 [widget]
 <<widget "CMGender">>
-    <<set _optionlist to ["伪娘","扶她","正太","美少女"]>>
+    <<set _optionlist to ["伪娘","扶她","少年","少女"]>>
     <<listbox "$PC.性别" autoselect>>
 	<<optionsfrom _optionlist>>
     <</listbox>>
@@ -143,6 +143,7 @@
             <<set $PC.瞳色 to "天蓝色">>
             <<set $PC.皮肤 to "白皙">>
             <<set $PC.魅力 to 2400>>
+            <<set $PC.头衔 to "菜鸟魔法师">>
 
             <<set $PC.sensitive to {"m" : 2,  "b":2,  "p":2,  "v":0,  "a":4}>>
 
@@ -168,7 +169,7 @@
 
             <<set $PC.genital to {
                 "阴茎" : 2,
-                "子宫" : 0
+                "子宫" : -1
             }>>
 
             <<set $starttrait to "抖M体质">>
@@ -200,6 +201,7 @@
             <<set $PC.瞳色 to  "棕色">>
             <<set $PC.皮肤 to "白皙">>
             <<set $PC.魅力 to 1800>>
+            <<set $PC.头衔 to "游戏直播主">>
 
             <<set $PC.sensitive to {"m" : 1,  "b":2,  "p":1, "v":0,  "a":8}>>
 
@@ -224,7 +226,7 @@
             }>>
             <<set $PC.genital to {
                 "阴茎" : 3,
-                "子宫" : 0
+                "子宫" : -1
             }>>
 
             <<set $starttrait to "轻浮">>
@@ -256,6 +258,7 @@
             <<set $PC.瞳色 to  "淡绿色">>
             <<set $PC.皮肤 to "白皙">>
             <<set $PC.魅力 to 3000>>
+            <<set $PC.头衔 to "二次元绘师">>
 
             <<set $PC.sensitive to {"m" : 1,  "b":2,  "v":1, "p":1,  "a":8}>>
 
@@ -300,7 +303,7 @@
         <<case "沐歌">>
             <<set $PC.type to 3>>
             <<set $PC.名字 to "沐歌">>
-            <<set $PC.性别 to "美少女">>
+            <<set $PC.性别 to "少女">>
             <<set $PC.种族 to "人类">>
             <<set $PC.特长 to "音乐表演">>
             <<set $PC.态度 to 1>>
@@ -313,6 +316,7 @@
             <<set $PC.瞳色 to "棕色">>
             <<set $PC.皮肤 to "健康">>
             <<set $PC.魅力 to 2000>>
+            <<set $PC.头衔 to "新人爱豆">>
 
             <<set $PC.sensitive to {"m" : 1,  "b":4,  "v":1, "p":0,  "a":1}>>
 
@@ -352,7 +356,7 @@
         <<case "云鹿">>
             <<set $PC.type to 5>>
             <<set $PC.名字 to "云鹿">>
-            <<set $PC.性别 to "正太">>
+            <<set $PC.性别 to "少年">>
             <<set $PC.种族 to "兽族">>
             <<set $PC.特长 to "运动格斗">>
             <<set $PC.态度 to 1>>
@@ -365,6 +369,7 @@
             <<set $PC.瞳色 to "深绿色">>
             <<set $PC.皮肤 to "白皙">>
             <<set $PC.魅力 to 1800>>
+            <<set $PC.头衔 to "修仙爱好者">>
 
             <<set $PC.sensitive to {"m" : 1,  "b":2,  "p":2, "v":0,  "a":2}>>
 
@@ -390,7 +395,7 @@
 
             <<set $PC.genital to {
                 "阴茎" : 2,
-                "子宫" : 0
+                "子宫" : -1
             }>>
            
             <<set $PC.lewd to {
@@ -422,6 +427,7 @@
             <<set $PC.瞳色 to "深绿色">>
             <<set $PC.皮肤 to "白皙">>
             <<set $PC.魅力 to 1200>>
+            <<set $PC.头衔 to "中医学徒">>
 
             <<set $PC.sensitive to {"m" : 4,  "b":2,  "v":1, "p":1,  "a":1}>>
 
@@ -467,21 +473,21 @@
 <<widget "CMChangeApply">>
 
     <<switch $PC.性别 >>
-        <<case "美少女">>
-            <<set $PC.genital.阴茎 to 0>>
+        <<case "少女">>
             <<set $PC.genital.子宫 to 1>>
+            <<set $PC.genital.阴茎 to -1>>
             <<set $PC.produce.精液 to [0,0]>>
-            <<set $PC.sensitive.p to 0>>
+            <<set $PC.sensitive.p to -1>>
         <<case "扶她">>
             <<set $PC.genital.子宫 to 1>>
             <<if $PC.genital.阴茎 is 0>>
                 <<set $PC.genital.阴茎 to 1>>
             <</if>>
             <<set $PC.produce.精液 to [($PC.genital.阴茎*50),($PC.genital.阴茎*50)]>>
-        <<case "伪娘" "正太">>
-            <<set $PC.genital.子宫 to 0>>
-            <<set $PC.sensitive.v to 0>>
-            <<if $PC.genital.阴茎 is 0>>
+        <<case "伪娘" "少年">>
+            <<set $PC.genital.子宫 to -1>>
+            <<set $PC.sensitive.v to -1>>
+            <<if $PC.genital.阴茎 is -1>>
                 <<set $PC.genital.阴茎 to 1>>
             <</if>>
             <<set $PC.produce.精液 to [($PC.genital.阴茎*50),($PC.genital.阴茎*50)]>>

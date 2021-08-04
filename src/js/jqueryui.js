@@ -21,3 +21,28 @@ importScripts(setup.Path + "CSS/jquery-ui.js")
 /* Load jQuery UI - End */
 
 const select=(...args)=>(con)=>args.includes(con)
+
+function inrange(num1, num2) {
+	const arr = [];
+	for (let index = 0; num1 <= num2; index++, num1++) {
+	  arr[index] = num1;
+	}
+	 return num => arr.includes(num)
+  }
+
+class SelectCase {
+	cases = [];
+	default = "";
+	add(num1, num2, string) {
+	  this.cases.push({ num1, num2, string });
+	}
+	has(num) {
+	  for (const element of this.cases) {
+		let { num1, num2, string } = element;
+		if (num1 <= num && num <= num2) {
+		  return string;
+		}
+	  }
+	  return this.default;
+	}
+  }

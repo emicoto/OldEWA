@@ -21,7 +21,8 @@
 
 <<widget "fixvalue">>  
     <<set $money to Math.clamp($money,0,9999999999)>>
-    
+    <<set $PC.发长 to Math.clamp($PC.发长,0,9999)>>
+    <<set $PC.魅力 to Math.clamp($PC.魅力,0,9999)>>
 <</widget>>
 
 <<widget "showbasebar">>
