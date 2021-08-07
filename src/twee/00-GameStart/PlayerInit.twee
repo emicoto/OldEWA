@@ -1,36 +1,8 @@
-:: StoryInit
+﻿:: InitPlayerChara [widget]
 
-<<DataBaseInstall>>
-
-<<set $test to {}>>
-<<set $temp to {}>>
-
-<<set $gametime to 0>>
-
-<!-- 快速检索法 luatable["indexname"] = $test.名字 ; $test.历史 
-     var=[0,1,2,3] , luatable[0] = $var[0]  -->
-
-<<set $intro to 0>>
+<<widget "InitPlayerData">>
+<!-- 角色创建 -->
 <<set $starttrait to 0>>
-
-<!-- 日期相关 -->
-<<set $days to 1 >>
-<<set $date to {
-    "year" : 2024,
-    "month" : 7,
-    "day" : 1,
-    "week" : 1,      /*星期一*/
-    "time" : 540,
-    "hour" : 9,
-    "min" : 0,
-    "zone" : "上午",
-    "weekday" : "周一"
-}>>
-
-<<set $weather to "晴">>
-
-<<set $money to 5000>>
-<<set $follower to 1000>>
 
 <!-- 角色数据 -->
 <<set $PC to {
@@ -47,13 +19,16 @@
     "发色"      : "奶茶色",
     "瞳色"      : "棕色",
     "皮肤"      : "白皙",
-    "魅力"      : 1000,
+    "魅力"      : 1600,
     "头衔"      : "菜鸟勇者",
 }>>
 
 <<set $shortinfo to " | 勇敢的少年想创造奇迹。">>
 
+<!-- 角色模组ID，影响角色文本 -->
 <<set $PC.type to 1>>
+<!-- 精神力等级，影响魔力上限，满级10 -->
+<<set $PC.level to 1>>
 
 <<set $PC.base to {
     "体力" : [500,500],
@@ -80,6 +55,9 @@
 <!-- 身体感度，满值10 -->
 <<set $PC.sensitive to {  "m" : 2,  "b" : 2,  "v" : 0,  "p" : 1,  "a" : 4}>>
 
+<!-- 扩张程度，数值是最大直径cm -->
+<<set $PC.extend to {vagina: 3, anal: 2.2, ureth: 0.3}>>
+
 <!-- 学校表现，满值1200
  S 1200-1000 A 1000-800, B 800-600 C 600-400 D 400-200 E 200-100 F 0-100 -->
 <<set $PC.school to {
@@ -103,17 +81,14 @@
     "性技" : 0  /* 影响性攻击效果 */
 }>>
 
-<!-- 精神力等级，影响魔力上限，满级10 -->
-<<set $PC.level to 1>>
-
 <!-- 变态度 -->
 <!-- 下限-1000，上限1000 -->
 <<set $PC.lewd to {
     "纯洁" : 1000, /* 内心的纯洁度，影响欲望 */
     "露出" : 0,    /* 露出接受程度 */
     "滥交" : 0,    /* 滥交接受程度 */
-    "受虐" : -500, /* 受虐接受程度 */
-    "顺从" : -100, /* 顺从程度 */
+    "受虐" : 0, /* 受虐接受程度 */
+    "顺从" : 0, /* 顺从程度 */
     "兽交" : 0,    /* 兽交接受程度 */
     "药瘾" : 0,    /* 药物成瘾度 */
     "性瘾" : 0    /* 性成瘾度 */
@@ -125,13 +100,14 @@
     "乳汁" : [100,100],
 }>>
 
+<!-- PC的素质 -->
 <<set $PC.trait to {}>>
+<!-- PC的状态 -->
 <<set $PC.stats to {}>>
-<<set $pctitle to {}>>
 
 <<set $PC.genital to {
     "阴茎" : 1,
-    "子宫" : 0
+    "子宫" : 0,
 }>>
 
 <<set $PC.vaginity to {
@@ -141,6 +117,10 @@
     "A处女" : 1
 }>>
 
+<<set $PFlag to {
+    lactating : false,
+    lactatecd : 0,
+}>>
 
 <!-- 记录 -->
 <<set $PC.sexrecord to {
@@ -190,11 +170,6 @@
     },
 }>>
 
-<!-- 各种名声 -->
-<<set $famous to {}>>
+<<set $pflag to {}>>
 
-<<set $achivement to {
-    "locked":false,
-    "points":0,
-    "achived":{},
-}>>
+<</widget>>

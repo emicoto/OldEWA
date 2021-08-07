@@ -1,0 +1,74 @@
+﻿#savesListContainer {
+	display: flex;
+	flex-direction: column;
+	border: 1px solid #999;
+}
+
+#savesListContainer .savesListRow {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	align-items: center;
+	border: 1px solid #999;
+	padding: 4px;
+}
+
+#savesListContainer .savesListRow .saveGroup {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	align-items: center;
+	flex-grow: 1;
+	flex-shrink: 1;
+	/* Set min-width to allow parent correctly to resize this element's children */
+	min-width: 0;
+}
+
+#savesListContainer .savesListRow .saveGroup > div {
+	display: flex;
+	justify-content: center;
+	margin: 0 10px;
+	flex-shrink: 0;
+	flex-grow: 0;
+}
+
+#savesListContainer .savesListRow .saveGroup .saveId {
+	min-width: 10px;
+}
+
+#savesListContainer .savesListRow .saveGroup .saveButton {
+	min-width: 110px;
+	display: flex;
+	justify-content: center;
+	margin: 0 10px;
+}
+
+#savesListContainer .savesListRow .saveGroup .saveName {
+	width: 60px;
+}
+
+#savesListContainer .savesListRow .saveGroup .saveButton input {
+	margin: 3px 0;
+}
+
+#savesListContainer .savesListRow .saveGroup > .saveDetails {
+	flex-grow: 1;
+	flex-shrink: 1;
+	flex-basis: 0px;
+	min-width: 100px;
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	justify-content: stretch;
+}
+
+#savesListContainer .savesListRow .saveGroup > .saveDetails span {
+	max-height: 80px;
+	overflow-y: hidden;
+}
+
+#savesListContainer .savesListRow .saveGroup .deleteButton {
+	display: flex;
+	justify-content: right;
+	margin: 0;
+}

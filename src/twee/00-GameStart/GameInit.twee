@@ -1,0 +1,40 @@
+﻿:: InitGameData [widget]
+<<widget "InitGameData">>
+<!-- 初始化游戏数据 -->
+<<set $gametime to 0>>
+<<set $intro to 1>>
+<<set $tutorial to 0>>
+
+<!-- 日期相关 -->
+<<set $days to 1 >>
+<<set $date to {
+    "year" : 2024,
+    "month" : 7,
+    "day" : 1,
+    "week" : 1,      /*星期一*/
+    "time" : 540,
+    "hour" : 9,
+    "min" : 0,
+    "zone" : "上午",
+    "weekday" : "周一"
+}>>
+
+<<set $weather to "晴">>
+
+<<set $money to 5000>>
+<<set $follower to 100>>
+
+<!-- 各种名声 -->
+<<set $fame to {
+    brave : 0,   /* 作为勇者的名声，影响主线任务发展和描述，也影响被强奸的概率 */
+    slut  : 0,   /* 作为荡妇的名声，改变路人对主角的描述 */
+    idol  : 0,   /* 作为偶像明星、网红的名声，对收入有影响 */
+    rape  : 0,   /* 在强奸犯中的知名度，影响强奸率 */
+    social: 0,   /* 在社交圈里的地位 */
+    business:0,  /* 商业名声 */
+}>>
+
+<!-- 持有物 -->
+<<set $items to {}>>
+
+<</widget>>

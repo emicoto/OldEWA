@@ -15,14 +15,16 @@
 <span style="font-size:11px;color:gray">照片下面，一共有 <span style="color:deeppink"><<print _like>></span> 个赞。</span><br>
 <<dashline>>
 [ 现在状态 ]<br>
-<<showbasebar "健康" "#BBFA5F">>　<<showbasebar "体力" "#FEDF45">>　<<showbasebar "理智" "#A7C2FF">><br>
-<<showbasebar "魔力" "#C2A5FF">>　<<showbasebar "欲望" "#FF7377">>　<<showbasebar "压力" "#8690C8">><br>
-<<showbasebar "疼痛" "#7C68C5">>　<<showbasebar "恐惧" "#B86D4C">>　<<showbasebar "屈服" "#72B3C2">><br>
-<<dashline>>
-<<showbasebar "快感" "#FB92C7">><br>
-<div id="sensationbar">
-<<showbasebar "快M" "#FB92C7">>　<<showbasebar "快B" "#FB92C7">>　<<showbasebar "快A" "#FB92C7">>　<<showbasebar "快U" "#FB92C7">><br>
-<<showbasebar "快P" "#FB92C7">>　<<showbasebar "快V" "#FB92C7">><br>
+<div id="statusdisplay">
+    <<showbasebar "健康" "#BBFA5F">>　<<showbasebar "体力" "#FEDF45">>　<<showbasebar "理智" "#A7C2FF">><br>
+    <<showbasebar "魔力" "#C2A5FF">>　<<showbasebar "欲望" "#FF7377">>　<<showbasebar "压力" "#8690C8">><br>
+    <<showbasebar "疼痛" "#7C68C5">>　<<showbasebar "恐惧" "#B86D4C">>　<<showbasebar "屈服" "#72B3C2">><br>
+    <<dashline>>
+    <<showbasebar "快感" "#FB92C7">><br>
+    <div id="sensationbar">
+    <<showbasebar "快M" "#FB92C7">>　<<showbasebar "快B" "#FB92C7">>　<<showbasebar "快A" "#FB92C7">>　<<showbasebar "快U" "#FB92C7">><br>
+    <<showbasebar "快P" "#FB92C7">>　<<showbasebar "快V" "#FB92C7">><br>
+    </div>
 </div>
 <<dashline>>
 [ 秘密 ]<br>
@@ -50,8 +52,8 @@
 <<dashline>>
 [ 秘密档案 ]<br>
 <div id="lewddata">
-纯洁 S　露出 F　滥交 F　受虐 F<br>
-顺从 F　兽交 F　药隐 F　性瘾 F<br>
+纯洁 <<print $PC.lewd.纯洁/10>>%　露出 <<print $PC.lewd.露出/10>>%　滥交 <<print $PC.lewd.滥交/10>>%　受虐 <<print $PC.lewd.受虐/10>>%<br>
+顺从 <<print $PC.lewd.顺从/10>>%　兽交 <<print $PC.lewd.兽交/10>>%　药瘾 <<print $PC.lewd.药瘾/10>>%　性瘾 <<print $PC.lewd.性瘾/10>>%<br>
 </div>
 <div id="lewdinfo">
 现在<<you>>的子宫里有0ml精液。<br>

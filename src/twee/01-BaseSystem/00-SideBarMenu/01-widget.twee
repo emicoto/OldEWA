@@ -31,7 +31,29 @@
 <</widget>>
 
 <<widget "playerstatus">>
+    
+<<showbasebar "健康" "#BBFA5F">><br>
+<<showbasebar "体力" "#FEDF45">><br>
+<<showbasebar "魔力" "#C2A5FF">><br>
+<<showbasebar "理智" "#A7C2FF">><br>
+<<dashline>>
+<<showbasebar "欲望" "#FF7377">><br>
+<<showbasebar "快感" "#FB92C7">><br>
 
+<<if $PC.base.酒精 gt 0>>
+    <<showbasebar "酒精" "#D1CE89">><br>
+<</if>>
+<<if $PC.base.药物 gt 0>>
+    <<showbasebar "药物" "#A398EA">><br>
+<</if>>
+
+<<if $combatmode is true>>
+    <<dashline>>
+    <<showbasebar "压力" "#8690C8">><br>
+    <<showbasebar "疼痛" "#7C68C5">><br>
+    <<showbasebar "恐惧" "#B86D4C">><br>
+<</if>>
+    
 <</widget>>
 
 

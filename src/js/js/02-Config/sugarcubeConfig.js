@@ -1,6 +1,6 @@
 Config.history.controls = true;
 
-Config.history.maxStates = 5;
+Config.history.maxStates = 3;
 
 State.prng.init()
 
@@ -12,7 +12,7 @@ Config.saves.onLoad = function (save) {
 }
 
 Config.saves.onSave = function (save) {
-	new Wikifier(null, '<<updateFeats>>');
+	new Wikifier(null, '<<updateGame>>');
 }
 
 /*LinkNumberify and images will enable or disable the feature completely*/

@@ -110,8 +110,6 @@ sugarcube-2:
       name: looktatoos
     skillrate:
       name: skillrate
-    showchooldata:
-      name: showchooldata
     showschooldata:
       name: showschooldata
     displayskillrank:
@@ -120,3 +118,29 @@ sugarcube-2:
       name: skillprocess
     showskilldata:
       name: showskilldata
+    playerstatus:
+      name: playerstatus
+    clearAllWarning:
+      name: clearAllWarning
+    saveWarning:
+      name: saveWarning
+    loadWarning:
+      name: loadWarning
+    deleteWarning:
+      name: deleteWarning
+    CMBackground:
+      name: CMBackground
+    lang:
+      name: lang
+    printL:
+      name: printL
+    InitDataBase:
+      name: InitDataBase
+    InitGameData:
+      name: InitGameData
+    InitPlayerData:
+      name: InitPlayerData
+    InitNPCData:
+      name: InitNPCData
+    he:
+      name: he

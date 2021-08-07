@@ -23,6 +23,12 @@
     <<set $money to Math.clamp($money,0,9999999999)>>
     <<set $PC.发长 to Math.clamp($PC.发长,0,9999)>>
     <<set $PC.魅力 to Math.clamp($PC.魅力,0,9999)>>
+    <<set $PC.base.体力[1] to Math.clamp(500+($PC.ability.运动*($PC.level/5)),0,2500)>>
+    <<set $PC.base.健康[0] to Math.clamp($PC.base.健康[0],-100,1000)>>
+    <<set $PC.base.健康[1] to 1000>>
+    <<set $PC.base.理智[0] to Math.clamp($PC.base.理智[0],-100,1000)>>
+    <<set $PC.base.理智[1] to 1000>>
+    <<set $PC.base.魔力[1] to Math.clamp(100+$PC.level*($PC.ability.意志/8),100,1200)>>
 <</widget>>
 
 <<widget "showbasebar">>
@@ -49,4 +55,54 @@
 
 <<widget "showtimer">>
     
+<</widget>>
+
+<<widget "updateGame">>
+
+<</widget>>
+
+<<widget "lang">>
+    <<if $args[0]>>
+        <<switch $lang>>
+            <<case "CN">>
+                <<print $args[0]>>
+            <<case "EN">>
+                <<print $args[1]>>
+            <<case "JP">>
+                <<print $args[2]>>
+        <</switch>>
+    <<else>>
+        <div class="error-view">
+            error: args is null
+        </div>
+    <</if>>
+<</widget>>
+
+<<widget "printL">>
+    <<if $args[0]>>
+        <<switch $lang>>
+            <<case "CN">>
+                <<print $args[0]>>
+            <<case "EN">>
+                <<print setup.EN[$args[0]]>>
+            <<case "JP">>
+                <<print setup.JP[$args[0]]>>
+        <</switch>>
+    <<else>>
+        <div class="error-view">
+            error: args is null
+        </div>
+    <</if>>
+<</widget>>
+
+<<widget "he">>
+<<set _gender to $PC.性别>>
+    <<switch _gender>>
+        <<case "伪娘" "少年">>
+            <<print "他">>
+        <<case "扶她" "少女">>
+            <<print "她">>
+        <<default>>
+            <<print "它">>
+    <</switch>>
 <</widget>>
