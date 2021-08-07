@@ -279,6 +279,7 @@
             <<set $PC.genital.阴茎 to -1>>
             <<set $PC.produce.精液 to [0,0]>>
             <<set $PC.sensitive.p to -1>>
+            <<set $PC.vaginity.童贞 to -1>>
         <<case "扶她">>
             <<set $PC.genital.子宫 to 1>>
             <<if $PC.genital.阴茎 is 0>>
@@ -292,6 +293,7 @@
                 <<set $PC.genital.阴茎 to 10>>
             <</if>>
             <<set $PC.produce.精液 to [($PC.genital.阴茎*50),($PC.genital.阴茎*50)]>>
+            <<set $PC.vaginity.处女 to -1>>
     <</switch>>
 
     <<if $PC.trait.泌乳体质 is 1 and $PC.胸部 gt 1>>

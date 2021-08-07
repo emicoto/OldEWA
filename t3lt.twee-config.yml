@@ -144,3 +144,5 @@ sugarcube-2:
       name: InitNPCData
     he:
       name: he
+    showvaginity:
+      name: showvaginity

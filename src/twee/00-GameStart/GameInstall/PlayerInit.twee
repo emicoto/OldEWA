@@ -118,7 +118,7 @@
 }>>
 
 <<set $PFlag to {
-    lactating : false,
+    lactation : false,
     lactatecd : 0,
 }>>
 
@@ -170,6 +170,5 @@
     },
 }>>
 
-<<set $pflag to {}>>
 
 <</widget>>

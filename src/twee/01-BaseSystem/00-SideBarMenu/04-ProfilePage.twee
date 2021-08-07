@@ -29,9 +29,16 @@
 <<dashline>>
 [ 秘密 ]<br>
 <<you>>的身体很干爽。<br>
-<<you>>的初吻还在。童贞。肛门至今还未被任何人贯穿。<br>
+<<showvaginity>>。<br>
+<<if $pflag.lactation is true>>
 <<you>>的胸部能分泌少量乳汁。现在有50cc的分量。<br>
+<</if>>
+<<if $PC.genital.阴茎 gt 0>>
 <<you>>的阴茎很小，能生产少量精液。囊袋中现在是满的。<br>
+<</if>>
+<<if $PC.genital.子宫 gt 0>>
+<<you>>的阴道很紧，需要润滑扩张才能进去。<br>
+<</if>>
 <<you>>的肛门很紧，需要润滑扩张才能进去。<br>
 <<dashline>>
 [ 学生档案 ]<br>
@@ -148,4 +155,60 @@
         <div class="metername"><<print $args[1]>></div><div class="skillrank"><<displayskillrank _num>></div>
         <<meterbar _percent _color>>
     </div>
+<</widget>>
+
+<<widget "wetness">>
+<<set _infomation to {
+    {required: 0 , text: "很干爽"，},
+    {required: 10 , text: "身上有液体，黏黏的"},
+    {required: 30 , text: ""},
+    {required: 50 , text: ""},
+    {required: 100, text: ""},
+}>>
+
+<</widget>>
+
+<<widget "showvaginity">>
+    <<nobr>>
+    <<you>>的
+    <<if $PC.vaginity.初吻 is 1>>
+        初吻还在。
+    <<else>>
+        初吻给了<<print $PC.vaginity.初吻>>。
+    <</if>>
+
+    <<if $PC.vaginity.童贞 is 1>>
+        还是个童贞
+    <<elseif $PC.vaginity.童贞 isnot -1 and isnot $PC.vaginity.童贞 1>>
+        童贞已经献给了<<print $PC.vaginity.童贞>>
+    <</if>>
+
+    <<if $PC.vaginity.处女 is 1>>
+        处女膜依然完好
+    <<elseif $PC.vaginity.处女 isnot -1 and $PC.vaginity.处女 isnot 1>>
+        处女已经在<<print $PC.vaginity.处女.date>>被<<print $PC.vaginity.处女.person>>贯穿。
+    <</if>>
+
+    <<if $PC.vaginity.A处女 is 1>>
+        肛门至今还未被任何人贯穿。
+    <<else>>
+        肛门处女在<<print $PC.vaginity.A处女.date>>被<<print $PC.vaginity.A处女.person>>贯穿。
+    <</if>>
+    <</nobr>>
+<</widget>>
+
+<<widget "showlactaion">>
+
+<</widget>>
+
+<<widget "showpenisinfo">>
+
+<</widget>>
+
+<<widget "showvaginainfo">>
+
+<</widget>>
+
+<<widget "showanalinfo">>
+
 <</widget>>
