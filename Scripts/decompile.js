@@ -23,8 +23,8 @@ const tweego = () => {
 };
 const COMMANDS = [tweego()];
 const options = {
-  html: `-d ${_resolve("dist/index.html")}`,
-  script: `-o ${_resolve("decompile/script.twee")}`,
+  html: `-d ${_resolve("dist/decompile.html")}`,
+  script: `-o ${_resolve("public/script.twee")}`,
 };
 for (const key in options) {
   COMMANDS.push(options[key]);

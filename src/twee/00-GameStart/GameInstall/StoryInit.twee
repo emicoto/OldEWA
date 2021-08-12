@@ -12,6 +12,11 @@
 
 <<set $temp to {}>>
 <<set $lang to "CN">>
+<<set $Config to {
+	pronun : 2,
+	timelimit : false,
+}>>
+<<set $hardmode to 1>>
 
 <<if StartConfig.debug is true>>
 	<<set $debug to 1>>
@@ -35,6 +40,7 @@
         "locked":false,
         "points":0,
         "achived":{},
+		"reset":0,
     }>>
 <</if>>
 

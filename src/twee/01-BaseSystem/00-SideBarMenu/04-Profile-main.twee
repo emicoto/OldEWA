@@ -1,0 +1,70 @@
+﻿:: Profile [widget]
+<<widget "profile">>
+<div id="profile">
+
+<<set _like to random(($PC.魅力/100),($PC.魅力/10))>>
+<<set _infochange to false>>
+
+＠<<print $PC.名字>>　　关注　<<print $follow>>　　粉丝　<<print $follower>><br>
+<span id="shortinfo" class="selfinfo">
+    <<changeinfo>>
+</span>
+<<dashline>>
+[ 一张自拍照 ]<br>
+<span style="font-size:13px;color:olive">照片中的<<you>>有着一头<<hair>>，<<eye>>，<<skin>>，<<beauty>>。<<lookbody>>，单薄的衬衫下是<<breast>>，从衣服轮廓线中可看出<<lookhips>>。<<looktatoos>></span><br>
+<span style="font-size:11px;color:gray">照片下面，一共有 <span style="color:deeppink"><<print _like>></span> 个赞。</span><br>
+
+<<dashline>>
+[ 现在状态 ]<br>
+<div id="statusdisplay">
+    <<showbasebar "健康" "#BBFA5F">>　<<showbasebar "体力" "#FEDF45">>　<<showbasebar "理智" "#A7C2FF">><br>
+    <<showbasebar "魔力" "#C2A5FF">>　<<showbasebar "欲望" "#FF7377">>　<<showbasebar "压力" "#8690C8">><br>
+    <<showbasebar "疼痛" "#7C68C5">>　<<showbasebar "恐惧" "#B86D4C">>　<<showbasebar "耻辱" "#72B3C2">><br>
+</div>
+
+<<dashline>>
+[ 学生档案 ]<br>
+<div id="skilldata">
+<<showskilldata "school" "文学">>　<<showskilldata "school" "数学">>　<<showskilldata "school" "物理">>　<<showskilldata "school" "生理">>
+<br><br>
+<<showskilldata "school" "自然">>　<<showskilldata "school" "表演">>　<<showskilldata "school" "艺术">>
+<br><br>
+</div>
+
+<<dashline>>
+[ 能力档案 ]<br>
+<div id="rpgstatus">
+种族：<<print $PC.种族>><br>
+精神等级：<<print $PC.level>><br>
+· HP　<<print $PC.rpg.HP[0]>> / <<print $PC.rpg.HP[1]>>　　· MP　<<print $PC.rpg.MP[0]>> / <<print $PC.rpg.MP[1]>> 　　· SP　<<print $PC.rpg.SP[0]>> / <<print $PC.rpg.SP[1]>><br>
+· 物攻 <<print $PC.rpg.ATK>>　　 物防 <<print $PC.rpg.DEF>>　　魔攻 <<print $PC.rpg.MATK>>　　魔防 <<print $PC.rpg.MDEF>> <br>
+· 装备加成: 无<br>
+</div>
+
+<<dashline>>
+[ 技能档案 ]<br>
+<div id="skilldata">
+<<showskilldata "abl" "异能">>　<<showskilldata "abl" "奥术">>　<<showskilldata "abl" "战技">>　<<showskilldata "abl" "健身">>
+<br><br>
+<<showskilldata "abl" "运动">>　<<showskilldata "abl" "灵巧">>　<<showskilldata "abl" "意志">>
+<br><br>
+</div>
+
+<<dashline>>
+[ 宠物资料 ]<br>
+<div id="otherdata">
+    <<switch $PC.type>>
+        <<case 1 5>>
+            史莱姆。 浅蓝色半透明可可爱爱的一团。只需要喝水不需要其他食物。会因为喝的饮料颜色而变色。
+        <<case 2 4>>
+            小狼狗。 额头镶着个月亮形状的水晶的看着像二哈的狗。似乎有魔力。
+        <<case 3>>
+            小恶魔。 浑身紫色看着丑萌丑萌的。万能助手。
+        <<case 6>>
+            小触手。 粉粉嫩嫩的小型触手。 再生能力很强，是很好的实验对象。
+    <</switch>>
+</div>
+
+</div>
+
+<</widget>>

@@ -1,0 +1,20 @@
+﻿:: Profile Detail [widget]
+<<widget "statistics">>
+
+<</widget>>
+
+<<widget "playrecord">>
+<div id="profile">
+
+♦<u> <b> 工作记录</b> </u><br>
+<br>
+<<dashline>>
+♥<u> <b> 经历次数</b> </u><br>
+<<for _i to 0; _i lt $explist.length; _i++>>
+    <<if $PC.exp[$explist[_i]] isnot null>>
+    <div id="explist" class="listblock"><span class="listname"><b>· </b><<print $explist[_i]>></span><span class="listnum">- <<print $PC.exp[$explist[_i]]>></span></div>
+    <</if>>
+<</for>>
+
+</div>
+<</widget>>

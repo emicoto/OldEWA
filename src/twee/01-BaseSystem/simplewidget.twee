@@ -23,12 +23,40 @@
     <<set $money to Math.clamp($money,0,9999999999)>>
     <<set $PC.发长 to Math.clamp($PC.发长,0,9999)>>
     <<set $PC.魅力 to Math.clamp($PC.魅力,0,9999)>>
-    <<set $PC.base.体力[1] to Math.clamp(500+($PC.ability.运动*($PC.level/5)),0,2500)>>
+
+    /* 基础条修正 */
+    <<set $PC.base.体力[1] to Math.clamp(500+($PC.abl.运动*($PC.level/5)),0,2500)>>
     <<set $PC.base.健康[0] to Math.clamp($PC.base.健康[0],-100,1000)>>
     <<set $PC.base.健康[1] to 1000>>
     <<set $PC.base.理智[0] to Math.clamp($PC.base.理智[0],-100,1000)>>
     <<set $PC.base.理智[1] to 1000>>
-    <<set $PC.base.魔力[1] to Math.clamp(100+$PC.level*($PC.ability.意志/8),100,1200)>>
+    <<set $PC.base.魔力[1] to Math.clamp(100+$PC.level*($PC.abl.意志/8),100,1200)>> 
+
+    /* 扩张修正 */
+    <<set $PC.ste.anal to Math.clamp($PC.ste.anal,1,(12+($PC.体型*2)))>>
+    <<if $PC.性别 is "少女">>
+        <<set $PC.ste.ureth to Math.clamp($PC.ste.ureth,0.5,6)>>
+    <<else>>
+        <<set $PC.ste.ureth to Math.clamp($PC.ste.ureth,0.2,(0.5+$PC.genital.阴茎/10))>>
+    <</if>>
+    <<if $PC.genital.子宫 is null>>
+        <<set $PC.ste.vagina to null>>
+    <<else>>
+        <<set $PC.ste.vagina to Math.clamp($PC.ste.vagina,1,(12+($PC.体型*2)))>>
+    <</if>>
+
+    /* RPG相关修正 */
+    <<set $PC.rpg.HP[1] to Math.clamp(($PC.base.体力[1]/5+100),1,1000)>>
+    <<set $PC.rpg.HP[0] to Math.clamp(($PC.base.体力[0]/5+$PC.base.健康[0]/10),0,$PC.rpg.HP[1])>>
+
+    <<set $PC.rpg.MP[1] to $PC.base.魔力[1]>>
+    <<set $PC.rpg.MP[0] to $PC.base.魔力[0]>>
+
+    <<set $PC.ATK to Math.clamp((10+$PC.abl.战技/10),1,120)>>
+    <<set $PC.DEF to Math.clamp((10+$PC.abl.健身/10),1,120)>>
+    <<set $PC.MATK to Math.clamp((10+($PC.奥术/10*$PC.自然/500)),1,250)>>
+    <<set $PC.MDEF to Math.clamp((10+($PC.异能/10*$PC.物理/500)),1,250)>>
+
 <</widget>>
 
 <<widget "showbasebar">>
@@ -105,4 +133,53 @@
         <<default>>
             <<print "它">>
     <</switch>>
+<</widget>>
+
+<<widget "setchara">>
+    <<if $args[0] is "player">>
+        <<set $currentchara to {
+            名字 : $PC.名字,
+            性别 : $PC.性别,
+            genital : $PC.genital,
+        }>>
+    <<else>>
+        <<set $currentchara to $NPC[$args[0]]>>
+    <</if>>
+<</widget>>
+
+<<widget "splits">>
+    <<set _a to $args.length>>
+    <<set _i to random(0,_a)>>
+    <<print $args[_i]>>
+<</widget>>
+
+<<widget "genders">>
+    <<set _sex to $PC.genital>>
+    <<if _sex.子宫 is null>>
+        <<print $args[0]>>
+    <<else>>
+        <<print $args[1]>>
+    <</if>>
+<</widget>>
+
+/*  HoverTxt : Show notepad icon shows some wikified text in a window of width X pixels above an icon when it's hovered over.  */
+/*  EXAMPLE: <<HoverTxt 200 "text">>  */
+/*  EXAMPLE: <<HoverTxt 300 `someFunction()`>>  */
+<<widget "HoverTxt">>
+	<<if !Number.isInteger($args[0])>>
+		<<set _width = 200>>  /* Default to a width of 200 if an invalid width is passed. */
+	<<else>>
+		<<set _width = $args[0]>>
+	<</if>>
+	<<set _left = Math.trunc(_width / 2) - 11>>
+	<<if ndef _HoverTxtCount>>
+		<<set _HoverTxtCount = 1>>
+	<<else>>
+		<<set _HoverTxtCount += 1>>
+	<</if>>
+	<a class="hoverTxt" style="text-decoration: none;"><img class="hoverIco" src="image/NoteIcon.png">
+		<span @id="'hoverTxt' + _HoverTxtCount" class="hoverBox" @style="'left: -' + _left + 'px; width: ' + _width + 'px;'">
+			<<print $args[1]>>
+		</span>
+	</a>
 <</widget>>

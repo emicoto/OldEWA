@@ -34,7 +34,7 @@
 <span id="charamaking">
 <li>外貌体征</li>
 　体型　<<CMBodytype>>　　肤色　<<CMSkin>>　　特殊　<<CMRace>><br>
-　发色　<<CMHairColor>>　　发型　<<CMHair>>　　<span id="CMEyeoption">瞳色　<<CMEyeColor>></span><br>
+　发色　<<CMHairColor>>　　发型　<<CMHair>>　　<span id="CMEyeoption">瞳色　<<CMEyeColor>></span><span id="CMFurOption"></span><br>
 　罩杯　<<CMBreast>>　　臀型　<<CMButts>>　　<label><<print '<<checkbox "$PC.trait.泌乳体质" 0 1 ' + ($PC.trait.泌乳体质 is 1 ? "checked" : "") + '>>'>>泌乳体质？</label><br>
 <<dashline>>
 <li>感官特征</li>
@@ -45,7 +45,7 @@
 <<dashline>>
 <li>特殊素质</li>
 <span style="font-size:11px;color:gray">　备注：部分素质会影响成就的获得。</span><br>
-<label>　<<radiobutton "$starttrait" "菜鸟" autocheck>> 菜鸟勇者</label>　　<span class="description">没什么特别的，只有一点新手补助。第一次玩推荐这个。</span><br>
+<label>　<<radiobutton "$starttrait" "菜鸟" autocheck>> 菜鸟</label>　　<span class="description">没什么特别的，只有一点新手补助。第一次玩推荐这个。</span><br>
 <label>　<<radiobutton "$starttrait" "好色" autocheck>> 好色</label>　　<span class="description">对性行为抵抗下降，欲望更容易上升。</span><br>
 <label>　<<radiobutton "$starttrait" "轻浮" autocheck>> 轻浮</label>　　<span class="description">对滥交接受度良好，容易从负面心理状态中恢复。</span><br>
 <label>　<<radiobutton "$starttrait" "人气" autocheck>> 人气</label>　　<span class="description">粉丝、魅力、金钱都有加成，但容易触发严重事件。</span><br>
@@ -55,7 +55,6 @@
 <label>　<<radiobutton "$starttrait" "抖M体质" autocheck>> 抖M</label>　　<span class="description">抖M体质，疼痛减免。</span><br>
 <label>　<<radiobutton "$starttrait" "倾国倾城" autocheck>> 倾国倾城</label> <span class="description">一眼万年。招来狂蜂浪蝶，事件永不中断。</span><br>
 <label>　<<radiobutton "$starttrait" "经商头脑" autocheck>> 经商头脑</label> <span class="description">生财有道，摆摊卖东西有加成。但要注意强盗或小偷。</span><br>
-<span id="racetrait"></span>
 <span id="omegatrait"></span>
 <!-- 自动纠正 -->
 <<silently>>
@@ -70,21 +69,20 @@
                 <<case "伪娘">>
                     <<replace #CMgenital>><<CMBoy>><</replace>>
                     <<replace #omegatrait>>
-                    <label>　<<radiobutton "$starttrait" "OMEGA" autocheck>> OMEGA</label>　<span class="description">向女装山脉祈愿，获得孕囊，实现肛内怀孕。</span><br>
+                    <label>　<<radiobutton "$starttrait" "OMEGA" autocheck>> OMEGA</label>　<span class="description">向女装山脉祈愿，获得肠道孕囊，实现肛内怀孕。</span><br>
                     <</replace>>
                 <<case "少年">>
                     <<replace #CMgenital>><<CMBoy>><</replace>>
                 <<case "少女">>
-                    <<replace #CMgenital>><<CMGirl>><</replace>>
+                    <<replace #CMgenital>><<CMGirl>><<CMCri>><</replace>>
                 <<case "扶她">>
                     <<replace #CMgenital>><<CMGirl>><<CMBoy>><</replace>>
             <</switch>>
             <<if $PC.种族 is "兽族">>
-                <<replace #racetrait>>
-                <label>　<<radiobutton "$starttrait" "兽角" autocheck>> 兽角</label>　　<span class="description">头上增加兽角，增加一点魅力和攻击力。</span><br>
-                <</replace>>
+                <<replace #CMFurOption>>　　原型　<<CMFurType>><</replace>>
             <<else>>
-                <<replace #racetrait>><</replace>>
+                <<replace #CMFurOption>><</replace>>
+                <<set $PC.兽型 to null>>
             <</if>>
             <<CMChangeApply>>
         <<else>>
@@ -99,6 +97,10 @@
 <<widget "CMBoy">>
 　阴茎大小　<<CMPsize>><br>
 　阴茎感度　<<CMPenis>><br>
+<</widget>>
+
+<<widget "CMCri">>
+　阴蒂感度 <<CMPenis>><br>
 <</widget>>
 
 <<widget "CMGirl">>
@@ -127,5 +129,8 @@
 
 :: 游戏设定 [widget]
 <<widget "GameSetting">>
-    游戏各种设定（制作中）……
+　语言： 英语English　|　中文Chinese　|　日语Japanese<br>
+　视角： 第一人称　|　第二人称　|  第三人称<br>
+　战斗难度： 简单　|　普通　|　困难　|　噩梦　　※简单模式下无法获得成就<br>
+　时间限制： 有　|　无　　※无限制模式下无法获得成就<br>
 <</widget>>

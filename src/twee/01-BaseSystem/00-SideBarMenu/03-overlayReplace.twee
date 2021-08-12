@@ -6,10 +6,37 @@
 			<<set $currentOverlay to $args[0]>>
 			<<run $(".customOverlay").attr("data-overlay",$currentOverlay)>>
 			<<switch $args[0]>>
-
+			<<case "items">>
+				<<replace #customOverlayTitle>><<OverlayTitle "Items">><</replace>>
+				<<replace #customOverlayContent>><<items>><</replace>>
+				
 			<<case "profile">>
 				<<replace #customOverlayTitle>><<OverlayTitle "Profile">><</replace>>
 				<<replace #customOverlayContent>><<profile>><</replace>>
+
+				<<case "detail">>
+					<<replace #customOverlayTitle>><<OverlayTitle "Profile">><</replace>>
+					<<replace #customOverlayContent>><<playrecord>><</replace>>
+				<<case "secretfile">>
+					<<replace #customOverlayTitle>><<OverlayTitle "Profile">><</replace>>
+					<<replace #customOverlayContent>><<secretfile>><</replace>>
+
+			<<case "journal">>	
+				<<replace #customOverlayTitle>><<OverlayTitle "Journal">><</replace>>
+				<<replace #customOverlayContent>><<journal>><</replace>>
+
+			<<case "social">>
+				<<replace #customOverlayTitle>><<OverlayTitle "Social">><</replace>>
+				<<replace #customOverlayContent>><<socialmedia>><</replace>>
+
+			<<case "dictionary">>
+				<<replace #customOverlayTitle>><<OverlayTitle "Dictionary">><</replace>>
+				<<replace #customOverlayContent>><<dictionary>><</replace>>
+
+			<<case "achivement">>
+				<<replace #customOverlayTitle>><<OverlayTitle "Achivement">><</replace>>
+				<<replace #customOverlayContent>><<achivement>><</replace>>
+				
 			<<case "options">>
 				<<replace #customOverlayTitle>><<OverlayTitle "Options">><</replace>>
 				<<replace #customOverlayContent>><<options>><</replace>>
@@ -41,22 +68,27 @@
 	</div>
 
 	<<if $args[0] is "Profile">>
-		<<button 数据记录>><</button>><<button 详细>><</button>>
+		<<button 详细数据>><<overlayReplace "detail">><</button>>
+		<<button 秘密情报>><<overlayReplace "secretfile">><</button>>
+		<<if $currentOverlay isnot "profile">>
+			<<button 基本情报>><<overlayReplace "profile">><</button>>
+		<</if>>
 	<</if>>
 
-	<<if $args[0] is "saves">>
+	<<if $args[0] is "Saves">>
 		<<button "Export/Import Save">>
 			<<overlayReplace "optionsExportImport">>
 			<<set $currentOverlay to null>>
 		<</button>>
+		<<if $currentOverlay is "optionsExportImport">>
+			<<button "Return to Options">>
+				<<overlayReplace "saves">>
+				<<set $currentOverlay to "saves">>
+			<</button>>
+		<</if>>
 	<</if>>
 
-	<<if $args[0] is "optionsExportImport">>
-		<<button "Return to Options">>
-			<<overlayReplace "saves">>
-			<<set $currentOverlay to "saves">>
-		<</button>>
-	<</if>>
+	
 
 
 <<if $args[0]>><li>$args[0]</li><<else>>　　<</if>>

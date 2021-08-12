@@ -24,18 +24,34 @@ Elysion是一个类似现代——2021年地球的世界，虽然表面上平平
 在这个不寻常的世界中，你要管理好自身、培养能力，适应新的世界新的秩序，并在日渐混乱的世界中活下去……<br>
 新的故事即将开始……<br>
 
+<div class="delayed">
+<<setchara "player">>
 <span style="line-height:40px;font-size:13px;padding:0px;margin:0px">　
-<<link [[＞ 开始游戏|开始]]>>
-<</link>></span><br>
+<<link [[＞ 开始游戏|开始]]>><</link>></span><br>
 
 <<include "初始设定">>
-
+</div>
 <<link "⇧⇧">>
 	<<script>>
 		document.body.scrollTop = 0;
 		document.documentElement.scrollTop = 0;
 	<</script>>
 <</link>>
+<<script>>
+$(document).on(':passagerender', function (ev) {
+	// Find all elements containing the delayed class.
+	var elems = $(ev.content).find('.delayed');
+	// Appearance delay (in milliseconds) between each delayed text block.
+	var delay = 1500; // 1 second fade-in
+	if (elems.length > 0) {
+		elems.each(function (i) {
+			$(this)
+				.delay(delay * (i + 1))
+				.fadeTo(delay, 1);
+		});
+	}
+});
+<</script>>
 
 </div>
 
@@ -60,11 +76,11 @@ Elysion是一个类似现代——2021年地球的世界，虽然表面上平平
 <<dashline>>
 
 :: 开始
+<<GSApply>>
 你的名字是 <<print $PC.名字>> <br>
 怎么样？有变化了吗？<br>
-<<he>>
-准备好，故事要开始了哦！事件就这么发生了……
-<br>
+<<he>>准备好，故事要开始了哦！事件就这么发生了……<br>
+
 
 [[回到开头|Start]]
 

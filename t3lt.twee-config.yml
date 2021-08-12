@@ -146,3 +146,52 @@ sugarcube-2:
       name: he
     showvaginity:
       name: showvaginity
+    CMFurType:
+      name: CMFurType
+    GSApply:
+      name: GSApply
+    showwetness:
+      name: showwetness
+    setchara:
+      name: setchara
+    journal:
+      name: journal
+    socialmedia:
+      name: socialmedia
+    dictionary:
+      name: dictionary
+    achivement:
+      name: achivement
+    secretfile:
+      name: secretfile
+    statistics:
+      name: statistics
+    playrecord:
+      name: playrecord
+    items:
+      name: items
+    CMCri:
+      name: CMCri
+    sensitive:
+      name: sensitive
+    breast_info:
+      name: breast_info
+    penis:
+      name: penis
+    penis_info:
+      name: penis_info
+    vagina_info:
+      name: vagina_info
+    anal_info:
+      name: anal_info
+    ureth_info:
+      name: ureth_info
+    splits:
+      name: splits
+    genders:
+      name: genders
+    HoverTxt:
+      name: HoverTxt
+    hovertip:
+      name: hovertip
+      container: true

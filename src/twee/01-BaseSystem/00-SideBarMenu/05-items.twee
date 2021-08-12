@@ -1,0 +1,21 @@
+﻿:: SideMenuPage [widget]
+
+<<widget "items">>
+
+<</widget>>
+
+<<widget "journal">>
+
+<</widget>>
+
+<<widget "socialmedia">>
+
+<</widget>>
+
+<<widget "dictionary">>
+
+<</widget>>
+
+<<widget "achivement">>
+
+<</widget>>

@@ -169,3 +169,54 @@ window.rankcolor = function(num){
       return "#D7A800";
   }
 }
+
+function eye(){
+  return V.PC.瞳色 + "的眼睛"
+}
+
+DefineMacroS("eye", eye);
+
+function skin(){
+  return V.PC.皮肤 + "的肌肤"
+}
+
+DefineMacroS("skin", skin);
+
+function breast(){
+  switch(V.PC.胸部){
+    case 1:
+      return "微微隆起的胸部"
+    case 2:
+      return "可爱小巧的胸部"
+    case 3:
+      return "小山峰一样的胸部"
+    case 4:
+      return "有着傲人曲线的胸部"
+    case 5:
+      return "有着惊人吸引力的胸部"
+    default:
+      return "平坦的胸部"
+  }
+}
+
+DefineMacroS("breast", breast);
+
+function penis(){
+  var size = V.PC.genital.阴茎
+  var a = random(0,2)
+  const text1 = ["惊人的","魔鬼般的","巨大无比的"]
+  const text2 = ["可爱的","小孩一般的","短小"]
+  const text3 = ["幼儿一般的","迷你可爱的","牙签般的"]
+  const select = new SelectCase()
+  select
+  select.add(1,8,text3[a]+"小丁丁")
+  select.add(9,12,text2[a]+"阴茎")
+  select.add(13,16,"阴茎")
+  select.add(17,19,"粗长阴茎")
+  select.add(20,24,"巨大阴茎")
+  select.add(25,30,"超大阴茎")
+  select.add(30,50,text1[0]+"马屌")
+  return `${select.has(size)}`
+}
+
+DefineMacroS("penis", penis);

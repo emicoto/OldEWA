@@ -8,6 +8,7 @@
 
 <<widget "CMBackground">>
     <<set _optionlist to {"魔法少女":1,"小网红":2,"二次元":3,"小爱豆":4,"道童":5,"名门世家":6}>>
+    <!-- <<if $debug is true or $achivement.reset gt 0>><<set _optionlist.穿越者 to 7>> -->
         <<listbox "$PC.type" autoselect>>
         <<optionsfrom _optionlist>>
     <</listbox>>
@@ -48,6 +49,13 @@
     <</listbox>>
 <</widget>>
 
+<<widget "CMFurType">>
+    <<set _optionlist to ["猫","狗","狼","狐","鹿","羊","牛"]>>
+        <<listbox "$PC.兽型" autoselect>>
+        <<optionsfrom _optionlist>>
+    <</listbox>>
+<</widget>>
+
 <<widget "CMBreast">>
     <<set _optionlist to {"平坦":0,"微隆":1,"贫乳":2,"普乳":3,"巨乳":4,"魔乳":5}>>
         <<listbox "$PC.胸部" autoselect>>
@@ -84,35 +92,35 @@
 <</widget>>
 
 <<widget "CMMouth">>
-    <label> <<radiobutton "$PC.sensitive.m" 0.2 autocheck>> 无感　</label>
-    <label> <<radiobutton "$PC.sensitive.m" 1 autocheck>> 普通　</label>
-    <label> <<radiobutton "$PC.sensitive.m" 2 autocheck>> 敏感　</label>
-    <label> <<radiobutton "$PC.sensitive.m" 4 autocheck>> 十分敏感　</label>
-    <label> <<radiobutton "$PC.sensitive.m" 8 autocheck>> 超级敏感　</label>
+    <label> <<radiobutton "$PC.sens.m" 0.2 autocheck>> 钝感　</label>
+    <label> <<radiobutton "$PC.sens.m" 1 autocheck>> 普通　</label>
+    <label> <<radiobutton "$PC.sens.m" 2 autocheck>> 敏感　</label>
+    <label> <<radiobutton "$PC.sens.m" 4 autocheck>> 比较敏感　</label>
+    <label> <<radiobutton "$PC.sens.m" 6 autocheck>> 十分敏感　</label>
 <</widget>>
 
 <<widget "CMChest">>
-    <label> <<radiobutton "$PC.sensitive.b" 0.2 autocheck>> 无感　</label>
-    <label> <<radiobutton "$PC.sensitive.b" 1 autocheck>> 普通　</label>
-    <label> <<radiobutton "$PC.sensitive.b" 2 autocheck>> 敏感　</label>
-    <label> <<radiobutton "$PC.sensitive.b" 4 autocheck>> 十分敏感　</label>
-    <label> <<radiobutton "$PC.sensitive.b" 8 autocheck>> 超级敏感　</label>
+    <label> <<radiobutton "$PC.sens.b" 0.2 autocheck>> 钝感　</label>
+    <label> <<radiobutton "$PC.sens.b" 1 autocheck>> 普通　</label>
+    <label> <<radiobutton "$PC.sens.b" 2 autocheck>> 敏感　</label>
+    <label> <<radiobutton "$PC.sens.b" 4 autocheck>> 比较敏感　</label>
+    <label> <<radiobutton "$PC.sens.b" 6 autocheck>> 十分敏感　</label>
 <</widget>>
 
 <<widget "CMVagina">>
-    <label> <<radiobutton "$PC.sensitive.v" 0.2 autocheck>> 无感　</label>
-    <label> <<radiobutton "$PC.sensitive.v" 1 autocheck>> 普通　</label>
-    <label> <<radiobutton "$PC.sensitive.v" 2 autocheck>> 敏感　</label>
-    <label> <<radiobutton "$PC.sensitive.v" 4 autocheck>> 十分敏感　</label>
-    <label> <<radiobutton "$PC.sensitive.v" 8 autocheck>> 超级敏感　</label>
+    <label> <<radiobutton "$PC.sens.v" 0.2 autocheck>> 钝感　</label>
+    <label> <<radiobutton "$PC.sens.v" 1 autocheck>> 普通　</label>
+    <label> <<radiobutton "$PC.sens.v" 2 autocheck>> 敏感　</label>
+    <label> <<radiobutton "$PC.sens.v" 4 autocheck>> 比较敏感　</label>
+    <label> <<radiobutton "$PC.sens.v" 6 autocheck>> 十分敏感　</label>
 <</widget>>
 
 <<widget "CMPenis">>
-    <label> <<radiobutton "$PC.sensitive.p" 0.2 autocheck>> 无感　</label>
-    <label> <<radiobutton "$PC.sensitive.p" 1 autocheck>> 普通　</label>
-    <label> <<radiobutton "$PC.sensitive.p" 2 autocheck>> 敏感　</label>
-    <label> <<radiobutton "$PC.sensitive.p" 4 autocheck>> 十分敏感　</label>
-    <label> <<radiobutton "$PC.sensitive.p" 8 autocheck>> 超级敏感　</label>
+    <label> <<radiobutton "$PC.sens.c" 0.2 autocheck>> 钝感　</label>
+    <label> <<radiobutton "$PC.sens.c" 1 autocheck>> 普通　</label>
+    <label> <<radiobutton "$PC.sens.c" 2 autocheck>> 敏感　</label>
+    <label> <<radiobutton "$PC.sens.c" 4 autocheck>> 比较敏感　</label>
+    <label> <<radiobutton "$PC.sens.c" 6 autocheck>> 十分敏感　</label>
 <</widget>>
 
 <<widget "CMPsize">>
@@ -124,11 +132,11 @@
 <</widget>>
 
 <<widget "CMAnal">>
-    <label> <<radiobutton "$PC.sensitive.a" 0.2 autocheck>> 无感　</label>
-    <label> <<radiobutton "$PC.sensitive.a" 1 autocheck>> 普通　</label>
-    <label> <<radiobutton "$PC.sensitive.a" 2 autocheck>> 敏感　</label>
-    <label> <<radiobutton "$PC.sensitive.a" 4 autocheck>> 十分敏感　</label>
-    <label> <<radiobutton "$PC.sensitive.a" 8 autocheck>> 超级敏感　</label>
+    <label> <<radiobutton "$PC.sens.a" 0.2 autocheck>> 无感　</label>
+    <label> <<radiobutton "$PC.sens.a" 1 autocheck>> 普通　</label>
+    <label> <<radiobutton "$PC.sens.a" 2 autocheck>> 敏感　</label>
+    <label> <<radiobutton "$PC.sens.a" 4 autocheck>> 十分敏感　</label>
+    <label> <<radiobutton "$PC.sens.a" 6 autocheck>> 超级敏感　</label>
 <</widget>>
 
 
@@ -149,10 +157,10 @@
             <<set $PC.发色 to "水色">>
             <<set $PC.瞳色 to "天蓝色">>
             <<set $PC.皮肤 to "白皙">> 
-            <<set $PC.sensitive to {"m" : 2,  "b":2,  "p":2,  "v":0,  "a":4}>>
+            <<set $PC.sens to {"m" : 2,  "b":2,  "c":2,  "v":null, "u":1, "a":4}>>
             <<set $PC.genital to {
-                "阴茎" : 2,
-                "子宫" : -1
+                "阴茎" : 10,
+                "子宫" : null
             }>>
             <<set $starttrait to "抖M体质">>
 
@@ -171,11 +179,11 @@
             <<set $PC.发色 to "水色">>
             <<set $PC.瞳色 to  "棕色">>
             <<set $PC.皮肤 to "白皙">>
-            <<set $PC.sensitive to {"m" : 1,  "b":2,  "p":1, "v":0,  "a":8}>>
+            <<set $PC.sens to {"m" : 1,  "b":2,  "c":1, "v":null, "u":1, "a":8}>>
 
             <<set $PC.genital to {
-                "阴茎" : 3,
-                "子宫" : -1
+                "阴茎" : 14,
+                "子宫" : null
             }>>
 
             <<set $starttrait to "轻浮">>          
@@ -195,11 +203,11 @@
             <<set $PC.发色 to "奶茶色">>
             <<set $PC.瞳色 to  "淡绿色">>
             <<set $PC.皮肤 to "白皙">>
-            <<set $PC.sensitive to {"m" : 1,  "b":2,  "v":1, "p":1,  "a":8}>>
+            <<set $PC.sens to {"m" : 1,  "b":2,  "v":1, "c":1, "u":1, "a":8}>>
             <<set $starttrait to "好色">>
 
             <<set $PC.genital to {
-                "阴茎" : 3,
+                "阴茎" : 14,
                 "子宫" : 1
             }>>
 
@@ -218,7 +226,7 @@
             <<set $PC.发色 to "深棕色">>
             <<set $PC.瞳色 to "棕色">>
             <<set $PC.皮肤 to "健康">>
-            <<set $PC.sensitive to {"m" : 1,  "b":4,  "v":1, "p":0,  "a":1}>>             
+            <<set $PC.sens to {"m" : 1,  "b":4,  "v":1, "c":1, "u":1, "a":1}>>             
             <<set $starttrait to "人气">>
 
         <<case "云鹿">>
@@ -236,14 +244,15 @@
             <<set $PC.发色 to "白金色">>
             <<set $PC.瞳色 to "深绿色">>
             <<set $PC.皮肤 to "白皙">>
-            <<set $PC.sensitive to {"m" : 1,  "b":2,  "p":2, "v":0,  "a":2}>>
+            <<set $PC.sens to {"m" : 1,  "b":2,  "c":2, "v":null, "u":1, "a":2}>>
 
             <<set $PC.genital to {
-                "阴茎" : 2,
-                "子宫" : -1
+                "阴茎" : 10,
+                "子宫" : null
             }>>
 
             <<set $starttrait to "兽角">>
+            <<set $PC.兽型 to "鹿">>
 
         <<case "若秋">>
             <<set $PC.type to 6>>
@@ -261,10 +270,10 @@
             <<set $PC.瞳色 to "深绿色">>
             <<set $PC.皮肤 to "白皙">>
             <<set $PC.魅力 to 1200>>
-            <<set $PC.sensitive to {"m" : 4,  "b":2,  "v":1, "p":1,  "a":1}>>
+            <<set $PC.sens to {"m" : 4,  "b":2,  "v":1, "c":1, "u":1, "a":1}>>
 
             <<set $PC.genital to {
-                "阴茎" : 3,
+                "阴茎" : 14,
                 "子宫" : 1
             }>>           
     <</switch>>
@@ -276,31 +285,21 @@
     <<switch $PC.性别 >>
         <<case "少女">>
             <<set $PC.genital.子宫 to 1>>
-            <<set $PC.genital.阴茎 to -1>>
-            <<set $PC.produce.精液 to [0,0]>>
-            <<set $PC.sensitive.p to -1>>
-            <<set $PC.vaginity.童贞 to -1>>
+            <<set $PC.genital.阴茎 to null>>
+
         <<case "扶她">>
             <<set $PC.genital.子宫 to 1>>
-            <<if $PC.genital.阴茎 is 0>>
+            <<if $PC.genital.阴茎 is null>>
                 <<set $PC.genital.阴茎 to 14>>
             <</if>>
-            <<set $PC.produce.精液 to [($PC.genital.阴茎*50),($PC.genital.阴茎*50)]>>
+
         <<case "伪娘" "少年">>
-            <<set $PC.genital.子宫 to -1>>
-            <<set $PC.sensitive.v to -1>>
-            <<if $PC.genital.阴茎 is -1>>
+            <<set $PC.genital.子宫 to null>>
+            <<if $PC.genital.阴茎 is null>>
                 <<set $PC.genital.阴茎 to 10>>
             <</if>>
-            <<set $PC.produce.精液 to [($PC.genital.阴茎*50),($PC.genital.阴茎*50)]>>
-            <<set $PC.vaginity.处女 to -1>>
-    <</switch>>
 
-    <<if $PC.trait.泌乳体质 is 1 and $PC.胸部 gt 1>>
-        <<set $PC.produce.乳汁 to [($PC.genital.胸部*50),($PC.genital.胸部*50)]>>
-    <<else>>
-        <<set $PC.produce.乳汁 to [0,0]>>
-    <</if>>
+    <</switch>>
 
     <<switch $PC.type>>
         <<case 1>>
@@ -309,8 +308,8 @@
                     "纯洁" : 800,
                     "露出" : 0,
                     "滥交" : 0,
-                    "受虐" : 100,
-                    "顺从" : 100,
+                    "受虐" : 50,
+                    "顺从" : 0,
                     "兽交" : 0,
                     "药瘾" : 0,
                     "性瘾" : 0
@@ -318,11 +317,11 @@
         <<case 2>>
             <<set $PC.头衔 to "直播主">>
             <<set $PC.lewd to {
-                "纯洁" : 750,
-                "露出" : 50,
-                "滥交" : 20,
+                "纯洁" : 800,
+                "露出" : 0,
+                "滥交" : 0,
                 "受虐" : 0,
-                "顺从" : 200,
+                "顺从" : 0,
                 "兽交" : 0,
                 "药瘾" : 0,
                 "性瘾" : 0
@@ -333,8 +332,8 @@
                 "纯洁" : 800,
                 "露出" : 0,
                 "滥交" : 0,
-                "受虐" : -500,
-                "顺从" : -500,
+                "受虐" : 0,
+                "顺从" : -50,
                 "兽交" : 0,
                 "药瘾" : 0,
                 "性瘾" : 0
@@ -342,8 +341,8 @@
         <<case 4>>
             <<set $PC.头衔 to "小爱豆">>
             <<set $PC.lewd to {
-                "纯洁" : 1000,
-                "露出" : 0,
+                "纯洁" : 900,
+                "露出" : 50,
                 "滥交" : 0,
                 "受虐" : 0,
                 "顺从" : 0,
@@ -358,7 +357,7 @@
                 "露出" : 0,
                 "滥交" : 0,
                 "受虐" : 0,
-                "顺从" : 0,
+                "顺从" : 100,
                 "兽交" : 0,
                 "药瘾" : 0,
                 "性瘾" : 0,
@@ -366,131 +365,228 @@
         <<case 6>>
             <<set $PC.头衔 to "富二代">>
             <<set $PC.lewd to {
-                    "纯洁" : 600,
+                    "纯洁" : 700,
                     "露出" : 0,
                     "滥交" : 0,
-                    "受虐" : -500,
-                    "顺从" : -500,
+                    "受虐" : -100,
+                    "顺从" : -100,
                     "兽交" : 0,
-                    "药瘾" : -50,
-                    "性瘾" : 0
+                    "药瘾" : 0,
+                    "性瘾" : 0,
                 }>>
     <</switch>>
 
     <<switch $PC.特长>>
         <<case "自然科学">>
             <<set $PC.school to {
-                "文学" : 50,
-                "数学" : 50,
-                "物理" : 100,
-                "生理" : 50,
-                "自然" : 250,
+                "文学" : 0,
+                "数学" : 80,
+                "物理" : 0,
+                "生理" : 0,
+                "自然" : 120,
                 "表演" : 0,
                 "艺术" : 0
             }>>
-            <<set $PC.ability to {
+            <<set $PC.abl to {
                 "异能" : 0,
-                "奥术" : 150,
-                "格斗" : 0,
+                "奥术" : 120,
+                "战技" : 0, 
+                "健身" : 0,
                 "运动" : 0,
-                "灵巧" : 0,
+                "灵巧" : 0, 
                 "意志" : 0,
-                "性技" : 0
             }>>
         <<case "物理科学">>
             <<set $PC.school to {
                 "文学" : 0,
-                "数学" : 200,
-                "物理" : 250,
+                "数学" : 80,
+                "物理" : 120,
                 "生理" : 0,
-                "自然" : 50,
+                "自然" : 0,
                 "表演" : 0,
                 "艺术" : 0
             }>>
-            <<set $PC.ability to {
-                "异能" : 150,
+            <<set $PC.abl to {
+                "异能" : 120,
                 "奥术" : 0,
-                "格斗" : 0,
+                "战技" : 0, 
+                "健身" : 0,
                 "运动" : 0,
-                "灵巧" : 0,
+                "灵巧" : 0, 
                 "意志" : 0,
-                "性技" : 0
             }>>
         <<case "文艺创作">>
             <<set $PC.school to {
-                "文学" : 0,
-                "数学" : 200,
-                "物理" : 250,
-                "生理" : 0,
-                "自然" : 50,
-                "表演" : 0,
-                "艺术" : 0
-            }>>
-            <<set $PC.ability to {
-                "异能" : 150,
-                "奥术" : 0,
-                "格斗" : 0,
-                "运动" : 0,
-                "灵巧" : 0,
-                "意志" : 0,
-                "性技" : 0
-            }>>
-        <<case "生理科学">>
-            <<set $PC.school to {
-                "文学" : 0,
-                "数学" : 50,
-                "物理" : 100,
-                "生理" : 250,
-                "自然" : 100,
-                "表演" : 0,
-                "艺术" : 0
-            }>>
-            <<set $PC.ability to {
-                "异能" : 0,
-                "奥术" : 0,
-                "格斗" : 0,
-                "运动" : 0,
-                "灵巧" : 0,
-                "意志" : 50,
-                "性技" : 100
-            }>>
-        <<case "音乐表演">>
-            <<set $PC.school to {
-                "文学" : 150,
+                "文学" : 120,
                 "数学" : 0,
                 "物理" : 0,
                 "生理" : 0,
                 "自然" : 0,
-                "表演" : 250,
-                "艺术" : 100
+                "表演" : 0,
+                "艺术" : 80
             }>>
-            <<set $PC.ability to {
-                "异能" : 50,
+            <<set $PC.abl to {
+                "异能" : 0,
                 "奥术" : 0,
-                "格斗" : 0,
+                "战技" : 0, 
+                "健身" : 0,
                 "运动" : 0,
-                "灵巧" : 0,
-                "意志" : 100,
-                "性技" : 0
+                "灵巧" : 120, 
+                "意志" : 0,
+            }>>
+        <<case "生理科学">>
+            <<set $PC.school to {
+                "文学" : 0,
+                "数学" : 0,
+                "物理" : 0,
+                "生理" : 120,
+                "自然" : 80,
+                "表演" : 0,
+                "艺术" : 0
+            }>>
+            <<set $PC.abl to {
+                "异能" : 0,
+                "奥术" : 0,
+                "战技" : 0, 
+                "健身" : 120,
+                "运动" : 0,
+                "灵巧" : 0, 
+                "意志" : 0,
+            }>>
+        <<case "音乐表演">>
+            <<set $PC.school to {
+                "文学" : 0,
+                "数学" : 0,
+                "物理" : 0,
+                "生理" : 0,
+                "自然" : 80,
+                "表演" : 120,
+                "艺术" : 0,
+            }>>
+            <<set $PC.abl to {
+                "异能" : 0,
+                "奥术" : 0,
+                "战技" : 0, 
+                "健身" : 0,
+                "运动" : 0,
+                "灵巧" : 0, 
+                "意志" : 120,
             }>>
         <<case "运动格斗">>
             <<set $PC.school to {
                 "文学" : 0,
-                "数学" : 50,
-                "物理" : 50,
-                "生理" : 100,
-                "自然" : 100,
-                "表演" : 50,
+                "数学" : 0,
+                "物理" : 0,
+                "生理" : 50,
+                "自然" : 50,
+                "表演" : 0,
                 "艺术" : 0
             }>>
-            <<set $PC.ability to {
+            <<set $PC.abl to {
                 "异能" : 0,
                 "奥术" : 0,
-                "格斗" : 200,
+                "战技" : 120, 
+                "健身" : 0,
                 "运动" : 100,
-                "灵巧" : 0,
+                "灵巧" : 0, 
                 "意志" : 0,
-                "性技" : 0
             }>>
     <</switch>>
+<</widget>>
+
+<<widget "GSApply">>
+    <<set $PC.魅力 to 1600>>
+    <<switch $starttrait>>
+        <<case "菜鸟">>
+            <<set $PC.trait.菜鸟 to true>>
+        <<case "好色">>
+            <<set $PC.trait.好色 to true>>
+        <<case "轻浮">>
+            <<set $PC.trait.轻浮 to true>>
+        <<case "人气">>
+            <<set $PC.trait.人气 to true>>
+        <<case "天使心">>
+            <<set $PC.trait.天使心 to true>>
+        <<case "露出癖">>
+            <<set $PC.trait.露出癖 to true>>
+        <<case "福瑞爱">>
+            <<set $PC.trait.福瑞爱 to true>>
+        <<case "抖M体质">>
+            <<set $PC.trait.抖M体质 to true>>
+        <<case "倾国倾城">>
+            <<set $PC.trait.倾国倾城 to true>>
+        <<case "经商头脑">>
+            <<set $PC.trait.经商头脑 to true>>
+        <<case "OMEGA">>
+            <<set $PC.trait.OMEGA to true>>
+    <</switch>>
+    <<switch $PC.type>>
+        <<case 1>>
+            <<set $follower to (500+random(100,1000))>>
+        <<case 2>>
+            <<set $follower to (1000+random(500,5000))>>
+        <<case 3>>
+            <<set $follower to (1000+random(500,3000))>>
+        <<case 4>>
+            <<set $follower to (5000+random(5000,30000))>>
+        <<case 5>>
+            <<set $follower to (100+random(50,2000))>>
+        <<case 6>>
+            <<set $follower to (1000+random(500,2000))>>
+    <</switch>>
+    <<if $PC.种族 is "兽族">>
+        <<switch $PC.兽型>>
+            <<case "猫" "狗" "狼" "狐">>
+                <<set $PC.trait.兽耳 to true>>
+                <<set $PC.trait.兽尾 to true>>
+            <<case "鹿" "牛" "羊">>
+                <<set $PC.trait.兽角 to true>>
+                <<set $PC.trait.兽耳 to true>>
+                <<set $PC.trait.兽尾 to true>>
+        <</switch>>
+    <</if>>
+    <<switch $PC.性别>>
+        <<case "少女">>
+            <<set $PC.eskl.屌技 to null>>
+            <<set $PC.produce.精液 to [0,0]>>
+            <<set $PC.genital.阴茎 to null>>
+            <<set $PC.vaginity.童贞 to null>>
+            <<set $PC.sexrec.射精 to null>>
+            <<set $PC.exp.射精 to null>>
+
+        <<case "扶她">>
+
+        <<case "少年" "伪娘">>
+            <<set $PC.base.快V to null>>
+            <<set $PC.sens.v to null>>
+            <<set $PC.ste.vagina to null>>
+            <<set $PC.eskl.膣技 to null>>
+            <<set $PC.genital.子宫 to null>>
+            <<set $PC.vaginity.处女 to null>>
+            <<set $PC.sexrec.V高潮 to null>>
+            <<set $PC.sexrec.内射 to null>>
+            <<set $PC.exp.V高潮 to null>>
+            <<set $PC.exp.内射 to null>>
+            <<set $PC.exp.怀孕 to null>>
+            <<if $PC.性别 isnot "伪娘">>
+                <<set $PC.exp.A怀孕 to null>>
+            <</if>>
+    <</switch>>
+
+    <<if $PC.genital.阴茎 isnot null>>
+        <<set $PC.produce.精液 to [($PC.genital.阴茎*5),($PC.genital.阴茎*5)]>>
+    <<else>>
+        <<set $PC.produce.精液 to [0,0]>>
+    <</if>>
+
+    <<if $PC.trait.泌乳体质 is 1>>
+        <<set $PC.produce.乳汁 to [($PC.genital.胸部*20),($PC.genital.胸部*20)]>>
+        <<set $PFlag.lactation to true>>
+        <<set $PFlag.lactatecd to 60>>
+    <<else>>
+        <<set $PC.produce.乳汁 to [0,0]>>
+        <<set $PFlag.lactation to false>>
+        <<set $PFlag.lactatecd to null>>
+    <</if>>
+
 <</widget>>

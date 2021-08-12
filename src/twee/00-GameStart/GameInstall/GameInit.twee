@@ -22,6 +22,7 @@
 <<set $weather to "晴">>
 
 <<set $money to 5000>>
+<<set $follow to 1>>
 <<set $follower to 100>>
 
 <!-- 各种名声 -->
@@ -36,5 +37,9 @@
 
 <!-- 持有物 -->
 <<set $items to {}>>
+
+/* 玩家各种记录 */
+<<set $record to {}>> 
+
 
 <</widget>>

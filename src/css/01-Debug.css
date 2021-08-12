@@ -57,8 +57,10 @@
 }
 
 .error-view {
-	background-color: #eaa;
-	border-left-color: #d77;
+	background-color: rgb(255, 249, 159);
+	border-left-color: rgb(255, 223, 40);
+	font-size: 12px;
+	color:#444;
 }
 
 .error-view > .error-source:not([hidden]) {
