@@ -2,13 +2,19 @@
 :: StoryCaption
 <div @class="(Errors.log.length==0?'hidden':'') + ' error-reporter-btn'" onclick="Errors.Reporter.toggle()"></div>
 <!-- 游戏还没开始时 */ -->
+<div id="storyCaptionDiv">
+
+<div id="avater"><<avater>></div>
+
 <<if $intro is 0>>
-<<versioninfo>>
+	<<versioninfo>>
 
 <<else>>
 
+
 <!-- 游戏内日期和时钟 -->
-<<timestats>>
+<div id="showtimes"><<timestats>></div>
+
 <span class="money">　<<printmoney $money>></span><br>
 <!-- 简短通知 -->
 <<notification>>
@@ -26,36 +32,36 @@
 <<button OPTIONS>><<overlayReplace "options">><</button>>
 <<button SAVES>><<overlayReplace "saves">><</button>>
 
+<</if>>
+
+</div>
+
 <!-- 隐藏元素 */ -->
 <<set $currentOverlay to null>>
-	
+
+
 <div id="customOverlay" class="customOverlay hidden">
 	<div id="customOverlayTitle" class="fixedClose"></div>
 	<div id="customOverlayContent"></div>
 </div>
 
+/* 自动刷新等待JS读取结束 */
+<<set _timer to 10>>
+<<repeat 0.5s>>
 <<script>>
 	dragElement(document.getElementById("customOverlay"))
 	function dragElement(event) {
-		// Passage is about to be displayed.
-		var dragID = "#customOverlay", jQIntervalID = 0;
-		function ActivatejQueryUI() {  // Function to see if jQuery UI is loaded yet.
-			if (setup.JSLoaded) {
-				clearInterval(jQIntervalID);  // Stop looking, it's loaded.
-				if ($(dragID).length > 0) {  // Make sure an element with a "draggable" ID exists.
-					$(dragID).draggable();  // Make it draggable.
-				}
-			}
-		}
-
-		if (setup.JSLoaded) {  // See if jQuery UI is loaded yet.
-			// It's loaded, so set up the draggable element.
-			$(event.content).find(dragID).draggable();
-		} else {  // Wait for jQuery UI to load using the ActivatejQueryUI function.
-			jQIntervalID = setInterval(ActivatejQueryUI, 100);
-		}
+		var dragID = "#customOverlay"
+		$(dragID).draggable();
 	}
 <</script>>
+	<<set _timer to _timer -1>>
+	<<if _timer is 0>>
+	<<stop>>
+	<</if>>
+<</repeat>>
 
-<</if>>
+
+
+
 

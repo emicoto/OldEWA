@@ -1,6 +1,6 @@
 window.prepareSaveDetails = function (forceRun){
 	if("ewaSaveDetails" in localStorage === false || forceRun === true){
-		var saveDetails = {autosave: null, slots:[null,null,null,null,null,null,null,null]}
+		var saveDetails = {autosave: null, slots:[null,null,null,null,null,null,null,null,null,null]}
 		var SugarCubeSaveDetails = Save.get();
 		if(SugarCubeSaveDetails.autosave != null){
 			saveDetails.autosave = {
@@ -73,7 +73,7 @@ window.deleteSaveDetails = function (saveSlot){
 }
 
 window.deleteAllSaveDetails = function (saveSlot){
-	var saveDetails = {autosave: null, slots:[null,null,null,null,null,null,null,null]};
+	var saveDetails = {autosave: null, slots:[null,null,null,null,null,null,null,null,null,null]};
 	localStorage.setItem("ewaSaveDetails" ,JSON.stringify(saveDetails));
 }
 

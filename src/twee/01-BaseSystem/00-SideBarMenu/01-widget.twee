@@ -17,11 +17,9 @@
 <</widget>>
 
 <<widget "timestats">>
-    <div id="TimeContainer">
-        <div id="InGameDate">
-            <span class="showtime"><<print $date.year>>.<<if $date.month lt 10>>0<</if>><<print $date.month>>.<<if $date.day lt 10>>0<</if>><<print $date.day>> <<print $date.weekday>> <<if $date.hour lt 10>>0<</if>><<print $date.hour>>:<<if $date.min lt 10>>0<</if>><<print $date.min>> (<<print $date.zone>>)</span><br>
-        </div>
-    </div>
+<div class="InGameDate">
+    <span class="showtime"><<print $date.year>>.<<if $date.month lt 10>>0<</if>><<print $date.month>>.<<if $date.day lt 10>>0<</if>><<print $date.day>> <<print $date.weekday>> <<if $date.hour lt 10>>0<</if>><<print $date.hour>>:<<if $date.min lt 10>>0<</if>><<print $date.min>> (<<print $date.zone>>)</span><br>
+</div>
 <</widget>>
 
 <<widget "notification">>

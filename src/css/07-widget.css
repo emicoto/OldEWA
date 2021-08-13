@@ -1,0 +1,88 @@
+﻿/* HoverTxt code - Start */
+.hoverTxt {
+	position: relative;
+	top: 5px;
+	vertical-align: text-bottom;
+	height: 30px;
+}
+.hoverTxt:hover span {
+	visibility: visible;
+}
+.hoverTxt span {
+	position: absolute;
+	background-color: #f3f3ed;
+	padding: 3px;
+	border: 1px solid #aaa;
+	border-radius: 10px;
+	visibility: hidden;
+	color: black;
+	text-decoration: none;
+}
+.hoverBox {
+	top: -100px;
+	text-align: left;
+	box-shadow: 0px 0px 12px 2px rgba(0, 0, 0, 0.5);
+	z-index: 100;
+}
+/* HoverTxt code - End */
+
+/* hovertip v2.0 - Start */
+.hoverTip {
+	display: inline-block;
+	top: 4px;
+	border-width: 0px;
+    border-bottom: 1px dashed #ccc;  /* If you want dots under the hoverable text */
+}
+.hoverTipTxt {
+	position: relative;
+	vertical-align: text-bottom;
+	line-height: initial;
+}
+.hoverTipTxt .hoverBox {
+	position: absolute;
+	visibility: hidden;
+}
+.hoverTipTxt:hover .hoverBox, .hoverTipTxt:focus .hoverBox {
+	visibility: visible;
+}
+.hoverBox {
+	padding: 3px 10px;
+	width: intrinsic;  /* Safari/WebKit uses a non-standard name */
+	width: -webkit-max-content;  /* Chrome */
+	width: -moz-max-content;  /* Firefox/Gecko */
+	width: max-content;
+	max-width: 330px;
+	line-height: initial;
+	text-align: left;
+	color: rgb(146, 126, 11);
+	background-color: rgba(255, 255, 255, 0.95);
+	border: rgba(221, 218, 187, 0.95) solid 2px;
+	-webkit-border-radius: 6px;
+	   -moz-border-radius: 6px;
+	        border-radius: 6px;
+	-webkit-box-shadow: 0px 0px 6px 2px rgba(134, 128, 109, 0.2);
+	   -moz-box-shadow: 0px 0px 6px 2px rgba(134, 128, 109, 0.2);
+	        box-shadow: 0px 0px 6px 2px rgba(134, 128, 109, 0.2);
+	z-index: 100;
+}
+.hoverTail::after {
+	content: "";
+	position: absolute;
+	top: 100%;  /* At the bottom of the tooltip */
+	left: 50%;
+	margin-left: -5px;
+	border-width: 8px;
+	border-style: solid;
+	border-color: rgba(221, 218, 187, 0.95) transparent transparent transparent;
+	z-index: 100;
+}
+.hoverBox a {
+	-webkit-transition-duration: unset;
+	   -moz-transition-duration: unset;
+	     -o-transition-duration: unset;
+	        transition-duration: unset;
+}
+#ui-bar .hoverBox {
+	max-width: 230px;
+}
+/* hovertip v2.0 - End */

@@ -179,3 +179,13 @@ Macro.add("hovertip", {
 	}
 });
 /* hovertip v2.0 - End */
+
+window.ImgExist = function(imgurl) {
+	var imgobj = new Image()
+	imgobj.src = imgurl;
+	if (imgobj.fileSize > 0 || (imgobj.width > 0 && imgobj.height > 0)) {  
+		return true;
+   } else {  
+		return false;
+	} 
+}

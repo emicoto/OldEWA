@@ -1,7 +1,7 @@
 ﻿if (document.location.href.toLowerCase().includes("/temp/") || document.location.href.toLowerCase().includes("/private/") || hasOwnProperty.call(window, "storyFormat")) {
 	// Change this to the path where this HTML file is
 	// located if you want to run this from inside Twine.
-	setup.Path = "H:/_ElysionWorldAdventure/dist";  // Running inside Twine application
+	setup.Path = "H:/_ElysionWorldAdventure/dist/";  // Running inside Twine application
 } else {
 	setup.Path = "";  // Running in a browser
 }

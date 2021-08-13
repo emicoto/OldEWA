@@ -13,6 +13,7 @@
     font-family: 'Times New Roman', 微软雅黑;
     font-size: 15px;
     letter-spacing: 4px;
+    max-width: 250px;
 }
 
 #ui-bar-toggle{
@@ -154,11 +155,54 @@
     z-index: 1000;
 }
 
-#TimeContainer {
+body #story-caption #storyCaptionDiv {
+	/* 232 px: img size, 1.32 em: stats line height, 4px: stats borders */
+	position: fixed;
+	top: 150px;
+	left: 10px;
+	height: calc(100% - 150px);
+	width: 268px;
+	padding-right: 2px;
+	padding-bottom: 12px;
+	overflow: scroll;
+	overflow-y: scroll;
+	overflow-wrap: anywhere;
+	scrollbar-color: #ddd #ccc;
+    scrollbar-width: thin;
+}
+
+#ui-bar header {
+    position: absolute;
+    top:5px;
+    z-index:-100;
+}
+
+*::-webkit-scrollbar-thumb{
+	background-color: rgb(220, 220, 220);
+}
+
+*::-webkit-scrollbar{
+	background-color: #eee;
+	width: 6px;
+}
+
+#story-caption {
+	-webkit-backface-visibility: hidden;
+	backface-visibility: hidden;
+}
+
+#story-caption .error-reporter-btn {
+	position: absolute;
+	right: 16px;
+	top: 48px;
+	z-index: 999;
+}
+
+#showtimes {
     border-top: 2px solid #716617;
     border-bottom: 2px solid #716617;
     position: fixed;
-    top:188px;
+    top:150px;
     left:0px;
     overflow: hidden;
     width: 280px;
@@ -166,12 +210,12 @@
     z-index: 99;
 }
 
-#InGameDate {
+.InGameDate {
     border-top: 1px solid rgb(223, 220, 198,0.5);
     border-bottom: 1px solid rgb(223, 220, 198,0.5);
     background-color: #57522e;
-    position: fixed;
-    top:190px;
+    position: absolute;
+    top:0px;
     left:0px;
     overflow: hidden;
     width: 280px;
@@ -192,7 +236,7 @@
     font-size: 18px;
     color:rgb(172, 169, 2);
     vertical-align:middle;
-    background-image: url("image/moneyicon.png");
+    background-image: url("image/icon/moneyicon.png");
     background-repeat: no-repeat;
     background-position-x: 0px;
     font-family: 稚艺简体,'Times New Roman';

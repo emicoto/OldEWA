@@ -177,9 +177,38 @@
 	<<else>>
 		<<set _HoverTxtCount += 1>>
 	<</if>>
-	<a class="hoverTxt" style="text-decoration: none;"><img class="hoverIco" src="image/NoteIcon.png">
+	<a class="hoverTxt" style="text-decoration: none;"><img class="hoverIco" src="image/icon/NoteIcon.png">
 		<span @id="'hoverTxt' + _HoverTxtCount" class="hoverBox" @style="'left: -' + _left + 'px; width: ' + _width + 'px;'">
 			<<print $args[1]>>
 		</span>
 	</a>
+<</widget>>
+
+<<widget "icon">>
+<<if $args[0]>>
+    <<set _path to "image/icon/"+$args[0]+".png">>
+    <<print "<img id='icon' src='image/icon/"+$args[0]+".png'>">>
+<<else>>
+    <div id="error-view">error: no args</div>
+<</if>>
+<</widget>>
+
+<<widget "location">>
+<<if $args[0]>>
+    <<set $local.place to $args[0]>>
+    /*
+    if local in group A, set $local.tag to 室内/室外 if in charagroupa a set $local.chara to charaname ....如此类推一次性处理 
+     */
+<<else>>
+    <div id="error-view">error: no args</div>
+<</if>>
+<</widget>>
+
+<<widget "passtime">>
+<<set $date.time to $date.time+$args[0]>>
+<</widget>>
+
+/* 再现ERA口上系统的TRYCALL体系 主 */
+<<widget "call">>
+<<include $args[0]+"_"+$args[1]>>
 <</widget>>

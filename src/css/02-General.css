@@ -1,10 +1,11 @@
 /* Links */
 a, a.internalLink, a.externalLink {
-    color: rgb(139, 148, 12);
+    color: rgb(151, 136, 0);
+    font-weight: 600;
 }
 
 a:hover, a.internalLink:hover, a.externalLink:hover {
-	color: rgb(226, 155, 0);
+	color: rgb(255, 72, 133);
 	text-decoration: none;
   border-bottom:1px solid;
 }
@@ -76,451 +77,59 @@ hr {
   cursor: pointer;
 }
 
-/* Drunk Text - Start */
-.drunk {
-	animation: drunkCam 30s alternate;
-}
-@keyframes drunkCam {
-	0%  { filter: blur(0px); text-shadow: 0 0 0 #aaa; }
-	20% { filter: blur(1px); text-shadow: 8px 0 0 #aaa; }
-	24% { filter: blur(0px); text-shadow: 0 0 0 #aaa; }
-	26% { filter: blur(0px); text-shadow: 0 0 0 #aaa; }
-	28% { filter: blur(1px); text-shadow: 10px 0 0 #aaa; }
-	30% { filter: blur(0px); text-shadow: 0 0 0 #aaa; }
-	60% { filter: blur(1px); text-shadow: 5px 0 0 #aaa; }
-	62% { filter: blur(0px); text-shadow: 0 0 0 #aaa; }
-	65% { filter: blur(2px); text-shadow: 8px 0 0 #aaa; }
-	67% { filter: blur(0px); text-shadow: 0 0 0 #aaa; }
-	80% { filter: blur(0px); text-shadow: 8px 0 0 #aaa; }
-	85% { filter: blur(2px); text-shadow: 10px 0 0 #aaa; }
-	88% { filter: blur(1px); text-shadow: 5px 0 0 #aaa; }
-	90% { filter: blur(0px); text-shadow: 0 0 0 #aaa; }
-}
-/* Drunk Text - End */
-
-/* Glitchy Text - Start */
-
-/* The "clip" in ".glitch" is depreciated, so technically you should use the "clip-path" that's in ".glitchy" instead, however IE doesn't support "clip-path", and most browsers still support "clip". */
-
-.glitch {
-  color: white;
-  position: relative;
-}
-.glitch:before {
-  content: attr(data-text);
-  width: calc(100% + 0.5em);
-  position: absolute;
-  left: -9px;
-  text-shadow: 1px 0 blue;
-  top: -5px;
-  color: #FFD;
-  background: #111;
-  overflow: hidden;
-  clip: rect(0, 900px, 0, 0);
-  animation: noise-anim-2 3s infinite linear alternate-reverse;
-  -webkit-animation: noise-anim-2 3s infinite linear alternate-reverse;
-}
-.glitch:after {
-  content: attr(data-text);
-  width: calc(100% + 0.5em);
-  position: absolute;
-  left: -5px;
-  text-shadow: -1px 0 red;
-  top: -5px;
-  color: #DFF;
-  background: #111;
-  overflow: hidden;
-  clip: rect(0, 900px, 0, 0);
-  animation: noise-anim 2s infinite linear alternate-reverse;
-  -webkit-animation: noise-anim 2s infinite linear alternate-reverse;
-}
-@keyframes noise-anim {
-  0% {
-    clip: rect(80px, 9999px, 16px, 0);
-  }
-  5% {
-    clip: rect(94px, 9999px, 17px, 0);
-  }
-  10% {
-    clip: rect(9px, 9999px, 92px, 0);
-  }
-  15.0% {
-    clip: rect(37px, 9999px, 4px, 0);
-  }
-  20% {
-    clip: rect(53px, 9999px, 47px, 0);
-  }
-  25% {
-    clip: rect(99px, 9999px, 69px, 0);
-  }
-  30.0% {
-    clip: rect(15px, 9999px, 49px, 0);
-  }
-  35% {
-    clip: rect(83px, 9999px, 81px, 0);
-  }
-  40% {
-    clip: rect(55px, 9999px, 43px, 0);
-  }
-  45% {
-    clip: rect(28px, 9999px, 27px, 0);
-  }
-  50% {
-    clip: rect(64px, 9999px, 28px, 0);
-  }
-  55.0% {
-    clip: rect(76px, 9999px, 91px, 0);
-  }
-  60.0% {
-    clip: rect(29px, 9999px, 72px, 0);
-  }
-  65% {
-    clip: rect(70px, 9999px, 10px, 0);
-  }
-  70% {
-    clip: rect(5px, 9999px, 84px, 0);
-  }
-  75% {
-    clip: rect(46px, 9999px, 81px, 0);
-  }
-  80% {
-    clip: rect(7px, 9999px, 85px, 0);
-  }
-  85.0% {
-    clip: rect(17px, 9999px, 89px, 0);
-  }
-  90% {
-    clip: rect(41px, 9999px, 59px, 0);
-  }
-  95% {
-    clip: rect(53px, 9999px, 90px, 0);
-  }
-  100% {
-    clip: rect(10px, 9999px, 30px, 0);
-  }
-}
-@keyframes noise-anim-2 {
-  0% {
-    clip: rect(84px, 9999px, 3px, 0);
-  }
-  5% {
-    clip: rect(31px, 9999px, 69px, 0);
-  }
-  10% {
-    clip: rect(37px, 9999px, 33px, 0);
-  }
-  15.0% {
-    clip: rect(18px, 9999px, 6px, 0);
-  }
-  20% {
-    clip: rect(25px, 9999px, 87px, 0);
-  }
-  25% {
-    clip: rect(100px, 9999px, 8px, 0);
-  }
-  30.0% {
-    clip: rect(24px, 9999px, 87px, 0);
-  }
-  35% {
-    clip: rect(39px, 9999px, 16px, 0);
-  }
-  40% {
-    clip: rect(96px, 9999px, 25px, 0);
-  }
-  45% {
-    clip: rect(16px, 9999px, 100px, 0);
-  }
-  50% {
-    clip: rect(92px, 9999px, 76px, 0);
-  }
-  55.0% {
-    clip: rect(29px, 9999px, 40px, 0);
-  }
-  60.0% {
-    clip: rect(40px, 9999px, 39px, 0);
-  }
-  65% {
-    clip: rect(94px, 9999px, 44px, 0);
-  }
-  70% {
-    clip: rect(2px, 9999px, 78px, 0);
-  }
-  75% {
-    clip: rect(86px, 9999px, 50px, 0);
-  }
-  80% {
-    clip: rect(2px, 9999px, 46px, 0);
-  }
-  85.0% {
-    clip: rect(41px, 9999px, 71px, 0);
-  }
-  90% {
-    clip: rect(75px, 9999px, 15px, 0);
-  }
-  95% {
-    clip: rect(41px, 9999px, 8px, 0);
-  }
-  100% {
-    clip: rect(23px, 9999px, 75px, 0);
-  }
+#icon {
+  position: static;
+  vertical-align: middle;
 }
 
-.glitchy {
-  color: #111;
-  position: relative;
+.textbox {
+  width: 300px;
+  height: 150px;
+  font-size: 12px;
+  border-radius: 10px;
+  border: 2px solid #707556;
 }
-.glitchy:before {
-  content: attr(data-text);
-  width: calc(100% + 0.5em);
-  position: absolute;
-  left: -9px;
-  text-shadow: 1px 0 blue;
-  top: -5px;
-  color: #111;
-  background: #FFD;
-  overflow: hidden;
-  clip-path: polygon(0 0);
-  animation: noise-animY-2 3s infinite linear alternate-reverse;
-  -webkit-animation: noise-animY-2 3s infinite linear alternate-reverse;
-}
-.glitchy:after {
-  content: attr(data-text);
-  width: calc(100% + 0.5em);
-  position: absolute;
-  left: -5px;
-  text-shadow: -1px 0 red;
-  top: -5px;
-  color: #111;
-  background: #DFF;
-  overflow: hidden;
-  clip-path: polygon(0 0);
-  animation: noise-animY 2s infinite linear alternate-reverse;
-  -webkit-animation: noise-animY 2s infinite linear alternate-reverse;
-}
-@keyframes noise-animY {
-  0% {
-    clip-path: polygon(0 80px, 100% 80px, 100% 16px, 0 16px);
-  }
-  5% {
-    clip-path: polygon(0 94px, 100% 94px, 100% 17px, 0 17px);
-  }
-  10% {
-    clip-path: polygon(0 9px, 100% 9px, 100% 92px, 0 92px);
-  }
-  15.0% {
-    clip-path: polygon(0 37px, 100% 37px, 100% 4px, 0 4px);
-  }
-  20% {
-    clip-path: polygon(0 53px, 100% 53px, 100% 47px, 0 47px);
-  }
-  25% {
-    clip-path: polygon(0 99px, 100% 99px, 100% 69px, 0 69px);
-  }
-  30.0% {
-    clip-path: polygon(0 15px, 100% 15px, 100% 49px, 0 49px);
-  }
-  35% {
-    clip-path: polygon(0 83px, 100% 83px, 100% 81px, 0 81px);
-  }
-  40% {
-    clip-path: polygon(0 55px, 100% 55px, 100% 43px, 0 43px);
-  }
-  45% {
-    clip-path: polygon(0 28px, 100% 28px, 100% 27px, 0 27px);
-  }
-  50% {
-    clip-path: polygon(0 64px, 100% 64px, 100% 28px, 0 28px);
-  }
-  55.0% {
-    clip-path: polygon(0 76px, 100% 76px, 100% 91px, 0 91px);
-  }
-  60.0% {
-    clip-path: polygon(0 29px, 100% 29px, 100% 72px, 0 72px);
-  }
-  65% {
-    clip-path: polygon(0 70px, 100% 70px, 100% 10px, 0 10px);
-  }
-  70% {
-    clip-path: polygon(0 5px, 100% 5px, 100% 84px, 0 84px);
-  }
-  75% {
-    clip-path: polygon(0 46px, 100% 46px, 100% 81px, 0 81px);
-  }
-  80% {
-    clip-path: polygon(0 7px, 100% 7px, 100% 85px, 0 85px);
-  }
-  85.0% {
-    clip-path: polygon(0 17px, 100% 17px, 100% 89px, 0 89px);
-  }
-  90% {
-    clip-path: polygon(0 41px, 100% 41px, 100% 59px, 0 59px);
-  }
-  95% {
-    clip-path: polygon(0 53px, 100% 53px, 100% 90px, 0 90px);
-  }
-  100% {
-    clip-path: polygon(0 10px, 100% 10px, 100% 30px, 0 30px);
-  }
-}
-@keyframes noise-animY-2 {
-  0% {
-    clip-path: polygon(0 84px, 100% 84px, 100% 3px, 0 3px);
-  }
-  5% {
-    clip-path: polygon(0 31px, 100% 31px, 100% 69px, 0 69px);
-  }
-  10% {
-    clip-path: polygon(0 37px, 100% 37px, 100% 33px, 0 33px);
-  }
-  15.0% {
-    clip-path: polygon(0 18px, 100% 18px, 100% 6px, 0 6px);
-  }
-  20% {
-    clip-path: polygon(0 25px, 100% 25px, 100% 87px, 0 87px);
-  }
-  25% {
-    clip-path: polygon(0 100px, 100% 100px, 100% 8px, 0 8px);
-  }
-  30.0% {
-    clip-path: polygon(0 24px, 100% 24px, 100% 87px, 0 87px);
-  }
-  35% {
-    clip-path: polygon(0 39px, 100% 39px, 100% 16px, 0 16px);
-  }
-  40% {
-    clip-path: polygon(0 96px, 100% 96px, 100% 25px, 0 25px);
-  }
-  45% {
-    clip-path: polygon(0 16px, 100% 16px, 100% 100px, 0 100px);
-  }
-  50% {
-    clip-path: polygon(0 92px, 100% 92px, 100% 76px, 0 76px);
-  }
-  55.0% {
-    clip-path: polygon(0 29px, 100% 29px, 100% 40px, 0 40px);
-  }
-  60.0% {
-    clip-path: polygon(0 40px, 100% 40px, 100% 39px, 0 39px);
-  }
-  65% {
-    clip-path: polygon(0 94px, 100% 94px, 100% 44px, 0 44px);
-  }
-  70% {
-    clip-path: polygon(0 2px, 100% 2px, 100% 78px, 0 78px);
-  }
-  75% {
-    clip-path: polygon(0 86px, 100% 86px, 100% 50px, 0 50px);
-  }
-  80% {
-    clip-path: polygon(0 2px, 100% 2px, 100% 46px, 0 46px);
-  }
-  85.0% {
-    clip-path: polygon(0 41px, 100% 41px, 100% 71px, 0 71px);
-  }
-  90% {
-    clip-path: polygon(0 75px, 100% 75px, 100% 15px, 0 15px);
-  }
-  95% {
-    clip-path: polygon(0 41px, 100% 41px, 100% 8px, 0 8px);
-  }
-  100% {
-    clip-path: polygon(0 23px, 100% 23px, 100% 75px, 0 75px);
-  }
-}
-/* Glitchy Text - End */
 
-/* HoverTxt code - Start */
-.hoverTxt {
-	position: relative;
-	top: 5px;
-	vertical-align: text-bottom;
-	height: 30px;
+.title {
+  font-size: 32px;
+  font-family: "筑紫古典";
+  color:#474000;
+  letter-spacing: 5px;
+  margin-left: -10px;
+  text-shadow: #fff 2px 2px;
 }
-.hoverTxt:hover span {
-	visibility: visible;
-}
-.hoverTxt span {
-	position: absolute;
-	background-color: #f3f3ed;
-	padding: 3px;
-	border: 1px solid #aaa;
-	border-radius: 10px;
-	visibility: hidden;
-	color: black;
-	text-decoration: none;
-}
-.hoverBox {
-	top: -100px;
-	text-align: left;
-	box-shadow: 0px 0px 12px 2px rgba(0, 0, 0, 0.5);
-	z-index: 100;
-}
-/* HoverTxt code - End */
 
-/* hovertip v2.0 - Start */
-.hoverTip {
-	display: inline-block;
-	top: 4px;
-	border-width: 0px;
-    border-bottom: 1px dashed #ccc;  /* If you want dots under the hoverable text */
+.box {
+  min-height: 20px;
+  width: fit-content;
+  max-width: 720px;
+  padding: 10px 20px;
+  background-color: rgba(255, 255, 255, 0.75);
+  border-radius: 5px;
+  border: rgba(212, 211, 197, 0.75) 1px solid;
+  color:rgb(153, 150, 130);
+  text-shadow: rgb(230, 238, 225) 1px 1px;
+  line-height: 18px;
+  font-size: 14px;
+  margin: 10px 0px;
 }
-.hoverTipTxt {
-	position: relative;
-	vertical-align: text-bottom;
-	line-height: initial;
-}
-.hoverTipTxt .hoverBox {
-	position: absolute;
-	visibility: hidden;
-}
-.hoverTipTxt:hover .hoverBox, .hoverTipTxt:focus .hoverBox {
-	visibility: visible;
-}
-.hoverBox {
-	padding: 3px 10px;
-	width: intrinsic;  /* Safari/WebKit uses a non-standard name */
-	width: -webkit-max-content;  /* Chrome */
-	width: -moz-max-content;  /* Firefox/Gecko */
-	width: max-content;
-	max-width: 330px;
-	line-height: initial;
-	text-align: left;
-	color: rgb(146, 126, 11);
-	background-color: rgba(255, 255, 255, 0.95);
-	border: rgba(221, 218, 187, 0.95) solid 2px;
-	-webkit-border-radius: 6px;
-	   -moz-border-radius: 6px;
-	        border-radius: 6px;
-	-webkit-box-shadow: 0px 0px 6px 2px rgba(134, 128, 109, 0.2);
-	   -moz-box-shadow: 0px 0px 6px 2px rgba(134, 128, 109, 0.2);
-	        box-shadow: 0px 0px 6px 2px rgba(134, 128, 109, 0.2);
-	z-index: 100;
-}
-.hoverTail::after {
-	content: "";
-	position: absolute;
-	top: 100%;  /* At the bottom of the tooltip */
-	left: 50%;
-	margin-left: -5px;
-	border-width: 8px;
-	border-style: solid;
-	border-color: rgba(221, 218, 187, 0.95) transparent transparent transparent;
-	z-index: 100;
-}
-.hoverBox a {
-	-webkit-transition-duration: unset;
-	   -moz-transition-duration: unset;
-	     -o-transition-duration: unset;
-	        transition-duration: unset;
-}
-#ui-bar .hoverBox {
-	max-width: 230px;
-}
-/* hovertip v2.0 - End */
-  
 
+.tolink a {
+  background-image: url("image/icon/tolink.png");
+  background-repeat: no-repeat;
+  background-position-x: -2px;
+  vertical-align: middle;
+  letter-spacing: 2px;
+  padding: 0px 6px 4px 16px;
+  margin: 2px;
+  font-family: 稚艺简体;
+}
 
-  
+.tolink a:hover {
+  background-image: url("image/icon/tolink_hover.png");
+  color: #d4bf00;
+  border:0px;
+}
 
   
   

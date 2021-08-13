@@ -20,6 +20,14 @@
 }>>
 
 <<set $weather to "晴">>
+<<set $local to {
+    place   : null,
+    tag     : null,
+    event   : null,
+    chara   : null,
+    open    : null,
+    outside : null,
+}>>
 
 <<set $money to 5000>>
 <<set $follow to 1>>

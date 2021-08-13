@@ -37,6 +37,8 @@ Elysion是一个类似现代——2021年地球的世界，虽然表面上平平
 		document.documentElement.scrollTop = 0;
 	<</script>>
 <</link>>
+
+<!-- 脚本 -->
 <<script>>
 $(document).on(':passagerender', function (ev) {
 	// Find all elements containing the delayed class.
@@ -81,9 +83,5 @@ $(document).on(':passagerender', function (ev) {
 怎么样？有变化了吗？<br>
 <<he>>准备好，故事要开始了哦！事件就这么发生了……<br>
 
-
+[[开始|你的家]]
 [[回到开头|Start]]
-
-:: 测试
-
-测试123456

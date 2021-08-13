@@ -1,0 +1,43 @@
+﻿:: Avater [widget]
+
+<<widget "avater">>
+
+<<set _path to "image/avater/">>
+<<set _layer to ["frame","bukkake","accesory","hat","coat","top","bottom","undertop","underbottom","shoes","socks","faceadd","eyebrow","hairfront","eyes","mouth","body","hairback","back","background"]>>
+
+<<set $avater.frame to null>>
+<<set $avater.samen to "face">>
+<<set $avater.accesory to null>>
+<<set $avater.hat to null>>
+<<set $avater.coat to null>>
+<<set $avater.top to "Tshirt/red_1">>
+<<set $avater.bottom to "shortpant/black">>
+<<set $avater.undertop to null>>
+<<set $avater.underbottom to "boxer/white">>
+<<set $avater.shoes to "sportshoes/white">>
+<<set $avater.socks to "sportsocks/white">>
+<<set $avater.faceadd to "shy">>
+<<set $avater.eyebrow to "normal">>
+<<set $avater.hairfront to "naturalshort/aqua">>
+<<set $avater.eyes to "aqua/eye_1">>
+<<set $avater.mouth to "smile">>
+<<set $avater.body to "white/body_1">>
+<<set $avater.hairback to null>>
+<<set $avater.back to null>>
+<<set $avater.background to null>>
+
+
+<<for _i to 0; _i <_layer.length; _i++>>
+
+<<if $avater[_layer[_i]] is null>>
+    <<continue>>
+<<else>>
+    <<set _ipath to _path + (_i) +"_" + _layer[_i]+"/"+$avater[_layer[_i]]>>
+    <<print "<div class='L"+(_i)+"_"+_layer[_i]+"'><img src='"+_ipath+".png'></div>">>
+
+<</if>>
+
+
+<</for>>
+
+<</widget>>

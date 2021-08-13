@@ -45,47 +45,33 @@ html {
     /* Vertical colour gradient */
   background-image: linear-gradient(
     to bottom,
-    rgb(241, 241, 236),
-    rgb(179, 180, 178)
+    rgb(240, 240, 240) 30%,
+    rgb(220, 220, 220)
   );
   background-image: -webkit-linear-gradient(
     top,
-    rgb(241, 241, 236),
-    rgb(179, 180, 178)
+    rgb(240, 240, 240) 30%,
+    rgb(220, 220, 220)
   );
     background-attachment: fixed;
 
     /* Fallback colour */
-    background-color: silver;
+    background-color: #eee;
 }
 
 body {
     /* Remove default styles */
     background-color: transparent;
-    margin: 5% 0 0 0;
+    margin: -1% 0 0 0;
     font-family: "Times New Roman", Georgia, Verdana;
     /* Used to center the box */
     text-align: left;
     color: #707556;
 }
 
+
 #passages {
-    /* Box background (white with 70% opacity) */
-    background-color: rgba(255, 255, 255, 0.7);
-    border: 2px solid white;
-    /* Rounded corners */
-    border-radius: 1em;
-    /* Box width */
-    width: 95%;
-    min-width: 480px;
-    max-width: 1200px;
-    /* Center the box */
-    display: inline-block;
-    min-height: 40%;
-    margin:left;
-    margin-bottom: 5%;
-    padding: 0px;
-    z-index: -2;
+    float: left;
 }
 
 .passage {
@@ -93,8 +79,8 @@ body {
     /* Inner margin within the box */
     padding: 24px;
     /* Text formatting */
-    color: black;
-    font-size: 100%;
+    color: rgb(65, 58, 3);
+    font-size: 90%;
     line-height:180%;
     text-align:justify;
 }
@@ -105,7 +91,7 @@ body {
     font-size: 90%;
     }
     #passages {
-    width: 95%;
+    width: 80%;
     }
 }
 @media screen and (max-width: 960px) {
@@ -113,7 +99,7 @@ body {
     font-size: 90%;
   }
   #passages {
-    width: 100%;
+    width: 90%;
   }
 }
 
@@ -122,7 +108,7 @@ body {
     font-size: 87.5%;
   }
   #passages {
-    width: 100%;
+    width: 95%;
   }
 }
 
@@ -193,14 +179,3 @@ label {
 	cursor: pointer;
 }
 
-.delayed {
-  opacity: 0;
-}
-
-.textbox {
-  width: 300px;
-  height: 150px;
-  font-size: 12px;
-  border-radius: 10px;
-  border: 2px solid #707556;
-}
