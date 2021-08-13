@@ -203,3 +203,5 @@ sugarcube-2:
       name: call
     avater:
       name: avater
+    IniAvater:
+      name: IniAvater

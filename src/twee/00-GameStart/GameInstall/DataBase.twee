@@ -60,6 +60,8 @@
     怡安小区 : {place:"怡安小区", outside:"室外", tag:["公园","散步","隐藏","广场舞"],chara:["player"], bus:true, subway:true, car:true, bike:true}
 }>>
 
+<<IniAvater>>
+
 <</widget>>
 
 <<widget "InitNPCData">>

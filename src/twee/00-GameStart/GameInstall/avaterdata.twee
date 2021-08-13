@@ -1,0 +1,37 @@
+﻿:: AvaterData [widget]
+
+<<widget "IniAvater">>
+
+<<set setup.avater to {
+    frame : [],
+    bukkake : ["body","bottom","face","hair","mouth","penis"],
+    accesory : [],
+    hat : [],
+    coat : [],
+    top : ["Tshirt"],
+    bottom : ["shortpant"],
+    undertop : [],
+    underbottom : ["boxer"],
+    shoes : ["sportshoes","highheel"],
+    socks : ["sportsocks"],
+    faceadd : ["red","shy","tear"],
+    eyebrow : ["angry","normal","sad"],
+    hairfront : ["himecut","naturalshort"],
+    eyes : ["aqua","white"]
+    mouth : ["laugh","open","sad","smile"]
+    body : ["dark","white","mugi"],
+    hairback : ["straight"],
+    back : [],
+    background : [],
+}>>
+
+<</widget>>
+
+<<widget "IniClothTop">>
+    <<set setup.tops to {
+        Tshirt : {
+            cost : 10,
+            reval : 
+        }
+    }>>
+<</widget>>
