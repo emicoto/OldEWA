@@ -201,7 +201,21 @@ sugarcube-2:
       name: location
     call:
       name: call
-    avater:
-      name: avater
-    IniAvater:
-      name: IniAvater
+    avatar:
+      name: avatar
+    InitAvatar:
+      name: InitAvatar
+    SetAvatar:
+      name: SetAvatar
+    InitClothUnderbottoms:
+      name: InitClothUnderbottoms
+    InitClothSocks:
+      name: InitClothSocks
+    InitClothShoes:
+      name: InitClothShoes
+    InitClothBottom:
+      name: InitClothBottom
+    InitClothTop:
+      name: InitClothTop
+    InitFace:
+      name: InitFace

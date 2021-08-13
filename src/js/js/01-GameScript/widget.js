@@ -42,8 +42,19 @@ function hair(){
   select.add(800, 1200, "及腰长发");
   select.default = "超长长发";
   const hairlenth = select.has(num);
-  return `${V.PC.发色 + V.PC.发型 + hairlenth}`;
+  return `${setup.L[V.lang]["发色"][V.PC.发色] + setup.L[V.lang]["发型"][V.PC.发型] + hairlenth}`;
 }
+
+window.hairlenth = function(){
+  const select = new SelectCase();
+  var num= V.PC.发长
+  select.add(0,99, 1);
+  select.add(100,499, 2);
+  select.default = 3
+  const lenth = select.has(num)
+  return lenth
+}
+
 
 DefineMacroS("hair",hair);
 
@@ -130,6 +141,7 @@ window.skillrequire = function(args){
   }
 }
 
+
 window.skillprocess = function (num){
   var rank = skillrank(num)
   switch(rank){
@@ -171,13 +183,13 @@ window.rankcolor = function(num){
 }
 
 function eye(){
-  return V.PC.瞳色 + "的眼睛"
+  return setup.L[V.lang]["瞳色"][V.PC.瞳色] + setup.L[V.lang]["瞳色"]["eyes"]
 }
 
 DefineMacroS("eye", eye);
 
 function skin(){
-  return V.PC.皮肤 + "的肌肤"
+  return setup.L[V.lang][肤色][V.PC.皮肤] + setup.L[V.lang][肤色]["skin"]
 }
 
 DefineMacroS("skin", skin);
@@ -220,3 +232,16 @@ function penis(){
 }
 
 DefineMacroS("penis", penis);
+
+window.breastsize = function() {
+  var size = V.PC.胸部
+  if (size >= 0 && size <= 2){
+    return 1;
+  }
+  else if (size==3){
+    return 2;
+  }
+  else if (size>=4){
+    return 3;
+  }
+}

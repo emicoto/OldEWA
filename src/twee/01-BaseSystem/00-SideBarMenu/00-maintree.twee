@@ -4,7 +4,7 @@
 <!-- 游戏还没开始时 */ -->
 <div id="storyCaptionDiv">
 
-<div id="avater"><<avater>></div>
+<div id="avatar"><<avatar>></div>
 
 <<if $intro is 0>>
 	<<versioninfo>>

@@ -43,7 +43,7 @@
 <</widget>>
 
 <<widget "CMSkin">>
-    <<set _optionlist to ["健康","白皙","麦色","棕色","黝黑"]>>
+    <<set _optionlist to {"健康":"health","白皙":"white","麦色":"mugi","棕色":"dark","黝黑":"black"}>>
         <<listbox "$PC.皮肤" autoselect>>
         <<optionsfrom _optionlist>>
     <</listbox>>
@@ -71,7 +71,7 @@
 <</widget>>
 
 <<widget "CMHairColor">>
-    <<set _optionlist to ["黑色","深棕色","红棕色","棕色","奶茶色","金黄色","米黄色","白金色","银色","纯白色","紫色","绿色","蓝色","水色","粉色"]>>
+    <<set _optionlist to {"黑色":"black","深棕色":"darkbrown","红棕色":"redbrown","棕色":"brown","奶茶色":"milktea","金色":"blond","米黄色":"softblond","白金色":"platinum","银色":"sliver","纯白色":"white","紫色":"purple","绿色":"grean","蓝色":"blue","水色":"aqua","粉色":"pink"}>>
         <<listbox "$PC.发色" autoselect>>
         <<optionsfrom _optionlist>>
     <</listbox>>
@@ -85,7 +85,7 @@
 <</widget>>
 
 <<widget "CMEyeColor">>
-    <<set _optionlist to ["黑色","棕色","深绿色","淡绿色","深蓝色","天蓝色","紫红色","银色","金色","红色"]>>
+    <<set _optionlist to {"黑色":"black","棕色":"brown","碧绿色":"emerald","绿色":"green","蓝色":"blue","水色":"aqua","紫红色":"purple","银色":"white","金色":"amber","红色":"red"}>>
         <<listbox "$PC.瞳色" autoselect>>
         <<optionsfrom _optionlist>>
     <</listbox>>
@@ -153,10 +153,10 @@
             <<set $PC.臀部 to 1>>
             <<set $PC.体型 to 1>>
             <<set $PC.发长 to 100>>
-            <<set $PC.发型 to "顺直">>
-            <<set $PC.发色 to "水色">>
+            <<set $PC.发型 to "straight">>
+            <<set $PC.发色 to "aqua">>
             <<set $PC.瞳色 to "天蓝色">>
-            <<set $PC.皮肤 to "白皙">> 
+            <<set $PC.皮肤 to "white">> 
             <<set $PC.sens to {"m" : 2,  "b":2,  "c":2,  "v":null, "u":1, "a":4}>>
             <<set $PC.genital to {
                 "阴茎" : 10,
@@ -175,10 +175,10 @@
             <<set $PC.臀部 to 1>>
             <<set $PC.体型 to 2>>
             <<set $PC.发长 to 150>>
-            <<set $PC.发型 to "波波头">>
-            <<set $PC.发色 to "水色">>
+            <<set $PC.发型 to "straight">>
+            <<set $PC.发色 to "aqua">>
             <<set $PC.瞳色 to  "棕色">>
-            <<set $PC.皮肤 to "白皙">>
+            <<set $PC.皮肤 to "white">>
             <<set $PC.sens to {"m" : 1,  "b":2,  "c":1, "v":null, "u":1, "a":8}>>
 
             <<set $PC.genital to {
@@ -199,10 +199,10 @@
             <<set $PC.臀部 to 3>>
             <<set $PC.体型 to 2>>
             <<set $PC.发长 to 300>>
-            <<set $PC.发型 to "微卷">>
-            <<set $PC.发色 to "奶茶色">>
+            <<set $PC.发型 to "straight">>
+            <<set $PC.发色 to "milktea">>
             <<set $PC.瞳色 to  "淡绿色">>
-            <<set $PC.皮肤 to "白皙">>
+            <<set $PC.皮肤 to "white">>
             <<set $PC.sens to {"m" : 1,  "b":2,  "v":1, "c":1, "u":1, "a":8}>>
             <<set $starttrait to "好色">>
 
@@ -222,10 +222,10 @@
             <<set $PC.臀部 to 2>>
             <<set $PC.体型 to 1>>
             <<set $PC.发长 to 250>>
-            <<set $PC.发型 to "波波头">>
-            <<set $PC.发色 to "深棕色">>
+            <<set $PC.发型 to "straight">>
+            <<set $PC.发色 to "darkbrown">>
             <<set $PC.瞳色 to "棕色">>
-            <<set $PC.皮肤 to "健康">>
+            <<set $PC.皮肤 to "health">>
             <<set $PC.sens to {"m" : 1,  "b":4,  "v":1, "c":1, "u":1, "a":1}>>             
             <<set $starttrait to "人气">>
 
@@ -240,10 +240,10 @@
             <<set $PC.臀部 to 1>>
             <<set $PC.体型 to 1>>
             <<set $PC.发长 to 120>>
-            <<set $PC.发型 to "顺直">>
-            <<set $PC.发色 to "白金色">>
+            <<set $PC.发型 to "straight">>
+            <<set $PC.发色 to "platinum">>
             <<set $PC.瞳色 to "深绿色">>
-            <<set $PC.皮肤 to "白皙">>
+            <<set $PC.皮肤 to "white">>
             <<set $PC.sens to {"m" : 1,  "b":2,  "c":2, "v":null, "u":1, "a":2}>>
 
             <<set $PC.genital to {
@@ -265,10 +265,10 @@
             <<set $PC.臀部 to 3>>
             <<set $PC.体型 to 3>>
             <<set $PC.发长 to 50>>
-            <<set $PC.发型 to "顺直">>
-            <<set $PC.发色 to "黑发">>
+            <<set $PC.发型 to "straight">>
+            <<set $PC.发色 to "black">>
             <<set $PC.瞳色 to "深绿色">>
-            <<set $PC.皮肤 to "白皙">>
+            <<set $PC.皮肤 to "white">>
             <<set $PC.魅力 to 1200>>
             <<set $PC.sens to {"m" : 4,  "b":2,  "v":1, "c":1, "u":1, "a":1}>>
 

@@ -1,0 +1,249 @@
+﻿:: AvatarSetup [widget]
+<<widget "SetAvatar">>
+
+/* 相框 OR 特效 */
+<<set $avatar.frame to null>>
+
+/* 浴精喷精冒汗气息之类的 */
+<<if $PFlag.bukkake.body is true>>
+    <<set $avatar.addon.body to true>>
+<<else>>
+    <<set $avatar.addon.body to false>>
+<</if>>
+
+<<if $PFlag.bukkake.face is true>>
+    <<set $avatar.addon.face to true>>
+<<else>>
+    <<set $avatar.addon.face to false>>
+<</if>>
+
+<<if $PFlag.bukkake.hair is true>>
+    <<set $avatar.addon.hair to true>>
+<<else>>
+    <<set $avatar.addon.hair to false>>
+<</if>>
+
+<<if ($PC.sexrec.饮精.c gt 100)>>
+    <<set $avatar.addon.face to true>>
+<<else>>
+    <<set $avatar.addon.face to false>>
+<</if>>
+
+<<if ($PC.sexrec.肛内射.c + $PC.sexrec.内射.c) gt 200 and $PFlag.bottoms lte 1>>
+    <<set $avatar.addon.bottom to true>>
+<<else>>
+    <<set $avatar.addon.bottom to false>>
+<</if>>
+
+<<if ($PC.sexrec.射精.c gt 10) and $PFlag.bottoms lte 1>>
+    <<set $avatar.addon.penis to true>>
+<<else>>
+    <<set $avatar.addon.penis to false>>
+<</if>>
+
+
+/* 脖子 */
+<<if $PEquip.neck isnot null>>
+    <<set $avatar.neck to $PEquip.neck.index +"/"+$PEquip.neck.color>>
+<<else>>
+    <<set $avatar.neck to null>>
+<</if>>
+
+
+/* 帽子 */
+<<if $PEquip.hat isnot null>>
+    <<set $avatar.hat to $PEquip.hat.index +"/"+$PEquip.hat.color>>
+<<else>>
+    <<set $avatar.hat to null>>
+<</if>>
+
+
+/* 脸部装饰 */
+<<if $PEquip.face isnot null>>
+    <<set $avatar.face to $PEquip.face.index +"/"+$PEquip.face.color>>
+<<else>>
+    <<set $avatar.face to null>>
+<</if>>
+
+
+/* 外套 */
+
+<<if $PEquip.coat isnot null>>
+    <<set $avatar.coat to $PEquip.coat.index +"/"+$PEquip.coat.color>>
+
+    /* 查看胸部差分。大衣外套没有怀孕差分 */
+    <<set _apath to "/image/avatar/5_coat/">>
+    <<set _apath to _apath + $avatar.coat + "_" + breastsize()+ ".png">>
+    <<if ImgExist(_apath) is true>>
+        <<set $avatar.coat to $avatar.coat + "_" + breastsize()>>
+    <<else>>
+        <<set $avatar.coat to $avatar.coat + "_1">>
+    <</if>>
+
+<<else>>
+    <<set $avatar.coat to null>>
+<</if>>
+
+
+/* 上衣，连衣裙归这里 */
+<<if $PEquip.top isnot null>>
+    <<set $avatar.top to $PEquip.top.index +"/"+$PEquip.top.color>>
+
+    /* 先看看胸部差分是否存在 */
+    <<set _apath to "/image/avatar/6_top/">>
+    <<set _apath to _apath + $avatar.top + "_" + breastsize()+ ".png">>
+    <<if ImgExist(_apath) is true>>
+        <<set $avatar.top to $avatar.top + "_" + breastsize()>>
+    <<else>>
+        <<set $avatar.top to $avatar.top + "_1">>
+    <</if>>
+
+    /* 然后查看怀孕差分 */
+    <<if $PC.stats.怀孕 is true or $PC.stats.肠内受孕 is true >>
+        <<set _apath to "/image/avatar/6_top/">>
+        <<set _apath to _apath+$avatar.top+"p.png">>
+        <<if ImgExist(_apath) is true>>
+            <<set $avatar.top to $avatar.top + "p">>
+        <</if>>
+    <</if>>
+
+<<else>>
+    <<set $avatar.top to null>>
+<</if>>
+
+/* 手部装饰 */
+<<if $PEquip.hand isnot null>>
+    <<set $avatar.hand to $PEquip.hand.index +"/"+$PEquip.hand.color>>
+<<else>>
+    <<set $avatar.hand to null>>
+<</if>>
+
+/* 裙子裤子都在这里，吊带工作裤也是 */
+<<if $PEquip.bottom isnot null>>
+    <<set $avatar.bottom to $PEquip.bottom.index + "/" + $PEquip.bottom.color>>
+<<else>>
+    <<set $avatar.bottom to null>>
+<</if>>
+
+/* 内衣或泳衣上身部位，连衣泳装和连衣内衣也在这里 */
+<<if $PEquip.undertop isnot null>>
+    <<set $avatar.undertop to $PEquip.undertop.index + "/" + $PEquip.undertop.color>>
+
+    /* 查看胸部差分 */
+    <<set _apath to "/image/avatar/9_undertop">>
+    <<set _apath to _apath + $avatar.undertop + "_" + breastsize() + ".png">>
+    <<if ImgExist(_apath) is true>>
+        <<set $avatar.undertop to $avatar.undertop + "_" + breastsize()>>
+    <<else>>
+        <<set $avatar.undertop to $avatar.undertop + "_1">>
+    <</if>>
+
+    /* 然后查看怀孕差分 */
+    <<if $PC.stats.怀孕 is true or $PC.stats.肠内受孕 is true >>
+        <<set _apath to "/image/avatar/9_undertop/">>
+        <<set _apath to _apath+$avatar.undertop+"p.png">>
+        <<if ImgExist(_apath) is true>>
+            <<set $avatar.undertop to $avatar.undertop + "p">>
+        <</if>>
+    <</if>>
+
+<<else>>
+    <<set $avatar.undertop to null>>
+<</if>>
+
+/* 内衣或泳衣的下身部位 */
+<<if $PEquip.underbottom isnot null>>
+    <<set $avatar.underbottom to $PEquip.underbottom.index + "/" + $PEquip.underbottom.color>>
+<<else>>
+    <<set $avatar.underbottom to null>>
+<</if>>
+
+/* 鞋子 */
+<<if $PEquip.shoes isnot null>>
+    <<set $avatar.shoes to $PEquip.shoes.index + "/" + $PEquip.shoes.color>>
+<<else>>
+    <<set $avatar.shoes to null>>
+<</if>>
+
+/* 袜子 */
+<<if $PEquip.socks isnot null>>
+    <<set $avatar.socks to $PEquip.socks.index + "/" + $PEquip.socks.color>>
+<<else>>
+    <<set $avatar.socks to null>>
+<</if>>
+
+/* 眉毛 */
+<<set $avatar.eyebrow to $PFace.eyebrow>>
+
+/* 发型前面 */
+<<set _apath to "/image/avatar/15_hairfront/">>
+<<set _bpath to _apath + $PEquip.hairfront + "/" + $PC.发色 + hairlenth() + ".png">>
+<<set _cpath to _cpath + $PEquip.hairfront + "/" + $PC.发色 + "_1.png">>
+<<if ImgExist(_bpath)>>
+    <<set $avatar.hairfront to $PEquip.hairfront + "/" + $PC.发色 + hairlenth()>>
+<<elseif ImgExist(_cpath)>>
+    <<set $avatar.hairfront to $PEquip.hairfront + "/" + $PC.发色 + "_1">>
+<<else>>
+    <<set $avatar.hairfront to $PEquip.hairfront + "/white_1">>
+<</if>>
+
+/* 眼睛 */
+<<set _apath to "/image/avatar/16_eyes/">>
+<<set _bpath to _apath + $PC.瞳色 +"/full.png">>
+
+<<if ImgExist(_bpath)>>
+    <<set $avatar.eyes to $PC.瞳色 + "/" + $PFace.eyes>>
+<<else>>
+    <<set $avatar.eyes to "white/" + $PFace.eyes>>
+<</if>>
+
+/* 嘴巴 */
+<<set $avatar.mouth to $PFace.mouth>>
+
+/* 淫纹 */
+<<if $PSkin.腹部 isnot null>>
+    <<set $avatar.tatoos to $PSkin.腹部.index>>
+<<else>>
+    <<set $avatar.tatoos to null>>
+<</if>>
+
+/* 素体 */
+<<if $PC.stats.怀孕 is true or $PC.stats.肠内受孕 is true >>
+    <<set $avatar.body to $PC.皮肤 +"/body_"+ breastsize()+"p">>
+<<else>>
+    <<set $avatar.body to $PC.皮肤 +"/body_"+ breastsize()>>
+<</if>>
+
+/* JJ */
+<<if $PC.genital.阴茎 gt 3 and $PFlag.bottoms lte 1>>
+    <<set $avatar.penis to $PC.皮肤 +"/penis">>
+<<else>>
+    <<set $avatar.penis to null>>
+<</if>>
+
+/* 头发后面 */
+<<set _apath to "/image/avatar/19_hairback/">>
+<<set _bpath to _apath + $PEquip.hairback + "/" + $PC.发色 + hairlenth() + ".png">>
+<<set _cpath to _cpath + $PEquip.hairback + "/" + $PC.发色 + "_1.png">>
+<<if ImgExist(_bpath)>>
+    <<set $avatar.hairback to $PEquip.hairback + "/" + $PC.发色 + hairlenth()>>
+<<elseif ImgExist(_cpath)>>
+    <<set $avatar.hairback to $PEquip.hairback + "/" + $PC.发色 + "_1">>
+<<else>>
+    <<set $avatar.hairback to $PEquip.hairback + "/white_1">>
+<</if>>
+
+/* 背后装饰 */
+<<set $avatar.back to $PEquip.back>>
+
+/* 背景 */
+<<set _apath to "/image/avatar/21_background/"+$location+".png">>
+
+<<if ImgExist(_apath)>>
+    <<set $avatar.background to $location>>
+<<else>>
+    <<set $avatar.background to null>>
+<</if>>
+
+
+<</widget>>

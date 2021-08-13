@@ -24,13 +24,12 @@
 	<<set $debug to 0>>
 <</if>>
 
-<<set $avater to {
+<<set $avatar to {
 	frame		: null,
-	bukkake	 	: null,
-	accesory	: null,  /* face,neck,hand共用一个图层。0是neck，1是face,2是hand */
-	accesory1	: null,
-	accesory2	: null,
-
+	addon	 	: {body:false,bottom:false,face:false,hair:false,mouth:false,penis:false},
+	neck		: null, 
+	hand		: null,
+	face		: null,
 	hat			: null,
 	coat		: null,
 	top			: null,
@@ -39,12 +38,13 @@
 	underbottom	: null,
 	shoes		: null,
 	socks		: null,
-	faceadd 	: null,
-	faceadd1	: null,
+	emoadd 		: {tear:false, shy:false, red:false},
 	eyebrow 	: null,
 	hairfront	: null,
 	eyes		: null,
 	mouth		: null,
+	tatoos		: null,
+	penis		: null,
 	body		: null,
 	hairback	: null,
 	back		: null,

@@ -1,79 +1,90 @@
-﻿:: Avater [widget]
+﻿:: Avatar [widget]
 
-<<widget "avater">>
+<<widget "avatar">>
 
-<<set _path to "image/avater/">>
+<<set _path to "/image/avatar/">>
 <<set _layer to ["frame","addon","neck","hat","face","coat","top","hand","bottom","undertop","underbottom","shoes","socks","emoadd","eyebrow","hairfront","eyes","mouth","body","hairback","back","background"]>>
 
-<<set $avater.frame to null>>
-<<set $avater.addon to {"face":true}>>
-<<set $avater.neck to null>>
-<<set $avater.hat to null>>
-<<set $avater.face to null>>
-<<set $avater.coat to null>>
-<<set $avater.top to "Tshirt/red_1">>
-<<set $avater.hand to null>>
-<<set $avater.bottom to "shortpant/black">>
-<<set $avater.undertop to null>>
-<<set $avater.underbottom to "boxer/white">>
-<<set $avater.shoes to "sportshoes/white">>
-<<set $avater.socks to "sportsocks/white">>
-<<set $avater.emoadd to {"shy":true,"tear":true}>>
-<<set $avater.eyebrow to "normal">>
-<<set $avater.hairfront to "naturalshort/aqua">>
-<<set $avater.eyes to "aqua/eye_1">>
-<<set $avater.mouth to "smile">>
-<<set $avater.body to "white/body_1">>
-<<set $avater.penis to "white/penis">>
-<<set $avater.hairback to null>>
-<<set $avater.back to null>>
-<<set $avater.background to null>>
-
+<<SetAvatar>>
 
 <<for _i to 0; _i <_layer.length; _i++>>
 
-<<if $avater[_layer[_i]] is null>>
+<<if $avatar[_layer[_i]] is null>>
     <<continue>>
 <<else>>
+    <<set _tpath to _path + _i+"_"+_layer[_i] + "/">>
+    <<set _classname to "<div class='L"+_i+"_"+_layer[_i]+"'>">>
 
     <<if _layer[_i] isnot "addon" and _layer[_i] isnot "emoadd">>
-        <<set _ipath to _path + (_i) +"_" + _layer[_i]+"/"+$avater[_layer[_i]]>>
-        <<print "<div class='L"+(_i)+"_"+_layer[_i]+"'><img src='"+_ipath+".png'></div>">>
+        <<set _ipath to _tpath + $avatar[_layer[_i]]>>
+        <<print _classname + "<img src='"+_ipath+".png'></div>">>
     <</if>>
 
-    <<if _layer[_i] is "body" and $avater.penis isnot null>>
-        <<set _ipath to _path + (_i) +"_" + _layer[_i]+"/"+$avater.penis>>
-        <<print "<div class='L"+(_i)+"_"+_layer[_i]+"'><img src='"+_ipath+".png'></div>">>
+    <<if _layer[_i] is "body" and $avatar.tatoos isnot null and $PFlag.tops lte 2>>
+        <<set _ipath to _tpath + $avatar.tatoos>>
+        <<print _classname + "<img src='"+_ipath+".png'></div>">>
+    <</if>>
+
+    <<if _layer[_i] is "body" and $avatar.penis isnot null>>
+        <<set _ipath to _tpath + $avatar.penis>>
+        <<print _classname + "<img src='"+_ipath+".png'></div>">>
     <</if>>
 
     <<if _layer[_i] is "addon">>
 
-        <<if $avater.addon.bottom is true and $pflag.bottom lte 2>>
-
+        <<if $avatar.addon.bottom is true and $PFlag.bottoms lte 2>>
+            <<set _ipath to _tpath + "bottom">>
+            <<print _classname + "<img src='"+_ipath+".png'></div>">>
         <</if>>
 
-        <<if $avater.addon.body is true>>
-
+        <<if $avatar.addon.body is true>>
+            <<set _ipath to _tpath + "body">>
+            <<print _classname + "<img src='"+_ipath+".png'></div>">>
         <</if>>
 
-        <<if $avater.addon.hair is true>>
-
+        <<if $avatar.addon.hair is true>>
+            <<set _ipath to _tpath + "hair">>
+            <<print _classname + "<img src='"+_ipath+".png'></div>">>
         <</if>>
 
-        <<if $avater.addon.face is true>>
-
+        <<if $avatar.addon.face is true>>
+            <<set _ipath to _tpath + "face">>
+            <<print _classname + "<img src='"+_ipath+".png'></div>">>
         <</if>>
 
-        <<if $avater.addon.mouth is true>>
-
+        <<if $avatar.addon.mouth is true>>
+            <<set _ipath to _tpath + "mouth">>
+            <<print _classname + "<img src='"+_ipath+".png'></div>">>
         <</if>>
 
-        <<if $avater.addon.penis is true and $pflag.bottom lte 1>>
-
+        <<if $avatar.addon.penis is true and $PFlag.bottoms lte 1>>
+            <<set _ipath to _tpath + "penis">>
+            <<print _classname + "<img src='"+_ipath+".png'></div>">>
         <</if>>
 
     <</if>>
 
+    <<if _layer[_i] is "emoadd">>
+        /*<<if $avatar.emoadd.shy is true>>
+            <<set _ipath to _tpath + "shy">>
+            <<print _classname + "<img src='"+_ipath+".png'></div>">>
+        <</if>>
+
+        <<if $avatar.emoadd.red is true>>
+            <<set _ipath to _tpath + "red">>
+            <<print _classname + "<img src='"+_ipath+".png'></div>">>
+        <</if>>
+
+        <<if $avatar.emoadd.hurt is true>>
+            <<set _ipath to _tpath + "hurt">>
+            <<print _classname + "<img src='"+_ipath+".png'></div>">>
+        <</if>>
+
+        <<if $avatar.emoadd.tear is true>>
+            <<set _ipath to _tpath + "tear">>
+            <<print _classname + "<img src='"+_ipath+".png'></div>">>
+        <</if>>*/
+    <</if>>
 
 <</if>>
 

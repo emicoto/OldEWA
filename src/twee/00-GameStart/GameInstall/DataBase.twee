@@ -29,16 +29,107 @@
 
 <<set setup.L to {
     "CN":{
+        开始:{
         "开始游戏":"开始游戏",
         "快速开始":"快速开始",
         "创建角色":"创建角色",
         "游戏设定":"游戏设定",
+        },
+        肤色:{
+        "dark" : "棕色",
+        "black" : "黝黑",
+        "mugi" : "麦色",
+        "health" : "健康",
+        "white" : "白皙",
+        "skin"  : "的肌肤",
+        },
+        瞳色:{
+            "eyes":"的眼镜",
+            "black":"黑色",
+            "brown":"棕色",
+            "emerald":"碧绿色",
+            "green":"绿色",
+            "blue":"蓝色",
+            "aqua":"水色",
+            "purple":"紫红色",
+            "white":"银色",
+            "amber":"金色",
+            "red":"红色",
+        },
+        发色:{
+            "black":"黑色",
+            "darkbrown":"深棕色",
+            "redbrown":"红棕色",
+            "brown":"棕色",
+            "milktea":"奶茶色",
+            "blond":"金色",
+            "softblond":"米黄色",
+            "platinum":"白金色",
+            "sliver":"银色",
+            "white":"纯白色",
+            "purple":"紫色",
+            "green":"绿色",
+            "blue":"蓝色",
+            "aqua":"水色",
+            "pink":"粉色",
+        },
+        发型:{
+            "straight":"顺直",
+            "natural":"自然",
+            "curly":"微卷",
+            "himecut":"齐刘海",
+        },
     },
     "EN":{
-        "开始游戏":"StartGame",
+        开始:{"开始游戏":"StartGame",
         "快速开始":"QuickStart",
         "创建角色":"CharaMaking",
         "游戏设定":"GameSetting",
+        },
+        肤色:{
+        "dark" : "dark",
+        "black" : "black",
+        "mugi" : "wheatish",
+        "health" : "healthy white",
+        "white" : "pale white",
+        "skin"  : "skin", 
+        },
+        瞳色:{
+            "eyes":"eyes",
+            "black":"black",
+            "brown":"brown",
+            "emerald":"emerald",
+            "green":"green",
+            "blue":"blue",
+            "aqua":"aqua",
+            "purple":"purple",
+            "white":"silver",
+            "amber":"amber",
+            "red":"red",
+        },
+        发色:{
+            "black":"black",
+            "darkbrown":"dark-brown",
+            "redbrown":"red-brown",
+            "brown":"brown",
+            "milktea":"milktea color",
+            "blond":"blond",
+            "softblond":"soft blond",
+            "platinum":"platinum blond",
+            "sliver":"sliver",
+            "white":"white",
+            "purple":"purple",
+            "green":"green",
+            "blue":"blue",
+            "aqua":"aqua",
+            "pink":"pink",
+        },
+        发型:{
+            "straight":"straight",
+            "natural":"natrual",
+            "curly":"curly",
+            "himecut":"himecut",
+        },
     }
 }>>
 
@@ -56,11 +147,11 @@
 <<set $explist to ["战败","攻击","被攻击","诱惑","射精","高潮","M高潮","B高潮","C高潮","U高潮","V高潮","A高潮","多重高潮","自慰","口交","性交","肛交","内射","肛内射","喷乳","被猥琐","被眠奸","被迷奸","被强奸","被轮奸","被兽奸","被触手奸","兽交","触手","史莱姆","怀孕","A怀孕","分娩","尿道开发","阴道扩张","肛门扩张","产卵","寄生","监禁","SM"]>>
 
 <<set setup.placedata to {
-    你的家 : {place:"你的家", outside:"室内", tag:["煮食","休息","沐浴","更衣","电脑","WIFI"], chara:["player"], bus:false,},
-    怡安小区 : {place:"怡安小区", outside:"室外", tag:["公园","散步","隐藏","广场舞"],chara:["player"], bus:true, subway:true, car:true, bike:true}
+    你的家 : {place:"你的家", outside:"室内", tag:["煮食","休息","沐浴","更衣","电脑","WIFI"], chara:["player"], bus:false, subway:false, car:false, bike:false},
+    怡安小区 : {place:"怡安小区", outside:"室外", tag:["公园","散步","隐藏","广场舞"],chara:["player"], bus:true, subway:true, car:true, bike:true},
 }>>
 
-<<IniAvater>>
+<<InitAvatar>>
 
 <</widget>>
 

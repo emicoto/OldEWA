@@ -1,4 +1,5 @@
-﻿if (document.location.href.toLowerCase().includes("/temp/") || document.location.href.toLowerCase().includes("/private/") || hasOwnProperty.call(window, "storyFormat")) {
+﻿
+if (document.location.href.toLowerCase().includes("/temp/") || document.location.href.toLowerCase().includes("/private/") || hasOwnProperty.call(window, "storyFormat")) {
 	// Change this to the path where this HTML file is
 	// located if you want to run this from inside Twine.
 	setup.Path = "H:/_ElysionWorldAdventure/dist/";  // Running inside Twine application
@@ -50,4 +51,15 @@ class SelectCase {
 window.range = function(num,min,max){
 	if (num >= min && num <= max){return true}
 	else{return false}
+}
+
+
+window.ImgExist = function(imgurl) {
+	var imgobj = new Image()
+	imgobj.src = imgurl;
+	if (imgobj.fileSize > 0 || (imgobj.width > 0 && imgobj.height > 0)) {  
+		return true;
+   } else {  
+		return false;
+	} 
 }

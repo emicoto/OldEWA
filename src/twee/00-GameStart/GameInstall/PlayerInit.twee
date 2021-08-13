@@ -6,7 +6,7 @@
 
 <!-- 角色数据 -->
 <<set $PC to {
-    "名字"      : "玩家",
+    "名字"      : "魔女",
     "性别"      : "伪娘",
     "种族"      : "人类",
     "特长"      : "文艺创作",
@@ -15,10 +15,10 @@
     "臀部"      : 2,
     "体型"      : 1,
     "发长"      : 120,
-    "发型"      : "微卷",
-    "发色"      : "奶茶色",
-    "瞳色"      : "棕色",
-    "皮肤"      : "白皙",
+    "发色"      : "aqua",
+    "发型"      : "natrual",
+    "瞳色"      : "aqua",
+    "皮肤"      : "white",
     "魅力"      : 1600,
     "头衔"      : "菜鸟勇者",
 }>>
@@ -170,7 +170,12 @@
 <<set $PC.trait to {}>>
 
 <!-- PC的状态 -->
-<<set $PC.stats to {}>>
+<<set $PC.stats to {
+    生病 : false,
+    怀孕 : false,
+    寄生 : false,
+    肠内受孕 : false,
+}>>
 
 <<set $PC.genital to {
     "阴茎" : 14,     "子宫" : 0,
@@ -188,8 +193,13 @@ $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌}
 <<set $PFlag to {
     lactation : false,
     lactatecd : 0,
-    tops      : 9, /* 上身的裸露范围  10=完全不露  9=手臂范围可见 8=手臂到肩膀范围可见 7=手臂到上半胸可见 6=只有下腹可见 5=手臂+下腹可见 4=手臂到肩膀+下腹 3=手臂到上半胸+下腹 2=只有敏感部位有遮掩 1=半透明装 0=全裸*/
-    bottoms   : 4, /* 下身的裸露范围  5=完全不露  4=到膝盖  3=到大腿  2=三角区  1=半透明/暴露装/接近全裸  0=全裸  */
+    tops      : 9, 
+    bottoms   : 4, 
+    bukkake   : {
+        body:false,
+        face:false,
+        hair:false,
+    }
 }>>
 
 <!-- 记录 -->
@@ -218,6 +228,7 @@ $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌}
     "耻辱" : setup.marksheet,
 }>>
 
+/* 纹身，layer有额头、脸颊（左右）、锁骨（左右）、胸（左右）、后脖根、手臂（左右）、后背、腰窝、 臀瓣（左右），大腿（左右）*/
 <<set $PSkin to {
     "额头":null,
     "脸颊":null,
@@ -227,28 +238,87 @@ $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌}
     "后脖根":null,
     "左臂":null,
     "右臂":null,
+    "腹部":null,
     "背部":null,
     "腰窝":null,
     "左臀":null,
     "右臀":null,
     "左腿":null,
     "右腿":null,
-}>> /* 纹身，layer有额头、脸颊（左右）、锁骨（左右）、胸（左右）、后脖根、手臂（左右）、后背、腰窝、 臀瓣（左右），大腿（左右）*/
+}>> 
 
+/* 现有装备 */
 <<set $PEquip to {
-    "头饰":null,
-    "面饰":null,
-    "耳饰":null,
-    "右手":null,
-    "左手":null,
-    "鞋子":null,
-    "袜子":null,
-    "脚饰":null,
+	neck : null,
+	hand : null,
+	face : null,
+	hat  : null,
+	coat : null,
+	top  : {
+        id   : 1,
+        cost : 10,
+        reveal : 9,
+        color: "red", 
+        colors : ["black","blue","green","pink","red","white","yellow"],
+        name : "T恤",
+        text : "一件简单的T恤",
+        shop : "all",
+        index : "Tshirt",
+    },
+    hand : null,
+    bottom : {
+        id   : 1,
+        cost : 10,
+        reveal : 4, 
+        color: "black",
+        colors : ["black","blue","demi","mint","pink","purple","red","white"],
+        name : "短裤",
+        text : "一条简单的短裤",
+        shop : "all",
+        index : "shortpant",
+    },
+    undertop : null,
+    underbottom: {
+        id   : 1,
+        cost : 12,
+        reveal : 2, 
+        color: "white",
+        colors : ["aqua","black","blue","pink","purple","red","white"],
+        name : "四角内裤",
+        text : "一条简单的四角内裤",
+        shop : "all",
+        index : "boxer",
+    },
+    shoes   :{
+        id   : 1,
+        cost : 60,
+        color: "white",
+        colors : ["white"],
+        name : "运动鞋",
+        text : "一双普通的白色运动鞋",
+        shop : "all",
+        index : "sportshoes",
+    },
+    socks   :{
+        id   : 1,
+        cost : 10,
+        color: "white",
+        colors : ["aqua","black","chocolate","green","red","white","yellow"],
+        name : "运动短袜",
+        text : "一双简单的运动袜",
+        shop : "all",
+        index : "sportsocks",
+    },
+    back    : null,
+    hairfront : "natural",
+    hairback  : "straight",
+}>>
 
-    "外套":null,
-    "上衣":null,
-    "下衣":null,
-    "内衣":null,
-}>> /* 现有装备 */
+<<set $PFace to {
+    eyebrow : "normal",
+    eyes    : "full",
+    mouth   : "smile",
+    index   : "normal",
+}>>
 
 <</widget>>
