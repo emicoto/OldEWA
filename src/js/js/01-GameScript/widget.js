@@ -268,3 +268,23 @@ window.imglocation = function(){
     }
 
 }
+
+function setreveal(){
+  const tops = [V.PEquip.coat.reveal,V.PEquip.top.reveal,V.PEquip.undertop.reveal]
+  const bottoms = [V.PEquip.bottoms.reveal,V.PEquip.underbottom.reveal]
+  tops.sort()
+  bottoms.sort()
+  if (!tops[0]){
+    V.PFlag.tops = 0
+  }else{
+    V.PFlag.tops = tops[0]
+  }
+
+  if (!bottoms[0]){
+    V.PFlag.bottoms = 0
+  }else{
+    V.PFlag.bottoms = bottoms[0]
+  }
+}
+
+DefineMacroS("setreveal", setreveal);

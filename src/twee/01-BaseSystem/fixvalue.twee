@@ -1,0 +1,43 @@
+﻿:: FixValue [widget]
+
+<<widget "fixvalue">>  
+    <<set $money to Math.clamp($money,0,9999999999)>>
+    <<set $PC.发长 to Math.clamp($PC.发长,0,9999)>>
+    <<set $PC.魅力 to Math.clamp($PC.魅力,0,9999)>>
+
+    /* 基础条修正 */
+    <<set $PC.base.体力[1] to Math.clamp(500+($PC.abl.运动*($PC.level/5)),0,2500)>>
+    <<set $PC.base.健康[0] to Math.clamp($PC.base.健康[0],-100,1000)>>
+    <<set $PC.base.健康[1] to 1000>>
+    <<set $PC.base.理智[0] to Math.clamp($PC.base.理智[0],-100,1000)>>
+    <<set $PC.base.理智[1] to 1000>>
+    <<set $PC.base.魔力[1] to Math.clamp(100+$PC.level*($PC.abl.意志/8),100,1200)>> 
+
+    /* 扩张修正 */
+    <<set $PC.ste.anal to Math.clamp($PC.ste.anal,1,(12+($PC.体型*2)))>>
+    <<if $PC.性别 is "少女">>
+        <<set $PC.ste.ureth to Math.clamp($PC.ste.ureth,0.5,6)>>
+    <<else>>
+        <<set $PC.ste.ureth to Math.clamp($PC.ste.ureth,0.2,(0.5+$PC.genital.阴茎/10))>>
+    <</if>>
+    <<if $PC.genital.子宫 is null>>
+        <<set $PC.ste.vagina to null>>
+    <<else>>
+        <<set $PC.ste.vagina to Math.clamp($PC.ste.vagina,1,(12+($PC.体型*2)))>>
+    <</if>>
+
+    /* RPG相关修正 */
+    <<set $PC.rpg.HP[1] to Math.clamp(($PC.base.体力[1]/5+100),1,1000)>>
+    <<set $PC.rpg.HP[0] to Math.clamp(($PC.base.体力[0]/5+$PC.base.健康[0]/10),0,$PC.rpg.HP[1])>>
+
+    <<set $PC.rpg.MP[1] to $PC.base.魔力[1]>>
+    <<set $PC.rpg.MP[0] to $PC.base.魔力[0]>>
+
+    <<set $PC.ATK to Math.clamp((10+$PC.abl.战技/10),1,120)>>
+    <<set $PC.DEF to Math.clamp((10+$PC.abl.健身/10),1,120)>>
+    <<set $PC.MATK to Math.clamp((10+($PC.奥术/10*$PC.自然/500)),1,250)>>
+    <<set $PC.MDEF to Math.clamp((10+($PC.异能/10*$PC.物理/500)),1,250)>>
+
+    /*<<setreveal>>*/
+
+<</widget>>

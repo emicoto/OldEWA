@@ -4,6 +4,7 @@
     <div class="dashline"></div>
 <</widget>>
 
+
 <<widget "meterbar">>
     <<if $args[0]>>
         <<set _percent to $args[0]>>
@@ -19,55 +20,14 @@
     <<print '<div id="meter" class="metercon"><div id="meter" class="bar" style="width:'+_percent+'%;background-color:'+_color+'"></div></div>'>>
 <</widget>>
 
-<<widget "fixvalue">>  
-    <<set $money to Math.clamp($money,0,9999999999)>>
-    <<set $PC.发长 to Math.clamp($PC.发长,0,9999)>>
-    <<set $PC.魅力 to Math.clamp($PC.魅力,0,9999)>>
-
-    /* 基础条修正 */
-    <<set $PC.base.体力[1] to Math.clamp(500+($PC.abl.运动*($PC.level/5)),0,2500)>>
-    <<set $PC.base.健康[0] to Math.clamp($PC.base.健康[0],-100,1000)>>
-    <<set $PC.base.健康[1] to 1000>>
-    <<set $PC.base.理智[0] to Math.clamp($PC.base.理智[0],-100,1000)>>
-    <<set $PC.base.理智[1] to 1000>>
-    <<set $PC.base.魔力[1] to Math.clamp(100+$PC.level*($PC.abl.意志/8),100,1200)>> 
-
-    /* 扩张修正 */
-    <<set $PC.ste.anal to Math.clamp($PC.ste.anal,1,(12+($PC.体型*2)))>>
-    <<if $PC.性别 is "少女">>
-        <<set $PC.ste.ureth to Math.clamp($PC.ste.ureth,0.5,6)>>
-    <<else>>
-        <<set $PC.ste.ureth to Math.clamp($PC.ste.ureth,0.2,(0.5+$PC.genital.阴茎/10))>>
-    <</if>>
-    <<if $PC.genital.子宫 is null>>
-        <<set $PC.ste.vagina to null>>
-    <<else>>
-        <<set $PC.ste.vagina to Math.clamp($PC.ste.vagina,1,(12+($PC.体型*2)))>>
-    <</if>>
-
-    /* RPG相关修正 */
-    <<set $PC.rpg.HP[1] to Math.clamp(($PC.base.体力[1]/5+100),1,1000)>>
-    <<set $PC.rpg.HP[0] to Math.clamp(($PC.base.体力[0]/5+$PC.base.健康[0]/10),0,$PC.rpg.HP[1])>>
-
-    <<set $PC.rpg.MP[1] to $PC.base.魔力[1]>>
-    <<set $PC.rpg.MP[0] to $PC.base.魔力[0]>>
-
-    <<set $PC.ATK to Math.clamp((10+$PC.abl.战技/10),1,120)>>
-    <<set $PC.DEF to Math.clamp((10+$PC.abl.健身/10),1,120)>>
-    <<set $PC.MATK to Math.clamp((10+($PC.奥术/10*$PC.自然/500)),1,250)>>
-    <<set $PC.MDEF to Math.clamp((10+($PC.异能/10*$PC.物理/500)),1,250)>>
-
-<</widget>>
 
 <<widget "showbasebar">>
-
 <<if $args[0]>>
     <<set _percent to basepercent($args[0])>>
     <div class="metername">$args[0]</div><<meterbar _percent $args[1]>>
 <<else>>
     <div class="error-view">error：no args</div>
 <</if>>
-
 <</widget>>
 
 <<widget "timer">>
@@ -78,16 +38,18 @@
         <<replace #timer>><<print $gametime>><</replace>>
     <</repeat>>
 <</silently>>
-
 <</widget>>
+
 
 <<widget "showtimer">>
     
 <</widget>>
 
+
 <<widget "updateGame">>
 
 <</widget>>
+
 
 <<widget "lang">>
     <<if $args[0]>>
@@ -211,4 +173,85 @@
 /* 再现ERA口上系统的TRYCALL体系 主 */
 <<widget "call">>
 <<include $args[0]+"_"+$args[1]>>
+<</widget>>
+
+<<widget "ApplyHairSet">>
+    <<if $args[0]>>
+        <<set $PC.发型 to $args[0]>>
+    <</if>>
+    <<switch $PC.发型>>
+        <<case "straight">>
+            <<set $PC.hairfront to "himecut">>
+            <<set $PC.hairback to "straight">>
+        <<case "curly">>
+            <<set $PC.hairfront to "curly">>
+            <<set $PC.hairback to "curly">>
+        <<case "natural">>
+            <<set $PC.hairfront to "natural">>
+            <<set $PC.hairback to "natural">>
+        <<default>>
+            <<set $PC.hairfront to "natural">>
+            <<set $PC.hairback to "straight">>
+    <</switch>>
+<</widget>>
+
+<<widget "dressup">>
+    <<set $PEquip[$args[0]] to $args[1]>>
+
+    <<switch $args[0]>>
+        <<case "top">>
+            <<if setup.avater.top[$args[1]].slot is "onepiece">>
+                <<set $PEquip.bottom to null>>
+            <</if>>
+        <<case "bottom">>
+            <<if setup.avater.bottom[$args[1]].slot is "onepiece">>
+                <<set $PEquip.top to null>>
+            <</if>>
+        <<case "undertop">>
+            <<if setup.avater.undertop[$args[1]].slot is "onepiece">>
+                <<set $PEquip.underbottom to null>>
+            <<elseif setup.avater.undertop[$args[1]].slot is "fullbody">>
+                <<set $PEquip.underbottom to null>>
+                <<set $PEquip.top to null>>
+                <<set $PEquip.bottom to null>>
+            <</if>>
+    <</switch>>
+
+
+<</widget>>
+
+/*<<dressup category index>>*/
+
+<<widget "setface">>
+    <<if setup.facelist.includes($args[0])>>
+        <<set $PFace to setup.face[$args[0]]>>
+    <<else>>
+        <<set $PFace to setup.face.正常>>
+    <</if>>
+<</widget>>
+
+<<widget "gonaked">>
+    <<for _i to 0;_i lt setup.equipindex.length;_i++>>
+        <<set $TEquip[setup.equipindex[_i]] to $PEquip[setup.equipindex[_i]]>>
+    <</for>>
+
+    <<set $PEquip.coat to null>>
+    <<set $PEquip.top to null>>
+    <<set $PEquip.bottom to null>>
+    <<set $PEquip.undertop to null>>
+    <<set $PEquip.underbottom to null>>
+    <<set $PEquip.shoes to null>>
+    <<set $PEquip.socks to null>>
+    <<set $PEquip.hand to null>>
+    <<set $PFlag.tops to 0>>
+    <<set $PFlag.bottoms to 0>>
+<</widget>>
+
+<<widget "redress">>
+    <<for _i to 0;_i lt setup.equipindex.length;_i++>>
+        <<set $PEquip[setup.equipindex[_i]] to $TEquip[setup.equipindex[_i]]>>
+    <</for>>
+    /*<<fixvalue>>*/
+    <<set $PFlag.tops to 9>>
+    <<set $PFlag.bototoms to 4>>
 <</widget>>

@@ -4,28 +4,25 @@
 
 <<set setup.avatar to {
     frame : {},
-    bukkake : {},
-    accesory : {},
+    addon : {},
+    neck : {},
     hat : {},
+    face:{},
     coat : {},
     top : {},
+    hand:{},
     bottom :{},
     undertop : {},
     underbottom :{},
     shoes : {},
     socks : {},
-    faceadd : {},
-    eyebrow : {},
     hairfront : {},
-    eyes : {},
-    mouth : {},
-    body : {},
     hairback : {},
+    tatoos : {},
     back : {},
-    background : {},
 }>>
 
-<<InitFace>>
+<<InitEmotion>>
 <<InitClothTop>>
 <<InitClothBottom>>
 <<InitClothShoes>>
@@ -38,7 +35,7 @@
 /* 下身的裸露范围  5=完全不露  4=到膝盖  3=到大腿  2=三角区  1=半透明/暴露装/接近全裸  0=全裸  */
 
 <<widget "InitClothTop">>
-    <<set setup.avatar.tops to {
+    <<set setup.avatar.top to {
         naked : {
             id   : 0,
             cost : 0,
@@ -67,7 +64,7 @@
 <</widget>>
 
 <<widget "InitClothBottom">>
-    <<set setup.avatar.bottoms to {
+    <<set setup.avatar.bottom to {
         naked : {
             id   : 0,
             cost : 0,
@@ -96,7 +93,7 @@
 <</widget>>
 
 <<widget "InitClothUnderbottoms">>
-    <<set setup.avatar.underbottoms to {
+    <<set setup.avatar.underbottom to {
         naked : {
             id   : 0,
             cost : 0,
@@ -184,47 +181,96 @@
     }>>
 <</widget>>
 
-<<widget "InitFace">>
+<<widget "InitEmotion">>
+    <<set setup.facelist to ["正常","伤心","生气","受伤","快感1","快感2","开心","高潮"]>>
     <<set setup.face to {
-        normal : {
+        正常 : {
             eyebrow : "normal",
             eyes    : "full",
             mouth   : "smile",
             frame   : null,
-            add     : null,
-            index   : "normal",
+            tear    : false,
+            shy     : false,
+            red     : false,
+            hurt    : false,
+            name    : "正常",
         },
-        sad: {
+        伤心: {
             eyebrow : "sad",
             eyes    : "quater1",
             mouth   : "sad",
             frame   : null,
-            add     : ["tear"],
-            index   : "sad",
+            tear    : true,
+            shy     : false,
+            red     : false,
+            hurt    : false,
+            name    : "伤心",
         },
-        angry: {
+        生气: {
             eyebrow : "angry",
             eyes    : "quater2",
             mouth   : "open",
             frame   : null,
-            add     : null,
-            index   : "angry",
+            tear    : false,
+            shy     : false,
+            red     : false,
+            hurt    : false,
+            name    : "生气",
         },
-        hurt: {
+        受伤: {
             eyebrow : "angry",
-            eyes    : "blink",
+            eyes    : "blink1",
             mouth   : "open",
             frame   : null,
-            add     : ["hurt"],
-            index   : "hurt",
+            tear    : false,
+            shy     : false,
+            red     : false,
+            hurt    : true,
+            name    : "受伤",
         },
-        ecstasy: {
+        快感1: {
             eyebrow : "sad",
             eyes    : "quater2",
             mouth   : "open",
             frame   : null,
-            add     : ["tear","red"],
-            index   : "ecstasy",
+            tear    : false,
+            shy     : false,
+            red     : true,
+            hurt    : false,
+            name    : "快感",
         },
+        快感2: {
+            eyebrow : "confuse",
+            eyes    : "lookup2",
+            mouth   : "open",
+            frame   : null,
+            tear    : true,
+            shy     : false,
+            red     : true,
+            hurt    : false,
+            name    : "快感",
+        },
+        开心:  {
+            eyebrow :"happy",
+            eyes    :"quater2",
+            mouth   :"laugh",
+            frame   :null,
+            tear    :false,
+            shy     :true,
+            red     :false,
+            hurt    :false,
+            name    :"开心",
+        },
+        高潮:{
+            eyebrow : "sad",
+            eyes    : "lookup1",
+            mouth   : "open",
+            frame   : null,
+            tear    : true,
+            shy     : false,
+            red     : true,
+            hurt    : false,
+            name    : "高潮", 
+        }
     }>>
 <</widget>>

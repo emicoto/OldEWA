@@ -221,3 +221,17 @@ sugarcube-2:
       name: InitFace
     checkimg:
       name: checkimg
+    InitEmotion:
+      name: InitEmotion
+    setface:
+      name: setface
+    gonaked:
+      name: gonaked
+    CMEmote:
+      name: CMEmote
+    redress:
+      name: redress
+    setreveal:
+      name: setreveal
+    saveoutfit:
+      name: saveoutfit

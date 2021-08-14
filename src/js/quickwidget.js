@@ -54,12 +54,29 @@ window.range = function(num,min,max){
 }
 
 
-window.ImgExist = function(imgurl) {
-	var imgobj = new Image()
-	imgobj.src = imgurl;
-	if (imgobj.fileSize > 0 || (imgobj.width > 0 && imgobj.height > 0)) {  
+window.ImgExist = function(url) {
+    var img = new Image();
+	
+    img.onload = function () {
+        if (this.complete == true){
+            // 改了这里
+            return true;
+        }
+    }
+    img.onerror = function () {
+        return false;
+    }
+
+	img.src = url;
+	
+	if (img.complete) {
+	  return true;
+	} else {
+	  img.onload = () => {
 		return true;
-   } else {  
+	  };
+	  img.onerror = () => {
 		return false;
-	} 
+	  };
+	}
 }

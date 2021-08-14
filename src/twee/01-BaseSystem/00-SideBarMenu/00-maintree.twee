@@ -62,12 +62,13 @@
 <</repeat>>
 
 /* 动态化部分 */
-<<repeat 0.1s>>
-<<replace "#avatar">><<avatar>><</replace>>
-<<replace "#playerstats">><<playerstatus>><</replace>>
-<<replace "#showtimes">><<timestats>><</replace>>
-<</repeat>>
-
+<<silently>>
+	<<repeat 0.5s>>
+		<<replace "#avatar">><<avatar>><</replace>>
+		<<replace "#playerstats">><<playerstatus>><</replace>>
+		<<replace "#showtimes">><<timestats>><</replace>>
+	<</repeat>>
+<</silently>>
 
 
 

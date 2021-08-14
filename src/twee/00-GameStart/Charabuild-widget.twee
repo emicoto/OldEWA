@@ -71,7 +71,7 @@
 <</widget>>
 
 <<widget "CMHairColor">>
-    <<set _optionlist to {"黑色":"black","深棕色":"darkbrown","红棕色":"redbrown","棕色":"brown","奶茶色":"milktea","金色":"blond","米黄色":"softblond","白金色":"platinum","银色":"sliver","纯白色":"white","紫色":"purple","绿色":"grean","蓝色":"blue","水色":"aqua","粉色":"pink"}>>
+    <<set _optionlist to {"黑色":"black","深棕色":"darkbrown","酒红色":"wine","棕色":"brown","奶茶色":"milktea","金色":"blond","米黄色":"softblond","白金色":"platinum","银色":"sliver","纯白色":"white","紫色":"purple","绿色":"grean","蓝色":"blue","水色":"aqua","粉色":"pink"}>>
         <<listbox "$PC.发色" autoselect>>
         <<optionsfrom _optionlist>>
     <</listbox>>
@@ -87,6 +87,13 @@
 <<widget "CMEyeColor">>
     <<set _optionlist to {"黑色":"black","棕色":"brown","碧绿色":"emerald","绿色":"green","蓝色":"blue","水色":"aqua","紫红色":"purple","银色":"white","金色":"amber","红色":"red"}>>
         <<listbox "$PC.瞳色" autoselect>>
+        <<optionsfrom _optionlist>>
+    <</listbox>>
+<</widget>>
+
+<<widget "CMEmote">>
+    <<set _optionlist to setup.facelist>>
+        <<listbox "$PEquip.emote" autoselect>>
         <<optionsfrom _optionlist>>
     <</listbox>>
 <</widget>>
@@ -298,7 +305,6 @@
             <<if $PC.genital.阴茎 is null>>
                 <<set $PC.genital.阴茎 to 10>>
             <</if>>
-
     <</switch>>
 
     <<switch $PC.type>>

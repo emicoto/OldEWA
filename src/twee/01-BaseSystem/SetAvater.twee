@@ -1,8 +1,11 @@
 ﻿:: AvatarSetup [widget]
 <<widget "SetAvatar">>
 
+/* 表情搭载 */
+<<setface $PEquip.emote>>
+
 /* 相框 OR 特效 */
-<<set $avatar.frame to null>>
+<<set $avatar.frame to $PFace.frame>>
 
 /* 浴精喷精冒汗气息之类的 */
 <<if $PFlag.bukkake.body is true>>
@@ -134,7 +137,7 @@
     <<set $avatar.bottom to $PEquip.bottom.index + "/" + $PEquip.bottom.color>>
 
     /* 还没实装的情况 */
-    <<checkimg 8 "bottom" $avatar.bottom>>
+    <<checkimg 8 "bottom" $avatar.bottom "shortpant/white">>
 
 <<else>>
     <<set $avatar.bottom to null>>
@@ -174,7 +177,7 @@
     <<set $avatar.underbottom to $PEquip.underbottom.index + "/" + $PEquip.underbottom.color>>
 
     /* 还没实装的情况 */
-    <<checkimg 10 "underbottom" $avatar.underbottom>>
+    <<checkimg 10 "underbottom" $avatar.underbottom "boxer/white">>
 
 <<else>>
     <<set $avatar.underbottom to null>>
@@ -205,26 +208,30 @@
 /* 发型前面 */
 <<set _apath to "/image/avatar/15_hairfront/">>
 <<set _bpath1 to _apath + $PEquip.hairfront + "/" + $PC.发色 + "_" + fhairlenth() + ".png">>
-<<set _bpath2 to _apath + $PEquip.hairfront + "/" + $PC.发色 + "_" + (fhairlenth()-1) + ".png">>
+
+<<if fhairlenth() gt 3>>
+    <<set _bpath2 to _apath + $PEquip.hairfront + "/" + $PC.发色 + "_" + (fhairlenth()-1) + ".png">>
+<</if>>
+
 <<set _bpath3 to _apath + $PEquip.hairfront + "/" + $PC.发色 + "_2.png">>
 <<set _bpath4 to _apath + $PEquip.hairfront + "/" + $PC.发色 + "_1.png">>
 
 <<if ImgExist(_bpath1)>>
     <<set $avatar.hairfront to $PEquip.hairfront + "/" + $PC.发色 + "_"+ fhairlenth()>>
 
-<<elseif ImgExist(_bpath2)>>
+<<elseif fhairlenth() gt 3 and ImgExist(_bpath2)>>
     <<set $avatar.hairfront to $PEquip.hairfront + "/" + $PC.发色 + "_"+ (fhairlenth()-1)>>
+
 <<elseif ImgExist(_bpath3)>>
     <<set $avatar.hairfront to $PEquip.hairfront + "/" + $PC.发色 + "_2">>
 <<elseif ImgExist(_bpath4)>>
     <<set $avatar.hairfront to $PEquip.hairfront + "/" + $PC.发色 + "_1">>
 <<else>>
     <<set $avatar.hairfront to $PEquip.hairfront + "/white_1">>
+    <<set _placeholder to "natural/"+$PC.发色+"_1">>
     /* 还没实装的情况 */
-    <<checkimg 15 "hairfront" $avatar.hairfront "natural/white_1">>
+    <<checkimg 15 "hairfront" $avatar.hairfront _placeholder>>
 <</if>>
-
-    
 
 /* 眼睛 */
 <<set _apath to "/image/avatar/16_eyes/">>
@@ -233,7 +240,7 @@
 <<if ImgExist(_bpath)>>
     <<set $avatar.eyes to $PC.瞳色 + "/" + $PFace.eyes>>
 <<else>>
-    <<set $avatar.eyes to "white/" + $PFace.eyes>>
+    <<set $avatar.eyes to "aqua/" + $PFace.eyes>>
 <</if>>
 
 /* 嘴巴 */
@@ -266,36 +273,40 @@
     <<set $avatar.penis to null>>
 <</if>>
 
+
 /* 头发后面 */
 <<set _apath to "/image/avatar/19_hairback/">>
 <<set _bpath1 to _apath + $PEquip.hairback + "/" + $PC.发色 + "_" + hairlenth() + ".png">>
-<<set _bpath2 to _apath + $PEquip.hairback + "/" + $PC.发色 + "_" + (hairlenth()-1) + ".png">>
+<<if hairlenth() gt 3>>
+    <<set _bpath2 to _apath + $PEquip.hairback + "/" + $PC.发色 + "_" + (hairlenth()-1) + ".png">>
+<</if>>
 <<set _bpath3 to _apath + $PEquip.hairback + "/" + $PC.发色 + "_2.png">>
 <<set _bpath4 to _apath + $PEquip.hairback + "/" + $PC.发色 + "_1.png">>
 
 <<if ImgExist(_bpath1)>>
     <<set $avatar.hairback to $PEquip.hairback + "/" + $PC.发色 + "_"+hairlenth()>>
 
-<<elseif ImgExist(_bpath2)>>
+<<elseif hairlenth() gt 3 and ImgExist(_bpath2)>>
     <<set $avatar.hairback to $PEquip.hairback + "/" + $PC.发色 + "_"+(hairlenth()-1)>>
+
 <<elseif ImgExist(_bpath3)>>
     <<set $avatar.hairback to $PEquip.hairback + "/" + $PC.发色 + "_2">>
 <<elseif ImgExist(_bpath4)>>
     <<set $avatar.hairback to $PEquip.hairback + "/" + $PC.发色 + "_1">>
 <<else>>
     <<set $avatar.hairback to $PEquip.hairback + "/white_1">>
+    <<set _placeholder to "straight/"+$PC.发色+"_"+hairlenth()>>
         /* 还没实装的情况 */
-    <<checkimg 19 "hairback" $avatar.hairback "straight/white_1">>
-
+    <<checkimg 19 "hairback" $avatar.hairback _placeholder>>
 <</if>>
 
 
 
 /* 背后装饰 */
 <<if $PEquip.back isnot null>>
-<<set $avatar.back to $PEquip.back>>
-<<set _apath to $PEquip.back>>
-<<checkimg 20 "back" $PEquip.back "dummy">>
+    <<set $avatar.back to $PEquip.back>>
+    <<set _apath to $PEquip.back>>
+    <<checkimg 20 "back" $PEquip.back "dummy">>
 <</if>>
 
 /* 背景 */
@@ -313,11 +324,13 @@
 <<widget "checkimg">>
 <<set _checkpath to "/image/avatar/"+$args[0]+"_"+$args[1]+"/"+$args[2]+".png">>
 
-<<if ImgExist(_checkpath) is false>>
+<<run ImgExist(_checkpath)>>
+
+<<if _imgstats is false>>
     <<if $args[3]>>
         <<set $avatar[$args[1]] to $args[3]>>
     <<else>>
-         <<set $avatar[a$rgs[1]] to "dummy">>
+         <<set $avatar[$args[1]] to "dummy">>
     <</if>>
 <</if>>
 

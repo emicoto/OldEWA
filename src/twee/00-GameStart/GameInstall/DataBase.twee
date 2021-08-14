@@ -24,7 +24,22 @@
     "状态" : ["精神崩溃","失眠","梦魇","发情","毒瘾发作","性瘾发作","口球","束缚","眼罩","暂时性失明","失明","耳聋","自闭","伤痕I","伤痕II","伤痕III","重伤","濒死","怀孕","肠内受孕","寄生"],
 
     /* 初期头衔无buff，通过成就获得的头衔装备时，可以获得对应的buff*/
-    "头衔" : ["菜鸟勇者","小爱豆","小道童","富二代","二次元","魔法少女","直播主","顶流爱豆","穿越者","超脱者","武术大师","奥术大师","保卫者","恐怖分子","老司机","打工仔","守财奴"]
+    "头衔" : ["菜鸟勇者","小爱豆","小道童","富二代","二次元","魔法少女","直播主","顶流爱豆","穿越者","超脱者","武术大师","奥术大师","保卫者","恐怖分子","老司机","打工仔","守财奴"],
+
+    "HairSet" : {
+        straight : {
+            front:"himecut",
+            back :"straight",
+        },
+        natural : {
+            front:"natural",
+            back:"natural",
+        },
+        curly :{
+            front:"curly",
+            back:"curly",
+        },
+    },
 }>>
 
 <<set setup.L to {
@@ -59,7 +74,7 @@
         发色:{
             "black":"黑色",
             "darkbrown":"深棕色",
-            "redbrown":"红棕色",
+            "wine":"酒红色",
             "brown":"棕色",
             "milktea":"奶茶色",
             "blond":"金色",
@@ -110,12 +125,12 @@
         发色:{
             "black":"black",
             "darkbrown":"dark-brown",
-            "redbrown":"red-brown",
+            "wine":"red-wine-color",
             "brown":"brown",
-            "milktea":"milktea color",
+            "milktea":"milktea-color",
             "blond":"blond",
-            "softblond":"soft blond",
-            "platinum":"platinum blond",
+            "softblond":"soft-blond",
+            "platinum":"platinum-blond",
             "sliver":"sliver",
             "white":"white",
             "purple":"purple",
@@ -151,6 +166,8 @@
     怡安小区 : {place:"怡安小区", outside:"室外", tag:["公园","散步","隐藏","广场舞"],chara:["player"], bus:true, subway:true, car:true, bike:true},
 }>>
 
+<<set setup.equipindex to ["neck","hat","face","coat","top","hand","bottom","undertop","underbottom","shoes","socks","back","hairfront","hairback","emote"]>>
+
 <<InitAvatar>>
 
 <</widget>>
@@ -161,7 +178,7 @@
     CID : "0",
     名字 : "NPC",
     性别 : "男",
-    genital : { "阴茎":18, "子宫":-1},
+    genital : { "阴茎":18, "子宫":null},
     vaginity : {"初吻":0, "童贞":0,"处女":0,"A处女":1},
     好感 : 0,
     信赖 : 0,

@@ -4,9 +4,6 @@
 
 <<set _path to "/image/avatar/">>
 <<set _layer to ["frame","addon","neck","hat","face","coat","top","hand","bottom","undertop","underbottom","shoes","socks","emoadd","eyebrow","hairfront","eyes","mouth","body","hairback","back","background"]>>
-
-<<SetAvatar>>
-
 <<for _i to 0; _i <_layer.length; _i++>>
 
 <<if $avatar[_layer[_i]] is null>>
@@ -65,25 +62,25 @@
     <</if>>
 
     <<if _layer[_i] is "emoadd">>
-        /*<<if $avatar.emoadd.shy is true>>
+        <<if $PFace.shy is true>>
             <<set _ipath to _tpath + "shy">>
             <<print _classname + "<img src='"+_ipath+".png'></div>">>
         <</if>>
 
-        <<if $avatar.emoadd.red is true>>
+        <<if $PFace.red is true>>
             <<set _ipath to _tpath + "red">>
             <<print _classname + "<img src='"+_ipath+".png'></div>">>
         <</if>>
 
-        <<if $avatar.emoadd.hurt is true>>
+        <<if $PFace.hurt is true>>
             <<set _ipath to _tpath + "hurt">>
             <<print _classname + "<img src='"+_ipath+".png'></div>">>
         <</if>>
 
-        <<if $avatar.emoadd.tear is true>>
+        <<if $PFace.tear is true>>
             <<set _ipath to _tpath + "tear">>
             <<print _classname + "<img src='"+_ipath+".png'></div>">>
-        <</if>>*/
+        <</if>>
     <</if>>
 
 <</if>>

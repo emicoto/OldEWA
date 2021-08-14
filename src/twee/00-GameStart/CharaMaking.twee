@@ -25,9 +25,9 @@
     <<set $PC.trait.泌乳体质 to 0>>
 <</if>>
 
-<li>角色名字： <<textbox "$PC.名字" $PC.名字>> ∵ 人物背景：<<CMBackground>></li>
-<li>性别属性： <<CMGender>></li>
-<li>兴趣特长： <<CMMainclass>></li>
+<li>角色名字： <<textbox "$PC.名字" $PC.名字>>　　∵ 人物背景：<<CMBackground>></li>
+<li>性别属性： <<CMGender>>　　<<if $debug>><<button 查看裸体>><<gonaked>><</button>><<button 穿上衣服>><<redress>><</button>><</if>></li>
+<li>兴趣特长： <<CMMainclass>>　<<if $debug>>∵ 切换表情: <<CMEmote>><</if>></li>
 <li>　性观念： <<CMChara>></li>
 
 <<dashline>>
@@ -58,7 +58,8 @@
 <span id="omegatrait"></span>
 <!-- 自动纠正 -->
 <<silently>>
-    <<repeat 1s>>
+    <<repeat 0.3s>>
+        <<set $PC.前发长 to $PC.发长>>
         <<if $activepage is "CharaMaking">>
             <<if $PC.种族 is "夜族">>
                 <<set $PC.eye to "银色">><<replace #CMEyeoption>>瞳色　<<CMEyeColor>><</replace>>
@@ -88,6 +89,7 @@
         <<else>>
             <<stop>>
         <</if>>
+        <<SetAvatar>>
     <</repeat>>
 <</silently>>
 <!-- Event -->

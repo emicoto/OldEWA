@@ -50,12 +50,12 @@
 <<you>>的<<if $PC.vaginity.初吻 is 1>>初吻还在。<<else>>初吻对象是<<print $PC.vaginity.初吻>>。<br>
 <</if>>
 
-<<if $PC.genital.阴茎 gt 0>>
+<<if $PC.genital.阴茎 isnot null>>
 <<you>><<if $PC.vaginity.童贞 is 1>>至今还是个童贞。<<elseif $PC.vaginity.童贞 isnot -1 and $PC.vaginity.童贞 isnot 1>>童贞已经献给了<<print $PC.vaginity.童贞>>。<br>
 <</if>>
 <</if>>
 
-<<if $PC.genital.子宫 gt 0>>
+<<if $PC.genital.子宫 isnot null>>
 <<you>>的<<if $PC.vaginity.处女 is 1>>处女膜依然完好。<<elseif $PC.vaginity.处女 isnot -1 and $PC.vaginity.处女 isnot 1>>处女已经在<<print $PC.vaginity.处女.date>>被<<print $PC.vaginity.处女.person>>贯穿。<br>
 <</if>>
 <</if>>

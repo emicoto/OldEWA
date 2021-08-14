@@ -179,7 +179,7 @@
 }>>
 
 <<set $PC.genital to {
-    "阴茎" : 14,     "子宫" : 0,
+    "阴茎" : 14,     "子宫" : null,
 }>>
 
 <<set $PC.vaginity to {
@@ -200,7 +200,9 @@ $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌}
         body:false,
         face:false,
         hair:false,
-    }
+    },
+    topslot :true,
+    bottomslot:true,
 }>>
 
 <!-- 记录 -->
@@ -251,9 +253,8 @@ $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌}
 /* 现有装备 */
 <<set $PEquip to {
 	neck : null,
-	hand : null,
+    hat  : null,
 	face : null,
-	hat  : null,
 	coat : null,
 	top  : {
         id   : 1,
@@ -313,13 +314,19 @@ $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌}
     back    : null,
     hairfront : "natural",
     hairback  : "straight",
+    emote     : "正常"
 }>>
 
 <<set $PFace to {
     eyebrow : "normal",
     eyes    : "full",
     mouth   : "smile",
-    index   : "normal",
+    name    : "正常",
+    frame   : null,
+    tear    : false,
+    shy     : false,
+    red     : false,
+    hurt    : false,
 }>>
 
 <</widget>>

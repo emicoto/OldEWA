@@ -1,6 +1,8 @@
 :: PassageHeader
 <<set $passage to passage()>><<set $tags to tags()>>
-<<fixvalue>>
+<<fixvalue>><<SetAvatar>><<timed 1s>><<SetAvatar>><</timed>>
+
 
 :: PassageFooter
 <div id="gameVersionDisplay">EWA ver<<print StartConfig.version>></div>
+<<SetAvatar>><<timed 1s>><<SetAvatar>><</timed>>
