@@ -47,7 +47,7 @@
 
 /* 自动刷新等待JS读取结束 */
 <<set _timer to 10>>
-<<repeat 0.5s>>
+<<repeat 0.3s>>
 <<script>>
 	dragElement(document.getElementById("customOverlay"))
 	function dragElement(event) {
@@ -61,6 +61,12 @@
 	<</if>>
 <</repeat>>
 
+/* 动态化部分 */
+<<repeat 0.1s>>
+<<replace "#avatar">><<avatar>><</replace>>
+<<replace "#playerstats">><<playerstatus>><</replace>>
+<<replace "#showtimes">><<timestats>><</replace>>
+<</repeat>>
 
 
 

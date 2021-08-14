@@ -155,7 +155,7 @@
             <<set $PC.发长 to 100>>
             <<set $PC.发型 to "straight">>
             <<set $PC.发色 to "aqua">>
-            <<set $PC.瞳色 to "天蓝色">>
+            <<set $PC.瞳色 to "aqua">>
             <<set $PC.皮肤 to "white">> 
             <<set $PC.sens to {"m" : 2,  "b":2,  "c":2,  "v":null, "u":1, "a":4}>>
             <<set $PC.genital to {
@@ -177,7 +177,7 @@
             <<set $PC.发长 to 150>>
             <<set $PC.发型 to "straight">>
             <<set $PC.发色 to "aqua">>
-            <<set $PC.瞳色 to  "棕色">>
+            <<set $PC.瞳色 to  "brown">>
             <<set $PC.皮肤 to "white">>
             <<set $PC.sens to {"m" : 1,  "b":2,  "c":1, "v":null, "u":1, "a":8}>>
 
@@ -201,7 +201,7 @@
             <<set $PC.发长 to 300>>
             <<set $PC.发型 to "straight">>
             <<set $PC.发色 to "milktea">>
-            <<set $PC.瞳色 to  "淡绿色">>
+            <<set $PC.瞳色 to "green">>
             <<set $PC.皮肤 to "white">>
             <<set $PC.sens to {"m" : 1,  "b":2,  "v":1, "c":1, "u":1, "a":8}>>
             <<set $starttrait to "好色">>
@@ -224,7 +224,7 @@
             <<set $PC.发长 to 250>>
             <<set $PC.发型 to "straight">>
             <<set $PC.发色 to "darkbrown">>
-            <<set $PC.瞳色 to "棕色">>
+            <<set $PC.瞳色 to "brown">>
             <<set $PC.皮肤 to "health">>
             <<set $PC.sens to {"m" : 1,  "b":4,  "v":1, "c":1, "u":1, "a":1}>>             
             <<set $starttrait to "人气">>
@@ -242,7 +242,7 @@
             <<set $PC.发长 to 120>>
             <<set $PC.发型 to "straight">>
             <<set $PC.发色 to "platinum">>
-            <<set $PC.瞳色 to "深绿色">>
+            <<set $PC.瞳色 to "emerald">>
             <<set $PC.皮肤 to "white">>
             <<set $PC.sens to {"m" : 1,  "b":2,  "c":2, "v":null, "u":1, "a":2}>>
 
@@ -267,7 +267,7 @@
             <<set $PC.发长 to 50>>
             <<set $PC.发型 to "straight">>
             <<set $PC.发色 to "black">>
-            <<set $PC.瞳色 to "深绿色">>
+            <<set $PC.瞳色 to "emerald">>
             <<set $PC.皮肤 to "white">>
             <<set $PC.魅力 to 1200>>
             <<set $PC.sens to {"m" : 4,  "b":2,  "v":1, "c":1, "u":1, "a":1}>>
@@ -551,8 +551,6 @@
             <<set $PC.produce.精液 to [0,0]>>
             <<set $PC.genital.阴茎 to null>>
             <<set $PC.vaginity.童贞 to null>>
-            <<set $PC.sexrec.射精 to null>>
-            <<set $PC.exp.射精 to null>>
 
         <<case "扶她">>
 
@@ -563,11 +561,6 @@
             <<set $PC.eskl.膣技 to null>>
             <<set $PC.genital.子宫 to null>>
             <<set $PC.vaginity.处女 to null>>
-            <<set $PC.sexrec.V高潮 to null>>
-            <<set $PC.sexrec.内射 to null>>
-            <<set $PC.exp.V高潮 to null>>
-            <<set $PC.exp.内射 to null>>
-            <<set $PC.exp.怀孕 to null>>
             <<if $PC.性别 isnot "伪娘">>
                 <<set $PC.exp.A怀孕 to null>>
             <</if>>

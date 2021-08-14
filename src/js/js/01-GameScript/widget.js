@@ -50,7 +50,19 @@ window.hairlenth = function(){
   var num= V.PC.发长
   select.add(0,99, 1);
   select.add(100,499, 2);
-  select.default = 3
+  select.add(500,799,3)
+  select.default = 4
+  const lenth = select.has(num)
+  return lenth
+}
+
+window.fhairlenth = function(){
+  const select = new SelectCase();
+  var num= V.PC.前发长
+  select.add(0,99, 1);
+  select.add(100,499, 2);
+  select.add(500,799,3)
+  select.default = 4
   const lenth = select.has(num)
   return lenth
 }
@@ -244,4 +256,15 @@ window.breastsize = function() {
   else if (size>=4){
     return 3;
   }
+}
+
+window.imglocation = function(){
+  var location = V.location
+    if (location == "单身公寓"){
+      return "singleapartment"
+    }
+    else{
+      return "dummy"
+    }
+
 }
