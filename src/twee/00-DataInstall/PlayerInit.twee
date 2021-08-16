@@ -6,17 +6,16 @@
 
 <!-- 角色数据 -->
 <<set $PC to {
-    "名字"      : "魔女",    "性别"      : "伪娘",    "种族"      : "人类",
-    "特长"      : "文艺创作",
-    "态度"      : 1,
-    "胸部"      : 1,    "臀部"      : 2,    "体型"      : 1,
-    "前发长"    : 120,    "发长"      : 120,
-    "发色"      : "aqua",
-    "发型"      : "natural", /* 不做修饰时的发型，只有自然、卷发、顺直三种，只能在美容店修改*/
-    "瞳色"      : "aqua",
-    "肤色"      : "white",
-    "魅力"      : 1600,
-    "头衔"      : "菜鸟勇者",
+    "名字"  : "魔女",   "性别" : "伪娘",    "种族" : "人类",
+    "特长"  : "文艺创作",
+    "态度"  : 1,
+    "胸部"  : 1,        "臀部" : 2,         "体型" : 1,
+    "前发长": 120,      "发长" : 120,
+    "发色"  : "aqua",   "发型" : "natural", /* 不做修饰时的发型，只有自然、卷发、顺直三种，只能在美容店修改*/
+    "瞳色"  : "aqua",
+    "肤色"  : "white",
+    "魅力"  : 1600,
+    "头衔"  : "菜鸟勇者",
 }>>
 
 <<set $shortinfo to " | 勇敢的少年想创造奇迹。">>
@@ -27,25 +26,13 @@
 <<set $PC.level to 1>>
 
 <<set $PC.base to {
-    "体力" : [500,500],
-    "健康" : [1000,1000], /* 上限值固定 */
-    "理智" : [1000,1000], /* 上限值固定 */
-    "魔力" : [0,100],
-    "酒精" : [0,1000], /* 上限值固定 */
-    "药物" : [0,1000], /* 上限值固定 */
-    "欲望" : [0,1000], /* 上限值固定 */
-    "快感" : [0,1000], /* 上限值固定 每次获得快MBPVUA全加起来的五分一，满了会高潮*/
-    "压力" : [0,1000],
-    "疼痛" : [0,1000], /* 上限值固定 */
-    "恐惧" : [0,1000], /* 上限值固定 */
-    "耻辱" : [0,1000], /* 上限值固定 */
+    "体力" : [500,500], "健康" : [1000,1000],   "理智" : [1000,1000], 
+    "魔力" : [0,100],   "酒精" : [0,1000],      "药物" : [0,1000], 
+    "欲望" : [0,1000],  "快感" : [0,1000],      "压力" : [0,1000],
+    "疼痛" : [0,1000],  "恐惧" : [0,1000],      "耻辱" : [0,1000], 
 
-    "快M"  : [0,1000], /* 满了会局部高潮 */
-    "快B"  : [0,1000],
-    "快C"  : [0,1000],
-    "快V"  : [0,1000],
-    "快U"  : [0,1000],
-    "快A"  : [0,1000],
+    "快M"  : [0,1000],  "快B"  : [0,1000],  "快C"  : [0,1000],
+    "快V"  : [0,1000],  "快U"  : [0,1000],  "快A"  : [0,1000],
 }>>
 
 <!-- 身体感度，满值10 -->
@@ -133,28 +120,19 @@
 }>>
 
 <!-- 液体 -->
-<<set $PC.produce to {
-    "精液" : [100,100],     "乳汁" : [100,100],
-}>>
+<<set $PC.produce to { "精液" : [100,100], "乳汁" : [100,100],}>>
 
 <!-- PC的素质 -->
 <<set $PC.trait to {}>>
 
 <!-- PC的状态 -->
 <<set $PC.stats to {
-    生病 : false,
-    怀孕 : false,
-    寄生 : false,
-    肠内受孕 : false,
+    生病 : false,    怀孕 : false,    寄生 : false,    肠内受孕 : false,
 }>>
 
-<<set $PC.genital to {
-    "阴茎" : 14,     "子宫" : null,
-}>>
+<<set $PC.genital to { "阴茎" : 14, "子宫" : null,}>>
 
-<<set $PC.vaginity to {
-    "初吻" : 1,     "童贞" : 1,     "处女" : 1,     "A处女" : 1
-}>>
+<<set $PC.vaginity to { "初吻" : 1, "童贞" : 1, "处女" : 1, "A处女" : 1}>>
 <!-- 失去时记录日期、情况、对象。 
 $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌} 
 显示的时候：XX的处女在X年X月X日，被路人的巨屌强行贯穿了。
@@ -162,17 +140,10 @@ $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌}
 自己破处：XX的处女在X年X月X日，用玩具自行贯穿了 -->
 
 <<set $PFlag to {
-    lactation : false,
-    lactatecd : 0,
-    tops      : 9, 
-    bottoms   : 4, 
-    bukkake   : {
-        body:false,
-        face:false,
-        hair:false,
-    },
-    topslot :true,
-    bottomslot:true,
+    lactation : false,    lactatecd : 0,
+    tops      : 9,     bottoms   : 4, 
+    bukkake   : { body:false, face:false, hair:false, },
+    topslot :true,    bottomslot:true,
 }>>
 
 <!-- 记录 -->
@@ -190,10 +161,8 @@ $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌}
 
 
 <<set $PC.mark to {
-    "快乐" : setup.marksheet,
-    "痛苦" : setup.marksheet,
-    "恐惧" : setup.marksheet,
-    "耻辱" : setup.marksheet,
+    "快乐" : setup.marksheet,    "痛苦" : setup.marksheet,
+    "恐惧" : setup.marksheet,    "耻辱" : setup.marksheet,
 }>>
 
 /* 纹身，layer有额头、脸颊（左右）、锁骨（左右）、胸（左右）、后脖根、手臂（左右）、后背、腰窝、 臀瓣（左右），大腿（左右）*/
@@ -216,6 +185,15 @@ $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌}
     emote     : "正常"
 }>>
 
+<!-- 临时备份 -->
+<<set $TEquip to {
+    neck        : null,  hat        : null,  face       : null,
+    coat        : null,  top        : null,  hand       : null,
+    bottom      : null,  undertop   : null,  underbottom: null,
+    shoes       : null,  socks      : null,  back       : null,
+    hairfront   : null,  hairback   : null,  emote      : null,
+}>>
+
 <<dressup "top" "Tshirt" "red">>
 <<dressup "underbottom" "boxer" "white">>
 <<dressup "bottom" "shortpant" "black">>
@@ -223,9 +201,8 @@ $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌}
 <<dressup "socks" "sportsocks">>
 
 <<set $PFace to {
-    eyebrow : "normal",    eyes    : "full",    mouth   : "smile",
     name    : "正常",
-    frame   : null,
+    eyebrow : "normal",    eyes    : "full",    mouth   : "smile",    frame   : null,
     tear    : false,    shy     : false,
     red     : false,    hurt    : false,
 }>>

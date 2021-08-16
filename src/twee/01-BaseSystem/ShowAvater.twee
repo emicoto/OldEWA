@@ -93,8 +93,6 @@
 
 <<widget "portrait">>
 
-<div id="portrait">
-
 <<set _path to "./image/avatar/">>
 <<set _layer to ["back","hairback","body","mouth","eyes","hairfront","eyebrow","emoadd","socks","shoes","underbottom","undertop","bottom","hand","top","coat","face","hat","neck","addon","frame"]>>
 
@@ -179,7 +177,5 @@
 <</if>>
 
 <</for>>
-
-</div>
 
 <</widget>>

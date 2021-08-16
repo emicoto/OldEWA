@@ -3,23 +3,39 @@
 <<widget "InitAvatar">>
 
 <<set setup.avatar to {
-    frame : {},
-    addon : {},
-    neck : {},
-    hat : {},
-    face:{},
-    coat : {},
-    top : {},
-    hand:{},
-    bottom :{},
-    undertop : {},
-    underbottom :{},
-    shoes : {},
-    socks : {},
-    hairfront : {},
-    hairback : {},
-    tatoos : {},
-    back : {},
+    frame : {},     ddon : {},      neck : {},
+    hat : {},       face:{},        coat : {},
+    top : {},       hand:{},        bottom :{},
+    undertop : {},  underbottom :{},
+    shoes : {},     socks : {},
+    hairfront : {}, hairback : {},
+    tatoos : {},    back : {},
+}>>
+
+<<set $avatar to {
+    frame       : null,
+    addon       : {body:false,bottom:false,face:false,hair:false,mouth:false,penis:false},
+        
+    neck        : null, hand        : null, face        : null,
+    hat         : null, coat        : null, top         : null,
+    bottom      : null, undertop    : null, underbottom : null,
+    shoes       : null, socks       : null,
+
+    emoadd      : {tear:false, shy:false, red:false, hurt:false},
+
+    eyebrow     : null, hairfront   : null, eyes        : null,
+    mouth       : null, tatoos      : null, penis       : null,
+    body        : null, hairback    : null, back        : null,
+    background  : null,
+}>>
+
+<<set $tryon to {
+    frame       : null, addon       : null, neck        : null, hand        : null,
+    face        : null, hat         : null, coat        : null, top         : null,
+    bottom      : null, undertop    : null, underbottom : null, shoes       : null,
+    socks       : null, emoadd      : null, eyebrow     : null, hairfront   : null,
+    eyes        : null, mouth       : null, tatoos      : null, penis       : null,
+    body        : null, hairback    : null, back        : null, background  : null,
 }>>
 
 <<InitEmotion>>

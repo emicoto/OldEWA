@@ -1,21 +1,33 @@
 import ymlPlugin from "esbuild-plugin-yaml";
 import dsv from "esbuild-plugin-dsv";
 import ImportGlob from "esbuild-plugin-import-glob";
+import esbuildPluginTsc from "esbuild-plugin-tsc";
 import esbuildServe from "esbuild-serve";
+import babel from "esbuild-plugin-babel";
+import dts from "esbuild-plugin-d.ts";
 //---------------------
 
 import { globPlugin } from "esbuild-plugin-glob";
 const ImportGlobPlugin = ImportGlob.default;
 const yamlPlugin = ymlPlugin.yamlPlugin;
 const dsvPlugin = dsv.dsvPlugin;
+const dtsPlugin = dts.dtsPlugin;
 //---------------------
-const options = {
-  entryPoints: ["Code/**/*.js"],
+// const options =;
+// esbuildServe(, {
+//   port: 8009,
+//   root: "./dist",
+//   live: true,
+// });
+import esbuild from "esbuild"
+esbuild.build({
+  entryPoints: ["Code/**/*.ts"],
   charset: "utf8",
   bundle: true,
   entryNames: "[dir]/[name]",
-  outdir: "./modules",
+  outdir: "./src/js/02-General",
   outbase: "Code",
+
   // outfile: "test.js",
   // tsconfig: "./Code/tsconfig.json",
   target: "chrome58,firefox57,safari11,edge16".split(","),
@@ -31,11 +43,11 @@ const options = {
       },
     }),
 
+    // esbuildPluginTsc(),
+
+    // dtsPlugin(),
+    // babel(),
   ],
   format: "esm",
-};
-esbuildServe(options, {
-  port: 8008,
-  root: "./dist",
-  live: true,
-});
+  watch:true
+})

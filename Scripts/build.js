@@ -2,28 +2,14 @@ const { spawn } = require("child_process");
 const path = require("path");
 const _resolve = (...w) => path.resolve(__dirname, `../`, ...w);
 const { platform, arch } = require("os");
-const klawSync = require("klaw-sync");
 
-function getJS() {
-  const modulePath = _resolve("");
-  const JS = [];
-  const test = klawSync("modules");
-  test.map((item) => {
-    const FilePath = item.path;
-    const isJSFile = path.extname(FilePath) === ".js";
 
-    if (isJSFile) {
-      JS.push(`${_resolve(path.relative(modulePath, FilePath))}`);
-    }
-  });
-  return JS;
-}
 
 const SYSTEM = {
   platform: platform(),
   arch: arch(),
 };
-
+console.log(SYSTEM);
 const tweego = () => {
   const system = {
     win32: "win",

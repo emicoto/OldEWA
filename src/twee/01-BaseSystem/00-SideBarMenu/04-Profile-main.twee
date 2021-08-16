@@ -57,16 +57,16 @@
 等级：<<print $pet.level>><br>
 · HP　<<print $pet.HP[0]>> / <<print $pet.HP[1]>>　　· MP　<<print $pet.MP[0]>> / <<print $pet.MP[1]>> 　　· SP　<<print $pet.SP[0]>> / <<print $pet.SP[1]>><br>
 · 物攻 <<print $pet.ATK>>　　 物防 <<print $pet.DEF>>　　魔攻 <<print $pet.MATK>>　　魔防 <<print $pet.MDEF>>　　速度 <<print $pet.SPD>><br>
-· 描述：
+描述：<br>
 <<switch $pet.type>>
     <<case 1>>
-         浅蓝色半透明可可爱爱的一团。只需要喝水不需要其他食物。会因为喝的饮料颜色而变色。
+       浅蓝色半透明可可爱爱的一团。只需要喝水不需要其他食物。会因为喝的饮料颜色而变色。
     <<case 2>>
-         额头镶着个月亮形状的水晶的看着像二哈的小狼狗。似乎有魔力。
+       额头镶着个月亮形状的水晶的看着像二哈的小狼狗。似乎有魔力。
     <<case 3>>
-         浑身紫色看着丑萌丑萌的。万能助手。
+       浑身紫色看着丑萌丑萌的。万能助手。
     <<case 4>>
-         粉粉嫩嫩的小型触手。 再生能力很强，是很好的实验对象。
+       粉粉嫩嫩的小型触手。 再生能力很强，是很好的实验对象。
 <</switch>><br>
 </div>
 
