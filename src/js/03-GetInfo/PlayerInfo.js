@@ -1,7 +1,14 @@
 ﻿/* 名字和称呼的处理 */
 function you() {
     var name = V.PC.名字;
+    switch (V.persons){
+    case 1:
+      return "我"
+    case 2:
+      return "你"
+    default:
     return name;
+    }
   }
 DefineMacroS("you", you);
 
@@ -70,7 +77,7 @@ DefineMacroS("eye", eye);
 
 /* 皮肤 */
 function skin(){
-  return setup.L[V.lang]["肤色"][V.PC.皮肤] + setup.L[V.lang]["肤色"]["skin"]
+  return setup.L[V.lang]["肤色"][V.PC.肤色] + setup.L[V.lang]["肤色"]["skin"]
 }
 DefineMacroS("skin", skin);
 

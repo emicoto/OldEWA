@@ -1,0 +1,52 @@
+﻿:: ShopTryOnAvater [widget]
+
+<<widget "PrepareTryON">>
+/* 预处理 */
+<<set _layer to ["frame","addon","neck","hat","face","coat","top","hand","bottom","undertop","underbottom","shoes","socks","emoadd","eyebrow","hairfront","eyes","mouth","body","hairback","back"]>>
+
+<<for _i to 0; _i <_layer.length; _i++>>
+    <<set $tryon[_layer[_i]] to $avatar[_layer[_i]]>>
+<</for>>
+
+<<set $tryon.eyebrow to "normal">>
+<<set $tryon.mouth to "smile">>
+
+<</widget>>
+
+<<widget "SetTryOn">>
+    <<set $tryon[$args[0]] to [$args[1]]>>
+<</widget>>
+
+<<widget "UnsetTryOn">>
+    <<set $tryon[$args[0]] to null>>
+<</widget>>
+
+
+<<widget "ShowTryON">>
+<<set _path to "./image/avatar/">>
+<<set _layer to ["frame","addon","neck","hat","face","coat","top","hand","bottom","undertop","underbottom","shoes","socks","emoadd","eyebrow","hairfront","eyes","mouth","body","hairback","back"]>>
+
+<img class="Layer" src="./image/avatar/21_background/tryon.png" style="z-index:0;">
+
+<<for _i to 0; _i <_layer.length; _i++>>
+
+<<set _zindex to "z-index:"+(20-_i)>>
+<<if $tryon[_layer[_i]] is null>>
+    <<continue>>
+<<else>>
+    <<set _path1 to _path + _i+"_"+_layer[_i] + "/">>
+
+    <<if _layer[_i] isnot "addon" and _layer[_i] isnot "emoadd">>
+        <<set _spath to _path1 + $tryon[_layer[_i]]>>
+        <img class="Layer flipx" @src="_spath + '.png'" @style="_zindex">
+    <</if>>
+
+    <<if _layer[_i] is "body">>
+        <<set _spath to _path1 + $PC.肤色+"/penis.png">>
+        <img class="Layer flipx" @src="_spath" @style="_zindex">
+    <</if>>
+<</if>>
+
+<</for>>
+
+<</widget>>

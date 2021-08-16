@@ -9,12 +9,12 @@
 <br>
 
 <div class="tolink">
-<<link "健身　　 　(00:30)">><</link>><br>
-<<link "打游戏 　　(00:30)">><</link>><br>
-<<link "洗澡　 　　(00:30)">><</link>><br>
-<<link "和宠物玩耍 (01:00)">><</link>><br>
+<<link "健身　　 　(00:30)">><<passtime 30>><</link>><br>
+<<link "打游戏 　　(00:30)">><<passtime 30>><</link>><br>
+<<link "洗澡　 　　(00:30)">><<passtime 30>><</link>><br>
+<<link "和宠物玩耍 (01:00)">><<passtime 60>><</link>><br>
 <br>
-<<link "出门　 (00:05)" 怡安小区 >><</link>><br>
+<<link "出门　 (00:05)" 怡安小区 >><<passtime 5>><</link>><br>
 </div>
 
 /*可以做的事情……

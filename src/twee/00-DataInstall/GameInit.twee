@@ -3,7 +3,7 @@
 
 <!-- 初始化游戏数据 -->
 <<set $gametime to 0>>
-<<set $intro to 1>>
+<<set $intro to true>>
 <<set $tutorial to false>>
 
 <!-- 日期相关 -->

@@ -44,7 +44,7 @@
 
 <<widget "CMSkin">>
     <<set _optionlist to {"健康":"health","白皙":"white","麦色":"mugi","棕色":"dark","黝黑":"black"}>>
-        <<listbox "$PC.皮肤" autoselect>>
+        <<listbox "$PC.肤色" autoselect>>
         <<optionsfrom _optionlist>>
     <</listbox>>
 <</widget>>
@@ -163,7 +163,7 @@
             <<set $PC.发型 to "straight">>
             <<set $PC.发色 to "aqua">>
             <<set $PC.瞳色 to "aqua">>
-            <<set $PC.皮肤 to "white">> 
+            <<set $PC.肤色 to "white">> 
             <<set $PC.sens to {"m" : 2,  "b":2,  "c":2,  "v":null, "u":1, "a":4}>>
             <<set $PC.genital to {
                 "阴茎" : 10,
@@ -185,7 +185,7 @@
             <<set $PC.发型 to "straight">>
             <<set $PC.发色 to "milktea">>
             <<set $PC.瞳色 to  "brown">>
-            <<set $PC.皮肤 to "white">>
+            <<set $PC.肤色 to "white">>
             <<set $PC.sens to {"m" : 1,  "b":2,  "c":1, "v":null, "u":1, "a":8}>>
 
             <<set $PC.genital to {
@@ -209,7 +209,7 @@
             <<set $PC.发型 to "straight">>
             <<set $PC.发色 to "milktea">>
             <<set $PC.瞳色 to "green">>
-            <<set $PC.皮肤 to "white">>
+            <<set $PC.肤色 to "white">>
             <<set $PC.sens to {"m" : 1,  "b":2,  "v":1, "c":1, "u":1, "a":8}>>
             <<set $starttrait to "好色">>
 
@@ -232,7 +232,7 @@
             <<set $PC.发型 to "straight">>
             <<set $PC.发色 to "darkbrown">>
             <<set $PC.瞳色 to "brown">>
-            <<set $PC.皮肤 to "health">>
+            <<set $PC.肤色 to "health">>
             <<set $PC.sens to {"m" : 1,  "b":4,  "v":1, "c":1, "u":1, "a":1}>>             
             <<set $starttrait to "人气">>
 
@@ -250,7 +250,7 @@
             <<set $PC.发型 to "straight">>
             <<set $PC.发色 to "platinum">>
             <<set $PC.瞳色 to "emerald">>
-            <<set $PC.皮肤 to "white">>
+            <<set $PC.肤色 to "white">>
             <<set $PC.sens to {"m" : 1,  "b":2,  "c":2, "v":null, "u":1, "a":2}>>
 
             <<set $PC.genital to {
@@ -275,7 +275,7 @@
             <<set $PC.发型 to "straight">>
             <<set $PC.发色 to "black">>
             <<set $PC.瞳色 to "emerald">>
-            <<set $PC.皮肤 to "white">>
+            <<set $PC.肤色 to "white">>
             <<set $PC.魅力 to 1200>>
             <<set $PC.sens to {"m" : 4,  "b":2,  "v":1, "c":1, "u":1, "a":1}>>
 
@@ -586,6 +586,11 @@
         <<set $PC.produce.乳汁 to [0,0]>>
         <<set $PFlag.lactation to false>>
         <<set $PFlag.lactatecd to null>>
+    <</if>>
+
+    <<if $PFlag.tops lt 2>>
+        <<redress>>
+        <<setface "正常">>
     <</if>>
 
 <</widget>>

@@ -216,12 +216,18 @@
 <<widget "setface">>
     <<if setup.facelist.includes($args[0])>>
         <<set $PFace to setup.face[$args[0]]>>
-        <<set $Equip.emote to $args[0]>>
+        <<if $intro isnot true or $debug isnot true>>
+            <<set $Equip.emote to $args[0]>>
+        <</if>>
     <<else>>
         <<set $PFace to setup.face.正常>>
-        <<set $Equip.emote to $args[0]>>
+        <<if $intro isnot true or $debug isnot true>>
+            <<set $Equip.emote to $args[0]>>
+        <</if>>
     <</if>>
-    <<SetAvatar>>
+    <<if $args[1] isnot "loop">>
+        <<SetAvatar>>
+    <</if>>
 <</widget>>
 
 <<widget "gonaked">>

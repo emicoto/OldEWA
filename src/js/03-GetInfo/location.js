@@ -1,10 +1,12 @@
 ﻿window.imglocation = function(){
     var location = V.local.place
-      if (location == "单身公寓"){
+    switch (location) {
+      case "单身公寓":
         return "singleapartment"
-      }
-      else{
+      case "怡安小区":
+        return "neiborhood"
+      default:
         return "dummy"
-      }
+    }
   
 }

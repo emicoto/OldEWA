@@ -6,11 +6,10 @@
 
 <div id="avatar"><<avatar>></div>
 
-<<if $intro is 0>>
+<<if $intro is true>>
 	<<versioninfo>>
 
 <<else>>
-
 
 <!-- 游戏内日期和时钟 -->
 <div id="showtimes"><<timestats>></div>
@@ -65,8 +64,10 @@
 <<silently>>
 	<<repeat 0.5s>>
 		<<replace "#avatar">><<avatar>><</replace>>
-		<<replace "#playerstats">><<playerstatus>><</replace>>
-		<<replace "#showtimes">><<timestats>><</replace>>
+		<<if $intro isnot true>>
+			<<replace "#playerstats">><<playerstatus>><</replace>>
+			<<replace "#showtimes">><<timestats>><</replace>>
+		<</if>>
 	<</repeat>>
 <</silently>>
 

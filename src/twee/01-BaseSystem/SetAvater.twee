@@ -1,6 +1,9 @@
 ﻿:: AvatarSetup [widget]
 <<widget "SetAvatar">>
 
+<<if $intro is true or $debug is true>>
+    <<setface $Equip.emote "loop">>
+<</if>>
 /* 相框 OR 特效 */
 <<set $avatar.frame to $PFace.frame>>
 
@@ -273,14 +276,14 @@
 
 /* 素体 */
 <<if $PC.stats.怀孕 is true or $PC.stats.肠内受孕 is true >>
-    <<set $avatar.body to $PC.皮肤 +"/body_"+ breastsize()+"p">>
+    <<set $avatar.body to $PC.肤色 +"/body_"+ breastsize()+"p">>
 <<else>>
-    <<set $avatar.body to $PC.皮肤 +"/body_"+ breastsize()>>
+    <<set $avatar.body to $PC.肤色 +"/body_"+ breastsize()>>
 <</if>>
 
 /* JJ */
 <<if $PC.genital.阴茎 gt 3 and $PFlag.bottoms lte 1>>
-    <<set $avatar.penis to $PC.皮肤 +"/penis">>
+    <<set $avatar.penis to $PC.肤色 +"/penis">>
 <<else>>
     <<set $avatar.penis to null>>
 <</if>>

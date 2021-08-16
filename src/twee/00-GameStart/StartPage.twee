@@ -25,7 +25,6 @@ Elysion是一个类似现代——2021年地球的世界，虽然表面上平平
 新的故事即将开始……<br>
 
 <div class="delayed">
-<<setchara "player">>
 <span style="line-height:40px;font-size:13px;padding:0px;margin:0px">　
 <<link [[＞ 开始游戏|开始]]>><</link>></span><br>
 
@@ -62,10 +61,10 @@ $(document).on(':passagerender', function (ev) {
 
 <div id="StartingPageMenu">
     <<button setup.L[$lang]["开始"]["快速开始"]>><<replace #StartingPage>><<set $activepage to "QuickStart">><<QuickStart>><</replace>><</button>>
-    <<button "创建角色">><<replace #StartingPage>><<set $activepage to "CharaMaking">><<CharaMaking>><</replace>><</button>>
-    <<button "游戏设定">><<replace #StartingPage>><<set $activepage to "GameSetting">><<GameSetting>><</replace>><</button>>
+    <<button setup.L[$lang]["开始"]["创建角色"]>><<replace #StartingPage>><<set $activepage to "CharaMaking">><<CharaMaking>><</replace>><</button>>
+    <<button setup.L[$lang]["开始"]["游戏设定"]>><<replace #StartingPage>><<set $activepage to "GameSetting">><<GameSetting>><</replace>><</button>>
     <<if $achivement.points gt 0>>
-    <<button "周回特典">><<replace #StartingPage>><<set $activepage to "StartBonus">><<StartBonus>><</replace>><</button>><</if>>
+    <<button setup.L[$lang]["开始"]["周回特典"]>><<replace #StartingPage>><<set $activepage to "StartBonus">><<StartBonus>><</replace>><</button>><</if>>
 </div>
 
 <<dashline>><br>
@@ -78,10 +77,11 @@ $(document).on(':passagerender', function (ev) {
 <<dashline>>
 
 :: 开始
-<<GSApply>>
-你的名字是 <<print $PC.名字>> <br>
-怎么样？有变化了吗？<br>
-<<he>>准备好，故事要开始了哦！事件就这么发生了……<br>
+<<GSApply>><<set $intro to false>>
 
-[[开始|你的家]]
-[[回到开头|Start]]
+<<you>>准备好了吗？<br>
+故事要开始哦哦！<br>
+
+
+[[开始|你的家]]<br>
+[[回到开头|Start]]<br>

@@ -239,3 +239,9 @@ sugarcube-2:
       name: dressup
     portrait:
       name: portrait
+    PrepareTryON:
+      name: PrepareTryON
+    ShowTryON:
+      name: ShowTryON
+    passtime:
+      name: passtime

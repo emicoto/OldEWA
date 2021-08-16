@@ -127,12 +127,3 @@
             大家的魔女<br> 是个伪娘。既然是魔女，那当然擅长魔法。
     <</switch>>
 <</widget>>
-
-
-:: 游戏设定 [widget]
-<<widget "GameSetting">>
-　语言： 英语English　|　中文Chinese　|　日语Japanese<br>
-　视角： 第一人称　|　第二人称　|  第三人称<br>
-　战斗难度： 简单　|　普通　|　困难　|　噩梦　　※简单模式下无法获得成就<br>
-　时间限制： 有　|　无　　※无限制模式下无法获得成就<br>
-<</widget>>

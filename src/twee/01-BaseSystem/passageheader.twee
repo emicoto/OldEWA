@@ -1,6 +1,6 @@
 :: PassageHeader
 <<set $passage to passage()>><<set $tags to tags()>>
-<<fixvalue>>
+<<fixvalue>><<time>>
 <<SetAvatar>><<timed 1s>><<SetAvatar>><</timed>><<setchara "player">>
 
 

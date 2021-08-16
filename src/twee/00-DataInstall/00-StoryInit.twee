@@ -8,10 +8,8 @@
 <!-- 游戏系统环境设定 -->
 <<set $temp to {}>>
 <<set $lang to "CN">>
-<<set $Config to {
-	pronun : 3,
-	timelimit : false,
-}>>
+<<set $timelimit to true>>
+<<set $persons to 3>>
 <<set $hardmode to 1>>
 
 /*<<if StartConfig.debug is true>>
@@ -37,6 +35,33 @@
 	shoes		: null,
 	socks		: null,
 	emoadd 		: {tear:false, shy:false, red:false, hurt:false},
+	eyebrow 	: null,
+	hairfront	: null,
+	eyes		: null,
+	mouth		: null,
+	tatoos		: null,
+	penis		: null,
+	body		: null,
+	hairback	: null,
+	back		: null,
+	background  : null,
+}>>
+
+<<set $tryon to {
+	frame		: null,
+	addon	 	: null,
+	neck		: null, 
+	hand		: null,
+	face		: null,
+	hat			: null,
+	coat		: null,
+	top			: null,
+	bottom		: null,
+	undertop	: null,
+	underbottom	: null,
+	shoes		: null,
+	socks		: null,
+	emoadd 		: null,
 	eyebrow 	: null,
 	hairfront	: null,
 	eyes		: null,
