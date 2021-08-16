@@ -93,6 +93,13 @@
             性别 : $PC.性别,
             genital : $PC.genital,
         }>>
+    <<elseif $args[0] is "pet">>
+        <<set $currentchara to {
+            名字: $pet.name,
+            genital: $pet.genital,
+            genitype: $pet.genitype,
+            special: $pet.special,
+        }>>
     <<else>>
         <<set $currentchara to $NPC[$args[0]]>>
     <</if>>

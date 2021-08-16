@@ -37,7 +37,7 @@
 种族：<<print $PC.种族>><br>
 精神等级：<<print $PC.level>><br>
 · HP　<<print $PC.rpg.HP[0]>> / <<print $PC.rpg.HP[1]>>　　· MP　<<print $PC.rpg.MP[0]>> / <<print $PC.rpg.MP[1]>> 　　· SP　<<print $PC.rpg.SP[0]>> / <<print $PC.rpg.SP[1]>><br>
-· 物攻 <<print $PC.rpg.ATK>>　　 物防 <<print $PC.rpg.DEF>>　　魔攻 <<print $PC.rpg.MATK>>　　魔防 <<print $PC.rpg.MDEF>> <br>
+· 物攻 <<print $PC.rpg.ATK>>　　 物防 <<print $PC.rpg.DEF>>　　魔攻 <<print $PC.rpg.MATK>>　　魔防 <<print $PC.rpg.MDEF>> 　　速度 <<print $PC.rpg.SPD>> <br>
 · 装备加成: 无<br>
 </div>
 
@@ -52,17 +52,22 @@
 
 <<dashline>>
 [ 宠物资料 ]<br>
-<div id="otherdata">
-    <<switch $PC.type>>
-        <<case 1 5>>
-            史莱姆。 浅蓝色半透明可可爱爱的一团。只需要喝水不需要其他食物。会因为喝的饮料颜色而变色。
-        <<case 2 4>>
-            小狼狗。 额头镶着个月亮形状的水晶的看着像二哈的狗。似乎有魔力。
-        <<case 3>>
-            小恶魔。 浑身紫色看着丑萌丑萌的。万能助手。
-        <<case 6>>
-            小触手。 粉粉嫩嫩的小型触手。 再生能力很强，是很好的实验对象。
-    <</switch>>
+<div id="rpgstatus">
+名字：<<print $pet.name>>　　品种：<<petstype>><br>
+等级：<<print $pet.level>><br>
+· HP　<<print $pet.HP[0]>> / <<print $pet.HP[1]>>　　· MP　<<print $pet.MP[0]>> / <<print $pet.MP[1]>> 　　· SP　<<print $pet.SP[0]>> / <<print $pet.SP[1]>><br>
+· 物攻 <<print $pet.ATK>>　　 物防 <<print $pet.DEF>>　　魔攻 <<print $pet.MATK>>　　魔防 <<print $pet.MDEF>>　　速度 <<print $pet.SPD>><br>
+· 描述：
+<<switch $pet.type>>
+    <<case 1>>
+         浅蓝色半透明可可爱爱的一团。只需要喝水不需要其他食物。会因为喝的饮料颜色而变色。
+    <<case 2>>
+         额头镶着个月亮形状的水晶的看着像二哈的小狼狗。似乎有魔力。
+    <<case 3>>
+         浑身紫色看着丑萌丑萌的。万能助手。
+    <<case 4>>
+         粉粉嫩嫩的小型触手。 再生能力很强，是很好的实验对象。
+<</switch>><br>
 </div>
 
 </div>

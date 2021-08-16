@@ -100,7 +100,7 @@ hr {
   text-shadow: #fff 2px 2px;
 }
 
-.box {
+.lbox {
   min-height: 20px;
   width: fit-content;
   max-width: 720px;
@@ -130,6 +130,14 @@ hr {
   background-image: url("image/icon/tolink_hover.png");
   color: #d4bf00;
   border:0px;
+}
+
+.situation {
+  min-height: 50px;
+  width: fit-content;
+  max-width: 1000px;
+  padding: 3px;
+  margin: 5px;
 }
 
   

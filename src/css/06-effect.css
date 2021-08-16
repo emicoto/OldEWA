@@ -375,3 +375,74 @@
   }
 }
 /* Glitchy Text - End */
+
+/* 模拟抽插 CSS动画 */
+.thrust_x_s {
+  -webkit-animation-name:"thurst_x";
+  animation-name:"thurst_x";
+  -webkit-animation-duration: 2s;
+  animation-duration:2s;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count:infinite;
+}
+
+.thrust_x_f {
+  -webkit-animation-name:"thurst_x";
+  animation-name:"thurst_x";
+  -webkit-animation-duration: 1s;
+  animation-duration:1s;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count:infinite;
+}
+
+.thrust_x_f2 {
+  -webkit-animation-name:"thurst_x";
+  animation-name:"thurst_x";
+  -webkit-animation-duration: 0.5s;
+  animation-duration:0.5s;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count:infinite;
+}
+
+.thrust_y_s {
+  -webkit-animation-name:"thurst_y";
+  animation-name:"thurst_y";
+  -webkit-animation-duration: 2s;
+  animation-duration:2s;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count:infinite;
+}
+
+.thrust_y_f {
+  -webkit-animation-name:"thurst_y";
+  animation-name:"thurst_y";
+  -webkit-animation-duration: 1s;
+  animation-duration:1s;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count:infinite;
+}
+
+.thrust_y_f2 {
+  -webkit-animation-name:"thurst_y";
+  animation-name:"thurst_y";
+  -webkit-animation-duration: 0.5s;
+  animation-duration:0.5s;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count:infinite;
+}
+
+@keyframes thurst_x {
+  0%   {left:-10px; top:-10px;}
+  25%  {left:10px; top:10px;}
+  50%  {left:-10px; top:-10px;}
+  75%  {left:10px; top:10px;}
+  100% {left:-10px; top:-10px;}
+}
+
+@keyframes thurst_y {
+  0%   {left:0px; top:-10px;}
+  25%  {left:0px; top:10px;}
+  50%  {left:0px; top:-10px;}
+  75%  {left:0px; top:10px;}
+  100% {left:0px; top:-10px;}
+}

@@ -1,9 +1,12 @@
 <!-- 左侧边栏 -->
 :: StoryCaption
 <div @class="(Errors.log.length==0?'hidden':'') + ' error-reporter-btn'" onclick="Errors.Reporter.toggle()"></div>
-<!-- 游戏还没开始时 */ -->
+
 <div id="storyCaptionDiv">
 
+<!-- 游戏还没开始时 */ -->
+
+<!-- 显示小人 -->
 <div id="avatar"><<avatar>></div>
 
 <<if $intro is true>>
@@ -22,17 +25,23 @@
 <div id="playerstats"><<playerstatus>></div>
 
 <!-- 菜单 -->
-<<button ITEMS>><<overlayReplace "items">><</button>>
+<div class="splitbotton">
 <<button PROFILE>><<overlayReplace "profile">><</button>>
 <<button JOURNAL>><<overlayReplace "journal">><</button>>
+<<button ITEMS>><<overlayReplace "items">><</button>>
 <<button SOCIAL>><<overlayReplace "social">><</button>>
+</div>
 <<button DICTIONARY>><<overlayReplace "dictionary">><</button>>
 <<button ACHIVEMENT>><<overlayReplace "achivement">><</button>>
-<<button OPTIONS>><<overlayReplace "options">><</button>>
-<<button SAVES>><<overlayReplace "saves">><</button>>
-
 <</if>>
 
+<div class="splitbotton">
+<<button OPTIONS>><<overlayReplace "options">><</button>>
+<<button SAVES>><<overlayReplace "saves">><</button>>
+</div>
+
+
+/* 框架的尾巴 */
 </div>
 
 <!-- 隐藏元素 */ -->

@@ -1,0 +1,46 @@
+﻿#con {
+  width: 180px;
+  height: 260px;
+  border: 1px solid #ccc;
+  position:relative;
+  overflow:clip;
+}
+
+.blinking {
+  animation-name:sample;
+  animation-duration:5s;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+}
+
+.layer {
+  position:absolute;
+  top:0px;
+  left:0px;
+}
+
+@keyframes sample {
+  58%   {content:url("https://lunegame.000webhostapp.com/full.png")}
+  60%  {content:url("https://lunegame.000webhostapp.com/quater1.png")}
+  62%  {content:url("https://lunegame.000webhostapp.com/half.png")}
+  64% {content:url("https://lunegame.000webhostapp.com/close1.png")}
+  66%  {content:url("https://lunegame.000webhostapp.com/half.png")}
+  68%  {content:url("https://lunegame.000webhostapp.com/quater1.png")}
+  70%   {content:url("https://lunegame.000webhostapp.com/full.png")} 
+  
+  84%   {content:url("https://lunegame.000webhostapp.com/full.png")}
+  85%  {content:url("https://lunegame.000webhostapp.com/quater1.png")}
+  86%  {content:url("https://lunegame.000webhostapp.com/half.png")}
+  87% {content:url("https://lunegame.000webhostapp.com/close1.png")}
+  88%  {content:url("https://lunegame.000webhostapp.com/half.png")}
+  89%  {content:url("https://lunegame.000webhostapp.com/quater1.png")}
+  90%   {content:url("https://lunegame.000webhostapp.com/full.png")}
+  
+  94%   {content:url("https://lunegame.000webhostapp.com/full.png")}
+  95%  {content:url("https://lunegame.000webhostapp.com/quater1.png")}
+  96%  {content:url("https://lunegame.000webhostapp.com/half.png")}
+  97% {content:url("https://lunegame.000webhostapp.com/close1.png")}
+  98%  {content:url("https://lunegame.000webhostapp.com/half.png")}
+  99%  {content:url("https://lunegame.000webhostapp.com/quater1.png")}
+  100%   {content:url("https://lunegame.000webhostapp.com/full.png")}
+}

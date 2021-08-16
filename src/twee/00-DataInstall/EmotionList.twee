@@ -1,0 +1,77 @@
+﻿:: EmotionList [widget]
+
+<<widget "InitEmotion">>
+    <<set setup.facelist to ["正常","伤心","生气","受伤","快感1","快感2","开心","高潮","害羞","困惑"]>>
+    <<set setup.face to {
+        正常 : {
+            eyebrow : "normal",     eyes    : "full",   mouth   : "smile",
+            frame   : null,
+            tear    : false,    shy     : false,
+            red     : false,    hurt    : false,
+            name    : "正常",
+        },
+        伤心: {
+            eyebrow : "sad",    eyes    : "quater1",    mouth   : "sad",
+            frame   : null,
+            tear    : true,     shy     : false,
+            red     : false,    hurt    : false,
+            name    : "伤心",
+        },
+        生气: {
+            eyebrow : "angry",  eyes    : "quater2",    mouth   : "open",
+            frame   : null,
+            tear    : false,    shy     : false,
+            red     : false,    hurt    : false,
+            name    : "生气",
+        },
+        受伤: {
+            eyebrow : "angry",  eyes    : "blink1", mouth   : "open",
+            frame   : null,
+            tear    : false,    shy     : false,
+            red     : false,    hurt    : true,
+            name    : "受伤",
+        },
+        快感1: {
+            eyebrow : "sad",    eyes    : "quater2",    mouth   : "open",
+            frame   : null,
+            tear    : false,    shy     : false,
+            red     : true,     hurt    : false,
+            name    : "快感",
+        },
+        快感2: {
+            eyebrow : "confuse",    eyes    : "lookup2",    mouth   : "open",
+            frame   : null,
+            tear    : true,     shy     : false,
+            red     : true,     hurt    : false,
+            name    : "快感",
+        },
+        开心:  {
+            eyebrow :"happy",   eyes    :"quater2", mouth   :"laugh",
+            frame   :null,
+            tear    :false,     shy     :true,
+            red     :false,     hurt    :false,
+            name    :"开心",
+        },
+        高潮:{
+            eyebrow : "sad",    eyes    : "lookup1",    mouth   : "open",
+            frame   : null,
+            tear    : true,     shy     : false,
+            red     : true,     hurt    : false,
+            name    : "高潮", 
+        },
+        害羞:{
+            eyebrow : "happy",  eyes    : "lookleft",    mouth   : "smile",
+            frame   : null,
+            tear    : false,    shy     : true,
+            red     : false,    hurt    : false,
+            name    : "害羞", 
+        },
+        困惑:{
+            eyebrow : "confuse",  eyes    : "quater2",    mouth   : "unhappy",
+            frame   : "confuse",
+            tear    : false,    shy     : false,
+            red     : false,    hurt    : false,
+            name    : "困惑", 
+        },
+    }>>
+<</widget>>

@@ -1,11 +1,13 @@
 ﻿:: 你的家
 <<location "单身公寓">>
 <span class="title"><<you>>家</span><br>
-<div class=box>
+<div class="lbox">
 一个60平方米左右的单身公寓。简约现代风的装修，巨大的落地窗，还有一个阳台，两个人住也相当舒适的公寓。<br>
 </div>
 <br>
-<<call "城市生活" "1">>
+<div class="situation">
+<<call "城市生活" 1>>
+</div>
 <br>
 
 <div class="tolink">

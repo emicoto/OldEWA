@@ -3,6 +3,7 @@
 <<widget "fixvalue">>  
     <<set $money to Math.clamp($money,0,9999999999)>>
     <<set $PC.发长 to Math.clamp($PC.发长,0,9999)>>
+    <<set $PC.前发长 to Math.clamp($PC.前发长,0,9999)>>
     <<set $PC.魅力 to Math.clamp($PC.魅力,0,9999)>>
 
     /* 基础条修正 */
@@ -26,6 +27,17 @@
         <<set $PC.ste.vagina to Math.clamp($PC.ste.vagina,1,(12+($PC.体型*2)))>>
     <</if>>
 
+    /* 液体分量修正 */
+    <<if $PC.genital.阴茎 isnot null>>
+        <<set $PC.produce.精液[1] to Math.clamp($PC.produce.精液[1],$PC.genital.阴茎*2.5,$PC.genital.阴茎*10)>>
+        <<set $PC.produce.精液[0] to Math.clamp($PC.produce.精液[0],0,$PC.produce.精液[1])>>
+    <</if>>
+
+    <<if $PFlag.lactation is true>>
+        <<set $PC.produce.乳汁[1] to Math.clamp($PC.produce.乳汁[1],$PC.genital.胸部*10,$PC.genital.胸部*40)>>
+        <<set $PC.produce.乳汁[0] to Math.clamp($PC.produce.乳汁[0],0,$PC.produce.乳汁[1])>>
+    <</if>>
+
     /* RPG相关修正 */
     <<set $PC.rpg.HP[1] to Math.clamp(($PC.base.体力[1]/5+100),1,1000)>>
     <<set $PC.rpg.HP[0] to Math.clamp(($PC.base.体力[0]/5+$PC.base.健康[0]/10),0,$PC.rpg.HP[1])>>
@@ -33,10 +45,46 @@
     <<set $PC.rpg.MP[1] to $PC.base.魔力[1]>>
     <<set $PC.rpg.MP[0] to $PC.base.魔力[0]>>
 
-    <<set $PC.ATK to Math.clamp((10+$PC.abl.战技/10),1,120)>>
-    <<set $PC.DEF to Math.clamp((10+$PC.abl.健身/10),1,120)>>
-    <<set $PC.MATK to Math.clamp((10+($PC.奥术/10*$PC.自然/500)),1,250)>>
-    <<set $PC.MDEF to Math.clamp((10+($PC.异能/10*$PC.物理/500)),1,250)>>
+    <<set $PC.ATK to Math.clamp((10+$PC.abl.战技/10),1,500)>>
+    <<set $PC.DEF to Math.clamp((10+$PC.abl.健身/10),1,500)>>
+    <<set $PC.MATK to Math.clamp((10+($PC.abl.奥术/10*$PC.school.自然/500)),1,500)>>
+    <<set $PC.MDEF to Math.clamp((10+($PC.abl.异能/10*$PC.school.物理/500)),1,500)>>
+    <<set $PC.SPD to Math.clamp((10+($PC.abl.运动/10)),1,500)>>
+
+    /* 技能等相关值修正 */
+    <<switch $hardmode>>
+        <<case 0.5>>
+            <<set _maxvalue to 1000>>
+        <<case 1>>
+            <<set _maxvalue to 1200>>
+        <<case 2>>
+            <<set _maxvalue to 2400>>
+        <<case 5>>
+            <<set _maxvalue to 3600>>
+    <</switch>>
+
+    <<set $PC.school.文学 to Math.clamp($PC.school.文学,0,1200)>>
+    <<set $PC.school.数学 to Math.clamp($PC.school.数学,0,1200)>>
+    <<set $PC.school.物理 to Math.clamp($PC.school.物理,0,1200)>>
+    <<set $PC.school.生理 to Math.clamp($PC.school.生理,0,1200)>>
+    <<set $PC.school.自然 to Math.clamp($PC.school.自然,0,1200)>>
+    <<set $PC.school.表演 to Math.clamp($PC.school.表演,0,1200)>>
+    <<set $PC.school.艺术 to Math.clamp($PC.school.艺术,0,1200)>>
+
+    <<set $PC.abl.异能 to Math.clamp($PC.abl.异能,0,_maxvalue)>>
+    <<set $PC.abl.奥术 to Math.clamp($PC.abl.奥术,0,_maxvalue)>>
+    <<set $PC.abl.战技 to Math.clamp($PC.abl.战技,0,_maxvalue)>>
+    <<set $PC.abl.健身 to Math.clamp($PC.abl.健身,0,_maxvalue)>>
+    <<set $PC.abl.运动 to Math.clamp($PC.abl.运动,0,_maxvalue)>>
+    <<set $PC.abl.灵巧 to Math.clamp($PC.abl.灵巧,0,_maxvalue)>>
+    <<set $PC.abl.意志 to Math.clamp($PC.abl.意志,0,_maxvalue)>>
+
+    <<set $PC.eskl.性技巧 to Math.clamp($PC.eskl.性技巧,0,1000)>>
+    <<set $PC.eskl.性耐性 to Math.clamp($PC.eskl.性耐性,0,1000)>>
+    <<set $PC.eskl.口技 to Math.clamp($PC.eskl.口技,0,1000)>>
+    <<set $PC.eskl.手技 to Math.clamp($PC.eskl.手技,0,1000)>>
+    <<set $PC.eskl.脚技 to Math.clamp($PC.eskl.脚技,0,1000)>>
+    <<set $PC.eskl.腰技 to Math.clamp($PC.eskl.腰技,0,1000)>>
 
     <<run setreveal()>>
 

@@ -11,8 +11,12 @@
 <<widget "versioninfo">>
 
 失乐园物语 ver.<<print StartConfig.version>><br>
-<br>
 一切都还只是个框架<br>
+<br>
+作者：狐千月<br>
+程序协力：鸽子<br>
+文本辅助：AI地牢<br>
+<br><br>
 
 <</widget>>
 

@@ -245,3 +245,5 @@ sugarcube-2:
       name: ShowTryON
     passtime:
       name: passtime
+    petstype:
+      name: petstype
