@@ -221,6 +221,7 @@
         <<set $PFace to setup.face.正常>>
         <<set $Equip.emote to $args[0]>>
     <</if>>
+    <<SetAvatar>>
 <</widget>>
 
 <<widget "gonaked">>

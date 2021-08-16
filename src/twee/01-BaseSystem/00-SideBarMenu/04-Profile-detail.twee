@@ -10,9 +10,9 @@
 <br>
 <<dashline>>
 ♥<u> <b> 经历次数</b> </u><br>
-<<for _i to 0; _i lt $explist.length; _i++>>
-    <<if $PC.exp[$explist[_i]] isnot null>>
-    <div id="explist" class="listblock"><span class="listname"><b>· </b><<print $explist[_i]>></span><span class="listnum">- <<print $PC.exp[$explist[_i]]>></span></div>
+<<for _i to 0; _i lt setup.explist.length; _i++>>
+    <<if $PC.exp[setup.explist[_i]] isnot null>>
+    <div id="explist" class="listblock"><span class="listname"><b>· </b><<print $explist[_i]>></span><span class="listnum">- <<print $PC.exp[setup.explist[_i]]>></span></div>
     <</if>>
 <</for>>
 

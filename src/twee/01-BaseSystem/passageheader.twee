@@ -1,8 +1,10 @@
 :: PassageHeader
 <<set $passage to passage()>><<set $tags to tags()>>
-<<fixvalue>><<SetAvatar>><<timed 1s>><<SetAvatar>><</timed>>
+<<fixvalue>>
+<<SetAvatar>><<timed 1s>><<SetAvatar>><</timed>><<setchara "player">>
 
 
 :: PassageFooter
 <div id="gameVersionDisplay">EWA ver<<print StartConfig.version>></div>
+/* 一个页面显示完毕之后重新调整左边栏的表情变化 */
 <<SetAvatar>><<timed 1s>><<SetAvatar>><</timed>><<setchara "player">>

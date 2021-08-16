@@ -4,59 +4,62 @@
 
 <<set _path to "./image/avatar/">>
 <<set _layer to ["frame","addon","neck","hat","face","coat","top","hand","bottom","undertop","underbottom","shoes","socks","emoadd","eyebrow","hairfront","eyes","mouth","body","hairback","back","background"]>>
+
 <<for _i to 0; _i <_layer.length; _i++>>
+
+<<set _zindex to "z-index:"+(21-_i)>>
 
 <<if $avatar[_layer[_i]] is null>>
     <<continue>>
 <<else>>
     <<set _tpath to _path + _i+"_"+_layer[_i] + "/">>
-    <<set _classname to "<div class='L"+_i+"_"+_layer[_i]+"'>">>
+    
 
     <<if _layer[_i] isnot "addon" and _layer[_i] isnot "emoadd">>
         <<set _ipath to _tpath + $avatar[_layer[_i]]>>
-        <<print _classname + "<img src='"+_ipath+".png'></div>">>
+        <img class="Layer" @src="_ipath + '.png'" @style="_zindex">
     <</if>>
 
     <<if _layer[_i] is "body" and $avatar.tatoos isnot null and $PFlag.tops lte 2>>
         <<set _ipath to _tpath + $avatar.tatoos>>
-        <<print _classname + "<img src='"+_ipath+".png'></div>">>
+        <img class="Layer" @src="_ipath + '.png'" @style="_zindex">
     <</if>>
 
     <<if _layer[_i] is "body" and $avatar.penis isnot null>>
         <<set _ipath to _tpath + $avatar.penis>>
-        <<print _classname + "<img src='"+_ipath+".png'></div>">>
+        <img class="Layer" @src="_ipath + '.png'" @style="_zindex">
     <</if>>
 
     <<if _layer[_i] is "addon">>
 
         <<if $avatar.addon.bottom is true and $PFlag.bottoms lte 2>>
             <<set _ipath to _tpath + "bottom">>
-            <<print _classname + "<img src='"+_ipath+".png'></div>">>
+            <img class="Layer" @src="_ipath + '.png'" @style="_zindex">
         <</if>>
 
         <<if $avatar.addon.body is true>>
             <<set _ipath to _tpath + "body">>
-            <<print _classname + "<img src='"+_ipath+".png'></div>">>
+            <img class="Layer" @src="_ipath + '.png'" @style="_zindex">
         <</if>>
 
         <<if $avatar.addon.hair is true>>
             <<set _ipath to _tpath + "hair">>
-            <<print _classname + "<img src='"+_ipath+".png'></div>">>
+            <img class="Layer" @src="_ipath + '.png'" @style="_zindex">
         <</if>>
 
         <<if $avatar.addon.face is true>>
             <<set _ipath to _tpath + "face">>
-            <<print _classname + "<img src='"+_ipath+".png'></div>">>
+            <img class="Layer" @src="_ipath + '.png'" @style="_zindex">
         <</if>>
 
         <<if $avatar.addon.mouth is true>>
             <<set _ipath to _tpath + "mouth">>
-            <<print _classname + "<img src='"+_ipath+".png'></div>">>
+            <img class="Layer" @src="_ipath + '.png'" @style="_zindex">
         <</if>>
 
         <<if $avatar.addon.penis is true and $PFlag.bottoms lte 1>>
             <<set _ipath to _tpath + "penis">>
-            <<print _classname + "<img src='"+_ipath+".png'></div>">>
+            <img class="Layer" @src="_ipath + '.png'" @style="_zindex">
         <</if>>
 
     <</if>>
@@ -64,22 +67,22 @@
     <<if _layer[_i] is "emoadd">>
         <<if $PFace.shy is true>>
             <<set _ipath to _tpath + "shy">>
-            <<print _classname + "<img src='"+_ipath+".png'></div>">>
+            <img class="Layer" @src="_ipath + '.png'" @style="_zindex">
         <</if>>
 
         <<if $PFace.red is true>>
             <<set _ipath to _tpath + "red">>
-            <<print _classname + "<img src='"+_ipath+".png'></div>">>
+            <img class="Layer" @src="_ipath + '.png'" @style="_zindex">
         <</if>>
 
         <<if $PFace.hurt is true>>
             <<set _ipath to _tpath + "hurt">>
-            <<print _classname + "<img src='"+_ipath+".png'></div>">>
+            <img class="Layer" @src="_ipath + '.png'" @style="_zindex">
         <</if>>
 
         <<if $PFace.tear is true>>
             <<set _ipath to _tpath + "tear">>
-            <<print _classname + "<img src='"+_ipath+".png'></div>">>
+            <img class="Layer" @src="_ipath + '.png'" @style="_zindex">
         <</if>>
     <</if>>
 
@@ -96,6 +99,7 @@
 <<set _layer to ["back","hairback","body","mouth","eyes","hairfront","eyebrow","emoadd","socks","shoes","underbottom","undertop","bottom","hand","top","coat","face","hat","neck","addon","frame"]>>
 
 <<for _i to 0; _i <_layer.length; _i++>>
+<<set _zindex to "z-index:"+_i>>
 
 <<if $avatar[_layer[_i]] is null>>
     <<continue>>
@@ -105,7 +109,7 @@
         <<set _ipath to _tpath + $avatar[_layer[_i]]+".png">>
         <img class="P_Layer flipx" @src="_ipath" @style="_zindex">
     <</if>>
-    
+
     <<if _layer[_i] is "body" and $avatar.tatoos isnot null and $PFlag.tops lte 2>>
         <<set _ipath to _tpath + $avatar.tatoos+".png">>
         <img class="P_Layer flipx" @src="_ipath" @style="_zindex">
