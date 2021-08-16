@@ -85,17 +85,6 @@
     <</if>>
 <</widget>>
 
-<<widget "he">>
-<<set _gender to $PC.性别>>
-    <<switch _gender>>
-        <<case "伪娘" "少年">>
-            <<print "他">>
-        <<case "扶她" "少女">>
-            <<print "她">>
-        <<default>>
-            <<print "它">>
-    <</switch>>
-<</widget>>
 
 <<widget "setchara">>
     <<if $args[0] is "player">>
@@ -196,62 +185,64 @@
 <</widget>>
 
 <<widget "dressup">>
-    <<set $PEquip[$args[0]] to $args[1]>>
+    <<set $Equip[$args[0]] to setup.avatar[$args[0]][$args[1]]>>
+    
+    <<if $args[2]>>
+        <<set $Equip[$args[0]].color to $args[2]>>
+    <</if>>
 
     <<switch $args[0]>>
         <<case "top">>
-            <<if setup.avater.top[$args[1]].slot is "onepiece">>
-                <<set $PEquip.bottom to null>>
+            <<if setup.avatar.top[$args[1]].slot is "onepiece">>
+                <<set $Equip.bottom to null>>
             <</if>>
         <<case "bottom">>
-            <<if setup.avater.bottom[$args[1]].slot is "onepiece">>
-                <<set $PEquip.top to null>>
+            <<if setup.avatar.bottom[$args[1]].slot is "onepiece">>
+                <<set $Equip.top to null>>
             <</if>>
         <<case "undertop">>
-            <<if setup.avater.undertop[$args[1]].slot is "onepiece">>
-                <<set $PEquip.underbottom to null>>
-            <<elseif setup.avater.undertop[$args[1]].slot is "fullbody">>
-                <<set $PEquip.underbottom to null>>
-                <<set $PEquip.top to null>>
-                <<set $PEquip.bottom to null>>
+            <<if setup.avatar.undertop[$args[1]].slot is "onepiece">>
+                <<set $Equip.underbottom to null>>
+            <<elseif setup.avatar.undertop[$args[1]].slot is "fullbody">>
+                <<set $Equip.underbottom to null>>
+                <<set $Equip.top to null>>
+                <<set $Equip.bottom to null>>
             <</if>>
     <</switch>>
-
-
 <</widget>>
 
-/*<<dressup category index>>*/
+/*<<dressup category index color>>*/
 
 <<widget "setface">>
     <<if setup.facelist.includes($args[0])>>
         <<set $PFace to setup.face[$args[0]]>>
+        <<set $Equip.emote to $args[0]>>
     <<else>>
         <<set $PFace to setup.face.正常>>
+        <<set $Equip.emote to $args[0]>>
     <</if>>
 <</widget>>
 
 <<widget "gonaked">>
     <<for _i to 0;_i lt setup.equipindex.length;_i++>>
-        <<set $TEquip[setup.equipindex[_i]] to $PEquip[setup.equipindex[_i]]>>
+        <<set $TEquip[setup.equipindex[_i]] to $Equip[setup.equipindex[_i]]>>
     <</for>>
 
-    <<set $PEquip.coat to null>>
-    <<set $PEquip.top to null>>
-    <<set $PEquip.bottom to null>>
-    <<set $PEquip.undertop to null>>
-    <<set $PEquip.underbottom to null>>
-    <<set $PEquip.shoes to null>>
-    <<set $PEquip.socks to null>>
-    <<set $PEquip.hand to null>>
+    <<set $Equip.coat to null>>
+    <<set $Equip.top to null>>
+    <<set $Equip.bottom to null>>
+    <<set $Equip.undertop to null>>
+    <<set $Equip.underbottom to null>>
+    <<set $Equip.shoes to null>>
+    <<set $Equip.socks to null>>
+    <<set $Equip.hand to null>>
     <<set $PFlag.tops to 0>>
     <<set $PFlag.bottoms to 0>>
 <</widget>>
 
 <<widget "redress">>
     <<for _i to 0;_i lt setup.equipindex.length;_i++>>
-        <<set $PEquip[setup.equipindex[_i]] to $TEquip[setup.equipindex[_i]]>>
+        <<set $Equip[setup.equipindex[_i]] to $TEquip[setup.equipindex[_i]]>>
     <</for>>
-    /*<<fixvalue>>*/
-    <<set $PFlag.tops to 9>>
-    <<set $PFlag.bototoms to 4>>
+    <<fixvalue>>
 <</widget>>

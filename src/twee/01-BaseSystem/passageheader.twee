@@ -5,4 +5,4 @@
 
 :: PassageFooter
 <div id="gameVersionDisplay">EWA ver<<print StartConfig.version>></div>
-<<SetAvatar>><<timed 1s>><<SetAvatar>><</timed>>
+<<SetAvatar>><<timed 1s>><<SetAvatar>><</timed>><<setchara "player">>

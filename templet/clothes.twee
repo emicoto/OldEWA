@@ -1,0 +1,23 @@
+:: dummy
+
+<<set sample to {
+    indexname : {
+        id : 0,
+        cost : 0,
+        reveal : 0,
+        durable : 0,
+        maxdurable : 0,
+        warm : 0,
+        color : "colorname",
+        colors : [],
+        name : "itemname",
+        text : "description",
+        tag  : [],
+        gender : "f",
+        shop : "all/offline/online/unique",
+        index : "indexname",
+        layer : "layername",
+        category : "category",
+        slot : "layername",
+    }
+}>>

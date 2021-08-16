@@ -7,6 +7,14 @@
     margin-left: 40px;
 }
 
+.Layer {
+    width: 180px;
+    height: 260px;
+    top: 0px;
+    left: 0px;
+    position: absolute;
+}
+
 .L0_frame {
     z-index: 21;
     width: 100%;
@@ -203,4 +211,19 @@
     top: 0px;
     left: 0px;
     position: absolute;  
+}
+
+#portrait {
+    width: 120px;
+    height: 120px;
+    border: 1px solid #ddd;
+    position: relative;
+    overflow: clip;
+    float: left;
+}
+
+.P_Layer {
+    top: -15px;
+    left: -35px;
+    position: absolute;
 }

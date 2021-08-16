@@ -38,6 +38,6 @@
     <<set $PC.MATK to Math.clamp((10+($PC.奥术/10*$PC.自然/500)),1,250)>>
     <<set $PC.MDEF to Math.clamp((10+($PC.异能/10*$PC.物理/500)),1,250)>>
 
-    /*<<setreveal>>*/
+    <<run setreveal()>>
 
 <</widget>>
