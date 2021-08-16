@@ -158,6 +158,7 @@
 #profile {
     margin-left: 10px;
     font-size: 14px;
+    float: left;
 }
 
 #profile .dashline {
@@ -241,6 +242,14 @@
     margin-top: 5px;
 }
 
+#explist {
+    height:max-content;
+    width: 100%;
+    position: relative;
+    float:left;
+    display: block;
+}
+
 .listblock {
     height: 20px;
     font-size: 12px;
@@ -249,6 +258,7 @@
     align-content: left;
     border-right: 1px dashed #ccc;
     margin-left: 8px;
+    position: relative;
 }
 
 .listname {

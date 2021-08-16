@@ -17,7 +17,7 @@
     <<else>>
         <<set _color to "#bbb">>
     <</if>>
-    <<print '<div id="meter" class="metercon"><div id="meter" class="bar" style="width:'+_percent+'%;background-color:'+_color+'"></div></div>'>>
+    <<print '<div id="meter" class="metercon"><div class="bar" style="width:'+_percent+'%;background-color:'+_color+'"></div></div>'>>
 <</widget>>
 
 

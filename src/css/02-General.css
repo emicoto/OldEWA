@@ -51,6 +51,7 @@ input[type="text"]:hover {
   height:1px;
   border-bottom: 1px rgb(184, 182, 173) dashed;
   position: relative;
+  display: block;
 }
 
 hr {

@@ -7,14 +7,47 @@
 <div id="profile">
 
 ♦<u> <b> 工作记录</b> </u><br>
+
 <br>
 <<dashline>>
 ♥<u> <b> 经历次数</b> </u><br>
+<div id="explist">
+
+/* 批量处理 */
+<<set _count to 0>>
+<<set _pbr to "">>
+<<set _group to ["性交","怀孕","阴道扩张","V高潮"]>>
+
 <<for _i to 0; _i lt setup.explist.length; _i++>>
-    <<if $PC.exp[setup.explist[_i]] isnot null>>
-    <div id="explist" class="listblock"><span class="listname"><b>· </b><<print $explist[_i]>></span><span class="listnum">- <<print $PC.exp[setup.explist[_i]]>></span></div>
+    <<if $PC.genital.子宫 is null and _group.includes(setup.explist[_i]) is true>>
+        <<continue>>
+    <<elseif $PC.genital.阴茎 is null and setup.explist[_i] is "射精">>
+        <<continue>>
+    <<else>>
+        <<set _count ++>>
+        <<if $PC.exp[setup.explist[_i]] isnot null>>
+        <div class="listblock"><span class="listname"><b>· </b><<print setup.explist[_i]>></span><span class="listnum">- <<print $PC.exp[setup.explist[_i]]>></span></div>
+        <</if>>
+        <<if _count%4 == 0>>
+            <<set _pbr to _pbr+"<br>">>
+        <</if>>
     <</if>>
 <</for>>
+/* 批量处理完毕 */
+
+</div>
+<<print _pbr>><br>
+
+<<dashline>>
+♥<u> <b> 累积</b> </u><br>
+<div style="width:90%;margin-left:10px;margin-top:5px">
+至今为止<<you>>总共:<br>
+<b>· </b>沐浴了<<print $PC.sexrec.浴精.a>>ml的精液<br>
+<b>· </b>饮下了<<print $PC.sexrec.饮精.a>>ml的精液<br>
+<<if $PC.genital.阴茎 isnot null>><b>· </b>射出了<<print $PC.sexrec.射精.a>>ml的种子<br><</if>>
+<<if $PC.genital.子宫 isnot null>><b>· </b>子宫内被灌注了<<print $PC.sexrec.内射.a>>ml的精子<br><</if>>
+<b>· </b>肠道内被灌注了<<print $PC.sexrec.肛内射.a>>ml的精子<br>
+</div>
 
 </div>
 <</widget>>
