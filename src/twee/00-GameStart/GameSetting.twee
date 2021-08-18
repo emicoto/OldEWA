@@ -1,6 +1,7 @@
 ﻿:: 游戏设定 [widget]
 <<widget "GameSetting">>
-　<<lang "视角" "Persons">>： <label><<radiobutton "$persons" 1 autocheck>> <<lang "第一人称" "First: I">></label>　|　<label><<radiobutton "$persons" 2 autocheck>><<lang "第二人称" "Second: You">></label>　|  <label><<radiobutton "$persons" 3 autocheck>><<lang "第三人称(默认)" "Third: Call Name(defalt)">></label><br>
+　<<lang "游戏视角" "Persons">>： <label><<radiobutton "$persons" 1 autocheck>> <<lang "第一人称" "First: I">></label>　|　<label><<radiobutton "$persons" 2 autocheck>><<lang "第二人称" "Second: You">></label>　|　<label><<radiobutton "$persons" 3 autocheck>><<lang "第三人称(默认)" "Third: Call Name(defalt)">></label>
+<<lang "" "※Not full support on English">><br>
 
 　<<lang "战斗难度" "Combat">>： <label><<radiobutton "$hardmode" 0.5 autocheck>> <<lang "简单" "EASY">></label>　|　<label><<radiobutton "$hardmode" 1 autocheck>> <<lang "普通" "NORMAL">></label>　|　<label><<radiobutton "$hardmode" 2 autocheck>> <<lang "困难" "HARD">></label>　|　<label><<radiobutton "$hardmode" 5 autocheck>> <<lang "噩梦" "NIGHTMARE">></label>　　
 ※<<lang "简单模式下无法获得成就" "Achievements will not available in easy mode">><br>
@@ -8,7 +9,7 @@
 　<<lang "时间限制" "TimeLimit">>： <label><<radiobutton "$timelimit" true autocheck>> <<lang "有" "Yes">></label>　|　<label><<radiobutton "$timelimit" false autocheck>> <<lang "无" "No">></label>　　
 ※<<lang "无时间限制模式下无法获得成就" "Achievements will not available in no time limit mode">><br>
 
-　<<lang "语言" "Language">>： <label><<radiobutton "$lang" "EN" autocheck>> English</label>　|　<label><<radiobutton "$lang" "CN" autocheck>> 中文</label><br>
+　<<lang "使用语言" "Language">>： <label><<radiobutton "$lang" "EN" autocheck>> English</label>　|　<label><<radiobutton "$lang" "CN" autocheck>> 中文</label><br>
 
 　<<link "＞ 改变语言/Comfirm Language" "Start">><</link>>
 <</widget>>

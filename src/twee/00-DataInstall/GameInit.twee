@@ -34,6 +34,38 @@
     business:0,  /* 商业名声 */
 }>>
 
+/* AVATAR设定 */
+<<set $avatar to {
+    frame       : null,
+    addon       : {body:false,bottom:false,face:false,hair:false,mouth:false,penis:false},
+        
+    neck        : null, hand        : null, face        : null,
+    hat         : null, coat        : null, top         : null,
+    bottom      : null, undertop    : null, underbottom : null,
+    shoes       : null, socks       : null,
+
+    emoadd      : {tear:false, shy:false, red:false, hurt:false},
+
+    eyebrow     : null, hairfront   : null, kemofront: {mimi:null, horn:null}, eyes : null,
+    mouth       : null, tatoos      : null, penis       : null,
+    body        : null, hairback    : null, kemoback: {wing:null, tail:null},  back : null,
+    background  : null,
+}>>
+
+<<set $tryon to {
+    frame       : null,
+        
+    neck        : null, hand        : null, face        : null,
+    hat         : null, coat        : null, top         : null,
+    bottom      : null, undertop    : null, underbottom : null,
+    shoes       : null, socks       : null,
+
+    eyebrow     : null, hairfront   : null, kemofront: {mimi:null, horn:null}, eyes : null,
+    mouth       : null, tatoos      : null, penis       : null,
+    body        : null, hairback    : null, kemoback: {wing:null, tail:null},  back : null,
+    background  : null,
+}>>
+
 <!-- 持有物 -->
 <<set $items to {}>>
 

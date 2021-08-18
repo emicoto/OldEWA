@@ -30,3 +30,17 @@
 商场里的服装店。商品琳琅满目，什么都有。<br>
 </div>
 
+<div id="showcase">
+
+</div>
+<div id="container">
+    <span class="itemthumb"><img src="image/avatar/6_top/Tshirt/thumb.png"></span>
+    <span class="itemname">T恤</span>
+    <span class="itemprice">￥10</span>
+    <span class="itemdescription">一件简单的T恤</span>
+</div>
+
+<br><br>
+<div class="tolink">
+<<link "离开 (00:12)" "怡安小区">><<passtime 12>><</link>><br>
+</div>

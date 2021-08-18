@@ -1,17 +1,22 @@
 ﻿:: ShopTryOnAvater [widget]
 
-<<widget "PrepareTryON">>
-/* 预处理 */
-<<set _layer to ["frame","addon","neck","hat","face","coat","top","hand","bottom","undertop","underbottom","shoes","socks","emoadd","eyebrow","hairfront","eyes","mouth","body","hairback","back"]>>
-
-<<for _i to 0; _i <_layer.length; _i++>>
-    <<set $tryon[_layer[_i]] to $avatar[_layer[_i]]>>
+<<widget "EnterTryRoom">>
+/* 把身上衣服暂存在TEquip里 */
+<<for _i to 0;_i lt setup.equipindex.length;_i++>>
+    <<set $TEquip[setup.equipindex[_i]] to $Equip[setup.equipindex[_i]]>>
 <</for>>
 
-<<set $tryon.eyebrow to "normal">>
-<<set $tryon.mouth to "smile">>
+/* 清理身上外在液体 */
+<<set $PFlag.bukkake.body to false>>
+<<set $PFlag.bukakke.face to false>>
+<<set $PFlag.bukkake.hair to false>>
+
+<<set $location to 试衣间>>
+<<SetAvatar>>
+<<set $avatar.background to "tryon">>
 
 <</widget>>
+
 
 <<widget "SetTryOn">>
     <<set $tryon[$args[0]] to [$args[1]]>>
@@ -21,32 +26,40 @@
     <<set $tryon[$args[0]] to null>>
 <</widget>>
 
+<<widget "SetShowcase">>
+    <<set _layer to ["frame","addon","neck","hat","face","coat","top","bottom","hand","undertop","underbottom","shoes","socks","emoadd","eyebrow","kemofront","hairfront","eyes","mouth","body","hairback","kemoback","back","background"]>>
+    <<set _group to ["coat","top","undertop"]>>
 
-<<widget "ShowTryON">>
-<<set _path to "./image/avatar/">>
-<<set _layer to ["frame","addon","neck","hat","face","coat","top","hand","bottom","undertop","underbottom","shoes","socks","emoadd","eyebrow","hairfront","eyes","mouth","body","hairback","back"]>>
+    <<set $showcase to setup.avatar[$args[0]][$args[1]]>>
+    <<set _path to "./image/avatar/"+_layer.indexOf($args[0])+"_"+$args[0]+"/">>
+    /* .image/avatar/1_hat/ */
 
-<img class="Layer" src="./image/avatar/21_background/tryon.png" style="z-index:0;">
+    <<if $showcase.imgenable is false>>
+        <<set _path to _path + "dummy">>
+    <<else>>
+         <<if $showcase.acc isnot null and $showcase.pattern.length gt 0>>
+            <<set _path1 to _path + $showcase.index + "/" + $args[3]>>
+        <<else>>
+            <<set _path1 to _path + "dummy">>
+        <</if>>
+        /* .image/avatar/1_hat/pattern */
 
-<<for _i to 0; _i <_layer.length; _i++>>
+        <<if $showcase.fixcolor is true>>
+            <<set _path to _path + $showcase.index + "/" + $args[2]>>
+        <<else>>
+            <<set _path to _path + $showcase.index + "/basic">>
+        <</if>>
 
-<<set _zindex to "z-index:"+(20-_i)>>
-<<if $tryon[_layer[_i]] is null>>
-    <<continue>>
-<<else>>
-    <<set _path1 to _path + _i+"_"+_layer[_i] + "/">>
+        <<if _group.includes($args[0]) is true and $showcase.dfpng.breast is true>>
+            <<set _path to _path + "_1">>
+        <</if>>
 
-    <<if _layer[_i] isnot "addon" and _layer[_i] isnot "emoadd">>
-        <<set _spath to _path1 + $tryon[_layer[_i]]>>
-        <img class="Layer flipx" @src="_spath + '.png'" @style="_zindex">
+         /* .image/avatar/1_hat/basic_1 or white_1 */
+
     <</if>>
 
-    <<if _layer[_i] is "body">>
-        <<set _spath to _path1 + $PC.肤色+"/penis.png">>
-        <img class="Layer flipx" @src="_spath" @style="_zindex">
-    <</if>>
-<</if>>
-
-<</for>>
+    <img class='layer flipx' src="./image/avatar/manekin.png">
+    <img class='layer flipx' @src="_path + '.png'">
+    <img class='layer flipx' @src="_path1 + '.png'">
 
 <</widget>>

@@ -13,7 +13,7 @@
     font-family: 'Times New Roman', 微软雅黑;
     font-size: 15px;
     letter-spacing: 4px;
-    max-width: 250px;
+    max-width: 245px;
     margin: 2px 0px;
 }
 
@@ -264,30 +264,8 @@ body #story-caption #storyCaptionDiv {
     line-height: 20px;
 }
 
-.metername { 
-    width:40px; 
-    height:18px; 
-    font-size: 14px;
-    font-family:微软雅黑;
-    float:left;
-    z-index:1;
-}   
-
-
-.metercon {
-    z-index:1;
-    width:120px;
-    height: 6px;
-    margin-top: 8px;
-    background-color: #ddd;
-    border:1px solid #ccc;
-    float: left;
-}
-
-.bar {
-    z-index:2;
+#splitbotton button{
+    width: 120px;
     max-width: 120px;
-    min-width: 0px;
-    height:6px;
-    background-color: #ccc;
+    letter-spacing: 2px;
 }

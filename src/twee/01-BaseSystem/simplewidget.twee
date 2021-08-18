@@ -198,6 +198,10 @@
         <<set $Equip[$args[0]].color to $args[2]>>
     <</if>>
 
+    <<if $args[3]>>
+        <<set $Equip[$args[0]].color to $args[3]>>
+    <</if>>
+
     <<switch $args[0]>>
         <<case "top">>
             <<if setup.avatar.top[$args[1]].slot is "onepiece">>
@@ -218,7 +222,7 @@
     <</switch>>
 <</widget>>
 
-/*<<dressup category index color>>*/
+/*<<dressup category id color pattern>>*/
 
 <<widget "setface">>
     <<if setup.facelist.includes($args[0])>>
@@ -252,6 +256,7 @@
     <<set $Equip.hand to null>>
     <<set $PFlag.tops to 0>>
     <<set $PFlag.bottoms to 0>>
+    <<SetAvatar>>
 <</widget>>
 
 <<widget "redress">>
@@ -259,4 +264,5 @@
         <<set $Equip[setup.equipindex[_i]] to $TEquip[setup.equipindex[_i]]>>
     <</for>>
     <<fixvalue>>
+    <<SetAvatar>>
 <</widget>>

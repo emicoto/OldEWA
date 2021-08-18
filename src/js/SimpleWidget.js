@@ -29,3 +29,23 @@ window.basepercent = function(name) {
     var max = V.PC.base[name][1]
     return Math.clamp(Math.trunc(((min/max)*100)),1,100)
 };
+
+function isPregnant() {
+    if (V.PC.stats.怀孕 == true || V.PC.stats.肠内受孕 == true){
+        return "p"
+    }else{
+        return ""
+    }
+}
+
+window.isPregnant = isPregnant
+
+function isFixhair(table) {
+    if (table.fixcolor == true) {
+        return V.PC.发色
+    }else{
+        return "basic"
+    }
+}
+
+window.isFixhair = isFixhair

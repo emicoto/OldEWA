@@ -25,19 +25,19 @@
 <div id="playerstats"><<playerstatus>></div>
 
 <!-- 菜单 -->
-<div class="splitbotton">
+<div id="splitbotton">
 <<button PROFILE>><<overlayReplace "profile">><</button>>
-<<button JOURNAL>><<overlayReplace "journal">><</button>>
+<<button JOURNAL>><<overlayReplace "journal">><</button>><br>
 <<button ITEMS>><<overlayReplace "items">><</button>>
-<<button SOCIAL>><<overlayReplace "social">><</button>>
+<<button SOCIAL>><<overlayReplace "social">><</button>><br>
 </div>
-<<button DICTIONARY>><<overlayReplace "dictionary">><</button>>
-<<button ACHIVEMENT>><<overlayReplace "achivement">><</button>>
+<<button DICTIONARY>><<overlayReplace "dictionary">><</button>><br>
+<<button ACHIVEMENT>><<overlayReplace "achivement">><</button>><br>
 <</if>>
 
-<div class="splitbotton">
-<<button OPTIONS>><<overlayReplace "options">><</button>>
+<div id="splitbotton">
 <<button SAVES>><<overlayReplace "saves">><</button>>
+<<button OPTIONS>><<overlayReplace "options">><</button>><br>
 </div>
 
 
@@ -53,24 +53,24 @@
 	<div id="customOverlayContent"></div>
 </div>
 
+
+
+<<silently>>
+
 /* 自动刷新等待JS读取结束 */
 <<set _timer to 10>>
-<<repeat 0.3s>>
-<<script>>
-	dragElement(document.getElementById("customOverlay"))
-	function dragElement(event) {
-		var dragID = "#customOverlay"
-		$(dragID).draggable();
-	}
-<</script>>
-	<<set _timer to _timer -1>>
-	<<if _timer is 0>>
-	<<stop>>
-	<</if>>
-<</repeat>>
+	<<repeat 0.3s>>
+		<<script>>
+			dragElement(document.getElementById("customOverlay"))
+			function dragElement(event) {
+				var dragID = "#customOverlay"
+				$(dragID).draggable();	}
+		<</script>>
+		<<set _timer to _timer -1>>
+		<<if _timer is 0>><<stop>><</if>>
+	<</repeat>>
 
 /* 动态化部分 */
-<<silently>>
 	<<repeat 0.5s>>
 		<<replace "#avatar">><<avatar>><</replace>>
 		<<if $intro isnot true>>

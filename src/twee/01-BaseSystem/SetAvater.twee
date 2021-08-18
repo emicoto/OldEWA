@@ -1,6 +1,8 @@
 ﻿:: AvatarSetup [widget]
 <<widget "SetAvatar">>
 
+<<silently>>
+
 <<if $intro is true or $debug is true>>
     <<setface $Equip.emote "loop">>
 <</if>>
@@ -45,217 +47,119 @@
 <</if>>
 
 
-/* 脖子 */
-<<if $Equip.neck isnot null>>
-    <<set $avatar.neck to $Equip.neck.index +"/"+$Equip.neck.color>>
-<<else>>
-    <<set $avatar.neck to null>>
-<</if>>
+/* 共通处理 */
+<<set _group to ["neck","hat","face","hand","bottom","underbottom","shoes","socks","back"]>>
 
-
-/* 帽子 */
-<<if $Equip.hat isnot null>>
-    <<set $avatar.hat to $Equip.hat.index +"/"+$Equip.hat.color>>
-<<else>>
-    <<set $avatar.hat to null>>
-<</if>>
-
-
-/* 脸部装饰 */
-<<if $Equip.face isnot null>>
-    <<set $avatar.face to $Equip.face.index +"/"+$Equip.face.color>>
-<<else>>
-    <<set $avatar.face to null>>
-<</if>>
-
-
-/* 外套 */
-
-<<if $Equip.coat isnot null>>
-
-    /* 查看胸部差分。大衣外套没有怀孕差分 */
-    <<set _apath to "./image/avatar/5_coat/">>
-    <<set _bpath to $Equip.coat.index + "/" + $Equip.coat.color>>
-    <<set _apath to _apath + _bpath + "_" + breastsize()+ ".png">>
-    <<if ImgExist(_apath) is true>>
-        <<set $avatar.coat to _bpath + "_" breastsize()>>
+<<for _i to 0; _i lt _group.length; _i++ >>
+<<set _n to _group[_i]>>
+<<if $Equip[_n] isnot null and $Equip[_n].imgenable is true>>
+    <<if $Equip[_n].fixcolor is true>>
+        <<set $avatar[_n] to { fixcolor: true, color: $Equip[_n].color, src: $Equip[_n].index + "/" + $Equip[_n].color, acc: null,}>>
     <<else>>
-        <<set $avatar.coat to _bpath + "_1">>
+        <<set $avatar[_n] to { fixcolor: false, color: $Equip[_n].color, src: $Equip[_n].index + "/basic", acc: null,}>>
     <</if>>
-
-    /* 还没实装的情况 */
-    <<checkimg 5 "coat" _bpath>>
-
+    <<if $Equip[_n].acc isnot null>>
+        <<set $avatar[_n].acc to $Equip[_n].index + "/"+ $Equip[_n].acc >>
+    <</if>>
+<<elseif $Equip[_n] isnot null and $Equip[_n].imgenable is false>>
+    <<switch _n>>
+        <<case "bottom">>
+            <<set $avatar.bottom to { fixcolor: true, color: "white", src: "shortpant/basic", acc: null, }>>
+        <<case "underbottom">>
+            <<set $avatar.underbottom to { fixcolor: true, color: "white", src: "boxer/basic", acc: null, }>>
+        <<default>>
+            <<set $avatar[_n] to { fixcolor: true, color: "", src: null, acc: null, }>>
+    <</switch>>
 <<else>>
-    <<set $avatar.coat to null>>
+    <<set $avatar[_n] to null>>
 <</if>>
 
+<</for>>
 
-/* 上衣，连衣裙归这里 */
-<<if $Equip.top isnot null>>
-    
-    <<set _apath to "./image/avatar/6_top/">>
-    <<set _bpath to $Equip.top.index +"/"+$Equip.top.color>>
+/* 有胸部跟怀孕差分的上衣部分处理 */
+<<set _group to ["coat","top","undertop"]>>
 
-    /* 先看看胸部差分是否存在 */
-    <<set _apath to _apath + _bpath + "_" + breastsize()+ ".png">>
-    <<if ImgExist(_apath) is true>>
-        <<set $avatar.top to _bpath + "_" + breastsize()>>
+<<for _i to 0; _i lt _group.length; _i++>>
+<<set _n to _group[_i]>>
+
+<<if $Equip[_n] isnot null and $Equip[_n].imgenable is true>>
+    <<if $Equip[_n].fixcolor is true>>
+        <<set $avatar[_n] to {fixcolor:true, color: $Equip[_n].color, src: $Equip[_n].index + "/" + $Equip[_n].color, acc: null, tuckin:false}>>
     <<else>>
-        <<set $avatar.top to _bpath + "_1">>
+        <<set $avatar[_n] to {fixcolor:true, color: $Equip[_n].color, src: $Equip[_n].index + "/basic" , acc: null, tuckin:false}>>
     <</if>>
 
-    /* 然后查看怀孕差分 */
-    <<if $PC.stats.怀孕 is true or $PC.stats.肠内受孕 is true >>
-        <<set _apath to "./image/avatar/6_top/">>
-        <<set _apath to _apath + _bpath +"p.png">>
-        <<if ImgExist(_apath) is true>>
-            <<set $avatar.top to $avatar.top + "p">>
-        <</if>>
+    <<if $Equip[_n].tuckinable is true and $Equip[_n].tuckin is true>>
+        <<set $avatar[_n].tuckin to true>>
+    <</if>>
+    <<if $Equip[_n].acc isnot null>>
+        <<set $avatar[_n].acc to $Equip[_n].index + "/"+ $Equip[_n].acc >>
     <</if>>
 
-    /* 还没实装的情况 */
-    <<checkimg 6 "top" $avatar.top "Tshirt/white_1">>
-
-<<else>>
-    <<set $avatar.top to null>>
-<</if>>
-
-/* 手部装饰 */
-<<if $Equip.hand isnot null>>
-    <<set $avatar.hand to $Equip.hand.index +"/"+$Equip.hand.color>>
-
-    /* 还没实装的情况 */
-    <<checkimg 7 "hand" $avatar.hand>>
-
-<<else>>
-    <<set $avatar.hand to null>>
-<</if>>
-
-/* 裙子裤子都在这里，吊带工作裤也是 */
-<<if $Equip.bottom isnot null>>
-    <<set $avatar.bottom to $Equip.bottom.index + "/" + $Equip.bottom.color>>
-
-    /* 还没实装的情况 */
-    <<checkimg 8 "bottom" $avatar.bottom "shortpant/white">>
-
-<<else>>
-    <<set $avatar.bottom to null>>
-<</if>>
-
-/* 内衣或泳衣上身部位，连衣泳装和连衣内衣也在这里 */
-<<if $Equip.undertop isnot null>>
-    <<set _bpath to $Equip.undertop.index + "/" + $Equip.undertop.color>>
-
-    /* 查看胸部差分 */
-    <<set _apath to "./image/avatar/9_undertop">>
-    <<set _apath to _apath + _bpath + "_" + breastsize() + ".png">>
-    <<if ImgExist(_apath) is true>>
-        <<set $avatar.undertop to _bpath + "_" + breastsize()>>
-    <<else>>
-        <<set $avatar.undertop to _bpath + "_1">>
+    <<if $Equip[_n].dfpng.breast is true>>
+        <<set $avatar[_n].src to $avatar[_n].src + "_" + breastsize()>>
     <</if>>
 
-    /* 然后查看怀孕差分 */
-    <<if $PC.stats.怀孕 is true or $PC.stats.肠内受孕 is true >>
-        <<set _apath to "./image/avatar/9_undertop/">>
-        <<set _apath to _apath + $avatar.undertop + "p.png">>
-        <<if ImgExist(_apath) is true>>
-            <<set $avatar.undertop to $avatar.undertop + "p">>
-        <</if>>
+    <<if $Equip[_n].dfpng.pregnant is true>>
+        <<set $avatar[_n].src to $avatar[_n].src + isPregnant()>>
     <</if>>
 
-    /* 还没实装的情况 */
-    <<checkimg 9 "undertop" _bpath>>
-
+<<elseif $Equip[_n] isnot null and $Equip[_n].imagenable is false>>
+    <<switch _n>>
+        <<case "top">>
+            <<set $avatar.top to { fixcolor: true, color: "white", src: "Tshirt/white_" + breastsize() + isPregnant(), acc: "Tshirt/slime", tuckin:false }>>
+        <<default>>
+            <<set $avatar[_n] to { fixcolor: true, color: "", src: null, acc: null, }>>
+    <</switch>>
 <<else>>
-    <<set $avatar.undertop to null>>
+    <<set $avatar[_n] to null>>
 <</if>>
 
-/* 内衣或泳衣的下身部位 */
-<<if $Equip.underbottom isnot null>>
-    <<set $avatar.underbottom to $Equip.underbottom.index + "/" + $Equip.underbottom.color>>
-
-    /* 还没实装的情况 */
-    <<checkimg 10 "underbottom" $avatar.underbottom "boxer/white">>
-
-<<else>>
-    <<set $avatar.underbottom to null>>
-<</if>>
-
-/* 鞋子 */
-<<if $Equip.shoes isnot null>>
-    <<set $avatar.shoes to $Equip.shoes.index + "/" + $Equip.shoes.color>>
-    
-    /* 还没实装的情况 */
-    <<checkimg 11 "shoes" $avatar.shoes>>
-<<else>>
-    <<set $avatar.shoes to null>>
-<</if>>
-
-/* 袜子 */
-<<if $Equip.socks isnot null>>
-    <<set $avatar.socks to $Equip.socks.index + "/" + $Equip.socks.color>>
-    /* 还没实装的情况 */
-    <<checkimg 12 "socks" $avatar.socks>>
-<<else>>
-    <<set $avatar.socks to null>>
-<</if>>
+<</for>>
 
 /* 眉毛 */
 <<set $avatar.eyebrow to $PFace.eyebrow>>
 
 /* 发型前面 */
-<<set _apath to "./image/avatar/15_hairfront/">>
-<<set _bpath to _apath + $Equip.hairfront + "/" + $PC.发色 + "_1.png">>
-
-<<if ImgExist(_bpath)>>
-    <<set $avatar.hairfront to $Equip.hairfront + "/" + $PC.发色 + "_1">>
+<<if setup.hairfront[$Equip.hairfront].long is true>>
+    <<set $avatar.hairfront to $Equip.hairfront + "/" + isFixhair(setup.hairfront[$Equip.hairfront]) + "_" + hairlenth($PC.前发长)>>
 <<else>>
-    /* 缺乏颜色的情况变回白色或默认色 */
-    <<set $avatar.hairfront to $Equip.hairfront + "/white_1">>
-
-    /* 发型还没实装的情况 */
-    <<set _placeholder to "natural/"+$PC.发色+"_1">>  
-    <<checkimg 15 "hairfront" $avatar.hairfront _placeholder>>
+    <<set $avatar.hairfront to $Equip.hairfront + "/" + isFixhair(setup.hairfront[$Equip.hairfront]) + "_1">>
 <</if>>
 
-/* 前发暂时不会有长度变化，于是先封印
-<<set _apath to "./image/avatar/15_hairfront/">>
-<<set _bpath1 to _apath + $Equip.hairfront + "/" + $PC.发色 + "_" + hairlenth($PC.前发长) + ".png">>
-
-<<if hairlenth($PC.前发长) gt 3>>
-    <<set _bpath2 to _apath + $Equip.hairfront + "/" + $PC.发色 + "_" + (hairlenth($PC.前发长)-1) + ".png">>
-<</if>>
-
-<<set _bpath3 to _apath + $Equip.hairfront + "/" + $PC.发色 + "_2.png">>
-<<set _bpath4 to _apath + $Equip.hairfront + "/" + $PC.发色 + "_1.png">>
-
-<<if ImgExist(_bpath1)>>
-    <<set $avatar.hairfront to $Equip.hairfront + "/" + $PC.发色 + "_"+ hairlenth($PC.前发长)>>
-
-<<elseif hairlenth($PC.前发长) gt 3 and ImgExist(_bpath2)>>
-    <<set $avatar.hairfront to $Equip.hairfront + "/" + $PC.发色 + "_"+ (hairlenth($PC.前发长)-1)>>
-
-<<elseif ImgExist(_bpath3)>>
-    <<set $avatar.hairfront to $Equip.hairfront + "/" + $PC.发色 + "_2">>
-<<elseif ImgExist(_bpath4)>>
-    <<set $avatar.hairfront to $Equip.hairfront + "/" + $PC.发色 + "_1">>
+/* 发型后面 */
+<<if setup.hairback[$Equip.hairback].long is true>>
+    <<set $avatar.hairback to $Equip.hairback + "/" + isFixhair(setup.hairback[$Equip.hairback]) + "_" + hairlenth($PC.发长)>>
 <<else>>
-    <<set $avatar.hairfront to $Equip.hairfront + "/white_1">>
-    <<set _placeholder to "natural/"+$PC.发色+"_1">>
-    <<checkimg 15 "hairfront" $avatar.hairfront _placeholder>>
+    <<set $avatar.hairback to $Equip.hairback + "/" + isFixhair(setup.hairback[$Equip.hairback]) + "_1">>
 <</if>>
-*/
+
+/* 兽耳、兽角、兽尾 */
+/*
+<<if $PC.trait.兽耳 is true>>
+    <<set $avatar.kemofront.mimi to {
+        src= type/ + basic or color, color:=haircolor, fixcolor:true or false }>>
+<</if>>
+
+<<if $PC.trait.兽角 is true>>
+    <<set $avatar.kemofront.horn to type >>
+<</if>>
+
+<<if $PC.trait.翅膀 is true>>
+    <<set $avatar.kemoback.wing  to {
+        src= type/ + basic or color, color:=haircolor, fixcolor:true or false }>>
+<</if>>
+
+<<if $PC.trait.兽尾 is true>>
+    <<set $avatar.kemoback.tail  to {
+        src= type/ + basic or color, color:=haircolor, fixcolor:true or false }>>
+<</if>>
+ */
 
 /* 眼睛 */
-<<set _apath to "./image/avatar/16_eyes/">>
-<<set _bpath to _apath + $PC.瞳色 +"/full.png">>
-
-<<if ImgExist(_bpath)>>
-    <<set $avatar.eyes to $PC.瞳色 + "/" + $PFace.eyes>>
-<<else>>
-    <<set $avatar.eyes to "aqua/" + $PFace.eyes>>
+<<set $avatar.eyes to $PC.瞳色 + "/" + $PFace.eyes>>
+<<if $PFace.eyes is "full" and $PFace.name is "正常">>
+    <<set $avatar.eyes to $avatar.eyes + "_idle">>
 <</if>>
 
 /* 嘴巴 */
@@ -263,7 +167,7 @@
 
 /* 淫纹 */
 <<if $PSkin.腹部 isnot null>>
-    <<set _apath to "./image/avatar/18_body/"+$PSkin.腹部.index+".png">>
+    <<set _apath to "./image/avatar/19_body/"+$PSkin.腹部.index+".png">>
     
     <<if ImgExist(_apath)>>
         <<set $avatar.tatoos to $PSkin.腹部.index>>
@@ -275,11 +179,8 @@
 <</if>>
 
 /* 素体 */
-<<if $PC.stats.怀孕 is true or $PC.stats.肠内受孕 is true >>
-    <<set $avatar.body to $PC.肤色 +"/body_"+ breastsize()+"p">>
-<<else>>
-    <<set $avatar.body to $PC.肤色 +"/body_"+ breastsize()>>
-<</if>>
+<<set $avatar.body to $PC.肤色 +"/body_"+ breastsize() + isPregnant()>>
+
 
 /* JJ */
 <<if $PC.genital.阴茎 gt 3 and $PFlag.bottoms lte 1>>
@@ -289,47 +190,13 @@
 <</if>>
 
 
-/* 头发后面 */
-<<set _apath to "./image/avatar/19_hairback/">>
-<<set _bpath1 to _apath + $Equip.hairback + "/" + $PC.发色 + "_" + hairlenth($PC.发长) + ".png">>
-<<if hairlenth($PC.发长) gt 3>>
-    <<set _bpath2 to _apath + $Equip.hairback + "/" + $PC.发色 + "_" + (hairlenth($PC.发长)-1) + ".png">>
-<</if>>
-<<set _bpath3 to _apath + $Equip.hairback + "/" + $PC.发色 + "_2.png">>
-<<set _bpath4 to _apath + $Equip.hairback + "/" + $PC.发色 + "_1.png">>
-
-<<if ImgExist(_bpath1)>>
-    <<set $avatar.hairback to $Equip.hairback + "/" + $PC.发色 + "_"+hairlenth($PC.发长)>>
-
-<<elseif hairlenth($PC.发长) gt 3 and ImgExist(_bpath2)>>
-    <<set $avatar.hairback to $Equip.hairback + "/" + $PC.发色 + "_"+(hairlenth($PC.发长)-1)>>
-
-<<elseif ImgExist(_bpath3)>>
-    <<set $avatar.hairback to $Equip.hairback + "/" + $PC.发色 + "_2">>
-<<elseif ImgExist(_bpath4)>>
-    <<set $avatar.hairback to $Equip.hairback + "/" + $PC.发色 + "_1">>
-<<else>>
-    <<set $avatar.hairback to $Equip.hairback + "/white_1">>
-    <<set _placeholder to "straight/"+$PC.发色+"_"+hairlenth($PC.发长)>>
-        /* 还没实装的情况 */
-    <<checkimg 19 "hairback" $avatar.hairback _placeholder>>
-<</if>>
-
-
-
-/* 背后装饰 */
-<<if $Equip.back isnot null>>
-    <<set $avatar.back to $Equip.back>>
-    <<set _apath to $Equip.back>>
-    <<checkimg 20 "back" $Equip.back "dummy">>
-<</if>>
-
 /* 背景 */
 <<set $avatar.background to imglocation()>>
 <<if $avatar.background is "dummy">>
     <<set $avatar.background to null>>
 <</if>>
 
+<</silently>>
 
 <</widget>>
 

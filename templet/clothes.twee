@@ -1,23 +1,75 @@
 :: dummy
 
 <<set sample to {
-    indexname : {
-        id : 0,
-        cost : 0,
-        reveal : 0,
-        durable : 0,
-        maxdurable : 0,
-        warm : 0,
-        color : "colorname",
+    {
+        id: 0,
+        index : "indexname",    name : "名称",     gender : "n",/* 服装的性别倾向，n=无/中性, f=女性 m=男性 */
+        text : "说明",   
+        tag  : [], /* 物品的属性 */
+        dfpng  : {breast:false, pregnant:false}, /* 差分支持情况 */
+
+        cost : 0,        reveal : 0,        hot : 0, cold : 0, 
+        durable : 0,        maxdurable : 0,     beauty: 0, /* 魅力加成 */
+        fixcolor: false;    color: null,    /* fixcolor=颜色固定无法用canvas更改，color=物品目前所显示的颜色 */
+        colors : null,
+        
+        category: null, layer : "top", /* 在商店里的分类和图层 */
+        shop : null,    /* 什么店能买。all=所有，offlineshop=实体店限定, onlineshop=网购限定, 特定店直接写店名 */
+        
+        slot : "tops", /* tops=只占上身位置，bottoms=只占下身位置，onepiece=全身装 */
+        tuckinable: false,        tuckin : false, /* 是否能塞进下身衣服里 */
+        acc : null,     /* 物品所显示的花纹图案 */
+        patterns: []    /* 图案文件名列表 */
+    },
+    /*上衣外套模板 */
+     {
+        id: 0,
+        index : "indexname",    name : "名称",     gender : "n",
+        text : "说明",   
+        tag  : [], 
+        dfpng  : {breast:false, pregnant:false},
+
+        cost : 0,       reveal : 0,         hot : 0, cold : 0,
+        durable : 0,    maxdurable : 0,     beauty: 0,
+        fixcolor: false;    color:null,  colorname: null,
         colors : [],
-        name : "itemname",
-        text : "description",
-        tag  : [],
-        gender : "f",
-        shop : "all/offline/online/unique",
-        index : "indexname",
-        layer : "layername",
-        category : "category",
-        slot : "layername",
+        
+        category: "category",     layer : "top",      slot : "tops",
+        shop : "all", 
+
+        tuckinable: false,        tuckin : false,
+        acc : null,
+        patterns: [],
+    },
+    /* 其他模板 */
+    {
+        id: 0,
+        index : "indexname",    name : "名称",     gender : "n",
+        text : "说明",   
+        tag  : [], 
+
+        cost : 0,       reveal : 0,         hot : 0, cold : 0,
+        durable : 0,    maxdurable : 0,     beauty: 0,
+        fixcolor: false;    color:null,  colorname: null,
+        colors : [],
+        
+        category: "category",     layer : "top",      slot : "tops",
+        shop : "all", 
+
+        acc : null,
+        patterns: [],
+    },
+}>>
+
+上身的裸露范围  10=完全不露  9=手臂范围可见 8=手臂到肩膀范围可见 7=手臂到上半胸可见 6=只有下腹可见 5=手臂+下腹可见 4=手臂到肩膀+下腹 3=手臂到上半胸+下腹 2=只有敏感部位有遮掩 1=半透明装 0=全裸
+下身的裸露范围  5=完全不露  4=到膝盖  3=到大腿  2=三角区  1=半透明/暴露装/接近全裸  0=全裸
+
+warm/cold 适应温度值  0=无适应值变化，以人体全裸舒适温度20~30℃来计算。每度变化 +/- 1
+
+<<set sample to {
+    id :{
+        id : 0,     name : "道具名",    category : "物品种类",
+        price: 0,
+        value:0,    effect:["base","food","+"],
     }
 }>>

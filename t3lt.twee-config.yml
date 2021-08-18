@@ -247,3 +247,15 @@ sugarcube-2:
       name: passtime
     petstype:
       name: petstype
+    SetupLanguage:
+      name: SetupLanguage
+    InitClothUndertops:
+      name: InitClothUndertops
+    InitClothCoat:
+      name: InitClothCoat
+    InitClothAccesory:
+      name: InitClothAccesory
+    InitFrontHairStyle:
+      name: InitFrontHairStyle
+    InitBackHairStyle:
+      name: InitBackHairStyle

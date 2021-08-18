@@ -54,6 +54,35 @@ input[type="text"]:hover {
   display: block;
 }
 
+
+.metername { 
+  width:40px; 
+  height:18px; 
+  font-size: 14px;
+  font-family:微软雅黑;
+  float:left;
+  z-index:1;
+}   
+
+
+.metercon {
+  z-index:1;
+  width:120px;
+  height: 6px;
+  margin-top: 8px;
+  background-color: #ddd;
+  border:1px solid #ccc;
+  float: left;
+}
+
+.bar {
+  z-index:2;
+  max-width: 120px;
+  min-width: 0px;
+  height:6px;
+  background-color: #ccc;
+}
+
 hr {
     border-color: rgb(88, 94, 43);
 }
@@ -139,7 +168,4 @@ hr {
   padding: 3px;
   margin: 5px;
 }
-
-  
-  
 

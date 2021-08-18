@@ -156,7 +156,7 @@
             <<set $PC.种族 to "人类">>
             <<set $PC.特长 to "自然科学">>
             <<set $PC.态度 to 4>>
-            <<set $PC.胸部 to 2>>
+            <<set $PC.胸部 to 1>>
             <<set $PC.臀部 to 1>>
             <<set $PC.体型 to 1>>
             <<set $PC.发长 to 100>>
@@ -178,7 +178,7 @@
             <<set $PC.种族 to "人类">>
             <<set $PC.特长 to "物理科学">>
             <<set $PC.态度 to 2>>
-            <<set $PC.胸部 to 1>>
+            <<set $PC.胸部 to 0>>
             <<set $PC.臀部 to 1>>
             <<set $PC.体型 to 2>>
             <<set $PC.发长 to 150>>
@@ -243,7 +243,7 @@
             <<set $PC.种族 to "兽族">>
             <<set $PC.特长 to "运动格斗">>
             <<set $PC.态度 to 1>>
-            <<set $PC.胸部 to 1>>
+            <<set $PC.胸部 to 0>>
             <<set $PC.臀部 to 1>>
             <<set $PC.体型 to 1>>
             <<set $PC.发长 to 120>>
@@ -258,7 +258,7 @@
                 "子宫" : null
             }>>
 
-            <<set $starttrait to "兽角">>
+            <<set $starttrait to "菜鸟">>
             <<set $PC.兽型 to "鹿">>
 
         <<case "若秋">>
@@ -612,23 +612,12 @@
     <</if>>
     <<switch $PC.性别>>
         <<case "少女">>
-            <<set $PC.eskl.屌技 to null>>
             <<set $PC.produce.精液 to [0,0]>>
             <<set $PC.genital.阴茎 to null>>
-            <<set $PC.vaginity.童贞 to null>>
-
         <<case "扶她">>
 
         <<case "少年" "伪娘">>
-            <<set $PC.base.快V to null>>
-            <<set $PC.sens.v to null>>
-            <<set $PC.ste.vagina to null>>
-            <<set $PC.eskl.膣技 to null>>
             <<set $PC.genital.子宫 to null>>
-            <<set $PC.vaginity.处女 to null>>
-            <<if $PC.性别 isnot "伪娘">>
-                <<set $PC.exp.A怀孕 to null>>
-            <</if>>
     <</switch>>
 
     <<if $PC.genital.阴茎 isnot null>>

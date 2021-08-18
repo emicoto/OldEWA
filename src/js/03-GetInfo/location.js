@@ -5,6 +5,8 @@
         return "singleapartment"
       case "怡安小区":
         return "neiborhood"
+      case "试衣间" :
+        return "tryon"
       default:
         return "dummy"
     }

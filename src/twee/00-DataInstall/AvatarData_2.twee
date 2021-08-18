@@ -1,0 +1,155 @@
+﻿:: AvatarData 2 [widget]
+
+<<widget "InitClothAccesory">>
+
+    <<set setup.avatar.neck to [
+        {
+            id: 0,
+            index : "naked",    name : "裸",     gender : "n",
+            text : "无",   
+            tag  : ["裸露"],
+            imgenable : false,
+
+            cost : 0,   reveal : 0,    hot : 0,     cold : 0,
+            durable : 0,     maxdurable : 0,     beauty: 0,
+            fixcolor: true,    color:null,  colorname: null,
+            colors : [],
+            
+            category: "围巾/项链", layer : "neck",
+            shop : null, 
+        },
+    ]>>
+
+    <<set setup.avatar.hat to [
+        {
+            id: 0,
+            index : "naked",    name : "裸",     gender : "n",
+            text : "无",   
+            tag  : ["裸露"],
+            imgenable : false,
+
+            cost : 0,   reveal : 0,    hot : 0,     cold : 0,
+            durable : 0,     maxdurable : 0,     beauty: 0,
+            fixcolor: true,    color:null,  colorname: null,
+            colors : [],
+            
+            category: "帽子/头饰", layer : "hat",
+            shop : null,
+            acc : null,
+            patterns: []
+        },
+    ]>>
+
+    <<set setup.avatar.face to [
+        {
+            id: 0,
+            index : "naked",    name : "裸",     gender : "n",
+            text : "无",   
+            tag  : ["裸露"],
+            imgenable : false,
+
+            cost : 0,   reveal : 0,    hot : 0,     cold : 0,
+            durable : 0,     maxdurable : 0,     beauty: 0,
+            fixcolor: true,    color:null,  colorname: null,
+            colors : [],
+            
+            category: "眼镜/面具", layer : "face",
+            shop : null, 
+        },
+    ]>>
+
+    <<set setup.avatar.hand to [
+        {
+            id : 0,
+            index : "naked",    name : "裸",     gender : "n",
+            text : "无",   
+            tag  : ["裸露"],
+            imgenable : false,
+
+            cost : 0,   reveal : 0,    hot : 0,     cold : 0,
+            durable : 0,     maxdurable : 0,     beauty: 0,
+            fixcolor: true,    color:null,  colorname: null,
+            colors : [],
+            
+            category: "手饰/手套", layer : "hand",
+            shop : null, 
+        },
+    ]>>
+
+<</widget>>
+
+<<widget "InitClothCoat">>
+
+    <<set setup.avatar.coat to [
+        {
+            id: 0,
+            index : "naked",    name : "裸",     gender : "n",
+            text : "无",   
+            tag  : ["裸露"],
+            dfpng  : {breast:false, pregnant:false},
+            imgenable : false,
+
+            cost : 0,        reveal : 0,        hot : 0, cold : 0,
+            durable : 0,     maxdurable : 0,     beauty: 0,
+            fixcolor: true,    color:null,  colorname: null,
+            colors : [],
+            
+            category: "外套", layer : "coat",
+            shop : null, 
+            
+            slot : "tops", 
+            tuckinable: false,        tuckin : false, 
+            acc : null,
+            patterns: []
+        },
+    ]>>
+
+<</widget>>
+
+<<widget "InitClothUndertops">>
+
+    <<set setup.avatar.undertop to [
+        {
+            id: 0,
+            index : "naked",    name : "裸",     gender : "n",
+            text : "无",   
+            tag  : ["裸露"],
+            dfpng  : {breast:false, pregnant:false},
+            imgenable : false,
+
+            cost : 0,        reveal : 0,        hot : 0, cold : 0,
+            durable : 0,     maxdurable : 0,     beauty: 0,
+            fixcolor: true,    color:null,  colorname: null,
+            colors : [],
+            
+            category: "内衣", layer : "undertop",
+            shop : null, 
+            
+            slot : "tops",
+            tuckinable: false,        tuckin : false, 
+            acc : null,
+            patterns: []
+        },
+    ]>>
+<</widget>>
+
+<<widget "InitFrontHairStyle">>
+    <<set setup.fronthairlist to ["natural","himecut"]>>
+    <<set setup.hairfront to {
+        natural: {
+            id:0, index:"natural", long: false, fixcolor: true,
+        },
+        himecut : {
+            id:1, index:"himecut", long: false, fixcolor: true,
+        },
+    }>>
+<</widget>>
+
+<<widget "InitBackHairStyle">>
+    <<set setup.fronthairlist to ["straight"]>>
+    <<set setup.hairback to {
+        straight: {
+            id:0, index:"straight", long: true, fixcolor: true,
+        },
+    }>>
+<</widget>>
