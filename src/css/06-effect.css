@@ -392,13 +392,24 @@
   padding: 20px;
 }
 
+.wselectarea {
+  max-width: 800px;
+  width: 100%;
+  display:block;
+  text-align: center;
+  align-content: center;
+  align-items: center;
+  margin: auto;
+}
+
 .weirdtext {
-  display: block;
+  width: 150px;
+  display: inline-block;
   line-height: 40px;
 	letter-spacing: 2px;
   text-align: center;
-  margin: auto;
   padding: 20px;
+  position: relative;
 }
 
 .weirdtext a {
@@ -410,10 +421,19 @@
 	-webkit-animation: mix 4s linear infinite;
 }
 
+.weirdtext:hover ::before {
+  content: "- ";
+}
+.weirdtext:hover ::after {
+  content: " -";
+}
+
 .weirdtext a:hover{
-  color: #aaa;
+  color: #666;
   animation: none;
 	-webkit-animation: none;
+  text-shadow:0 0 2px #666;
+  border: none;
 }
 /*all spans have to be block or inline block to transform*/
 #weirdtext span{
@@ -433,12 +453,12 @@
 	-webkit-animation: zoom 6s linear infinite;
 }
 .weffect2{
-	animation: bounce 3s linear infinite;
-	-webkit-animation: bounce 3s linear infinite;
+	animation: mix 5s linear infinite;
+	-webkit-animation: mix 5s linear infinite;
 }
 .weffect3{
-	animation: squash 2s linear infinite;
-	-webkit-animation: squash 2s linear infinite;	
+	animation: mix2 3s linear infinite;
+	-webkit-animation: mix2 3s linear infinite;	
 }
 .weffect4{
 	animation: rot 5s linear infinite;
@@ -455,24 +475,24 @@
 @keyframes zoom{
 	0%{transform: scale(1);
     color:rgba(0,0,0,0);
-    text-shadow:0 0 1px #444;}
-	50%{transform: scale(1.2);
+    text-shadow:0 0 0px #444;}
+	50%{transform: scale(1.1);
     color:rgba(0,0,0,0);
-    text-shadow:0 0 2px #444;}
+    text-shadow:0 0 1px #444;}
 	100%{transform: scale(1);
     color:rgba(0,0,0,0);
-    text-shadow:0 0 1px #444;}
+    text-shadow:0 0 0px #444;}
 }
 @-webkit-keyframes zoom{
 	0%{-webkit-transform: scale(1);
     color:rgba(0,0,0,0);
-    text-shadow:0 0 1px #444;}
-	50%{-webkit-transform: scale(1.2);
+    text-shadow:0 0 0px #444;}
+	50%{-webkit-transform: scale(1.1);
     color:rgba(0,0,0,0);
-    text-shadow:0 0 2px #444;}
+    text-shadow:0 0 1px #444;}
 	100%{-webkit-transform: scale(1);
     color:rgba(0,0,0,0);
-    text-shadow:0 0 1px #444;}
+    text-shadow:0 0 0px #444;}
 }
 
 @keyframes bounce{
@@ -500,10 +520,10 @@
 @keyframes rot{
 	0%{transform: rotate(9deg);
     color:rgba(0,0,0,0);
-    text-shadow:0 0 2px #444;}
+    text-shadow:0 0 1px #444;}
 	50%{transform: rotate(-9deg);
     color:rgba(0,0,0,0);
-    text-shadow:0 0 1px #444;}
+    text-shadow:0 0 0px #444;}
 	100%{transform: rotate(9deg);
     color:rgba(0,0,0,0);
     text-shadow:0 0 2px #444;}
@@ -511,10 +531,10 @@
 @-webkit-keyframes rot{
 	0%{-webkit-transform: rotate(9deg);
     color:rgba(0,0,0,0);
-    text-shadow:0 0 2px #444;}
+    text-shadow:0 0 1px #444;}
 	50%{-webkit-transform: rotate(-9deg);
     color:rgba(0,0,0,0);
-    text-shadow:0 0 1px #444;
+    text-shadow:0 0 0px #444;
   }
 	100%{-webkit-transform: rotate(9deg);
     color:rgba(0,0,0,0);
@@ -569,21 +589,21 @@
 		opacity: .7;
     color:rgba(0,0,0,0);
     text-shadow:0 0 2px #444;
-    transform: rotate(2deg);
+    transform: rotate(3deg);
 	}
 	50%{
 		transform: scale(1);
 		opacity: 1;
     color:rgba(0,0,0,0);
     text-shadow:0 0 1px #444;
-    transform: rotate(-2deg);
+    transform: rotate(-3deg);
 	}
 	100%{
 		transform: scale(.9);
 		opacity: .7;
     color:rgba(0,0,0,0);
     text-shadow:0 0 4px #444;
-    transform: rotate(2deg);
+    transform: rotate(3deg);
 	}
 }
 
@@ -593,21 +613,69 @@
 		opacity: .7;
     color:rgba(0,0,0,0);
     text-shadow:0 0 2px #444;
-    -webkit-transform: rotate(2deg);
+    -webkit-transform: rotate(3deg);
 	}
 	50%{
 		-webkit-transform: scale(1);
 		opacity: 1;
     color:rgba(0,0,0,0);
     text-shadow:0 0 1px #444;
-    -webkit-transform: rotate(-2deg);
+    -webkit-transform: rotate(-3deg);
 	}
 	100%{
 		-webkit-transform: scale(.9);
 		opacity: .7;
     color:rgba(0,0,0,0);
     text-shadow:0 0 4px #444;
-    -webkit-transform: rotate(2deg);
+    -webkit-transform: rotate(3deg);
+	}
+}
+
+@keyframes mix2 {
+  0%{
+		transform: scale(.9);
+		opacity: .6;
+    color:rgba(0,0,0,0);
+    text-shadow:0 0 1px #444;
+    transform: rotate(6deg);
+	}
+	50%{
+		transform: scale(1);
+		opacity: 1;
+    color:rgba(0,0,0,0);
+    text-shadow:0 0 3px #444;
+    transform: rotate(-6deg);
+	}
+	100%{
+		transform: scale(.9);
+		opacity: .6;
+    color:rgba(0,0,0,0);
+    text-shadow:0 0 2px #444;
+    transform: rotate(6deg);
+	}
+}
+
+@-webkit-keyframes mix2 {
+  0%{
+		-webkit-transform: scale(.9);
+		opacity: .6;
+    color:rgba(0,0,0,0);
+    text-shadow:0 0 1px #444;
+    -webkit-transform: rotate(6deg);
+	}
+	50%{
+		-webkit-transform: scale(1);
+		opacity: 1;
+    color:rgba(0,0,0,0);
+    text-shadow:0 0 3px #444;
+    -webkit-transform: rotate(-6deg);
+	}
+	100%{
+		-webkit-transform: scale(.9);
+		opacity: .6;
+    color:rgba(0,0,0,0);
+    text-shadow:0 0 1px #444;
+    -webkit-transform: rotate(6deg);
 	}
 }
 /* 云里雾里奇妙特效结束 */

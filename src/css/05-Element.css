@@ -1,8 +1,18 @@
 ﻿#startpage input {
     max-width: 100px;
     max-height: 20px;
-    font-size: 14px;
-  }
+    font-size: 15px;
+}
+
+#startpage {
+    line-height: auto;
+}
+
+.intro {
+    font-family: 筑紫古典;
+    font-size: 18px;
+    text-shadow: 0 0 3px rgb(237, 240, 222)
+}
 
 #StartingPageMenu {
     width:100%;
@@ -10,7 +20,7 @@
 
 #StartingPageMenu button {
     width:150px;
-    font-size: 14px;
+    font-size: 16px;
     letter-spacing:2px;
     margin: 4px;
     background-color: rgba(250, 250, 250);
@@ -26,14 +36,15 @@
 }
 
 #StartingPage li {
-    font-size: 14px;
+    font-size: 15px;
     line-height: 24px;
     list-style: "∵ ";
 }
 
 #StartingPage select {
-    font-size: 12px;
-    width: 80px;
+    font-size: 14px;
+    width: 100px;
+    height: 30px;
     color: olive;
 }
 
@@ -48,18 +59,42 @@
 }
 
 #charamaking {
-    font-size: 14px;
+    font-size: 15px;
+    font-family: 筑紫黑体;
 }
 
 #charamaking li {
-    font-size: 14px;
+    font-size: 15px;
     list-style: "・";
-    font-weight: 600;
     color:olive;
+    font-family: 新综艺B;
+}
+
+#GameSetting {
+    font-size: 14px;
+    letter-spacing: 2px;
+    line-height: 24px;
+}
+
+#GameSetting a {
+    font-size: 14px;
+    font-family: Georgia, 新综艺B;
 }
 
 .description {
     margin-left: 10px;
     font-size: 14px;
     color:gray;
+}
+
+#fonttest {
+    font-size:13px;
+    font-family: 轻吟体;
+    font-weight: 500;
+    letter-spacing: 2px;
+}
+
+.gray {
+    text-shadow: 1px 1px 0px rgba(187, 187, 187, 0.5),-2px -2px 0px #eee,;
+    color:#ccc;
 }

@@ -1,7 +1,9 @@
 /* Links */
 a, a.internalLink, a.externalLink {
     color: rgb(151, 136, 0);
-    font-weight: 600;
+    font-family: 珍珠体;
+    font-size: 16px;
+    letter-spacing: 2px;
 }
 
 a:hover, a.internalLink:hover, a.externalLink:hover {
@@ -16,12 +18,18 @@ span.link-disabled {
   
 button {
 	color: #111;
+  font-family: 新综艺;
+}
+
+li {
+  font-family: 筑紫黑体;
 }
 
 input, select, textarea {
     color: #111;
     border-color: #ccc;
     max-width:200px;
+    font-family:正保黑体L ;
 }
 
 input:not(:disabled):focus, select:not(:disabled):focus, textarea:not(:disabled):focus,
@@ -59,9 +67,9 @@ input[type="text"]:hover {
   width:40px; 
   height:18px; 
   font-size: 14px;
-  font-family:微软雅黑;
   float:left;
   z-index:1;
+  font-family: 新综艺;
 }   
 
 
@@ -152,7 +160,7 @@ hr {
   letter-spacing: 2px;
   padding: 0px 6px 4px 16px;
   margin: 2px;
-  font-family: 稚艺简体;
+  font-family: 新综艺;
 }
 
 .tolink a:hover {

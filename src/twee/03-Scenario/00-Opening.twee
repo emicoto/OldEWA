@@ -1,4 +1,4 @@
-﻿:: Opening CN [eventfirst]
+﻿:: Opening [eventfirst]
 
 <<if $count is undefined>>
     <<set $count to 0>>
@@ -7,10 +7,15 @@
 
 <div id="weirdtext"><<Opening $count>></div>
 
-<div class="weirdtext">
+
+/* 选项区 */
+<div class="wselectarea">
+
 <<if $count is 0>>
- <<link "睁开眼睛" $passage>><<set $count to 1>><</link>>　　　 <<link "回忆梦境" $passage>><<set $count to 2>><</link>>
+ <div class="weirdtext"><<link "睁开眼睛" $passage>><<set $count to 1>><</link>></div>
+ <div  class="weirdtext"><<link "回忆梦境" $passage>><<set $count to 2>><</link>></div>
 <</if>>
+
 </div>
 <br>
 
@@ -54,12 +59,12 @@ function setup(){
 <</script>>
 <</silently>>
 
-:: Opening [widget]
+:: Opening branch [widget]
 
 <<widget "Opening">>
 
 <<switch $args[0]>>
-<<case 0>><<you>>知道自己已经醒过来了，却依然感觉混混沌沌，仿佛还在迷雾之中。<<you>>似乎做了一个梦，很长、很长的梦，感觉有一辈子那么久远。但是，<<you>>却想不起来梦中的内容了，只是意识还在混沌中，不知现今何时何地。
+<<case 0>><<you>>知道自己已经醒过来了，却依然感觉混混沌沌，仿佛还在迷雾之中。<<you>>似乎做了一个梦，很长、很长的梦，感觉有一辈子那么久远。但<<you>>的意识还在混沌钟，一时半会想不起梦境内容，甚至忘记现今何时，身处何方。
 
 <<case 1>><<you>>试着睁开眼睛，但是无力睁开。<<set $count to 3>>
 

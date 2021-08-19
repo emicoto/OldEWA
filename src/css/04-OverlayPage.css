@@ -97,7 +97,7 @@
 #overlaytitle {
     width: 98%;
     height: 50px;
-    font-size: 20px;
+    font-size: 24px;
     font-style: border;
     position: absolute;
     top:5px;
@@ -107,10 +107,20 @@
 }
   
 #overlaytitle li {
-    list-style: "※　";
+    list-style:none;
     list-style-position: inside;
+    font-family: 筑紫古典;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-left: 10px;
+    color: rgb(151, 141, 1);
 }
-
+#overlaytitle li::before {
+    content: "♢";
+}
+#overlaytitle li::after {
+    content: "♢";
+}
 #overlaytitle button{
     float: right;
     top:5px;
@@ -125,7 +135,7 @@
 }
 
 #customOverlay {
-    font-family: 'Times New Roman', 微软雅黑;
+    font-family: 'Times New Roman', 轻吟体;
 }
 
 #customOverlay button {
@@ -161,17 +171,52 @@
     float: left;
 }
 
+#profile a{
+    font-size: 14px;
+    line-height: 20px;
+}
+
+#profile li {
+    list-style: none;
+    font-family:珍珠体 ;
+    margin-left: -3px;
+    font-weight: 600;
+    color: rgb(165, 154, 0);
+    letter-spacing: 5px;
+}
+
+#profile li::before {
+    content: "♢";
+}
+
+#profile li::after {
+    content: "♢";
+}
+
 #profile .dashline {
     margin-top: 5px;
-    margin-bottom: 5px;
+    margin-bottom: 8px;
+    border-bottom: 1px solid #ddd;
 }
 
 #profile .metername{
     margin-left: 10px;
 }
 
+.selfinfo {
+    margin-left: 15px;
+    font-size: 13px;
+    color: rgb(152, 153, 85);
+}
+
+.photoinfo {
+    width: 95%;
+    margin-left: 15px;
+    line-height:20px;
+}
+
 #sensationbar .metername{
-    font-family: Georgia, Verdana, 微软雅黑;
+    font-family: Georgia, Verdana, 轻吟体;
 }
 
 #sensationbar .metercon {
@@ -222,13 +267,11 @@
     text-align: center;
     z-index: 0;
     font-size: 12px;
-    font-family: 'Times New Roman', 微软雅黑;
     margin-top: 5px;
 }
 
 .metername {
     font-size: 12px;
-    font-family: 'Times New Roman', 微软雅黑;
 }
 
 #skilldata .skillrank {
@@ -238,7 +281,6 @@
     z-index: 0;
     margin-right: 20px;
     font-size: 11px;
-    font-family: 'Times New Roman', 微软雅黑;
     margin-top: 5px;
 }
 
@@ -253,7 +295,7 @@
 .listblock {
     height: 20px;
     font-size: 12px;
-    font-family: 'Times New Roman', 微软雅黑;
+
     float: left;
     align-content: left;
     border-right: 1px dashed #ccc;
@@ -275,7 +317,8 @@
 }
 
 #rpgstatus {
-    margin-left: 5px;
+    margin-left: 10px;
     font-size: 12px;
-    font-family: 微软雅黑;
+    font-family:新综艺;
+    width: 90%;
 }

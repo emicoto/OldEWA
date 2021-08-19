@@ -10,7 +10,7 @@
 }
 
 #ui-bar button {
-    font-family: 'Times New Roman', 微软雅黑;
+    font-family: "Times New Roman", 筑紫黑体;
     font-size: 15px;
     letter-spacing: 4px;
     max-width: 245px;
@@ -248,8 +248,7 @@ body #story-caption #storyCaptionDiv {
 #notice {
     width: 100%;
     height:fit-content;
-    font-size: 12px;
-    font-family: 'Times New Roman', 微软雅黑;
+    font-size: 13px;
     color:#8b8b7e;
     padding: 5px;
 }

@@ -1,7 +1,7 @@
 ﻿:: 快速开始 [widget]
 <<widget "QuickStart">>
 
-<div style="margin-left:16px">∵ <<lang "预设人物卡" "Preset">>：
+<div style="margin-left:16px;font-size:14px">∵ <<lang "预设人物卡" "Preset">>：
 <select id="preset" name="preset" onchange="V.preset = this.value; showcharainfo()">
 	<option value="魔女" selected>魔女</option>
 	<option value="羽轩">羽轩</option>
@@ -13,7 +13,7 @@
 </select>
 </div>
 
-<div id="charainfo" style="margin-left:30px;font-size:15px;color:gray;"><<charainfo>></div><br>
+<div id="charainfo" style="margin-left:30px;font-size:16px;color:gray;font-family:筑紫A圆"><<charainfo>></div><br>
 
 
 <</widget>>

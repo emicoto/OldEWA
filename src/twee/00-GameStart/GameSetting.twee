@@ -1,5 +1,6 @@
 ﻿:: 游戏设定 [widget]
 <<widget "GameSetting">>
+<div id="GameSetting">
 　<<lang "游戏视角" "Persons">>： <label><<radiobutton "$persons" 1 autocheck>> <<lang "第一人称" "First: I">></label>　|　<label><<radiobutton "$persons" 2 autocheck>><<lang "第二人称" "Second: You">></label>　|　<label><<radiobutton "$persons" 3 autocheck>><<lang "第三人称(默认)" "Third: Call Name(defalt)">></label>
 <<lang " " "※Not full support on English">><br>
 
@@ -11,5 +12,6 @@
 
 　<<lang "使用语言" "Language">>： <label><<radiobutton "$lang" "EN" autocheck>> English</label>　|　<label><<radiobutton "$lang" "CN" autocheck>> 中文</label><br>
 
-　<<link "＞ 改变语言/Comfirm Language" "Start">><</link>>
+　<<link "> 改变语言/Comfirm Language" "Start">><</link>>
+</div>
 <</widget>>
