@@ -82,6 +82,7 @@ $(document).on(':passagerender', function (ev) {
 <<you>>准备好了吗？<br>
 故事要开始哦哦！<br>
 
+<<set $next to "Opening "+$lang>>
 
-[[开始|你的家]]<br>
+<<link "开始" $next>> <</link>><br>
 [[回到开头|Start]]<br>

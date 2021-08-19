@@ -1,0 +1,145 @@
+﻿:: 试衣间
+<span class="title">服装店</span><br>
+<div class="lbox">
+商场里的服装店。商品琳琅满目，什么都有。<br>
+</div>
+
+<<EnterTryRoom>>
+
+<div id="show_container">
+
+    <div class="followleft">
+        <div id="showcase">
+            <<ShowCase "top" 1 null "slime">>
+        </div>
+    </div>
+
+    <div class="followright">
+    <div id="item_info">
+        <div id="description">
+        一件简单的T恤。 并不能给你太多保护，但总比没有好。<br>
+        </div>
+        <div id="warmth">适应温度：18C～27C</div>
+
+        <div id="outfit_trait">
+            <div class="of_title">属性：</div>
+            <div class="of_traitlist">
+                <li>日常 - 适合平时穿戴</li>
+            </div>
+        </div>
+
+    </div>
+    
+    <div id="option_containter">
+        可选图案：<br>
+        <div id="pattern_option">
+            slime  heart  pattern1  patern2  pattern3  pattern4  pattern5  pattern6  pattern7 pattern8
+        </div>
+
+        可选颜色：<br>
+        <div id="color_plate">          
+            <div class="color_plate" style="background-color:#56545A;"><<button 黑>><</button>></div>
+            <div class="color_plate" style="background-color:#FFFFFF;"><<button 白>><</button>></div>
+            <div class="color_plate" style="background-color:#4089F9;"><<button 蓝>><</button>></div>
+            <div class="color_plate" style="background-color:#5DD9FA;"><<button 青>><</button>></div>
+            <div class="color_plate" style="background-color:#FB83C4;"><<button 粉>><</button>></div>
+            <div class="color_plate" style="background-color:#B36CF6;"><<button 紫>><</button>></div>
+            <div class="color_plate" style="background-color:#F14660;"><<button 红>><</button>></div>
+            <div class="color_plate" style="background-color:#FC7051;"><<button 橙>><</button>></div>
+            <div class="color_plate" style="background-color:#F8F45F;"><<button 黄>><</button>></div>
+            <div class="color_plate" style="background-color:#FDF3B1;"><<button 米黄>><</button>></div>
+            <div class="color_plate" style="background-color:#8DC862;"><<button 绿>><</button>></div>
+            <div class="color_plate" style="background-color:#BBEEC1;"><<button 薄荷>><</button>></div>
+            <div class="color_plate" style="background-color:#9C6C51;"><<button 棕>><</button>></div>
+            <div class="color_plate" style="background-color:#CBC8C7;"><<button 自定义>><</button>></div>
+        </div>
+    </div>
+    </div>
+
+</div>
+
+<div id="ShopList">
+  <ul>
+    <li class="category"><a href="#hat">头饰</a></li>
+    <li class="category"><a href="#coat">外套</a></li>
+    <li class="category"><a href="#tops">上装</a></li>
+    <li class="category"><a href="#bottoms">下装</a></li>
+    <li class="category"><a href="#inner_up">内衣</a></li>
+    <li class="category"><a href="#inner_bt">内裤</a></li>
+    <li class="category"><a href="#legging">袜子</a></li>
+    <li class="category"><a href="#shoes">鞋子</a></li>
+    <li class="category"><a href="#other">其他</a></li>
+  </ul>
+
+    <div id="hat">
+        <p>帽子什么的</p>
+    </div>
+
+    <div id="coat">
+        <p>外套大衣什么的</p>
+    </div>
+
+    <div id="tops">
+        <div class="show_items">
+            <span class="itemthumb"><img src="image/avatar/6_top/Tshirt/thumb.png"></span>
+            <span class="itemname">T恤</span>
+            <span class="itemprice">￥10</span>
+        </div>
+        <div class="show_items">
+            <span class="itemthumb"><img src="image/avatar/6_top/Tshirt/thumb.png"></span>
+            <span class="itemname">T恤</span>
+            <span class="itemprice">￥10</span>
+        </div>
+    </div>
+
+    <div id="bottoms">
+        <p>裤子什么的</p>
+    </div>
+
+    <div id="inner_up">
+        <p>内衣</p>
+    </div>
+
+    <div id="inner_bt">
+        <p>内裤</p>
+    </div>
+
+    <div id="legging">
+        <p>袜子啥的</p>
+    </div>
+
+    <div id="shoes">
+        <p>鞋子</p>
+    </div>
+
+    <div id="other">
+        <p>其他装饰</p>
+    </div>
+
+</div>
+
+
+<br><br>
+<div class="buybotton">
+<<link "购买" $passage>><</link>>
+</div>
+<div class="backbutton">
+<<link "离开" "怡安小区">><<redress>><</link>><br>
+</div>
+
+
+
+<<silently>>
+/* 自动刷新等待JS读取结束 */
+<<set _timer to 10>>
+<<repeat 0.3s>>
+    <<script>>
+        $( function() {
+            $( "#ShopList" ).tabs();
+        } );
+    <</script>>
+    <<set _timer to _timer -1>>
+    <<if _timer is 0>><<stop>><</if>>
+<</repeat>>
+
+<</silently>>

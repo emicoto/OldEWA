@@ -169,3 +169,60 @@ hr {
   margin: 5px;
 }
 
+
+#next {
+position: fixed;
+top: 20px;
+left: 300px;
+box-shadow: 5px 5px 5px #bbb;
+}
+
+#next:hover{
+background-color: rgb(255, 255, 255);
+}
+
+.nextbutton{
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;    
+}
+
+.nextbutton a {
+  color:rgb(71, 69, 60)
+}
+.nextbutton a:hover {
+  color:rgb(192, 189, 15)
+}
+
+.nextbutton {
+border: 1px solid #ccc;
+border-left: none;
+width: fit-content;
+padding: 0 0.5em;
+line-height: 2em;
+}
+.nextbutton:before,
+.nextbutton:after {
+content: "";
+border-top: 1px solid #ccc;
+display: block;
+position: absolute;
+width: 1.16em;
+height: 1em;
+z-index: -1;
+}
+.nextbutton:before {
+left: -1.16em;
+transform-origin: top right;
+transform: rotate(300deg);
+}
+.nextbutton:after {
+left: 0;
+transform-origin: top left;
+transform: rotate(240deg);
+}
+.nextbutton:hover,
+.nextbutton:hover::before,
+.nextbutton:hover::after {
+background-color: white;
+}

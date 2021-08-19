@@ -72,6 +72,8 @@ body {
 
 #passages {
     float: left;
+    width: 80%;
+    min-width: 600px;
 }
 
 .passage {
@@ -86,6 +88,14 @@ body {
 }
 
 /* Shrink the page when viewed on devices with a low screen width */
+@media screen and (max-width: 1920px) {
+  .passage {
+  font-size: 100%;
+  }
+  #passages {
+  width: 80%;
+  }
+}
 @media screen and (max-width: 1200px) {
     .passage {
     font-size: 90%;

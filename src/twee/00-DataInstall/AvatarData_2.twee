@@ -11,7 +11,7 @@
             imgenable : false,
 
             cost : 0,   reveal : 0,    hot : 0,     cold : 0,
-            durable : 0,     maxdurable : 0,     beauty: 0,
+            durable : 0,     maxdurable : 0,     beauty: 0,     defence: 0,
             fixcolor: true,    color:null,  colorname: null,
             colors : [],
             
@@ -29,7 +29,7 @@
             imgenable : false,
 
             cost : 0,   reveal : 0,    hot : 0,     cold : 0,
-            durable : 0,     maxdurable : 0,     beauty: 0,
+            durable : 0,     maxdurable : 0,     beauty: 0,     defence: 0,
             fixcolor: true,    color:null,  colorname: null,
             colors : [],
             
@@ -49,7 +49,7 @@
             imgenable : false,
 
             cost : 0,   reveal : 0,    hot : 0,     cold : 0,
-            durable : 0,     maxdurable : 0,     beauty: 0,
+            durable : 0,     maxdurable : 0,     beauty: 0,     defence: 0,
             fixcolor: true,    color:null,  colorname: null,
             colors : [],
             
@@ -67,7 +67,7 @@
             imgenable : false,
 
             cost : 0,   reveal : 0,    hot : 0,     cold : 0,
-            durable : 0,     maxdurable : 0,     beauty: 0,
+            durable : 0,     maxdurable : 0,     beauty: 0,     defence: 0,
             fixcolor: true,    color:null,  colorname: null,
             colors : [],
             
@@ -90,7 +90,7 @@
             imgenable : false,
 
             cost : 0,        reveal : 0,        hot : 0, cold : 0,
-            durable : 0,     maxdurable : 0,     beauty: 0,
+            durable : 0,     maxdurable : 0,     beauty: 0,     defence: 0,
             fixcolor: true,    color:null,  colorname: null,
             colors : [],
             
@@ -118,7 +118,7 @@
             imgenable : false,
 
             cost : 0,        reveal : 0,        hot : 0, cold : 0,
-            durable : 0,     maxdurable : 0,     beauty: 0,
+            durable : 0,     maxdurable : 0,     beauty: 0,     defence: 0,
             fixcolor: true,    color:null,  colorname: null,
             colors : [],
             

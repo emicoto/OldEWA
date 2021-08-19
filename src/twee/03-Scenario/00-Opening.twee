@@ -1,0 +1,76 @@
+﻿:: Opening CN [eventfirst]
+
+<<if $count is undefined>>
+    <<set $count to 0>>
+    <<set $eventend to false>>
+<</if>>
+
+<div id="weirdtext"><<Opening $count>></div>
+
+<div class="weirdtext">
+<<if $count is 0>>
+ <<link "睁开眼睛" $passage>><<set $count to 1>><</link>>　　　 <<link "回忆梦境" $passage>><<set $count to 2>><</link>>
+<</if>>
+</div>
+<br>
+
+/*
+<div id="next" class="nextbutton">
+    <<if $eventend is false>>
+        <<link "NEXT" $passage>><</link>>
+    <<else>>
+        <<link "NEXT" "你的家">><</link>>
+    <</if>>
+</div> */
+
+/* 等待渲染完毕 */
+<<silently>><<script>>
+//requires jQuery because I am lazy.
+$(document).ready(function(){
+	setup();
+});
+
+function setup(){
+	
+	var $passage = $('#weirdtext');
+	var rawtxt = $passage.html();
+	var len = rawtxt.length;
+	var newtext = '';
+	
+	for(var i = 0; i < len; i ++){	
+		var rng = Math.floor(Math.random() * 5) + 1;
+		var currentchar = rawtxt.charAt(i);
+		if(currentchar == ' '){
+			var newchar = '<span class="space"></span>';
+		}
+		else{
+			var newchar = '<span class="weffect' + rng + '">' + currentchar + '</span>';
+		}
+		newtext = newtext + newchar;
+	}
+	$passage.html(newtext);
+}
+
+<</script>>
+<</silently>>
+
+:: Opening [widget]
+
+<<widget "Opening">>
+
+<<switch $args[0]>>
+<<case 0>><<you>>知道自己已经醒过来了，却依然感觉混混沌沌，仿佛还在迷雾之中。<<you>>似乎做了一个梦，很长、很长的梦，感觉有一辈子那么久远。但是，<<you>>却想不起来梦中的内容了，只是意识还在混沌中，不知现今何时何地。
+
+<<case 1>><<you>>试着睁开眼睛，但是无力睁开。<<set $count to 3>>
+
+<<case 2>><<you>>试着回忆梦境内容。<<set $count to 3>>
+
+<<case 3>>
+
+<<case 4>>
+
+<<case 5>>
+
+<</switch>>
+
+<</widget>>

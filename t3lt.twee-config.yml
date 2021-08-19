@@ -259,3 +259,9 @@ sugarcube-2:
       name: InitFrontHairStyle
     InitBackHairStyle:
       name: InitBackHairStyle
+    ShowCase:
+      name: ShowCase
+    EnterTryRoom:
+      name: EnterTryRoom
+    Opening:
+      name: Opening

@@ -44,7 +44,7 @@
             dfpng  : {breast:false, pregnant:false},
 
             cost : 0,        reveal : 0,        hot : 0, cold : 0,
-            durable : 0,     maxdurable : 0,     beauty: 0,
+            durable : 0,     maxdurable : 0,     beauty: 0,     defence: 0,
             fixcolor: true,    color:null,  colorname: null,
             colors : [],
             
@@ -59,13 +59,13 @@
         {
             id: 1,
             index : "Tshirt",    name : "T恤",     gender : "n",
-            text : "一件简单的短袖T恤",   
+            text : " 一件简单的T恤。 并不能给你太多保护，但总比没有好。",   
             tag  : ["日常"],
             imgenable : true,
             dfpng  : {breast:true, pregnant:true},
 
             cost : 25,        reveal : 9,        hot : 1, cold : -1,  /* 数值是直接在21上加减 */
-            durable : 20,     maxdurable : 20,     beauty: 0,
+            durable : 20,     maxdurable : 20,     beauty: 0,     defence: 0,
             fixcolor: false,    color:"#FDFFFF",  colorname: "白",
             colors : [],
             
@@ -90,11 +90,11 @@
             imgenable : false,
 
             cost : 0,        reveal : 0,    hot : 0,    cold : 0,
-            durable : 0,     maxdurable : 0,     beauty: 0,
+            durable : 0,     maxdurable : 0,     beauty: 0,     defence: 0,
             fixcolor: true,    color:null,  colorname: null,
             colors : [],
             
-            category: "裤子/裙子", layer : "top",
+            category: "下衣", layer : "top",
             shop : null, 
             
             slot : "tops", 
@@ -109,11 +109,11 @@
             imgenable : true,
 
             cost : 30,        reveal : 4,   hot : 1,   cold : -1, 
-            durable : 20,     maxdurable : 20,     beauty: 0,
+            durable : 20,     maxdurable : 20,     beauty: 0,     defence: 0,
             fixcolor: false,    color:"#787878",  colorname: "黑",
             colors : [],
             
-            category: "裤子", layer : "bottom",
+            category: "下衣", layer : "bottom",
             shop : "all", 
             
             slot : "bottoms", 
@@ -133,7 +133,7 @@
             imgenable : false,
 
             cost : 0,        reveal : 0,    hot : 0,    cold : 0,
-            durable : 0,     maxdurable : 0,     beauty: 0,
+            durable : 0,     maxdurable : 0,     beauty: 0,     defence: 0,
             fixcolor: true,    color:null,  colorname: null,
             colors : [],
             
@@ -152,7 +152,7 @@
             imgenable : true,
 
             cost : 12,        reveal : 2,    hot : 0.1,    cold : -0.1,
-            durable : 10,     maxdurable : 10,     beauty: 0,
+            durable : 10,     maxdurable : 10,     beauty: 0,     defence: 0,
             fixcolor: false,    color:"#FDFFF",  colorname: "白",
             colors : [],
             
@@ -176,7 +176,7 @@
             imgenable : false,
 
             cost : 0,       reveal : 0,    hot : 0,    cold : 0,
-            durable : 0,    maxdurable : 0,     beauty: 0,
+            durable : 0,    maxdurable : 0,     beauty: 0,     defence: 0,
             fixcolor: true,    color:null,  colorname: null,
             colors : [],
             
@@ -194,7 +194,7 @@
             imgenable : true,
 
             cost : 60,       reveal : 0,    hot : 0.1,    cold : -0.1,
-            durable : 30,    maxdurable : 30,     beauty: 0,
+            durable : 30,    maxdurable : 30,     beauty: 0,     defence: 0,
             fixcolor: true,    color:"#FFFFFF",  colorname: "白",
             colors : ["white"],
             
@@ -212,7 +212,7 @@
             imgenable : true,
 
             cost : 80,       reveal : 0,    hot : 0,    cold : 0,
-            durable : 20,    maxdurable : 20,     beauty: 0.05,
+            durable : 20,    maxdurable : 20,     beauty: 0.05,     defence: 0,
             fixcolor: false,    color:"#FDFFFF",  colorname: "白",
             colors : [],
             
@@ -235,7 +235,7 @@
             imgenable : false,
 
             cost : 0,       reveal : 0,    hot : 0,    cold : 0,
-            durable : 0,    maxdurable : 0,     beauty: 0,
+            durable : 0,    maxdurable : 0,     beauty: 0,     defence: 0,
             fixcolor: true,    color:null,  colorname: null,
             colors : [],
             
@@ -253,7 +253,7 @@
             imgenable : true,
 
             cost : 10,       reveal : 0,    hot : 0.2,    cold : -0.2,
-            durable : 0,    maxdurable : 0,     beauty: 0,
+            durable : 0,    maxdurable : 0,     beauty: 0,     defence: 0,
             fixcolor: false,    color:"#FDFFF",  colorname: "白",
             colors : [],
             

@@ -8,10 +8,10 @@
 
 /* 清理身上外在液体 */
 <<set $PFlag.bukkake.body to false>>
-<<set $PFlag.bukakke.face to false>>
+<<set $PFlag.bukkake.face to false>>
 <<set $PFlag.bukkake.hair to false>>
 
-<<set $location to 试衣间>>
+<<location "试衣间">>
 <<SetAvatar>>
 <<set $avatar.background to "tryon">>
 
@@ -26,7 +26,7 @@
     <<set $tryon[$args[0]] to null>>
 <</widget>>
 
-<<widget "SetShowcase">>
+<<widget "ShowCase">>
     <<set _layer to ["frame","addon","neck","hat","face","coat","top","bottom","hand","undertop","underbottom","shoes","socks","emoadd","eyebrow","kemofront","hairfront","eyes","mouth","body","hairback","kemoback","back","background"]>>
     <<set _group to ["coat","top","undertop"]>>
 
@@ -37,7 +37,7 @@
     <<if $showcase.imgenable is false>>
         <<set _path to _path + "dummy">>
     <<else>>
-         <<if $showcase.acc isnot null and $showcase.pattern.length gt 0>>
+         <<if $showcase.acc isnot null and $showcase.patterns.length gt 0>>
             <<set _path1 to _path + $showcase.index + "/" + $args[3]>>
         <<else>>
             <<set _path1 to _path + "dummy">>
@@ -57,9 +57,10 @@
          /* .image/avatar/1_hat/basic_1 or white_1 */
 
     <</if>>
-
-    <img class='layer flipx' src="./image/avatar/manekin.png">
-    <img class='layer flipx' @src="_path + '.png'">
-    <img class='layer flipx' @src="_path1 + '.png'">
+    <img class='Caselayer flipx' src="./image/avatar/manekin.png">
+    <img class='Caselayer flipx' @src="_path + '.png'">
+    <img class='Caselayer flipx' @src="_path1 + '.png'">
 
 <</widget>>
+
+
