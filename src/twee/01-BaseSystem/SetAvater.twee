@@ -34,13 +34,13 @@
     <<set $avatar.addon.face to false>>
 <</if>>
 
-<<if ($PC.sexrec.肛内射.c + $PC.sexrec.内射.c) gt 200 and $PFlag.bottoms lte 1>>
+<<if ($PC.sexrec.肛内射.c + $PC.sexrec.内射.c) gt 200 and $PFlag.bottom lte 1>>
     <<set $avatar.addon.bottom to true>>
 <<else>>
     <<set $avatar.addon.bottom to false>>
 <</if>>
 
-<<if ($PC.sexrec.射精.c gt 10) and $PFlag.bottoms lte 1>>
+<<if ($PC.sexrec.射精.c gt 10) and $PFlag.bottom lte 1>>
     <<set $avatar.addon.penis to true>>
 <<else>>
     <<set $avatar.addon.penis to false>>
@@ -48,7 +48,7 @@
 
 
 /* 共通处理 */
-<<set _group to ["neck","hat","face","hand","bottom","underbottom","shoes","socks","back"]>>
+<<set _group to ["neck","hat","face","hand","bottom","inner_bt","shoes","legs","back"]>>
 
 <<for _i to 0; _i lt _group.length; _i++ >>
 <<set _n to _group[_i]>>
@@ -65,8 +65,8 @@
     <<switch _n>>
         <<case "bottom">>
             <<set $avatar.bottom to { fixcolor: true, color: "white", src: "shortpant/basic", acc: null, }>>
-        <<case "underbottom">>
-            <<set $avatar.underbottom to { fixcolor: true, color: "white", src: "boxer/basic", acc: null, }>>
+        <<case "inner_bt">>
+            <<set $avatar.inner_bt to { fixcolor: true, color: "white", src: "boxer/basic", acc: null, }>>
         <<default>>
             <<set $avatar[_n] to { fixcolor: true, color: "", src: null, acc: null, }>>
     <</switch>>
@@ -77,7 +77,7 @@
 <</for>>
 
 /* 有胸部跟怀孕差分的上衣部分处理 */
-<<set _group to ["coat","top","undertop"]>>
+<<set _group to ["outter","top","inner_up"]>>
 
 <<for _i to 0; _i lt _group.length; _i++>>
 <<set _n to _group[_i]>>
@@ -121,17 +121,17 @@
 <<set $avatar.eyebrow to $PFace.eyebrow>>
 
 /* 发型前面 */
-<<if setup.hairfront[$Equip.hairfront].long is true>>
-    <<set $avatar.hairfront to $Equip.hairfront + "/" + isFixhair(setup.hairfront[$Equip.hairfront]) + "_" + hairlenth($PC.前发长)>>
+<<if Avatars.hairfront[$Equip.hairfront].long is true>>
+    <<set $avatar.hairfront to $Equip.hairfront + "/" + isFixhair(Avatars.hairfront[$Equip.hairfront]) + "_" + hairlenth($PC.前发长)>>
 <<else>>
-    <<set $avatar.hairfront to $Equip.hairfront + "/" + isFixhair(setup.hairfront[$Equip.hairfront]) + "_1">>
+    <<set $avatar.hairfront to $Equip.hairfront + "/" + isFixhair(Avatars.hairfront[$Equip.hairfront]) + "_1">>
 <</if>>
 
 /* 发型后面 */
-<<if setup.hairback[$Equip.hairback].long is true>>
-    <<set $avatar.hairback to $Equip.hairback + "/" + isFixhair(setup.hairback[$Equip.hairback]) + "_" + hairlenth($PC.发长)>>
+<<if Avatars.hairback[$Equip.hairback].long is true>>
+    <<set $avatar.hairback to $Equip.hairback + "/" + isFixhair(Avatars.hairback[$Equip.hairback]) + "_" + hairlenth($PC.发长)>>
 <<else>>
-    <<set $avatar.hairback to $Equip.hairback + "/" + isFixhair(setup.hairback[$Equip.hairback]) + "_1">>
+    <<set $avatar.hairback to $Equip.hairback + "/" + isFixhair(Avatars.hairback[$Equip.hairback]) + "_1">>
 <</if>>
 
 /* 兽耳、兽角、兽尾 */
@@ -183,7 +183,7 @@
 
 
 /* JJ */
-<<if $PC.genital.阴茎 gt 3 and $PFlag.bottoms lte 1>>
+<<if $PC.genital.阴茎 gt 3 and $PFlag.bottom lte 1>>
     <<set $avatar.penis to $PC.肤色 +"/penis">>
 <<else>>
     <<set $avatar.penis to null>>

@@ -636,7 +636,7 @@
         <<set $PFlag.lactatecd to null>>
     <</if>>
 
-    <<if $PFlag.tops lt 2>>
+    <<if $PFlag.top lt 2>>
         <<redress>>
         <<setface "正常">>
     <</if>>

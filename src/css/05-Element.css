@@ -60,14 +60,14 @@
 
 #charamaking {
     font-size: 15px;
-    font-family: 筑紫黑体;
+    font-family: Georgia,筑紫黑体;
 }
 
 #charamaking li {
     font-size: 15px;
     list-style: "・";
     color:olive;
-    font-family: 新综艺B;
+    font-family: Georgia,新综艺B;
 }
 
 #GameSetting {
@@ -85,13 +85,6 @@
     margin-left: 10px;
     font-size: 14px;
     color:gray;
-}
-
-#fonttest {
-    font-size:13px;
-    font-family: 轻吟体;
-    font-weight: 500;
-    letter-spacing: 2px;
 }
 
 .gray {

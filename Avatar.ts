@@ -60,7 +60,7 @@ namespace Avatar {
         }
         return {
           name: v,
-          src: this.avatar[v] ? __resolve(AvatarPath, `${i}_${v}`, `${this.avatar[v]}.png`) : __resolve(AvatarPath, "dummy.png"),
+          src: this.avatar[v] ? __resolve(AvatarPath, `${v}`, `${this.avatar[v]}.png`) : __resolve(AvatarPath, "dummy.png"),
           z: 21 - i
         }
       };
@@ -118,7 +118,7 @@ namespace Avatar {
         if (v === "addon" || v === "emoadd") {
           return this.ChangrAddonSrc(v, i)
         }
-        return this.opt[v].src = this.avatar[v] ? __resolve(AvatarPath, `${i}_${v}`, `${this.avatar[v]}.png`) : __resolve(AvatarPath, "dummy.png")
+        return this.opt[v].src = this.avatar[v] ? __resolve(AvatarPath, `${v}`, `${this.avatar[v]}.png`) : __resolve(AvatarPath, "dummy.png")
       })
 
       Renderer.composeLayersAgain()
@@ -159,26 +159,29 @@ namespace Avatar {
   export const __layer = [
     "frame",
     "addon",
-    "neck",
     "hat",
-    "face",
-    "coat",
-    "top",
-    "bottom",    
-    "hand",
-    "undertop",
-    "underbottom",
-    "shoes",
-    "socks",
-    "emoadd",
+    "kemofront",
     "eyebrow",
     "hairfront",
+    "neck",
+    "face",
+    "emoadd",
     "eyes",
     "mouth",
+    "outter",
+    "top",
+    "inner_up",
+    "hand",
+    "bottom",
+    "inner_bt",
+    "shoes",
+    "legging",
+    "tattoos",
     "body",
     "hairback",
     "back",
-    "background"
+    "kemoback",
+    "background",
   ]
   const blendmode = [
     "source-over",

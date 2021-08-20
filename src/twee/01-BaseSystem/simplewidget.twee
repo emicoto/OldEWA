@@ -192,7 +192,7 @@
 <</widget>>
 
 <<widget "dressup">>
-    <<set $Equip[$args[0]] to setup.avatar[$args[0]][$args[1]]>>
+    <<set $Equip[$args[0]] to Avatars[$args[0]][$args[1]]>>
     
     <<if $args[2]>>
         <<set $Equip[$args[0]].color to $args[2]>>
@@ -204,18 +204,18 @@
 
     <<switch $args[0]>>
         <<case "top">>
-            <<if setup.avatar.top[$args[1]].slot is "onepiece">>
+            <<if Avatars.top[$args[1]].slot is "onepiece">>
                 <<set $Equip.bottom to null>>
             <</if>>
         <<case "bottom">>
-            <<if setup.avatar.bottom[$args[1]].slot is "onepiece">>
+            <<if Avatars.bottom[$args[1]].slot is "onepiece">>
                 <<set $Equip.top to null>>
             <</if>>
-        <<case "undertop">>
-            <<if setup.avatar.undertop[$args[1]].slot is "onepiece">>
-                <<set $Equip.underbottom to null>>
-            <<elseif setup.avatar.undertop[$args[1]].slot is "fullbody">>
-                <<set $Equip.underbottom to null>>
+        <<case "inner_up">>
+            <<if Avatars.inner_up[$args[1]].slot is "onepiece">>
+                <<set $Equip.inner_bt to null>>
+            <<elseif Avatars.inner_up[$args[1]].slot is "fullbody">>
+                <<set $Equip.inner_bt to null>>
                 <<set $Equip.top to null>>
                 <<set $Equip.bottom to null>>
             <</if>>
@@ -246,16 +246,16 @@
         <<set $TEquip[setup.equipindex[_i]] to $Equip[setup.equipindex[_i]]>>
     <</for>>
 
-    <<set $Equip.coat to null>>
+    <<set $Equip.outter to null>>
     <<set $Equip.top to null>>
     <<set $Equip.bottom to null>>
-    <<set $Equip.undertop to null>>
-    <<set $Equip.underbottom to null>>
+    <<set $Equip.inner_up to null>>
+    <<set $Equip.inner_bt to null>>
     <<set $Equip.shoes to null>>
-    <<set $Equip.socks to null>>
+    <<set $Equip.legs to null>>
     <<set $Equip.hand to null>>
-    <<set $PFlag.tops to 0>>
-    <<set $PFlag.bottoms to 0>>
+    <<set $PFlag.top to 0>>
+    <<set $PFlag.bottom to 0>>
     <<SetAvatar>>
 <</widget>>
 

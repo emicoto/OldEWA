@@ -27,33 +27,30 @@
 <</widget>>
 
 <<widget "ShowCase">>
-    <<set _layer to ["frame","addon","neck","hat","face","coat","top","bottom","hand","undertop","underbottom","shoes","socks","emoadd","eyebrow","kemofront","hairfront","eyes","mouth","body","hairback","kemoback","back","background"]>>
-    <<set _group to ["coat","top","undertop"]>>
-
-    <<set $showcase to setup.avatar[$args[0]][$args[1]]>>
-    <<set _path to "./image/avatar/"+_layer.indexOf($args[0])+"_"+$args[0]+"/">>
+    <<set _layer to Avatars.layer>>
+    <<set _group to ["outter","top","inner_up"]>>
+    <<set _path to "./image/avatar/"+ $showcase.layer +"/">>
     /* .image/avatar/1_hat/ */
 
     <<if $showcase.imgenable is false>>
         <<set _path to _path + "dummy">>
     <<else>>
          <<if $showcase.acc isnot null and $showcase.patterns.length gt 0>>
-            <<set _path1 to _path + $showcase.index + "/" + $args[3]>>
+            <<set _path1 to _path + $showcase.index + "/" + $showcase.acc>>
         <<else>>
             <<set _path1 to _path + "dummy">>
         <</if>>
         /* .image/avatar/1_hat/pattern */
 
         <<if $showcase.fixcolor is true>>
-            <<set _path to _path + $showcase.index + "/" + $args[2]>>
+            <<set _path to _path + $showcase.index + "/" + $showcase.color>>
         <<else>>
             <<set _path to _path + $showcase.index + "/basic">>
         <</if>>
 
-        <<if _group.includes($args[0]) is true and $showcase.dfpng.breast is true>>
+        <<if _group.includes($showcase.layer) is true and $showcase.dfpng.breast is true>>
             <<set _path to _path + "_1">>
         <</if>>
-
          /* .image/avatar/1_hat/basic_1 or white_1 */
 
     <</if>>

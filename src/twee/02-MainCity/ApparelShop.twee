@@ -6,20 +6,24 @@
 
 <<EnterTryRoom>>
 
+<<set $showcase to A.top[3]>>
+
+<<if $showcase isnot null>><</if>>
 <div id="show_container">
 
     <div class="followleft">
         <div id="showcase">
-            <<ShowCase "top" 1 null "slime">>
+            <<ShowCase>>
         </div>
     </div>
 
     <div class="followright">
+    
     <div id="item_info">
         <div id="description">
         一件简单的T恤。 并不能给你太多保护，但总比没有好。<br>
         </div>
-        <div id="warmth">适应温度：18C～27C</div>
+        <div id="warmth">适应温度：18C～28C</div>
 
         <div id="outfit_trait">
             <div class="of_title">属性：</div>
@@ -37,23 +41,25 @@
         </div>
 
         可选颜色：<br>
-        <div id="color_plate">          
-            <div class="color_plate" style="background-color:#56545A;"><<button 黑>><</button>></div>
-            <div class="color_plate" style="background-color:#FFFFFF;"><<button 白>><</button>></div>
-            <div class="color_plate" style="background-color:#4089F9;"><<button 蓝>><</button>></div>
-            <div class="color_plate" style="background-color:#5DD9FA;"><<button 青>><</button>></div>
-            <div class="color_plate" style="background-color:#FB83C4;"><<button 粉>><</button>></div>
-            <div class="color_plate" style="background-color:#B36CF6;"><<button 紫>><</button>></div>
-            <div class="color_plate" style="background-color:#F14660;"><<button 红>><</button>></div>
-            <div class="color_plate" style="background-color:#FC7051;"><<button 橙>><</button>></div>
-            <div class="color_plate" style="background-color:#F8F45F;"><<button 黄>><</button>></div>
-            <div class="color_plate" style="background-color:#FDF3B1;"><<button 米黄>><</button>></div>
-            <div class="color_plate" style="background-color:#8DC862;"><<button 绿>><</button>></div>
-            <div class="color_plate" style="background-color:#BBEEC1;"><<button 薄荷>><</button>></div>
-            <div class="color_plate" style="background-color:#9C6C51;"><<button 棕>><</button>></div>
-            <div class="color_plate" style="background-color:#CBC8C7;"><<button 自定义>><</button>></div>
+        <div id="color_plate">
+            <<if $showcase.fixcolor is false>>
+                <<for _i to 0; _i lt L.colorlist.length; _i ++>>
+                    <div class="color_plate" @style="'background-color:'+ L.colorlist[_i].code">
+                    <<set _name to L.colorlist[_i].name>>
+                    <<button _name>><</button>>
+                    </div>
+                <</for>>
+                <div class="color_plate" style="background-color:#CBC8C7;"><<button 自定义>><</button>></div>
+            <<else>>
+                <<for _i to 0; _i lt $showcase.colors.length; _i++>>
+                    <<set _code to L.colors[$showcase.colors[_i]].code>>
+                    <<set _name to L.colors[$showcase.colors[_i]].name>>
+                    <div class="color_plate" @style="'background-color:'+_code"><<button _name>><</button>></div>
+                <</for>>
+            <</if>>
         </div>
     </div>
+
     </div>
 
 </div>
@@ -61,7 +67,7 @@
 <div id="ShopList">
   <ul>
     <li class="category"><a href="#hat">头饰</a></li>
-    <li class="category"><a href="#coat">外套</a></li>
+    <li class="category"><a href="#outter">外套</a></li>
     <li class="category"><a href="#tops">上装</a></li>
     <li class="category"><a href="#bottoms">下装</a></li>
     <li class="category"><a href="#inner_up">内衣</a></li>
@@ -75,19 +81,25 @@
         <p>帽子什么的</p>
     </div>
 
-    <div id="coat">
+    <div id="outter">
         <p>外套大衣什么的</p>
     </div>
 
     <div id="tops">
+        <<if $activepage is "tops">>
+
+        <</if>>
+        <<set _img to "image/avatar/top/shirt/thumb.png">>
+        
         <div class="show_items">
-            <span class="itemthumb"><img src="image/avatar/6_top/Tshirt/thumb.png"></span>
+            <span class="itemthumb"><<link [img[image/avatar/top/Tshirt/thumb.png]] >><</link>></span>
             <span class="itemname">T恤</span>
             <span class="itemprice">￥10</span>
-        </div>
+        </div> 
+
         <div class="show_items">
-            <span class="itemthumb"><img src="image/avatar/6_top/Tshirt/thumb.png"></span>
-            <span class="itemname">T恤</span>
+            <span class="itemthumb"><<link [img[_img]] >><</link>></span>
+            <span class="itemname">衬衫</span>
             <span class="itemprice">￥10</span>
         </div>
     </div>

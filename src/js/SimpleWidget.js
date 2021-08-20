@@ -13,14 +13,14 @@ window.showcharainfo = function () {
 
 function setreveal(){
     const isReveal=w=>V.Equip[w] ?V.Equip[w].reveal :0;
-    const tops =[isReveal("coat"),isReveal("top"),isReveal("undertop"),]
-    const bottoms=[isReveal("bottom"),isReveal("underbottom")]
+    const tops =[isReveal("outter"),isReveal("top"),isReveal("inner_up"),]
+    const bottoms=[isReveal("bottom"),isReveal("inner_bt")]
     tops.sort((a,b)=>b-a)
     bottoms.sort((a,b)=>b-a)
     console.log("上衣:",tops)
     console.log("下衣:",bottoms)
-    V.PFlag.tops = !tops[0]?0: tops[0]
-    V.PFlag.bottoms=!bottoms[0]?0: bottoms[0]
+    V.PFlag.top = !tops[0]?0: tops[0]
+    V.PFlag.bottom=!bottoms[0]?0: bottoms[0]
 }
 window.setreveal = setreveal
 

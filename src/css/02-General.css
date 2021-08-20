@@ -18,18 +18,18 @@ span.link-disabled {
   
 button {
 	color: #111;
-  font-family: 新综艺;
+  font-family: "Times New Roman", 新综艺;
 }
 
 li {
-  font-family: 筑紫黑体;
+  font-family: "Times New Roman", 筑紫黑体;
 }
 
 input, select, textarea {
     color: #111;
     border-color: #ccc;
     max-width:200px;
-    font-family:正保黑体L ;
+    font-family:"Times New Roman", 正保黑体L ;
 }
 
 input:not(:disabled):focus, select:not(:disabled):focus, textarea:not(:disabled):focus,
@@ -69,7 +69,7 @@ input[type="text"]:hover {
   font-size: 14px;
   float:left;
   z-index:1;
-  font-family: 新综艺;
+  font-family: "Times New Roman", 新综艺;
 }   
 
 
@@ -120,6 +120,23 @@ hr {
   vertical-align: middle;
 }
 
+.followleft {
+  height: 100%;
+  float: left;
+}
+
+.followright {
+  height: 100%;
+  float: right;
+}
+
+.followbottom {
+  position: absolute;
+  bottom:0px;
+  width: 100%;
+  height: auto;
+}
+
 .textbox {
   width: 300px;
   height: 150px;
@@ -146,9 +163,9 @@ hr {
   border-radius: 5px;
   border: rgba(212, 211, 197, 0.75) 1px solid;
   color:rgb(153, 150, 130);
-  text-shadow: rgb(230, 238, 225) 1px 1px;
   line-height: 18px;
   font-size: 14px;
+  font-family: 'Times New Roman', 正保黑体;
   margin: 10px 0px;
 }
 
@@ -175,6 +192,9 @@ hr {
   max-width: 1000px;
   padding: 3px;
   margin: 5px;
+  font-size: 16px;
+  letter-spacing: 1px;
+  font-weight: 500;
 }
 
 

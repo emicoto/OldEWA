@@ -1,0 +1,67 @@
+﻿:: LanguageDictionaryr [widget]
+
+<<widget "SetupLanguage">>
+<<set setup.L to {
+    "CN":{
+        "确认" : "确认",
+        开始:{
+        "开始游戏":"开始游戏",  "快速开始":"快速开始",  "创建角色":"创建角色",
+        "游戏设定":"游戏设定",  "周回特典":"周回特典",
+        },
+        肤色:{
+        "dark"   : "棕色",  "black" : "黝黑",   "mugi"  : "麦色",
+        "health" : "健康",  "white" : "白皙",   "skin"  : "的肌肤",
+        }, 
+        瞳色:{
+            "black" : "黑色",   "brown" : "棕色",   "emerald": "碧绿色",
+            "green" : "绿色",   "blue"  : "蓝色",   "aqua"   : "水色",
+            "purple": "紫红色", "white" : "银色",   "amber"  : "金色",
+            "red"   : "红色",
+            "eyes"  : "的眼睛",
+        },
+        发色:{
+            "black"     :"黑色",    "darkbrown" :"深棕色",  "wine"  :"酒红色",
+            "brown"     :"棕色",    "milktea"   :"奶茶色",  "blond" :"金色",
+            "softblond" :"米黄色",  "platinum"  :"白金色",  "silver":"银色",
+            "white"     :"纯白色",  "purple"    :"紫色",    "green" :"绿色",
+            "blue"      :"蓝色",    "aqua"      :"水色",    "pink"  :"粉色",
+        },
+        发型:{
+            "straight"  :"顺直的",   "natural"  :"自然的",
+            "curly"     :"卷曲的",   "himecut"  :"齐刘海",
+        },
+    },
+    "EN":{
+        "确认" : "comfirm",
+
+        开始:{
+            "开始游戏":"StartGame",     "快速开始":"QuickStart",
+            "创建角色":"CharaMaking",   "游戏设定":"GameSetting",
+            "周回特典":"Bonus",
+        },
+        肤色:{
+        "dark"  : "dark",           "black" : "black",      "mugi" : "wheatish",
+        "health": "healthy white",  "white" : "pale white", "skin"  : "skin", 
+        },
+        瞳色:{
+            "eyes"   : "eyes",      "black" : "black",      "brown": "brown",
+            "emerald": "emerald",   "green" : "green",      "blue" : "blue",
+            "aqua"   : "aqua",      "purple": "purple",     "white": "silver",
+            "amber"  : "amber",     "red"   : "red",
+        },
+        发色:{
+            "black":"black",    "darkbrown":"dark-brown",   "wine":"red-wine-color",
+            "brown":"brown",    "milktea":"milktea-color",  "blond":"blond",
+            "softblond":"soft-blond",   "platinum":"platinum-blond",
+
+            "silver":"silver",  "white":"white",    "purple":"purple",  "green":"green",
+            "blue":"blue",      "aqua":"aqua",      "pink":"pink",
+        }, 
+        发型:{
+            "straight"  : "straight",   "natural" : "natural",
+            "curly"     : "curly",      "himecut" : "himecut",
+        },
+    }
+}>>
+
+<</widget>>

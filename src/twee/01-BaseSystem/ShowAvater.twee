@@ -3,8 +3,7 @@
 <<widget "avatar">>
 
 <<set _path to "./image/avatar/">>
-<<set _layer to ["frame","addon","neck","hat","face","coat","top","bottom","hand","undertop","underbottom","shoes","socks","emoadd","eyebrow","kemofront","hairfront","eyes","mouth","body","hairback","kemoback","back","background"]>>
-
+<<set _layer to Avatars.layer>>
 <<set _ignore to ["addon","emoadd","kemofront","kemoback"]>>
 <<set _nosrc to ["frame","eyebrow","eyes","mouth","body","hairback","hairfront","background"]>>
 
@@ -25,7 +24,7 @@
     <</if>>
 
     /* 批量合成文件夹名称 0_frame 这部分 */
-    <<set _path1 to _path + _i+"_"+_layer[_i] + "/">>
+    <<set _path1 to _path + _layer[_i] + "/">>
 
     /* 先显示基础部分 */
     <<if _ignore.includes(_layer[_i]) is false>>
@@ -44,7 +43,7 @@
     <</if>> 
 
     /* 腹部、胸部纹身 */
-    <<if _layer[_i] is "body" and $avatar.tatoos isnot null and $PFlag.tops lte 2>>
+    <<if _layer[_i] is "body" and $avatar.tatoos isnot null and $PFlag.top lte 2>>
         <<set _path2 to _path1 + $avatar.tatoos>>
         <img class="Layer" @src="_path2 + '.png'" @style="_zindex">
     <</if>>
@@ -79,7 +78,7 @@
     /* 液体效果 */
     <<if _layer[_i] is "addon">>
 
-        <<if $avatar.addon.bottom is true and $PFlag.bottoms lte 2>>
+        <<if $avatar.addon.bottom is true and $PFlag.bottom lte 2>>
             <<set _path2 to _path1 + "bottom">>
             <img class="Layer" @src="_path2 + '.png'" @style="_zindex">
         <</if>>
@@ -104,7 +103,7 @@
             <img class="Layer" @src="_path2 + '.png'" @style="_zindex">
         <</if>>
 
-        <<if $avatar.addon.penis is true and $PFlag.bottoms lte 1>>
+        <<if $avatar.addon.penis is true and $PFlag.bottom lte 1>>
             <<set _path2 to _path1 + "penis">>
             <img class="Layer" @src="_path2 + '.png'" @style="_zindex">
         <</if>>
@@ -142,7 +141,7 @@
 <<widget "portrait">>
 
 <<set _path to "./image/avatar/">>
-<<set _layer to ["frame","addon","neck","hat","face","coat","top","bottom","hand","undertop","underbottom","shoes","socks","emoadd","eyebrow","kemofront","hairfront","eyes","mouth","body","hairback","kemoback","back"]>>
+<<set _layer to Avatars.layer>>
 
 <<set _ignore to ["addon","emoadd","kemofront","kemoback"]>>
 <<set _nosrc to ["frame","eyebrow","eyes","mouth","body","hairback","hairfront"]>>
@@ -182,7 +181,7 @@
     <</if>> 
 
     /* 腹部、胸部纹身 */
-    <<if _layer[_i] is "body" and $avatar.tatoos isnot null and $PFlag.tops lte 2>>
+    <<if _layer[_i] is "body" and $avatar.tatoos isnot null and $PFlag.top lte 2>>
         <<set _path2 to _path1 + $avatar.tatoos>>
         <img class="P_Layer flipx" @src="_path2 + '.png'" @style="_zindex">
     <</if>>
@@ -217,7 +216,7 @@
     /* 液体效果 */
     <<if _layer[_i] is "addon">>
 
-        <<if $avatar.addon.bottom is true and $PFlag.bottoms lte 2>>
+        <<if $avatar.addon.bottom is true and $PFlag.bottom lte 2>>
             <<set _path2 to _path1 + "bottom">>
             <img class="P_Layer flipx" @src="_path2 + '.png'" @style="_zindex">
         <</if>>
@@ -242,7 +241,7 @@
             <img class="P_Layer flipx" @src="_path2 + '.png'" @style="_zindex">
         <</if>>
 
-        <<if $avatar.addon.penis is true and $PFlag.bottoms lte 1>>
+        <<if $avatar.addon.penis is true and $PFlag.bottom lte 1>>
             <<set _path2 to _path1 + "penis">>
             <img class="P_Layer flipx" @src="_path2 + '.png'" @style="_zindex">
         <</if>>

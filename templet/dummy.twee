@@ -1,0 +1,172 @@
+﻿:: 测试
+
+在js里用window.变量 宣言就可以直接用了哦！
+万万没想到汉字也可以！ 要用print来打印出来！
+<<print 测试>>
+
+你是<<you>>,新的故事即将开始……<br>
+只是测试看看<br>
+调用测试<br>
+
+//语言切换
+<<set _lang to "EN">>
+<<set _next to "OPENING_" + _lang >>
+
+<<include _next>>
+
+
+:: OPENING_EN [nobr]
+
+<div id="EN">
+A world similar to our modern Earth 2021, but with supernatural beings hidden in places we can't see - such as magic, superpowers, ghosts, vampires, humanoid animals and more.You wake up to find an abnormality in yourself. You held out your hands and saw a pair of beautiful, slender hands, and from the bone joints, you could tell that they were the hands of a male teenager.You sat up from your bed and scratched the back of your head, and you noticed that the length of your hair was much shorter than what you had. As your mind completely clears, you remember the last scene you remember: the breathing mask over your face, the alarm sounding in your ears from the medical instruments - you can be sure that the original you has died from a serious illness.You get up and look at where you are now, a room of about 24 square meters, with a bright window on the right-hand side of the bed, and beautiful cherry blossoms blooming outside the window. In addition to a bed of one meter five big enough for two people to sleep, there is a bookcase full of various Japanese manga, next to the bookcase there is a computer desk with two large screens and a cool headset on the desk. On the wall next to the computer desk, there were some superhero posters.
+</div>
+
+
+:: OPENING_CN [nobr]
+
+<div id="CN">
+一个类似于我们现代地球2021年的世界，但在我们看不到的地方隐藏着超自然的存在--比如魔法、超能力、鬼魂、吸血鬼、人形动物等等。你醒来时发现自己身上有异常情况。你伸出双手，看到一双美丽、纤细的手，从骨节上看，你可以看出这是一双男性青少年的手。你从床上坐起来，抓了抓后脑勺，你发现你的头发长度比原来短了很多。当你的头脑完全清醒时，你想起了你记得的最后一幕：呼吸面罩罩在你的脸上，耳边传来医疗仪器的警报声--你可以肯定，原来的你已经死于一场大病。你站起来，看看你现在所在的地方，一个大约24平方米的房间，床的右侧有一个明亮的窗户，窗外盛开着美丽的樱花。除了一张一米五的大床足以让两个人睡觉外，还有一个书柜，上面摆满了各种日本漫画，书柜旁边有一张电脑桌，上面有两个大屏幕，桌上还有一个很酷的耳机。在电脑桌旁边的墙壁上，有一些超级英雄的海报。
+</div>
+
+:: 垃圾桶
+
+<<test>>
+
+自定义链接
+
+<a class="class1" data-passage="passage name" data-setter="$variableName to 'variableValue'">link text</a>
+
+自定义按钮
+<button class="class1" data-passage="测试" data-setter="$var to 123">测试一下</button>
+<button class="sidebutton" data-passage="测试">测试一下</button>
+
+<<script>>
+var title = document.getElementById("title");
+title.style.display = "";
+<</script>>
+
+<<script>>
+var title = document.getElementById("title");
+title.style.display = "none";
+<</script>>
+
+<p style="font-size:18px;font-family:筑紫A圆;">
+<b>游戏一切的开始。</b>
+总之先写个东西看看。
+</p>
+
+<br><br>
+
+<font face="筑紫古典" size="7">
+失乐园物语<br>
+</font>
+
+<font face="细倩简体">
+<div id="Layer3" style="opacity:0.3;position:absolute;top:30px;width:300px;height:150px;background-color:#40B3DF">
+</div>
+	
+
+<div id="Layer1" style="position:absolute;padding:20px;border-radius:50px;border:2px solid #EE872A;">
+	<h3>Look! Styles and colors</h3>
+
+	<div style="letter-spacing:12px;">Manipulate Text</div>
+
+	<div style="color:#40B3DF;">Colors<span style="background-color:#B4009E;color:#ffffff;">Boxes</span></div>
+	<div style="color:#000000;">and more...</div>
+</div>
+	
+<div id="Layer2" style="opacity:0.2;position:absolute;top:30px;width:200px;height:200px;background-color:#8AC007">
+</div>
+</font>
+
+
+<div id="accordion" class="ui-accordion">
+  <h3 class="ui-accordion-header">Section 1</h3>
+  <div class="ui-accordion-content">
+    <p>
+    Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer
+    ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit
+    amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut
+    odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.
+    </p>
+  </div>
+  <h3 class="ui-accordion-header">Section 2</h3>
+  <div class="ui-accordion-content">
+    <p>
+    Sed non urna. Donec et ante. Phasellus eu ligula. Vestibulum sit amet
+    purus. Vivamus hendrerit, dolor at aliquet laoreet, mauris turpis porttitor
+    velit, faucibus interdum tellus libero ac justo. Vivamus non quam. In
+    suscipit faucibus urna.
+    </p>
+  </div>
+  <h3 class="ui-accordion-header">Section 3</h3>
+  <div class="ui-accordion-content">
+    <p>
+    Nam enim risus, molestie et, porta ac, aliquam ac, risus. Quisque lobortis.
+    Phasellus pellentesque purus in massa. Aenean in pede. Phasellus ac libero
+    ac tellus pellentesque semper. Sed ac felis. Sed commodo, magna quis
+    lacinia ornare, quam ante aliquam nisi, eu iaculis leo purus venenatis dui.
+    </p>
+    <ul>
+      <li>List item one</li>
+      <li>List item two</li>
+      <li>List item three</li>
+    </ul>
+  </div>
+  <h3 class="ui-accordion-header">Section 4</h3>
+  <div class="ui-accordion-content">
+    <p>
+    Cras dictum. Pellentesque habitant morbi tristique senectus et netus
+    et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in
+    faucibus orci luctus et ultrices posuere cubilia Curae; Aenean lacinia
+    mauris vel est.
+    </p>
+    <p>
+    Suspendisse eu nisl. Nullam ut libero. Integer dignissim consequat lectus.
+    Class aptent taciti sociosqu ad litora torquent per conubia nostra, per
+    inceptos himenaeos.
+    </p>
+  </div>
+</div>
+
+<<script>>
+
+$(document).one(":passagerender",  function(event) {
+    var accordin = "#accordion", jQIntervalID = 0;
+    function ActivatejQueryUI() {  // Function to see if jQuery UI is loaded yet.
+		if (setup.JSLoaded) {
+			clearInterval(jQIntervalID);  // Stop looking, it's loaded.
+			if ($(accordin).length > 0) {  // Make sure an element with a "draggable" class exists.
+				$(accordin).accordion();  // Make them draggable.
+			}
+			if ($(accordin).length > 0) {  // Make sure an element with a "droppable" class exists.
+				$(accordin).accordion();  // Make them droppable.
+			}
+		}
+	}
+
+	if (setup.JSLoaded) {  // See if jQuery UI is loaded yet.
+		// It's loaded, so set up draggable and droppable elements.
+		$(event.content).find(accordin).accordion();
+	} else {  // Wait for jQuery UI to load using the ActivatejQueryUI function.
+		jQIntervalID = setInterval(ActivatejQueryUI, 100);
+	}
+  } );
+<</script>>
+
+<<script>>
+  /* 标签页标题切换 */
+  var originTitle = document.title;
+  var titleTime;
+  document.addEventListener("visibilitychange", function () {
+    if (document.hidden) {
+      document.title = "(つェ⊂) 我藏好了哦~ " + originTitle;
+      clearTimeout(titleTime);
+    } else {
+      document.title = "(*´∇｀*) 被你发现啦~ " + originTitle;
+      titleTime = setTimeout(function () {
+        document.title = originTitle;
+      }, 2000);
+    }
+  });
+<</script>>

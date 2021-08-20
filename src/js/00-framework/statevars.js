@@ -11,5 +11,20 @@ Object.defineProperties(window, {
 	},
 	C: {
 		value: {}
+	},
+	S: {
+		get: function(){
+			return setup
+		}
+	},
+	A: {
+		get: function() {
+			return Avatars
+		}
+	},
+	L: {
+		get: function() {
+			return DataList
+		}
 	}
 });

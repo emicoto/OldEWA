@@ -1,0 +1,388 @@
+﻿:: AvatarData 1 [widget]
+
+<<widget "InitAvatar">>
+
+<<set Avatars.layer to [
+    "frame","addon",
+    "hat","kemofront","eyebrow","hairfront",
+    "neck","face","emoadd","eyes","mouth",
+    "outter","top","inner_up","hand","bottom","inner_bt","shoes","legs",
+    "body","hairback","back","kemoback","background",
+]>>
+
+<<set L.colorlist to [
+    { name:"黑",    code:"#56545A" },
+    { name:"白",    code:"#FFFFFF" },
+    { name:"灰",    code:"#CBC8C7" },   
+    { name:"蓝",    code:"#4089F9" },
+    { name:"青",    code:"#5DD9FA" },
+    { name:"天蓝",  code:"#DDFDFF" },
+    { name:"粉",    code:"#FB83C4" },
+    { name:"紫",    code:"#B36CF6" },
+    { name:"红",    code:"#F14660" },
+    { name:"橙",    code:"#FC7051" },
+    { name:"黄",    code:"#F8F45F" },
+    { name:"米黄",  code:"#FDF3B1" },
+    { name:"绿",    code:"#8DC862" },
+    { name:"薄荷",  code:"#BBEEC1" },
+    { name:"棕",    code:"#9C6C51" },
+]>>
+
+<<set L.colors to {
+    mint : { name:"薄荷绿", code: "#BBEEC1" },
+    white : { name:"白", code:"#FFFFFF"},
+    black : { name:"黑", code:"#56545A"},
+}>>
+
+<<InitEmotion>>
+
+<<InitClothAccesory>>
+
+<<InitClothCoat>>
+<<InitClothTop>>
+<<InitClothBottom>>
+
+<<InitClothShoes>>
+<<InitClothSocks>>
+
+<<InitClothUndertops>>
+<<InitClothUnderbottoms>>
+
+<<InitFrontHairStyle>>
+<<InitBackHairStyle>>
+
+<</widget>>
+
+/* 上身的裸露范围  10=完全不露  9=手臂范围可见 8=手臂到肩膀范围可见 7=手臂到上半胸可见 6=只有下腹可见 5=手臂+下腹可见 4=手臂到肩膀+下腹 3=手臂到上半胸+下腹 2=只有敏感部位有遮掩 1=半透明装 0=全裸*/
+/* 下身的裸露范围  5=完全不露  4=到膝盖  3=到大腿  2=三角区  1=半透明/暴露装/接近全裸  0=全裸  */
+
+<<widget "InitClothTop">>
+    <<set Avatars.top to [
+        {
+            id: 0,
+            index : "naked",    name : "裸",     gender : "n",
+            text : "无",   
+            tag  : ["裸露"],
+            imgenable : false,
+            dfpng  : {breast:false, pregnant:false},
+
+            cost : 0,        reveal : 0,        hot : 0, cold : 0,
+            durable : 0,     maxdurable : 0,     beauty: 0,     defence: 0,
+            fixcolor: true,    color:null,  colorname: null,
+            colors : [],
+            
+            category: "上衣/连衣裙", layer : "top",
+            shop : null, 
+            
+            slot : "tops", 
+            tuckinable: false,        tuckin : false, 
+            acc : null,
+            patterns: [],
+        },
+        {
+            id: 1,
+            index : "Tshirt",    name : "T恤",     gender : "n",
+            text : "一件简单的T恤。 并不能给你太多保护，但总比没有好。",   
+            tag  : ["日常"],
+            imgenable : true,
+            dfpng  : {breast:true, pregnant:true},
+
+            cost : 35,        reveal : 9,        hot : 1, cold : -1,  /* 数值是直接在21上加减 */
+            durable : 20,     maxdurable : 20,     beauty: 0,     defence: 0.5,
+            fixcolor: false,    color:"#FDFFFF",  colorname: "白",
+            colors : [],
+            
+            category: "上衣", layer : "top",
+            shop : "all",
+            
+            slot : "tops", 
+            tuckinable: true,        tuckin : false, 
+            acc : "slime",
+            patterns: ["slime","heart"],
+        },
+        {
+            id: 2,
+            index : "shirt",    name : "衬衫",     gender : "n",
+            text : "一件简单的西式长袖衬衫。浅浅的暗纹给你增加了些许气质。",   
+            tag  : ["日常","正式","商务"],
+            imgenable : true,
+            dfpng  : {breast:true, pregnant:true},
+
+            cost : 120,        reveal : 10,        hot : 1.5, cold : -1.5,  /* 数值是直接在21上加减 */
+            durable : 20,     maxdurable : 20,     beauty: 0.02,     defence: 0.5,
+            fixcolor: false,    color:"#FDFFFF",  colorname: "白",
+            colors : ["mint"],
+            
+            category: "上衣", layer : "top",
+            shop : "all",
+            
+            slot : "tops", 
+            tuckinable: true,        tuckin : false, 
+            acc : null,
+            patterns: [],
+        },
+        {
+            id: 3,
+            index : "bwopiece",    name : "黑白连衣裙",     gender : "f",
+            text : "一件设计简单的连衣裙。修身的设计显得你身材更苗条。毕竟是易淘上的便宜货，不能指望布料的防御效果。",   
+            tag  : ["日常"],
+            imgenable : true,
+            dfpng  : {breast:true, pregnant:true},
+
+            cost : 200,        reveal : 9,        hot : 0.5, cold : -0.5,  /* 数值是直接在21上加减 */
+            durable : 15,     maxdurable : 15,     beauty: 0.05,     defence: 0,
+            fixcolor: true,    color:"white",  colorname: "白",
+            colors : ["white"],
+            
+            category: "上衣", layer : "top",  slot : "onepiece", 
+            shop : "all",
+            
+            tuckinable: false,        tuckin : false, 
+            acc : null,
+            patterns: [],
+        },
+    ]>>
+<</widget>>
+
+<<widget "InitClothBottom">>
+    <<set Avatars.bottom to [
+        {
+            id: 0,
+            index : "naked",    name : "裸",     gender : "n",
+            text : "无",   
+            tag  : ["裸露"],
+            imgenable : false,
+            dfpng  : {breast:false, pregnant:false},
+
+            cost : 0,        reveal : 0,    hot : 0,    cold : 0,
+            durable : 0,     maxdurable : 0,     beauty: 0,     defence: 0,
+            fixcolor: true,    color:null,  colorname: null,
+            colors : [],
+            
+            category: "下衣", layer : "bottom", slot : "bottom", 
+            shop : null, 
+            
+            acc : null,
+            patterns: [],
+        },
+        {
+            id: 1,
+            index : "shortpant",    name : "短裤",     gender : "n",
+            text : "一条简单的短裤",   
+            tag  : ["日常"],
+            imgenable : true,
+            dfpng  : {breast:false, pregnant:false},
+
+            cost : 50,        reveal : 4,   hot : 1,   cold : -1, 
+            durable : 20,     maxdurable : 20,     beauty: 0,     defence: 0.2,
+            fixcolor: false,    color:"#787878",  colorname: "黑",
+            colors : [],
+            
+            category: "下衣", layer : "bottom", slot : "bottom", 
+            shop : "all", 
+            
+            acc : null,
+            patterns: [],
+        },
+        {
+            id: 2,
+            index : "shortskirt",    name : "短裙",     gender : "f",
+            text : "一条简单的短裙",   
+            tag  : ["日常"],
+            imgenable : true,
+            dfpng  : {breast:false, pregnant:true},
+
+            cost : 60,        reveal : 4,   hot : 0.5,   cold : -0.5, 
+            durable : 12,     maxdurable : 12,     beauty: 0.01,     defence: 0,
+            fixcolor: false,    color:"#787878",  colorname: "黑",
+            colors : ["black"],
+            
+            category: "下衣", layer : "bottom", slot : "bottom",
+            shop : "all", 
+             
+            acc : null,
+            patterns: [],
+        },
+        {
+            id: 3,
+            index : "bskirt",    name : "西装短裙",     gender : "f",
+            text : "一条简单的西式短裙。毕竟是廉价款，不能指望耐久度。",   
+            tag  : ["日常","商务"],
+            imgenable : true,
+            dfpng  : {breast:false, pregnant:false},
+
+            cost : 120,        reveal : 4,   hot : 0.5,   cold : -0.5, 
+            durable : 10,     maxdurable : 10,     beauty: 0.03,     defence: 0,
+            fixcolor: false,    color:"#787878",  colorname: "黑",
+            colors : ["black"],
+            
+            category: "下衣", layer : "bottom", slot : "bottom", 
+            shop : "all", 
+            
+            acc : null,
+            patterns: [],
+        },
+    ]>>
+<</widget>>
+
+<<widget "InitClothUnderbottoms">>
+    <<set Avatars.inner_bt to [
+        {
+            id: 0,
+            index : "naked",    name : "裸",     gender : "n",
+            text : "无",   
+            tag  : ["裸露"],
+            imgenable : false,
+            dfpng  : {breast:false, pregnant:false},
+
+            cost : 0,        reveal : 0,    hot : 0,    cold : 0,
+            durable : 0,     maxdurable : 0,     beauty: 0,     defence: 0,
+            fixcolor: true,    color:null,  colorname: null,
+            colors : [],
+            
+            category: "内裤", layer : "inner_bt", slot : "bottom", 
+            shop : null, 
+            
+            acc : null,
+            patterns: [],
+        },
+        {
+            id: 1,
+            index : "boxer",    name : "四角内裤",     gender : "m",
+            text : "一条简单的四角内裤",   
+            tag  : ["日常"],
+            imgenable : true,
+            dfpng  : {breast:false, pregnant:false},
+
+            cost : 12,        reveal : 2,    hot : 0.05,    cold : -0.05,
+            durable : 10,     maxdurable : 10,     beauty: 0,     defence: 0,
+            fixcolor: false,    color:"#FDFFF",  colorname: "白",
+            colors : [],
+            
+            category: "内裤", layer : "inner_bt", slot : "bottom", 
+            shop : "all", 
+            
+            acc : null,
+            patterns: [],
+        },
+        {
+            id: 2,
+            index : "pantie",    name : "内裤",     gender : "f",
+            text : "一款简单朴素的内裤",   
+            tag  : ["日常"],
+            imgenable : false,
+            dfpng  : {breast:false, pregnant:false},
+
+            cost : 12,        reveal : 2,    hot : 0,    cold : 0,
+            durable : 10,     maxdurable : 10,     beauty: 0,     defence: 0,
+            fixcolor: false,    color:"#FDFFF",  colorname: "白",
+            colors : [],
+            
+            category: "内裤", layer : "inner_bt", slot : "bottom", 
+            shop : "all", 
+            
+            acc : null,
+            patterns: [],
+        },
+    ]>>
+<</widget>>
+
+<<widget "InitClothShoes">>
+    <<set Avatars.shoes to [
+        {
+            id: 0,
+            index : "naked",    name : "裸",     gender : "n",
+            text : "无",   
+            tag  : ["裸露"], 
+            imgenable : false,
+
+            cost : 0,       reveal : 0,    hot : 0,    cold : 0,
+            durable : 0,    maxdurable : 0,     beauty: 0,     defence: 0,
+            fixcolor: true,    color:null,  colorname: null,
+            colors : [],
+            
+            category: "鞋子",     layer : "shoes",      slot : "shoes",
+            shop : null, 
+
+            acc : null,
+            patterns: [],
+        },
+        {
+            id: 1,
+            index : "sportshoes",    name : "运动鞋",     gender : "n",
+            text : "一双普通的白色运动鞋",   
+            tag  : ["日常","运动"], 
+            imgenable : true,
+
+            cost : 60,       reveal : 0,    hot : 0.1,    cold : -0.1,
+            durable : 30,    maxdurable : 30,     beauty: 0,     defence: 0,
+            fixcolor: true,    color:"#FFFFFF",  colorname: "白",
+            colors : ["white"],
+            
+            category: "鞋子",     layer : "shoes",      slot : "shoes",
+            shop : "all", 
+
+            acc : null,
+            patterns: [],
+        },
+        {
+            id: 2,
+            index : "highheel",    name : "高跟鞋",     gender : "f",
+            text : "一双简单设计的高跟鞋",   
+            tag  : ["日常","商务"], 
+            imgenable : true,
+
+            cost : 80,       reveal : 0,    hot : 0,    cold : 0,
+            durable : 20,    maxdurable : 20,     beauty: 0.02,     defence: 0,
+            fixcolor: false,    color:"#FDFFFF",  colorname: "白",
+            colors : [],
+            
+            category: "鞋子",     layer : "shoes",      slot : "shoes",
+            shop : "all", 
+
+            acc : null,
+            patterns: [],
+        },
+    ]>>
+<</widget>>
+
+<<widget "InitClothSocks">>
+    <<set Avatars.legs to [
+        {
+            id: 0,
+            index : "naked",    name : "裸",     gender : "n",
+            text : "无",   
+            tag  : ["裸露"], 
+            imgenable : false,
+
+            cost : 0,       reveal : 0,    hot : 0,    cold : 0,
+            durable : 0,    maxdurable : 0,     beauty: 0,     defence: 0,
+            fixcolor: true,    color:null,  colorname: null,
+            colors : [],
+            
+            category: "袜子",     layer : "legs",      slot : "legs",
+            shop : null, 
+
+            acc : null,
+            patterns: [],
+        },
+        {
+            id: 1,
+            index : "sportsocks",    name : "运动短袜",     gender : "n",
+            text : "一双简单的运动袜",   
+            tag  : ["日常","运动"], 
+            imgenable : true,
+
+            cost : 10,       reveal : 0,    hot : 0.2,    cold : -0.2,
+            durable : 0,    maxdurable : 0,     beauty: 0,     defence: 0,
+            fixcolor: false,    color:"#FDFFF",  colorname: "白",
+            colors : [],
+            
+            category: "袜子",     layer : "legs",      slot : "legs",
+            shop : null, 
+
+            acc : null,
+            patterns: [],
+        },
+    ]>>
+<</widget>>
