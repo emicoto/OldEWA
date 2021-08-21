@@ -74,9 +74,9 @@
             <<case "CN">>
                 <<print $args[0]>>
             <<case "EN">>
-                <<print setup.EN[$args[0]]>>
+                <<print setup.L.EN[$args[0]]>>
             <<case "JP">>
-                <<print setup.JP[$args[0]]>>
+                <<print setup.L.JP[$args[0]]>>
         <</switch>>
     <<else>>
         <div class="error-view">
@@ -225,13 +225,13 @@
 /*<<dressup category id color pattern>>*/
 
 <<widget "setface">>
-    <<if setup.facelist.includes($args[0])>>
-        <<set $PFace to setup.face[$args[0]]>>
+    <<if A.facelist.includes($args[0])>>
+        <<set $PFace to A.emote[$args[0]]>>
         <<if $intro isnot true or $debug isnot true>>
             <<set $Equip.emote to $args[0]>>
         <</if>>
     <<else>>
-        <<set $PFace to setup.face.正常>>
+        <<set $PFace to A.emote.正常>>
         <<if $intro isnot true or $debug isnot true>>
             <<set $Equip.emote to $args[0]>>
         <</if>>

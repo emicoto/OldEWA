@@ -18,15 +18,15 @@
 <<set _pbr to "">>
 <<set _group to ["性交","怀孕","阴道扩张","V高潮"]>>
 
-<<for _i to 0; _i lt L.explist.length; _i++>>
-    <<if $PC.genital.子宫 is null and _group.includes(L.explist[_i]) is true>>
+<<for _i to 0; _i lt D.explist.length; _i++>>
+    <<if $PC.genital.子宫 is null and _group.includes(D.explist[_i]) is true>>
         <<continue>>
-    <<elseif $PC.genital.阴茎 is null and L.explist[_i] is "射精">>
+    <<elseif $PC.genital.阴茎 is null and D.explist[_i] is "射精">>
         <<continue>>
     <<else>>
         <<set _count ++>>
-        <<if $PC.exp[L.explist[_i]] isnot null>>
-        <div class="listblock"><span class="listname"><b>· </b><<print L.explist[_i]>></span><span class="listnum">- <<print $PC.exp[L.explist[_i]]>></span></div>
+        <<if $PC.exp[D.explist[_i]] isnot null>>
+        <div class="listblock"><span class="listname"><b>· </b><<print D.explist[_i]>></span><span class="listnum">- <<print $PC.exp[D.explist[_i]]>></span></div>
         <</if>>
         <<if _count%4 == 0>>
             <<set _pbr to _pbr+"<br>">>

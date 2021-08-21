@@ -43,17 +43,17 @@
         可选颜色：<br>
         <div id="color_plate">
             <<if $showcase.fixcolor is false>>
-                <<for _i to 0; _i lt L.colorlist.length; _i ++>>
-                    <div class="color_plate" @style="'background-color:'+ L.colorlist[_i].code">
-                    <<set _name to L.colorlist[_i].name>>
+                <<for _i to 0; _i lt A.colorlist.length; _i ++>>
+                    <div class="color_plate" @style="'background-color:'+ A.colorlist[_i].code">
+                    <<set _name to A.colorlist[_i].name>>
                     <<button _name>><</button>>
                     </div>
                 <</for>>
                 <div class="color_plate" style="background-color:#CBC8C7;"><<button 自定义>><</button>></div>
             <<else>>
                 <<for _i to 0; _i lt $showcase.colors.length; _i++>>
-                    <<set _code to L.colors[$showcase.colors[_i]].code>>
-                    <<set _name to L.colors[$showcase.colors[_i]].name>>
+                    <<set _code to A.colors[$showcase.colors[_i]].code>>
+                    <<set _name to A.colors[$showcase.colors[_i]].name>>
                     <div class="color_plate" @style="'background-color:'+_code"><<button _name>><</button>></div>
                 <</for>>
             <</if>>

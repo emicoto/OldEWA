@@ -2,7 +2,7 @@
 
 <<widget "InitAvatar">>
 
-<<set Avatars.layer to [
+<<set A.layer to [
     "frame","addon",
     "hat","kemofront","eyebrow","hairfront",
     "neck","face","emoadd","eyes","mouth",
@@ -10,7 +10,7 @@
     "body","hairback","back","kemoback","background",
 ]>>
 
-<<set L.colorlist to [
+<<set A.colorlist to [
     { name:"黑",    code:"#56545A" },
     { name:"白",    code:"#FFFFFF" },
     { name:"灰",    code:"#CBC8C7" },   
@@ -28,7 +28,7 @@
     { name:"棕",    code:"#9C6C51" },
 ]>>
 
-<<set L.colors to {
+<<set A.colors to {
     mint : { name:"薄荷绿", code: "#BBEEC1" },
     white : { name:"白", code:"#FFFFFF"},
     black : { name:"黑", code:"#56545A"},

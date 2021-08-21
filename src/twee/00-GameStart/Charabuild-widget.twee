@@ -92,7 +92,7 @@
 <</widget>>
 
 <<widget "CMEmote">>
-    <<set _optionlist to setup.facelist>>
+    <<set _optionlist to A.facelist>>
         <<listbox "$Equip.emote" autoselect>>
         <<optionsfrom _optionlist>>
     <</listbox>>

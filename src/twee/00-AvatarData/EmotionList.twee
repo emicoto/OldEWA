@@ -1,8 +1,8 @@
 ﻿:: EmotionList [widget]
 
 <<widget "InitEmotion">>
-    <<set setup.facelist to ["正常","开心","伤心","生气","害羞","困惑","受伤","快感1","快感2","高潮",]>>
-    <<set setup.face to {
+    <<set A.facelist to ["正常","开心","伤心","生气","害羞","困惑","受伤","快感1","快感2","高潮",]>>
+    <<set A.emote to {
         正常 : {
             name : "正常",
             eyebrow : "normal",  eyes : "full",  mouth : "smile",  frame : null,

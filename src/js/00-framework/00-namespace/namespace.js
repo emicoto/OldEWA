@@ -31,10 +31,6 @@ window.EWA = {
 	setup: setup,
 	/** Patch to make javascript execution more consistent (see comment below) */
 	Wikifier: Wikifier,
-	Avatars : Avatars,
-	DataList : DataList,
-	DataBase : DataBase,
-	Lang : Lang,
 }
 /* Make each of these namespaces available at the top level as well */
 window.defineGlobalNamespaces = (namespaces) => {
@@ -77,14 +73,9 @@ window.Avatars = {
 }
 defineGlobalNamespaces(Avatars)
 
-window.DataList = {}
-defineGlobalNamespaces(DataList)
+window.GameData = {}
+defineGlobalNamespaces(GameData)
 
-window.DataBase = {}
-defineGlobalNamespaces(DataBase)
-
-window.Lang = {}
-defineGlobalNamespaces(Lang)
 /**
  * Patches to make javascript execution more consistent
  * OR: Why we alias SugarCube.State as State:

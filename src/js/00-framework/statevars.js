@@ -22,9 +22,9 @@ Object.defineProperties(window, {
 			return Avatars
 		}
 	},
-	L: {
+	D: {
 		get: function() {
-			return DataList
+			return GameData
 		}
 	}
 });
