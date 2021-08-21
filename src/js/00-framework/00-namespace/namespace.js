@@ -76,6 +76,10 @@ defineGlobalNamespaces(Avatars)
 window.GameData = {}
 defineGlobalNamespaces(GameData)
 
+
+window.EWA.Avatars = Avatars
+window.EWA.GameData = GameData
+
 /**
  * Patches to make javascript execution more consistent
  * OR: Why we alias SugarCube.State as State:

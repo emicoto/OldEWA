@@ -2,8 +2,8 @@
 
 <<widget "EnterTryRoom">>
 /* 把身上衣服暂存在TEquip里 */
-<<for _i to 0;_i lt setup.equipindex.length;_i++>>
-    <<set $TEquip[setup.equipindex[_i]] to $Equip[setup.equipindex[_i]]>>
+<<for _i to 0;_i lt D.equipindex.length;_i++>>
+    <<set $TEquip[D.equipindex[_i]] to $Equip[D.equipindex[_i]]>>
 <</for>>
 
 /* 清理身上外在液体 */
@@ -18,15 +18,7 @@
 <</widget>>
 
 
-<<widget "SetTryOn">>
-    <<set $tryon[$args[0]] to [$args[1]]>>
-<</widget>>
-
-<<widget "UnsetTryOn">>
-    <<set $tryon[$args[0]] to null>>
-<</widget>>
-
-<<widget "ShowCase">>
+<<widget "ShowManequin">>
     <<set _layer to Avatars.layer>>
     <<set _group to ["outter","top","inner_up"]>>
     <<set _path to "./image/avatar/"+ $showcase.layer +"/">>
@@ -60,4 +52,67 @@
 
 <</widget>>
 
+<<widget "ShowCase">>
+
+    <div class="followleft">
+        <div id="showcase">
+            <<ShowManequin>>
+        </div>
+    </div>
+
+    <div class="followright">
+    
+    <div id="item_info">
+        <div id="description">
+        <<print $showcase.text>><br>
+        </div>
+        <div class="warmth">适应温度：18C～28C</div>
+
+        <div id="outfit_trait">
+            <div class="of_title">属性：</div>
+            <div class="of_traitlist">
+                <li>日常 - 适合平时穿戴</li>
+            </div>
+        </div>
+
+    </div>
+    
+    <div id="option_containter">
+        <<if $showcase.patterns.length gt 0>>
+            可选图案：<br>
+            <div id="pattern_option">
+                <<for _i to 0; _i lt $showcase.patterns.length; _i++>>
+                    <<set _name to $showcase.patterns[_i]>>
+                    <<print "<<button _name>><<run setPatterns('"+_name+"')>><</button>>">>
+                <</for>>          
+            </div>
+        <</if>>
+
+        <<if $showcase.fixcolor is false or $showcase.colors.length gt 0>>
+            可选颜色：<br>
+            <div id="color_plate">
+                <<if $showcase.fixcolor is false>>
+                    <<for _i to 0; _i lt A.colorlist.length; _i ++>>
+                        <div class="color_plate" @style="'background-color:'+ A.colorlist[_i].code">
+                        <<set _name to A.colorlist[_i].name>>
+                        <<print "<<button _name>><<run setColors(A.colorlist["+_i+"].code,A.colorlist["+_i+"].name)>><</button>>">>
+                        </div>
+                    <</for>>
+                    <div class="color_plate" style="background-color:#CBC8C7;"><<button 自定义>><</button>></div>
+                <<else>>
+                    <<for _i to 0; _i lt $showcase.colors.length; _i++>>
+                        <<set _code to A.colors[$showcase.colors[_i]].code>>
+                        <<set _name to A.colors[$showcase.colors[_i]].name>>
+                        <div class="color_plate" @style="'background-color:'+_code">
+                        <<print "<<button _name>><<run setColors($showcase.colors["+_i+"],A.colors[$showcase.colors["+_i+"]].name)>><</button>>">>
+                        </div>
+                    <</for>>
+                <</if>>
+            </div>
+        <</if>>
+    </div>
+
+    </div>
+
+<</widget>>
 

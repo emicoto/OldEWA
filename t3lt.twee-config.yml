@@ -265,3 +265,7 @@ sugarcube-2:
       name: EnterTryRoom
     Opening:
       name: Opening
+    setshowcase:
+      name: setshowcase
+    ShowManequin:
+      name: ShowManequin

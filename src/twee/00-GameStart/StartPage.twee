@@ -26,7 +26,7 @@ Elysion是一个类似现代——2021年地球的世界，虽然表面上平平
 <div id="test"></div>
 <div class="delayed">
 <span style="line-height:40px;font-size:13px;padding:0px;margin:0px">　
-<<link [[＞ 开始游戏|开始]]>><</link>></span><br>
+<<link "＞ 开始游戏" "开始">><<GSApply>><<set $intro to false>><</link>></span><br>
 
 <<include "初始设定">>
 </div>
@@ -77,7 +77,7 @@ $(document).on(':passagerender', function (ev) {
 <<dashline>>
 
 :: 开始
-<<GSApply>><<set $intro to false>>
+
 
 <<you>>准备好了吗？<br>
 故事要开始哦哦！<br>

@@ -96,6 +96,10 @@
     letter-spacing: 1px;
 }
 
+#description {
+    width: 80%;
+    max-width: 500px;
+}
 
 #option_containter {
     width: calc(100% - 120px);

@@ -131,8 +131,8 @@
 
             cost : 200,        reveal : 9,        hot : 0.5, cold : -0.5,  /* 数值是直接在21上加减 */
             durable : 15,     maxdurable : 15,     beauty: 0.05,     defence: 0,
-            fixcolor: true,    color:"white",  colorname: "白",
-            colors : ["white"],
+            fixcolor: true,    color:"black",  colorname: "黑",
+            colors : ["white","black"],
             
             category: "上衣", layer : "top",  slot : "onepiece", 
             shop : "all",
@@ -168,7 +168,7 @@
         {
             id: 1,
             index : "shortpant",    name : "短裤",     gender : "n",
-            text : "一条简单的短裤",   
+            text : "一条简单的短裤。",   
             tag  : ["日常"],
             imgenable : true,
             dfpng  : {breast:false, pregnant:false},
@@ -187,7 +187,7 @@
         {
             id: 2,
             index : "shortskirt",    name : "短裙",     gender : "f",
-            text : "一条简单的短裙",   
+            text : "一条简单的短裙。",   
             tag  : ["日常"],
             imgenable : true,
             dfpng  : {breast:false, pregnant:true},
@@ -249,7 +249,7 @@
         {
             id: 1,
             index : "boxer",    name : "四角内裤",     gender : "m",
-            text : "一条简单的四角内裤",   
+            text : "一条简单的四角内裤。",   
             tag  : ["日常"],
             imgenable : true,
             dfpng  : {breast:false, pregnant:false},
@@ -268,7 +268,7 @@
         {
             id: 2,
             index : "pantie",    name : "内裤",     gender : "f",
-            text : "一款简单朴素的内裤",   
+            text : "一款简单朴素的内裤。",   
             tag  : ["日常"],
             imgenable : false,
             dfpng  : {breast:false, pregnant:false},
@@ -310,7 +310,7 @@
         {
             id: 1,
             index : "sportshoes",    name : "运动鞋",     gender : "n",
-            text : "一双普通的白色运动鞋",   
+            text : "一双普通的白色运动鞋。",   
             tag  : ["日常","运动"], 
             imgenable : true,
 
@@ -328,7 +328,7 @@
         {
             id: 2,
             index : "highheel",    name : "高跟鞋",     gender : "f",
-            text : "一双简单设计的高跟鞋",   
+            text : "一双简单设计的高跟鞋。",   
             tag  : ["日常","商务"], 
             imgenable : true,
 
@@ -369,7 +369,7 @@
         {
             id: 1,
             index : "sportsocks",    name : "运动短袜",     gender : "n",
-            text : "一双简单的运动袜",   
+            text : "一双简单的运动袜。",   
             tag  : ["日常","运动"], 
             imgenable : true,
 

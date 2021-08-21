@@ -166,8 +166,8 @@ $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌}
 
 
 <<set $PC.mark to {
-    "快乐" : setup.marksheet,    "痛苦" : setup.marksheet,
-    "恐惧" : setup.marksheet,    "耻辱" : setup.marksheet,
+    "快乐" : D.marksheet,    "痛苦" : D.marksheet,
+    "恐惧" : D.marksheet,    "耻辱" : D.marksheet,
 }>>
 
 /* 纹身，layer有额头、脸颊（左右）、锁骨（左右）、胸（左右）、后脖根、手臂（左右）、后背、腰窝、 臀瓣（左右），大腿（左右）*/
@@ -179,7 +179,7 @@ $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌}
     "右臀":null,    "左腿":null,    "右腿":null,
 }>> 
 
-/* 现有装备 */
+/* 现有衣服等装备 */
 <<set $Equip to {
 	neck    : null,     hat  : null,	    face : null,
 	outter  : null,	    top  : null,        hand : null,
@@ -187,7 +187,7 @@ $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌}
     shoes   : null,     legs   : null,
     back    : null,
     hairfront : "natural",    hairback  : "straight",
-    emote     : "正常"
+    emote     : "正常",
 }>>
 
 <!-- 临时备份 -->

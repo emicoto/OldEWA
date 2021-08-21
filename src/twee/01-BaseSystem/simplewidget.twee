@@ -242,8 +242,8 @@
 <</widget>>
 
 <<widget "gonaked">>
-    <<for _i to 0;_i lt setup.equipindex.length;_i++>>
-        <<set $TEquip[setup.equipindex[_i]] to $Equip[setup.equipindex[_i]]>>
+    <<for _i to 0;_i lt GameData.equipindex.length;_i++>>
+        <<set $TEquip[D.equipindex[_i]] to $Equip[D.equipindex[_i]]>>
     <</for>>
 
     <<set $Equip.outter to null>>
@@ -260,8 +260,8 @@
 <</widget>>
 
 <<widget "redress">>
-    <<for _i to 0;_i lt setup.equipindex.length;_i++>>
-        <<set $Equip[setup.equipindex[_i]] to $TEquip[setup.equipindex[_i]]>>
+    <<for _i to 0;_i lt D.equipindex.length;_i++>>
+        <<set $Equip[D.equipindex[_i]] to $TEquip[D.equipindex[_i]]>>
     <</for>>
     <<fixvalue>>
     <<SetAvatar>>

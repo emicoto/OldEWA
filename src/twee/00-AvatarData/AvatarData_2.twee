@@ -97,7 +97,7 @@
             category: "外衣", layer : "outter",
             shop : null, 
             
-            slot : "tops", 
+            slot : "top", 
             tuckinable: false,        tuckin : false, 
             acc : null,
             patterns: []
@@ -125,7 +125,49 @@
             category: "内衣", layer : "inner_up",
             shop : null, 
             
-            slot : "tops",
+            slot : "top",
+            tuckinable: false,        tuckin : false, 
+            acc : null,
+            patterns: []
+        },
+        {
+            id: 1,
+            index : "camisole",    name : "吊带背心",     gender : "f",
+            text : "一件简单的吊带背心，给胸部小小的你带来些许安全感。",   
+            tag  : ["日常"],
+            dfpng  : {breast:false, pregnant:false},
+            imgenable : false,
+
+            cost : 30,        reveal : 7,        hot : 0.2, cold : -0.2,
+            durable : 10,     maxdurable : 10,     beauty: 0,     defence: 0,
+            fixcolor: false,    color:"#FFFFF",  colorname: "白",
+            colors : [],
+            
+            category: "内衣", layer : "inner_up",
+            shop : "all", 
+            
+            slot : "top",
+            tuckinable: false,        tuckin : false, 
+            acc : null,
+            patterns: []
+        },
+        {
+            id: 2,
+            index : "simplebra",    name : "胸罩",     gender : "f",
+            text : "一件设计朴素的胸罩。",   
+            tag  : ["日常"],
+            dfpng  : {breast:false, pregnant:false},
+            imgenable : false,
+
+            cost : 60,        reveal : 4,        hot : 0, cold : 0,
+            durable : 10,     maxdurable : 10,     beauty: 0,     defence: 0,
+            fixcolor: false,    color:"#FFFFF",  colorname: "白",
+            colors : [],
+            
+            category: "内衣", layer : "inner_up",
+            shop : "all", 
+            
+            slot : "top",
             tuckinable: false,        tuckin : false, 
             acc : null,
             patterns: []

@@ -6,125 +6,180 @@
 
 <<EnterTryRoom>>
 
-<<set $showcase to A.top[3]>>
 
-<<if $showcase isnot null>><</if>>
 <div id="show_container">
-
-    <div class="followleft">
-        <div id="showcase">
-            <<ShowCase>>
-        </div>
-    </div>
-
-    <div class="followright">
-    
-    <div id="item_info">
-        <div id="description">
-        一件简单的T恤。 并不能给你太多保护，但总比没有好。<br>
-        </div>
-        <div id="warmth">适应温度：18C～28C</div>
-
-        <div id="outfit_trait">
-            <div class="of_title">属性：</div>
-            <div class="of_traitlist">
-                <li>日常 - 适合平时穿戴</li>
-            </div>
-        </div>
-
-    </div>
-    
-    <div id="option_containter">
-        可选图案：<br>
-        <div id="pattern_option">
-            slime  heart  pattern1  patern2  pattern3  pattern4  pattern5  pattern6  pattern7 pattern8
-        </div>
-
-        可选颜色：<br>
-        <div id="color_plate">
-            <<if $showcase.fixcolor is false>>
-                <<for _i to 0; _i lt A.colorlist.length; _i ++>>
-                    <div class="color_plate" @style="'background-color:'+ A.colorlist[_i].code">
-                    <<set _name to A.colorlist[_i].name>>
-                    <<button _name>><</button>>
-                    </div>
-                <</for>>
-                <div class="color_plate" style="background-color:#CBC8C7;"><<button 自定义>><</button>></div>
-            <<else>>
-                <<for _i to 0; _i lt $showcase.colors.length; _i++>>
-                    <<set _code to A.colors[$showcase.colors[_i]].code>>
-                    <<set _name to A.colors[$showcase.colors[_i]].name>>
-                    <div class="color_plate" @style="'background-color:'+_code"><<button _name>><</button>></div>
-                <</for>>
-            <</if>>
-        </div>
-    </div>
-
-    </div>
-
+    <<if $showcase isnot null>><<ShowCase>><</if>>  
 </div>
+
+<<set _shop to ["all","offline"]>>
+<<set _placeholder to "image/avatar/thumb.png">>
+<<set _table to []>>
 
 <div id="ShopList">
   <ul>
     <li class="category"><a href="#hat">头饰</a></li>
     <li class="category"><a href="#outter">外套</a></li>
-    <li class="category"><a href="#tops">上装</a></li>
-    <li class="category"><a href="#bottoms">下装</a></li>
+    <li class="category"><a href="#top">上装</a></li>
+    <li class="category"><a href="#bottom">下装</a></li>
     <li class="category"><a href="#inner_up">内衣</a></li>
     <li class="category"><a href="#inner_bt">内裤</a></li>
-    <li class="category"><a href="#legging">袜子</a></li>
+    <li class="category"><a href="#legs">袜子</a></li>
     <li class="category"><a href="#shoes">鞋子</a></li>
-    <li class="category"><a href="#other">其他</a></li>
+    <li class="category"><a href="#accesory">饰品</a></li>
   </ul>
-
+    
     <div id="hat">
-        <p>帽子什么的</p>
+        <<for _i to 0; _i lt Avatars.hat.length; _i ++>>
+            <<if A.hat[_i].shop is null or _shop.includes(A.hat[_i].shop) is false>>
+                <<continue>>
+            <<else>>
+                <<if Avatars.hat[_i].imgenable is true>>
+                    <<set _img to "image/avatar/hat/" + A.hat[_i].index + "/thumb.png">>
+                <<else>>
+                    <<set _img to _placeholder>>
+                <</if>>
+                 <div class="show_items">
+                    <div class="itemthumb"><<print "<<link [img[_img]]>><<run setShowCase(A.hat["+_i+"])>><</link>>">></div>
+                    <div class="itemname"><<print A.hat[_i].name>></div>
+                    <div class="itemprice">￥<<print A.hat[_i].cost>></div>
+                </div>
+            <</if>>
+        <</for>>
     </div>
 
     <div id="outter">
-        <p>外套大衣什么的</p>
+        <<for _i to 0; _i lt Avatars.outter.length; _i ++>>
+            <<if A.outter[_i].shop is null or _shop.includes(A.outter[_i].shop) is false>>
+                <<continue>>
+            <<else>>
+                <<if Avatars.outter[_i].imgenable is true>>
+                    <<set _img to "image/avatar/top/" + A.outter[_i].index + "/thumb.png">>
+                <<else>>
+                    <<set _img to _placeholder>>
+                <</if>>
+                 <div class="show_items">
+                    <div class="itemthumb"><<print "<<link [img[_img]]>><<run setShowCase(A.outter["+_i+"])>><</link>>">></div>
+                    <div class="itemname"><<print A.outter[_i].name>></div>
+                    <div class="itemprice">￥<<print A.outter[_i].cost>></div>
+                </div>
+            <</if>>
+        <</for>>
     </div>
 
-    <div id="tops">
-        <<if $activepage is "tops">>
-
-        <</if>>
-        <<set _img to "image/avatar/top/shirt/thumb.png">>
-        
-        <div class="show_items">
-            <span class="itemthumb"><<link [img[image/avatar/top/Tshirt/thumb.png]] >><</link>></span>
-            <span class="itemname">T恤</span>
-            <span class="itemprice">￥10</span>
-        </div> 
-
-        <div class="show_items">
-            <span class="itemthumb"><<link [img[_img]] >><</link>></span>
-            <span class="itemname">衬衫</span>
-            <span class="itemprice">￥10</span>
-        </div>
+    <div id="top">
+        <<for _i to 0; _i lt Avatars.top.length; _i ++>>
+            <<if A.top[_i].shop is null or _shop.includes(A.top[_i].shop) is false>>
+                <<continue>>
+            <<else>>
+                <<if Avatars.top[_i].imgenable is true>>
+                    <<set _img to "image/avatar/top/" + A.top[_i].index + "/thumb.png">>
+                <<else>>
+                    <<set _img to _placeholder>>
+                <</if>>
+                 <div class="show_items">
+                    <div class="itemthumb"><<print "<<link [img[_img]]>><<run setShowCase(A.top["+_i+"])>><</link>>">></div>
+                    <div class="itemname"><<print A.top[_i].name>></div>
+                    <div class="itemprice">￥<<print A.top[_i].cost>></div>
+                </div>
+            <</if>>
+        <</for>>
     </div>
 
-    <div id="bottoms">
-        <p>裤子什么的</p>
+    <div id="bottom">
+        <<for _i to 0; _i lt Avatars.bottom.length; _i ++>>
+            <<if A.bottom[_i].shop is null or _shop.includes(A.bottom[_i].shop) is false>>
+                <<continue>>
+            <<else>>
+                <<if Avatars.bottom[_i].imgenable is true>>
+                    <<set _img to "image/avatar/bottom/" + A.bottom[_i].index + "/thumb.png">>
+                <<else>>
+                    <<set _img to _placeholder>>
+                <</if>>
+                 <div class="show_items">
+                    <div class="itemthumb"><<print "<<link [img[_img]]>><<run setShowCase(A.bottom["+_i+"])>><</link>>">></div>
+                    <div class="itemname"><<print A.bottom[_i].name>></div>
+                    <div class="itemprice">￥<<print A.bottom[_i].cost>></div>
+                </div>
+            <</if>>
+        <</for>>
     </div>
 
     <div id="inner_up">
-        <p>内衣</p>
+        <<for _i to 0; _i lt Avatars.inner_up.length; _i ++>>
+            <<if A.inner_up[_i].shop is null or _shop.includes(A.inner_up[_i].shop) is false>>
+                <<continue>>
+            <<else>>
+                <<if Avatars.inner_up[_i].imgenable is true>>
+                    <<set _img to "image/avatar/inner_up/" + A.inner_up[_i].index + "/thumb.png">>
+                <<else>>
+                    <<set _img to _placeholder>>
+                <</if>>
+                 <div class="show_items">
+                    <div class="itemthumb"><<print "<<link [img[_img]]>><<run setShowCase(A.inner_up["+_i+"])>><</link>>">></div>
+                    <div class="itemname"><<print A.inner_up[_i].name>></div>
+                    <div class="itemprice">￥<<print A.inner_up[_i].cost>></div>
+                </div>
+            <</if>>
+        <</for>>
     </div>
 
     <div id="inner_bt">
-        <p>内裤</p>
+        <<for _i to 0; _i lt Avatars.inner_bt.length; _i ++>>
+            <<if A.inner_bt[_i].shop is null or _shop.includes(A.inner_bt[_i].shop) is false>>
+                <<continue>>
+            <<else>>
+                <<if Avatars.inner_bt[_i].imgenable is true>>
+                    <<set _img to "image/avatar/inner_bt/" + A.inner_bt[_i].index + "/thumb.png">>
+                <<else>>
+                    <<set _img to _placeholder>>
+                <</if>>
+                 <div class="show_items">
+                    <div class="itemthumb"><<print "<<link [img[_img]]>><<run setShowCase(A.inner_bt["+_i+"])>><</link>>">></div>
+                    <div class="itemname"><<print A.inner_bt[_i].name>></div>
+                    <div class="itemprice">￥<<print A.inner_bt[_i].cost>></div>
+                </div>
+            <</if>>
+        <</for>>
     </div>
 
-    <div id="legging">
-        <p>袜子啥的</p>
-    </div>
+    <div id="legs">
+        <<for _i to 0; _i lt Avatars.legs.length; _i ++>>
+            <<if A.legs[_i].shop is null or _shop.includes(A.legs[_i].shop) is false>>
+                <<continue>>
+            <<else>>
+                <<if Avatars.legs[_i].imgenable is true>>
+                    <<set _img to "image/avatar/legs/" + A.legs[_i].index + "/thumb.png">>
+                <<else>>
+                    <<set _img to _placeholder>>
+                <</if>>
+                 <div class="show_items">
+                    <div class="itemthumb"><<print "<<link [img[_img]]>><<run setShowCase(A.legs["+_i+"])>><</link>>">></div>
+                    <div class="itemprice">￥<<print A.legs[_i].cost>></div>
+                </div>
+            <</if>>
+        <</for>>
+      </div>
 
     <div id="shoes">
-        <p>鞋子</p>
+        <<for _i to 0; _i lt Avatars.shoes.length; _i ++>>
+            <<if A.shoes[_i].shop is null or _shop.includes(A.shoes[_i].shop) is false>>
+                <<continue>>
+            <<else>>
+                <<if Avatars.shoes[_i].imgenable is true>>
+                    <<set _img to "image/avatar/shoes/" + A.shoes[_i].index + "/thumb.png">>
+                <<else>>
+                    <<set _img to _placeholder>>
+                <</if>>
+                 <div class="show_items">
+                    <div class="itemthumb"><<print "<<link [img[_img]]>><<run setShowCase(A.shoes["+_i+"])>><</link>>">></div>
+                    <div class="itemname"><<print A.shoes[_i].name>></div>
+                    <div class="itemprice">￥<<print A.shoes[_i].cost>></div>
+                </div>
+            <</if>>
+        <</for>>
     </div>
 
-    <div id="other">
+    <div id="accesory">
         <p>其他装饰</p>
     </div>
 

@@ -56,3 +56,27 @@ window.linkifyDivs = function (parentSelector = "") {
 	$(document).ready(() => { $(parentSelector + " .div-link").click(function (e) { $(this).find('a').first().click(); }) });
 	$(document).ready(() => { $(parentSelector + " .div-link a").click(function (e) { e.stopPropagation(); }) });
 }
+
+function setShowCase(table) {
+    if (typeof(table) == "object") {
+        V.showcase = table
+        new Wikifier(null,"<<replace '#show_container'>><<ShowCase>><</replace>>")
+    }else{
+        console.log(table,"error: is not object")
+    }
+
+}
+window.setShowCase = setShowCase
+
+function setPatterns(arg) {
+    V.showcase.acc = arg
+    new Wikifier(null,"<<replace '#showcase'>><<ShowManequin>><</replace>>")
+}
+window.setPatterns = setPatterns
+
+function setColors(arg,name) {
+    V.showcase.color = arg
+    V.showcase.colorname = name
+    new Wikifier(null,"<<replace '#showcase'>><<ShowManequin>><</replace>>")
+}
+window.setColors = setColors
