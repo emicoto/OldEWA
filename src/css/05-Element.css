@@ -91,3 +91,11 @@
     text-shadow: 1px 1px 0px rgba(187, 187, 187, 0.5),-2px -2px 0px #eee,;
     color:#ccc;
 }
+
+.eventsituation {
+    width: 100%;
+    height: fit-content;
+    margin: auto;
+    font-size: 24px;
+    font-family:珍珠体, Georgia;
+}
