@@ -102,14 +102,3 @@
     <<if _timer lte 0>><<stop>><</if>>
 <</repeat>>
 <</silently>>
-
-<<widget "updateaction">>
-
-<<switch $args[0]>>
-    <<case "buy">>
-        你花费<<print $showcase.cost>>购买了<<print $showcase.name>>。
-    <<case "nomenytobuy">>
-        虽然你想买<<print $showcase.name>>，可惜钱不够了……
-<</switch>>
-
-<</widget>>
