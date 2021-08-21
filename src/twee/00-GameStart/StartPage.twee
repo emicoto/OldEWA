@@ -15,7 +15,7 @@
 Elysion World Adventure
 
 :: Start [nosave]
-
+<<audio "幻想" volume 1 play loop>>
 <div id="startpage">
 <span class="intro">这是一个发生在名叫Elysion的星球的故事。<br>
 Elysion是一个类似现代——2021年地球的世界，虽然表面上平平无奇，实际上隐藏着各种超自然存在。<br>

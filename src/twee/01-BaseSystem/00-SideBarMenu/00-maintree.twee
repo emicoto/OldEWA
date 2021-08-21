@@ -2,6 +2,10 @@
 :: StoryCaption
 <div @class="(Errors.log.length==0?'hidden':'') + ' error-reporter-btn'" onclick="Errors.Reporter.toggle()"></div>
 
+<div id="volume">
+♫♪♩♬ <<volume>>
+</div>
+
 <div id="storyCaptionDiv">
 
 <!-- 游戏还没开始时 */ -->

@@ -227,3 +227,59 @@ label {
 	cursor: pointer;
 }
 
+input[type=range] {
+  -webkit-appearance: none;
+	vertical-align: middle;
+  border: 0;
+}
+
+input[type=range]:focus {
+  outline: none;
+}
+
+#volume {
+  font-size: 10px;
+  font-family: 'Times New Roman', "MS PGothic";
+  position: fixed;
+  top:0px;
+  right:10px;
+}
+
+.VolumeSlider, .VolumeSlider::-webkit-slider-runnable-track {
+  -webkit-appearance: none;
+  width: 120px;
+  height: 5px;
+  max-height: 5px;
+  background: #fff;
+  outline: none;
+  opacity: 0.6;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+  border: 1px solid #bbb;
+}
+
+.VolumeSlider:hover {
+  opacity: 1;
+}
+
+.VolumeSlider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 5px;
+  height: 15px;
+  background: #bfc22f;
+  cursor: pointer;
+  margin-top: -5px;
+}
+
+.VolumeSlider::-moz-range-thumb {
+  width: 5px;
+  height: 15px;
+  background: #bfc22f;
+  cursor: pointer;
+  margin-top: -5px;
+}
+
+input[type=range]:focus::-webkit-slider-runnable-track {
+  background: #d1d1d1;
+}

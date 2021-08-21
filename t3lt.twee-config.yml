@@ -277,3 +277,7 @@ sugarcube-2:
       name: showinner
     buyoutfit:
       name: buyoutfit
+    InitBGM:
+      name: InitBGM
+    volume:
+      name: volume

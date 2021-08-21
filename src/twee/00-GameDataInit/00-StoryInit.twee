@@ -3,6 +3,7 @@
      var=[0,1,2,3] , luatable[0] = $var[0]  -->
 <!-- 首先初始化资料库 -->
 <<InitDataBase>>
+<<InitBGM>>
 
 <!-- 游戏系统环境设定 -->
 <<set $temp to {}>>
