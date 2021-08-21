@@ -15,11 +15,13 @@
     <<continue>>
 <<else>>
 
-    <<if $avatar.top isnot null>>
-        <<if $avatar.top.tuckin is true and _layer[_i] is "top">>
-            <<set _zindex to "z-index:"+(23-_i-1)>>
-        <<elseif $avatar.top.tuckin is true and _layer[_i] is "bottom">>
-            <<set _zindex to "z-index:"+(23-_i+1)>>
+    <<if $avatar.top isnot null and $avatar.bottom isnot null>>
+        <<if $avatar.top.tuckin is true or $avatar.bottom.slot is "overall">>
+            <<if _layer[_i] is "top">>
+                <<set _zindex to "z-index:"+(23-_i-1)>>
+            <<elseif _layer[_i] is "bottom">>
+                <<set _zindex to "z-index:"+(23-_i+1)>>
+            <</if>>
         <</if>>
     <</if>>
 

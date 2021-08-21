@@ -1,0 +1,115 @@
+﻿:: 试衣间
+<span class="title">服装店</span><br>
+<div class="lbox">
+商场里的服装店。商品琳琅满目，什么都有。<br>
+</div>
+<<set $shoptype to ["all","offline"]>>
+
+<<EnterTryRoom>>
+<div id="action-text2"></div>
+<div id="action-popup" class="hidden"><span id="action-text"></span></div>
+
+<div id="show_container">
+    <<if $showcase isnot null>><<ShowCase>><</if>>  
+</div>
+
+<div id="ShopList">
+  <ul>
+    <li class="category"><a href="#hat">头饰</a></li>
+    <li class="category"><a href="#outter">外套</a></li>
+    <li class="category"><a href="#top">上装</a></li>
+    <li class="category"><a href="#bottom">下装</a></li>
+    <li class="category"><a href="#inner_up">内衣</a></li>
+    <li class="category"><a href="#inner_bt">内裤</a></li>
+    <li class="category"><a href="#legs">袜子</a></li>
+    <li class="category"><a href="#shoes">鞋子</a></li>
+    <li class="category"><a href="#accesory">饰品</a></li>
+  </ul>
+    
+    <div id="hat">
+        <<ShowAShopItems "hat">>
+    </div>
+
+    <div id="outter">
+        <<ShowAShopItems "outter">>
+    </div>
+
+    <div id="top">
+        <<ShowAShopItems "top">>
+    </div>
+
+    <div id="bottom">
+        <<ShowAShopItems "bottom">>
+    </div>
+
+    <div id="inner_up">
+        <<ShowAShopItems "inner_up">>
+    </div>
+
+    <div id="inner_bt">
+        <<ShowAShopItems "inner_bt">>
+    </div>
+
+    <div id="legs">
+        <<ShowAShopItems "legs">>
+    </div>
+
+    <div id="shoes">
+        <<ShowAShopItems "shoes">>
+    </div>
+
+    <div id="accesory">
+        <<ShowAShopItems "face">>
+        <<ShowAShopItems "neck">>
+        <<ShowAShopItems "hand">>
+        <<ShowAShopItems "back">>
+    </div>
+
+</div>
+
+
+<br><br>
+
+<div class="showinner">
+<<link "只看内衣">><<showinner>><</link>>
+</div>
+<div class="buybotton">
+<<link "购买">><<run BuyOutFit()>><</link>>
+</div>
+<div class="trybotton">
+<<link "试穿">><<tryon $showcase.layer>><</link>>
+</div>
+<div class="redress">
+<<link "复位">><<redress>><</link>>
+</div>
+
+<div class="backbutton">
+<<link "离开" "怡安小区">><<redress>><</link>><br>
+</div>
+
+
+
+<<silently>>
+/* 自动刷新等待JS读取结束 */
+<<set _timer to 10>>
+<<repeat 0.3s>>
+    <<script>>
+        $( function() {
+            $( "#ShopList" ).tabs();
+        } );
+    <</script>>
+    <<set _timer to _timer -1>>
+    <<if _timer lte 0>><<stop>><</if>>
+<</repeat>>
+<</silently>>
+
+<<widget "updateaction">>
+
+<<switch $args[0]>>
+    <<case "buy">>
+        你花费<<print $showcase.cost>>购买了<<print $showcase.name>>。
+    <<case "nomenytobuy">>
+        虽然你想买<<print $showcase.name>>，可惜钱不够了……
+<</switch>>
+
+<</widget>>

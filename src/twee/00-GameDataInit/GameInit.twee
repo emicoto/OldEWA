@@ -66,6 +66,10 @@
     background  : null,
 }>>
 
+/* 商店种类 */
+<<set $shoptype to []>>
+<<set $showcase to null>>
+
 <!-- 持有物 -->
 <<set $items to {}>>
 
@@ -77,9 +81,13 @@
     bottom : [],
     inner_up : [],
     inner_bt : [],
-    accesory : [],
     shoes : [],
     legs : [],
+
+    face : [],
+    neck : [],
+    hand : [],
+    back : [],
 }>>
 
 /* 宠物设定 */

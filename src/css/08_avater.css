@@ -7,15 +7,6 @@
     margin-left: 40px;
 }
 
-#tryon {
-    width: 180px;
-    height: 260px;
-    border: 1px solid #ddd;
-    position: relative;
-    overflow: hidden;
-    float: left;
-}
-
 .Layer {
     width: 180px;
     height: 260px;
@@ -225,7 +216,7 @@
     background-color: rgba(255, 255, 255, 0.3);
     border: 1px solid #ddd;
     padding: 10px;
-    display: inline-flex;
+    display: inline-table;
     width: 100%;
     min-width: 500px;
     max-width: 800px;
@@ -244,6 +235,8 @@
     margin: 2px 5px;
     position:relative;
     border: 1px solid #ccc;
+    float: left;
+    overflow: clip;    
 }
 
 .itemthumb {
@@ -251,8 +244,12 @@
     height: 80px;
     position: absolute;
     top:0px;
-    left:0px;
+    left:-5px;
     z-index: 0;
+}
+
+.itemthumb:hover {
+    background-color: rgba(127, 255, 212, 0.2);
 }
 
 .itemname {
@@ -271,9 +268,59 @@
     height: 30px;
     position: absolute;
     right: 0px;
-    bottom: 16px;
+    bottom: 5px;
     z-index: 1;
-    font-size: 16px;
-    font-weight: 600;
+    font-size: 15px;
+    font-family: 新综艺B;
     color: orange;
+    letter-spacing: 1px;
+}
+
+#action-popup {
+    position: fixed;
+    top: 120px;
+    right:30px;
+    border: 2px solid rgb(216, 215, 199);
+    border-radius: 10px;
+    padding: 20px 10px;
+    text-align: center;
+    background-color: #fff;
+    z-index: 100;
+    min-width: 200px;
+    max-width: 600px;
+}
+
+#action-popup.flash {
+    background-color:rgb(247, 255, 220);
+}
+
+#action-text2 {
+	display: table;
+	background-color: #eee;
+    border-radius: 3px;
+    transition: all 1.25s;
+}
+#action-text2.flash {
+	background-color:rgb(169, 255, 241);
+}
+.popup {
+    animation: popup 0.75s linear alternate-reverse;
+}
+.action-flash {
+	border-color: rgb(169, 255, 241) !important;
+    color: black !important;
+}
+.action-flash a {
+	color: darkgoldenrod !important;
+}
+.notransition {
+	transition: none !important;
+}
+
+@keyframes popup {
+    100%  {transform: translateX(-1%); transform: scale(0.01)};
+    75% {transform: translateX(-50%); transform: scale(0.25)};
+    50% {transform: translateX(-100%); transform: scale(0.5)};
+    25% {transform: translateX(-150%); transform: scale(0.75)};
+    0% {transform: translateX(-200%); transform: scale(1.25)};
 }

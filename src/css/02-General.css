@@ -197,6 +197,12 @@ hr {
   font-weight: 500;
 }
 
+.div-link {
+	cursor: pointer;
+}
+.div-link a {
+	pointer-events: none;
+}
 
 #next {
 position: fixed;

@@ -71,3 +71,9 @@ window.saveDataCompare = function(save1, save2){
 	})
 	return result;
 }
+
+// Make .divs-links clickable as if they're anchors
+window.linkifyDivs = function (parentSelector = "") {
+	$(document).ready(() => { $(parentSelector + " .div-link").click(function (e) { $(this).find('a').first().click(); }) });
+	$(document).ready(() => { $(parentSelector + " .div-link a").click(function (e) { e.stopPropagation(); }) });
+}

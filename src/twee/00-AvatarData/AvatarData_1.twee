@@ -123,7 +123,7 @@
         },
         {
             id: 3,
-            index : "bwopiece",    name : "黑白连衣裙",     gender : "f",
+            index : "bwopiece",    name : "BW连衣裙",     gender : "f",
             text : "一件设计简单的连衣裙。修身的设计显得你身材更苗条。毕竟是易淘上的便宜货，不能指望布料的防御效果。",   
             tag  : ["日常"],
             imgenable : true,
@@ -379,7 +379,7 @@
             colors : [],
             
             category: "袜子",     layer : "legs",      slot : "legs",
-            shop : null, 
+            shop : "all", 
 
             acc : null,
             patterns: [],

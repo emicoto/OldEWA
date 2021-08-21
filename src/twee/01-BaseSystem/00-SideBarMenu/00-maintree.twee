@@ -17,7 +17,7 @@
 <!-- 游戏内日期和时钟 -->
 <div id="showtimes"><<timestats>></div>
 
-<span class="money">　<<printmoney $money>></span><br>
+<span id="money" class="money">　<<printmoney $money>></span><br>
 <!-- 简短通知 -->
 <<notification>>
 
@@ -76,6 +76,7 @@
 		<<if $intro isnot true>>
 			<<replace "#playerstats">><<playerstatus>><</replace>>
 			<<replace "#showtimes">><<timestats>><</replace>>
+			<<replace "#money">>　<<printmoney $money>><</replace>>
 		<</if>>
 	<</repeat>>
 <</silently>>

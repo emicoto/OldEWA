@@ -269,3 +269,11 @@ sugarcube-2:
       name: setshowcase
     ShowManequin:
       name: ShowManequin
+    ShowAShopItems:
+      name: ShowAShopItems
+    tryon:
+      name: tryon
+    showinner:
+      name: showinner
+    buyoutfit:
+      name: buyoutfit

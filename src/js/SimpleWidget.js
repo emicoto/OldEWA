@@ -80,3 +80,21 @@ function setColors(arg,name) {
     new Wikifier(null,"<<replace '#showcase'>><<ShowManequin>><</replace>>")
 }
 window.setColors = setColors
+
+function BuyOutFit() {
+    if (V.money > V.showcase.cost) {
+        V.money = V.money - V.showcase.cost
+        V.closet[V.showcase.layer].push(V.showcase)
+        var text = "你花费了"+V.showcase.cost+"元购买了"+V.showcase.name+"<</replace>>"
+    }else{
+        var text = "虽然你想买"+V.showcase.name+"，但钱不够……"
+    }
+
+    new Wikifier(null,"<<replace '#action-text'>>"+text)
+    new Wikifier(null,"<<replace '#action-text2'>>"+text)
+
+    $('#action-popup').removeClass('hidden'); setTimeout(() => { $('#action-popup').addClass('hidden') }, 3200);
+    $('#action-popup').addClass('popup'); setTimeout(() => { $('#action-popup').removeClass('popup') }, 1000);
+    $('#action-text2').addClass('notransition flash'); setTimeout(() => { $('#action-text2').removeClass('notransition flash') }, 100);
+}
+window.BuyOutFit = BuyOutFit
