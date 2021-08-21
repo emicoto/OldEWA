@@ -38,10 +38,10 @@
                 <<else>>
                     <<set _img to _placeholder>>
                 <</if>>
-                 <div class="show_items">
+                 <div id="show_items">
                     <div class="itemthumb"><<print "<<link [img[_img]]>><<run setShowCase(A.hat["+_i+"])>><</link>>">></div>
                     <div class="itemname"><<print A.hat[_i].name>></div>
-                    <div class="itemprice">￥<<print A.hat[_i].cost>></div>
+                    <div class="itemprice"><<print A.hat[_i].cost>>￥</div>
                 </div>
             <</if>>
         <</for>>
@@ -57,10 +57,10 @@
                 <<else>>
                     <<set _img to _placeholder>>
                 <</if>>
-                 <div class="show_items">
+                 <div id="show_items">
                     <div class="itemthumb"><<print "<<link [img[_img]]>><<run setShowCase(A.outter["+_i+"])>><</link>>">></div>
                     <div class="itemname"><<print A.outter[_i].name>></div>
-                    <div class="itemprice">￥<<print A.outter[_i].cost>></div>
+                    <div class="itemprice"><<print A.outter[_i].cost>>￥</div>
                 </div>
             <</if>>
         <</for>>
@@ -76,10 +76,10 @@
                 <<else>>
                     <<set _img to _placeholder>>
                 <</if>>
-                 <div class="show_items">
+                 <div id="show_items">
                     <div class="itemthumb"><<print "<<link [img[_img]]>><<run setShowCase(A.top["+_i+"])>><</link>>">></div>
                     <div class="itemname"><<print A.top[_i].name>></div>
-                    <div class="itemprice">￥<<print A.top[_i].cost>></div>
+                    <div class="itemprice"><<print A.top[_i].cost>>￥</div>
                 </div>
             <</if>>
         <</for>>
@@ -95,10 +95,10 @@
                 <<else>>
                     <<set _img to _placeholder>>
                 <</if>>
-                 <div class="show_items">
+                 <div id="show_items">
                     <div class="itemthumb"><<print "<<link [img[_img]]>><<run setShowCase(A.bottom["+_i+"])>><</link>>">></div>
                     <div class="itemname"><<print A.bottom[_i].name>></div>
-                    <div class="itemprice">￥<<print A.bottom[_i].cost>></div>
+                    <div class="itemprice"><<print A.bottom[_i].cost>>￥</div>
                 </div>
             <</if>>
         <</for>>
@@ -114,10 +114,10 @@
                 <<else>>
                     <<set _img to _placeholder>>
                 <</if>>
-                 <div class="show_items">
+                 <div id="show_items">
                     <div class="itemthumb"><<print "<<link [img[_img]]>><<run setShowCase(A.inner_up["+_i+"])>><</link>>">></div>
                     <div class="itemname"><<print A.inner_up[_i].name>></div>
-                    <div class="itemprice">￥<<print A.inner_up[_i].cost>></div>
+                    <div class="itemprice"><<print A.inner_up[_i].cost>>￥</div>
                 </div>
             <</if>>
         <</for>>
@@ -133,10 +133,10 @@
                 <<else>>
                     <<set _img to _placeholder>>
                 <</if>>
-                 <div class="show_items">
+                 <div id="show_items">
                     <div class="itemthumb"><<print "<<link [img[_img]]>><<run setShowCase(A.inner_bt["+_i+"])>><</link>>">></div>
                     <div class="itemname"><<print A.inner_bt[_i].name>></div>
-                    <div class="itemprice">￥<<print A.inner_bt[_i].cost>></div>
+                    <div class="itemprice"><<print A.inner_bt[_i].cost>>￥</div>
                 </div>
             <</if>>
         <</for>>
@@ -152,9 +152,10 @@
                 <<else>>
                     <<set _img to _placeholder>>
                 <</if>>
-                 <div class="show_items">
+                 <div id="show_items">
                     <div class="itemthumb"><<print "<<link [img[_img]]>><<run setShowCase(A.legs["+_i+"])>><</link>>">></div>
-                    <div class="itemprice">￥<<print A.legs[_i].cost>></div>
+                    <div class="itemname"><<print A.legs[_i].name>></div>
+                    <div class="itemprice"><<print A.legs[_i].cost>>￥</div>
                 </div>
             <</if>>
         <</for>>
@@ -170,10 +171,10 @@
                 <<else>>
                     <<set _img to _placeholder>>
                 <</if>>
-                 <div class="show_items">
+                 <div id="show_items">
                     <div class="itemthumb"><<print "<<link [img[_img]]>><<run setShowCase(A.shoes["+_i+"])>><</link>>">></div>
                     <div class="itemname"><<print A.shoes[_i].name>></div>
-                    <div class="itemprice">￥<<print A.shoes[_i].cost>></div>
+                    <div class="itemprice"><<print A.shoes[_i].cost>>￥</div>
                 </div>
             <</if>>
         <</for>>
