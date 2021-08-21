@@ -81,6 +81,14 @@ function setColors(arg,name) {
 }
 window.setColors = setColors
 
+
+function ShowPopUP() {
+    $('#action-popup').removeClass('hidden'); setTimeout(() => { $('#action-popup').addClass('hidden') }, 3200);
+    $('#action-popup').addClass('popup'); setTimeout(() => { $('#action-popup').removeClass('popup') }, 1000);
+    $('#action-text2').addClass('notransition flash'); setTimeout(() => { $('#action-text2').removeClass('notransition flash') }, 100);
+}
+window.ShowPopUP = ShowPopUP
+
 function BuyOutFit() {
     if (V.money > V.showcase.cost) {
         V.money = V.money - V.showcase.cost
@@ -92,9 +100,7 @@ function BuyOutFit() {
 
     new Wikifier(null,"<<replace '#action-text'>>"+text)
     new Wikifier(null,"<<replace '#action-text2'>>"+text)
-
-    $('#action-popup').removeClass('hidden'); setTimeout(() => { $('#action-popup').addClass('hidden') }, 3200);
-    $('#action-popup').addClass('popup'); setTimeout(() => { $('#action-popup').removeClass('popup') }, 1000);
-    $('#action-text2').addClass('notransition flash'); setTimeout(() => { $('#action-text2').removeClass('notransition flash') }, 100);
+    ShowPopUP()
+    
 }
 window.BuyOutFit = BuyOutFit
