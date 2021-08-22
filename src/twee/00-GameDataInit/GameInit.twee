@@ -75,19 +75,12 @@
 
 <!-- 衣柜。身上的衣服会从衣柜里取出来放到 Equip里 -->
 <<set $closet to {
-    hat : [],
-    outter : [],
-    top : [],
-    bottom : [],
-    inner_up : [],
-    inner_bt : [],
-    shoes : [],
-    legs : [],
+    outter : [],    top : [],    bottom : [],
+    inner_up : [],    inner_bt : [],
+    shoes : [],    legs : [],
 
-    face : [],
-    neck : [],
-    hand : [],
-    back : [],
+    hat : [],    face : [],    neck : [],
+    hand : [],    back : [],
 }>>
 
 /* 宠物设定 */
@@ -105,6 +98,30 @@
 
 /* 玩家各种记录 */
 <<set $record to {}>> 
+
+/* 事件系统相关变量 */
+<<set $Eflag to {
+    nonext   : true;    end      : false;
+    location : null;    chara    : null;
+}>>
+
+/* 每次设定剧情时set要写好几次就麻烦，干脆试试用obj */
+<<set $event to {
+    type : "主线", name : "开场", branch : "初次", count: 0,
+}>> 
+
+<<set $eventexit to "你的家">>
+<<set $count to 0>>      /* 通用计数变量。需要离开当前passage或重置的情况 */
+<<set $eventend to false>>
+
+/* 事件系列名
+    主线  剧情名  分歧  进度
+    支线  剧情名  分歧  进度
+    日常  剧情名  分歧  进度
+    角色  剧情名  分歧  进度
+    例： 主线_开头剧情_初次_0 / 主线_开头剧情_周回_0
+    然后每隔剧情开始前都处理一次对应的Eventfirst。
+ */
 
 
 <</widget>>

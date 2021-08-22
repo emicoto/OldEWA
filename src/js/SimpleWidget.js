@@ -19,8 +19,8 @@ function setreveal(){
     bottoms.sort((a,b)=>b-a)
     console.log("上衣:",tops)
     console.log("下衣:",bottoms)
-    V.PFlag.top = !tops[0]?0: tops[0]
-    V.PFlag.bottom=!bottoms[0]?0: bottoms[0]
+    V.Pflag.top = !tops[0]?0: tops[0]
+    V.Pflag.bottom=!bottoms[0]?0: bottoms[0]
 }
 window.setreveal = setreveal
 

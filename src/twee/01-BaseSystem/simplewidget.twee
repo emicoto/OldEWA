@@ -166,10 +166,7 @@
 <<set $date.time to $date.time+$args[0]>>
 <</widget>>
 
-/* 再现ERA口上系统的TRYCALL体系 主 */
-<<widget "call">>
-<<include $args[0]+"_"+$args[1]>>
-<</widget>>
+
 
 <<widget "ApplyHairSet">>
     <<switch $PC.发型>>
@@ -251,8 +248,8 @@
     <<set $Equip.shoes to null>>
     <<set $Equip.legs to null>>
     <<set $Equip.hand to null>>
-    <<set $PFlag.top to 0>>
-    <<set $PFlag.bottom to 0>>
+    <<set $Pflag.top to 0>>
+    <<set $Pflag.bottom to 0>>
     <<SetAvatar>>
 <</widget>>
 

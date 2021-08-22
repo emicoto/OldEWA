@@ -44,7 +44,7 @@
 <<set $PC.sens to {  m : 2,  b : 2,  v : 0, u :1, c : 1,  a : 4}>>
 
 <!-- 扩张程度，数值是最大直径cm -->
-<<set $PC.ste to {vagina: 3, anal: 2.5, ureth: 0.3}>>
+<<set $PC.stretch to {vagina: 3, anal: 2.5, ureth: 0.3}>>
 
 <<set $PC.rpg to {
     HP : [200,200],   /* =体力/5+健康/10 */
@@ -126,6 +126,7 @@
 
 <!-- 液体 -->
 <<set $PC.produce to { "精液" : [100,100], "乳汁" : [100,100],}>>
+<<set $PC.wet to {V:0, A:0, U:0}>>  /* 湿润/润滑度 */
 
 <!-- PC的素质 -->
 <<set $PC.trait to {}>>
@@ -144,7 +145,7 @@ $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌}
 和奸文：XX的处女在X年X月X日，献给了爱人的巨屌 
 自己破处：XX的处女在X年X月X日，用玩具自行贯穿了 -->
 
-<<set $PFlag to {
+<<set $Pflag to {
     lactation : false,    lactatecd : 0,
     top      : 9,     bottom   : 4, 
     bukkake   : { body:false, face:false, hair:false, },
@@ -171,7 +172,7 @@ $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌}
 }>>
 
 /* 纹身，layer有额头、脸颊（左右）、锁骨（左右）、胸（左右）、后脖根、手臂（左右）、后背、腰窝、 臀瓣（左右），大腿（左右）*/
-<<set $PSkin to {
+<<set $Pskin to {
     "额头":null,    "脸颊":null,    "锁骨":null,
     "左胸":null,    "右胸":null,    "后脖根":null,
     "左臂":null,    "右臂":null,    "腹部":null,
@@ -195,7 +196,7 @@ $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌}
     neck        : null,  hat        : null,  face       : null,
     outter      : null,  top        : null,  hand       : null,
     bottom      : null,  inner_up   : null,  inner_bt: null,
-    shoes       : null,  legs      : null,  back       : null,
+    shoes       : null,  legs       : null,  back       : null,
     hairfront   : null,  hairback   : null,  emote      : null,
 }>>
 

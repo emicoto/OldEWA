@@ -69,7 +69,7 @@
 <<widget "breast_info">>
 /* 感度、罩杯大小、泌乳情报 */
 <<you>><<breast>><<sensitive "b">>。
-<<if $PFlag.lactation is true and $PC.produce.乳汁[1] gt 0>>
+<<if $Pflag.lactation is true and $PC.produce.乳汁[1] gt 0>>
 已经开始分泌乳汁，总共能容纳<<print $PC.produce.乳汁[1]>>cc的乳汁。现在有<<print ($PC.produce.乳汁[0]/$PC.produce.乳汁[1])*100>>%的量。
 <</if>>
 <br>
@@ -87,17 +87,17 @@
 
 <<widget "ureth_info">>
 /* 感度、扩张情报 */
-<<you>>的尿道<<sensitive "u">>。经过开发后最大能容纳直径<<print $PC.ste.ureth>>cm的物体插入。<br>
+<<you>>的尿道<<sensitive "u">>。经过开发后最大能容纳直径<<print $PC.stretch.ureth>>cm的物体插入。<br>
 <</widget>>
 
 <<widget "vagina_info">>
 /* 感度、扩张、怀孕情报 */
-<<you>>的膣内<<sensitive "v">>。<<if $PC.vaginity.处女 isnot 1>>最大能容纳直径<<print $PC.ste.vagina>>cm的物体插入。<</if>><br>
+<<you>>的膣内<<sensitive "v">>。<<if $PC.vaginity.处女 isnot 1>>最大能容纳直径<<print $PC.stretch.vagina>>cm的物体插入。<</if>><br>
 <</widget>>
 
 <<widget "anal_info">>
 /* 感度、扩张、寄生、A怀孕情报 */
-<<you>>的菊部<<sensitive "a">>。最大能容纳直径<<print $PC.ste.anal>>cm的物体插入。<br>
+<<you>>的菊部<<sensitive "a">>。最大能容纳直径<<print $PC.stretch.anal>>cm的物体插入。<br>
 <</widget>>
 
 <<widget "sensitive">>

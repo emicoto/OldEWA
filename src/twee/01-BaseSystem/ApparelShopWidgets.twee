@@ -7,9 +7,9 @@
 <</for>>
 
 /* 清理身上外在液体 */
-<<set $PFlag.bukkake.body to false>>
-<<set $PFlag.bukkake.face to false>>
-<<set $PFlag.bukkake.hair to false>>
+<<set $Pflag.bukkake.body to false>>
+<<set $Pflag.bukkake.face to false>>
+<<set $Pflag.bukkake.hair to false>>
 
 <<location "试衣间">>
 <<SetAvatar>>

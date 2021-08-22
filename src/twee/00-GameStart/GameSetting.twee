@@ -10,7 +10,7 @@
 　<<lang "时间限制" "TimeLimit">>： <label><<radiobutton "$timelimit" true autocheck>> <<lang "有" "Yes">></label>　|　<label><<radiobutton "$timelimit" false autocheck>> <<lang "无" "No">></label>　　
 ※<<lang "无时间限制模式下无法获得成就" "Achievements will not available in no time limit mode">><br>
 
-　<<lang "使用语言" "Language">>： <label><<radiobutton "$lang" "EN" autocheck>> English</label>　|　<label><<radiobutton "$lang" "CN" autocheck>> 中文</label><br>
+　<<lang "使用语言" "Language">>： <label><<radiobutton "$lang" "EN" autocheck>> English</label>　|　<label><<radiobutton "$lang" "CN" autocheck>> 中文</label>　　<<lang " " "※English support still WIP">><br>
 
 　<<link "> 改变语言/Comfirm Language" "Start">><</link>>
 </div>

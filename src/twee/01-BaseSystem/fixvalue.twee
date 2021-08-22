@@ -37,16 +37,16 @@
     <<set $PC.base.恐惧[1] to 1000>>
 
     /* 扩张修正 */
-    <<set $PC.ste.anal to Math.clamp($PC.ste.anal,1,(12+($PC.体型*2))).toFixed(2)>>
+    <<set $PC.stretch.anal to Math.clamp($PC.stretch.anal,1,(12+($PC.体型*2))).toFixed(2)>>
     <<if $PC.性别 is "少女">>
-        <<set $PC.ste.ureth to Math.clamp($PC.ste.ureth,0.5,6)>>
+        <<set $PC.stretch.ureth to Math.clamp($PC.stretch.ureth,0.5,6)>>
     <<else>>
-        <<set $PC.ste.ureth to Math.clamp($PC.ste.ureth,0.2,(0.5+$PC.genital.阴茎/10)).toFixed(2)>>
+        <<set $PC.stretch.ureth to Math.clamp($PC.stretch.ureth,0.2,(0.5+$PC.genital.阴茎/10)).toFixed(2)>>
     <</if>>
     <<if $PC.genital.子宫 is null>>
-        <<set $PC.ste.vagina to null>>
+        <<set $PC.stretch.vagina to null>>
     <<else>>
-        <<set $PC.ste.vagina to Math.clamp($PC.ste.vagina,1,(12+($PC.体型*2))).toFixed(2)>>
+        <<set $PC.stretch.vagina to Math.clamp($PC.stretch.vagina,1,(12+($PC.体型*2))).toFixed(2)>>
     <</if>>
 
     /* 液体分量修正 */
@@ -55,7 +55,7 @@
         <<set $PC.produce.精液[0] to Math.clamp($PC.produce.精液[0],0,$PC.produce.精液[1])>>
     <</if>>
 
-    <<if $PFlag.lactation is true>>
+    <<if $Pflag.lactation is true>>
         <<set $PC.produce.乳汁[1] to Math.clamp($PC.produce.乳汁[1],$PC.genital.胸部*10,$PC.genital.胸部*40)>>
         <<set $PC.produce.乳汁[0] to Math.clamp($PC.produce.乳汁[0],0,$PC.produce.乳汁[1])>>
     <</if>>

@@ -87,7 +87,10 @@ $(document).on(':passagerender', function (ev) {
 <div class="eventselectarea">
 
 <div class="eventselection">
-<<link "开始" "Opening">><<masteraudio stop>><<audio "迷雾" volume 1 play loop>><</link>>
+<<link "开始" "Event">>
+<<masteraudio stop>><<audio "迷雾" volume 1 play loop>>
+<<EventFirst>>
+<</link>>
 </div>
 
 <div class="eventselection">
