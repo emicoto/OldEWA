@@ -281,3 +281,9 @@ sugarcube-2:
       name: InitBGM
     volume:
       name: volume
+    CMHairstyle:
+      name: CMHairstyle
+    ApplyHairSet:
+      name: ApplyHairSet
+    CMEyetype:
+      name: CMEyetype

@@ -16,7 +16,7 @@
             "black" : "黑色",   "brown" : "棕色",   "emerald": "碧绿色",
             "green" : "绿色",   "blue"  : "蓝色",   "aqua"   : "水色",
             "purple": "紫红色", "white" : "银色",   "amber"  : "金色",
-            "red"   : "红色",
+            "red"   : "红色",   "lightgreen" : "淡绿色", "lightpurple":"淡紫色",
             "eyes"  : "的眼睛",
         },
         发色:{
@@ -48,7 +48,8 @@
             "eyes"   : "eyes",      "black" : "black",      "brown": "brown",
             "emerald": "emerald",   "green" : "green",      "blue" : "blue",
             "aqua"   : "aqua",      "purple": "purple",     "white": "silver",
-            "amber"  : "amber",     "red"   : "red",
+            "amber"  : "amber",     "red"   : "red",      "lightgreen" : "light green",
+            "lightpurple":"light purple",
         },
         发色:{
             "black":"black",    "darkbrown":"dark-brown",   "wine":"red-wine-color",

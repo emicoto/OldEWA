@@ -1,282 +1,151 @@
-
+window["BLENDMODE"] = {
+	"SOURCE_OVER": "source-over",
+	"SOURCE_IN": "source-in",
+	"SOURCE_OUT": "source-out",
+	"SOURCE_ATOP": "source-atop",
+	"DESTINATION_OVER": "destination-over",
+	"DESTINATION_IN": "destination-in",
+	"DESTINATION_OUT": "destination-out",
+	"DESTINATION_ATOP": "destination-atop",
+	"LIGHTER": "lighter",
+	"COPY": "copy",
+	"XOR": "xor",
+	"MULTIPLY": "multiply",
+	"SCREEN": "screen",
+	"OVERLAY": "overlay",
+	"DARKEN": "darken",
+	"LIGHTEN": "lighten",
+	"COLOR_DODGE": "color-dodge",
+	"COLOR_BURN": "color-burn",
+	"HARD_LIGHT": "hard-light",
+	"SOFT_LIGHT": "soft-light",
+	"DIFFERENCE": "difference",
+	"EXCLUSION": "exclusion",
+	"HUE": "hue",
+	"SATURATION": "saturation",
+	"COLOR": "color",
+	"LUMINOSITY": "luminosity"
+}
 
 namespace Avatar {
-  export let canvas
-  export const AvatarPath: string = "image/avatar/"
-  const TemplatePath: string = "image/templet/"
-  export let avatar
-  const __resolve = (paths, ...word: string[]): string => path.resolve(paths, ...word)
-  export class Canvas {
-    canvas;
-    avatar;
-    opt: any = {};
-    array: any[];
-    constructor(option, avatar) {
-      this.avatar = avatar
-      const options = option.length ? option : { width: 180, height: 260, fill: "black", id: "avatars" }
-      this.canvas = Renderer.createCanvas(options.width, options.height, options.fill ? options.fill : 1);
-      this.canvas.canvas.id = options.id
-      this.composeLayers()
-    }
-    addon(value, index) {
-      const v = this.avatar[value]
-      const key = Object.keys(v)
-      // console.log(key);
-      this.opt[value] = {}
-      const array = key.map(vl => {
+	const AVATARPATH = "image/avatar"
+	const __resolve = (mainpath, ...paths) => path.resolve(mainpath, ...paths)
+	// export const CANVAS = Renderer.createCanvas(180,260)
+	// const layer = [{name:"eyes",z:0,src:}]
+	// Renderer.Animations["eyes"] = {frames: 2,
+	//     duration: 1000
+	// }
+	Renderer.CanvasModels["Avatar"] = {
+		name: "Avatar",
+		width: 180,
+		height: 260,
+		frames: 8,
+		generatedOptions() {
+			console.log("generatedOptions");
+			return []
+		},
+		defaultOptions() {
+			console.log("defaultOptions");
+
+			return {
+
+				filters: {}
+			}
+		}, preprocess(options) {
+			console.log("preprocess");
+		}, layers: {
+			"eyes": {
+				showfn() {
+					return true
+				},
+				width: 180,
+				height: 260,
+				z: 1,
+				srcfn() {
+					return __resolve(AVATARPATH, "hairfront/curly/basic_1.png")
+				},animationfn(){
+					return "eyes"
+				},
+				desaturatefn(){
+					return true
+				},
+				blendModefn(){
+					return BLENDMODE.OVERLAY
+				},blendfn(){
+					return tinycolor.random().toHexString();
+				},
+				masksrcfn(){
+					// dist\image\avatar\hairfront\curly\hl_mask.png
+					return  __resolve(AVATARPATH, "hairfront/curly/hl_mask.png")
+				}
+			}
+		}
+	}
+ const s = 5000
+//  const f = 30
+ const frame =[0,1,2,3,2,1,0]
+ let n = 0
 
 
-        return this.opt[value][vl] = {
-          name: `${value}_${vl}`,
-          src: v[vl] ? __resolve(AvatarPath, `${index}_${value}`, `${vl}.png`) : __resolve(AvatarPath, "dummy.png"),
-          z: 21 - index
-        }
+ export const fm = [[58,60,62,64,66,68,70],[84,85,86,87,88,89,90],[94,95,96,97,98,99,100]].map((v1)=>v1.map(
+	 (v2,i)=>{
+		 let num
+		 
+		if (n===0) {
+			n = s / 100 * v2
+			num = n
+		}else{
+			num = n
+			n =  (s / 100 * v2)
+			num = n - num 
+				// console.log(v2,frame[i],n ,num,i);
+		}
+		console.log(v2,frame[i],n ,num,i);
+		
+		return{
+			frame:frame[i],
+			duration:num
+		}
+	 }
+ )).flat()
 
-
-
-      })
-
-      return array
-    }
-    ChangrAddonSrc(value, index) {
-      const v = this.avatar[value]
-      const key = Object.keys(v)
-      // console.log(key);
-      const array = key.map(vl => {
-
-
-        return this.opt[value][vl].src = v[vl] ? __resolve(AvatarPath, `${index}_${value}`, `${vl}.png`) : __resolve(AvatarPath, "dummy.png")
-
-
-
-      })
-
-      return array
-    }
-    get options() {
-      const fun = (v, i) => {
-        if (v === "addon" || v === "emoadd") {
-          return this.addon(v, i)
-        }
-        return {
-          name: v,
-          src: this.avatar[v] ? __resolve(AvatarPath, `${v}`, `${this.avatar[v]}.png`) : __resolve(AvatarPath, "dummy.png"),
-          z: 21 - i
-        }
-      };
-
-
-      this.array = __layer.map((v, i) => {
-        if (v === "addon" || v === "emoadd") {
-          return fun(v, i)
-        }
-        this.opt[v] = fun(v, i)
-
-        return this.opt[v]
-      }
-
-
-
-      ).flat()
-      // console.log(array);
-
-
-      return this.array
-    }
-    get CANVAS() {
-      return this.canvas.canvas
-    }
-
-    composeLayers() {
-      const debug = false
-      const listern ={
-        error: (error, context) => console.log("error", error, context),
-
-        composeLayers: (layers) => console.log("composeLayers", layers),
-        loaded: (layer, src) => console.log("loaded", layer, src),
-        loadError: (layer, src) => console.log("loadError", layer, src),
-        loadingDone: (time, count) => console.log("loadingDone", time, count),
-
-        beforeRender: (layers) => console.log("beforeRender", layers),
-        layerCacheMiss: (layer) => console.log("layerCacheMiss", layer),
-        layerCacheHit: (layer) => console.log("layerCacheHit", layer),
-        processingStep: (layer, processing, canvas, dt) => console.log("processingStep", layer, processing, canvas, dt),
-        composition: (layer, result) => console.log("composition", layer, result),
-        renderingDone: (time) => console.log("renderingDone", time),
-
-        keyframe: (animation, keyframeIndex, keyframe) => console.log("keyframe", animation, keyframeIndex, keyframe),
-        keyframeRender: (spec, cacheHit, cacheRenderTime) => console.log("keyframeRender", spec, cacheHit, cacheRenderTime),
-        animationStop: () => console.log("animationStop"),
-
-      }
-      Renderer.composeLayers(this.canvas, this.options, 1, debug?listern:{});
-    }
-
-    composeLayersAgain() {
-
-      __layer.map((v, i) => {
-        if (v === "addon" || v === "emoadd") {
-          return this.ChangrAddonSrc(v, i)
-        }
-        return this.opt[v].src = this.avatar[v] ? __resolve(AvatarPath, `${v}`, `${this.avatar[v]}.png`) : __resolve(AvatarPath, "dummy.png")
-      })
-
-      Renderer.composeLayersAgain()
-    }
-    setOption(key:string,option){
-      const options = Object.keys(option)
-      let keys:(string|string[]) = key
-      if(!options.length) return
-     
-      key.includes("_") && (keys = key.split("_") )
-     options.forEach(v=>{
-       if (Array.isArray(keys)) {
-           this.opt[keys[0]][keys[1]][v] = option[v]
-         return
-       }
-        this.opt[key][v] = option[v]
-     })
-    }
-    deleteOption(key:string,option:(string|string[])){
-      let keys:(string|string[]) = key
-      if(!option.length) return
-      
-      key.includes("_") && (keys = key.split("_") )
-    if (Array.isArray(option)) {
-       option.forEach(v=>{
-       if (Array.isArray(keys)) {
-         delete  this.opt[keys[0]][keys[1]][v] 
-         return
-       }
-       delete this.opt[key][v] 
-     })
-    }else{
-         delete this.opt[key][option] 
-    }
-    }
-
-  }
-  export const __layer = [
-    "frame",
-    "addon",
-    "hat",
-    "kemofront",
-    "eyebrow",
-    "hairfront",
-    "neck",
-    "face",
-    "emoadd",
-    "eyes",
-    "mouth",
-    "outter",
-    "top",
-    "inner_up",
-    "hand",
-    "bottom",
-    "inner_bt",
-    "shoes",
-    "legging",
-    "tattoos",
-    "body",
-    "hairback",
-    "back",
-    "kemoback",
-    "background",
-  ]
-  const blendmode = [
-    "source-over",
-    "source-in",
-    "source-out",
-    "source-atop",
-    "destination-over",
-    "destination-in",
-    "destination-out",
-    "destination-atop",
-    "lighter",
-    "copy",
-    "xor",
-    "multiply",
-    "screen",
-    "overlay",
-    "darken",
-    "lighten",
-    "color-dodge",
-    "color-burn",
-    "hard-light",
-    "soft-light",
-    "difference",
-    "exclusion",
-    "hue",
-    "saturation",
-    "color",
-    "luminosity"
-  ]
-  export const BLENDMODE = {
-    "SOURCE_OVER": 0,
-    "SOURCE_IN": 1,
-    "SOURCE_OUT": 2,
-    "SOURCE_ATOP": 3,
-    "DESTINATION_OVER": 4,
-    "DESTINATION_IN": 5,
-    "DESTINATION_OUT": 6,
-    "DESTINATION_ATOP": 7,
-    "LIGHTER": 8,
-    "COPY": 9,
-    "XOR": 10,
-    "MULTIPLY": 11,
-    "SCREEN": 12,
-    "OVERLAY": 13,
-    "DARKEN": 14,
-    "LIGHTEN": 15,
-    "COLOR_DODGE": 16,
-    "COLOR_BURN": 17,
-    "HARD_LIGHT": 18,
-    "SOFT_LIGHT": 19,
-    "DIFFERENCE": 20,
-    "EXCLUSION": 21,
-    "HUE": 22,
-    "SATURATION": 23,
-    "COLOR": 24,
-    "LUMINOSITY": 25
-  }
-
-  //  console.log("test",tinycolor);
-
-  $(document).one(":storyready", () => {
-    canvas = new Canvas({ width: 180, height: 260, fill: "black", id: "avatars" }, V.avatar)
-
-    const html = document.getElementById("avatar")
-    if (html) html.appendChild(canvas.CANVAS)
-
-  })
-
-
-
-
-
-
-  // export const opt = {
-  //   name: "hairfront",
-  //   src: __resolve(AvatarPath, "15_hairfront", "natural", "white_1.png"),
-  //   desaturate: true,
-  //   brightness: -0.3,
-  //   blendMode: 'overlay',
-  //   blend: '#636363',
-  //   z: 5
-  // }
-  // export const opt2 = {
-  //   name: "hairback",
-  //   src: __resolve(AvatarPath, "19_hairback", "straight", "white_1.png"),
-  //   desaturate: true,
-  //   brightness: -0.3,
-  //   blendMode: 'overlay',
-  //   blend: '#636363',
-  //   z: 1
-  // }
-
-
-
-
-
+//  const keyframes = [{
+//         frame: 0,
+//         duration: s / f
+//     }, {
+//         frame: 1,
+//         duration: s / f
+//     }, {
+//         frame: 2,
+//         duration: s / f
+//     }, {
+//         frame: 3,
+//         duration: s / f
+//     },
+//     {
+//         frame: 2,
+//         duration: s / f
+//     },
+//     {
+//         frame: 1,
+//         duration: s / f
+//     },
+//     {
+//         frame: 0,
+//         duration: 3000
+//     }]
+	Renderer.Animations["eyes"] = {
+    keyframes: fm
+};
+	// export const canvas = CANVAS.canvas
+	export var model = Renderer.locateModel("Avatar");
+	export var options = model.defaultOptions();
+	// options.hair = true;
+	// options.hair_sides_type = "default";
+	// options.hair_sides_position = "front";
+	// options.filters.hair = { desaturate: true, brightness: -0.3, blendMode: 'hard-light', blend: '#e49b67' }
+	export var canvas = model.createCanvas();
+	model.render(canvas, options);
+	model.animate(canvas, options)
 }
 window.Avatar = Avatar

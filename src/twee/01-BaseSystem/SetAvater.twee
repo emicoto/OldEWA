@@ -157,8 +157,13 @@
  */
 
 /* 眼睛 */
+<<set _eyegroup to ["full","blink2","lookup3"]>>
+<<set _type to [null,"a","b","c"]>>
 <<set $avatar.eyes to $PC.瞳色 + "/" + $PFace.eyes>>
-<<if $PFace.eyes is "full" and $PFace.name is "正常">>
+<<if _eyegroup.includes($PFace.eyes) is true>>
+    <<set $avatar.eyes to $avatar.eyes + _type[$PC.眼型]>>
+<</if>>
+<<if $PFace.eyes.includes("full") is true and $PFace.name is "正常">>
     <<set $avatar.eyes to $avatar.eyes + "_idle">>
 <</if>>
 

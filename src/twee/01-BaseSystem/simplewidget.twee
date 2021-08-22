@@ -172,22 +172,19 @@
 <</widget>>
 
 <<widget "ApplyHairSet">>
-    <<if $args[0]>>
-        <<set $PC.发型 to $args[0]>>
-    <</if>>
     <<switch $PC.发型>>
         <<case "straight">>
-            <<set $PC.hairfront to "himecut">>
-            <<set $PC.hairback to "straight">>
+            <<set $Equip.hairfront to "himecut">>
+            <<set $Equip.hairback to "straight">>
         <<case "curly">>
-            <<set $PC.hairfront to "curly">>
-            <<set $PC.hairback to "curly">>
+            <<set $Equip.hairfront to "curly">>
+            <<set $Equip.hairback to "curly">>
         <<case "natural">>
-            <<set $PC.hairfront to "natural">>
-            <<set $PC.hairback to "natural">>
+            <<set $Equip.hairfront to "natural">>
+            <<set $Equip.hairback to "straight">>
         <<default>>
-            <<set $PC.hairfront to "natural">>
-            <<set $PC.hairback to "straight">>
+            <<set $Equip.hairfront to "natural">>
+            <<set $Equip.hairback to "straight">>
     <</switch>>
 <</widget>>
 

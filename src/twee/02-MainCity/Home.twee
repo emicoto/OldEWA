@@ -11,6 +11,8 @@
 <br>
 
 <div class="tolink">
+<<link "打开衣柜　 (00:01)" "衣柜">><<passtime 1>><</link>><br>
+<br>
 <<link "健身　　 　(00:30)">><<passtime 30>><</link>><br>
 <<link "打游戏 　　(00:30)">><<passtime 30>><</link>><br>
 <<link "洗澡　 　　(00:30)">><<passtime 30>><</link>><br>

@@ -83,6 +83,19 @@ $(document).on(':passagerender', function (ev) {
 故事要开始了哟！<br>
 </div>
 
-<<link "开始" "Opening">><<masteraudio stop>><<audio "迷雾" volume 0.5 play loop>><</link>><br>
-<<link "跳过开头" "你的家">><</link>><br>
-[[回到开头|Start]]<br>
+
+<div class="eventselectarea">
+
+<div class="eventselection">
+<<link "开始" "Opening">><<masteraudio stop>><<audio "迷雾" volume 1 play loop>><</link>>
+</div>
+
+<div class="eventselection">
+<<link "跳过开头" "你的家">><</link>>
+</div>
+
+<div class="eventselection">
+[[回到开头|Start]]
+</div>
+
+</div>

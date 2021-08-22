@@ -14,19 +14,24 @@
 <<if $count is 0>>
  <div class="weirdtext"><<link "睁开眼睛" $passage>><<set $count to 1>><</link>></div>
  <div  class="weirdtext"><<link "回忆梦境" $passage>><<set $count to 2>><</link>></div>
+<<else>>
+
 <</if>>
 
 </div>
 <br>
 
-/*
+<<if $count gt 0>>
 <div id="next" class="nextbutton">
     <<if $eventend is false>>
         <<link "NEXT" $passage>><</link>>
     <<else>>
         <<link "NEXT" "你的家">><</link>>
     <</if>>
-</div> */
+</div>
+<</if>>
+
+
 
 /* 等待渲染完毕 */
 <<silently>><<script>>
@@ -68,9 +73,9 @@ function setup(){
 
 <<case 1>><<you>>试着睁开眼睛，但是无力睁开。<<set $count to 3>>
 
-<<case 2>><<you>>试着回忆梦境内容。<<set $count to 3>>
+<<case 2>><<you>>试着回忆梦境内容。<<set $count to 4>>
 
-<<case 3>>
+<<case 3>><<you>>太累了，只好放弃挣扎，再次回到梦境，试着回忆梦境的内容。<<set $count to 4>>
 
 <<case 4>>
 

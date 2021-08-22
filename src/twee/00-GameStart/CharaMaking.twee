@@ -49,7 +49,8 @@
 <span id="charamaking">
 <li>外貌体征</li>
 　体型　<<CMBodytype>>　　肤色　<<CMSkin>>　　特殊　<<CMRace>><br>
-　发色　<<CMHairColor>>　　发型　<<CMHair>>　　<span id="CMEyeoption">瞳色　<<CMEyeColor>></span><span id="CMFurOption"></span><br>
+　发色　<<CMHairColor>>　　发长　<<CMHair>>　　发型　<<CMHairstyle>><br>
+　眼型　<<CMEyetype>>　　<span id="CMEyeoption">瞳色　<<CMEyeColor>></span><span id="CMFurOption"></span><br>
 　罩杯　<<CMBreast>>　　臀型　<<CMButts>>　　<label><<print '<<checkbox "$PC.trait.泌乳体质" 0 1 ' + ($PC.trait.泌乳体质 is 1 ? "checked" : "") + '>>'>>泌乳体质？</label><br>
 <<dashline>>
 <li>感官特征</li>
@@ -104,6 +105,7 @@
         <<else>>
             <<stop>>
         <</if>>
+        <<ApplyHairSet>>
         <<SetAvatar>>
     <</repeat>>
 <</silently>>

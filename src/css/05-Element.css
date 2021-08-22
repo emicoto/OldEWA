@@ -93,9 +93,55 @@
 }
 
 .eventsituation {
+    max-width: 800px;
     width: 100%;
+    display: block;
     height: fit-content;
     margin: auto;
     font-size: 24px;
     font-family:珍珠体, Georgia;
+    text-align: center;
+    letter-spacing: 2px;
+	line-height: 40px;
+    padding: 20px;
+}
+
+.eventselectarea {
+    max-width: 800px;
+    width: 100%;
+    display:block;
+    text-align: center;
+    align-content: center;
+    align-items: center;
+    margin: auto;
+  }
+
+.eventselection {
+    width: 150px;
+    display: inline-block;
+    line-height: 40px;
+    letter-spacing: 2px;
+    text-align: center;
+    padding: 20px;
+    position: relative;
+}
+
+.eventselection a {
+	font-family: 珍珠体;
+	font-size: 24px;
+    font-weight: 300;
+    color:rgb(129, 122, 16);
+}
+
+.eventselection:hover ::before {
+  content: "- ";
+}
+.eventselection:hover ::after {
+  content: " -";
+}
+
+.eventselection a:hover{
+    color: rgb(180, 166, 36);
+    text-shadow:0 0 2px rgb(180, 166, 36);
+    border: none;
 }

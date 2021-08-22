@@ -37,56 +37,70 @@
 
 <<widget "CMBodytype">>
     <<set _optionlist to {"普通":2,"高大":3,"娇小":1}>>
-        <<listbox "$PC.体型" autoselect>>
+    <<listbox "$PC.体型" autoselect>>
         <<optionsfrom _optionlist>>
     <</listbox>>
 <</widget>>
 
 <<widget "CMSkin">>
     <<set _optionlist to {"健康":"health","白皙":"white","麦色":"mugi","棕色":"dark","黝黑":"black"}>>
-        <<listbox "$PC.肤色" autoselect>>
+    <<listbox "$PC.肤色" autoselect>>
         <<optionsfrom _optionlist>>
     <</listbox>>
 <</widget>>
 
 <<widget "CMFurType">>
     <<set _optionlist to ["猫","狗","狼","狐","鹿","羊","牛"]>>
-        <<listbox "$PC.兽型" autoselect>>
+    <<listbox "$PC.兽型" autoselect>>
         <<optionsfrom _optionlist>>
     <</listbox>>
 <</widget>>
 
 <<widget "CMBreast">>
     <<set _optionlist to {"平坦":0,"微隆":1,"贫乳":2,"普乳":3,"巨乳":4,"魔乳":5}>>
-        <<listbox "$PC.胸部" autoselect>>
+    <<listbox "$PC.胸部" autoselect>>
         <<optionsfrom _optionlist>>
     <</listbox>>
 <</widget>>
 
 <<widget "CMButts">>
     <<set _optionlist to {"窄小":1,"普通":2,"圆润":3,"丰臀":4,"安产":5}>>
-        <<listbox "$PC.臀部" autoselect>>
+    <<listbox "$PC.臀部" autoselect>>
         <<optionsfrom _optionlist>>
     <</listbox>>
 <</widget>>
 
 <<widget "CMHairColor">>
     <<set _optionlist to {"黑色":"black","深棕色":"darkbrown","酒红色":"wine","棕色":"brown","奶茶色":"milktea","金色":"blond","米黄色":"softblond","白金色":"platinum","银色":"silver","纯白色":"white","紫色":"purple","绿色":"green","蓝色":"blue","水色":"aqua","粉色":"pink"}>>
-        <<listbox "$PC.发色" autoselect>>
+    <<listbox "$PC.发色" autoselect>>
         <<optionsfrom _optionlist>>
     <</listbox>>
 <</widget>>
 
 <<widget "CMHair">>
     <<set _optionlist to {"齐耳短发":50,"及脖中发":100,"及肩中发":250,"及胸长发":500,"及腰长发":800}>>
-        <<listbox "$PC.发长" autoselect>>
+    <<listbox "$PC.发长" autoselect>>
+        <<optionsfrom _optionlist>>
+    <</listbox>>
+<</widget>>
+
+<<widget "CMHairstyle">>
+    <<set _optionlist to {"自然":"natural","卷发":"curly","直发":"straght"}>>
+    <<listbox "$PC.发型" autoselect>>
         <<optionsfrom _optionlist>>
     <</listbox>>
 <</widget>>
 
 <<widget "CMEyeColor">>
-    <<set _optionlist to {"黑色":"black","棕色":"brown","碧绿色":"emerald","绿色":"green","蓝色":"blue","水色":"aqua","紫红色":"purple","银色":"white","金色":"amber","红色":"red"}>>
+    <<set _optionlist to {"黑色":"black","棕色":"brown","碧绿色":"emerald","绿色":"green","淡绿色":"lightgreen","蓝色":"blue","水色":"aqua","紫色":"purple","淡紫色":"lightpurple","银色":"white","金色":"amber","红色":"red"}>>
         <<listbox "$PC.瞳色" autoselect>>
+        <<optionsfrom _optionlist>>
+    <</listbox>>
+<</widget>>
+
+<<widget "CMEyetype">>
+    <<set _optionlist to {"普通":1,"吊眼":2}>>
+        <<listbox "$PC.眼型" autoselect>>
         <<optionsfrom _optionlist>>
     <</listbox>>
 <</widget>>
