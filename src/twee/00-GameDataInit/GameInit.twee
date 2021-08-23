@@ -101,8 +101,8 @@
 
 /* 事件系统相关变量 */
 <<set $Eflag to {
-    nonext   : true;    end      : false;
-    location : null;    chara    : null;
+    nonext   : true,    end      : false,
+    location : null,    chara    : null,
 }>>
 
 /* 每次设定剧情时set要写好几次就麻烦，干脆试试用obj */
