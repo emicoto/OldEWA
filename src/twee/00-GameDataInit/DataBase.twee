@@ -100,16 +100,12 @@
 
 <<widget "InitBGM">>
 
-<<set _bgm = setup.SoundPath + "Haibane/13 - Feding.mp3">>
-<<cacheaudio "迷雾" _bgm>>
+<<cacheaudio "迷雾" "sound/Haibane/Feding.mp3">>
 
-<<set _bgm = setup.SoundPath + "CLAUDE DEBUSSY CLAIR DE LUNE.mp3">>
-<<cacheaudio "月光" _bgm>>
+<<cacheaudio "月光" "sound/ClairDeLune.mp3">>
 
-<<set _bgm = setup.SoundPath + "Melody Of Elves.mp3">>
-<<cacheaudio "幻想" _bgm>>
+<<cacheaudio "幻想" "sound/MelodyOfElves.mp3">>
 
-<<set _bgm = setup.SoundPath + "minmin.mp3">>
-<<cacheaudio "蝉鸣" _bgm>>
+<<cacheaudio "蝉鸣" "sound/minmin.mp3">>
 
 <</widget>>

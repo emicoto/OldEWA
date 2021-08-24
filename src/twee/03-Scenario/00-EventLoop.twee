@@ -1,38 +1,47 @@
 ﻿:: Event [core]
 
 <div id="eventsituation">
-<<call $event.type $event.name $event.branch $event.count>>
+<<CallEvent>>
 </div>
 
-<div class="eventselectarea">
-<<callselect $event.type $event.name $event.branch $event.count>>
+<div id="eventselectarea">
+<<CallEventSelect>>
 </div>
 
 /* 出口区 */
+<<if $Eflag.nonext is false>>
 <div id="next" class="nextbutton">
-<<if $eventend is false and $Eflag.nonext is false>>
-    <<link "下一页" $passage>><</link>>
-<<elseif $eventend is true>>
-    <<link "下一页" $eventexit>><</link>>
-<</if>>
+<<nextbutton>>
 </div>
+<</if>>
 
+<<CallEventEffect>>
 
 :: EventSystem [widget]
 
 /* 再现ERA口上系统的TRYCALL体系 主 */
-<<widget "call">>
-<<if Story.has($args[0]+"_"+$args[1]) is true>>
-    <<include $args[0]+"_"+$args[1]>>
+<<widget "CallEvent">>
+<<set _passagename to $event.type+"_"+$event.name+"_"+$event.branch+"_"+$event.count>>
+<<if Story.has(_passagename) is true>>
+    <<include _passagename>>
 <<else>>
 /* 失败时显示通用代替口上 */
 <</if>>
 <</widget>>
 
-<<widget "callselect">>
-<<set _passagename to $event.type+"_"+$event.name+"_Select_"+$event.count>>
+<<widget "CallEventSelect">>
+<<set _passagename to $event.type+"_"+$event.name+"_"+$event.branch+"_S_"+$event.count>>
 <<if Story.has(_passagename) is true>>
-    <<include $args[0]+"_S"+$args[1]>>
+    <<include _passagename>>
+<<else>>
+/* 失败时显示通用代替口上 */
+<</if>>
+<</widget>>
+
+<<widget "CallEventEffect">>
+<<set _passagename to $event.type+"_"+$event.name+"_"+$event.branch+"_E">>
+<<if Story.has(_passagename) is true>>
+    <<include _passagename>>
 <<else>>
 /* 失败时显示通用代替口上 */
 <</if>>
@@ -48,5 +57,12 @@
 /* 失败时使用代替的处理 */
 <</if>>
 
+<</widget>>
 
+<<widget "nextbutton">>
+<<if $eventend is false>>
+    <<link "下一页" $passage>><</link>>
+<<else>>
+    <<link "下一页" $eventexit>><</link>>
+<</if>>
 <</widget>>

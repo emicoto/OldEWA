@@ -92,7 +92,7 @@
     color:#ccc;
 }
 
-.eventsituation {
+#eventsituation {
     max-width: 800px;
     width: 100%;
     display: block;
@@ -106,7 +106,11 @@
     padding: 20px;
 }
 
-.eventselectarea {
+.graytext {
+    color: #444;
+}
+
+#eventselectarea {
     max-width: 800px;
     width: 100%;
     display:block;
@@ -114,9 +118,9 @@
     align-content: center;
     align-items: center;
     margin: auto;
-  }
+}
 
-.eventselection {
+.Eselect {
     width: 150px;
     display: inline-block;
     line-height: 40px;
@@ -126,21 +130,21 @@
     position: relative;
 }
 
-.eventselection a {
+.Eselect a {
 	font-family: 珍珠体;
 	font-size: 24px;
     font-weight: 300;
     color:rgb(129, 122, 16);
 }
 
-.eventselection:hover ::before {
+.Eselect:hover ::before {
   content: "- ";
 }
-.eventselection:hover ::after {
+.Eselect:hover ::after {
   content: " -";
 }
 
-.eventselection a:hover{
+.Eselect a:hover{
     color: rgb(180, 166, 36);
     text-shadow:0 0 2px rgb(180, 166, 36);
     border: none;

@@ -291,3 +291,11 @@ sugarcube-2:
       name: callselect
     EventFirst:
       name: EventFirst
+    nextbutton:
+      name: nextbutton
+    CallEventEffect:
+      name: CallEventEffect
+    CallEventSelect:
+      name: CallEventSelect
+    CallEvent:
+      name: CallEvent

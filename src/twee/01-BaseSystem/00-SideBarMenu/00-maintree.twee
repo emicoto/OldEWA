@@ -76,7 +76,9 @@
 
 /* 动态化部分 */
 	<<repeat 0.5s>>
-		<<replace "#avatar">><<avatar>><</replace>>
+		<<if $render is "image">>
+			<<replace "#avatar">><<avatar>><</replace>>
+		<</if>>
 		<<if $intro isnot true>>
 			<<replace "#playerstats">><<playerstatus>><</replace>>
 			<<replace "#showtimes">><<timestats>><</replace>>

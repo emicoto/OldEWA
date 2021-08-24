@@ -1,0 +1,50 @@
+﻿:: 主线_开场_EventFirst [eventfirst]
+<<set $count to 0>>
+
+:: 主线_开场_初次_0 [mainloop]
+
+<<Opening $count>>
+<<if $count gt 0>>
+<<set $Eflag.nonext to false>>
+<</if>>
+
+:: 主线_开场_初次_S_0 [selection]
+<<if $count is 0>>
+ <div class="weirdtext"><<link "睁开眼睛" $passage>><<set $count to 1>><</link>></div>
+ <div class="weirdtext"><<link "回忆梦境" $passage>><<set $count to 2>><</link>></div>
+<<else>>
+
+<</if>>
+
+:: 主线_开场_初次_E [effect]
+<<addclass "#eventsituation" "weirdtext">>
+<<silently>><<script>>
+//requires jQuery because I am lazy.
+$(document).ready(function(){
+	weirdeffect();
+});
+<</script>>
+<</silently>>
+
+:: 主线_开场_初次 [widget]
+
+<<widget "Opening">>
+
+<<switch $args[0]>>
+<<case 0>><<you>>知道自己已经醒过来了，却依然感觉混混沌沌，仿佛还在迷雾之中。<<you>>似乎做了一个梦，很长、很长的梦，感觉有一辈子那么久远。但<<you>>的意识还在混沌钟，一时半会想不起梦境内容，甚至忘记现今何时，身处何方。
+
+<<case 1>><<you>>试着睁开眼睛，但是无力睁开。<<set $count to 3>>
+
+<<case 2>><<you>>试着回忆梦境内容。<<set $count to 4>>
+
+<<case 3>><<you>>太累了，只好放弃挣扎，再次回到梦境，试着回忆梦境的内容。<<set $count to 4>>
+
+<<case 4>>
+
+<<case 5>>
+
+<</switch>>
+
+<</widget>>
+
+:: 主线_开场_轮回_0 [mainloop]

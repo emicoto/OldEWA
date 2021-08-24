@@ -1,0 +1,91 @@
+<!-- 左侧边栏 -->
+:: StoryCaption
+<div @class="(Errors.log.length==0?'hidden':'') + ' error-reporter-btn'" onclick="Errors.Reporter.toggle()"></div>
+
+<div id="volume">
+♫♪♩♬ <<volume>>
+</div>
+
+<div id="storyCaptionDiv">
+
+<!-- 游戏还没开始时 */ -->
+
+<!-- 显示小人 -->
+<div id="avatar"><<avatar>></div>
+
+<<if $intro is true>>
+	<<versioninfo>>
+
+<<else>>
+
+<!-- 游戏内日期和时钟 -->
+<div id="showtimes"><<timestats>></div>
+
+<span id="money" class="money">　<<printmoney $money>></span><br>
+<!-- 简短通知 -->
+<<notification>>
+
+<!-- 玩家状态 -->
+<div id="playerstats"><<playerstatus>></div>
+
+<!-- 菜单 -->
+<div id="splitbotton">
+<<button PROFILE>><<overlayReplace "profile">><</button>>
+<<button JOURNAL>><<overlayReplace "journal">><</button>><br>
+<<button ITEMS>><<overlayReplace "items">><</button>>
+<<button SOCIAL>><<overlayReplace "social">><</button>><br>
+</div>
+<<button DICTIONARY>><<overlayReplace "dictionary">><</button>><br>
+<<button ACHIVEMENT>><<overlayReplace "achivement">><</button>><br>
+<</if>>
+
+<div id="splitbotton">
+<<button SAVES>><<overlayReplace "saves">><</button>>
+<<button OPTIONS>><<overlayReplace "options">><</button>><br>
+</div>
+
+
+/* 框架的尾巴 */
+</div>
+
+<!-- 隐藏元素 */ -->
+<<set $currentOverlay to null>>
+
+
+<div id="customOverlay" class="customOverlay hidden">
+	<div id="customOverlayTitle" class="fixedClose"></div>
+	<div id="customOverlayContent"></div>
+</div>
+
+
+
+<<silently>>
+
+/* 自动刷新等待JS读取结束 */
+<<set _timer to 10>>
+	<<repeat 0.3s>>
+		<<script>>
+			dragElement(document.getElementById("customOverlay"))
+			function dragElement(event) {
+				var dragID = "#customOverlay"
+				$(dragID).draggable();	}
+		<</script>>
+		<<set _timer to _timer -1>>
+		<<if _timer is 0>><<stop>><</if>>
+	<</repeat>>
+
+/* 动态化部分 */
+	<<repeat 0.5s>>
+		<<if $render is "image">>
+			<<replace "#avatar">><<avatar>><</replace>>
+		<</if>>
+		<<if $intro isnot true>>
+			<<replace "#playerstats">><<playerstatus>><</replace>>
+			<<replace "#showtimes">><<timestats>><</replace>>
+			<<replace "#money">>　<<printmoney $money>><</replace>>
+		<</if>>
+	<</repeat>>
+<</silently>>
+
+
+

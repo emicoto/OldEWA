@@ -7,7 +7,6 @@
 
 <<EnterTryRoom>>
 <div id="action-text2"></div>
-<div id="action-popup" class="hidden"><span id="action-text"></span></div>
 
 <div id="show_container">
     <<if $showcase isnot null>><<ShowCase>><</if>>  

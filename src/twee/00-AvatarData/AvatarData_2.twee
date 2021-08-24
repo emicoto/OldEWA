@@ -179,10 +179,10 @@
     <<set Avatars.l.hairfront to ["natural","himecut"]>>
     <<set Avatars.hairfront to {
         natural: {
-            id:0, index:"natural", long: false, fixcolor: true,
+            id:0, index:"natural", long: false, fixcolor: false,
         },
         himecut : {
-            id:1, index:"himecut", long: false, fixcolor: true,
+            id:1, index:"himecut", long: false, fixcolor: false,
         },
         curly : {
             id:1, index:"curly", long: true, fixcolor: false,
@@ -194,7 +194,7 @@
     <<set Avatars.l.hairback to ["straight"]>>
     <<set Avatars.hairback to {
         straight: {
-            id:0, index:"straight", long: true, fixcolor: true,
+            id:0, index:"straight", long: true, fixcolor: false,
         },
         curly: {
             id:1, index:"curly", long:true, fixcolor:false,

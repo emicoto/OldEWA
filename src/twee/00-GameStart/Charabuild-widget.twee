@@ -85,7 +85,7 @@
 <</widget>>
 
 <<widget "CMHairstyle">>
-    <<set _optionlist to {"自然":"natural","卷发":"curly","直发":"straght"}>>
+    <<set _optionlist to {"自然":"natural","卷发":"curly","直发":"straight"}>>
     <<listbox "$PC.发型" autoselect>>
         <<optionsfrom _optionlist>>
     <</listbox>>

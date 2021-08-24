@@ -200,11 +200,11 @@ $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌}
     hairfront   : null,  hairback   : null,  emote      : null,
 }>>
 
-<<dressup "top" 1 "red">>
-<<dressup "inner_bt" 1 "white">>
-<<dressup "bottom" 1 "black">>
-<<dressup "shoes" 1 "white">>
-<<dressup "legs" 1 "white">>
+<<dressup "top" 1>>
+<<dressup "inner_bt" 1>>
+<<dressup "bottom" 1>>
+<<dressup "shoes" 1>>
+<<dressup "legs" 1>>
 
 <<set $PFace to {
     name    : "正常",

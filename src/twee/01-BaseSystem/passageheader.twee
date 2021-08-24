@@ -3,6 +3,9 @@
 <<fixvalue>><<time>>
 <<SetAvatar>><<timed 1s>><<SetAvatar>><</timed>>
 
+/* 通知弹出框 */
+<div id="action-popup" class="hidden"><span id="action-text"></span></div>
+
 
 :: PassageFooter
 <div id="gameVersionDisplay">EWA ver<<print StartConfig.version>></div>

@@ -11,7 +11,7 @@
 <<set $timelimit to true>>
 <<set $persons to 3>>
 <<set $hardmode to 1>>
-
+<<set $render to "canvas">>
 /*<<if StartConfig.debug is true>>
 	<<set $debug to 1>>
 <<else>>

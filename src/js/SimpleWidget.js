@@ -50,6 +50,15 @@ function isFixhair(table) {
 
 window.isFixhair = isFixhair
 
+function hasLength(table) {
+    if (table.long == true) {
+        return "_" + hairlenth(V.PC.前发长)
+    }else{
+        return "_1"
+    }
+}
+
+window.hasLength = hasLength
 
 // Make .divs-links clickable as if they're anchors
 window.linkifyDivs = function (parentSelector = "") {
@@ -104,3 +113,25 @@ function BuyOutFit() {
     
 }
 window.BuyOutFit = BuyOutFit
+
+function weirdeffect(){
+	
+	var $passage = $('#eventsituation');
+	var rawtxt = $passage.html();
+	var len = rawtxt.length;
+	var newtext = '';
+	
+	for(var i = 0; i < len; i ++){	
+		var rng = Math.floor(Math.random() * 5) + 1;
+		var currentchar = rawtxt.charAt(i);
+		if(currentchar == ' '){
+			var newchar = '<span class="space"></span>';
+		}
+		else{
+			var newchar = '<span class="weffect' + rng + '">' + currentchar + '</span>';
+		}
+		newtext = newtext + newchar;
+	}
+	$passage.html(newtext);
+}
+window.weirdeffect = weirdeffect
