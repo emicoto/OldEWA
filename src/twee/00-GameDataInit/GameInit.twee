@@ -13,6 +13,7 @@
     "time" : 540,    "hour" : 9,    "min" : 0,
     "zone" : "上午",    "weekday" : "周一"
 }>>
+<<set $daychange to false>>
 
 <<set $weather to "晴">>
 <<set $local to {}>>

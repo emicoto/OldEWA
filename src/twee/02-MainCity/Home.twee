@@ -13,11 +13,9 @@
 <div class="tolink">
 <<link "打开衣柜　 1m" "衣柜">><<passtime 1>><</link>><br>
 <br>
-<<link "健身　　 　30m">><<passtime 30>><</link>><br>
-<<link "打游戏 　　30m">><<passtime 30>><</link>><br>
-<<link "洗澡　 　　30m">><<passtime 30>><</link>><br>
-<<link "和宠物玩耍 60m">><<passtime 60>><</link>><br>
-<br>
+<<link "健身　　 　30m" $passage>><<passtime 30>><</link>>　　<<link "打游戏 　　30m" $passage>><<passtime 30>><</link>><br>
+<<link "洗澡　 　　30m" $passage>><<passtime 30>><</link>>　　<<link "和宠物玩耍 60m" $passage>><<passtime 60>><</link>><br>
+<<link "跳过时间　 23hr" $passage>><<passtime 1380>><</link>><br>
 <<link "出门　 　　5m" "怡安小区" >><<passtime 5>><</link>><br>
 </div>
 
@@ -40,7 +38,7 @@
 <<you>>最近离开父母家，独立出来自己住了。一切才刚开始各种不习惯……<br>
 幸好，有小宠物史莱姆相伴……嗯，要不要跟宠物做点什么呢……？<br>
 
-:: 衣柜 [tool]
+:: 衣柜
 
 <div id="action-text2"><<you>>打开了衣柜。</div>
 

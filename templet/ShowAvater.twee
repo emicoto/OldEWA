@@ -1,8 +1,14 @@
 ﻿:: Avatar [widget]
 
 <<widget "avatar">>
+<<if $render is "canvas">>
+    <<twinescript>>
+    output.appendChild(Avatar.getCanvas())
+    <</twinescript>>
+<</if>>
 
-<<set _path to "./image/avatar/">>
+<<if $render is "image">>
+    <<set _path to "./image/avatar/">>
 <<set _layer to Avatars.layer>>
 <<set _ignore to ["addon","emoadd","kemofront","kemoback"]>>
 <<set _nosrc to ["frame","eyebrow","eyes","mouth","body","hairback","hairfront","background"]>>
@@ -137,11 +143,19 @@
 
 <</if>>
 <</for>>
+<</if>>
 
 <</widget>>
 
 <<widget "portrait">>
+<<if $render is "canvas">>
+    <<twinescript>>
+    output.appendChild(Avatar.getPortrait())
+    <</twinescript>>
+<</if>>
 
+<<if $render is "image">>
+    
 <<set _path to "./image/avatar/">>
 <<set _layer to Avatars.layer>>
 
@@ -276,5 +290,6 @@
 <</if>>
 
 <</for>>
+<</if>>
 
 <</widget>>

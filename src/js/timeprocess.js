@@ -43,53 +43,69 @@ function GetTime() {
 Macro.add('timeprocess', {
 	handler: function () {
 		var time = V.date.time;
-		var min, hour, day, week, month, year, zone, weekday; // Never checked and always overwritten - no need to init with old value
-		// Sanity check
+		var day = V.date.day;
+		var week = V.date.week;
+		var month = V.date.month;
+		var year = V.date.year;
+		var min,hour,zone,weekday;
+
 
 		/* 时间的处理 */
 		if (time < 0) time = 0;
 
-		min = time % 60
-		hour = Math.floor(time/60);
+			min = time % 60;
+			hour = Math.floor(time/60);
+
+		if (time >= 1440) time -= 1440;
 
 		if (hour > 23){
-			day = day + Math.floor(hour/24);
-			week = week += Math.floor(hour/24);
+			day += Math.floor(hour/24);
+			V.days += Math.floor(hour/24);
+
+			week = week + Math.floor(hour/24);
 			hour = hour % 24;
+			V.daychange = true
 		};
 
-		zone = gettimezone(hour)
+		zone = gettimezone(hour);
 
 		/* 周的处理 */
-		week = week%7
+		week = week%7;
 		switch(week){
 			case 0:
 				weekday = "周日";
+				break;
 			case 1:
 				weekday = "周一";
+				break;
 			case 2:
 				weekday = "周二";
+				break;
 			case 3:
 				weekday = "周三";
+				break;
 			case 4:
 				weekday = "周四";
+				break;
 			case 5:
 				weekday = "周五";
+				break;
 			case 6:
 				weekday = "周六";
-		}
+				break;
+		};
 
 		/* 月的处理，每月固定30天 */
 		while(day > 30){
-			month += 1;
+			month = month + 1;
 			day = Math.max(day-30,1);
-		}
+		};
 
 		/* 年的处理 */
 		if (month>12){
 			year = year+Math.floor(month/12);
 			month = Math.max(month%12,1);
-		}
+		};
 
 		V.date.time = time;
 		V.date.min = min;
@@ -100,7 +116,7 @@ Macro.add('timeprocess', {
 
 		V.date.day = day;
 		V.date.week = week;
-		V.date.month = mont;
+		V.date.month = month;
 		V.date.year = year;
 	}
 

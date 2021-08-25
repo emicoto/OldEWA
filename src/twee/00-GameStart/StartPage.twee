@@ -17,10 +17,6 @@ Elysion World Adventure
 :: Start [nosave]
 <<audio "标题" volume 0.5 play loop>>
 
-<<for _i to 0; _i lt 4; _i ++>>
-	<<print _i>><br>
-<</for>>
-
 <div id="startpage">
 <span class="intro">这是一个发生在名叫Elysion的星球的故事。<br>
 Elysion是一个类似现代——2021年地球的世界，虽然表面上平平无奇，实际上隐藏着各种超自然存在。<br>
