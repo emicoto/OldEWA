@@ -260,3 +260,53 @@ transform: rotate(240deg);
 .nextbutton:hover::after {
 background-color: white;
 }
+
+
+#action-popup {
+  position: fixed;
+  top: 120px;
+  right:30px;
+  border: 2px solid rgb(216, 215, 199);
+  border-radius: 10px;
+  padding: 20px 10px;
+  text-align: center;
+  background-color: #fff;
+  z-index: 100;
+  min-width: 200px;
+  max-width: 600px;
+}
+
+#action-popup.flash {
+  background-color:rgb(247, 255, 220);
+}
+
+#action-text2 {
+display: table;
+background-color: #eee;
+  border-radius: 3px;
+  transition: all 1.25s;
+}
+#action-text2.flash {
+background-color:rgb(169, 255, 241);
+}
+.popup {
+  animation: popup 0.75s linear alternate-reverse;
+}
+.action-flash {
+border-color: rgb(169, 255, 241) !important;
+  color: black !important;
+}
+.action-flash a {
+color: darkgoldenrod !important;
+}
+.notransition {
+transition: none !important;
+}
+
+@keyframes popup {
+  100%  {transform: translateX(-1%); transform: scale(0.01)};
+  75% {transform: translateX(-50%); transform: scale(0.25)};
+  50% {transform: translateX(-100%); transform: scale(0.5)};
+  25% {transform: translateX(-150%); transform: scale(0.75)};
+  0% {transform: translateX(-200%); transform: scale(1.25)};
+}

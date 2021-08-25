@@ -22,6 +22,8 @@
     position: relative;
     overflow: clip;
     float: left;
+    border-radius: 100%;
+    margin: 5px;
 }
 
 .P_Layer {
@@ -138,27 +140,27 @@
     padding: auto;
 }
 
-#color_plate button:hover {
+#color_plate button:hover{
     background-color: rgba(255, 255, 255, 0.5);
     color:deeppink;
 }
 
-#category_container {
+
+
+#ShopList, #ClosetList {
+    background-color: transparent;
+    border: 0px;
     width: 100%;
-    min-height: 30px;
-    min-width: 500px;
-    max-width: 800px;
-    position: relative;
-    overflow: visible;
-    border-bottom: 1px solid #ddd;
-    margin-top: 5px;
 }
 
-#category {
+#ShopList ul, #ClosetList ul {
+    border: 0px;
+    background-color: transparent;
     width: 100%;
-    height: 100%;
-    padding: auto;
+    height: 32px;
+    display: inline;
 }
+
 .category {
     float: left;
     position: relative;
@@ -171,48 +173,34 @@
     font-size: 13px;
 }
 
-#ShopList {
-    background-color: transparent;
-    border: 0px;
-    width: 100%;
-}
-
-#ShopList ul {
-    border: 0px;
-    background-color: transparent;
-    width: 100%;
-    height: 32px;
-    display: inline;
-}
-
-#ShopList .ui-tabs, #ShopList .ui-tabs-tab {
+#ShopList .ui-tabs, #ShopList .ui-tabs-tab, #ClosetList .ui-tabs, #ClosetList .ui-tabs-tab {
     border: 1px #ccc solid;
     background-color: rgba(255, 255, 255, 0.3);
 }
 
-#ShopList a {
+#ShopList a , #ClosetList a{
     color: #999;
 }
 
-#ShopList .ui-tabs-active {
+#ShopList .ui-tabs-active, #ClosetList .ui-tabs-active{
     background-color: #ddd;
     border: 1px #ccc solid;
 }
 
 
-#ShopList .ui-tabs-active a  {
+#ShopList .ui-tabs-active a  , #ClosetList .ui-tabs-active a{
     color:rgb(56, 54, 52);
 }
 
-#ShopList li {
+#ShopList li , #ClosetList li{
     list-style: none;
 }
 
-#ShopList ::before, #ShopList ::after {
+#ShopList ::before, #ShopList ::after , #ClosetList ::before, #ClosetList ::after{
     display: none;
 }
 
-#ShopList .ui-tabs-panel {
+#ShopList .ui-tabs-panel , #ClosetList .ui-tabs-panel{
     background-color: rgba(255, 255, 255, 0.3);
     border: 1px solid #ddd;
     padding: 10px;
@@ -225,7 +213,7 @@
     margin-top: -1px;
 }
 
-#ShopList a:hover, #ShopList li a:hover{
+#ShopList a:hover, #ShopList li a:hover , #ClosetList a:hover, #ClosetList li a:hover{
     border:none;
 }
 
@@ -276,51 +264,48 @@
     letter-spacing: 1px;
 }
 
-#action-popup {
-    position: fixed;
-    top: 120px;
-    right:30px;
-    border: 2px solid rgb(216, 215, 199);
-    border-radius: 10px;
-    padding: 20px 10px;
+/* 衣柜相关 */
+
+#W_showitems {
+    width: 90px;
+    height: 120px;
+    margin: 2px 5px;
+    position:relative;
+    border: 1px solid #ccc;
+    float: left;
+    overflow: clip;
+    line-height: 16px;
+    font-family: 新综艺;
+}
+
+.itemdurab{
+    position: absolute;
+    bottom:32px;
+    right:5%;
+    font-size: 12px;
+}
+
+.itemdegree {
+    font-size:12px;
+    position: absolute;
+    bottom:16px;
+    right:5%;
+}
+
+.itembuff {
+    font-size:12px;
+    position: absolute;
+    bottom:2px;
+    right:5%;
+}
+
+.W_color {
+    border: 1px solid #aaa;
+    position: absolute;
+    min-width: 30px;
+    top: 2px;
+    right:2px;
+    height: 24px;
+    font-size: 12px;
     text-align: center;
-    background-color: #fff;
-    z-index: 100;
-    min-width: 200px;
-    max-width: 600px;
-}
-
-#action-popup.flash {
-    background-color:rgb(247, 255, 220);
-}
-
-#action-text2 {
-	display: table;
-	background-color: #eee;
-    border-radius: 3px;
-    transition: all 1.25s;
-}
-#action-text2.flash {
-	background-color:rgb(169, 255, 241);
-}
-.popup {
-    animation: popup 0.75s linear alternate-reverse;
-}
-.action-flash {
-	border-color: rgb(169, 255, 241) !important;
-    color: black !important;
-}
-.action-flash a {
-	color: darkgoldenrod !important;
-}
-.notransition {
-	transition: none !important;
-}
-
-@keyframes popup {
-    100%  {transform: translateX(-1%); transform: scale(0.01)};
-    75% {transform: translateX(-50%); transform: scale(0.25)};
-    50% {transform: translateX(-100%); transform: scale(0.5)};
-    25% {transform: translateX(-150%); transform: scale(0.75)};
-    0% {transform: translateX(-200%); transform: scale(1.25)};
 }

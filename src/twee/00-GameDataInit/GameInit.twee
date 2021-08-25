@@ -15,10 +15,8 @@
 }>>
 
 <<set $weather to "晴">>
-<<set $local to {
-    place   : null,    tag     : null,    event   : null,
-    chara   : null,    open    : null,    outside : null,
-}>>
+<<set $local to {}>>
+<<set $location to "单身公寓">>
 
 <<set $money to 5000>>
 <<set $follow to 1>>
@@ -107,7 +105,7 @@
 
 /* 每次设定剧情时set要写好几次就麻烦，干脆试试用obj */
 <<set $event to {
-    type : "主线", name : "开场", branch : "初次", count: 0,
+    type : "主线", name : "开场", branch : "" , phrase: "初次",
 }>> 
 
 <<set $eventexit to "你的家">>

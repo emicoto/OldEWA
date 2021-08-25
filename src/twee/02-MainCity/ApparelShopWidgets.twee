@@ -13,7 +13,6 @@
 
 <<location "试衣间">>
 <<SetAvatar>>
-<<set $avatar.background to "tryon">>
 
 <</widget>>
 

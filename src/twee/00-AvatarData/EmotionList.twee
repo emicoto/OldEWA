@@ -1,6 +1,10 @@
 ﻿:: EmotionList [widget]
 
 <<widget "InitEmotion">>
+    <<set A.l.eyebrows to ["angry","confuse","happy","normal","sad"]>>
+    <<set A.l.eyes to ["ahe","blink1","blink2","blink2","close1","close2","full","idle","half","lookdown","lookleft","lookup1","lookup2","lookup3","quater1","quater2"]>>
+    <<set A.l.mouth to ["angry","laugh","oop","open","sad","sign","smile","unhappy"]>>
+
     <<set A.facelist to ["正常","开心","伤心","生气","害羞","困惑","受伤","快感1","快感2","高潮",]>>
     <<set A.emote to {
         正常 : {

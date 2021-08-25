@@ -149,3 +149,67 @@
     text-shadow:0 0 2px rgb(180, 166, 36);
     border: none;
 }
+
+#navi {
+    width: 200px;
+    z-index: 50;
+    position: fixed;
+    bottom: 250px;
+    border: 2px solid #ccc;
+    padding: 4px;
+    height: 30px;
+    background-color: #fff;
+    border-radius: 25px 0% 0% 25px;
+}
+
+#navi:hover {
+    right: -2px;
+    transition: all 0.75s;
+}
+
+.navi_unable {
+    right: -100px
+}
+
+.navi_active {
+    right: -2px;
+}
+
+#movebutton {
+    position: absolute;
+    top:5px;
+    left:20px;
+}
+
+#links {
+    width: 176px;
+    height: 250px;
+    top: 39px;
+    left: 25px;
+    overflow-y: scroll;
+    background-color: rgb(245, 245, 245);
+    position: absolute;
+    padding-left: 5px;
+    border: 1px solid #ccc;
+}
+
+#links a {
+    font-size: 14px;
+}
+
+#links a:hover {
+    border: 0px;
+}
+
+.links:hover ::after {
+    content: " ◀";
+}
+
+.links {
+    width: 150px;
+    height: fit-content;
+    float: left;
+    position: relative;
+    border-bottom: 1px dashed #ccc;
+    padding-left: 20px;
+}

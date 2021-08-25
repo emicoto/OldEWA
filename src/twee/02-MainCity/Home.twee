@@ -1,4 +1,4 @@
-﻿:: 你的家
+﻿:: 你的家 单身公寓
 <<location "单身公寓">>
 <span class="title"><<you>>家</span><br>
 <div class="lbox">
@@ -6,19 +6,19 @@
 </div>
 <br>
 <div class="situation">
-<<call "城市生活" 1>>
+<<include "城市生活_1">>
 </div>
 <br>
 
 <div class="tolink">
-<<link "打开衣柜　 (00:01)" "衣柜">><<passtime 1>><</link>><br>
+<<link "打开衣柜　 1m" "衣柜">><<passtime 1>><</link>><br>
 <br>
-<<link "健身　　 　(00:30)">><<passtime 30>><</link>><br>
-<<link "打游戏 　　(00:30)">><<passtime 30>><</link>><br>
-<<link "洗澡　 　　(00:30)">><<passtime 30>><</link>><br>
-<<link "和宠物玩耍 (01:00)">><<passtime 60>><</link>><br>
+<<link "健身　　 　30m">><<passtime 30>><</link>><br>
+<<link "打游戏 　　30m">><<passtime 30>><</link>><br>
+<<link "洗澡　 　　30m">><<passtime 30>><</link>><br>
+<<link "和宠物玩耍 60m">><<passtime 60>><</link>><br>
 <br>
-<<link "出门　 (00:05)" 怡安小区 >><<passtime 5>><</link>><br>
+<<link "出门　 　　5m" "怡安小区" >><<passtime 5>><</link>><br>
 </div>
 
 /*可以做的事情……
@@ -39,3 +39,93 @@
 
 <<you>>最近离开父母家，独立出来自己住了。一切才刚开始各种不习惯……<br>
 幸好，有小宠物史莱姆相伴……嗯，要不要跟宠物做点什么呢……？<br>
+
+:: 衣柜 [tool]
+
+<div id="action-text2"><<you>>打开了衣柜。</div>
+
+<div id="ClosetList">
+  <ul>
+    <li class="category"><a href="#hat">头饰</a></li>
+    <li class="category"><a href="#outter">外套</a></li>
+    <li class="category"><a href="#top">上装</a></li>
+    <li class="category"><a href="#bottom">下装</a></li>
+    <li class="category"><a href="#inner_up">内衣</a></li>
+    <li class="category"><a href="#inner_bt">内裤</a></li>
+    <li class="category"><a href="#legs">袜子</a></li>
+    <li class="category"><a href="#shoes">鞋子</a></li>
+    <li class="category"><a href="#accesory">饰品</a></li>
+  </ul>
+    
+    <div id="hat">
+        
+    </div>
+
+    <div id="outter">
+        
+    </div>
+
+    <div id="top">
+        <div id="W_showitems">
+            <div class="itemthumb"><img src="image/avatar/top/shirt/thumb.png"></div>
+            <div class="W_color" style="background-color: #fff;">白</div>
+            <div class="itemdurab">耐久：20/20</div>
+            <div class="itemdegree"><span style="color:blue">-1C</span> | <span style="color:red">-1C</span></div>
+            <div class="itembuff"><span style="color:brown">Def+</span> <span style="color:deeppink">Allure+</span></div>
+        </div>
+    </div>
+
+    <div id="bottom">
+        
+    </div>
+
+    <div id="inner_up">
+        
+    </div>
+
+    <div id="inner_bt">
+        
+    </div>
+
+    <div id="legs">
+        
+    </div>
+
+    <div id="shoes">
+        
+    </div>
+
+    <div id="accesory">
+        
+    </div>
+
+</div>
+
+
+<div class="GoNaked">
+<<link "一键全脱">><<gonaked>><</link>>
+</div>
+<div class="redress">
+<<link "衣服复位">><<redress>><</link>>
+</div>
+<div class="SaveOutFit">
+<<link "保存搭配">><</link>>
+</div>
+<div class="backbutton">
+<<link "合上衣柜" "你的家 单身公寓">><</link>><br>
+</div>
+
+
+<<silently>>
+/* 自动刷新等待JS读取结束 */
+<<set _timer to 10>>
+<<repeat 0.3s>>
+    <<script>>
+        $( function() {
+            $( "#ClosetList" ).tabs();
+        } );
+    <</script>>
+    <<set _timer to _timer -1>>
+    <<if _timer lte 0>><<stop>><</if>>
+<</repeat>>
+<</silently>>

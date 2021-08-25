@@ -138,20 +138,6 @@
     <<set $avatar.hairback to setAvatar("hairback",{fixcolor:false, color:A.haircolor[$PC.发色], src: $Equip.hairback+"/basic"+hasLength(Avatars.hairback[$Equip.hairback])})>>
 <</if>>
 
-/*
-<<if Avatars.hairfront[$Equip.hairfront].long is true>>
-    <<set $avatar.hairfront to setAvatar("hairfront",$Equip.hairfront + "/" + isFixhair(Avatars.hairfront[$Equip.hairfront]) + "_" + hairlenth($PC.前发长))>>
-<<else>>
-    <<set $avatar.hairfront to setAvatar("hairfront",$Equip.hairfront + "/" + isFixhair(Avatars.hairfront[$Equip.hairfront]) + "_1")>>
-<</if>>
-
-
-<<if Avatars.hairback[$Equip.hairback].long is true>>
-    <<set $avatar.hairback to setAvatar("hairback",$Equip.hairback + "/" + isFixhair(Avatars.hairback[$Equip.hairback]) + "_" + hairlenth($PC.发长))>>
-<<else>>
-    <<set $avatar.hairback to setAvatar("hairback",$Equip.hairback + "/" + isFixhair(Avatars.hairback[$Equip.hairback]) + "_1")>>
-<</if>>
-*/
 
 /* 兽耳、兽角、兽尾 */
 /*
@@ -186,9 +172,15 @@
 /* 嘴巴 */
 <<set $avatar.mouth to setAvatar("mouth",$PFace.mouth)>>
 
+/* 表情追加 */
+<<set $avatar.emoadd.hurt to setAvatar("emoadd.hurt",$PFace.hurt)>>
+<<set $avatar.emoadd.shy to setAvatar("emoadd.shy",$PFace.shy)>>
+<<set $avatar.emoadd.tear to setAvatar("emoadd.tear",$PFace.tear)>>
+<<set $avatar.emoadd.red to setAvatar("emoadd.red",$PFace.red)>>
+
 /* 淫纹 */
 <<if $Pskin.腹部 isnot null>>
-    <<set _apath to "./image/avatar/19_body/"+$Pskin.腹部.index+".png">>
+    <<set _apath to "./image/avatar/body/"+$Pskin.腹部.index+".png">>
     
     <<if ImgExist(_apath)>>
         <<set $avatar.tatoos to setAvatar("tatoos",$Pskin.腹部.index)>>

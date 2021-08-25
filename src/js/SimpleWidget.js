@@ -11,6 +11,21 @@ window.showcharainfo = function () {
 	new Wikifier(null, '<<replace #charainfo>><<charainfo>><</replace>><<CMApply>>');
 }
 
+
+window.imglocation = function(){
+    var location = V.location
+    
+    if (GameData.placedata[location].img == undefined  || GameData.placedata[location].img == null){
+      return "dummy"
+
+    }else{
+      
+      let img = GameData.placedata[location].img
+      return img
+
+    }
+}
+
 function setreveal(){
     const isReveal=w=>V.Equip[w] ?V.Equip[w].reveal :0;
     const tops =[isReveal("outter"),isReveal("top"),isReveal("inner_up"),]
@@ -65,73 +80,3 @@ window.linkifyDivs = function (parentSelector = "") {
 	$(document).ready(() => { $(parentSelector + " .div-link").click(function (e) { $(this).find('a').first().click(); }) });
 	$(document).ready(() => { $(parentSelector + " .div-link a").click(function (e) { e.stopPropagation(); }) });
 }
-
-function setShowCase(table) {
-    if (typeof(table) == "object") {
-        V.showcase = table
-        new Wikifier(null,"<<replace '#show_container'>><<ShowCase>><</replace>>")
-    }else{
-        console.log(table,"error: is not object")
-    }
-
-}
-window.setShowCase = setShowCase
-
-function setPatterns(arg) {
-    V.showcase.acc = arg
-    new Wikifier(null,"<<replace '#showcase'>><<ShowManequin>><</replace>>")
-}
-window.setPatterns = setPatterns
-
-function setColors(arg,name) {
-    V.showcase.color = arg
-    V.showcase.colorname = name
-    new Wikifier(null,"<<replace '#showcase'>><<ShowManequin>><</replace>>")
-}
-window.setColors = setColors
-
-
-function ShowPopUP() {
-    $('#action-popup').removeClass('hidden'); setTimeout(() => { $('#action-popup').addClass('hidden') }, 3200);
-    $('#action-popup').addClass('popup'); setTimeout(() => { $('#action-popup').removeClass('popup') }, 1000);
-    $('#action-text2').addClass('notransition flash'); setTimeout(() => { $('#action-text2').removeClass('notransition flash') }, 100);
-}
-window.ShowPopUP = ShowPopUP
-
-function BuyOutFit() {
-    if (V.money > V.showcase.cost) {
-        V.money = V.money - V.showcase.cost
-        V.closet[V.showcase.layer].push(V.showcase)
-        var text = "你花费了"+V.showcase.cost+"元购买了"+V.showcase.name+"<</replace>>"
-    }else{
-        var text = "虽然你想买"+V.showcase.name+"，但钱不够……"
-    }
-
-    new Wikifier(null,"<<replace '#action-text'>>"+text)
-    new Wikifier(null,"<<replace '#action-text2'>>"+text)
-    ShowPopUP()
-    
-}
-window.BuyOutFit = BuyOutFit
-
-function weirdeffect(){
-	
-	var $passage = $('#eventsituation');
-	var rawtxt = $passage.html();
-	var len = rawtxt.length;
-	var newtext = '';
-	
-	for(var i = 0; i < len; i ++){	
-		var rng = Math.floor(Math.random() * 5) + 1;
-		var currentchar = rawtxt.charAt(i);
-		if(currentchar == ' '){
-			var newchar = '<span class="space"></span>';
-		}
-		else{
-			var newchar = '<span class="weffect' + rng + '">' + currentchar + '</span>';
-		}
-		newtext = newtext + newchar;
-	}
-	$passage.html(newtext);
-}
-window.weirdeffect = weirdeffect

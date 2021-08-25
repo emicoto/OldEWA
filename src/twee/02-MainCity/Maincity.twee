@@ -12,18 +12,49 @@
 </div>
 
 <div class="tolink">
-<<link "小区公园 (00:03)" $passage>><<passtime 3>><</link>><br>
-<<link "宜兴广场 (00:12)" "商店">><<passtime 12>><</link>><br>
-<<link "巴士站　 (00:05)" $passage>><<passtime 5>><</link>><br>
-<<link "地铁站　 (00:10)" $passage>><<passtime 10>><</link>><br>
-<br>
-<<link "回家 (00:05)" 你的家 >><<passtime 5>><</link>><br>
+/* 可以进行的互动 */
+</div>
+
+<div id="navi" class="navi_unable">
+    <<navi>>
 </div>
 
 /* 景南市。一个位于周唐南方大省柳洲省的一级大城市。<br>
 有山有水，面朝大海，四季分明，是个风景优美的旅游城市。<br> */
 
+:: 怡安小区 links [links]
+<div class="links" title="移动时间：3分钟"><<link "・ 小区公园" "怡安小区公园">><<passtime 3>><</link>></div>
+<div class="links" title="移动时间：12分钟"><<link "・ 宜兴广场" "商店">><<passtime 12>><</link>></div>
+<div class="links" title="移动时间：5分钟"><<link "・ 巴士站" $passage>><<passtime 5>><</link>></div>
+<div class="links" title="移动时间：10分钟"><<link "・ 地铁站" $passage>><<passtime 10>><</link>></div>
+
+
+:: 怡安小区公园
+<<location "怡安小区公园">>
+<span class="title">怡安小区 - 公园</span><br>
+<div class="lbox">
+绿意盎然，四周都种着花草树木。最吸引人的是南面一侧的用假山搭造的山泉景。<br>
+公园中央有个宽敞的小广场，偶尔会有大妈们在这里跳舞。<br>
+西面有儿童玩耍的设施。时不时能听到孩子们的欢声笑语。<br>
+</div>
+<br>
+
+<div class="situation">
+<<you>>坐在公园的长椅上，悠闲地看着天上的云朵，偶然会被飞过的小鸟吸引目光。<br>
+</div>
+
+<div class="tolink">
+
+</div>
+
+<div id="navi" class="navi_unable">
+    <<navi>>
+</div>
+
+:: 怡安小区公园 links
+<div class="links" title="移动时间：3分钟"><<link "・ 小区大门" "怡安小区">><<passtime 3>><</link>></div>
+
+
 :: 商店
 <<location "商店">>
 <<include "试衣间">>
-

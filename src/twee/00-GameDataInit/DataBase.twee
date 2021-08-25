@@ -60,8 +60,41 @@
 <<set D.explist to ["战败","攻击","被攻击","诱惑","射精","高潮","M高潮","B高潮","C高潮","U高潮","V高潮","A高潮","多重高潮","自慰","口交","性交","肛交","喷乳","被猥琐","被眠奸","被迷奸","被强奸","被轮奸","被兽奸","被触手奸","兽交","触手","史莱姆","怀孕","A怀孕","分娩","尿道开发","阴道扩张","肛门扩张","产卵","寄生","监禁","SM"]>>
 
 <<set D.placedata to {
-    你的家 : {place:"你的家", outside:"室内", tag:["煮食","休息","沐浴","更衣","电脑","WIFI"], chara:["player"], bus:false, subway:false, car:false, bike:false},
-    怡安小区 : {place:"怡安小区", outside:"室外", tag:["公园","散步","隐藏","广场舞"],chara:["player"], bus:true, subway:true, car:true, bike:true},
+    单身公寓 : {
+        place:"单身公寓", side:"室内", 
+        tag:["煮食","休息","沐浴","更衣","电脑","WIFI"], 
+        chara:["player"], 
+        bus:false, subway:false, car:false, bike:false,
+        homebutton: false,
+        img:"singleapartment",
+        },
+
+    怡安小区 : {
+        place:"怡安小区", side:"室外", 
+        tag:["交通中心","WIFI",],
+        chara:["player"], 
+        bus:true, subway:true, car:true, bike:true,
+        homebutton: true,
+        img:"neiborhood",
+        },
+
+    怡安小区公园 : {
+        place:"怡安小区公园", side:"室外", 
+        tag:["公园","散步","绿意","藏身点","广场舞","WIFI"],
+        chara:["player"], 
+        bus:false, subway:false, car:false, bike:true,
+        homebutton: true,
+        img:"neiborhood",
+        },
+    
+    试衣间 : {
+        place:"试衣间", side:"室内", 
+        tag:["公园","散步","绿意","藏身点","广场舞","WIFI"],
+        chara:["player"], 
+        bus:false, subway:false, car:false, bike:false,
+        homebutton: false,
+        img:"tryon",
+    }
 }>>
 
 <<set D.equipindex to ["neck","hat","face","outter","top","hand","bottom","inner_up","inner_bt","shoes","legs","back","hairfront","hairback","emote"]>>
@@ -104,7 +137,7 @@
 
 <<cacheaudio "月光" "sound/ClairDeLune.mp3">>
 
-<<cacheaudio "幻想" "sound/MelodyOfElves.mp3">>
+<<cacheaudio "标题" "sound/WolfRainRequim.mp3">>
 
 <<cacheaudio "蝉鸣" "sound/minmin.mp3">>
 

@@ -23,6 +23,18 @@
   filter:FlipV;
 }
 
+
+.movedown {
+  animation: movedown 1.5s alternate;
+}
+
+@keyframes movedown {
+  0% {height: 60px;};
+  25% {height: 120px};
+  50% {height: 180px};
+  100% {height: 250px};
+}
+
 /* Drunk Text - Start */
 .drunk {
 	animation: drunkCam 30s alternate;

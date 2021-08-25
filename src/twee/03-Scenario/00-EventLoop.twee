@@ -21,48 +21,118 @@
 
 /* 再现ERA口上系统的TRYCALL体系 主 */
 <<widget "CallEvent">>
-<<set _passagename to $event.type+"_"+$event.name+"_"+$event.branch+"_"+$event.count>>
-<<if Story.has(_passagename) is true>>
-    <<include _passagename>>
-<<else>>
-/* 失败时显示通用代替口上 */
+<<set _branch to [$event.type, $event.name, $event.branch, $event.phrase, $lang]>>
+<<set _n to 0>>
+
+<<for _i to 0; _i lt 4; _i ++>>
+<<switch _i>>
+    <<case 0>>
+        <<set _passagename to _branch[0]+" "+_branch[1]+" "+_branch[2]+" "+_branch[3]+" "+_branch[4]>>
+    <<case 1>>
+        <<set _passagename to _branch[0]+" "+_branch[1]+" "+_branch[2]+" "+_branch[3]>>
+    <<case 2>>
+        <<set _passagename to _branch[0]+" "+_branch[1]+" "+_branch[3]>>
+<</switch>>
+
+    <<if Story.has(_passagename+" "+$lang) is true>>
+        <<include _passagename>>
+        <<break>>
+    <<elseif $lang isnot "CN" and Story.has(_passagename+" CN") is true>>
+        <<include _passagename>>
+        <<break>>
+    <<elseif Story.has(_passagename) is true>>
+        <<include _passagename>>
+        <<break>>
+    <</if>>
+
+<</for>>
+
+<<if _i gt 2>>
+ /* 都失败时显示代替事件或者返回标题画面 */
+ <<set $Eflag.nonext to false>>
+ <<set $eventexit to "Start">>
+ <<set $eventend to true>>
+ <<print _passagename>>并不存在
 <</if>>
+
 <</widget>>
+
 
 <<widget "CallEventSelect">>
-<<set _passagename to $event.type+"_"+$event.name+"_"+$event.branch+"_S_"+$event.count>>
-<<if Story.has(_passagename) is true>>
-    <<include _passagename>>
-<<else>>
-/* 失败时显示通用代替口上 */
+
+<<set _branch to [$event.type, $event.name, $event.branch, $event.phrase, $lang]>>
+<<set _n to 0>>
+
+<<for _i to 0; _i lt 4; _i ++>>
+<<switch _i>>
+    <<case 0>>
+        <<set _passagename to _branch[0]+" "+_branch[1]+" "+_branch[2]+" "+_branch[3]+" "+_branch[4]+"S">>
+    <<case 1>>
+        <<set _passagename to _branch[0]+" "+_branch[1]+" "+_branch[2]+" "+_branch[3]+"S">>
+    <<case 2>>
+        <<set _passagename to _branch[0]+" "+_branch[1]+" "+_branch[3]+"S">>
+<</switch>>
+
+    <<if Story.has(_passagename+" "+$lang) is true>>
+        <<include _passagename>>
+        <<break>>
+    <<elseif $lang isnot "CN" and Story.has(_passagename+" CN") is true>>
+        <<include _passagename>>
+        <<break>>
+    <<elseif Story.has(_passagename) is true>>
+        <<include _passagename>>
+        <<break>>
+    <</if>>
+<</for>>
+
+<<if _i gt 2>>
+ /* 都失败时显示NEXT按钮 */
+ <<set $Eflag.nonext to false>>
 <</if>>
+
 <</widget>>
 
-<<widget "CallEventEffect">>
-<<set _passagename to $event.type+"_"+$event.name+"_"+$event.branch+"_E">>
-<<if Story.has(_passagename) is true>>
-    <<include _passagename>>
-<<else>>
-/* 失败时显示通用代替口上 */
-<</if>>
+<<widget "CallEventEffect">> /* 特效和数据处理就不用分语言版本了 */
+
+<<set _branch to [$event.type, $event.name, $event.branch, $event.phrase, $lang]>>
+<<set _n to 0>>
+
+<<for _i to 0; _i lt 4; _i ++>>
+<<switch _i>>
+    <<case 0>>
+        <<set _passagename to _branch[0]+" "+_branch[1]+" "+_branch[2]+" "+_branch[3]+" "+_branch[4]+"E">>
+    <<case 1>>
+        <<set _passagename to _branch[0]+" "+_branch[1]+" "+_branch[2]+" "+_branch[3]+"E">>
+    <<case 2>>
+        <<set _passagename to _branch[0]+" "+_branch[1]+" "+_branch[3]+"E">>
+<</switch>>
+
+    <<if Story.has(_passagename) is true>>
+        <<include _passagename>>
+        <<break>>
+    <</if>>
+<</for>>
+
 <</widget>>
 
 /* 各个事件开始前的特殊处理 */
 <<widget "EventFirst">>
-<<set _passagename to $event.type+"_"+$event.name+"_EventFirst">>
+<<set _passagename to $event.type+"_"+$event.name+" EventFirst">>
 /* 主线_剧情_EventFirst */
 <<if Story.has(_passagename)>>
     <<include _passagename>>
-<<else>>
-/* 失败时使用代替的处理 */
+
+<<else>>/* 失败时使用代替的处理 */
+
+
 <</if>>
 
 <</widget>>
 
 <<widget "nextbutton">>
 <<if $eventend is false>>
-    <<link "下一页" $passage>><</link>>
+    <<link "NEXT" $passage>><</link>>
 <<else>>
-    <<link "下一页" $eventexit>><</link>>
+    <<link "NEXT" $eventexit>><</link>>
 <</if>>
 <</widget>>

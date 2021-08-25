@@ -1,0 +1,295 @@
+﻿:: Avatar [widget]
+
+<<widget "avatar">>
+<<if $render is "canvas">>
+    <<twinescript>>
+    output.appendChild(Avatar.getCanvas())
+    <</twinescript>>
+<</if>>
+
+<<if $render is "image">>
+    <<set _path to "./image/avatar/">>
+<<set _layer to Avatars.layer>>
+<<set _ignore to ["addon","emoadd","kemofront","kemoback"]>>
+<<set _nosrc to ["frame","eyebrow","eyes","mouth","body","hairback","hairfront","background"]>>
+
+<<for _i to 0; _i <_layer.length; _i++>>
+
+<<set _zindex to "z-index:"+(23-_i)>>
+
+<<if $avatar[_layer[_i]] is null>>
+    <<continue>>
+<<else>>
+
+    <<if $avatar.top isnot null and $avatar.bottom isnot null>>
+        <<if $avatar.top.tuckin is true or $avatar.bottom.slot is "overall">>
+            <<if _layer[_i] is "top">>
+                <<set _zindex to "z-index:"+(23-_i-1)>>
+            <<elseif _layer[_i] is "bottom">>
+                <<set _zindex to "z-index:"+(23-_i+1)>>
+            <</if>>
+        <</if>>
+    <</if>>
+
+    /* 批量合成文件夹名称 0_frame 这部分 */
+    <<set _path1 to _path + _layer[_i] + "/">>
+
+    /* 先显示基础部分 */
+    <<if _ignore.includes(_layer[_i]) is false>>
+        <<if _nosrc.includes(_layer[_i]) is true>>
+           <<set _path2 to _path1 + $avatar[_layer[_i]]>> 
+        <<else>>
+           <<set _path2 to _path1 + $avatar[_layer[_i]].src>> 
+        <</if>>
+        <img class="Layer" @src="_path2 + '.png'" @style="_zindex">
+    <</if>>
+
+    /* 如果有图案差分的话 */
+    <<if $avatar[_layer[_i]].acc isnot undefined and $avatar[_layer[_i]].acc isnot null>>
+        <<set _path2 to _path1 + $avatar[_layer[_i]].acc>>
+        <img class="Layer" @src="_path2 + '.png'" @style="_zindex">
+    <</if>> 
+
+    /* 腹部、胸部纹身 */
+    <<if _layer[_i] is "body" and $avatar.tatoos isnot null and $Pflag.top lte 2>>
+        <<set _path2 to _path1 + $avatar.tatoos>>
+        <img class="Layer" @src="_path2 + '.png'" @style="_zindex">
+    <</if>>
+
+    /* 丁丁 */
+    <<if _layer[_i] is "body" and $avatar.penis isnot null>>
+        <<set _path2 to _path1 + $avatar.penis>>
+        <img class="Layer" @src="_path2 + '.png'" @style="_zindex">
+    <</if>>
+
+    /* 兽耳之类的 */
+    <<if _layer[_i] is "kemofront" and $avatar.kemofront.mimi isnot null>>
+        <<set _path2 to _path1 + $avarar.kemofront.mimi.src>>
+        <img class="Layer" @src="_path2 + '.png'" @style="_zindex">
+    <</if>>
+
+    <<if _layer[_i] is "kemofront" and $avatar.kemofront.horn isnot null>>
+        <<set _path2 to _path1 + $avarar.kemofront.horn>>
+        <img class="Layer" @src="_path2 + '.png'" @style="_zindex">
+    <</if>>
+
+    <<if _layer[_i] is "kemoback" and $avatar.kemoback.wing isnot null>>
+        <<set _path2 to _path1 + $avarar.kemoback.wing.src>>
+        <img class="Layer" @src="_path2 + '.png'" @style="_zindex">
+    <</if>>
+
+    <<if _layer[_i] is "kemoback" and $avatar.kemoback.tail isnot null>>
+        <<set _path2 to _path1 + $avarar.kemoback.tail.src>>
+        <img class="Layer" @src="_path2 + '.png'" @style="_zindex">
+    <</if>>
+
+    /* 液体效果 */
+    <<if _layer[_i] is "addon">>
+
+        <<if $avatar.addon.bottom is true and $Pflag.bottom lte 2>>
+            <<set _path2 to _path1 + "bottom">>
+            <img class="Layer" @src="_path2 + '.png'" @style="_zindex">
+        <</if>>
+
+        <<if $avatar.addon.body is true>>
+            <<set _path2 to _path1 + "body">>
+            <img class="Layer" @src="_path2 + '.png'" @style="_zindex">
+        <</if>>
+
+        <<if $avatar.addon.hair is true>>
+            <<set _path2 to _path1 + "hair">>
+            <img class="Layer" @src="_path2 + '.png'" @style="_zindex">
+        <</if>>
+
+        <<if $avatar.addon.face is true>>
+            <<set _path2 to _path1 + "face">>
+            <img class="Layer" @src="_path2 + '.png'" @style="_zindex">
+        <</if>>
+
+        <<if $avatar.addon.mouth is true>>
+            <<set _path2 to _path1 + "mouth">>
+            <img class="Layer" @src="_path2 + '.png'" @style="_zindex">
+        <</if>>
+
+        <<if $avatar.addon.penis is true and $Pflag.bottom lte 1>>
+            <<set _path2 to _path1 + "penis">>
+            <img class="Layer" @src="_path2 + '.png'" @style="_zindex">
+        <</if>>
+
+    <</if>>
+
+    /* 表情效果 */
+    <<if _layer[_i] is "emoadd">>
+        <<if $PFace.shy is true>>
+            <<set _path2 to _path1 + "shy">>
+            <img class="Layer" @src="_path2 + '.png'" @style="_zindex">
+        <</if>>
+
+        <<if $PFace.red is true>>
+            <<set _path2 to _path1 + "red">>
+            <img class="Layer" @src="_path2 + '.png'" @style="_zindex">
+        <</if>>
+
+        <<if $PFace.hurt is true>>
+            <<set _path2 to _path1 + "hurt">>
+            <img class="Layer" @src="_path2 + '.png'" @style="_zindex">
+        <</if>>
+
+        <<if $PFace.tear is true>>
+            <<set _path2 to _path1 + "tear">>
+            <img class="Layer" @src="_path2 + '.png'" @style="_zindex">
+        <</if>>
+    <</if>>
+
+<</if>>
+<</for>>
+<</if>>
+
+<</widget>>
+
+<<widget "portrait">>
+<<if $render is "canvas">>
+    <<twinescript>>
+    output.appendChild(Avatar.getPortrait())
+    <</twinescript>>
+<</if>>
+
+<<if $render is "image">>
+    
+<<set _path to "./image/avatar/">>
+<<set _layer to Avatars.layer>>
+
+<<set _ignore to ["addon","emoadd","kemofront","kemoback"]>>
+<<set _nosrc to ["frame","eyebrow","eyes","mouth","body","hairback","hairfront"]>>
+
+<<for _i to 0; _i <_layer.length; _i++>>
+<<set _zindex to "z-index:"+(22-_i)>>
+
+<<if $avatar[_layer[_i]] is null>>
+    <<continue>>
+<<else>>
+
+    <<if $avatar.top isnot null>>
+        <<if $avatar.top.tuckin is true and _layer[_i] is "top">>
+            <<set _zindex to "z-index:"+(22-_i-1)>>
+        <<elseif $avatar.top.tuckin is true and _layer[_i] is "bottom">>
+            <<set _zindex to "z-index:"+(22-_i+1)>>
+        <</if>>
+    <</if>>
+
+    /* 批量合成文件夹名称 0_frame 这部分 */
+    <<set _path1 to _path + _i+"_"+_layer[_i] + "/">>
+
+    /* 先显示基础部分 */
+    <<if _ignore.includes(_layer[_i]) is false>>
+        <<if _nosrc.includes(_layer[_i]) is true>>
+           <<set _path2 to _path1 + $avatar[_layer[_i]]>> 
+        <<else>>
+           <<set _path2 to _path1 + $avatar[_layer[_i]].src>> 
+        <</if>>
+        <img class="P_Layer flipx" @src="_path2 + '.png'" @style="_zindex">
+    <</if>>
+
+    /* 如果有图案差分的话 */
+    <<if $avatar[_layer[_i]].acc isnot undefined and $avatar[_layer[_i]].acc isnot null>>
+        <<set _path2 to _path1 + $avatar[_layer[_i]].acc>>
+        <img class="P_Layer flipx" @src="_path2 + '.png'" @style="_zindex">
+    <</if>> 
+
+    /* 腹部、胸部纹身 */
+    <<if _layer[_i] is "body" and $avatar.tatoos isnot null and $Pflag.top lte 2>>
+        <<set _path2 to _path1 + $avatar.tatoos>>
+        <img class="P_Layer flipx" @src="_path2 + '.png'" @style="_zindex">
+    <</if>>
+
+    /* 丁丁 */
+    <<if _layer[_i] is "body" and $avatar.penis isnot null>>
+        <<set _path2 to _path1 + $avatar.penis>>
+        <img class="P_Layer flipx" @src="_path2 + '.png'" @style="_zindex">
+    <</if>>
+
+    /* 兽耳之类的 */
+    <<if _layer[_i] is "kemofront" and $avatar.kemofront.mimi isnot null>>
+        <<set _path2 to _path1 + $avarar.kemofront.mimi.src>>
+        <img class="P_Layer flipx" @src="_path2 + '.png'" @style="_zindex">
+    <</if>>
+
+    <<if _layer[_i] is "kemofront" and $avatar.kemofront.horn isnot null>>
+        <<set _path2 to _path1 + $avarar.kemofront.horn>>
+        <img class="P_Layer flipx" @src="_path2 + '.png'" @style="_zindex">
+    <</if>>
+
+    <<if _layer[_i] is "kemoback" and $avatar.kemoback.wing isnot null>>
+        <<set _path2 to _path1 + $avarar.kemoback.wing.src>>
+        <img class="P_Layer flipx" @src="_path2 + '.png'" @style="_zindex">
+    <</if>>
+
+    <<if _layer[_i] is "kemoback" and $avatar.kemoback.tail isnot null>>
+        <<set _path2 to _path1 + $avarar.kemoback.tail.src>>
+        <img class="P_Layer flipx" @src="_path2 + '.png'" @style="_zindex">
+    <</if>>
+
+    /* 液体效果 */
+    <<if _layer[_i] is "addon">>
+
+        <<if $avatar.addon.bottom is true and $Pflag.bottom lte 2>>
+            <<set _path2 to _path1 + "bottom">>
+            <img class="P_Layer flipx" @src="_path2 + '.png'" @style="_zindex">
+        <</if>>
+
+        <<if $avatar.addon.body is true>>
+            <<set _path2 to _path1 + "body">>
+            <img class="P_Layer flipx" @src="_path2 + '.png'" @style="_zindex">
+        <</if>>
+
+        <<if $avatar.addon.hair is true>>
+            <<set _path2 to _path1 + "hair">>
+            <img class="P_Layer flipx" @src="_path2 + '.png'" @style="_zindex">
+        <</if>>
+
+        <<if $avatar.addon.face is true>>
+            <<set _path2 to _path1 + "face">>
+            <img class="P_Layer flipx" @src="_path2 + '.png'" @style="_zindex">
+        <</if>>
+
+        <<if $avatar.addon.mouth is true>>
+            <<set _path2 to _path1 + "mouth">>
+            <img class="P_Layer flipx" @src="_path2 + '.png'" @style="_zindex">
+        <</if>>
+
+        <<if $avatar.addon.penis is true and $Pflag.bottom lte 1>>
+            <<set _path2 to _path1 + "penis">>
+            <img class="P_Layer flipx" @src="_path2 + '.png'" @style="_zindex">
+        <</if>>
+
+    <</if>>
+
+    /* 表情效果 */
+    <<if _layer[_i] is "emoadd">>
+        <<if $PFace.shy is true>>
+            <<set _path2 to _path1 + "shy">>
+            <img class="P_Layer flipx" @src="_path2 + '.png'" @style="_zindex">
+        <</if>>
+
+        <<if $PFace.red is true>>
+            <<set _path2 to _path1 + "red">>
+            <img class="P_Layer flipx" @src="_path2 + '.png'" @style="_zindex">
+        <</if>>
+
+        <<if $PFace.hurt is true>>
+            <<set _path2 to _path1 + "hurt">>
+            <img class="P_Layer flipx" @src="_path2 + '.png'" @style="_zindex">
+        <</if>>
+
+        <<if $PFace.tear is true>>
+            <<set _path2 to _path1 + "tear">>
+            <img class="P_Layer flipx" @src="_path2 + '.png'" @style="_zindex">
+        <</if>>
+    <</if>>
+
+<</if>>
+
+<</for>>
+<</if>>
+
+<</widget>>

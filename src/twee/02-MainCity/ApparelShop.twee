@@ -72,14 +72,15 @@
 <div class="showinner">
 <<link "只看内衣">><<showinner>><</link>>
 </div>
+<div class="redress">
+<<link "衣服复位">><<redress>><</link>>
+</div>
+
 <div class="buybotton">
 <<link "购买">><<run BuyOutFit()>><</link>>
 </div>
 <div class="trybotton">
 <<link "试穿">><<tryon $showcase.layer>><</link>>
-</div>
-<div class="redress">
-<<link "复位">><<redress>><</link>>
 </div>
 
 <div class="backbutton">

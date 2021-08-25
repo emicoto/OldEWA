@@ -15,7 +15,12 @@
 Elysion World Adventure
 
 :: Start [nosave]
-<<audio "幻想" volume 1 play loop>>
+<<audio "标题" volume 0.5 play loop>>
+
+<<for _i to 0; _i lt 4; _i ++>>
+	<<print _i>><br>
+<</for>>
+
 <div id="startpage">
 <span class="intro">这是一个发生在名叫Elysion的星球的故事。<br>
 Elysion是一个类似现代——2021年地球的世界，虽然表面上平平无奇，实际上隐藏着各种超自然存在。<br>
@@ -23,7 +28,7 @@ Elysion是一个类似现代——2021年地球的世界，虽然表面上平平
 你本来是平平无奇的一员，但某天一觉醒来你察觉到有什么不一样了……<br>
 在这个不寻常的世界中，你要管理好自身、培养能力，适应新的世界新的秩序，并在日渐混乱的世界中活下去……<br>
 新的故事即将开始……<br></span>
-<div id="test"></div>
+
 <div class="delayed">
 <span style="line-height:40px;font-size:13px;padding:0px;margin:0px">　
 <<link "＞ 开始游戏" "开始">><<GSApply>><<set $intro to false>><</link>></span><br>
@@ -77,24 +82,24 @@ $(document).on(':passagerender', function (ev) {
 <<dashline>>
 
 :: 开始
+<<masteraudio stop>>
 
 <div id="eventsituation">
 <<you>>准备好了吗？<br>
 故事要开始了哟！<br>
 </div>
 
-
 <div id="eventselectarea">
 
 <div class="Eselect">
 <<link "开始" "Event">>
-<<masteraudio stop>><<audio "迷雾" volume 1 play loop>>
+<<audio "迷雾" volume 1 play loop>>
 <<EventFirst>>
 <</link>>
 </div>
 
 <div class="Eselect">
-<<link "跳过开头" "你的家">><</link>>
+<<link "跳过开头" "你的家 单身公寓">><</link>>
 </div>
 
 <div class="Eselect">

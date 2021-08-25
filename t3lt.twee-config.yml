@@ -299,3 +299,12 @@ sugarcube-2:
       name: CallEventSelect
     CallEvent:
       name: CallEvent
+    navibar:
+      name: navibar
+    navi:
+      name: navi
+    getlinks:
+      name: getlinks
+    twinescript:
+      name: twinescript
+      container: true

@@ -153,7 +153,9 @@
 
 <<widget "location">>
 <<if $args[0]>>
-    <<set $local.place to $args[0]>>
+    <<set $location to $args[0]>>
+    <<set $local to D.placedata[$args[0]]>>
+    <<set $movebutton to false>>
     /*
     if local in group A, set $local.tag to 室内/室外 if in charagroupa a set $local.chara to charaname ....如此类推一次性处理 
      */
@@ -165,8 +167,6 @@
 <<widget "passtime">>
 <<set $date.time to $date.time+$args[0]>>
 <</widget>>
-
-
 
 <<widget "ApplyHairSet">>
     <<switch $PC.发型>>
@@ -221,14 +221,10 @@
 <<widget "setface">>
     <<if A.facelist.includes($args[0])>>
         <<set $PFace to A.emote[$args[0]]>>
-        <<if $intro isnot true or $debug isnot true>>
-            <<set $Equip.emote to $args[0]>>
-        <</if>>
+        <<set $Equip.emote to $args[0]>>
     <<else>>
         <<set $PFace to A.emote.正常>>
-        <<if $intro isnot true or $debug isnot true>>
-            <<set $Equip.emote to $args[0]>>
-        <</if>>
+        <<set $Equip.emote to $args[0]>>
     <</if>>
     <<if $args[1] isnot "loop">>
         <<SetAvatar>>
@@ -248,8 +244,7 @@
     <<set $Equip.shoes to null>>
     <<set $Equip.legs to null>>
     <<set $Equip.hand to null>>
-    <<set $Pflag.top to 0>>
-    <<set $Pflag.bottom to 0>>
+    <<fixvalue>>
     <<SetAvatar>>
 <</widget>>
 
@@ -260,3 +255,23 @@
     <<fixvalue>>
     <<SetAvatar>>
 <</widget>>
+
+
+<<widget "navi">>
+<div id="links" class="hidden">
+    <<if $local.homebutton is true>>
+        <div class="links"><<link "・ 回家" "你的家 单身公寓" >><<passtime 5>><</link>></div>
+    <</if>>    
+    <<getlinks $location>>
+</div>
+
+<div id="movebutton">
+<<link "▶ 移动">><<run movebutton()>><</link>>
+</div>
+<</widget>>
+
+<<widget "getlinks">>
+<<set _local to $args[0] + " links">>
+<<include _local>>
+<</widget>>
+
