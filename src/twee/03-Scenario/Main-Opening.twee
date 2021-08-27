@@ -1,14 +1,14 @@
-﻿:: 主线 开场 EventFirst [eventfirst]
+﻿:: 主线 开场 EventFirst [nosave]
 <<set $count to 0>>
 
-:: 主线 开场 初次 [mainloop]
+:: 主线 开场 初次 [bookmark]
 
 <<Opening $count>>
 <<if $count gt 0>>
 <<set $Eflag.nonext to false>>
 <</if>>
 
-:: 主线 开场 初次S [selection]
+:: 主线 开场 初次S
 <<if $count is 0>>
  <div class="weirdtext"><<link "睁开眼睛" $passage>><<set $count to 1>><</link>></div>
  <div class="weirdtext"><<link "回忆梦境" $passage>><<set $count to 2>><</link>></div>
@@ -16,7 +16,7 @@
 
 <</if>>
 
-:: 主线 开场 初次E [effect]
+:: 主线 开场 初次E
 <<addclass "#eventsituation" "weirdtext">>
 <<silently>><<script>>
 //requires jQuery because I am lazy.
@@ -47,4 +47,4 @@ $(document).ready(function(){
 
 <</widget>>
 
-:: 主线 开场 轮回 [mainloop]
+:: 主线 开场 轮回

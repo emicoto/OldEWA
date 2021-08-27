@@ -156,8 +156,10 @@
     <<set $location to $args[0]>>
     <<set $local to D.placedata[$args[0]]>>
     <<set $movebutton to false>>
+
+    <<if $local.tag.includes("家")>><<run V.local.chara.push("player")>><</if>>
     /*
-    if local in group A, set $local.tag to 室内/室外 if in charagroupa a set $local.chara to charaname ....如此类推一次性处理 
+    设定地点时的各种处理。包括NPC角色的移动。
      */
 <<else>>
     <div id="error-view">error: no args</div>

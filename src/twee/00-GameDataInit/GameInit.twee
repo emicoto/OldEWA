@@ -23,6 +23,8 @@
 <<set $follow to 1>>
 <<set $follower to 100>>
 
+<<set $actmode = "自由", $chaos = 0>>
+
 <!-- 各种名声 -->
 <<set $fame to {
     brave : 0,   /* 作为勇者的名声，影响主线任务发展和描述，也影响被强奸的概率 */
@@ -70,7 +72,9 @@
 <<set $showcase to null>>
 
 <!-- 持有物 -->
-<<set $items to {}>>
+<<set $items to {
+    foods: [], medicine: [], sextoy: [], weapon: [], accesory: [],
+}>>
 
 <!-- 衣柜。身上的衣服会从衣柜里取出来放到 Equip里 -->
 <<set $closet to {
@@ -114,18 +118,19 @@
     type : "主线", name : "开场", branch : "" , phrase: "初次",
 }>> 
 
-<<set $eventexit to "你的家">>
+<<set $eventexit to "你的家 单身公寓">>
 <<set $count to 0>>      /* 通用计数变量。需要离开当前passage或重置的情况 */
 <<set $eventend to false>>
 
 /* 事件系列名
-    主线  剧情名  分歧  进度
-    支线  剧情名  分歧  进度
-    日常  剧情名  分歧  进度
-    角色  剧情名  分歧  进度
-    例： 主线_开头剧情_初次_0 / 主线_开头剧情_周回_0
-    然后每隔剧情开始前都处理一次对应的Eventfirst。
+    type name branch phrase lang
+    例： 主线 开头剧情 初次 0 CN / 主线 开头剧情 周回 0 CN
+    然后每个剧情开始前都处理一次对应的Eventfirst。
  */
-
+ /*
+  口上名
+  PCKOJO typeid name branch phrase lang
+  例 PCKOJO 1 与史莱姆玩耍 高潮 0 CN
+  */
 
 <</widget>>

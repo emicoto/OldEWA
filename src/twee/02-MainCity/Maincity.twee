@@ -1,4 +1,4 @@
-﻿:: 怡安小区
+﻿:: 怡安小区 [location]
 <<location "怡安小区">>
 <span class="title">怡安小区</span><br>
 <div class="lbox">
@@ -29,7 +29,7 @@
 <div class="links" title="移动时间：10分钟"><<link "・ 地铁站" $passage>><<passtime 10>><</link>></div>
 
 
-:: 怡安小区公园
+:: 怡安小区公园 [location]
 <<location "怡安小区公园">>
 <span class="title">怡安小区 - 公园</span><br>
 <div class="lbox">
@@ -55,6 +55,6 @@
 <div class="links" title="移动时间：3分钟"><<link "・ 小区大门" "怡安小区">><<passtime 3>><</link>></div>
 
 
-:: 商店
+:: 商店 [location]
 <<location "商店">>
 <<include "试衣间">>

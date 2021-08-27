@@ -1,5 +1,5 @@
 :: PassageHeader
-<<set $passage to passage()>><<set $tags to tags()>>
+<<set $passage to passage()>><<set $tags to tags($passage)>>
 /* 时间经过处理 */
 <<fixvalue>><<TimeEffect>>
 

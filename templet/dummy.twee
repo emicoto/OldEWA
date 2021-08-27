@@ -14,6 +14,16 @@
 
 <<include _next>>
 
+<<script>>
+	Template.add('He', function () {
+	return either('He', 'She', 'I', 'You', 'It', 'They');
+})
+Template.add('his', function () {
+	return either('his', 'her', 'my','your','its','their');
+})
+<</script>>
+
+?He was always willing to lend ?his ear to anyone.<br>
 
 :: OPENING_EN [nobr]
 

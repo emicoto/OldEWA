@@ -43,7 +43,7 @@
 <<set D.placedata to {
     单身公寓 : {
         place:"单身公寓", side:"室内", 
-        tag:["煮食","休息","沐浴","更衣","电脑","WIFI"], 
+        tag:["家","煮食","休息","沐浴","更衣","电脑","WIFI"], 
         chara:[], 
         bus:false, subway:false, car:false, bike:false,
         homebutton: false,

@@ -17,6 +17,8 @@ Config.saves.onSave = function (save) {
 	new Wikifier(null, '<<updateGame>>');
 }
 
+Config.saves.id = "EWA";
+
 /*LinkNumberify and images will enable or disable the feature completely*/
 /*debug will enable or disable the feature only for new games*/
 window.StartConfig = {
@@ -26,12 +28,15 @@ window.StartConfig = {
 	"version": "0.0.1",
 }
 
-Config.saves.autosave = "autosave";
+Config.saves.autosave = ["bookmark", "autosave","eventend"];
 
 Config.saves.isAllowed = function () {
 	if (tags().includes("nosave")) {
 		return false;
+	}else if (V.actmode == "combat") {
+		return false;
 	}
+	
 	return true;
 };
 
