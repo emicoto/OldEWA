@@ -143,7 +143,7 @@
 <<set _placeholder to "image/avatar/thumb.png">>
 
 <div id="W_showitems">
-    <div class="itemthumb"><<print "<<link [img[_nakeimg]] >><<run strip('"+_catgr+"')>><<run setreveal()>><<SetAvatar>><</link>>">></div>
+    <div class="itemthumb"><<print "<<link [img[_nakeimg]] >><<run strip('"+_catgr+"')>><<fixvalue>><<SetAvatar>><</link>>">></div>
     <div class="W_itemname">脱掉<<print _catgrname[$args[0]]>></div>
 </div>
 
@@ -157,7 +157,7 @@
         <<set _code to $closet[_catgr][_i].color>>
         <<set _name to $closet[_catgr][_i].colorname>>
         <div id="W_showitems">
-            <div class="itemthumb"><<print "<<link [img[_img]]>><<run dressOn('"+_catgr+"',"+_i+")>><<SetAvatar>><</link>>">></div>
+            <div class="itemthumb"><<print "<<link [img[_img]]>><<run dressOn('"+_catgr+"',"+_i+")>><<fixvalue>><<SetAvatar>><</link>>">></div>
             <div class="W_color" @style="'background-color:'+_code"><<print _name>></div>
             <<if $closet[_catgr][_i].acc isnot null>>
                 <div class="W_pattern"><<print $closet[_catgr][_i].acc>></div>

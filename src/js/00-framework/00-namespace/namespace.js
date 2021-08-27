@@ -71,11 +71,9 @@ window.Avatars = {
 	hairfront:[],
 	hairback:[],
 }
-defineGlobalNamespaces(Avatars)
+
 
 window.GameData = {}
-defineGlobalNamespaces(GameData)
-
 
 window.EWA.Avatars = Avatars
 window.EWA.GameData = GameData

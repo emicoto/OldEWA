@@ -1,4 +1,63 @@
-﻿/* 商店 */
+﻿/* 属性集算 */
+function setreveal(){
+    const isReveal=w=>V.Equip[w] ?V.Equip[w].reveal :0;
+    const tops =[isReveal("outter"),isReveal("top"),isReveal("inner_up"),]
+    const bottoms=[isReveal("bottom"),isReveal("inner_bt")]
+    tops.sort((a,b)=>b-a)
+    bottoms.sort((a,b)=>b-a)
+    /*console.log("上衣:",tops)
+    console.log("下衣:",bottoms)*/
+    V.Pflag.top = !tops[0]?0: tops[0]
+    V.Pflag.bottom=!bottoms[0]?0: bottoms[0]
+}
+window.setreveal = setreveal
+
+function allureBuff() {
+    const isAllure = w => V.Equip[w] ? V.Equip[w].beauty : 0;
+    const items = ["hat","outter","top","bottom","inner_up","inner_bt","legs","shoes","neck","face","hand","back"]
+
+    var a = 0
+    for(let i = 0; i < items.length; i++){
+            a = a+isAllure(items[i])
+        }
+
+    return 1+a
+}
+
+window.allureBuff = allureBuff
+
+function defBuff() {
+    const isDef = w => V.Equip[w] ? V.Equip[w].defence : 0;
+    const items = ["hat","outter","top","bottom","inner_up","inner_bt","legs","shoes","neck","face","hand","back"]
+
+    var a = 0
+    for(let i = 0; i < items.length; i++){
+            a = a+isDef(items[i])
+        }
+
+    return 1+a
+}
+
+window.defBuff = defBuff
+
+function warmth() {
+    const isHot = w => V.Equip[w] ? V.Equip[w].hot : 0;
+    const isCold = w => V.Equip[w] ? V.Equip[w].cold : 0;
+    const items = ["hat","outter","top","bottom","inner_up","inner_bt","legs","shoes","neck","face","hand","back"]
+
+    var a = [0,0]
+    for(let i = 0; i < items.length; i++){
+        a[0] += isHot(items[i])
+        a[1] += isCold(items[i])
+    }
+    V.PC.hot = V.fix.hot + a[0]
+    V.PC.cold = V.fix.cold + a[1]
+    return a
+}
+
+window.warmth = warmth
+
+/* 商店处理 */
 function setShowCase(table) {
     if (typeof(table) == "object") {
         V.showcase = table
@@ -43,6 +102,7 @@ function BuyOutFit() {
 }
 window.BuyOutFit = BuyOutFit
 
+/* 衣柜处理 */
 function strip(arg) {
     console.log(arg)
 
@@ -116,3 +176,4 @@ function dressOn(args, arg) {
 }
 
 window.dressOn = dressOn
+

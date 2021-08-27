@@ -26,19 +26,6 @@ window.imglocation = function(){
     }
 }
 
-function setreveal(){
-    const isReveal=w=>V.Equip[w] ?V.Equip[w].reveal :0;
-    const tops =[isReveal("outter"),isReveal("top"),isReveal("inner_up"),]
-    const bottoms=[isReveal("bottom"),isReveal("inner_bt")]
-    tops.sort((a,b)=>b-a)
-    bottoms.sort((a,b)=>b-a)
-    /*console.log("上衣:",tops)
-    console.log("下衣:",bottoms)*/
-    V.Pflag.top = !tops[0]?0: tops[0]
-    V.Pflag.bottom=!bottoms[0]?0: bottoms[0]
-}
-window.setreveal = setreveal
-
 window.basepercent = function(name) {
     var min = V.PC.base[name][0]
     var max = V.PC.base[name][1]

@@ -213,7 +213,7 @@
             <<set $PC.发色 to "milktea">>
             <<set $PC.瞳色 to  "brown">>
             <<set $PC.肤色 to "white">>
-            <<set $PC.sens to {"m" : 1,  "b":2,  "c":1, "v":null, "u":1, "a":8}>>
+            <<set $PC.sens to {"m" : 1,  "b":2,  "c":1, "v":null, "u":1, "a":6}>>
 
             <<set $PC.genital to { "阴茎" : 14, "子宫" : null }>>
 
@@ -235,7 +235,7 @@
             <<set $PC.发色 to "milktea">>
             <<set $PC.瞳色 to "green">>
             <<set $PC.肤色 to "white">>
-            <<set $PC.sens to {"m" : 1,  "b":2,  "v":1, "c":1, "u":1, "a":8}>>
+            <<set $PC.sens to {"m" : 1,  "b":2,  "v":1, "c":1, "u":1, "a":6}>>
             <<set $starttrait to "好色">>
 
             <<set $PC.genital to { "阴茎" : 14, "子宫" : 1 }>>
@@ -298,7 +298,6 @@
             <<set $PC.发色 to "black">>
             <<set $PC.瞳色 to "emerald">>
             <<set $PC.肤色 to "white">>
-            <<set $PC.魅力 to 1200>>
             <<set $PC.sens to {"m" : 4,  "b":2,  "v":1, "c":1, "u":1, "a":1}>>
 
             <<set $PC.genital to { "阴茎" : 14, "子宫" : 1 }>>           
@@ -521,6 +520,8 @@
 
 <<widget "GSApply">>
     <<set $PC.魅力 to 1600>>
+    <<set $fix.beauty to 1600>>
+
     <<switch $starttrait>>
         <<case "菜鸟">>
             <<set $PC.trait.菜鸟 to true>>
@@ -547,11 +548,12 @@
     <</switch>>
     <<switch $PC.type>>
         <<case 1>>
+            /* 宠物点数 HP/SP/MP 50=1点 总45点 */
             <<set $follower to (500+random(100,1000))>>
             <<set $pet to {
-                name:"史莱姆", type:1, level:1, 
+                name:"史莱姆", type:"史莱姆", level:1, 
                 HP:[50,50], SP:[200,200], MP:[200,200],
-                ATK:3, DEF:18, MATK:2, MDEF:8, SPD:3,
+                ATK:3, DEF:18, MATK:4, MDEF:8, SPD:3,
                 好感:100, 忠诚:10, 欲望:10, 支配:0,
                 genital: {"阴茎":16, "子宫":null},
                 genitype: "史莱姆",
@@ -561,19 +563,19 @@
         <<case 2>>
             <<set $follower to (1000+random(500,5000))>>
             <<set $pet to {
-                name:"魔狼", type:2, level:1,
+                name:"魔狼", type:"魔狼", level:1,
                 HP:[200,200], SP:[100,100], MP:[100,100],
                 ATK:10, DEF:5, MATK:5, MDEF:5, SPD:12,
                 好感:20, 忠诚:80, 欲望:20, 支配:0,
                 genital: {"阴茎":24, "子宫":null},
                 genitype: "狼阴茎",
-                special: ["变形"],
+                special: ["变身"],
                 stats: {},
             }>>
         <<case 3>>
             <<set $follower to (1000+random(500,3000))>>
             <<set $pet to {
-                name:"恶魔", type:2, level:1,
+                name:"恶魔", type:"恶魔", level:1,
                 HP:[100,100], SP:[50,50], MP:[300,300],
                 ATK:2, DEF:2, MATK:12, MDEF:12, SPD:8,
                 好感:10, 忠诚:0, 欲望:80, 支配:30,
@@ -584,31 +586,31 @@
             }>>
         <<case 4>>
             <<set $pet to {
-                name:"魔狼", type:2, level:1,
-                HP:[200,200], SP:[100,100], MP:[100,100],
-                ATK:10, DEF:5, MATK:5, MDEF:5, SPD:12,
-                好感:20, 忠诚:80, 欲望:20, 支配:0,
-                genital: {"阴茎":24, "子宫":null},
-                genitype: "狼阴茎",
-                special: ["变形"],
+                name:"魔蛇", type:"魔蛇", level:1,
+                HP:[150,150], SP:[50,50], MP:[200,200],
+                ATK:5, DEF:5, MATK:12, MDEF:5, SPD:10,
+                好感:20, 忠诚:50, 欲望:0, 支配:0,
+                genital: {"阴茎":28, "子宫":null},
+                genitype: "蛇阴茎",
+                special: ["变身"],
                 stats: {},
             }>>
         <<case 5>>
             <<set $follower to (100+random(50,2000))>>
             <<set $pet to {
-                name:"史莱姆", type:1, level:1,
-                HP:[50,50], SP:[200,200], MP:[200,200],
-                ATK:3, DEF:18, MATK:2, MDEF:8, SPD:3,
-                好感:100, 忠诚:0, 欲望:30, 支配:0,
-                genital: {"阴茎":16, "子宫":null},
-                genitype: "史莱姆",
-                special: ["液态"],
+                name:"幽鬼", type:"幽鬼", level:1,
+                HP:[100,100], SP:[200,200], MP:[150,150],
+                ATK:1, DEF:10, MATK:5, MDEF:15, SPD:5,
+                好感:20, 忠诚:10, 欲望:10, 支配:0,
+                genital: {"阴茎":18, "子宫":null},
+                genitype: "幽灵触手",
+                special: ["透明"],
                 stats: {},
             }>>
         <<case 6>>
             <<set $follower to (1000+random(500,2000))>>
             <<set $pet to {
-                name:"触手", type:4, level:1,
+                name:"触手", type:"触手", level:1,
                 HP:[500,500], SP:[100,100], MP:[150,150],
                 ATK:2, DEF:10, MATK:2, MDEF:15, SPD:1,
                 好感:0, 忠诚:20, 欲望:100, 支配:0,

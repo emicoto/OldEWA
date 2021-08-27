@@ -4,7 +4,8 @@
     <<set $money to Math.clamp($money,0,9999999999)>>
     <<set $PC.发长 to Math.clamp($PC.发长,0,9999)>>
     <<set $PC.前发长 to Math.clamp($PC.前发长,0,9999)>>
-    <<set $PC.魅力 to Math.clamp($PC.魅力,0,9999)>>
+    <<set $PC.魅力 to Math.clamp($fix.beauty*allureBuff(),0,9999)>>
+    <<set _warmth to warmth()>>
 
     /* 基础条修正 */
 
@@ -68,7 +69,7 @@
     <<set $PC.rpg.MP[0] to $PC.base.魔力[0]>>
 
     <<set $PC.rpg.ATK to Math.clamp((10+$PC.abl.战技/10),1,500).toFixed(1)>>
-    <<set $PC.rpg.DEF to Math.clamp((10+$PC.abl.健身/10),1,500).toFixed(1)>>
+    <<set $PC.rpg.DEF to Math.clamp((10+$PC.abl.健身/10)+defBuff(),1,500).toFixed(1)>>
     <<set $PC.rpg.MATK to Math.clamp((10+($PC.abl.奥术/10*$PC.school.自然/500)),1,500).toFixed(1)>>
     <<set $PC.rpg.MDEF to Math.clamp((10+($PC.abl.异能/10*$PC.school.物理/500)),1,500).toFixed(1)>>
     <<set $PC.rpg.SPD to Math.clamp((10+($PC.abl.运动/10)),1,500).toFixed(1)>>
@@ -108,6 +109,8 @@
     <<set $PC.eskl.脚技 to Math.clamp($PC.eskl.脚技,0,1000)>>
     <<set $PC.eskl.腰技 to Math.clamp($PC.eskl.腰技,0,1000)>>
 
+    /* 魅力修正 */
+    
     <<run setreveal()>>
 
 <</widget>>
