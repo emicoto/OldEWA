@@ -89,6 +89,7 @@ input[type="text"]:hover {
   min-width: 0px;
   height:6px;
   background-color: #ccc;
+  transition: all 0.75s;
 }
 
 hr {

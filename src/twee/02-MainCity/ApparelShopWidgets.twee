@@ -2,9 +2,7 @@
 
 <<widget "EnterTryRoom">>
 /* 把身上衣服暂存在TEquip里 */
-<<for _i to 0;_i lt D.equipindex.length;_i++>>
-    <<set $TEquip[D.equipindex[_i]] to $Equip[D.equipindex[_i]]>>
-<</for>>
+<<set $TEquip to clone($Equip)>>
 
 /* 清理身上外在液体 */
 <<set $Pflag.bukkake.body to false>>
@@ -18,37 +16,11 @@
 
 
 <<widget "ShowManequin">>
-    <<set _layer to Avatars.layer>>
-    <<set _group to ["outter","top","inner_up"]>>
-    <<set _path to "./image/avatar/"+ $showcase.layer +"/">>
-    /* .image/avatar/1_hat/ */
-
-    <<if $showcase.imgenable is false>>
-        <<set _path to _path + "dummy">>
-    <<else>>
-         <<if $showcase.acc isnot null and $showcase.patterns.length gt 0>>
-            <<set _path1 to _path + $showcase.index + "/" + $showcase.acc>>
-        <<else>>
-            <<set _path1 to _path + "dummy">>
-        <</if>>
-        /* .image/avatar/1_hat/pattern */
-
-        <<if $showcase.fixcolor is true>>
-            <<set _path to _path + $showcase.index + "/" + $showcase.color>>
-        <<else>>
-            <<set _path to _path + $showcase.index + "/basic">>
-        <</if>>
-
-        <<if _group.includes($showcase.layer) is true and $showcase.dfpng.breast is true>>
-            <<set _path to _path + "_1">>
-        <</if>>
-         /* .image/avatar/1_hat/basic_1 or white_1 */
-
-    <</if>>
-    <img class='Caselayer flipx' src="./image/avatar/manekin.png">
-    <img class='Caselayer flipx' @src="_path + '.png'">
-    <img class='Caselayer flipx' @src="_path1 + '.png'">
-
+    <div class="manequin">
+        <<twinescript>>
+        output.appendChild(Avatar.getShop())
+        <</twinescript>>
+    </div>
 <</widget>>
 
 <<widget "ShowCase">>
@@ -97,7 +69,7 @@
                         <<print "<<button _name>><<run setColors(A.colorlist["+_i+"].code,A.colorlist["+_i+"].name)>><</button>>">>
                         </div>
                     <</for>>
-                    <div class="color_plate" style="background-color:#CBC8C7;"><<button 自定义>><</button>></div>
+                    <div><<textbox "$showcase.color" "#FFFFFF">></div>
                 <<else>>
                     <<for _i to 0; _i lt $showcase.colors.length; _i++>>
                         <<set _code to A.colors[$showcase.colors[_i]].code>>
@@ -132,7 +104,7 @@
         <<capture _catgr _i>>
         <div id="show_items">
             <div class="itemthumb">
-            <<print "<<link [img[_img]]>><<run setShowCase(A['"+_catgr+"']["+_i+"])>><</link>>">>
+            <<print "<<link [img[_img]]>><<run setShowCase(A['"+_catgr+"']["+_i+"]); Avatar.setShop()>><</link>>">>
             </div>
             <div class="itemname">
             <<print Avatars[_catgr][_i].name>>

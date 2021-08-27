@@ -254,10 +254,10 @@ body #story-caption #storyCaptionDiv {
 }
 
 #playerstats {
-    width: 180px;
+    width: 170px;
     align-content: center;
     z-index: 0;
-    margin-left: 12%;
+    margin:auto;
     margin-top: 5px;
     margin-bottom: 10px;
     line-height: 20px;

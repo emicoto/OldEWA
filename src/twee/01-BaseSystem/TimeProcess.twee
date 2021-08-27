@@ -1,0 +1,14 @@
+﻿:: TimeProcess [widget]
+
+<<widget "TimeEffect">>
+<<timeprocess>>
+
+/* 每日结束时的处理 */
+<<if $daychange is true>>
+
+
+
+<<set $daychange to false>>
+<</if>>
+    
+<</widget>>

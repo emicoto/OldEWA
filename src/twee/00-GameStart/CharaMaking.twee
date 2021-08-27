@@ -113,16 +113,4 @@
 
 <</widget>>
 
-<<widget "CMBoy">>
-　阴茎大小　<<CMPsize>><br>
-　阴茎感度　<<CMPenis>><br>
-<</widget>>
-
-<<widget "CMCri">>
-　阴蒂感度 <<CMPenis>><br>
-<</widget>>
-
-<<widget "CMGirl">>
-　阴道感度　<<CMVagina>><br>
-<</widget>>
 

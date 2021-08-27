@@ -57,9 +57,17 @@
 #showcase {
     width: 100px;
     height: 240px;
+    overflow: clip;
+    position: absolute;
+    bottom: 0px
+}
+
+.manequin {
+    width: 166px;
+    height: 240px;
     position: absolute;
     bottom:0px;
-    overflow: clip;
+    left: -30px;
     /* Vertical colour gradient */
     background-image: linear-gradient(
         to bottom,
@@ -247,7 +255,7 @@
     right: 0px;
     bottom: 0px;
     z-index: 1;
-    text-shadow: -1px -1px 0px #fff,1px 1px 0px #fff;
+    text-shadow: -1px -1px 0px #fff,1px 1px 0px #fff,-1px 1px 0px #fff,1px -1px 0px #fff;
     font-size: 14px;
 }
 
@@ -267,8 +275,8 @@
 /* 衣柜相关 */
 
 #W_showitems {
-    width: 90px;
-    height: 120px;
+    width: 100px;
+    height: 130px;
     margin: 2px 5px;
     position:relative;
     border: 1px solid #ccc;
@@ -278,6 +286,13 @@
     font-family: 新综艺;
 }
 
+.W_itemname {
+    font-size: 13px;
+    position: absolute;
+    bottom: 48px;
+    right: 5%;
+    text-shadow: -1px -1px 0px #fff,1px 1px 0px #fff,-1px 1px 0px #fff,1px -1px 0px #fff;
+}
 .itemdurab{
     position: absolute;
     bottom:32px;
@@ -305,7 +320,22 @@
     min-width: 30px;
     top: 2px;
     right:2px;
-    height: 24px;
     font-size: 12px;
     text-align: center;
+    text-shadow: -1px -1px 0px #fff,1px 1px 0px #fff,-1px 1px 0px #fff,1px -1px 0px #fff;
+    height: 18px;
+}
+
+.W_pattern {
+    border: 1px solid #aaa;
+    position: absolute;
+    min-width: 30px;
+    top: 24px;
+    right:2px;
+    font-size: 10px;
+    font-family: 'Times New Roman', Times, serif;
+    text-align: center;
+    height: 18px;
+    background-color: rgba(238, 238, 238, 0.5);
+    text-shadow: -1px -1px 0px #fff,1px 1px 0px #fff,-1px 1px 0px #fff,1px -1px 0px #fff;
 }

@@ -170,3 +170,37 @@ $(document).one(":passagerender",  function(event) {
     }
   });
 <</script>>
+
+
+
+set manequin
+    /*
+    <<set _layer to Avatars.layer>>
+    <<set _group to ["outter","top","inner_up"]>>
+    <<set _path to "./image/avatar/"+ $showcase.layer +"/">>
+
+
+    <<if $showcase.imgenable is false>>
+        <<set _path to _path + "dummy">>
+    <<else>>
+         <<if $showcase.acc isnot null and $showcase.patterns.length gt 0>>
+            <<set _path1 to _path + $showcase.index + "/" + $showcase.acc>>
+        <<else>>
+            <<set _path1 to _path + "dummy">>
+        <</if>>
+
+
+        <<if $showcase.fixcolor is true>>
+            <<set _path to _path + $showcase.index + "/" + $showcase.color>>
+        <<else>>
+            <<set _path to _path + $showcase.index + "/basic">>
+        <</if>>
+
+        <<if _group.includes($showcase.layer) is true and $showcase.dfpng.breast is true>>
+            <<set _path to _path + "_1">>
+        <</if>>
+
+    <</if>>
+    <img class='Caselayer flipx' src="./image/avatar/manekin.png">
+    <img class='Caselayer flipx' @src="_path + '.png'">
+    <img class='Caselayer flipx' @src="_path1 + '.png'">*/

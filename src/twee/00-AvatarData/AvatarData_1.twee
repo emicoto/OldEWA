@@ -95,7 +95,7 @@
             imgenable : true,
             dfpng  : {breast:true, pregnant:true},
 
-            cost : 35,        reveal : 9,        hot : 1, cold : -1,  /* 数值是直接在21上加减 */
+            cost : 35,        reveal : 9,        hot : -1, cold : -1,  /* 数值是直接在21上加减 */
             durable : 20,     maxdurable : 20,     beauty: 0,     defence: 0.5,
             fixcolor: false,    color:"#FDFFFF",  colorname: "白",
             colors : [],
@@ -116,7 +116,7 @@
             imgenable : true,
             dfpng  : {breast:true, pregnant:true},
 
-            cost : 120,        reveal : 10,        hot : 1.5, cold : -1.5,  /* 数值是直接在21上加减 */
+            cost : 120,        reveal : 10,        hot : -1.5, cold : -1.5,  /* 数值是直接在21上加减 */
             durable : 20,     maxdurable : 20,     beauty: 0.02,     defence: 0.5,
             fixcolor: false,    color:"#FDFFFF",  colorname: "白",
             colors : ["mint"],
@@ -137,7 +137,7 @@
             imgenable : true,
             dfpng  : {breast:true, pregnant:true},
 
-            cost : 200,        reveal : 9,        hot : 0.5, cold : -0.5,  /* 数值是直接在21上加减 */
+            cost : 200,        reveal : 9,        hot : -0.5, cold : -0.5,  /* 数值是直接在21上加减 */
             durable : 15,     maxdurable : 15,     beauty: 0.05,     defence: 0,
             fixcolor: true,    color:"black",  colorname: "黑",
             colors : ["white","black"],
@@ -149,6 +149,26 @@
             acc : null,
             patterns: [],
         },
+        {
+            id: 4,
+            index : "slpshortup",    name : "短袖睡衣",     gender : "n",
+            text : "一件设计简单的睡衣。轻柔透气的布料给你带来好梦。",   
+            tag  : ["日常","睡衣"],
+            imgenable : true,
+            dfpng  : {breast:true, pregnant:true},
+
+            cost : 60,        reveal : 9,        hot : -0.5, cold : -0.5,  /* 数值是直接在21上加减 */
+            durable : 10,     maxdurable : 10,     beauty: 0,     defence: 0,
+            fixcolor: false,    color:"#FDFFFF",  colorname: "白",
+            colors : [],
+            
+            category: "上衣", layer : "top",  slot : "top", 
+            shop : "all",
+            
+            tuckinable: false,        tuckin : false, 
+            acc : "blackline",
+            patterns: ["blackline","tealine","whiteline","yellowline","greenline"],
+        }
     ]>>
 <</widget>>
 
@@ -179,9 +199,9 @@
             text : "一条简单的短裤。",   
             tag  : ["日常"],
             imgenable : true,
-            dfpng  : {breast:false, pregnant:false},
+            dfpng  : {breast:false, pregnant:true},
 
-            cost : 50,        reveal : 4,   hot : 1,   cold : -1, 
+            cost : 50,        reveal : 4,   hot : -0.5,   cold : -0.5, 
             durable : 20,     maxdurable : 20,     beauty: 0,     defence: 0.2,
             fixcolor: false,    color:"#787878",  colorname: "黑",
             colors : [],
@@ -200,7 +220,7 @@
             imgenable : true,
             dfpng  : {breast:false, pregnant:true},
 
-            cost : 60,        reveal : 4,   hot : 0.5,   cold : -0.5, 
+            cost : 60,        reveal : 4,   hot : -0.2,   cold : -0.2, 
             durable : 12,     maxdurable : 12,     beauty: 0.01,     defence: 0,
             fixcolor: false,    color:"#787878",  colorname: "黑",
             colors : ["black"],
@@ -217,9 +237,9 @@
             text : "一条简单的西式短裙。毕竟是廉价款，不能指望耐久度。",   
             tag  : ["日常","商务"],
             imgenable : true,
-            dfpng  : {breast:false, pregnant:false},
+            dfpng  : {breast:false, pregnant:true},
 
-            cost : 120,        reveal : 4,   hot : 0.5,   cold : -0.5, 
+            cost : 120,        reveal : 4,   hot : -0.2,   cold : -0.2, 
             durable : 10,     maxdurable : 10,     beauty: 0.03,     defence: 0,
             fixcolor: false,    color:"#787878",  colorname: "黑",
             colors : ["black"],
@@ -229,6 +249,25 @@
             
             acc : null,
             patterns: [],
+        },
+        {
+            id: 4,
+            index : "slpshortbt",    name : "睡衣短裤",     gender : "n",
+            text : "一件设计简单的睡衣短裤。轻柔透气的布料给你带来好梦。",   
+            tag  : ["日常","睡衣"],
+            imgenable : true,
+            dfpng  : {breast:false, pregnant:true},
+
+            cost : 50,        reveal : 4,   hot : -0.5,   cold : -0.5, 
+            durable : 10,     maxdurable : 10,     beauty: 0,     defence: 0.2,
+            fixcolor: false,    color:"#FDFFFF",  colorname: "白",
+            colors : [],
+            
+            category: "下衣", layer : "bottom", slot : "bottom", 
+            shop : "all", 
+            
+            acc : "blackline",
+            patterns: ["blackline","tealine","whiteline","yellowline","greenline"],
         },
     ]>>
 <</widget>>
@@ -262,7 +301,7 @@
             imgenable : true,
             dfpng  : {breast:false, pregnant:false},
 
-            cost : 12,        reveal : 2,    hot : 0.05,    cold : -0.05,
+            cost : 12,        reveal : 2,    hot : -0.1,    cold : -0.1,
             durable : 10,     maxdurable : 10,     beauty: 0,     defence: 0,
             fixcolor: false,    color:"#FDFFFF",  colorname: "白",
             colors : [],
@@ -278,10 +317,10 @@
             index : "pantie",    name : "内裤",     gender : "f",
             text : "一款简单朴素的内裤。",   
             tag  : ["日常"],
-            imgenable : false,
+            imgenable : true,
             dfpng  : {breast:false, pregnant:false},
 
-            cost : 12,        reveal : 2,    hot : 0,    cold : 0,
+            cost : 15,        reveal : 2,    hot : 0,    cold : 0,
             durable : 10,     maxdurable : 10,     beauty: 0,     defence: 0,
             fixcolor: false,    color:"#FDFFFF",  colorname: "白",
             colors : [],
@@ -322,7 +361,7 @@
             tag  : ["日常","运动"], 
             imgenable : true,
 
-            cost : 60,       reveal : 0,    hot : 0.1,    cold : -0.1,
+            cost : 60,       reveal : 0,    hot : -0.1,    cold : -0.1,
             durable : 30,    maxdurable : 30,     beauty: 0,     defence: 0,
             fixcolor: true,    color:"white",  colorname: "白",
             colors : ["white"],
@@ -381,7 +420,7 @@
             tag  : ["日常","运动"], 
             imgenable : true,
 
-            cost : 10,       reveal : 0,    hot : 0.2,    cold : -0.2,
+            cost : 10,       reveal : 0,    hot : -0.2,    cold : -0.2,
             durable : 0,    maxdurable : 0,     beauty: 0,     defence: 0,
             fixcolor: false,    color:"#FDFFFF",  colorname: "白",
             colors : [],

@@ -310,3 +310,9 @@ sugarcube-2:
       container: true
     timeprocess:
       name: timeprocess
+    TimeEffect:
+      name: TimeEffect
+    showcloset:
+      name: showcloset
+    pink-t:
+      name: pink-t

@@ -138,7 +138,7 @@
             dfpng  : {breast:false, pregnant:false},
             imgenable : false,
 
-            cost : 30,        reveal : 7,        hot : 0.2, cold : -0.2,
+            cost : 30,        reveal : 7,        hot : -0.2, cold : -0.2,
             durable : 10,     maxdurable : 10,     beauty: 0,     defence: 0,
             fixcolor: false,    color:"#FFFFF",  colorname: "白",
             colors : [],

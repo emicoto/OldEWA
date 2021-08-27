@@ -21,6 +21,7 @@ function he() {
     }
 }
 DefineMacroS("he", he);
+
 /* 头发 */
 function hair(){
   const select = new SelectCase();

@@ -1,4 +1,18 @@
 ﻿:: 创建人物组件 [widget]
+
+<<widget "CMBoy">>
+　阴茎大小　<<CMPsize>><br>
+　阴茎感度　<<CMPenis>><br>
+<</widget>>
+
+<<widget "CMCri">>
+　阴蒂感度 <<CMPenis>><br>
+<</widget>>
+
+<<widget "CMGirl">>
+　阴道感度　<<CMVagina>><br>
+<</widget>>
+
 <<widget "CMGender">>
     <<set _optionlist to ["伪娘","扶她","少年","少女"]>>
     <<listbox "$PC.性别" autoselect>>
@@ -174,15 +188,13 @@
             <<set $PC.臀部 to 1>>
             <<set $PC.体型 to 1>>
             <<set $PC.发长 to 100>>
+            <<set $PC.前发长 to 100>>
             <<set $PC.发型 to "straight">>
             <<set $PC.发色 to "aqua">>
             <<set $PC.瞳色 to "aqua">>
             <<set $PC.肤色 to "white">> 
             <<set $PC.sens to {"m" : 2,  "b":2,  "c":2,  "v":null, "u":1, "a":4}>>
-            <<set $PC.genital to {
-                "阴茎" : 10,
-                "子宫" : null
-            }>>
+            <<set $PC.genital to { "阴茎" : 10, "子宫" : null }>>
             <<set $starttrait to "抖M体质">>
 
         <<case "羽轩">>
@@ -196,16 +208,14 @@
             <<set $PC.臀部 to 1>>
             <<set $PC.体型 to 2>>
             <<set $PC.发长 to 150>>
+            <<set $PC.前发长 to 150>>
             <<set $PC.发型 to "straight">>
             <<set $PC.发色 to "milktea">>
             <<set $PC.瞳色 to  "brown">>
             <<set $PC.肤色 to "white">>
             <<set $PC.sens to {"m" : 1,  "b":2,  "c":1, "v":null, "u":1, "a":8}>>
 
-            <<set $PC.genital to {
-                "阴茎" : 14,
-                "子宫" : null
-            }>>
+            <<set $PC.genital to { "阴茎" : 14, "子宫" : null }>>
 
             <<set $starttrait to "轻浮">>          
 
@@ -220,6 +230,7 @@
             <<set $PC.臀部 to 3>>
             <<set $PC.体型 to 2>>
             <<set $PC.发长 to 300>>
+            <<set $PC.前发长 to 300>>
             <<set $PC.发型 to "straight">>
             <<set $PC.发色 to "milktea">>
             <<set $PC.瞳色 to "green">>
@@ -227,10 +238,7 @@
             <<set $PC.sens to {"m" : 1,  "b":2,  "v":1, "c":1, "u":1, "a":8}>>
             <<set $starttrait to "好色">>
 
-            <<set $PC.genital to {
-                "阴茎" : 14,
-                "子宫" : 1
-            }>>
+            <<set $PC.genital to { "阴茎" : 14, "子宫" : 1 }>>
 
         <<case "沐歌">>
             <<set $PC.type to 3>>
@@ -243,12 +251,15 @@
             <<set $PC.臀部 to 2>>
             <<set $PC.体型 to 1>>
             <<set $PC.发长 to 250>>
+            <<set $PC.前发长 to 250>>
             <<set $PC.发型 to "straight">>
             <<set $PC.发色 to "darkbrown">>
             <<set $PC.瞳色 to "brown">>
             <<set $PC.肤色 to "health">>
             <<set $PC.sens to {"m" : 1,  "b":4,  "v":1, "c":1, "u":1, "a":1}>>             
             <<set $starttrait to "人气">>
+
+            <<set $PC.genital to { "阴茎" : null, "子宫" : 1 }>>
 
         <<case "云鹿">>
             <<set $PC.type to 5>>
@@ -260,17 +271,14 @@
             <<set $PC.胸部 to 0>>
             <<set $PC.臀部 to 1>>
             <<set $PC.体型 to 1>>
-            <<set $PC.发长 to 120>>
+            <<set $PC.发长 to 120>> <<set $PC.前发长 to 120>>
             <<set $PC.发型 to "straight">>
             <<set $PC.发色 to "platinum">>
             <<set $PC.瞳色 to "emerald">>
             <<set $PC.肤色 to "white">>
             <<set $PC.sens to {"m" : 1,  "b":2,  "c":2, "v":null, "u":1, "a":2}>>
 
-            <<set $PC.genital to {
-                "阴茎" : 10,
-                "子宫" : null
-            }>>
+            <<set $PC.genital to { "阴茎" : 10, "子宫" : null }>>
 
             <<set $starttrait to "菜鸟">>
             <<set $PC.兽型 to "鹿">>
@@ -285,7 +293,7 @@
             <<set $PC.胸部 to 4>>
             <<set $PC.臀部 to 3>>
             <<set $PC.体型 to 3>>
-            <<set $PC.发长 to 50>>
+            <<set $PC.发长 to 50>> <<set $PC.前发长 to 50>>
             <<set $PC.发型 to "straight">>
             <<set $PC.发色 to "black">>
             <<set $PC.瞳色 to "emerald">>
@@ -293,10 +301,7 @@
             <<set $PC.魅力 to 1200>>
             <<set $PC.sens to {"m" : 4,  "b":2,  "v":1, "c":1, "u":1, "a":1}>>
 
-            <<set $PC.genital to {
-                "阴茎" : 14,
-                "子宫" : 1
-            }>>           
+            <<set $PC.genital to { "阴茎" : 14, "子宫" : 1 }>>           
     <</switch>>
     <<CMChangeApply>>
 <</widget>>

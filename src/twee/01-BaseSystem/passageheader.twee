@@ -1,6 +1,12 @@
 :: PassageHeader
 <<set $passage to passage()>><<set $tags to tags()>>
-<<fixvalue>><<time>>
+/* 时间经过处理 */
+<<fixvalue>><<TimeEffect>>
+
+
+/* 其他通用预处理 */
+
+/* AVATAR设定的更新检测 */
 <<SetAvatar>><<timed 1s>><<SetAvatar>><</timed>>
 
 /* 通知弹出框 */
@@ -9,5 +15,10 @@
 
 :: PassageFooter
 <div id="gameVersionDisplay">EWA ver<<print StartConfig.version>></div>
-/* 一个页面显示完毕之后重新调整左边栏的表情变化 */
+
+
+/* 事件的各种数值变化后续处理 */
+
+
+/* AVATAR设定的更新检测 ，一个页面显示完毕之后重新调整左边栏的表情变化 */
 <<SetAvatar>><<timed 1s>><<SetAvatar>><</timed>><<setchara "player">>

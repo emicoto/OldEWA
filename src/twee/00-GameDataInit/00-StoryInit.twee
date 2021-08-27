@@ -4,7 +4,7 @@
 <!-- 首先初始化资料库 -->
 <<InitDataBase>>
 <<InitBGM>>
-
+<<set $test to 0>>
 <!-- 游戏系统环境设定 -->
 <<set $temp to {}>>
 <<set $lang to "CN">>

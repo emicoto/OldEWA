@@ -41,6 +41,7 @@ Renderer.PatternProvider = function(spec) {
   console.warn("Unknown pattern spec " + JSON.stringify(spec));
   return null;
 };
+console.log(Story);
 var Avatar;
 (function(Avatar2) {
   const AVATARPATH = "image/avatar";
@@ -48,14 +49,17 @@ var Avatar;
   const cache = {};
   Renderer.CanvasModels["Shop"] = {
     name: "Avatar",
-    width: 180,
-    height: 260,
+    width: 166,
+    height: 240,
     frames: 8,
     generatedOptions() {
       return [];
     },
     defaultOptions() {
       return {
+        dress: null,
+        acc: null,
+        dummy: __resolve(AVATARPATH, "dummy.png"),
         filters: {}
       };
     },
@@ -72,7 +76,6 @@ var Avatar;
       return [];
     },
     defaultOptions() {
-      console.log("defaultOptions", V.avatar);
       return {
         frame: null,
         addon: { body: false, bottom: false, face: false, hair: false, mouth: false, penis: false },
@@ -157,32 +160,111 @@ var Avatar;
     },
     layers: {}
   };
+  Renderer.CanvasModels["Emoji"] = {
+    name: "Avatar",
+    width: 120,
+    height: 120,
+    frames: 8,
+    generatedOptions() {
+      return [];
+    },
+    defaultOptions() {
+      console.log("defaultOptions", V.avatar);
+      return {
+        frame: null,
+        addon: { body: false, bottom: false, face: false, hair: false, mouth: false, penis: false },
+        neck: null,
+        hand: null,
+        face: null,
+        hat: null,
+        outter: null,
+        top: null,
+        bottom: null,
+        inner_up: null,
+        inner_bt: null,
+        shoes: null,
+        legs: null,
+        emoadd: { tear: false, shy: false, red: false, hurt: false },
+        eyebrow: null,
+        hairfront: null,
+        kemofront: { mimi: null, horn: null },
+        eyes: null,
+        mouth: null,
+        tatoos: null,
+        penis: null,
+        body: null,
+        hairback: null,
+        kemoback: { wing: null, tail: null },
+        back: null,
+        background: null,
+        animation: "",
+        dummy: __resolve(AVATARPATH, "dummy.png"),
+        eyesframe: 1,
+        filters: {}
+      };
+    },
+    preprocess(options2) {
+    },
+    layers: {}
+  };
   function setLayer(id, name, options2) {
     Renderer.CanvasModels[id].layers[name] = options2;
   }
   Avatar2.setLayer = setLayer;
   function Shoplayer(ID) {
     let layerID = 0;
-    setLayer(ID, "background", {
-      width: 180,
-      height: 260,
+    setLayer(ID, "manekin", {
+      width: 166,
+      height: 240,
       z: layerID++,
-      showfn(options2) {
-        return !!options2.background;
-      },
+      show: true,
+      srcfn() {
+        return __resolve(AVATARPATH, `manekin.png`);
+      }
+    });
+    setLayer(ID, "dress", {
+      width: 166,
+      height: 240,
+      z: layerID++,
+      show: true,
       srcfn(options2) {
-        return options2.background ? __resolve(AVATARPATH, `background/${options2.background}.png`) : options2.dummy;
+        if (isObject(options2.dress)) {
+          return options2.dress ? __resolve(AVATARPATH, `${options2.dress.src}.png`) : options2.dummy;
+        }
+        return options2.dress ? __resolve(AVATARPATH, `${options2.dress.src}.png`) : options2.dummy;
+      },
+      blendModefn(options2) {
+        if (isObject(options2.dress)) {
+          if (!options2.dress.fixcolor) {
+            return BLENDMODE.MULTIPLY;
+          }
+        }
+      },
+      blendfn(options2) {
+        if (isObject(options2.dress)) {
+          if (!options2.dress.fixcolor) {
+            return options2.dress.color;
+          }
+        }
+      }
+    });
+    setLayer(ID, "acc", {
+      width: 166,
+      height: 240,
+      z: layerID++,
+      show: true,
+      srcfn(options2) {
+        return options2.acc ? __resolve(AVATARPATH, `${options2.acc}.png`) : options2.dummy;
       }
     });
   }
-  function Portraitlayer(ID, dx, dy) {
+  function Portraitlayer(ID, dx = -25) {
     let layerID = 0;
     setLayer(ID, "kemoback_wing", {
       width: 180,
       height: 260,
       z: layerID++,
       dx,
-      dy,
       showfn(options2) {
         return !!options2.kemoback.wing;
       },
@@ -209,7 +291,6 @@ var Avatar;
       height: 260,
       z: layerID++,
       dx,
-      dy,
       showfn(options2) {
         return !!options2.kemoback.tail;
       },
@@ -236,7 +317,6 @@ var Avatar;
       height: 260,
       z: layerID++,
       dx,
-      dy,
       showfn(options2) {
         return !!options2.back;
       },
@@ -263,7 +343,6 @@ var Avatar;
       height: 260,
       z: layerID++,
       dx,
-      dy,
       showfn(options2) {
         return !!options2.hairback;
       },
@@ -293,7 +372,6 @@ var Avatar;
       height: 260,
       z: layerID++,
       dx,
-      dy,
       showfn(options2) {
         return !!options2.body;
       },
@@ -306,7 +384,6 @@ var Avatar;
       height: 260,
       z: layerID++,
       dx,
-      dy,
       showfn(options2) {
         return !!options2.hand;
       },
@@ -336,7 +413,6 @@ var Avatar;
       height: 260,
       z: layerID++,
       dx,
-      dy,
       showfn(options2) {
         return !!options2.inner_up;
       },
@@ -366,7 +442,6 @@ var Avatar;
       height: 260,
       z: layerID++,
       dx,
-      dy,
       showfn(options2) {
         return !!options2.top;
       },
@@ -396,7 +471,6 @@ var Avatar;
       height: 260,
       z: layerID++,
       dx,
-      dy,
       showfn(options2) {
         if (isObject(options2.top)) {
           return !!options2.top.acc;
@@ -415,7 +489,6 @@ var Avatar;
       height: 260,
       z: layerID++,
       dx,
-      dy,
       showfn(options2) {
         return !!options2.inner_up;
       },
@@ -445,7 +518,6 @@ var Avatar;
       height: 260,
       z: layerID++,
       dx,
-      dy,
       showfn(options2) {
         return !!options2.mouth;
       },
@@ -475,7 +547,6 @@ var Avatar;
       height: 260,
       z: layerID++,
       dx,
-      dy,
       showfn(options2) {
         return !!options2.eyes;
       },
@@ -508,7 +579,6 @@ var Avatar;
       height: 260,
       z: layerID++,
       dx,
-      dy,
       showfn(options2) {
         return !!options2.emoadd.tear;
       },
@@ -521,7 +591,6 @@ var Avatar;
       height: 260,
       z: layerID++,
       dx,
-      dy,
       showfn(options2) {
         return !!options2.emoadd.shy;
       },
@@ -534,7 +603,6 @@ var Avatar;
       height: 260,
       z: layerID++,
       dx,
-      dy,
       showfn(options2) {
         return !!options2.emoadd.red;
       },
@@ -547,7 +615,6 @@ var Avatar;
       height: 260,
       z: layerID++,
       dx,
-      dy,
       showfn(options2) {
         return !!options2.emoadd.hurt;
       },
@@ -560,7 +627,6 @@ var Avatar;
       height: 260,
       z: layerID++,
       dx,
-      dy,
       showfn(options2) {
         return !!options2.face;
       },
@@ -590,7 +656,6 @@ var Avatar;
       height: 260,
       z: layerID++,
       dx,
-      dy,
       showfn(options2) {
         return !!options2.neck;
       },
@@ -620,7 +685,6 @@ var Avatar;
       height: 260,
       z: layerID++,
       dx,
-      dy,
       showfn(options2) {
         return !!options2.hairfront;
       },
@@ -645,52 +709,11 @@ var Avatar;
         }
       }
     });
-    setLayer(ID, "hairfront_msk", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      dx,
-      dy,
-      showfn(options2) {
-        return !!options2.hairfront;
-      },
-      srcfn(options2) {
-        if (isObject(options2.hairfront)) {
-          return options2.hairfront ? __resolve(AVATARPATH, `hairfront/${options2.hairfront.src}.png`) : options2.dummy;
-        }
-        return options2.hairfront ? __resolve(AVATARPATH, `hairfront/${options2.hairfront}.png`) : options2.dummy;
-      },
-      blendModefn(options2) {
-        if (isObject(options2.hairfront)) {
-          if (!options2.hairfront.fixcolor) {
-            return BLENDMODE.MULTIPLY;
-          }
-        }
-      },
-      blendfn(options2) {
-        if (isObject(options2.hairfront)) {
-          if (!options2.hairfront.fixcolor) {
-            return options2.hairfront.color[1];
-          }
-        }
-      },
-      masksrcfn(options2) {
-        if (isObject(options2.hairfront)) {
-          if (options2.hairfront) {
-            return __resolve(AVATARPATH, `hairfront/` + V.Equip.hairfront + `/hl_mask.png`);
-          }
-        }
-        if (options2.hairfront) {
-          __resolve(AVATARPATH, `hairfront/` + V.Equip.hairfront + `/hl_mask.png`);
-        }
-      }
-    });
     setLayer(ID, "eyebrow", {
       width: 180,
       height: 260,
       z: layerID++,
       dx,
-      dy,
       showfn(options2) {
         return !!options2.eyebrow;
       },
@@ -720,7 +743,6 @@ var Avatar;
       height: 260,
       z: layerID++,
       dx,
-      dy,
       showfn(options2) {
         return !!options2.kemofront.mimi;
       },
@@ -750,7 +772,6 @@ var Avatar;
       height: 260,
       z: layerID++,
       dx,
-      dy,
       showfn(options2) {
         return !!options2.kemofront.horn;
       },
@@ -780,7 +801,6 @@ var Avatar;
       height: 260,
       z: layerID++,
       dx,
-      dy,
       showfn(options2) {
         return !!options2.hat;
       },
@@ -810,7 +830,6 @@ var Avatar;
       height: 260,
       z: layerID++,
       dx,
-      dy,
       showfn(options2) {
         return !!options2.addon.face;
       },
@@ -823,7 +842,6 @@ var Avatar;
       height: 260,
       z: layerID++,
       dx,
-      dy,
       showfn(options2) {
         return !!options2.addon.hair;
       },
@@ -836,7 +854,6 @@ var Avatar;
       height: 260,
       z: layerID++,
       dx,
-      dy,
       showfn(options2) {
         return !!options2.addon.mouth;
       },
@@ -849,7 +866,6 @@ var Avatar;
       height: 260,
       z: layerID++,
       dx,
-      dy,
       showfn(options2) {
         return !!options2.frame;
       },
@@ -1097,6 +1113,23 @@ var Avatar;
         }
       }
     });
+    setLayer(ID, "inner_bt_acc", {
+      width: 180,
+      height: 260,
+      z: layerID++,
+      showfn(options2) {
+        if (isObject(options2.inner_bt)) {
+          return !!options2.inner_bt.acc;
+        }
+        return false;
+      },
+      srcfn(options2) {
+        if (isObject(options2.inner_bt)) {
+          return options2.inner_bt.acc ? __resolve(AVATARPATH, `inner_bt/${options2.inner_bt.acc}.png`) : options2.dummy;
+        }
+        return options2.dummy;
+      }
+    });
     setLayer(ID, "bottom", {
       width: 180,
       height: 260,
@@ -1123,6 +1156,23 @@ var Avatar;
             return options2.bottom.color;
           }
         }
+      }
+    });
+    setLayer(ID, "bottom_acc", {
+      width: 180,
+      height: 260,
+      z: layerID++,
+      showfn(options2) {
+        if (isObject(options2.bottom)) {
+          return !!options2.bottom.acc;
+        }
+        return false;
+      },
+      srcfn(options2) {
+        if (isObject(options2.bottom)) {
+          return options2.bottom.acc ? __resolve(AVATARPATH, `bottom/${options2.bottom.acc}.png`) : options2.dummy;
+        }
+        return options2.dummy;
       }
     });
     setLayer(ID, "hand", {
@@ -1179,6 +1229,23 @@ var Avatar;
             return options2.inner_up.color;
           }
         }
+      }
+    });
+    setLayer(ID, "inner_up_acc", {
+      width: 180,
+      height: 260,
+      z: layerID++,
+      showfn(options2) {
+        if (isObject(options2.inner_up)) {
+          return !!options2.inner_up.acc;
+        }
+        return false;
+      },
+      srcfn(options2) {
+        if (isObject(options2.inner_up)) {
+          return options2.inner_up.acc ? __resolve(AVATARPATH, `inner_up/${options2.inner_up.acc}.png`) : options2.dummy;
+        }
+        return options2.dummy;
       }
     });
     setLayer(ID, "top", {
@@ -1687,7 +1754,9 @@ var Avatar;
     });
   }
   Avatarlayer("Avatar");
-  Portraitlayer("Portrait", -25, -15);
+  new Portraitlayer("Portrait");
+  new Portraitlayer("Emoji");
+  new Shoplayer("Shop");
   function animation(options2, props = {}) {
     if (!options2.seconds) {
       throw new Error("options对象必须有name frames seconds 属性" + JSON.stringify(options2));
@@ -1748,21 +1817,146 @@ var Avatar;
   });
   Avatar2.AVATARMODEL = Renderer.locateModel("Avatar", "avatar");
   Avatar2.PORTRAITMODEL = Renderer.locateModel("Portrait", "portrait");
+  Avatar2.SHOPMODEL = Renderer.locateModel("Shop", "shop");
   Avatar2.options = Avatar2.AVATARMODEL.defaultOptions();
+  Avatar2.shopoptions = Avatar2.SHOPMODEL.defaultOptions();
   var AVATARCANVAS = Avatar2.AVATARMODEL.createCanvas();
   Avatar2.AVATARMODEL.render(AVATARCANVAS, Avatar2.options);
   Avatar2.AVATARMODEL.animate(AVATARCANVAS, Avatar2.options);
   var PORTRAITCANVAS = Avatar2.PORTRAITMODEL.createCanvas();
   Avatar2.PORTRAITMODEL.render(PORTRAITCANVAS, Avatar2.options);
   Avatar2.PORTRAITMODEL.animate(PORTRAITCANVAS, Avatar2.options);
+  var SHOPCANVAS = Avatar2.AVATARMODEL.createCanvas();
+  Avatar2.SHOPMODEL.render(SHOPCANVAS, Avatar2.shopoptions);
+  Avatar2.cacheEmoji = new Map();
+  function RandomNPCEmoji(FACES, O) {
+    const randomArray = (arr) => arr[parseInt(Math.random() * (arr.length - 1))];
+    const OPTION = {
+      fliter: {},
+      emoadd: {}
+    };
+    const CM = {
+      CMSkin: [
+        "health",
+        "white",
+        "mugi",
+        "dark",
+        "black"
+      ],
+      CMHairColor: [
+        "black",
+        "darkbrown",
+        "wine",
+        "brown",
+        "milktea",
+        "blond",
+        "softblond",
+        "platinum",
+        "silver",
+        "white",
+        "purple",
+        "green",
+        "blue",
+        "aqua",
+        "pink"
+      ],
+      CMHairstyle: [
+        "natural",
+        "straight"
+      ],
+      CMEyeColor: [
+        "black",
+        "brown",
+        "emerald",
+        "green",
+        "lightgreen",
+        "blue",
+        "aqua",
+        "purple",
+        "lightpurple",
+        "white",
+        "amber",
+        "red"
+      ],
+      CMEyetype: ["a", "b"]
+    };
+    const hair = randomArray(CM.CMHairColor);
+    const randomplus1 = (v) => parseInt(Math.random() * v) + 1;
+    OPTION["hairback"] = `straight/${hair}_${randomplus1(4)}`;
+    OPTION["hairfront"] = `${randomArray(CM.CMHairstyle)}/${hair}_1`;
+    OPTION["body"] = `${randomArray(CM.CMSkin)}/body_${randomplus1(3)}`;
+    let emote = A.emote[FACES];
+    const emoadd = ["tear", "shy", "red", "hurt"];
+    const nomal = ["eyebrow", "mouth", "frame"];
+    emoadd.forEach((va) => {
+      OPTION["emoadd"][va] = emote[va];
+    });
+    nomal.forEach((va) => {
+      OPTION[va] = emote[va];
+    });
+    OPTION["eyes"] = [randomArray(CM.CMEyeColor), emote["eyes"].includes("full") ? emote["eyes"] + randomArray(CM.CMEyetype) + "_idle" : emote["eyes"]].join("/");
+    var EMOJIMODEL = Renderer.locateModel("Emoji");
+    var EMOJICANVAS = EMOJIMODEL.createCanvas();
+    EMOJIMODEL.render(EMOJICANVAS, OPTION);
+    EMOJIMODEL.animate(EMOJICANVAS, OPTION);
+    O["ID"] ? EMOJICANVAS.canvas.id = O["ID"] : null;
+    O["CLASS"] ? EMOJICANVAS.canvas.className = O["CLASS"] : null;
+    return EMOJICANVAS.canvas;
+  }
+  Avatar2.RandomNPCEmoji = RandomNPCEmoji;
+  function avatarEmoji(FACES, O) {
+    const OPTIONSTR = JSON.stringify(Avatar2.options);
+    const OPTION = JSON.parse(OPTIONSTR);
+    let emote = A.emote[FACES];
+    const emoadd = ["tear", "shy", "red", "hurt"];
+    const nomal = ["eyebrow", "mouth", "frame"];
+    emoadd.forEach((va) => {
+      OPTION["emoadd"][va] = emote[va];
+    });
+    nomal.forEach((va) => {
+      OPTION[va] = emote[va];
+    });
+    OPTION["eyes"] = [V.PC.瞳色, emote["eyes"].includes("full") ? emote["eyes"] + T.type[V.PC.眼型] + "_idle" : emote["eyes"]].join("/");
+    var EMOJIMODEL = Renderer.locateModel("Emoji");
+    var EMOJICANVAS = EMOJIMODEL.createCanvas();
+    EMOJIMODEL.render(EMOJICANVAS, OPTION);
+    EMOJIMODEL.animate(EMOJICANVAS, OPTION);
+    O["ID"] ? EMOJICANVAS.canvas.id = O["ID"] : null;
+    O["CLASS"] ? EMOJICANVAS.canvas.className = O["CLASS"] : null;
+    return EMOJICANVAS.canvas;
+  }
+  Avatar2.avatarEmoji = avatarEmoji;
   function getCanvas() {
     return AVATARCANVAS.canvas;
   }
   Avatar2.getCanvas = getCanvas;
+  function getShop() {
+    return SHOPCANVAS.canvas;
+  }
+  Avatar2.getShop = getShop;
   function getPortrait() {
     return PORTRAITCANVAS.canvas;
   }
   Avatar2.getPortrait = getPortrait;
+  function setShop() {
+    const group = ["outter", "top", "inner_up"];
+    const opt = Avatar2.shopoptions;
+    const showcase = V.showcase;
+    const isbeast = group.includes(showcase.layer) && showcase.dfpng.breast;
+    const fixcolor = showcase.fixcolor;
+    const color = showcase.color;
+    let src = fixcolor ? __resolve(showcase.layer, showcase.index, `${color}${isbeast ? "_1" : ""}`) : __resolve(showcase.layer, showcase.index, `basic${isbeast ? "_1" : ""}`);
+    console.log(src, Avatar2.SHOPMODEL);
+    opt["acc"] = showcase.acc ? __resolve(showcase.layer, showcase.index, showcase.acc) : null;
+    opt["dress"] = {
+      fixcolor,
+      color,
+      src
+    };
+    console.log(opt, Avatar2.SHOPMODEL);
+    Avatar2.SHOPMODEL.redraw();
+  }
+  Avatar2.setShop = setShop;
   function setAvatar(key, option) {
     if (!Avatar2.options) {
       return option;
@@ -1807,3 +2001,5 @@ var Avatar;
 })(Avatar || (Avatar = {}));
 window.Avatar = Avatar;
 window.setAvatar = (key, options) => Avatar.setAvatar(key, options);
+window["avatarEmoji"] = (FACE, option) => Avatar.avatarEmoji(FACE, option);
+window["RandomNPCEmoji"] = (FACE, option) => Avatar.RandomNPCEmoji(FACE, option);

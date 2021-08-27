@@ -1,6 +1,7 @@
 <!-- 左侧边栏 -->
 :: StoryCaption
 <div @class="(Errors.log.length==0?'hidden':'') + ' error-reporter-btn'" onclick="Errors.Reporter.toggle()"></div>
+<<timeprocess>>
 
 <div id="volume">
 ♫♪♩♬ <<volume>>
@@ -23,7 +24,9 @@
 
 <span id="money" class="money">　<<printmoney $money>></span><br>
 <!-- 简短通知 -->
+<div id="notice">
 <<notification>>
+</div>
 
 <!-- 玩家状态 -->
 <div id="playerstats"><<playerstatus>></div>
@@ -80,8 +83,9 @@
 			<<replace "#avatar">><<avatar>><</replace>>
 		<</if>>
 		<<if $intro isnot true>>
-			<<replace "#playerstats">><<playerstatus>><</replace>>
 			<<replace "#showtimes">><<timestats>><</replace>>
+			<<replace "#playerstats">><<playerstatus>><</replace>>
+			<<replace "#notice">><<notification>><</replace>>
 			<<replace "#money">>　<<printmoney $money>><</replace>>
 		<</if>>
 	<</repeat>>

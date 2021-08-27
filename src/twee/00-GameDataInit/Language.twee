@@ -29,6 +29,11 @@
         发型:{
             "straight"  :"顺直的",   "natural"  :"自然的",
             "curly"     :"卷曲的",   "himecut"  :"齐刘海",
+            "bigwave"   :"大波浪卷", "pony"     :"马尾",
+            "twintail"  :"双马尾",   "twosider" :"披肩双马尾",
+            "sidetail"  :"侧马尾",   "bob"      :"波波头",
+            "manjyu"    :"包子头",   "drill"    :"螺旋卷发",
+            "drilltail" :"螺旋双马尾",
         },
 }>>
 

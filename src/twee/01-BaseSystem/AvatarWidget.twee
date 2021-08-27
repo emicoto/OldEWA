@@ -225,3 +225,28 @@
 <</if>>
 
 <</widget>>
+
+:: ShowAvatar [widget]
+
+<<widget "avatar">>
+<<if $render is "canvas">>
+    <<twinescript>>
+    output.appendChild(Avatar.getCanvas())
+    <</twinescript>>
+<</if>>
+
+<</widget>>
+
+<<widget "portrait">>
+<div id="portrait">
+
+<<if $render is "canvas">>
+    <div class="flipx">
+    <<twinescript>>
+    output.appendChild(Avatar.getPortrait())
+    <</twinescript>>
+    </div>
+<</if>>
+
+</div>
+<</widget>>

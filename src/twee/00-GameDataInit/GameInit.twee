@@ -82,6 +82,11 @@
     hand : [],    back : [],
 }>>
 
+<<set $closet.top[0] to clone(A.top[4])>>
+<<set $closet.bottom[0] to clone(A.bottom[4])>>
+<<set $closet.inner_bt[0] to clone(A.inner_bt[1])>>
+<<set $closet.legs[0] to clone(A.legs[1])>>
+
 /* 宠物设定 */
 <<set $pet to {
     name:"史莱姆", type:1, level:1,

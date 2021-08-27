@@ -140,7 +140,6 @@
             <img class="Layer" @src="_path2 + '.png'" @style="_zindex">
         <</if>>
     <</if>>
-
 <</if>>
 <</for>>
 <</if>>

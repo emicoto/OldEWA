@@ -32,8 +32,8 @@ function setreveal(){
     const bottoms=[isReveal("bottom"),isReveal("inner_bt")]
     tops.sort((a,b)=>b-a)
     bottoms.sort((a,b)=>b-a)
-    console.log("上衣:",tops)
-    console.log("下衣:",bottoms)
+    /*console.log("上衣:",tops)
+    console.log("下衣:",bottoms)*/
     V.Pflag.top = !tops[0]?0: tops[0]
     V.Pflag.bottom=!bottoms[0]?0: bottoms[0]
 }
