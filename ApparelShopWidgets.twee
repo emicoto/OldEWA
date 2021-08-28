@@ -69,7 +69,23 @@
                         <<print "<<button _name>><<run setColors(A.colorlist["+_i+"].code,A.colorlist["+_i+"].name)>><</button>>">>
                         </div>
                     <</for>>
-                    <div><button id="customColor">自定义颜色</button></div>
+                    /* <div><<textbox "$showcase.color" "#FFFFF">></div> */
+                    <div><button id="customColor">
+                   	自定义颜色
+</button></div>
+                   <script>
+var myPicker = new JSColor('#customColor', {format:'hex',value:'#000000',onInput:"setColors(this.toHEXString(),null,true)",
+onChange:"setColors(this.toHEXString(),'CustomColor')",
+required:false, 
+	palette:'#000000 #FFFFFF #636363 #FF0000 #00FF00 #0000FF', 
+	hideOnPaletteClick:true, backgroundColor:'#333', 
+	borderColor:'rgba(0,0,0,1)', borderRadius:10, width:200, 
+	closeButton:true, closeText:'关闭', sliderSize:20, 
+	shadowColor:'rgba(255,121,247,0.2)'
+});
+
+</script>
+
                 <<else>>
                     <<for _i to 0; _i lt $showcase.colors.length; _i++>>
                         <<set _code to A.colors[$showcase.colors[_i]].code>>
@@ -84,18 +100,6 @@
     </div>
 
     </div>
-
-<script>
-var myPicker = new JSColor('#customColor', {format:'hex',value:'#000000',onInput:"setColors(this.toHEXString(),null,true)",
-onChange:"setColors(this.toHEXString(),'自定义')",
-required:false, 
-	palette:'#000000 #FFFFFF #636363 #FF0000 #00FF00 #0000FF', 
-	hideOnPaletteClick:true, backgroundColor:'#ddd', 
-	borderColor:'rgba(0,0,0,1)', borderRadius:10, width:200, 
-	closeButton:true, closeText:'关闭', sliderSize:20, 
-	shadowColor:'rgba(255,121,247,0.2)'
-});
-</script>
 
 <</widget>>
 

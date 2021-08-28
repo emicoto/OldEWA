@@ -1022,9 +1022,7 @@ var Avatar;
       width: 180,
       height: 260,
       z: layerID++,
-      showfn(options2) {
-        return !!options2.penis;
-      },
+      show: true,
       srcfn(options2) {
         return options2.penis ? __resolve(AVATARPATH, `body/${options2.penis}.png`) : options2.dummy;
       }
@@ -1916,7 +1914,7 @@ var Avatar;
     nomal.forEach((va) => {
       OPTION[va] = emote[va];
     });
-    OPTION["eyes"] = [V.PC.瞳色, emote["eyes"].includes("full") ? emote["eyes"] + T.type[V.PC.眼型] + "_idle" : emote["eyes"]].join("/");
+    OPTION["eyes"] = [V.PC.info.eyecolor, emote["eyes"].includes("full") ? emote["eyes"] + T.type[V.PC.eyes] + "_idle" : emote["eyes"]].join("/");
     var EMOJIMODEL = Renderer.locateModel("Emoji");
     var EMOJICANVAS = EMOJIMODEL.createCanvas();
     EMOJIMODEL.render(EMOJICANVAS, OPTION);
@@ -1938,26 +1936,24 @@ var Avatar;
     return PORTRAITCANVAS.canvas;
   }
   Avatar2.getPortrait = getPortrait;
-  function setShop() {
+  function setShop(colors) {
     const group = ["outter", "top", "inner_up"];
     const opt = Avatar2.shopoptions;
     const showcase = V.showcase;
     const isbeast = group.includes(showcase.layer) && showcase.dfpng.breast;
     const fixcolor = showcase.fixcolor;
-    const color = showcase.color;
+    const color = colors ? colors : showcase.color;
     let src = fixcolor ? __resolve(showcase.layer, showcase.index, `${color}${isbeast ? "_1" : ""}`) : __resolve(showcase.layer, showcase.index, `basic${isbeast ? "_1" : ""}`);
-    console.log(src, Avatar2.SHOPMODEL);
     opt["acc"] = showcase.acc ? __resolve(showcase.layer, showcase.index, showcase.acc) : null;
     opt["dress"] = {
       fixcolor,
       color,
       src
     };
-    console.log(opt, Avatar2.SHOPMODEL);
     Avatar2.SHOPMODEL.redraw();
   }
   Avatar2.setShop = setShop;
-  function setAvatar(key, option) {
+  function setAvatar(key, option, updates) {
     if (!Avatar2.options) {
       return option;
     }
@@ -1973,7 +1969,7 @@ var Avatar;
     }
     if (!change[last])
       change[last] = option;
-    let update = false;
+    let update = updates ? true : false;
     const isObject2 = Object.prototype.toString.call(option) === "[object Object]";
     const isArray = Array.isArray(Avatar2.options);
     if (isObject2) {
@@ -1991,7 +1987,13 @@ var Avatar;
         update = true;
       }
     }
+    if (!update) {
+      if (V.harddebug)
+        console.log("未更新:", key, option, last, change[last], change);
+    }
     if (update) {
+      if (V.harddebug)
+        console.log("更新:", key, option, last, change[last], change);
       Avatar2.AVATARMODEL.redraw();
       Avatar2.PORTRAITMODEL.redraw();
     }
@@ -2000,6 +2002,6 @@ var Avatar;
   Avatar2.setAvatar = setAvatar;
 })(Avatar || (Avatar = {}));
 window.Avatar = Avatar;
-window.setAvatar = (key, options) => Avatar.setAvatar(key, options);
+window.setAvatar = (key, options, updates) => Avatar.setAvatar(key, options, updates);
 window["avatarEmoji"] = (FACE, option) => Avatar.avatarEmoji(FACE, option);
 window["RandomNPCEmoji"] = (FACE, option) => Avatar.RandomNPCEmoji(FACE, option);

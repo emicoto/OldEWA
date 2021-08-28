@@ -33,7 +33,7 @@ window.basepercent = function(name) {
 };
 
 function isPregnant() {
-    if (V.PC.stats.怀孕 == true || V.PC.stats.肠内受孕 == true){
+    if (V.PC.state.怀孕 == true || V.PC.state.肠内受孕 == true){
         return "p"
     }else{
         return ""
@@ -44,7 +44,7 @@ window.isPregnant = isPregnant
 
 function isFixhair(table) {
     if (table.fixcolor == true) {
-        return V.PC.发色
+        return V.PC.info.haircolor
     }else{
         return "basic"
     }
@@ -54,7 +54,7 @@ window.isFixhair = isFixhair
 
 function hasLength(table) {
     if (table.long == true) {
-        return "_" + hairlenth(V.PC.前发长)
+        return "_" + hairlenth(V.PC.info.fhairlen)
     }else{
         return "_1"
     }
@@ -67,3 +67,14 @@ window.linkifyDivs = function (parentSelector = "") {
 	$(document).ready(() => { $(parentSelector + " .div-link").click(function (e) { $(this).find('a').first().click(); }) });
 	$(document).ready(() => { $(parentSelector + " .div-link a").click(function (e) { e.stopPropagation(); }) });
 }
+
+function bookmark(obj) {
+    if(typeof(obj)=="object"){
+    Object.assign(V.bookmark,obj)
+    }else{
+        alert("bookmark function error: the assigment is not object.")
+    }
+    return ""
+}
+
+DefineMacroS("bookmark", bookmark);

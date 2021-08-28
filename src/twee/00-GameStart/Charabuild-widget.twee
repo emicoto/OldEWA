@@ -15,13 +15,13 @@
 
 <<widget "CMGender">>
     <<set _optionlist to ["伪娘","扶她","少年","少女"]>>
-    <<listbox "$PC.性别" autoselect>>
+    <<listbox "$PC.info.gender" autoselect>>
 	<<optionsfrom _optionlist>>
     <</listbox>>
 <</widget>>
 
 <<widget "CMBackground">>
-    <<set _optionlist to {"魔法少女":1,"小网红":2,"二次元":3,"小爱豆":4,"道童":5,"名门世家":6}>>
+    <<set _optionlist to {"魔法少女":1,"小网红":2,"二次元":3,"小爱豆":4,"道童":5,"富二代":6}>>
     <!-- <<if $debug is true or $achivement.reset gt 0>><<set _optionlist.穿越者 to 7>> -->
         <<listbox "$PC.type" autoselect>>
         <<optionsfrom _optionlist>>
@@ -30,35 +30,35 @@
 
 <<widget "CMChara">>
     <<set _optionlist to {"正常":2,"开放":4,"保守":1}>>
-        <<listbox "$PC.态度" autoselect>>
+        <<listbox "$PC.attitude" autoselect>>
         <<optionsfrom _optionlist>>
     <</listbox>>
 <</widget>>
 
 <<widget "CMRace">>
     <<set _optionlist to {"适应力":"人类","兽耳":"兽族","魔纹尖耳":"灵族","羽翼":"羽族","银瞳尖牙":"夜族"}>>
-    <<listbox "$PC.种族" autoselect>>
+    <<listbox "$PC.info.race" autoselect>>
 	<<optionsfrom _optionlist>>
     <</listbox>>
 <</widget>>
 
 <<widget "CMMainclass">>
     <<set _optionlist to ["文艺创作","物理科学","自然科学","生理科学","音乐表演","运动格斗"]>>
-    <<listbox "$PC.特长" autoselect>>
+    <<listbox "$PC.info.major" autoselect>>
         <<optionsfrom _optionlist>>
     <</listbox>>
 <</widget>>
 
 <<widget "CMBodytype">>
     <<set _optionlist to {"普通":2,"高大":3,"娇小":1}>>
-    <<listbox "$PC.体型" autoselect>>
+    <<listbox "$PC.body" autoselect>>
         <<optionsfrom _optionlist>>
     <</listbox>>
 <</widget>>
 
 <<widget "CMSkin">>
     <<set _optionlist to {"健康":"health","白皙":"white","麦色":"mugi","棕色":"dark","黝黑":"black"}>>
-    <<listbox "$PC.肤色" autoselect>>
+    <<listbox "$PC.info.skin" autoselect>>
         <<optionsfrom _optionlist>>
     <</listbox>>
 <</widget>>
@@ -72,49 +72,49 @@
 
 <<widget "CMBreast">>
     <<set _optionlist to {"平坦":0,"微隆":1,"贫乳":2,"普乳":3,"巨乳":4,"魔乳":5}>>
-    <<listbox "$PC.胸部" autoselect>>
+    <<listbox "$PC.breast" autoselect>>
         <<optionsfrom _optionlist>>
     <</listbox>>
 <</widget>>
 
 <<widget "CMButts">>
     <<set _optionlist to {"窄小":1,"普通":2,"圆润":3,"丰臀":4,"安产":5}>>
-    <<listbox "$PC.臀部" autoselect>>
+    <<listbox "$PC.hips" autoselect>>
         <<optionsfrom _optionlist>>
     <</listbox>>
 <</widget>>
 
 <<widget "CMHairColor">>
     <<set _optionlist to {"黑色":"black","深棕色":"darkbrown","酒红色":"wine","棕色":"brown","奶茶色":"milktea","金色":"blond","米黄色":"softblond","白金色":"platinum","银色":"silver","纯白色":"white","紫色":"purple","绿色":"green","蓝色":"blue","水色":"aqua","粉色":"pink"}>>
-    <<listbox "$PC.发色" autoselect>>
+    <<listbox "$PC.info.haircolor" autoselect>>
         <<optionsfrom _optionlist>>
     <</listbox>>
 <</widget>>
 
 <<widget "CMHair">>
     <<set _optionlist to {"齐耳短发":50,"及脖中发":100,"及肩中发":250,"及胸长发":500,"及腰长发":800}>>
-    <<listbox "$PC.发长" autoselect>>
+    <<listbox "$PC.info.hairlen" autoselect>>
         <<optionsfrom _optionlist>>
     <</listbox>>
 <</widget>>
 
 <<widget "CMHairstyle">>
     <<set _optionlist to {"自然":"natural","卷发":"curly","直发":"straight"}>>
-    <<listbox "$PC.发型" autoselect>>
+    <<listbox "$PC.info.hairstyle" autoselect>>
         <<optionsfrom _optionlist>>
     <</listbox>>
 <</widget>>
 
 <<widget "CMEyeColor">>
     <<set _optionlist to {"黑色":"black","棕色":"brown","碧绿色":"emerald","绿色":"green","淡绿色":"lightgreen","蓝色":"blue","水色":"aqua","紫色":"purple","淡紫色":"lightpurple","银色":"white","金色":"amber","红色":"red"}>>
-        <<listbox "$PC.瞳色" autoselect>>
+        <<listbox "$PC.info.eyecolor" autoselect>>
         <<optionsfrom _optionlist>>
     <</listbox>>
 <</widget>>
 
 <<widget "CMEyetype">>
     <<set _optionlist to {"普通":1,"吊眼":2}>>
-        <<listbox "$PC.眼型" autoselect>>
+        <<listbox "$PC.eyes" autoselect>>
         <<optionsfrom _optionlist>>
     <</listbox>>
 <</widget>>
@@ -161,7 +161,7 @@
 <<widget "CMPsize">>
     <label> <<radiobutton "$PC.genital.阴茎" 6 autocheck>> 迷你　</label>
     <label> <<radiobutton "$PC.genital.阴茎" 10 autocheck>> 短小　</label>
-    <label> <<radiobutton "$PC.genital.阴茎" 14 autocheck>> 普通　</label>
+    <label> <<radiobutton "$PC.genital.阴茎" 15 autocheck>> 普通　</label>
     <label> <<radiobutton "$PC.genital.阴茎" 18 autocheck>> 粗长　</label>
     <label> <<radiobutton "$PC.genital.阴茎" 24 autocheck>> 巨大　</label>
 <</widget>>
@@ -179,40 +179,40 @@
     <<switch $preset >>
         <<case "魔女">>
             <<set $PC.type to 1>>
-            <<set $PC.名字 to "魔女">>
-            <<set $PC.性别 to "伪娘">>
-            <<set $PC.种族 to "人类">>
-            <<set $PC.特长 to "自然科学">>
-            <<set $PC.态度 to 4>>
-            <<set $PC.胸部 to 1>>
-            <<set $PC.臀部 to 1>>
-            <<set $PC.体型 to 1>>
-            <<set $PC.发长 to 100>>
-            <<set $PC.前发长 to 100>>
-            <<set $PC.发型 to "straight">>
-            <<set $PC.发色 to "aqua">>
-            <<set $PC.瞳色 to "aqua">>
-            <<set $PC.肤色 to "white">> 
+            <<set $PC.info.name to "魔女">>
+            <<set $PC.info.gender to "伪娘">>
+            <<set $PC.info.race to "人类">>
+            <<set $PC.info.major to "自然科学">>
+            <<set $PC.attitude to 4>>
+            <<set $PC.breast to 1>>
+            <<set $PC.hips to 1>>
+            <<set $PC.body to 1>>
+            <<set $PC.info.hairlen to 100>>
+            <<set $PC.info.fhairlen to 100>>
+            <<set $PC.info.hairstyle to "straight">>
+            <<set $PC.info.haircolor to "aqua">>
+            <<set $PC.info.eyecolor to "aqua">>
+            <<set $PC.info.skin to "white">> 
             <<set $PC.sens to {"m" : 2,  "b":2,  "c":2,  "v":null, "u":1, "a":4}>>
             <<set $PC.genital to { "阴茎" : 10, "子宫" : null }>>
             <<set $starttrait to "抖M体质">>
 
         <<case "羽轩">>
             <<set $PC.type to 2>>
-             <<set $PC.名字 to "羽轩">>
-            <<set $PC.性别 to "伪娘">>
-            <<set $PC.种族 to "人类">>
-            <<set $PC.特长 to "物理科学">>
-            <<set $PC.态度 to 2>>
-            <<set $PC.胸部 to 0>>
-            <<set $PC.臀部 to 1>>
-            <<set $PC.体型 to 2>>
-            <<set $PC.发长 to 150>>
-            <<set $PC.前发长 to 150>>
-            <<set $PC.发型 to "straight">>
-            <<set $PC.发色 to "milktea">>
-            <<set $PC.瞳色 to  "brown">>
-            <<set $PC.肤色 to "white">>
+             <<set $PC.info.name to "羽轩">>
+            <<set $PC.info.gender to "伪娘">>
+            <<set $PC.info.race to "人类">>
+            <<set $PC.info.major to "物理科学">>
+            <<set $PC.attitude to 2>>
+            <<set $PC.breast to 0>>
+            <<set $PC.hips to 1>>
+            <<set $PC.body to 2>>
+            <<set $PC.info.hairlen to 150>>
+            <<set $PC.info.fhairlen to 150>>
+            <<set $PC.info.hairstyle to "straight">>
+            <<set $PC.info.haircolor to "milktea">>
+            <<set $PC.info.eyecolor to  "brown">>
+            <<set $PC.info.skin to "white">>
             <<set $PC.sens to {"m" : 1,  "b":2,  "c":1, "v":null, "u":1, "a":6}>>
 
             <<set $PC.genital to { "阴茎" : 14, "子宫" : null }>>
@@ -221,20 +221,20 @@
 
         <<case "月棂">>
             <<set $PC.type to 3>>
-            <<set $PC.名字 to "月棂">>
-            <<set $PC.性别 to "扶她">>
-            <<set $PC.种族 to "灵族">>
-            <<set $PC.特长 to "文艺创作">>
-            <<set $PC.态度 to 2>>
-            <<set $PC.胸部 to 3>>
-            <<set $PC.臀部 to 3>>
-            <<set $PC.体型 to 2>>
-            <<set $PC.发长 to 300>>
-            <<set $PC.前发长 to 300>>
-            <<set $PC.发型 to "straight">>
-            <<set $PC.发色 to "milktea">>
-            <<set $PC.瞳色 to "green">>
-            <<set $PC.肤色 to "white">>
+            <<set $PC.info.name to "月棂">>
+            <<set $PC.info.gender to "扶她">>
+            <<set $PC.info.race to "灵族">>
+            <<set $PC.info.major to "文艺创作">>
+            <<set $PC.attitude to 2>>
+            <<set $PC.breast to 3>>
+            <<set $PC.hips to 3>>
+            <<set $PC.body to 2>>
+            <<set $PC.info.hairlen to 300>>
+            <<set $PC.info.fhairlen to 300>>
+            <<set $PC.info.hairstyle to "straight">>
+            <<set $PC.info.haircolor to "milktea">>
+            <<set $PC.info.eyecolor to "green">>
+            <<set $PC.info.skin to "white">>
             <<set $PC.sens to {"m" : 1,  "b":2,  "v":1, "c":1, "u":1, "a":6}>>
             <<set $starttrait to "好色">>
 
@@ -242,20 +242,20 @@
 
         <<case "沐歌">>
             <<set $PC.type to 3>>
-            <<set $PC.名字 to "沐歌">>
-            <<set $PC.性别 to "少女">>
-            <<set $PC.种族 to "人类">>
-            <<set $PC.特长 to "音乐表演">>
-            <<set $PC.态度 to 1>>
-            <<set $PC.胸部 to 2>>
-            <<set $PC.臀部 to 2>>
-            <<set $PC.体型 to 1>>
-            <<set $PC.发长 to 250>>
-            <<set $PC.前发长 to 250>>
-            <<set $PC.发型 to "straight">>
-            <<set $PC.发色 to "darkbrown">>
-            <<set $PC.瞳色 to "brown">>
-            <<set $PC.肤色 to "health">>
+            <<set $PC.info.name to "沐歌">>
+            <<set $PC.info.gender to "少女">>
+            <<set $PC.info.race to "人类">>
+            <<set $PC.info.major to "音乐表演">>
+            <<set $PC.attitude to 1>>
+            <<set $PC.breast to 2>>
+            <<set $PC.hips to 2>>
+            <<set $PC.body to 1>>
+            <<set $PC.info.hairlen to 250>>
+            <<set $PC.info.fhairlen to 250>>
+            <<set $PC.info.hairstyle to "straight">>
+            <<set $PC.info.haircolor to "darkbrown">>
+            <<set $PC.info.eyecolor to "brown">>
+            <<set $PC.info.skin to "health">>
             <<set $PC.sens to {"m" : 1,  "b":4,  "v":1, "c":1, "u":1, "a":1}>>             
             <<set $starttrait to "人气">>
 
@@ -263,19 +263,19 @@
 
         <<case "云鹿">>
             <<set $PC.type to 5>>
-            <<set $PC.名字 to "云鹿">>
-            <<set $PC.性别 to "少年">>
-            <<set $PC.种族 to "兽族">>
-            <<set $PC.特长 to "运动格斗">>
-            <<set $PC.态度 to 1>>
-            <<set $PC.胸部 to 0>>
-            <<set $PC.臀部 to 1>>
-            <<set $PC.体型 to 1>>
-            <<set $PC.发长 to 120>> <<set $PC.前发长 to 120>>
-            <<set $PC.发型 to "straight">>
-            <<set $PC.发色 to "platinum">>
-            <<set $PC.瞳色 to "emerald">>
-            <<set $PC.肤色 to "white">>
+            <<set $PC.info.name to "云鹿">>
+            <<set $PC.info.gender to "少年">>
+            <<set $PC.info.race to "兽族">>
+            <<set $PC.info.major to "运动格斗">>
+            <<set $PC.attitude to 1>>
+            <<set $PC.breast to 0>>
+            <<set $PC.hips to 1>>
+            <<set $PC.body to 1>>
+            <<set $PC.info.hairlen to 120>> <<set $PC.info.fhairlen to 120>>
+            <<set $PC.info.hairstyle to "straight">>
+            <<set $PC.info.haircolor to "platinum">>
+            <<set $PC.info.eyecolor to "emerald">>
+            <<set $PC.info.skin to "white">>
             <<set $PC.sens to {"m" : 1,  "b":2,  "c":2, "v":null, "u":1, "a":2}>>
 
             <<set $PC.genital to { "阴茎" : 10, "子宫" : null }>>
@@ -285,19 +285,19 @@
 
         <<case "若秋">>
             <<set $PC.type to 6>>
-            <<set $PC.名字 to "若秋">>
-            <<set $PC.性别 to "扶她">>
-            <<set $PC.种族 to "羽族">>
-            <<set $PC.特长 to "生理科学">>
-            <<set $PC.态度 to 4>>
-            <<set $PC.胸部 to 4>>
-            <<set $PC.臀部 to 3>>
-            <<set $PC.体型 to 3>>
-            <<set $PC.发长 to 50>> <<set $PC.前发长 to 50>>
-            <<set $PC.发型 to "straight">>
-            <<set $PC.发色 to "black">>
-            <<set $PC.瞳色 to "emerald">>
-            <<set $PC.肤色 to "white">>
+            <<set $PC.info.name to "若秋">>
+            <<set $PC.info.gender to "扶她">>
+            <<set $PC.info.race to "羽族">>
+            <<set $PC.info.major to "生理科学">>
+            <<set $PC.attitude to 4>>
+            <<set $PC.breast to 4>>
+            <<set $PC.hips to 3>>
+            <<set $PC.body to 3>>
+            <<set $PC.info.hairlen to 50>> <<set $PC.info.fhairlen to 50>>
+            <<set $PC.info.hairstyle to "straight">>
+            <<set $PC.info.haircolor to "black">>
+            <<set $PC.info.eyecolor to "emerald">>
+            <<set $PC.info.skin to "white">>
             <<set $PC.sens to {"m" : 4,  "b":2,  "v":1, "c":1, "u":1, "a":1}>>
 
             <<set $PC.genital to { "阴茎" : 14, "子宫" : 1 }>>           
@@ -307,7 +307,7 @@
 
 <<widget "CMChangeApply">>
 
-    <<switch $PC.性别 >>
+    <<switch $PC.info.gender >>
         <<case "少女">>
             <<set $PC.genital.子宫 to 1>>
             <<set $PC.genital.阴茎 to null>>
@@ -327,7 +327,7 @@
 
     <<switch $PC.type>>
         <<case 1>>
-            <<set $PC.头衔 to "魔法少女">>
+            <<set $PC.title to "魔法少女">>
             <<set $PC.lewd to {
                     "纯洁" : 800,
                     "露出" : 0,
@@ -339,7 +339,7 @@
                     "性瘾" : 0
                 }>>
         <<case 2>>
-            <<set $PC.头衔 to "直播主">>
+            <<set $PC.title to "直播主">>
             <<set $PC.lewd to {
                 "纯洁" : 800,
                 "露出" : 0,
@@ -351,7 +351,7 @@
                 "性瘾" : 0
             }>>
         <<case 3>>
-            <<set $PC.头衔 to "二次元">>
+            <<set $PC.title to "二次元">>
             <<set $PC.lewd to {
                 "纯洁" : 800,
                 "露出" : 0,
@@ -363,7 +363,7 @@
                 "性瘾" : 0
             }>>
         <<case 4>>
-            <<set $PC.头衔 to "小爱豆">>
+            <<set $PC.title to "小爱豆">>
             <<set $PC.lewd to {
                 "纯洁" : 900,
                 "露出" : 50,
@@ -375,7 +375,7 @@
                 "性瘾" : 0
             }>>
         <<case 5>>
-            <<set $PC.头衔 to "小道童">>
+            <<set $PC.title to "小道童">>
             <<set $PC.lewd to {
                 "纯洁" : 1000,
                 "露出" : 0,
@@ -387,7 +387,7 @@
                 "性瘾" : 0,
             }>>
         <<case 6>>
-            <<set $PC.头衔 to "富二代">>
+            <<set $PC.title to "富二代">>
             <<set $PC.lewd to {
                     "纯洁" : 700,
                     "露出" : 0,
@@ -400,7 +400,7 @@
                 }>>
     <</switch>>
 
-    <<switch $PC.特长>>
+    <<switch $PC.info.major>>
         <<case "自然科学">>
             <<set $PC.school to {
                 "文学" : 0,
@@ -519,7 +519,7 @@
 <</widget>>
 
 <<widget "GSApply">>
-    <<set $PC.魅力 to 1600>>
+    <<set $PC.beauty to 1600>>
     <<set $fix.beauty to 1600>>
 
     <<switch $starttrait>>
@@ -620,7 +620,7 @@
                 stats: {},
             }>>
     <</switch>>
-    <<if $PC.种族 is "兽族">>
+    <<if $PC.info.race is "兽族">>
         <<switch $PC.兽型>>
             <<case "猫" "狗" "狼" "狐">>
                 <<set $PC.trait.兽耳 to true>>
@@ -631,7 +631,7 @@
                 <<set $PC.trait.兽尾 to true>>
         <</switch>>
     <</if>>
-    <<switch $PC.性别>>
+    <<switch $PC.info.gender>>
         <<case "少女">>
             <<set $PC.produce.精液 to [0,0]>>
             <<set $PC.genital.阴茎 to null>>
@@ -648,7 +648,7 @@
     <</if>>
 
     <<if $PC.trait.泌乳体质 is 1>>
-        <<set $PC.produce.乳汁 to [($PC.genital.胸部*20),($PC.genital.胸部*20)]>>
+        <<set $PC.produce.乳汁 to [($PC.breast*20),($PC.breast*20)]>>
         <<set $Pflag.lactation to true>>
         <<set $Pflag.lactatecd to 60>>
     <<else>>

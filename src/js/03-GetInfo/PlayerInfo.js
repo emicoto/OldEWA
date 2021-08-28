@@ -1,6 +1,6 @@
 ﻿/* 名字和称呼的处理 */
 function you() {
-    var name = V.PC.名字;
+    var name = V.PC.info.name;
     switch (V.persons){
     case 1:
       return "我"
@@ -25,7 +25,7 @@ DefineMacroS("he", he);
 /* 头发 */
 function hair(){
   const select = new SelectCase();
-  var num = V.PC.发长
+  var num = V.PC.info.hairlen
   select.add(0, 49, "超短发");
   select.add(50, 99, "齐耳短发");
   select.add(100, 249, "及脖中发");
@@ -34,7 +34,7 @@ function hair(){
   select.add(800, 1200, "及腰长发");
   select.default = "超长长发";
   const hairlength = select.has(num);
-  return `${setup.L[V.lang]["发色"][V.PC.发色] + setup.L[V.lang]["发型"][V.PC.发型] + hairlength}`;
+  return `${setup.L[V.lang]["发色"][V.PC.info.haircolor] + setup.L[V.lang]["发型"][V.PC.info.hairstyle] + hairlength}`;
 }
 
 window.hairlenth = function(num){
@@ -50,7 +50,7 @@ DefineMacroS("hair",hair);
 
 /* 容貌描述 */
 function beauty(){
-  var num = V.PC.魅力
+  var num = V.PC.beauty
   const select = new SelectCase()
   select.add(0,100,"脸部被毁容，丑得惨绝人寰")
   select.add(101,200,"脸上有重大伤痕，显得很狰狞")
@@ -72,19 +72,19 @@ DefineMacroS("beauty", beauty);
 
 /* 眼睛 */
 function eye(){
-  return setup.L[V.lang]["瞳色"][V.PC.瞳色] + setup.L[V.lang]["瞳色"]["eyes"]
+  return setup.L[V.lang]["瞳色"][V.PC.info.eyecolor] + setup.L[V.lang]["瞳色"]["eyes"]
 }
 DefineMacroS("eye", eye);
 
 /* 皮肤 */
 function skin(){
-  return setup.L[V.lang]["肤色"][V.PC.肤色] + setup.L[V.lang]["肤色"]["skin"]
+  return setup.L[V.lang]["肤色"][V.PC.info.skin] + setup.L[V.lang]["肤色"]["skin"]
 }
 DefineMacroS("skin", skin);
 
 /*胸部 */
 window.breastsize = function() {
-  var size = V.PC.胸部
+  var size = V.PC.breast
   if (between(size,0,1)){
     return 1;
   }
@@ -97,7 +97,7 @@ window.breastsize = function() {
 }
 
 function breast(){
-  switch(V.PC.胸部){
+  switch(V.PC.breast){
     case 1:
       return "微微隆起的胸部"
     case 2:

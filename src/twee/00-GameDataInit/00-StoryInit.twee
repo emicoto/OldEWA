@@ -14,19 +14,28 @@
 <<set $render to "canvas">>
 <<set $movebutton to false>>
 
-/*<<if StartConfig.debug is true>>
-	<<set $debug to 1>>
+<<if StartConfig.debug is true>>
+	<<set $debug to true>>
 <<else>>
-	<<set $debug to 0>>
-<</if>>*/
+	<<set $debug to false>>
+<</if>>
 
-<<set $debug to true>>
+<<set $harddebug to false>>
 
 <!-- 游戏各种flag初始化 -->
 <<InitGameData>>
 <<InitNPCData>>
 <<InitPlayerData>>
 <<setchara "player">>
+
+/* 各种记录 */
+<<set $log to {
+	dairy:[], anouce:[], remind:[],
+}>>
+
+<<if $bookmark is undefined>>
+	<<set $bookmark to {}>>
+<</if>>
 
 <!-- 已获得的头衔列表 -->
 <<if $pctitle is undefined>>
@@ -36,10 +45,10 @@
 <!-- 成就 -->
 <<if $achivement is undefined>>
     <<set $achivement to {
-        "locked":false,
-        "points":0,
-        "achived":{},
-		"reset":0,
+        locked:false,
+        scores:0,
+        achived:{},
+		loop:0,
     }>>
 <</if>>
 

@@ -23,6 +23,17 @@ function weirdeffect(){
 }
 window.weirdeffect = weirdeffect
 
+function anouncePopUP(args){
+    var text = args
+    V.log.anouce.push(text)
+    if(V.log.anouce.length > 100) V.log.anouce.deleteAt(0);
+
+    new Wikifier(null,"<<replace '#action-text>>"+text+"<</replace>>")
+    new Wikifier(null,"<<replace '#action-text2'>>"+text+"<</replace>>")
+    ShowPopUP()
+}
+window.anouncePopUP = anouncePopUP
+
 
 function ShowPopUP() {
     $('#action-popup').removeClass('hidden'); setTimeout(() => { $('#action-popup').addClass('hidden') }, 3200);

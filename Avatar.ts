@@ -2215,7 +2215,7 @@ namespace Avatar {
 		nomal.forEach(va => {
 			OPTION[va] = emote[va]
 		})
-		OPTION["eyes"] = [V.PC.瞳色, emote["eyes"].includes("full") ? emote["eyes"] + T.type[V.PC.眼型] + "_idle" : emote["eyes"]].join("/")
+		OPTION["eyes"] = [V.PC.info.eyecolor, emote["eyes"].includes("full") ? emote["eyes"] + T.type[V.PC.eyes] + "_idle" : emote["eyes"]].join("/")
 		var EMOJIMODEL = Renderer.locateModel("Emoji");
 		var EMOJICANVAS = EMOJIMODEL.createCanvas();
 		EMOJIMODEL.render(EMOJICANVAS, OPTION)
@@ -2291,10 +2291,15 @@ namespace Avatar {
 			}
 		}
 		if (!update) {
-				if (V.harddebug) 	console.log("未更新:",key,option,last,change[last],change );
+					console.log("未更新:",key,option,change,last,change[last] );
+					if (last ==="penis") {
+						console.log(last ==="penis");
+						
+						AVATARMODEL.redraw()
+					}
 		}
 		if (update) {
-				if (V.harddebug)	console.log("更新:",key,option,last,change[last] ,change);
+					console.log("更新:",key,option,change,last,change[last] );
 			AVATARMODEL.redraw()
 			PORTRAITMODEL.redraw()
 		}
@@ -2303,6 +2308,6 @@ namespace Avatar {
 	}
 }
 window.Avatar = Avatar
-window.setAvatar = (key, options,updates) => Avatar.setAvatar(key, options,updates)
+window.setAvatar = (key, options) => Avatar.setAvatar(key, options)
 window["avatarEmoji"] = (FACE, option) => Avatar.avatarEmoji(FACE, option)
 window["RandomNPCEmoji"] = (FACE, option) => Avatar.RandomNPCEmoji(FACE, option)

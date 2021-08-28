@@ -28,6 +28,11 @@
     { name:"棕",    code:"#9C6C51" },
 ]>>
 
+<<set A.categoryname to {
+    hat:"帽子", outter:"外搭", top:"上衣", bottom:"下衣", inner_up:"内衣", inner_bt:"内裤", legs:"袜子",
+    shoes: "鞋子", neck:"颈饰", face:"脸饰", hand:"手饰", back:"背包"
+}>>
+
 <<set A.haircolor to {
     "black":["#4F4240","#CAA799"],      "darkbrown":["#765646","#EACFB2"],      "wine":["#9D5755","#EACFB2"] , 
     "brown":["#A07856","#EACFB2"],      "milktea":["#D5AEA0","#FFEDEA"],        "blond":["#FFD87C","#FFFFFF"],

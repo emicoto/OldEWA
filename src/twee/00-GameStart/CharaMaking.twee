@@ -40,7 +40,7 @@
     <<set $PC.trait.泌乳体质 to 0>>
 <</if>>
 
-<li>角色名字： <<textbox "$PC.名字" $PC.名字>>　　∵ 人物背景：<<CMBackground>></li>
+<li>角色名字： <<textbox "$PC.info.name" $PC.info.name>>　　∵ 人物背景：<<CMBackground>></li>
 <li>性别属性： <<CMGender>>　　　<<if $debug>><<button 查看裸体>><<gonaked>><</button>> <<button 穿上衣服>><<redress>><</button>><</if>></li>
 <li>兴趣特长： <<CMMainclass>>　　　<<if $debug>>∵ 切换表情: <<CMEmote>><</if>></li>
 <li>　性观念： <<CMChara>></li>
@@ -75,14 +75,14 @@
 <!-- 自动纠正 -->
 <<silently>>
     <<repeat 0.3s>>
-        <<set $PC.前发长 to $PC.发长>>
+        <<set $PC.info.fhairlen to $PC.info.hairlen>>
         <<if $activepage is "CharaMaking">>
-            <<if $PC.种族 is "夜族">>
+            <<if $PC.info.race is "夜族">>
                 <<set $PC.eye to "银色">><<replace #CMEyeoption>>瞳色　<<CMEyeColor>><</replace>>
-            <<elseif $PC.种族 is "灵族">>
+            <<elseif $PC.info.race is "灵族">>
                 <<set $PC.eye to "金色">><<replace #CMEyeoption>>瞳色　<<CMEyeColor>><</replace>>
             <</if>>
-            <<switch $PC.性别>>
+            <<switch $PC.info.gender>>
                 <<case "伪娘">>
                     <<replace #CMgenital>><<CMBoy>><</replace>>
                     <<replace #omegatrait>>
@@ -95,7 +95,7 @@
                 <<case "扶她">>
                     <<replace #CMgenital>><<CMGirl>><<CMBoy>><</replace>>
             <</switch>>
-            <<if $PC.种族 is "兽族">>
+            <<if $PC.info.race is "兽族">>
                 <<replace #CMFurOption>>　　原型　<<CMFurType>><</replace>>
             <<else>>
                 <<replace #CMFurOption>><</replace>>

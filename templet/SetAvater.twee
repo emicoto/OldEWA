@@ -122,14 +122,14 @@
 
 /* 发型前面 */
 <<if Avatars.hairfront[$Equip.hairfront].long is true>>
-    <<set $avatar.hairfront to $Equip.hairfront + "/" + isFixhair(Avatars.hairfront[$Equip.hairfront]) + "_" + hairlenth($PC.前发长)>>
+    <<set $avatar.hairfront to $Equip.hairfront + "/" + isFixhair(Avatars.hairfront[$Equip.hairfront]) + "_" + hairlenth($PC.info.fhairlen)>>
 <<else>>
     <<set $avatar.hairfront to $Equip.hairfront + "/" + isFixhair(Avatars.hairfront[$Equip.hairfront]) + "_1">>
 <</if>>
 
 /* 发型后面 */
 <<if Avatars.hairback[$Equip.hairback].long is true>>
-    <<set $avatar.hairback to $Equip.hairback + "/" + isFixhair(Avatars.hairback[$Equip.hairback]) + "_" + hairlenth($PC.发长)>>
+    <<set $avatar.hairback to $Equip.hairback + "/" + isFixhair(Avatars.hairback[$Equip.hairback]) + "_" + hairlenth($PC.info.hairlen)>>
 <<else>>
     <<set $avatar.hairback to $Equip.hairback + "/" + isFixhair(Avatars.hairback[$Equip.hairback]) + "_1">>
 <</if>>
@@ -159,9 +159,9 @@
 /* 眼睛 */
 <<set _eyegroup to ["full","blink2","lookup3"]>>
 <<set _type to [null,"a","b","c"]>>
-<<set $avatar.eyes to $PC.瞳色 + "/" + $PFace.eyes>>
+<<set $avatar.eyes to $PC.info.eyecolor + "/" + $PFace.eyes>>
 <<if _eyegroup.includes($PFace.eyes) is true>>
-    <<set $avatar.eyes to $avatar.eyes + _type[$PC.眼型]>>
+    <<set $avatar.eyes to $avatar.eyes + _type[$PC.eyes]>>
 <</if>>
 <<if $PFace.eyes.includes("full") is true and $PFace.name is "正常">>
     <<set $avatar.eyes to $avatar.eyes + "_idle">>
@@ -184,12 +184,12 @@
 <</if>>
 
 /* 素体 */
-<<set $avatar.body to $PC.肤色 +"/body_"+ breastsize() + isPregnant()>>
+<<set $avatar.body to $PC.info.skin +"/body_"+ breastsize() + isPregnant()>>
 
 
 /* JJ */
 <<if $PC.genital.阴茎 gt 3 and $Pflag.bottom lte 1>>
-    <<set $avatar.penis to $PC.肤色 +"/penis">>
+    <<set $avatar.penis to $PC.info.skin +"/penis">>
 <<else>>
     <<set $avatar.penis to null>>
 <</if>>

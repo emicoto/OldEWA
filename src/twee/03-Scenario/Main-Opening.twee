@@ -1,14 +1,18 @@
-﻿:: 主线 开场 EventFirst [nosave]
+﻿:: 主线 开幕 EventFirst [nosave]
 <<set $count to 0>>
 
-:: 主线 开场 初次 [bookmark]
+:: 主线 开幕 初次
+<<set _bk to {
+	主线开幕:{type:"主线", name:"开幕", branch: "", phrase:"初次", visited:true}
+}>>
+<<bookmark _bk>>
 
 <<Opening $count>>
 <<if $count gt 0>>
 <<set $Eflag.nonext to false>>
 <</if>>
 
-:: 主线 开场 初次S
+:: 主线 开幕 初次S
 <<if $count is 0>>
  <div class="weirdtext"><<link "睁开眼睛" $passage>><<set $count to 1>><</link>></div>
  <div class="weirdtext"><<link "回忆梦境" $passage>><<set $count to 2>><</link>></div>
@@ -16,7 +20,7 @@
 
 <</if>>
 
-:: 主线 开场 初次E
+:: 主线 开幕 初次E
 <<addclass "#eventsituation" "weirdtext">>
 <<silently>><<script>>
 //requires jQuery because I am lazy.
@@ -26,7 +30,7 @@ $(document).ready(function(){
 <</script>>
 <</silently>>
 
-:: 主线 开场 初次W [widget]
+:: 主线 开幕 初次W [widget]
 
 <<widget "Opening">>
 
@@ -47,4 +51,4 @@ $(document).ready(function(){
 
 <</widget>>
 
-:: 主线 开场 轮回
+:: 主线 开幕 轮回

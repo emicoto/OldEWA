@@ -1,4 +1,4 @@
-﻿:: 衣柜 [useitem]
+﻿:: 衣柜
 <div id="action-text2"><<you>>打开了衣柜。</div>
 
 <div id="ClosetList">
@@ -91,14 +91,12 @@
 <</repeat>>
 <</silently>>
 
+
 :: Closet-Widget [widget]
 
 <<widget "showcloset">>
 <<set _catgr to $args[0]>>
-<<set _catgrname to {
-    hat:"帽子", outter:"外搭", top:"上衣", bottom:"下衣", inner_up:"内衣", inner_bt:"内裤", legs:"袜子",
-    shoes: "鞋子", neck:"颈饰", face:"脸饰", hand:"手饰", back:"背包",
-}>>
+<<set _catgrname to A.categoryname>>
 <<set _nakeimg to "image/avatar/"+_catgr+"/thumb.png">>
 <<set _placeholder to "image/avatar/thumb.png">>
 

@@ -6,25 +6,27 @@
 
 <!-- 角色数据 -->
 <<set $PC to {
-    名字  : "魔女",   性别 : "伪娘",    种族 : "人类",
-    特长  : "文艺创作",
-    态度  : 1,
-    胸部  : 1,        臀部 : 2,         体型 : 1,     眼型: 1,
-    前发长: 120,      发长 : 120,
-    发色  : "aqua",   发型 : "natural", /* 不做修饰时的发型，只有自然、卷发、顺直三种，只能在美容店修改*/
-    瞳色  : "aqua",
-    肤色  : "white",
-    魅力  : 1600,
-    头衔  : "菜鸟勇者",
-    hot : 21, cold: 21,
+    attitude: 1, /* 态度，影响玩家角色进行性行为时的反应描述和数据补正 */ 
+    breast: 1, hips: 2, body: 1, eyes: 1,
+    beauty: 1600, title: "菜鸟勇者", hot: 21, cold:21,
 }>>
 
+<<set $PC.info to {
+    name  : "魔女",   gender : "伪娘",    race : "人类",
+    major  : "文艺创作",
+    fhairlen: 120,      hairlen : 120,
+    haircolor  : "aqua",   hairstyle : "natural", /* 不做修饰时的发型，只有自然、卷发、顺直三种，只能在美容店修改*/
+    eyecolor  : "aqua",
+    skin  : "white",
+}>>
+
+<<set $PC.equip to {
+    weapon:null, shield: null, accesory:[null,null,null], /* 辅助装饰最大3个位置 */
+}>>
 
 /* 固定修正的参数 */
 <<set $fix to {
-    beauty: 1600,
-    hot: 21,
-    cold: 21,
+    beauty: 1600,   hot: 26,   cold: 20,
 }>>
 
 <<set $shortinfo to " | 勇敢的少年想创造奇迹。">>
@@ -142,7 +144,7 @@
 <<set $PC.trait to {}>>
 
 <!-- PC的状态 -->
-<<set $PC.stats to {
+<<set $PC.state to {
     生病 : false,    怀孕 : false,    寄生 : false,    肠内受孕 : false,    失眠 : false,
 }>>
 
@@ -159,7 +161,8 @@ $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌}
     lactation : false,    lactatecd : 0,
     top      : 9,     bottom   : 4, 
     bukkake   : { body:false, face:false, hair:false, },
-    slot : {top:true, bottom:true, inner_up:false, inner_bt:true}
+    pregnant: { type:null, seed:null, phrase:null, date:null, }
+    /* 怀孕flag type:A怀孕还是正常怀孕 seed：孩子种类, father:父亲, phrase：阶段 date:预产期 */
 }>>
 
 <!-- 记录 -->
@@ -210,7 +213,7 @@ $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌}
     hairfront   : null,  hairback   : null,  emote      : null,
 }>>
 
-<<dressup "top" 1>>
+<<dressup "top" 1 "#F14660" "红">>
 <<dressup "inner_bt" 1>>
 <<dressup "bottom" 1>>
 <<dressup "shoes" 1>>

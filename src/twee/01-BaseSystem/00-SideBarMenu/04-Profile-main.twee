@@ -2,10 +2,10 @@
 <<widget "profile">>
 <div id="profile">
 
-<<set _like to random(($PC.魅力/100),($PC.魅力/10))>>
+<<set _like to random(($PC.beauty/100),($PC.beauty/10))>>
 <<set _infochange to false>>
 
-＠<<print $PC.名字>>　　关注　<<print $follow>>　　粉丝　<<print $follower>><br>
+＠<<print $PC.info.name>>　　关注　<<print $follow>>　　粉丝　<<print $follower>><br>
 <span id="shortinfo" class="selfinfo">
     <<changeinfo>>
 </span>
@@ -36,7 +36,7 @@
 <<dashline>>
 <li> 能力档案 </li>
 <div id="rpgstatus">
-· 等级：<<print $PC.level>>　《<<print $PC.种族>>》<br>
+· 等级：<<print $PC.level>>　《<<print $PC.info.race>>》<br>
 · HP　<<print $PC.rpg.HP[0]>> / <<print $PC.rpg.HP[1]>>　　· MP　<<print $PC.rpg.MP[0]>> / <<print $PC.rpg.MP[1]>> 　　· SP　<<print $PC.rpg.SP[0]>> / <<print $PC.rpg.SP[1]>><br>
 · 物攻 <<print $PC.rpg.ATK>>　　 物防 <<print $PC.rpg.DEF>>　　魔攻 <<print $PC.rpg.MATK>>　　魔防 <<print $PC.rpg.MDEF>> 　　速度 <<print $PC.rpg.SPD>> <br>
 · 装备加成: 无<br>

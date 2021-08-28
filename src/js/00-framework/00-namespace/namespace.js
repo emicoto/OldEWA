@@ -74,9 +74,13 @@ window.Avatars = {
 
 
 window.GameData = {}
+window.GameConfig = {
+	max_aslot: 3,
+}
 
 window.EWA.Avatars = Avatars
 window.EWA.GameData = GameData
+window.EWA.GameConfig = GameConfig
 
 /**
  * Patches to make javascript execution more consistent

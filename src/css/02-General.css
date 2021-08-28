@@ -266,7 +266,7 @@ background-color: white;
 #action-popup {
   position: fixed;
   top: 120px;
-  right:30px;
+  right:10%;
   border: 2px solid rgb(216, 215, 199);
   border-radius: 10px;
   padding: 20px 10px;
@@ -275,6 +275,18 @@ background-color: white;
   z-index: 100;
   min-width: 200px;
   max-width: 600px;
+}
+
+@media screen and (max-width:1200px){
+  #action-popup{right:4%}
+}
+
+@media screen and (max-width:960px){
+  #action-popup{right:20px}
+}
+
+@media screen and (max-width:720px){
+  #action-popup{right:5px}
 }
 
 #action-popup.flash {
@@ -291,7 +303,7 @@ background-color: #eee;
 background-color:rgb(169, 255, 241);
 }
 .popup {
-  animation: popup 0.75s linear alternate-reverse;
+  animation: popup 0.3s linear alternate-reverse;
 }
 .action-flash {
 border-color: rgb(169, 255, 241) !important;

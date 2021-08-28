@@ -89,8 +89,8 @@
 <<widget "setchara">>
     <<if $args[0] is "player">>
         <<set $currentchara to {
-            名字 : $PC.名字,
-            性别 : $PC.性别,
+            名字 : $PC.info.name,
+            性别 : $PC.info.gender,
             genital : $PC.genital,
         }>>
     <<elseif $args[0] is "pet">>
@@ -171,7 +171,7 @@
 <</widget>>
 
 <<widget "ApplyHairSet">>
-    <<switch $PC.发型>>
+    <<switch $PC.info.hairstyle>>
         <<case "straight">>
             <<set $Equip.hairfront to "himecut">>
             <<set $Equip.hairback to "straight">>
@@ -195,7 +195,7 @@
     <</if>>
 
     <<if $args[3]>>
-        <<set $Equip[$args[0]].color to $args[3]>>
+        <<set $Equip[$args[0]].colorname to $args[3]>>
     <</if>>
 
     <<switch $args[0]>>

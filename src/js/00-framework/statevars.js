@@ -26,5 +26,10 @@ Object.defineProperties(window, {
 		get: function() {
 			return GameData
 		}
-	}
+	},
+	cf: {
+		get: function() {
+			return GameConfig
+		}
+	},
 });

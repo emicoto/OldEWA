@@ -318,3 +318,5 @@ sugarcube-2:
       name: pink-t
     tags:
       name: tags
+    bookmark:
+      name: bookmark

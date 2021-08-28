@@ -2,9 +2,15 @@
 
 <<widget "fixvalue">>  
     <<set $money to Math.clamp($money,0,9999999999)>>
-    <<set $PC.发长 to Math.clamp($PC.发长,0,9999)>>
-    <<set $PC.前发长 to Math.clamp($PC.前发长,0,9999)>>
-    <<set $PC.魅力 to Math.clamp($fix.beauty*allureBuff(),0,9999)>>
+
+    /* 固定数值的修正 */
+    <<set $fix.hot to parseFloat((26+($PC.abl.健身/200)).toFixed(2))>>
+    <<set $fix.cold to parseFloat((20-($PC.abl.健身/200)).toFixed(2))>>
+
+    <<set $fix.beauty = 1600>>
+    <<set $PC.info.hairlen to Math.clamp($PC.info.hairlen,0,9999)>>
+    <<set $PC.info.fhairlen to Math.clamp($PC.info.fhairlen,0,9999)>>
+    <<set $PC.beauty to Math.clamp($fix.beauty*allureBuff(),0,9999)>>
     <<set _warmth to warmth()>>
 
     /* 基础条修正 */
@@ -15,7 +21,6 @@
     <<set $PC.base.健康[1] to 1000>>
     <<set $PC.base.健康[0] to Math.clamp($PC.base.健康[0],0,1000)>>
     
-
     <<set $PC.base.理智[1] to  Math.round(Math.clamp(500+($PC.abl.意志*($PC.level/5)),0,2500))>>  
     <<set $PC.base.理智[0] to Math.clamp($PC.base.理智[0],0,$PC.base.理智[1])>>
 
@@ -38,16 +43,16 @@
     <<set $PC.base.恐惧[1] to 1000>>
 
     /* 扩张修正 */
-    <<set $PC.stretch.anal to Math.clamp($PC.stretch.anal,1,(12+($PC.体型*2))).toFixed(2)>>
-    <<if $PC.性别 is "少女">>
+    <<set $PC.stretch.anal to parseFloat(Math.clamp($PC.stretch.anal,1,(12+($PC.body*2))).toFixed(2))>>
+    <<if $PC.info.gender is "少女">>
         <<set $PC.stretch.ureth to Math.clamp($PC.stretch.ureth,0.5,6)>>
     <<else>>
-        <<set $PC.stretch.ureth to Math.clamp($PC.stretch.ureth,0.2,(0.5+$PC.genital.阴茎/10)).toFixed(2)>>
+        <<set $PC.stretch.ureth to parseFloat(Math.clamp($PC.stretch.ureth,0.2,(0.5+$PC.genital.阴茎/10)).toFixed(2))>>
     <</if>>
     <<if $PC.genital.子宫 is null>>
         <<set $PC.stretch.vagina to null>>
     <<else>>
-        <<set $PC.stretch.vagina to Math.clamp($PC.stretch.vagina,1,(12+($PC.体型*2))).toFixed(2)>>
+        <<set $PC.stretch.vagina to parseFloat(Math.clamp($PC.stretch.vagina,1,(12+($PC.body*2))).toFixed(2))>>
     <</if>>
 
     /* 液体分量修正 */
@@ -57,7 +62,7 @@
     <</if>>
 
     <<if $Pflag.lactation is true>>
-        <<set $PC.produce.乳汁[1] to Math.clamp($PC.produce.乳汁[1],$PC.genital.胸部*10,$PC.genital.胸部*40)>>
+        <<set $PC.produce.乳汁[1] to Math.clamp($PC.produce.乳汁[1],$PC.breast*10,$PC.breast*40)>>
         <<set $PC.produce.乳汁[0] to Math.clamp($PC.produce.乳汁[0],0,$PC.produce.乳汁[1])>>
     <</if>>
 
@@ -68,11 +73,11 @@
     <<set $PC.rpg.MP[1] to $PC.base.魔力[1]>>
     <<set $PC.rpg.MP[0] to $PC.base.魔力[0]>>
 
-    <<set $PC.rpg.ATK to Math.clamp((10+$PC.abl.战技/10),1,500).toFixed(1)>>
-    <<set $PC.rpg.DEF to Math.clamp((10+$PC.abl.健身/10)+defBuff(),1,500).toFixed(1)>>
-    <<set $PC.rpg.MATK to Math.clamp((10+($PC.abl.奥术/10*$PC.school.自然/500)),1,500).toFixed(1)>>
-    <<set $PC.rpg.MDEF to Math.clamp((10+($PC.abl.异能/10*$PC.school.物理/500)),1,500).toFixed(1)>>
-    <<set $PC.rpg.SPD to Math.clamp((10+($PC.abl.运动/10)),1,500).toFixed(1)>>
+    <<set $PC.rpg.ATK to parseFloat(Math.clamp((10+$PC.abl.战技/10),1,500).toFixed(1))>>
+    <<set $PC.rpg.DEF to parseFloat(Math.clamp((10+$PC.abl.健身/10)+defBuff(),1,500).toFixed(1))>>
+    <<set $PC.rpg.MATK to parseFloat(Math.clamp((10+($PC.abl.奥术/10*$PC.school.自然/500)),1,500).toFixed(1))>>
+    <<set $PC.rpg.MDEF to parseFloat(Math.clamp((10+($PC.abl.异能/10*$PC.school.物理/500)),1,500).toFixed(1))>>
+    <<set $PC.rpg.SPD to parseFloat(Math.clamp((10+($PC.abl.运动/10)),1,500).toFixed(1))>>
 
     /* 技能等相关值修正 */
     <<switch $hardmode>>
