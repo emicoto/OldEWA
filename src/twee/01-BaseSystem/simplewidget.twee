@@ -153,11 +153,20 @@
 
 <<widget "location">>
 <<if $args[0]>>
-    <<set $location to $args[0]>>
-    <<set $local to D.placedata[$args[0]]>>
-    <<set $movebutton to false>>
 
+<<set $location to $args[0]>>
+
+<<if D.placedata[$args[0]]>>
+    <<set $local to D.placedata[$args[0]]>>
+<<else>>
+    <<set $local to null>>
+<</if>>
+
+<<set $movebutton to false>>
+
+ <<if $local isnot null>>
     <<if $local.tag.includes("家")>><<run V.local.chara.push("player")>><</if>>
+<</if>>
     /*
     设定地点时的各种处理。包括NPC角色的移动。
      */
@@ -283,5 +292,5 @@
 <</widget>>
 
 <<widget "red-t">>
-<span style="color:blue"><<print $args[0]>></span>
+<span style="color:red"><<print $args[0]>></span>
 <</widget>>

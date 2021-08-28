@@ -113,6 +113,8 @@
     location : null,    chara    : null,
 }>>
 
+<<set $Flag to {}>>
+
 /* 每次设定剧情时set要写好几次就麻烦，干脆试试用obj */
 <<set $event to {
     type : "主线", name : "开幕", branch : "初次" , phrase: null,

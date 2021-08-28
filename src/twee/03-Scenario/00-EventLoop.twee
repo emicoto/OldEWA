@@ -62,7 +62,7 @@
 
 /* 整个事件系列第一次开始时的各种前期处理 */
 <<widget "EventFirst">>
-<<set _passagename to $event.type+"_"+$event.name+" EventFirst">>
+<<set _passagename to $event.type+"_"+$event.name+"： EventFirst">>
 /* 主线_剧情_EventFirst */
 <<if Story.has(_passagename)>>
     <<include _passagename>>

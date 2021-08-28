@@ -12,7 +12,7 @@ function weirdeffect(){
 		var rng = Math.floor(Math.random() * 5) + 1;
 		var currentchar = rawtxt.charAt(i);
 		if(currentchar == ' '){
-			var newchar = '<span class="space"></span>';
+			var newchar = '<span class="space"> </span>';
 		}
 		else{
 			var newchar = '<span class="weffect' + rng + '">' + currentchar + '</span>';

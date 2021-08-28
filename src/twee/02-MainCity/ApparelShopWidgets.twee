@@ -9,7 +9,7 @@
 <<set $Pflag.bukkake.face to false>>
 <<set $Pflag.bukkake.hair to false>>
 
-<<location "试衣间">>
+<<set $location to "试衣间">>
 <<SetAvatar>>
 
 <</widget>>
@@ -85,6 +85,7 @@
 
     </div>
 
+<<if $showcase.fixcolor is false>>
 <script>
 var myPicker = new JSColor('#customColor', {format:'hex',value:'#000000',onInput:"setColors(this.toHEXString(),null,true)",
 onChange:"setColors(this.toHEXString(),'自定义')",
@@ -96,6 +97,7 @@ required:false,
 	shadowColor:'rgba(255,121,247,0.2)'
 });
 </script>
+<</if>>
 
 <</widget>>
 

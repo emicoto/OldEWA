@@ -320,3 +320,21 @@ sugarcube-2:
       name: tags
     bookmark:
       name: bookmark
+    OpeningEN:
+      name: OpeningEN
+    your:
+      name: your
+    him:
+      name: him
+    me:
+      name: me
+    am:
+      name: am
+    Iam:
+      name: Iam
+    I:
+      name: I
+    my:
+      name: my
+    Opening2:
+      name: Opening2

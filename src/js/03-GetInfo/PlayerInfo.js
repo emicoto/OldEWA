@@ -1,26 +1,119 @@
 ﻿/* 名字和称呼的处理 */
+
+/* 除了我，你他之外，其他都是英文限定。所以中文用you，英文用Im分开算了。英文描写玩家统一用I、me、my、mine */
 function you() {
     var name = V.PC.info.name;
     switch (V.persons){
     case 1:
-      return "我"
+      return "我";
     case 2:
-      return "你"
+      return "你";
     default:
-    return name;
+      return name;
     }
   }
 DefineMacroS("you", you);
 
+function I() {
+  var name = V.PC.info.name;
+  switch (V.persons){
+  case 1:
+    return "I";
+  case 2:
+    return "You";
+  default:
+    return name;
+  }
+}
+DefineMacroS("I", I);
+
+function my() {
+  switch (V.persons){
+  case 1:
+    return "My";
+  case 2:
+    return "Your";
+  default:
+    if (!PC.genital.子宫) return "His";
+    else return "Her";
+  }
+}
+DefineMacroS("my", my);
+
+function me() {
+  switch (V.persons){
+  case 1:
+    return "Me";
+  case 2:
+    return Im();
+  default:
+    return him();
+  }
+}
+DefineMacroS("me", me);
+
+function Iam() {
+  switch (V.persons){
+    case 1:
+      return "I am";
+    case 2:
+      return "You are";
+    default:
+      if (!PC.genital.子宫) return "He is";
+      else return "She is";
+    }
+}
+DefineMacroS("Iam", Iam);
+
+function am() {
+  switch (V.persons){
+    case 1:
+      return "am";
+    case 2:
+      return "are";
+    default:
+     return "is";
+    }
+}
+DefineMacroS("am", am);
+
 function he() {
   var gender = V.currentchara.genital
     if(!gender.子宫){
-      return "他"
+      if (V.lang == "CN")return "他";
+      else if (V.lang == "EN")return "He";
     }else{
-      return "她"
+      if (V.lang == "CN")return "她";
+      else if (V.lang == "EN")return "She";
     }
 }
 DefineMacroS("he", he);
+
+
+function his() {
+  var gender = V.currentchara.genital
+    if(!gender.子宫){
+      if (V.lang == "CN")return "他的";
+      else if (V.lang == "EN")return "His";
+    }else{
+      if (V.lang == "CN")return "她的";
+      else if (V.lang == "EN")return "Her";
+    }
+}
+DefineMacroS("his", his);
+
+function him() {
+  var gender = V.currentchara.genital
+    if(!gender.子宫){
+      if (V.lang == "CN")return "他";
+      else if (V.lang == "EN")return "Him";
+    }else{
+      if (V.lang == "CN")return "她";
+      else if (V.lang == "EN")return "Her";
+    }
+}
+DefineMacroS("him", him);
+
 
 /* 头发 */
 function hair(){
@@ -159,3 +252,9 @@ function it(){
   }
 }
 DefineMacroS("it", it);
+
+function LangSpl(CN,EN) {
+  if(V.lang=="CN")return CN;
+  if(V.lang=="EN")return EN;
+}
+window.LangSpl = LangSpl

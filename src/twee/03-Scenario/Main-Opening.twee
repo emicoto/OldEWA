@@ -1,23 +1,21 @@
-﻿:: 主线 开幕 EventFirst [nosave]
+﻿:: 主线 开幕：EventFirst [nosave]
 <<set $count to 0>>
+<<set $Eflag.nonext to true>>
+<<set $eventnext to 0>>
 
-:: 主线 开幕 初次
+:: 主线 开幕-初次
 <<bookmark "主线开幕_初次">>
 
+<<if $count is 8>>
+<<masteraudio stop>><<audio "蝉鸣" volume 0.75 play loop>>
+<</if>>
+
 <<Opening $count>>
-<<if $count gt 0>>
-<<set $Eflag.nonext to false>>
-<</if>>
 
-:: 主线 开幕 初次S
-<<if $count is 0>>
- <div class="weirdtext"><<link "睁开眼睛" $passage>><<set $count to 1>><</link>></div>
- <div class="weirdtext"><<link "回忆梦境" $passage>><<set $count to 2>><</link>></div>
-<<else>>
 
-<</if>>
+:: 主线 开幕-初次：E
 
-:: 主线 开幕 初次E
+<<if $count lt 8>>
 <<addclass "#eventsituation" "weirdtext">>
 <<silently>><<script>>
 //requires jQuery because I am lazy.
@@ -26,27 +24,211 @@ $(document).ready(function(){
 });
 <</script>>
 <</silently>>
+<</if>>
 
-:: 主线 开幕 初次W [widget]
+:: 主线 开幕-初次：W [widget]
 
 <<widget "Opening">>
 
 <<switch $args[0]>>
-<<case 0>><<you>>知道自己已经醒过来了，却依然感觉混混沌沌，仿佛还在迷雾之中。<<you>>似乎做了一个梦，很长、很长的梦，感觉有一辈子那么久远。但<<you>>的意识还在混沌钟，一时半会想不起梦境内容，甚至忘记现今何时，身处何方。
+<<case 0>>
+<<lang
+"<<you>>感觉混混沌沌，仿佛在白茫茫的一片迷雾之中。<<you>>的意识混混沌沌，不知自己是谁，也不清楚现今何时，身处何方。<<you>>只知道自己刚从一个很长的梦中醒来，这个梦或许有几辈子那么漫长。明明<<you>>知道自己已经醒来了，却感到眼皮沉重，完全睁不开眼睛。"
+"<<I>> feel like <<Iam>> in a fog, surrounded by white, and <<I>> don't know who <<Iam>>, when <<Iam>> now, or where <<Iam>>. All <<I>> know is that <<I>> have just woken up from a very long dream, a dream as long as several lifetimes. <<I>> know <<I>>'ve woken up, but <<my>> mind is still groggy and <<my>> eyelids are so heavy that <<I>> can't open <<my>> eyes."
+>>
 
-<<case 1>><<you>>试着睁开眼睛，但是无力睁开。<<set $count to 3>>
+<<case 1>>
+<<lang
+"<<you>>试着睁开眼睛，但是无力睁开。"
+"<<I>> try to open <<my>> eyes, but <<Iam>> too tired to do so."
+>>
+<<set $eventnext to 3>>
 
-<<case 2>><<you>>试着回忆梦境内容。<<set $count to 4>>
+<<case 2>>
+<<lang
+"<<you>>试着回忆梦境内容。"
+"<<I>> try to recall the detail of the dream."
+>>
+<<set $eventnext to 4>>
 
-<<case 3>><<you>>太累了，只好放弃挣扎，再次回到梦境，试着回忆梦境的内容。<<set $count to 4>>
+<<case 3>>
+<<lang
+"<<you>>太累了，只好放弃挣扎，再次回到梦境，试着回忆梦境的内容。"
+"<<Iam>> too tired for struggle, so <<I>> back to the dream world again try to recall the detail."
+>>
+<<set $eventnext to 4>>
 
 <<case 4>>
+<<lang 
+"<<you>>试图回忆梦中的细节。<<you>>隐约记得梦中最后一幕，是<<you>>自己的死亡。<<you>>又想到，<<you>>做过的另一个梦。在那个梦中，<<you>>梦到了世界末日、或者说人类的末日——无数的怪物突然出现，充斥着大地，把所有的一切吞噬……"
+"<<I>> try to recall the details of the dream, and <<I>> vaguely remember that the last scene in the dream was <<my>> own death. It occurs to <<I>> again that <<I>> had another dream in which <<I>> dreamed of the end of the world, the end of mankind - countless monsters suddenly appeared, they fill up the earth and everything be swallowed up by the monsters."
+>>
 
 <<case 5>>
+<<lang
+"那不是梦，<<you>>的直觉这么告诉<<you>>。"
+"It's not just a dreem, <<my>> gut tell <<me>> so."
+>>
+<<set $Flag.预知梦 to true>>
+<<set $eventnext to 7>>
+
+<<case 6>>
+<<lang
+"<<you>>觉得那就是梦，决定不把它放心上。"
+"But I think that just a dreem, so I fogot it."
+>>
+<<set $Flag.预知梦 to false>>
+<<set $eventnext to 7>>
+
+<<case 7>>
+<<lang
+"<<you>>突然感到头疼，当<<you>>恢复意识的时候，<<you>>顺利地从床上醒来。"
+"<<I>> suddenly feel a headache, and when <<I>> regain consciousness, <<I>> wake up from bed without incident."
+>>
+<<set $eventnext to 8>>
+
+<<case 8>>
+<<lang
+"<<you>>从一个既熟悉又陌生的房间中醒来。"
+"<<I>> wake up in a room that is both familiar and unfamiliar. "
+>>
+
+<<if kojo("PC",$PC.type,"主线","开幕","房间描述") isnot false>>
+	<<set _kojo to kojo("PC",$PC.type,"主线","开幕","房间描述")>>
+	<<include _kojo>>
+<<else>>
+	<<include "PC 主线-开幕-房间描述">>
+<</if>>
+
+<<case 9>>
+<<lang 
+"——没错，这就是<<you>>的房间。看到熟悉的房间摆设，<<you>>都想起来了。"
+"——Yes, it's <<my>> room. When <<I>> saw all my lovely stuff here, all remember came back."
+>>
+<<set $Flag.穿越者 to false>>
+<<set $eventnext to 12>>
+
+<<case 10>>
+<<lang
+"不对，这到底是哪里？<<you>>对周围的摆设感到疑惑，明明第一次见，却感到无比熟悉，仿佛在这里生活了很久一样。"
+"'Wait a minute, where am I?' A huge question pops up in <<my>> mind. <<Iam>> sure that <<I>> was saw this room for <<my>> first time, but <<I>> feel very familiar to this room. It was feel like... <<I>> had live here for long time before."
+>>
+<<set $Flag.穿越者 to true>>
+
+<<case 11>>
+/* 从穿越版回来 */
+<<lang 
+"对了，或许只是记忆混乱。当<<you>>这么想的时候，那些属于<<you>>的记忆，就陆陆续续回笼了。"
+"Oh yes, may be <<I>> just confused some memories. When <<I>> start to think like that way, those memories was belong to <<me>> all came back."
+>>
+<<set $eventnext to 12>>
+
+<<case 12>>
+/* 继续到结束事件 */
 
 <</switch>>
 
 <</widget>>
 
-:: 主线 开幕 轮回
+
+:: 主线 开幕-初次：S
+<<switch $count>>
+<<case 0>>
+	<<set _text to LangSpl("睁开眼睛","Open The Eyes")>>
+	<div class="weirdtext"><<link _text $passage>><<set $count to 1>><</link>></div>
+
+	<<set _text to LangSpl("回忆梦境","Recall The Dream")>>
+	<div class="weirdtext"><<link _text $passage>><<set $count to 2>><</link>></div>
+
+<<case 4>>
+	<<set _text to LangSpl("但这不是梦","But it's not just a dream")>>
+	<div class="weirdtext"><<link _text $passage>><<set $count to 5>><</link>></div>
+
+	<<set _text to LangSpl("这只是个梦","It just a dream")>>
+	<div class="weirdtext"><<link _text $passage>><<set $count to 6>><</link>></div>
+
+<<case 8>>
+	<<set _text to LangSpl("没错，这是<<you>>的房间","Yes, it's <<my>> room.")>>
+	<div class="Eselect"><<link _text $passage>><<set $count to 9>><</link>></div>
+
+	<<set _text to LangSpl("不对，这是哪？","Wait, where <<am>> <<I>>?")>>
+	<div class="Eselect"><<link _text $passage>><<set $count to 10>><</link>></div>
+
+<<case 10>>
+	<<set _text to LangSpl("继续","Next")>>
+	<div @class="($count >= 8 ? 'Eselect' : 'weirdtext' )"><<link _text $passage>>
+	<<set $event.branch to "初次-穿越版">>
+	<<set $eventnext to 0>>
+	<<set $count to 0>>
+	<<masteraudio stop>><<audio "迷雾" volume 1 play loop>>
+	<</link>></div>
+
+
+<<default>>
+	<<set _text to LangSpl("继续","Next")>>
+	<div @class="($count >= 8 ? 'Eselect' : 'weirdtext' )"><<link _text $passage>><<set $count to $eventnext>><</link>></div>
+
+<</switch>>
+
+:: 主线 开幕-初次-穿越版
+<<bookmark "主线开幕_初次_穿越版">>
+
+<<Opening2 $count>>
+
+
+:: 主线 开幕-初次-穿越版：W [widget]
+<<widget "Opening2">>
+<<switch $count>>
+<<case 0>>
+/* 从开幕-初次分支跳跃过来 */
+虽然<<you>>想不起来自己是谁，但<<you>>可以肯定一件事：原来的<<you>>并不如现在这具身体这版年轻有活力。至于这个房间为何给<<you>>一种熟悉感，大概是这个房间里的所有东西，都是<<you>>曾经拥有过的吧。
+
+<<set $eventnext to 1>>
+
+<<case 1>>
+<<you>>揉了揉脑袋，环顾房间四周。很快<<you>>的目光被床头柜摆着的手机吸引了。这是<<you>>的手机吗？
+
+<<case 2>>
+<<you>>拿起手机试着用自己的指纹解锁，然后成功了。看来这确实是<<you>>的手机，起码是这具身体主人的手机。<br>
+<<you>>打开通讯录，从电子名片中确认了自己现在的名字——<<print $PC.name>>，居然和<<you>>的名字一模一样。或许这里真的是自己居住的地方，只是记忆混乱了？
+
+<<case 3>>
+穿越重生这种事，在虚构作品中<<you>>看过不少，没想到也发生在自己身上了。<<you>>叹了口气，再次观察房间四处，试图寻找关于自己身份的线索。
+<<set $eventnext to 4>>
+
+<<case 4>>
+
+<</switch>>
+
+
+<</widget>>
+
+:: 主线 开幕-初次-穿越版：S
+<<switch $count>>
+<<case 1>>
+<<set _text to LangSpl("拿起手机","Pick up the phone")>>
+<div class="Eselect"><<link _text $passage>><<set $count to 2>><</link>></div>
+
+<<case 2>>
+<<set _text to LangSpl("只是记忆混乱","Just confused memory")>>
+<div class="Eselect"><<link _text $passage>><<set $event.branch to "初次">><<set $count to 11>><<set $Flag.穿越者 to false>><</link>></div>
+
+<<set _text to LangSpl("或许是重生穿越","Maybe reborn to the younger <<me>>")>>
+<div class="Eselect"><<link _text $passage>><<set $count to 3>><</link>></div>
+
+<<default>>
+<<set _text to LangSpl("继续","Next")>>
+<div class="Eselect"><<link _text $passage>><<set $count to $eventnext>><</link>></div>
+
+<</switch>>
+
+:: 主线 开幕-轮回
 <<bookmark "主线开幕_轮回">>
+
+:: PC 主线-开幕-房间描述 [nobr]
+<<lang 
+"一睁开眼，首先看到的是茂绿的窗外，响亮的蝉鸣宣告着当前的季节。窗户旁摆放着一张大书桌，上面摆放着<<if $PC.type is 2>>两个21寸的宽屏液显<<elseif $PC.type is 3>>影拓X和新帝HQ的大型数位屏<<else>>一个电脑屏幕<</if>>，书桌旁的小桌子上则是电脑主机。在靠近书桌的墙边，则整齐地摆放着两个书架，书架上是<<switch $PC.type>><<case 1 2 3>>各种漫画和小说还有塑料小人<<case 4 6>>各种各样的书籍<<case 5>>各种修仙小说和漫画<</switch>>，墙上则<<switch $PC.type>><<case 1>>挂着一些神秘生物的挂画<<case 2>>贴着各种游戏海报<<case 3>>贴着各种英雄电影的海报<<case 4 6>>挂着一些漂亮的装饰画<<case 5>>挂着一个黑白两色的八卦阵<</switch>>"
+
+"Across from the bed is the window, and outside the window is the loud sound of cicadas announcing the current season. Right next to the window sits a large desk with a computer with two screens, two bookshelves lined up side by side with various books and comics and some anime figurines, and posters of superheroes on the wall"
+>>
+

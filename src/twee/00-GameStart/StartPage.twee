@@ -18,16 +18,42 @@ Elysion World Adventure
 <<audio "标题" volume 0.5 play loop>>
 
 <div id="startpage">
-<span class="intro">这是一个发生在名叫Elysion的星球的故事。<br>
-Elysion是一个类似现代——2021年地球的世界，虽然表面上平平无奇，实际上隐藏着各种超自然存在。<br>
-例如：超能力、幽灵、兽化人、魔鬼、修仙者等等……<br>
-你本来是平平无奇的一员，但某天一觉醒来你察觉到有什么不一样了……<br>
-在这个不寻常的世界中，你要管理好自身、培养能力，适应新的世界新的秩序，并在日渐混乱的世界中活下去……<br>
-新的故事即将开始……<br></span>
+<span class="intro">
+<<lang 
+	"这是一个发生在名叫Elysion的星球的故事。"
+	"This is a story that happen on the planet called Elysion."
+>>
+<br>
+<<lang
+	"Elysion是一个类似现代——2021年地球的世界，虽然表面上平平无奇，实际上隐藏着各种超自然存在。"
+	"Elysion is a world similar to our modern world 2021. Though it's seemingly uneventfl, but actually there are variety of supernatural beings hidden in the world."
+>>
+<br>
+<<lang
+	"例如：超能力、幽灵、兽化人、魔鬼、修仙者等等。"
+	"Such as: the Superpowers, the Ghost, the Bestial human, the Demons, the Immortals, etc."
+>>
+<br>
+<<lang
+	"你本来是平平无奇的一员，但某天一觉醒来你察觉到有什么不一样了……"
+	"You're the one of the ordinary, but one day when you wake up then noticed something was different..."
+>>
+<br>
+<<lang
+	"在这个不寻常的世界中，你要管理好自身、培养能力，适应新的世界新的秩序，并在日渐混乱的世界中活下去。"
+	"In this unusual world, you have to manage yourself, develop your abilities, adapt the new world, and survive in an increasingly chaotic world."
+>>
+<br>
+<<lang 
+	"新的故事即将开始……"
+	"A new story is coming from you..."
+>>
+<br></span>
 
 <div class="delayed">
 <span style="line-height:40px;font-size:13px;padding:0px;margin:0px">　
-<<link "＞ 开始游戏" "开始">><<GSApply>><<set $intro to false>><</link>></span><br>
+<<set _text to LangSpl("＞ 开始游戏","＞ Game Start")>>
+<<link [[_text|开始]]>><<GSApply>><<set $intro to false>><</link>></span><br>
 
 <<include "初始设定">>
 </div>
@@ -61,11 +87,19 @@ $(document).on(':passagerender', function (ev) {
 <<set $activepage to "QuickStart">>
 
 <div id="StartingPageMenu">
-    <<button setup.L[$lang]["开始"]["快速开始"]>><<replace #StartingPage>><<set $activepage to "QuickStart">><<QuickStart>><</replace>><</button>>
-    <<button setup.L[$lang]["开始"]["创建角色"]>><<replace #StartingPage>><<set $activepage to "CharaMaking">><<CharaMaking>><</replace>><</button>>
-    <<button setup.L[$lang]["开始"]["游戏设定"]>><<replace #StartingPage>><<set $activepage to "GameSetting">><<GameSetting>><</replace>><</button>>
-    <<if $achivement.points gt 0>>
-    <<button setup.L[$lang]["开始"]["周回特典"]>><<replace #StartingPage>><<set $activepage to "StartBonus">><<StartBonus>><</replace>><</button>><</if>>
+	<<set _text to LangSpl("快速开始","QuickStart")>>
+    <<button _text>><<replace #StartingPage>><<set $activepage to "QuickStart">><<QuickStart>><</replace>><</button>>
+
+	<<set _text to LangSpl("创建角色","CharaMaking")>>
+    <<button _text>><<replace #StartingPage>><<set $activepage to "CharaMaking">><<CharaMaking>><</replace>><</button>>
+
+	<<set _text to LangSpl("游戏设定","GameSetting")>>
+    <<button _text>><<replace #StartingPage>><<set $activepage to "GameSetting">><<GameSetting>><</replace>><</button>>
+
+    <<if $achivement.scores gt 0>>
+	<<set _text to LangSpl("周回特典","Bonus")>>
+    <<button _text>><<replace #StartingPage>><<set $activepage to "StartBonus">><<StartBonus>><</replace>><</button>><</if>>
+
 </div>
 
 <<dashline>><br>
