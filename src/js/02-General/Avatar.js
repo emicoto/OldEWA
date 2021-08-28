@@ -1914,7 +1914,7 @@ var Avatar;
     nomal.forEach((va) => {
       OPTION[va] = emote[va];
     });
-    OPTION["eyes"] = [V.PC.info.eyecolor, emote["eyes"].includes("full") ? emote["eyes"] + T.type[V.PC.eyes] + "_idle" : emote["eyes"]].join("/");
+    OPTION["eyes"] = [V.PC.瞳色, emote["eyes"].includes("full") ? emote["eyes"] + T.type[V.PC.眼型] + "_idle" : emote["eyes"]].join("/");
     var EMOJIMODEL = Renderer.locateModel("Emoji");
     var EMOJICANVAS = EMOJIMODEL.createCanvas();
     EMOJIMODEL.render(EMOJICANVAS, OPTION);

@@ -2,10 +2,7 @@
 <<set $count to 0>>
 
 :: 主线 开幕 初次
-<<set _bk to {
-	主线开幕:{type:"主线", name:"开幕", branch: "", phrase:"初次", visited:true}
-}>>
-<<bookmark _bk>>
+<<bookmark "主线开幕_初次">>
 
 <<Opening $count>>
 <<if $count gt 0>>
@@ -52,3 +49,4 @@ $(document).ready(function(){
 <</widget>>
 
 :: 主线 开幕 轮回
+<<bookmark "主线开幕_轮回">>
