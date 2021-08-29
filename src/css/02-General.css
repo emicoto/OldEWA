@@ -100,6 +100,14 @@ hr {
 	display: none !important;
 }
 
+.hide {
+  visibility: hidden;
+}
+
+.show {
+  visibility: visible !important;
+}
+
 .close {
 	background-color: gray;
 }

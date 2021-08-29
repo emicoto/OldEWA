@@ -1,10 +1,10 @@
-﻿:: 主线 开幕：EventFirst [nosave]
+﻿:: 主线 开幕：EventFirst
 <<set $count to 0>>
 <<set $Eflag.nonext to true>>
 <<set $eventnext to 0>>
+<<bookmark "主线开幕_初次">>
 
 :: 主线 开幕-初次
-<<bookmark "主线开幕_初次">>
 
 <<if $count is 8>>
 <<masteraudio stop>><<audio "蝉鸣" volume 0.75 play loop>>
@@ -113,7 +113,6 @@ $(document).ready(function(){
 "不对，这到底是哪里？<<you>>对周围的摆设感到疑惑，明明第一次见，却感到无比熟悉，仿佛在这里生活了很久一样。"
 "'Wait a minute, where am I?' A huge question pops up in <<my>> mind. <<Iam>> sure that <<I>> was saw this room for <<my>> first time, but <<I>> feel very familiar to this room. It was feel like... <<I>> had live here for long time before."
 >>
-<<set $Flag.穿越者 to true>>
 
 <<case 11>>
 /* 从穿越版回来 */
@@ -135,49 +134,49 @@ $(document).ready(function(){
 <<switch $count>>
 <<case 0>>
 	<<set _text to LangSpl("睁开眼睛","Open The Eyes")>>
-	<div class="weirdtext"><<link _text $passage>><<set $count to 1>><</link>></div>
+	<div class="Wselect"><<link _text>><<set $count to 1>><<run Revent()>><</link>></div>
 
 	<<set _text to LangSpl("回忆梦境","Recall The Dream")>>
-	<div class="weirdtext"><<link _text $passage>><<set $count to 2>><</link>></div>
+	<div class="Wselect"><<link _text>><<set $count to 2>><<run Revent()>><</link>></div>
 
 <<case 4>>
 	<<set _text to LangSpl("但这不是梦","But it's not just a dream")>>
-	<div class="weirdtext"><<link _text $passage>><<set $count to 5>><</link>></div>
+	<div class="Wselect"><<link _text>><<set $count to 5>><<run Revent()>><</link>></div>
 
 	<<set _text to LangSpl("这只是个梦","It just a dream")>>
-	<div class="weirdtext"><<link _text $passage>><<set $count to 6>><</link>></div>
+	<div class="Wselect"><<link _text>><<set $count to 6>><<run Revent()>><</link>></div>
 
 <<case 8>>
 	<<set _text to LangSpl("没错，这是<<you>>的房间","Yes, it's <<my>> room.")>>
-	<div class="Eselect"><<link _text $passage>><<set $count to 9>><</link>></div>
+	<div class="Eselect"><<link _text>><<set $count to 9>><<run Revent()>><</link>></div>
 
 	<<set _text to LangSpl("不对，这是哪？","Wait, where <<am>> <<I>>?")>>
-	<div class="Eselect"><<link _text $passage>><<set $count to 10>><</link>></div>
+	<div class="Eselect"><<link _text>><<set $count to 10>><<run Revent()>><</link>></div>
 
 <<case 10>>
 	<<set _text to LangSpl("继续","Next")>>
-	<div @class="($count >= 8 ? 'Eselect' : 'weirdtext' )"><<link _text $passage>>
+	<div @class="($count >= 8 ? 'Eselect' : 'Wselect' )"><<link _text $passage>>
 	<<set $event.branch to "初次-穿越版">>
 	<<set $eventnext to 0>>
 	<<set $count to 0>>
-	<<masteraudio stop>><<audio "迷雾" volume 1 play loop>>
+	<<masteraudio stop>><<audio "穿越之谜" volume 1 play loop>>
 	<</link>></div>
 
 
 <<default>>
 	<<set _text to LangSpl("继续","Next")>>
-	<div @class="($count >= 8 ? 'Eselect' : 'weirdtext' )"><<link _text $passage>><<set $count to $eventnext>><</link>></div>
+	<div @class="($count >= 8 ? 'Eselect' : 'Wselect' )"><<link _text>><<set $count to $eventnext>><<run Revent()>><</link>></div>
 
 <</switch>>
 
 :: 主线 开幕-初次-穿越版
-<<bookmark "主线开幕_初次_穿越版">>
 
 <<Opening2 $count>>
 
 
 :: 主线 开幕-初次-穿越版：W [widget]
 <<widget "Opening2">>
+<<nobr>>
 <<switch $count>>
 <<case 0>>
 /* 从开幕-初次分支跳跃过来 */
@@ -193,13 +192,113 @@ $(document).ready(function(){
 <<you>>打开通讯录，从电子名片中确认了自己现在的名字——<<print $PC.name>>，居然和<<you>>的名字一模一样。或许这里真的是自己居住的地方，只是记忆混乱了？
 
 <<case 3>>
+<<bookmark "主线开幕_初次_穿越版">>
 穿越重生这种事，在虚构作品中<<you>>看过不少，没想到也发生在自己身上了。<<you>>叹了口气，再次观察房间四处，试图寻找关于自己身份的线索。
-<<set $eventnext to 4>>
-
+<<set $eflag to []>>
+<<set $count to 4>>
 <<case 4>>
 
+<<if $eflag.length is 1>>
+<<switch $eflag[0]>>
+	<<case "查看手机">>
+	手机里的东西大致看过了，接下来应该做什么呢？
+	<<case "查看电脑">>
+	电脑上的东西大致查看过了，接下来应该做什么呢？
+	<<case "四处翻找">>
+	房间里的东西大致翻找过了，接下来应该做什么呢？
 <</switch>>
 
+<<elseif $eflag.length is 2>>
+	<<if $eflag.includes("查看手机") is false>>
+	线索收集得差不多了，现在就剩下手机还没查看了……
+	<<elseif $eflag.includes("查看电脑") is false>>
+	线索收集得差不多了，现在就剩下电脑还没查看了……
+	<<else>>
+	大致的信息都掌握了，就差翻遍整个房间了……
+	<</if>>
+<<else>>
+	可以寻找的线索都找完了。
+	<<set $eventnext to 8>>
+<</if>>
+
+<<case 5>>
+	<<if $temp.c is undefined>>
+		<<set $temp.c to 0>>
+	<</if>>
+
+	<<switch $temp.c>>
+	<<case 0>>
+		<<you>>再次打开手机，首先确认了下日期——2024年7月1日。<<you>>觉得这个时间哪里不对，但又说不上来是哪里不对，总觉得<<you>>身处的时间应该是更遥远的未来。
+		<<set $eventnext to 5>>
+		<<set $temp.c to 1>>
+
+	<<case 1>>
+		接着<<you>>查看了下手机上的各种APP。打开后你感觉很熟悉，但看着那些LOGO和名称，又觉得哪里不对。飞信（微信？），易淘(淘宝？)，易支付(支付宝？)，爱说(微博？)，Nyan2(B站？)…… 似乎都跟<<you>>印象中的常用APP有所对应。
+		<<set $eventnext to 5>>
+		<<set $temp.c to 2>>
+
+	<<case 2>>
+		最后<<you>>从校园APP上得知了现在的身份——景南大学的学生，目前还是第一学年。
+		<<set $eventnext to 4>>
+		<<set $temp.c to undefined>>
+
+	<</switch>>
+
+
+<<case 6>>
+	<<if $temp.c is undefined>>
+		<<set $temp.c to 0>>
+	<</if>>
+
+	<<switch $temp.c>>
+	<<case 0>>
+		<<you>>启动电脑，登录了PP号（QQ？），大致了解了下自己的交友状态：原身似乎并不是个擅长社交的人，好友列表上只躺着一个名叫“灵”的人，头像是天空，资料空白一片，是男是女也不清楚。反而PP群加了不少，大多数是<<switch $PC.type>><<case 1>>二次元相关群<<case 2>>偶像后援群<<case 3>>小说催更和跑团群<</switch>>。
+		<<set $eventnext to 5>>
+		<<set $temp.c to 1>>
+		
+	<<case 1>>
+		再看了下浏览器的书签跟搜索记录，原主的兴趣爱好似乎和<<you>>几乎一样，或者说，<<you>>认为自己会喜欢的，会看的，都有。至于关于世界的情报……<<you>>用各种关键字简单查阅了一番。虽然<<you>>想不起来自己原来的世界是怎么样的，但总觉得，和这个世界也差不多。或许只是一些事物的名字变了，但大体还是一样的。或许，只是穿越到一个平行世界的另一个自己身上？<<you>>不由得这么想。
+		<<set $eventnext to 4>>
+		<<set $temp.c to undefined>>
+
+	<</switch>>
+
+
+<<case 7>>
+	<<if $temp.c is undefined>>
+		<<set $temp.c to 0>>
+	<</if>>
+
+	<<switch $temp.c>>
+	<<case 0>>
+		<<you>>在房间中到处翻找。<<you>>发现这个房子还挺宽敞——复式的单身公寓，一房一厅，精致的现代化装修，即时面积仅有50多平米，但开放式的结构让整个房子看起来十分宽敞。<br>
+		<<set $eventnext to 7>>
+		<<set $temp.c to 1>>
+
+	<<case 1>>
+		当<<you>>在思考原主的经济条件时，在衣柜下方的暗柜中找到了存折：十几万元，似乎有点多。可惜<<you>>不知道存款密码，一时半会也不好动用。<br>
+		<<set $eventnext to 7>>
+		<<set $temp.c to 2>>
+
+	<<case 2>>
+		除了存折，在四处翻找过程中，<<you>>找到了应该是自己的学生证、身份证、护照等等证件。再次确认，上面印着的就是<<you>>的名字，一个笔画都没差别，就连生日也是一样的。<<you>>不禁再次怀疑，到底是自己错了，还是世界错了。不过当<<you>>找到一个会悬浮在半空的奇妙小方块时，<<you>>可以确信一件事：没错了，这是个平行世界。<<you>>原来的世界，绝对没有这么高科技的东西！
+		<<set $eventnext to 4>>
+		<<set $temp.c to undefined>>
+	<</switch>>
+
+/* 搜索房间完毕 */
+<<case 8>>
+在整个公寓中翻找过一遍后，<<you>>疲劳地躺在沙发上，吹着冷气休息。<<you>>大致捋了下关于自己的线索：原身的名字和<<you>>一样，都叫<<print $PC.name>>，是景南大学的<<switch $PC.type>><<case 1>>电脑系<<case 2>>表演系<<case 3>>文学系<</switch>>学生。现在所居住的城市，就叫景南市，是个坐山朝海被水环绕的大城市。老家距离大学挺远，所以是自己一个人住在这个怡安小区的单身公寓中。似乎没什么朋友，准确来说，是没有亲密的朋友。联络簿上的，除了父母都是泛泛之交。
+<<set $eventnext to 9>>
+
+<<case 9>>
+
+
+<<case 10>>
+
+
+<</switch>>
+<</nobr>>
 
 <</widget>>
 
@@ -207,18 +306,43 @@ $(document).ready(function(){
 <<switch $count>>
 <<case 1>>
 <<set _text to LangSpl("拿起手机","Pick up the phone")>>
-<div class="Eselect"><<link _text $passage>><<set $count to 2>><</link>></div>
+<div class="Eselect"><<link _text>><<set $count to 2>><<run Revent()>><</link>></div>
 
 <<case 2>>
 <<set _text to LangSpl("只是记忆混乱","Just confused memory")>>
-<div class="Eselect"><<link _text $passage>><<set $event.branch to "初次">><<set $count to 11>><<set $Flag.穿越者 to false>><</link>></div>
+<div class="Eselect"><<link _text>><<set $event.branch to "初次">><<set $count to 11>><<set $Flag.穿越者 to false>><<run Revent()>><</link>></div>
 
 <<set _text to LangSpl("或许是重生穿越","Maybe reborn to the younger <<me>>")>>
-<div class="Eselect"><<link _text $passage>><<set $count to 3>><</link>></div>
+<div class="Eselect"><<link _text>><<set $count to 3>><<run anouncePopUP("获得头衔《穿越者》","获得成就")>><<set $Flag.穿越者 to true>><<set $pctitle.穿越者 to true>><<run Revent()>><</link>></div>
+
+<<case 4>>
+<<if $eflag.includes("查看手机") is false>>
+<<set _text to LangSpl("查看手机","Check the phone")>>
+<div class="Eselect"><<link _text>><<run V.eflag.push("查看手机")>><<set $count to 5>><<run Revent()>><</link>></div>
+<</if>>
+
+<<if $eflag.includes("查看电脑") is false>>
+<<set _text to LangSpl("查看电脑","Check the Computer")>>
+<div class="Eselect"><<link _text>><<run V.eflag.push("查看电脑")>><<set $count to 6>><<run Revent()>><</link>></div>
+<</if>>
+
+<<if $eflag.includes("四处翻找") is false>>
+<<set _text to LangSpl("四处翻找","Find around in the room")>>
+<div class="Eselect"><<link _text>><<run V.eflag.push("四处翻找")>><<set $count to 7>><<run Revent()>><</link>></div>
+<</if>>
+
+<<if $eflag.length is 3>>
+<<set _text to LangSpl("继续","Next")>>
+<div class="Eselect"><<link _text>><<set $count to $eventnext>><<run Revent()>><</link>></div>
+<</if>>
+
+<<case 7>>
+<<set _text to LangSpl("继续","Next")>>
+<div class="Eselect"><<link _text>><<set $count to $eventnext>><<if $temp.c is 2>><<run anouncePopUP("获得了《魔力方块》x1")>><</if>><<run Revent()>><</link>></div>
 
 <<default>>
 <<set _text to LangSpl("继续","Next")>>
-<div class="Eselect"><<link _text $passage>><<set $count to $eventnext>><</link>></div>
+<div class="Eselect"><<link _text>><<set $count to $eventnext>><<run Revent()>><</link>></div>
 
 <</switch>>
 
@@ -227,8 +351,7 @@ $(document).ready(function(){
 
 :: PC 主线-开幕-房间描述 [nobr]
 <<lang 
-"一睁开眼，首先看到的是茂绿的窗外，响亮的蝉鸣宣告着当前的季节。窗户旁摆放着一张大书桌，上面摆放着<<if $PC.type is 2>>两个21寸的宽屏液显<<elseif $PC.type is 3>>影拓X和新帝HQ的大型数位屏<<else>>一个电脑屏幕<</if>>，书桌旁的小桌子上则是电脑主机。在靠近书桌的墙边，则整齐地摆放着两个书架，书架上是<<switch $PC.type>><<case 1 2 3>>各种漫画和小说还有塑料小人<<case 4 6>>各种各样的书籍<<case 5>>各种修仙小说和漫画<</switch>>，墙上则<<switch $PC.type>><<case 1>>挂着一些神秘生物的挂画<<case 2>>贴着各种游戏海报<<case 3>>贴着各种英雄电影的海报<<case 4 6>>挂着一些漂亮的装饰画<<case 5>>挂着一个黑白两色的八卦阵<</switch>>"
+"一睁开眼，首先看到的是茂绿的窗外，响亮的蝉鸣宣告着当前的季节。窗户旁摆放着一张大书桌，上面摆放着<<if $PC.type is 2>>一个宽屏大液显<<elseif $PC.type is 1>>新帝HQ24数位屏和数位板<<else>>一个电脑屏幕<</if>>，书桌旁的小桌子上则是电脑主机。在靠近书桌的墙边，则整齐地摆放着两个书架，书架上是<<switch $PC.type>><<case 1>>各种漫画和小说还有塑料小人<<case 2>>各种各样的书籍<<case 3>>各种修仙小说和漫画<</switch>>，墙上则<<switch $PC.type>><<case 1>>挂着一些远古生物的挂画和各种游戏海报<<case 2>>挂着一些漂亮的装饰画<<case 3>>挂着一个黑白两色的八卦阵和一些仙侠作品的海报<</switch>>"
 
 "Across from the bed is the window, and outside the window is the loud sound of cicadas announcing the current season. Right next to the window sits a large desk with a computer with two screens, two bookshelves lined up side by side with various books and comics and some anime figurines, and posters of superheroes on the wall"
 >>
-

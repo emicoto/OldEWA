@@ -2,6 +2,39 @@
 .delayed {
     opacity: 0;
   }
+
+.delay {
+  animation: fadeIn linear 0.75s;
+  -webkit-animation: fadeIn linear 0.75s;
+  -moz-animation: fadeIn linear 0.75s;
+  -o-animation: fadeIn linear 0.75s;
+  -ms-animation: fadeIn linear 0.75s;
+}
+
+@keyframes fadeIn {
+  0% {opacity:0;}
+  100% {opacity:1;}
+}
+
+@-moz-keyframes fadeIn {
+  0% {opacity:0;}
+  100% {opacity:1;}
+}
+
+@-webkit-keyframes fadeIn {
+  0% {opacity:0;}
+  100% {opacity:1;}
+}
+
+@-o-keyframes fadeIn {
+  0% {opacity:0;}
+  100% {opacity:1;}
+}
+
+@-ms-keyframes fadeIn {
+  0% {opacity:0;}
+  100% {opacity:1;}
+}
   
 /*水平翻转*/
   .flipx {
@@ -426,7 +459,19 @@
   color: #444;
 }
 
-.weirdtext a {
+.Wselect {
+  width: fit-content;
+  min-width: 150px;
+  display: inline-block;
+  line-height: 40px;
+	letter-spacing: 2px;
+  text-align: center;
+  padding: 20px;
+  position: relative;
+  color: #444;
+}
+
+.Wselect a {
 	font-family: 珍珠体;
 	font-size: 24px;
 	color: #444;
@@ -435,14 +480,14 @@
 	-webkit-animation: mix 4s linear infinite;
 }
 
-.weirdtext:hover ::before {
+.Wselect:hover ::before {
   content: "- ";
 }
-.weirdtext:hover ::after {
+.Wselect:hover ::after {
   content: " -";
 }
 
-.weirdtext a:hover{
+.Wselect a:hover{
   color: #666;
   animation: none;
 	-webkit-animation: none;

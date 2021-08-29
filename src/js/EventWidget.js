@@ -130,3 +130,14 @@ function kojo(pc,uid,type,name,branch=null,phrase=null){
 }
 
 window.kojo = kojo
+
+function Revent() {
+
+    $('#eventsituation').addClass('delay'); setTimeout(() => { $('#eventsituation').removeClass('delay') }, 1000);
+    $('#eventselectarea').addClass('delay'); setTimeout(() => { $('#eventselectarea').removeClass('delay') }, 1000);
+    new Wikifier(null,"<<replace '#eventsituation'>><<CallEvent>><</replace>>")
+    new Wikifier(null,"<<replace '#eventselectarea'>><<CallEventSelect>><</replace>>")
+    new Wikifier(null,"<<replace '#eventeffect'>><<CallEventEffect>><</replace>>")
+
+}
+window.Revent = Revent

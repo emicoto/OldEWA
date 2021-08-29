@@ -1,4 +1,4 @@
-﻿:: Event [eventloop]
+﻿:: Event
 
 <div id="eventsituation">
 <<CallEvent>>
@@ -15,7 +15,9 @@
 </div>
 <</if>>
 
+<div id="eventeffect">
 <<CallEventEffect>>
+</div>
 
 :: EventSystem [widget]
 

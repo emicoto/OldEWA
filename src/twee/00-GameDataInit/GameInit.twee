@@ -123,6 +123,7 @@
 <<set $eventexit to "你的家 单身公寓">>
 <<set $count to 0>>      /* 通用计数变量。需要离开当前passage或重置的情况 */
 <<set $eventend to false>>
+<<set $eventnext to 0>>
 
 /* 事件系列名
     type name branch phrase lang

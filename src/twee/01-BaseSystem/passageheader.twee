@@ -2,15 +2,14 @@
 <<set $passage to passage()>><<set $tags to tags($passage)>>
 /* 时间经过处理 */
 <<fixvalue>><<TimeEffect>>
-
+/* 通知弹出框 */
+<div id="action-popup" class="hide"><span id="action-text"></span></div>
 
 /* 其他通用预处理 */
 
 /* AVATAR设定的更新检测 */
 <<SetAvatar>><<timed 1s>><<SetAvatar>><</timed>>
 
-/* 通知弹出框 */
-<div id="action-popup" class="hidden"><span id="action-text"></span></div>
 
 
 :: PassageFooter

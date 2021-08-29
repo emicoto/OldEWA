@@ -20,7 +20,7 @@
     性别 : ["伪娘","扶她","少年","少女"],
     种族 : ["人类","兽族","灵族","羽族","夜族"],
     专长 : ["文艺创作","物理科学","自然科学","生理科学","音乐表演","运动格斗"],
-    初期角色 : ["魔法少女","网红","二次元","爱抖露","道童","富二代"],
+    初期角色 : ["魔法少女","爱抖露","修仙者"],
     兽型 : ["猫","狗","狼","狐","鹿","羊","牛"],
     
     肤色 : ["dark","black","mugi","health","white"],
@@ -131,5 +131,10 @@
 <<cacheaudio "标题" "sound/WolfRainRequim.mp3">>
 
 <<cacheaudio "蝉鸣" "sound/minmin.mp3">>
+
+<<cacheaudio "弹出通知" "sound/ring.mp3">>
+<<cacheaudio "获得成就" "sound/rising.mp3">>
+
+<<cacheaudio "穿越之谜" "sound/LainOST_MistofDifferentDimension.mp3">>
 
 <</widget>>

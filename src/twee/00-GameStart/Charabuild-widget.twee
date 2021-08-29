@@ -21,7 +21,7 @@
 <</widget>>
 
 <<widget "CMBackground">>
-    <<set _optionlist to {"魔法少女":1,"小网红":2,"二次元":3,"小爱豆":4,"道童":5,"富二代":6}>>
+    <<set _optionlist to {"魔法少女":1,"小爱豆":2,"修仙者":3}>>
     <!-- <<if $debug is true or $achivement.reset gt 0>><<set _optionlist.穿越者 to 7>> -->
         <<listbox "$PC.type" autoselect>>
         <<optionsfrom _optionlist>>
@@ -197,51 +197,8 @@
             <<set $PC.genital to { "阴茎" : 10, "子宫" : null }>>
             <<set $starttrait to "抖M体质">>
 
-        <<case "羽轩">>
-            <<set $PC.type to 2>>
-             <<set $PC.info.name to "羽轩">>
-            <<set $PC.info.gender to "伪娘">>
-            <<set $PC.info.race to "人类">>
-            <<set $PC.info.major to "物理科学">>
-            <<set $PC.attitude to 2>>
-            <<set $PC.breast to 0>>
-            <<set $PC.hips to 1>>
-            <<set $PC.body to 2>>
-            <<set $PC.info.hairlen to 150>>
-            <<set $PC.info.fhairlen to 150>>
-            <<set $PC.info.hairstyle to "straight">>
-            <<set $PC.info.haircolor to "milktea">>
-            <<set $PC.info.eyecolor to  "brown">>
-            <<set $PC.info.skin to "white">>
-            <<set $PC.sens to {"m" : 1,  "b":2,  "c":1, "v":null, "u":1, "a":6}>>
-
-            <<set $PC.genital to { "阴茎" : 14, "子宫" : null }>>
-
-            <<set $starttrait to "轻浮">>          
-
-        <<case "月棂">>
-            <<set $PC.type to 3>>
-            <<set $PC.info.name to "月棂">>
-            <<set $PC.info.gender to "扶她">>
-            <<set $PC.info.race to "灵族">>
-            <<set $PC.info.major to "文艺创作">>
-            <<set $PC.attitude to 2>>
-            <<set $PC.breast to 3>>
-            <<set $PC.hips to 3>>
-            <<set $PC.body to 2>>
-            <<set $PC.info.hairlen to 300>>
-            <<set $PC.info.fhairlen to 300>>
-            <<set $PC.info.hairstyle to "straight">>
-            <<set $PC.info.haircolor to "milktea">>
-            <<set $PC.info.eyecolor to "green">>
-            <<set $PC.info.skin to "white">>
-            <<set $PC.sens to {"m" : 1,  "b":2,  "v":1, "c":1, "u":1, "a":6}>>
-            <<set $starttrait to "好色">>
-
-            <<set $PC.genital to { "阴茎" : 14, "子宫" : 1 }>>
-
         <<case "沐歌">>
-            <<set $PC.type to 3>>
+            <<set $PC.type to 2>>
             <<set $PC.info.name to "沐歌">>
             <<set $PC.info.gender to "少女">>
             <<set $PC.info.race to "人类">>
@@ -262,7 +219,7 @@
             <<set $PC.genital to { "阴茎" : null, "子宫" : 1 }>>
 
         <<case "云鹿">>
-            <<set $PC.type to 5>>
+            <<set $PC.type to 3>>
             <<set $PC.info.name to "云鹿">>
             <<set $PC.info.gender to "少年">>
             <<set $PC.info.race to "兽族">>
@@ -281,26 +238,7 @@
             <<set $PC.genital to { "阴茎" : 10, "子宫" : null }>>
 
             <<set $starttrait to "菜鸟">>
-            <<set $PC.兽型 to "鹿">>
-
-        <<case "若秋">>
-            <<set $PC.type to 6>>
-            <<set $PC.info.name to "若秋">>
-            <<set $PC.info.gender to "扶她">>
-            <<set $PC.info.race to "羽族">>
-            <<set $PC.info.major to "生理科学">>
-            <<set $PC.attitude to 4>>
-            <<set $PC.breast to 4>>
-            <<set $PC.hips to 3>>
-            <<set $PC.body to 3>>
-            <<set $PC.info.hairlen to 50>> <<set $PC.info.fhairlen to 50>>
-            <<set $PC.info.hairstyle to "straight">>
-            <<set $PC.info.haircolor to "black">>
-            <<set $PC.info.eyecolor to "emerald">>
-            <<set $PC.info.skin to "white">>
-            <<set $PC.sens to {"m" : 4,  "b":2,  "v":1, "c":1, "u":1, "a":1}>>
-
-            <<set $PC.genital to { "阴茎" : 14, "子宫" : 1 }>>           
+            <<set $PC.兽型 to "鹿">>        
     <</switch>>
     <<CMChangeApply>>
 <</widget>>
@@ -328,6 +266,7 @@
     <<switch $PC.type>>
         <<case 1>>
             <<set $PC.title to "魔法少女">>
+            <<set $pctitle.魔法少女 to true>>
             <<set $PC.lewd to {
                     "纯洁" : 800,
                     "露出" : 0,
@@ -339,31 +278,8 @@
                     "性瘾" : 0
                 }>>
         <<case 2>>
-            <<set $PC.title to "直播主">>
-            <<set $PC.lewd to {
-                "纯洁" : 800,
-                "露出" : 0,
-                "滥交" : 0,
-                "受虐" : 0,
-                "顺从" : 0,
-                "兽交" : 0,
-                "药瘾" : 0,
-                "性瘾" : 0
-            }>>
-        <<case 3>>
-            <<set $PC.title to "二次元">>
-            <<set $PC.lewd to {
-                "纯洁" : 800,
-                "露出" : 0,
-                "滥交" : 0,
-                "受虐" : 0,
-                "顺从" : -50,
-                "兽交" : 0,
-                "药瘾" : 0,
-                "性瘾" : 0
-            }>>
-        <<case 4>>
             <<set $PC.title to "小爱豆">>
+            <<set $pctitle.小爱豆 to true>>
             <<set $PC.lewd to {
                 "纯洁" : 900,
                 "露出" : 50,
@@ -374,8 +290,9 @@
                 "药瘾" : 0,
                 "性瘾" : 0
             }>>
-        <<case 5>>
+        <<case 3>>
             <<set $PC.title to "小道童">>
+            <<set $pctitle.小道童 to true>>
             <<set $PC.lewd to {
                 "纯洁" : 1000,
                 "露出" : 0,
@@ -386,18 +303,6 @@
                 "药瘾" : 0,
                 "性瘾" : 0,
             }>>
-        <<case 6>>
-            <<set $PC.title to "富二代">>
-            <<set $PC.lewd to {
-                    "纯洁" : 700,
-                    "露出" : 0,
-                    "滥交" : 0,
-                    "受虐" : -100,
-                    "顺从" : -100,
-                    "兽交" : 0,
-                    "药瘾" : 0,
-                    "性瘾" : 0,
-                }>>
     <</switch>>
 
     <<switch $PC.info.major>>
@@ -549,7 +454,7 @@
     <<switch $PC.type>>
         <<case 1>>
             /* 宠物点数 HP/SP/MP 50=1点 总45点 */
-            <<set $follower to (500+random(100,1000))>>
+            <<set $follower to (500+random(100,5000))>>
             <<set $pet to {
                 name:"史莱姆", type:"史莱姆", level:1, 
                 HP:[50,50], SP:[200,200], MP:[200,200],
@@ -573,49 +478,14 @@
                 stats: {},
             }>>
         <<case 3>>
-            <<set $follower to (1000+random(500,3000))>>
+            <<set $follower to (100+random(100,2000))>>
             <<set $pet to {
-                name:"恶魔", type:"恶魔", level:1,
-                HP:[100,100], SP:[50,50], MP:[300,300],
-                ATK:2, DEF:2, MATK:12, MDEF:12, SPD:8,
-                好感:10, 忠诚:0, 欲望:80, 支配:30,
-                genital: {"阴茎":18, "子宫":null},
-                genitype: "恶魔阴茎",
-                special: ["飞行"],
-                stats: {},
-            }>>
-        <<case 4>>
-            <<set $pet to {
-                name:"魔蛇", type:"魔蛇", level:1,
-                HP:[150,150], SP:[50,50], MP:[200,200],
-                ATK:5, DEF:5, MATK:12, MDEF:5, SPD:10,
-                好感:20, 忠诚:50, 欲望:0, 支配:0,
-                genital: {"阴茎":28, "子宫":null},
-                genitype: "蛇阴茎",
-                special: ["变身"],
-                stats: {},
-            }>>
-        <<case 5>>
-            <<set $follower to (100+random(50,2000))>>
-            <<set $pet to {
-                name:"幽鬼", type:"幽鬼", level:1,
-                HP:[100,100], SP:[200,200], MP:[150,150],
-                ATK:1, DEF:10, MATK:5, MDEF:15, SPD:5,
-                好感:20, 忠诚:10, 欲望:10, 支配:0,
-                genital: {"阴茎":18, "子宫":null},
-                genitype: "幽灵触手",
-                special: ["透明"],
-                stats: {},
-            }>>
-        <<case 6>>
-            <<set $follower to (1000+random(500,2000))>>
-            <<set $pet to {
-                name:"触手", type:"触手", level:1,
+                name:"灵虫", type:"灵虫", level:1,
                 HP:[500,500], SP:[100,100], MP:[150,150],
                 ATK:2, DEF:10, MATK:2, MDEF:15, SPD:1,
                 好感:0, 忠诚:20, 欲望:100, 支配:0,
                 genital: {"阴茎":24, "子宫":null},
-                genitype: "触手",
+                genitype: "幽灵触手",
                 special: ["再生"],
                 stats: {},
             }>>

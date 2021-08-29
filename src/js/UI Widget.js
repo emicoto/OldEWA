@@ -23,20 +23,21 @@ function weirdeffect(){
 }
 window.weirdeffect = weirdeffect
 
-function anouncePopUP(args){
+function anouncePopUP(args,sound="弹出通知"){
     var text = args
     V.log.anouce.push(text)
     if(V.log.anouce.length > 100) V.log.anouce.deleteAt(0);
 
-    new Wikifier(null,"<<replace '#action-text>>"+text+"<</replace>>")
-    new Wikifier(null,"<<replace '#action-text2'>>"+text+"<</replace>>")
     ShowPopUP()
+    new Wikifier(null,"<<replace '#action-text'>>"+text+"<</replace>>")
+    new Wikifier(null,`<<audio '${sound}' volume 0.5 play>>`)
+    return ""
 }
 window.anouncePopUP = anouncePopUP
 
 
 function ShowPopUP() {
-    $('#action-popup').removeClass('hidden'); setTimeout(() => { $('#action-popup').addClass('hidden') }, 3200);
+    $('#action-popup').addClass('show'); setTimeout(() => { $('#action-popup').removeClass('show') }, 3200);
     $('#action-popup').addClass('popup'); setTimeout(() => { $('#action-popup').removeClass('popup') }, 1000);
     $('#action-text2').addClass('notransition flash'); setTimeout(() => { $('#action-text2').removeClass('notransition flash') }, 100);
 }
@@ -60,3 +61,4 @@ function movebutton() {
    V.movebutton = !V.movebutton 
 }
 window.movebutton = movebutton
+

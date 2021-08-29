@@ -104,6 +104,7 @@
     letter-spacing: 2px;
 	line-height: 40px;
     padding: 20px;
+    transition: all 0.75s;
 }
 
 .graytext {
@@ -118,6 +119,7 @@
     align-content: center;
     align-items: center;
     margin: auto;
+    transition: all 0.75s;
 }
 
 .Eselect {
