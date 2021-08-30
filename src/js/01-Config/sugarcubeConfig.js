@@ -1,4 +1,4 @@
-Config.history.controls = true;
+Config.history.controls = false;
 
 Config.history.maxStates = 3;
 
@@ -11,6 +11,7 @@ Config.saves.slots = 10;
 
 Config.saves.onLoad = function (save) {
 	window.versionUpdateCheck = true;
+	new Wikifier(null, '<<loadgame>>')
 }
 
 Config.saves.onSave = function (save) {

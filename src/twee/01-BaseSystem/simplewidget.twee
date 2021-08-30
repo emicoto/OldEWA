@@ -294,3 +294,10 @@
 <<widget "red-t">>
 <span style="color:red"><<print $args[0]>></span>
 <</widget>>
+
+<<widget "loadgame">>
+
+<<masteraudio stop>>
+<<playlist "mainloop" shuffle play>>
+
+<</widget>>

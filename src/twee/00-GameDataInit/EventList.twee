@@ -11,7 +11,7 @@
 }>>
 
 <<set D.event.主线 to [
-    {id:0, type:"主线", name:"开幕", branch:["初次","轮回"], phrase:0},
+    {id:0, type:"主线", name:"开幕", branch:["初次","轮回","初次-穿越版"], phrase:0},
     {id:1, type:"主线", name:"梦醒", branch:["初次","轮回"], phrase:0},
 ]>>
 

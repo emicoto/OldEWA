@@ -172,3 +172,18 @@ function getitem(catgr, item, num=1) {
 }
 
 window.getitem = getitem
+
+function useitem(catgr,item) {
+    D.itemlist[catgr][item].effect()
+    V.items[catgr][item].num -= 1
+    return V.items
+}
+
+window.useitem = useitem
+
+/*
+列表先读取object的keys，然后以keys的array顺序来打印显示
+使用=>
+    print V.items[catgt][_keys[_i]].name
+    useitem(catgr,_keys[_i])
+*/

@@ -16,6 +16,10 @@ Elysion World Adventure
 
 :: Start [nosave]
 <<audio "标题" volume 0.5 play loop>>
+<<run Dialog.setup("测试");
+	Dialog.wiki(Story.get("PC 主线-开幕-房间描述").processText());
+	Dialog.open();
+	>>
 <div id="startpage">
 <span class="intro">
 <<lang 
@@ -87,7 +91,8 @@ $(document).on(':passagerender', function (ev) {
 
 <div id="StartingPageMenu">
 	<<set _text to LangSpl("快速开始","QuickStart")>>
-    <<button _text>><<replace #StartingPage>><<set $activepage to "QuickStart">><<QuickStart>><</replace>><</button>>
+    <<button _text>>
+	<<replace #StartingPage>><<set $activepage to "QuickStart">><<QuickStart>><</replace>><</button>>
 
 	<<set _text to LangSpl("创建角色","CharaMaking")>>
     <<button _text>><<replace #StartingPage>><<set $activepage to "CharaMaking">><<CharaMaking>><</replace>><</button>>

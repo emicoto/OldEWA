@@ -1,4 +1,4 @@
-﻿:: Event
+﻿:: Event [eventloop nosave]
 
 <div id="eventsituation">
 <<CallEvent>>
@@ -106,3 +106,4 @@
 <</if>>
 
 <</widget>>
+
