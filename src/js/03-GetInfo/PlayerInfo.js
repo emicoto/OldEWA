@@ -1,5 +1,15 @@
 ﻿/* 名字和称呼的处理 */
-
+function gsplit(m,f,p="chara"){
+  if (p=="player"){
+    if (V.PC.gender == "m" ) return m;
+    else return f;
+  }else {
+    if (V.currentchara.gender == "m" ) return m;
+    else return f;
+  }
+}
+window.gsplit = gsplit
+DefineMacroS("gsplit", gsplit);
 /* 除了我，你他之外，其他都是英文限定。所以中文用you，英文用Im分开算了。英文描写玩家统一用I、me、my、mine */
 function you() {
     var name = V.PC.info.name;
@@ -14,40 +24,47 @@ function you() {
   }
 DefineMacroS("you", you);
 
-function I() {
+function I(key=null) {
   var name = V.PC.info.name;
   switch (V.persons){
   case 1:
-    return "I";
+    return "I";    
   case 2:
-    return "You";
+    if(key!=null)return "You";
+    else return "you";
   default:
+    if(key!=null)return "<span class='Abc'>"+name+"</span>";
     return name;
   }
 }
 DefineMacroS("I", I);
 
-function my() {
+function my(key=null) {
   switch (V.persons){
   case 1:
-    return "My";
+    if(key!=null)return "My";
+    else return "my";
   case 2:
-    return "Your";
+    if(key!=null)return "Your";
+    else return "your";
   default:
-    if (!PC.genital.子宫) return "His";
-    else return "Her";
+    if(key!=null)return gsplit("His","Her","player");
+    else return gsplit("his","her","player");
   }
 }
 DefineMacroS("my", my);
 
-function me() {
+function me(key=null) {
   switch (V.persons){
   case 1:
-    return "Me";
+    if(key!=null)return "Me";
+    else return "me";
   case 2:
-    return Im();
+    if(key!=null)return "You";
+    else return "you";
   default:
-    return him();
+    if(key!=null)return gsplit("Him","Her","player");
+    else return gsplit("him","her","player");
   }
 }
 DefineMacroS("me", me);
@@ -59,11 +76,23 @@ function Iam() {
     case 2:
       return "You are";
     default:
-      if (!PC.genital.子宫) return "He is";
+      if (PC.gender == "m") return "He is";
       else return "She is";
     }
 }
 DefineMacroS("Iam", Iam);
+
+function myself() {
+  switch (V.persons){
+    case 1:
+      return "myself";
+    case 2:
+      return "yourself";
+    default:
+      return gsplit("himself","herself","player");
+    }
+}
+DefineMacroS("myself", myself);
 
 function am() {
   switch (V.persons){
@@ -77,39 +106,51 @@ function am() {
 }
 DefineMacroS("am", am);
 
-function he() {
-  var gender = V.currentchara.genital
-    if(!gender.子宫){
-      if (V.lang == "CN")return "他";
-      else if (V.lang == "EN")return "He";
+function mine(){
+  switch (V.persons){
+    case 1:
+      return "mine";
+    case 2:
+      return "yours";
+    default:
+     if (PC.gender == "m") return "his";
+      else return "hers";
+    }
+}
+
+function he(key=null) {
+  var gender = V.currentchara.gender
+    if(gender=="m"){
+      if(key!=null)return LangSpl("他","He");
+      else return LangSpl("他","he");
     }else{
-      if (V.lang == "CN")return "她";
-      else if (V.lang == "EN")return "She";
+      if(key!=null)return LangSpl("她","She");
+      else return LangSpl("她","she");
     }
 }
 DefineMacroS("he", he);
 
 
-function his() {
-  var gender = V.currentchara.genital
-    if(!gender.子宫){
-      if (V.lang == "CN")return "他的";
-      else if (V.lang == "EN")return "His";
+function his(key=null) {
+  var gender = V.currentchara.gender
+    if(gender=="m"){
+      if(key!=null)return LangSpl("他的","His");
+      else return LangSpl("他的","his");
     }else{
-      if (V.lang == "CN")return "她的";
-      else if (V.lang == "EN")return "Her";
+      if(key!=null)return LangSpl("她的","Her");
+      else return LangSpl("她的","her");
     }
 }
 DefineMacroS("his", his);
 
-function him() {
-  var gender = V.currentchara.genital
-    if(!gender.子宫){
-      if (V.lang == "CN")return "他";
-      else if (V.lang == "EN")return "Him";
+function him(key=null) {
+  var gender = V.currentchara.gender
+    if(gender=="m"){
+      if(key!=null)return "Him";
+      else return "him";
     }else{
-      if (V.lang == "CN")return "她";
-      else if (V.lang == "EN")return "Her";
+      if(key!=null)return "Her";
+      else return "her";
     }
 }
 DefineMacroS("him", him);
@@ -235,9 +276,7 @@ function petstype(){
     case 2:
       return "魔狼"
     case 3: 
-      return "恶魔"
-    case 4:
-      return "触手"
+      return "灵虫"
   }
 }
 DefineMacroS("petstype", petstype);
@@ -253,8 +292,3 @@ function it(){
 }
 DefineMacroS("it", it);
 
-function LangSpl(CN,EN) {
-  if(V.lang=="CN")return CN;
-  if(V.lang=="EN")return EN;
-}
-window.LangSpl = LangSpl

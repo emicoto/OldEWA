@@ -34,6 +34,7 @@ function anouncePopUP(args,sound="弹出通知"){
     return ""
 }
 window.anouncePopUP = anouncePopUP
+DefineMacroS("anouncePopUP", anouncePopUP);
 
 
 function ShowPopUP() {

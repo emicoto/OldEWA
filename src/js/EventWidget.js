@@ -141,6 +141,7 @@ function Revent() {
 
 }
 window.Revent = Revent
+DefineMacroS("Revent", Revent);
 
 function getitem(catgr, item, num=1) {
     if(D.itemlist[catgr][item].name.length > 0){
@@ -168,10 +169,16 @@ function getitem(catgr, item, num=1) {
             }
         }
     }
+    V.anounce.flag = true
+    V.anounce.text = "获得了《"+item+"》x "+num
+    if(V.lang == "EN"){
+        V.anounce.text = "got《"+D.itemlist[catgr][item].en_name+"》 x "+num
+    }
     return V.items
 }
 
 window.getitem = getitem
+DefineMacroS("getitem", getitem);
 
 function useitem(catgr,item) {
     D.itemlist[catgr][item].effect()

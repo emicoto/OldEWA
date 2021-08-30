@@ -5,6 +5,15 @@
 <<InitDataBase>>
 <<InitBGM>>
 <<set $test to 0>>
+
+<!-- DEBUG -->
+<<if StartConfig.debug is true>>
+	<<set $debug to true>>
+<<else>>
+	<<set $debug to false>>
+<</if>>
+<<set $harddebug to false>>
+
 <!-- 游戏系统环境设定 -->
 <<set $temp to {}>>
 <<set $lang to "CN">>
@@ -13,14 +22,7 @@
 <<set $hardmode to 1>>
 <<set $render to "canvas">>
 <<set $movebutton to false>>
-
-<<if StartConfig.debug is true>>
-	<<set $debug to true>>
-<<else>>
-	<<set $debug to false>>
-<</if>>
-
-<<set $harddebug to false>>
+<<set $anounce to {flag:false, text:"", type:"弹出通知"}>>
 
 <!-- 游戏各种flag初始化 -->
 <<InitGameData>>

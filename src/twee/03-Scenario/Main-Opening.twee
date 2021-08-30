@@ -145,24 +145,24 @@ $(document).ready(function(){
 <<switch $count>>
 <<case 0>>
 	<<set _text to LangSpl("睁开眼睛","Open The Eyes")>>
-	<div class="Wselect"><<link _text>><<set $count to 1>><<run Revent()>><</link>></div>
+	<div class="Wselect"><<link _text>><<set $count to 1>><<Revent>><</link>></div>
 
 	<<set _text to LangSpl("回忆梦境","Recall The Dream")>>
-	<div class="Wselect"><<link _text>><<set $count to 2>><<run Revent()>><</link>></div>
+	<div class="Wselect"><<link _text>><<set $count to 2>><<Revent>><</link>></div>
 
 <<case 4>>
 	<<set _text to LangSpl("但这不是梦","But it's not just a dream")>>
-	<div class="Wselect"><<link _text>><<set $count to 5>><<run Revent()>><</link>></div>
+	<div class="Wselect"><<link _text>><<set $count to 5>><<Revent>><</link>></div>
 
 	<<set _text to LangSpl("这只是个梦","It just a dream")>>
-	<div class="Wselect"><<link _text>><<set $count to 6>><<run Revent()>><</link>></div>
+	<div class="Wselect"><<link _text>><<set $count to 6>><<Revent>><</link>></div>
 
 <<case 8>>
 	<<set _text to LangSpl("没错，这是<<you>>的房间","Yes, it's <<my>> room.")>>
-	<div class="Eselect"><<link _text>><<set $count to 9>><<run Revent()>><<masteraudio stop>><</link>></div>
+	<div class="Eselect"><<link _text>><<set $count to 9>><<Revent>><<masteraudio stop>><</link>></div>
 
 	<<set _text to LangSpl("不对，这是哪？","Wait, where <<am>> <<I>>?")>>
-	<div class="Eselect"><<link _text>><<set $count to 10>><<run Revent()>><</link>></div>
+	<div class="Eselect"><<link _text>><<set $count to 10>><<Revent>><</link>></div>
 
 <<case 10>>
 	<<set _text to LangSpl("继续","Next")>>
@@ -183,7 +183,7 @@ $(document).ready(function(){
 
 <<default>>
 	<<set _text to LangSpl("继续","Next")>>
-	<div @class="($count >= 8 ? 'Eselect' : 'Wselect' )"><<link _text>><<set $count to $eventnext>><<run Revent()>><</link>></div>
+	<div @class="($count >= 8 ? 'Eselect' : 'Wselect' )"><<link _text>><<set $count to $eventnext>><<Revent>><</link>></div>
 
 <</switch>>
 
@@ -321,39 +321,39 @@ $(document).ready(function(){
 <<switch $count>>
 <<case 1>>
 <<set _text to LangSpl("拿起手机","Pick up the phone")>>
-<div class="Eselect"><<link _text>><<set $count to 2>><<run Revent()>><<passtime 2>><</link>></div>
+<div class="Eselect"><<link _text>><<set $count to 2>><<Revent>><<passtime 2>><</link>></div>
 
 <<case 2>>
 <<set _text to LangSpl("只是记忆混乱","Just confused memory")>>
-<div class="Eselect"><<link _text>><<set $event.branch to "初次">><<set $count to 11>><<set $Flag.穿越者 to false>><<run Revent()>><</link>></div>
+<div class="Eselect"><<link _text>><<set $event.branch to "初次">><<set $count to 11>><<set $Flag.穿越者 to false>><<Revent>><</link>></div>
 
 <<set _text to LangSpl("或许是重生穿越","Maybe reborn to the younger <<me>>")>>
-<div class="Eselect"><<link _text>><<set $count to 3>><<run anouncePopUP("获得头衔《穿越者》","获得成就")>><<set $Flag.穿越者 to true>><<set $pctitle.穿越者 to true>><<run Revent()>><</link>></div>
+<div class="Eselect"><<link _text>><<set $count to 3>><<anouncePopUP "获得头衔《穿越者》" "获得成就">><<set $Flag.穿越者 to true>><<set $pctitle.穿越者 to true>><<Revent>><</link>></div>
 
 <<case 4>>
 <<if $eflag.includes("查看手机") is false>>
 <<set _text to LangSpl("查看手机","Check the phone")>>
-<div class="Eselect"><<link _text>><<run V.eflag.push("查看手机")>><<set $count to 5>><<passtime 30>><<run Revent()>><</link>></div>
+<div class="Eselect"><<link _text>><<run V.eflag.push("查看手机")>><<set $count to 5>><<passtime 30>><<Revent>><</link>></div>
 <</if>>
 
 <<if $eflag.includes("查看电脑") is false>>
 <<set _text to LangSpl("查看电脑","Check the Computer")>>
-<div class="Eselect"><<link _text>><<run V.eflag.push("查看电脑")>><<set $count to 6>><<passtime 30>><<run Revent()>><</link>></div>
+<div class="Eselect"><<link _text>><<run V.eflag.push("查看电脑")>><<set $count to 6>><<passtime 30>><<Revent>><</link>></div>
 <</if>>
 
 <<if $eflag.includes("四处翻找") is false>>
 <<set _text to LangSpl("四处翻找","Find around in the room")>>
-<div class="Eselect"><<link _text>><<run V.eflag.push("四处翻找")>><<set $count to 7>><<passtime 60>><<run Revent()>><</link>></div>
+<div class="Eselect"><<link _text>><<run V.eflag.push("四处翻找")>><<set $count to 7>><<passtime 60>><<Revent>><</link>></div>
 <</if>>
 
 <<if $eflag.length is 3>>
 <<set _text to LangSpl("继续","Next")>>
-<div class="Eselect"><<link _text>><<set $count to $eventnext>><<unset $eflag>><<run Revent()>><</link>></div>
+<div class="Eselect"><<link _text>><<set $count to $eventnext>><<unset $eflag>><<Revent>><</link>></div>
 <</if>>
 
 <<case 7>>
 <<set _text to LangSpl("继续","Next")>>
-<div class="Eselect"><<link _text>><<set $count to $eventnext>><<if $temp.c is 2>><<run anouncePopUP("获得了《魔力方块》x1")>><<run getitem("important","魔力方块")>><</if>><<run Revent()>><</link>></div>
+<div class="Eselect"><<link _text $passage>><<set $count to $eventnext>><<if $temp.c is 2>><<getitem "important" "魔力方块">><</if>><</link>></div>
 
 <<case 9>>
 <<set _text to LangSpl("继续","Next")>>
@@ -364,7 +364,7 @@ $(document).ready(function(){
 
 <<default>>
 <<set _text to LangSpl("继续","Next")>>
-<div class="Eselect"><<link _text>><<set $count to $eventnext>><<run Revent()>><</link>></div>
+<div class="Eselect"><<link _text>><<set $count to $eventnext>><<Revent>><</link>></div>
 
 <</switch>>
 

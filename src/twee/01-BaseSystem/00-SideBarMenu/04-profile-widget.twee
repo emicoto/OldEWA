@@ -2,9 +2,9 @@
 
 <<widget "changeinfo">>
 <<if _infochange is true>>
-    一名<<print $PC.info.gender>><<print $PC.title>><<textbox "$shortinfo" $shortinfo>> <<link "保存修改">><<set _infochange to false>><<replace #shortinfo>><<changeinfo>><</replace>><</link>><br>
+    一名<<print $PC.info.tag>><<print $PC.title>><<textbox "$shortinfo" $shortinfo>> <<link "保存修改">><<set _infochange to false>><<replace #shortinfo>><<changeinfo>><</replace>><</link>><br>
 <<else>>
-    一名<<print $PC.info.gender>><<print $PC.title>><<print $shortinfo>> <<link "修改简介">><<set _infochange to true>><<replace #shortinfo>><<changeinfo>><</replace>><</link>>
+    一名<<print $PC.info.tag>><<print $PC.title>><<print $shortinfo>> <<link "修改简介">><<set _infochange to true>><<replace #shortinfo>><<changeinfo>><</replace>><</link>>
 <</if>>
 <</widget>>
 

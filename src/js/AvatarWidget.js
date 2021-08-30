@@ -110,7 +110,7 @@ window.BuyOutFit = BuyOutFit
 
 /* 衣柜处理 */
 function strip(arg) {
-    if (V.Equip[arg] != null) {
+    if (V.Equip[arg]) {
 
         var text = "你脱下了"+V.Equip[arg].name;
 
@@ -149,35 +149,35 @@ function dressOn(args, arg) {
         V.closet[args].push(obj)
     }
 
-    if(args == "top"  && V.Equip.bottom != null && V.Equip.top.slot == "onepiece"){
+    if(args == "top"  && V.Equip.bottom && V.Equip.top.slot == "onepiece"){
         let obj = clone(V.Equip.bottom)
         V.closet.bottom.push(obj)
         V.Equip.bottom = null
         
-    }else if (args == "bottom" && V.Equip.top != null && V.Equip.top.slot == "onepiece"){
+    }else if (args == "bottom" && V.Equip.top && V.Equip.top.slot == "onepiece"){
         let obj = clone(V.Equip.top)
         V.closet.top.push(obj)
         V.Equip.top = null
 
-    }else if (args == "inner_up" && V.Equip.inner_bt != null && V.Equip.inner_up.slot == "onepiece"){
+    }else if (args == "inner_up" && V.Equip.inner_bt && V.Equip.inner_up.slot == "onepiece"){
         let obj = clone(V.Equip.inner_bt)
         V.closet.inner_bt.push(obj)
         V.Equip.inner_bt = null
 
     }else if (args == "inner_up" && V.Equip.inner_up.slot == "fullbody"){
 
-        if(V.Equip.inner_bt != null){
+        if(V.Equip.inner_bt){
             let obj = clone(V.Equip.inner_bt)
             V.closet.inner_bt.push(obj)
             V.Equip.inner_bt = null }
 
-        if(V.Equip.top != null){
+        if(V.Equip.top){
             let obj = clone(V.Equip.top)
             V.closet.top.push(obj)
             V.Equip.top = null
         }
         
-        if(V.Equip.bottom != null){
+        if(V.Equip.bottom){
             let obj = clone(V.Equip.bottom)
             V.closet.bottom.push(obj)
             V.Equip.bottom = null

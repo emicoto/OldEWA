@@ -50,24 +50,6 @@
 
 <</widget>>
 
-
-<<widget "lang">>
-    <<if $args[0]>>
-        <<switch $lang>>
-            <<case "CN">>
-                <<print $args[0]>>
-            <<case "EN">>
-                <<print $args[1]>>
-            <<case "JP">>
-                <<print $args[2]>>
-        <</switch>>
-    <<else>>
-        <div class="error-view">
-            error: args is null
-        </div>
-    <</if>>
-<</widget>>
-
 <<widget "printL">>
     <<if $args[0]>>
         <<switch $lang>>
@@ -90,12 +72,14 @@
     <<if $args[0] is "player">>
         <<set $currentchara to {
             名字 : $PC.info.name,
-            性别 : $PC.info.gender,
+            性别 : $PC.info.tag,
             genital : $PC.genital,
+            gender: $PC.gender,
         }>>
     <<elseif $args[0] is "pet">>
         <<set $currentchara to {
             名字: $pet.name,
+            gender: $pet.gender,
             genital: $pet.genital,
             genitype: $pet.genitype,
             special: $pet.special,
@@ -105,20 +89,6 @@
     <</if>>
 <</widget>>
 
-<<widget "splits">>
-    <<set _a to $args.length>>
-    <<set _i to random(0,_a)>>
-    <<print $args[_i]>>
-<</widget>>
-
-<<widget "genders">>
-    <<set _sex to $PC.genital>>
-    <<if _sex.子宫 is null>>
-        <<print $args[0]>>
-    <<else>>
-        <<print $args[1]>>
-    <</if>>
-<</widget>>
 
 /*  HoverTxt : Show notepad icon shows some wikified text in a window of width X pixels above an icon when it's hovered over.  */
 /*  EXAMPLE: <<HoverTxt 200 "text">>  */

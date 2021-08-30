@@ -3,11 +3,6 @@
 <<widget "SetupLanguage">>
 <<set setup.L to {}>>
 <<set setup.L.CN to {
-        确认 : "确认",
-        开始:{
-        "开始游戏":"开始游戏",  "快速开始":"快速开始",  "创建角色":"创建角色",
-        "游戏设定":"游戏设定",  "周回特典":"周回特典",
-        },
         肤色:{
         "dark"   : "棕色",  "black" : "黝黑",   "mugi"  : "麦色",
         "health" : "健康",  "white" : "白皙",   "skin"  : "的肌肤",
@@ -35,16 +30,10 @@
             "manjyu"    :"包子头",   "drill"    :"螺旋卷发",
             "drilltail" :"螺旋双马尾",
         },
+        少年:"少年", 少女:"少女", 伪娘:"伪娘", 扶她:"扶她",
 }>>
 
 <<set setup.L.EN to {
-        确认 : "comfirm",
-
-        开始:{
-            "开始游戏":"StartGame",     "快速开始":"QuickStart",
-            "创建角色":"CharaMaking",   "游戏设定":"GameSetting",
-            "周回特典":"Bonus",
-        },
         肤色:{
         "dark"  : "dark",           "black" : "black",      "mugi" : "wheatish",
         "health": "healthy white",  "white" : "pale white", "skin"  : "skin", 
@@ -68,6 +57,7 @@
             "straight"  : "straight",   "natural" : "natural",
             "curly"     : "curly",      "himecut" : "himecut",
         },
+        少年:"boy", 少女:"girl", 伪娘:"trap", 扶她:"futa",
 }>>
 
 <</widget>>

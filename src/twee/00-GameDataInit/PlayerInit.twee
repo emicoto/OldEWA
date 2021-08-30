@@ -7,12 +7,13 @@
 <!-- 角色数据 -->
 <<set $PC to {
     attitude: 1, /* 态度，影响玩家角色进行性行为时的反应描述和数据补正 */ 
+    gender:"m",
     breast: 1, hips: 2, body: 1, eyes: 1,
     beauty: 1600, title: "菜鸟勇者", hot: 21, cold:21,
 }>>
 
 <<set $PC.info to {
-    name  : "魔女",   gender : "伪娘",    race : "人类",
+    name  : "魔女",   tag : "伪娘",    race : "人类",
     major  : "文艺创作",
     fhairlen: 120,      hairlen : 120,
     haircolor  : "aqua",   hairstyle : "natural", /* 不做修饰时的发型，只有自然、卷发、顺直三种，只能在美容店修改*/

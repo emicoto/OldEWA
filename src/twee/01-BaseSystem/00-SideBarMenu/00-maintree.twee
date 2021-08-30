@@ -1,6 +1,10 @@
 <!-- 左侧边栏 -->
 :: StoryCaption
 <div @class="(Errors.log.length==0?'hidden':'') + ' error-reporter-btn'" onclick="Errors.Reporter.toggle()"></div>
+<<if $anounce.flag is true>>
+	<<anouncePopUP $anounce.text $anounce.type>>
+<</if>>
+
 <<timeprocess>>
 
 <div id="volume">
@@ -96,5 +100,6 @@
 	<</repeat>>
 <</silently>>
 
+<<set $anounce to {flag:false, text:"", type:"弹出通知"}>>
 
 

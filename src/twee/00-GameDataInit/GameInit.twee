@@ -98,7 +98,7 @@
     HP:[50,50], SP:[200,200], MP:[200,200],
     ATK:3, DEF:18, MATK:2, MDEF:8, SPD:3,
     好感:100, 忠诚:0, 欲望:30, 支配:0,
-    genital: {"阴茎":16, "子宫":null},
+    gender:"m", genital: {"阴茎":16, "子宫":null},
     genitype: "史莱姆",
     special: ["液态"],
     stats: {},

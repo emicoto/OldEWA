@@ -21,7 +21,7 @@
 <<case "魔女">>大家的魔女<br> 是个伪娘。既然是魔（法少）女，那当然擅长魔法。<br>以上都是大嘘。只是个一个二次元爱好者，喜欢玩游戏，会画点画，玩COSPLAY，搞搞女装直播的样子。
 <<case "沐歌">>新人爱豆<br> 初露头角的美少女爱豆。除了唱歌，跳舞和演艺也不错。<br> 说是新人，其实后台有点硬，起码家境不穷。
 <<case "云鹿">>修仙爱好者<br> 小正太，热衷修仙文学。从小跟着爷爷练武术，身体素质很好。<br> 除了追小说，自己也会试着写小说的样子。
-<<default>>大家的魔女<br> 是个伪娘。既然是魔女，那当然擅长魔法。
+<<default>>大家的魔女<br> 是个伪娘。既然是魔（法少）女，那当然擅长魔法。<br>以上都是大嘘。只是个一个二次元爱好者，喜欢玩游戏，会画点画，玩COSPLAY，搞搞女装直播的样子。
 <</switch>>
 
 <</widget>>
@@ -76,7 +76,7 @@
             <<elseif $PC.info.race is "灵族">>
                 <<set $PC.eye to "金色">><<replace #CMEyeoption>>瞳色　<<CMEyeColor>><</replace>>
             <</if>>
-            <<switch $PC.info.gender>>
+            <<switch $PC.info.tag>>
                 <<case "伪娘">>
                     <<replace #CMgenital>><<CMBoy>><</replace>>
                     <<replace #omegatrait>>

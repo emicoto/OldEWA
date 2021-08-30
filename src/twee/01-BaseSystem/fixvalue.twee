@@ -44,7 +44,7 @@
 
     /* 扩张修正 */
     <<set $PC.stretch.anal to parseFloat(Math.clamp($PC.stretch.anal,1,(12+($PC.body*2))).toFixed(2))>>
-    <<if $PC.info.gender is "少女">>
+    <<if $PC.info.tag is "少女">>
         <<set $PC.stretch.ureth to Math.clamp($PC.stretch.ureth,0.5,6)>>
     <<else>>
         <<set $PC.stretch.ureth to parseFloat(Math.clamp($PC.stretch.ureth,0.2,(0.5+$PC.genital.阴茎/10)).toFixed(2))>>

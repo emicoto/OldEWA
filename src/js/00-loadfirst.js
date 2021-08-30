@@ -106,3 +106,20 @@ Macro.add('volume', {
 			.appendTo(this.output);
 	}
 });
+
+function LangSpl(CN,EN) {
+  if(V.lang=="CN")return CN;
+  if(V.lang=="EN")return EN;
+}
+window.LangSpl = LangSpl
+DefineMacroS("lang", LangSpl)
+
+function test(arg) {
+	if (arg){
+		return "测试成功？"
+	}else{
+		return "2333"
+	}
+}
+
+window.test = test

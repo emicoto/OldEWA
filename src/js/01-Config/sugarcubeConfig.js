@@ -1,6 +1,6 @@
-Config.history.controls = false;
+Config.history.controls = true;
 
-Config.history.maxStates = 3;
+Config.history.maxStates = 5;
 
 State.prng.init()
 

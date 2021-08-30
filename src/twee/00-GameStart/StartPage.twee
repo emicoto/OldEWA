@@ -16,10 +16,6 @@ Elysion World Adventure
 
 :: Start [nosave]
 <<audio "标题" volume 0.5 play loop>>
-<<run Dialog.setup("测试");
-	Dialog.wiki(Story.get("PC 主线-开幕-房间描述").processText());
-	Dialog.open();
-	>>
 <div id="startpage">
 <span class="intro">
 <<lang 

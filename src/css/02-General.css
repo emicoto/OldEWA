@@ -112,6 +112,18 @@ hr {
 	background-color: gray;
 }
 
+.Abc {
+  text-transform: capitalize;
+}
+
+.ABC {
+  text-transform: uppercase;
+}
+
+.abc {
+  text-transform: lowercase;
+}
+
 .macro-button {
   background-color: #eee;
   border-color: #ccc;
