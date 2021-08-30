@@ -141,3 +141,34 @@ function Revent() {
 
 }
 window.Revent = Revent
+
+function getitem(catgr, item, num=1) {
+    if(D.itemlist[catgr][item].name.length > 0){
+        if (V.items[catgr][item]){
+            V.items[catgr][item].num += num
+        }else{
+            V.items[catgr][item] = {
+                name: D.itemlist[catgr][item].name,
+                type: D.itemlist[catgr][item].type,
+                category: D.itemlist[catgr][item].category,                
+                thumb: D.itemlist[catgr][item].thumb,
+                num: num,
+            }
+        }
+    }else{
+        if (V.items.other.通用物品){
+            V.items.other.通用物品 += num
+        }else{
+            V.items.other.通用物品 = {
+                name : "通用物品",
+                type : "其他",
+                category:"other",
+                thumb : null,
+                num: num,
+            }
+        }
+    }
+    return V.items
+}
+
+window.getitem = getitem

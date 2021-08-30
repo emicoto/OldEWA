@@ -64,7 +64,7 @@
 
 /* 整个事件系列第一次开始时的各种前期处理 */
 <<widget "EventFirst">>
-<<set _passagename to $event.type+"_"+$event.name+"： EventFirst">>
+<<set _passagename to $event.type+"_"+$event.name+"：EventFirst">>
 /* 主线_剧情_EventFirst */
 <<if Story.has(_passagename)>>
     <<include _passagename>>
@@ -83,4 +83,26 @@
 <<else>>
     <<link "NEXT" $eventexit>><</link>>
 <</if>>
+<</widget>>
+
+/* 对应事件的结束处理 */
+<<widget "EventEnd">>
+<<set _passagename to $event.type+"_"+$event.name+"：EventEnd">>
+/* 主线_剧情_EventFirst */
+<<if Story.has(_passagename)>>
+    <<include _passagename>>
+<<else>>
+/* 失败时使用代替的处理 */
+<<masteraudio stop>>
+<<playlist "mainloop" shuffle play>>
+<<set $eventend to true>>
+<<set $eventexit to "你的家 单身公寓">>
+<<set $Eflag.nonext to false>>
+<<set $temp to {}>>
+<<set $eventnext to 0>>
+<<set $event to {}>>
+<<set $count to 0>>
+
+<</if>>
+
 <</widget>>

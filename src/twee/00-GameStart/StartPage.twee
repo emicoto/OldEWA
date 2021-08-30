@@ -16,7 +16,6 @@ Elysion World Adventure
 
 :: Start [nosave]
 <<audio "标题" volume 0.5 play loop>>
-
 <div id="startpage">
 <span class="intro">
 <<lang 
@@ -114,6 +113,7 @@ $(document).on(':passagerender', function (ev) {
 :: 开始
 <<masteraudio stop>>
 
+
 <div id="eventsituation">
 <<you>>准备好了吗？<br>
 故事要开始了哟！<br>
@@ -129,7 +129,7 @@ $(document).on(':passagerender', function (ev) {
 </div>
 
 <div class="Eselect">
-<<link "跳过开头" "你的家 单身公寓">><</link>>
+<<link "跳过开头" "你的家 单身公寓">><<playlist "mainloop" shuffle play>><</link>>
 </div>
 
 <div class="Eselect">

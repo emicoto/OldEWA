@@ -55,7 +55,7 @@
 <<set D.placedata to {
     单身公寓 : {
         place:"单身公寓", side:"室内", 
-        tag:["家","煮食","休息","沐浴","更衣","电脑","WIFI"], 
+        tag:["家","煮食","休息","沐浴","衣柜","电脑","WIFI"], 
         chara:[], 
         bus:false, subway:false, car:false, bike:false,
         homebutton: false,
@@ -82,13 +82,50 @@
     
     试衣间 : {
         place:"试衣间", side:"室内", 
-        tag:["换装"],
+        tag:["服装店"],
         chara:[], 
         bus:false, subway:false, car:false, bike:false,
         homebutton: false,
         img:"tryon",
     }
 }>>
+
+<<set D.itemlist to {
+    foods:{
+        汉堡包:{
+            name:"汉堡包", type:"食物", category:"food",
+            thumb:null, price:6, num:0,
+            shop:"快餐",
+            text:"只要是快餐店就一定会有卖的汉堡包。毕竟是最便宜的汉堡，份量不怎么的，味道也很一般。",
+            effect(){
+                V.PC.base.饮食[0] += 200;
+                return V.PC.base.饮食;
+            },
+        },
+    },
+    medicine:{},
+    sextoy:{},
+    weapon:{},
+    accesory:{},
+    important:{
+        魔力方块:{
+            name:"魔力方块", type:"重要", category:"important",
+            thumb:null, effect:"剧情", value:0, price:0, num:0,
+            shop:null,
+            text:"不知道有什么用的含有魔力的方块。往方块注入魔力的话，似乎能测试出自己的魔力类型。",
+        },
+    }, 
+    material:{},
+    other:{
+        通用物品:{
+            name:"通用物品", type:"其他", category:"other",
+            thumb:null, effect:"无", value:0, price:1,num:0, 
+            shop:null,
+            text:"一个万能的通用物品。虽然万能，却又什么都做不到。当玩家尝试获取某个不存在的物品是才会产生的物质。只能用来合成。",
+        },
+    },
+}>>
+
 
 <<InitAvatar>>
 
@@ -124,17 +161,25 @@
 
 <<widget "InitBGM">>
 
+/* BGM */
 <<cacheaudio "迷雾" "sound/Haibane/Feding.mp3">>
-
 <<cacheaudio "月光" "sound/ClairDeLune.mp3">>
-
 <<cacheaudio "标题" "sound/WolfRainRequim.mp3">>
-
 <<cacheaudio "蝉鸣" "sound/minmin.mp3">>
+<<cacheaudio "穿越之谜" "sound/LainOST_MistofDifferentDimension.mp3">>
 
+<<cacheaudio "Lof1" "sound/just-lofi-relax.mp3">>
+<<cacheaudio "Lof2" "sound/rain-and-nostalgia.mp3">>
+<<cacheaudio "Lof3" "sound/amp-lofi-ukulele.mp3">>
+<<createplaylist "mainloop">>
+	<<track "Lof1" volume 0.5>>
+    <<track "Lof2" volume 0.5>>
+    <<track "Lof3" volume 0.5>>
+<</createplaylist>>
+
+/* 音效 */
 <<cacheaudio "弹出通知" "sound/ring.mp3">>
 <<cacheaudio "获得成就" "sound/rising.mp3">>
 
-<<cacheaudio "穿越之谜" "sound/LainOST_MistofDifferentDimension.mp3">>
 
 <</widget>>

@@ -6,10 +6,6 @@
 
 :: 主线 开幕-初次
 
-<<if $count is 8>>
-<<masteraudio stop>><<audio "蝉鸣" volume 0.75 play loop>>
-<</if>>
-
 <<Opening $count>>
 
 
@@ -33,7 +29,7 @@ $(document).ready(function(){
 <<switch $args[0]>>
 <<case 0>>
 <<lang
-"<<you>>感觉混混沌沌，仿佛在白茫茫的一片迷雾之中。<<you>>的意识混混沌沌，不知自己是谁，也不清楚现今何时，身处何方。<<you>>只知道自己刚从一个很长的梦中醒来，这个梦或许有几辈子那么漫长。明明<<you>>知道自己已经醒来了，却感到眼皮沉重，完全睁不开眼睛。"
+"<<you>>的意识混混沌沌，仿佛在白茫茫的一片迷雾之中。<<you>>不知自己是谁，也不清楚现今何时，身处何方。<<you>>只知道自己刚从一个很长的梦中醒来，这个梦似乎有几辈子那么漫长。明明<<you>>知道自己已经醒来了，却感到眼皮沉重，完全睁不开眼睛。"
 "<<I>> feel like <<Iam>> in a fog, surrounded by white, and <<I>> don't know who <<Iam>>, when <<Iam>> now, or where <<Iam>>. All <<I>> know is that <<I>> have just woken up from a very long dream, a dream as long as several lifetimes. <<I>> know <<I>>'ve woken up, but <<my>> mind is still groggy and <<my>> eyelids are so heavy that <<I>> can't open <<my>> eyes."
 >>
 
@@ -88,6 +84,7 @@ $(document).ready(function(){
 <<set $eventnext to 8>>
 
 <<case 8>>
+<<audio "迷雾" stop>><<audio "蝉鸣" volume 0.75 play loop>>
 <<lang
 "<<you>>从一个既熟悉又陌生的房间中醒来。"
 "<<I>> wake up in a room that is both familiar and unfamiliar. "
@@ -124,6 +121,20 @@ $(document).ready(function(){
 
 <<case 12>>
 /* 继续到结束事件 */
+<<you>>是景南大学的<<switch $PC.type>><<case 1>>电脑系<<case 2>>表演系<<case 3>>文学系<</switch>>学生。现在所居住的城市，就叫景南市，是个坐山朝海被
+水环绕的大城市。老家距离大学挺远，所以是自己一个人住在这个怡安小区的单身公寓中。因为性格问题，身边没什么亲密朋友。联络簿上的，除了父母都是泛泛之交。
+<<set $eventnext to 13>>
+
+<<case 13>>
+说来好笑，除了家人关系之外，唯一一个比较亲密的人，居然是一个只认识了不到一个多月的网友。这名网友也挺神秘，头像是天空照，单字“灵”，资料都是空白的。不过懂很多东西还会算命，算得还很准。<<you>>和灵共同话题很多，很聊得来，有时候<<you>>甚至怀疑网线对面那个人是不是会远程读心，不然为何脑洞总能同步？
+<<set $eventnext to 14>>
+
+<<case 14>>
+<<you>>摇了摇头，从床上爬起来去洗漱换衣服。当<<you>>看向镜子的时候，竟然感到一丝恍惚——总觉得自己好像跟印象中的长相不太一样？
+<<set $eventnext to 15>>
+
+<<case 15>>
+<<you>>心中虽然有点疑惑，但很快就淡化。<<you>>快速地冲了个冷水澡，让大脑清醒清醒之后，回到了日常之中……
 
 <</switch>>
 
@@ -148,7 +159,7 @@ $(document).ready(function(){
 
 <<case 8>>
 	<<set _text to LangSpl("没错，这是<<you>>的房间","Yes, it's <<my>> room.")>>
-	<div class="Eselect"><<link _text>><<set $count to 9>><<run Revent()>><</link>></div>
+	<div class="Eselect"><<link _text>><<set $count to 9>><<run Revent()>><<masteraudio stop>><</link>></div>
 
 	<<set _text to LangSpl("不对，这是哪？","Wait, where <<am>> <<I>>?")>>
 	<div class="Eselect"><<link _text>><<set $count to 10>><<run Revent()>><</link>></div>
@@ -162,6 +173,13 @@ $(document).ready(function(){
 	<<masteraudio stop>><<audio "穿越之谜" volume 1 play loop>>
 	<</link>></div>
 
+<<case 15>>
+<<set _text to LangSpl("继续","Next")>>
+<div class="Eselect">
+<<link _text "你的家 单身公寓">>
+<<masteraudio stop>>
+<<EventEnd>>
+<</link>></div>
 
 <<default>>
 	<<set _text to LangSpl("继续","Next")>>
@@ -292,10 +310,7 @@ $(document).ready(function(){
 <<set $eventnext to 9>>
 
 <<case 9>>
-
-
-<<case 10>>
-
+折腾了半天，<<you>>感到累了，于是决定去冲个澡。洗澡的时候<<you>>看着镜子中的倒影感到些许恍惚——仿佛看到了年轻时候的自己。根据搜索到的信息，<<you>>已经开始接受穿越到平行世界另一个自己身上的现实，甚至开始展望未来，思考怎么渡过这个新的人生……
 
 <</switch>>
 <</nobr>>
@@ -306,7 +321,7 @@ $(document).ready(function(){
 <<switch $count>>
 <<case 1>>
 <<set _text to LangSpl("拿起手机","Pick up the phone")>>
-<div class="Eselect"><<link _text>><<set $count to 2>><<run Revent()>><</link>></div>
+<div class="Eselect"><<link _text>><<set $count to 2>><<run Revent()>><<passtime 2>><</link>></div>
 
 <<case 2>>
 <<set _text to LangSpl("只是记忆混乱","Just confused memory")>>
@@ -318,27 +333,34 @@ $(document).ready(function(){
 <<case 4>>
 <<if $eflag.includes("查看手机") is false>>
 <<set _text to LangSpl("查看手机","Check the phone")>>
-<div class="Eselect"><<link _text>><<run V.eflag.push("查看手机")>><<set $count to 5>><<run Revent()>><</link>></div>
+<div class="Eselect"><<link _text>><<run V.eflag.push("查看手机")>><<set $count to 5>><<passtime 30>><<run Revent()>><</link>></div>
 <</if>>
 
 <<if $eflag.includes("查看电脑") is false>>
 <<set _text to LangSpl("查看电脑","Check the Computer")>>
-<div class="Eselect"><<link _text>><<run V.eflag.push("查看电脑")>><<set $count to 6>><<run Revent()>><</link>></div>
+<div class="Eselect"><<link _text>><<run V.eflag.push("查看电脑")>><<set $count to 6>><<passtime 30>><<run Revent()>><</link>></div>
 <</if>>
 
 <<if $eflag.includes("四处翻找") is false>>
 <<set _text to LangSpl("四处翻找","Find around in the room")>>
-<div class="Eselect"><<link _text>><<run V.eflag.push("四处翻找")>><<set $count to 7>><<run Revent()>><</link>></div>
+<div class="Eselect"><<link _text>><<run V.eflag.push("四处翻找")>><<set $count to 7>><<passtime 60>><<run Revent()>><</link>></div>
 <</if>>
 
 <<if $eflag.length is 3>>
 <<set _text to LangSpl("继续","Next")>>
-<div class="Eselect"><<link _text>><<set $count to $eventnext>><<run Revent()>><</link>></div>
+<div class="Eselect"><<link _text>><<set $count to $eventnext>><<unset $eflag>><<run Revent()>><</link>></div>
 <</if>>
 
 <<case 7>>
 <<set _text to LangSpl("继续","Next")>>
-<div class="Eselect"><<link _text>><<set $count to $eventnext>><<if $temp.c is 2>><<run anouncePopUP("获得了《魔力方块》x1")>><</if>><<run Revent()>><</link>></div>
+<div class="Eselect"><<link _text>><<set $count to $eventnext>><<if $temp.c is 2>><<run anouncePopUP("获得了《魔力方块》x1")>><<run getitem("important","魔力方块")>><</if>><<run Revent()>><</link>></div>
+
+<<case 9>>
+<<set _text to LangSpl("继续","Next")>>
+<div class="Eselect">
+<<link _text "你的家 单身公寓">>
+<<EventEnd>>
+<</link>></div>
 
 <<default>>
 <<set _text to LangSpl("继续","Next")>>

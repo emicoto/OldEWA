@@ -73,7 +73,8 @@
 
 <!-- 持有物 -->
 <<set $items to {
-    foods: [], medicine: [], sextoy: [], weapon: [], accesory: [],
+    foods: {}, medicine: {}, sextoy: {}, weapon: {}, accesory: {}, 
+    material: {}, important:{}, other:{},
 }>>
 
 <!-- 衣柜。身上的衣服会从衣柜里取出来放到 Equip里 -->

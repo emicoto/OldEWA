@@ -1,0 +1,171 @@
+﻿:: 服装店-工具 [widget]
+
+<<widget "EnterTryRoom">>
+/* 把身上衣服暂存在TEquip里 */
+<<set $TEquip to clone($Equip)>>
+
+/* 清理身上外在液体 */
+<<set $Pflag.bukkake.body to false>>
+<<set $Pflag.bukkake.face to false>>
+<<set $Pflag.bukkake.hair to false>>
+
+<<location "试衣间">>
+<<SetAvatar>>
+
+<</widget>>
+
+
+<<widget "ShowManequin">>
+    <div class="manequin">
+        <<twinescript>>
+        output.appendChild(Avatar.getShop())
+        <</twinescript>>
+    </div>
+<</widget>>
+
+<<widget "ShowCase">>
+
+    <div class="followleft">
+        <div id="showcase">
+            <<if $showcase isnot null>><<ShowManequin>><</if>>
+        </div>
+    </div>
+
+    <div class="followright">
+    
+    <div id="item_info">
+        <div id="description">
+        <<print $showcase.text>><br>
+        </div>
+        <div class="warmth">适应温度：18C～28C</div>
+
+        <div id="outfit_trait">
+            <div class="of_title">属性：</div>
+            <div class="of_traitlist">
+                <li>日常 - 适合平时穿戴</li>
+            </div>
+        </div>
+
+    </div>
+    
+    <div id="option_containter">
+        <<if $showcase.patterns.length gt 0>>
+            可选图案：<br>
+            <div id="pattern_option">
+                <<for _i to 0; _i lt $showcase.patterns.length; _i++>>
+                    <<set _name to $showcase.patterns[_i]>>
+                    <<print "<<button _name>><<run setPatterns('"+_name+"')>><</button>>">>
+                <</for>>          
+            </div>
+        <</if>>
+
+        <<if $showcase.fixcolor is false or $showcase.colors.length gt 0>>
+            可选颜色：<br>
+            <div id="color_plate">
+                <<if $showcase.fixcolor is false>>
+                    <<for _i to 0; _i lt A.colorlist.length; _i ++>>
+                        <div class="color_plate" @style="'background-color:'+ A.colorlist[_i].code">
+                        <<set _name to A.colorlist[_i].name>>
+                        <<print "<<button _name>><<run setColors(A.colorlist["+_i+"].code,A.colorlist["+_i+"].name)>><</button>>">>
+                        </div>
+                    <</for>>
+                    /* <div><<textbox "$showcase.color" "#FFFFF">></div> */
+                    <div><button id="customColor">
+                   	自定义颜色
+</button></div>
+                   <script>
+var myPicker = new JSColor('#customColor', {format:'hex',value:'#000000',onInput:"setColors(this.toHEXString(),null,true)",
+onChange:"setColors(this.toHEXString(),'CustomColor')",
+required:false, 
+	palette:'#000000 #FFFFFF #636363 #FF0000 #00FF00 #0000FF', 
+	hideOnPaletteClick:true, backgroundColor:'#333', 
+	borderColor:'rgba(0,0,0,1)', borderRadius:10, width:200, 
+	closeButton:true, closeText:'关闭', sliderSize:20, 
+	shadowColor:'rgba(255,121,247,0.2)'
+});
+
+</script>
+
+                <<else>>
+                    <<for _i to 0; _i lt $showcase.colors.length; _i++>>
+                        <<set _code to A.colors[$showcase.colors[_i]].code>>
+                        <<set _name to A.colors[$showcase.colors[_i]].name>>
+                        <div class="color_plate" @style="'background-color:'+_code">
+                        <<print "<<button _name>><<run setColors($showcase.colors["+_i+"],A.colors[$showcase.colors["+_i+"]].name)>><</button>>">>
+                        </div>
+                    <</for>>
+                <</if>>
+            </div>
+        <</if>>
+    </div>
+
+    </div>
+
+<</widget>>
+
+<<widget "ShowAShopItems">>
+
+<<set _catgr to $args[0]>>
+<<set _placeholder to "image/avatar/thumb.png">>
+
+<<for _i to 0; _i lt Avatars[_catgr].length; _i ++>>
+    <<if Avatars[_catgr][_i].shop is null or $shoptype.includes(Avatars[_catgr][_i].shop) is false>>
+        <<continue>>
+    <<else>>
+        <<if Avatars[_catgr][_i].imgenable is true>>
+            <<set _img to "image/avatar/"+_catgr+"/"+Avatars[_catgr][_i].index + "/thumb.png">>
+        <<else>>
+            <<set _img to _placeholder>>
+        <</if>>
+        <<capture _catgr _i>>
+        <div id="show_items">
+            <div class="itemthumb">
+            <<print "<<link [img[_img]]>><<run setShowCase(A['"+_catgr+"']["+_i+"]); Avatar.setShop()>><</link>>">>
+            </div>
+            <div class="itemname">
+            <<print Avatars[_catgr][_i].name>>
+            </div>
+
+            <div class="itemprice">
+            <<print Avatars[_catgr][_i].cost>>￥
+            </div>
+        </div>
+        <</capture>>
+
+    <</if>>
+<</for>>
+
+<</widget>>
+
+<<widget "tryon">>
+<<set _layer to $args[0]>>
+
+<<set $Equip[_layer] to $showcase>>
+
+<<switch _layer>>
+    <<case "top">>
+        <<if $showcase.slot is "onepiece">>
+            <<set $Equip.bottom to null>>
+        <</if>>
+    <<case "bottom">>
+        <<if $Equip.top.slot is "onepiece">>
+            <<set $Equip.top to null>>
+        <</if>>
+    <<case "inner_up">>
+        <<if $showcase.slot is "onepiece">>
+            <<set $Equip.inner_bt to null>>
+        <<elseif $showcase.slot is "fullbody">>
+            <<set $Equip.inner_bt to null>>
+            <<set $Equip.top to null>>
+            <<set $Equip.bottom to null>>
+        <</if>>
+<</switch>>
+<<SetAvatar>>
+<</widget>>
+
+<<widget "showinner">>
+    <<set $Equip.outter to null>>
+    <<set $Equip.top to null>>
+    <<set $Equip.bottom to null>>
+    <<SetAvatar>>
+<</widget>>
