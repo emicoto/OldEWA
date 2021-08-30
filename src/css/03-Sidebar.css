@@ -65,6 +65,7 @@
     background-color: rgb(245, 245, 245);
     border-radius: 10px;
     margin-top: 10%;
+    box-shadow: 0px 12px 16px rgba(84, 77, 88, 0.5);
 }
 
 #ui-dialog-titlebar {
