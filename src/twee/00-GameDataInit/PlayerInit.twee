@@ -146,7 +146,7 @@
 
 <!-- PC的状态 -->
 <<set $PC.state to {
-    生病 : false,    怀孕 : false,    寄生 : false,    肠内受孕 : false,    失眠 : false,
+    生病 : false,    怀孕 : false,    寄生 : false,    肠内受孕 : false,    失眠 : false,   发情:false,
 }>>
 
 <<set $PC.genital to { "阴茎" : 14, "子宫" : null,}>>
@@ -203,16 +203,14 @@ $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌}
     back    : null,
     hairfront : "natural",    hairback  : "straight",
     emote     : "正常",
+
+    /* 特殊装备，不属于衣服，而是属于道具装备的范围 */
+    vagina : null, penis: null, ureth: null, anal: null,
+    nipple : null,
 }>>
 
 <!-- 临时备份 -->
-<<set $TEquip to {
-    neck        : null,  hat        : null,  face       : null,
-    outter      : null,  top        : null,  hand       : null,
-    bottom      : null,  inner_up   : null,  inner_bt: null,
-    shoes       : null,  legs       : null,  back       : null,
-    hairfront   : null,  hairback   : null,  emote      : null,
-}>>
+<<set $TEquip to {}>>
 
 <<dressup "top" 1 "#F14660" "红">>
 <<dressup "inner_bt" 1>>

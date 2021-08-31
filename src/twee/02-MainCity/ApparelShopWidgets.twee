@@ -137,8 +137,8 @@ required:false,
 
 <<widget "tryon">>
 <<set _layer to $args[0]>>
-
-<<set $Equip[_layer] to $showcase>>
+<<set $Equip[_layer] to clone($showcase)>>
+<<set $tryon[_layer] to clone($showcase)>>
 
 <<switch _layer>>
     <<case "top">>

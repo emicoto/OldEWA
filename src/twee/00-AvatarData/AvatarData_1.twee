@@ -63,6 +63,7 @@
 
 <<InitFrontHairStyle>>
 <<InitBackHairStyle>>
+<<InitLewdEquip>>
 
 <</widget>>
 
@@ -72,7 +73,7 @@
 <<widget "InitClothTop">>
     <<set Avatars.top to [
         {
-            id: 0,
+            id: 0, uid: 0,
             index : "naked",    name : "裸",     gender : "n",
             text : "无",   
             tag  : ["裸露"],
@@ -93,7 +94,7 @@
             patterns: [],
         },
         {
-            id: 1,
+            id: 1, uid: 0,
             index : "Tshirt",    name : "T恤",     gender : "n",
             text : "一件简单的T恤。 并不能给你太多保护，但总比没有好。",   
             tag  : ["日常"],
@@ -114,7 +115,7 @@
             patterns: ["slime","heart"],
         },
         {
-            id: 2,
+            id: 2, uid: 0,
             index : "shirt",    name : "衬衫",     gender : "n",
             text : "一件简单的西式长袖衬衫。浅浅的暗纹给你增加了些许气质。",   
             tag  : ["日常","正式","商务"],
@@ -135,7 +136,7 @@
             patterns: [],
         },
         {
-            id: 3,
+            id: 3, uid: 0,
             index : "bwopiece",    name : "BW连衣裙",     gender : "f",
             text : "一件设计简单的连衣裙。修身的设计显得你身材更苗条。毕竟是易淘上的便宜货，不能指望布料的防御效果。",   
             tag  : ["日常"],
@@ -155,7 +156,7 @@
             patterns: [],
         },
         {
-            id: 4,
+            id: 4, uid: 0,
             index : "slpshortup",    name : "短袖睡衣",     gender : "n",
             text : "一件设计简单的睡衣。轻柔透气的布料给你带来好梦。",   
             tag  : ["日常","睡衣"],
@@ -180,7 +181,7 @@
 <<widget "InitClothBottom">>
     <<set Avatars.bottom to [
         {
-            id: 0,
+            id: 0, uid: 0,
             index : "naked",    name : "裸",     gender : "n",
             text : "无",   
             tag  : ["裸露"],
@@ -199,7 +200,7 @@
             patterns: [],
         },
         {
-            id: 1,
+            id: 1, uid: 0,
             index : "shortpant",    name : "短裤",     gender : "n",
             text : "一条简单的短裤。",   
             tag  : ["日常"],
@@ -218,7 +219,7 @@
             patterns: [],
         },
         {
-            id: 2,
+            id: 2, uid: 0,
             index : "shortskirt",    name : "短裙",     gender : "f",
             text : "一条简单的短裙。",   
             tag  : ["日常"],
@@ -237,7 +238,7 @@
             patterns: [],
         },
         {
-            id: 3,
+            id: 3, uid: 0,
             index : "bskirt",    name : "西装短裙",     gender : "f",
             text : "一条简单的西式短裙。毕竟是廉价款，不能指望耐久度。",   
             tag  : ["日常","商务"],
@@ -256,7 +257,7 @@
             patterns: [],
         },
         {
-            id: 4,
+            id: 4, uid: 0,
             index : "slpshortbt",    name : "睡衣短裤",     gender : "n",
             text : "一件设计简单的睡衣短裤。轻柔透气的布料给你带来好梦。",   
             tag  : ["日常","睡衣"],
@@ -280,7 +281,7 @@
 <<widget "InitClothUnderbottoms">>
     <<set Avatars.inner_bt to [
         {
-            id: 0,
+            id: 0, uid: 0,
             index : "naked",    name : "裸",     gender : "n",
             text : "无",   
             tag  : ["裸露"],
@@ -299,7 +300,7 @@
             patterns: [],
         },
         {
-            id: 1,
+            id: 1, uid: 0,
             index : "boxer",    name : "四角内裤",     gender : "m",
             text : "一条简单的四角内裤。",   
             tag  : ["日常"],
@@ -318,7 +319,7 @@
             patterns: [],
         },
         {
-            id: 2,
+            id: 2, uid: 0,
             index : "pantie",    name : "内裤",     gender : "f",
             text : "一款简单朴素的内裤。",   
             tag  : ["日常"],
@@ -342,7 +343,7 @@
 <<widget "InitClothShoes">>
     <<set Avatars.shoes to [
         {
-            id: 0,
+            id: 0, uid: 0,
             index : "naked",    name : "裸",     gender : "n",
             text : "无",   
             tag  : ["裸露"], 
@@ -360,7 +361,7 @@
             patterns: [],
         },
         {
-            id: 1,
+            id: 1, uid: 0,
             index : "sportshoes",    name : "运动鞋",     gender : "n",
             text : "一双普通的白色运动鞋。",   
             tag  : ["日常","运动"], 
@@ -378,7 +379,7 @@
             patterns: [],
         },
         {
-            id: 2,
+            id: 2, uid: 0,
             index : "highheel",    name : "高跟鞋",     gender : "f",
             text : "一双简单设计的高跟鞋。",   
             tag  : ["日常","商务"], 
@@ -401,7 +402,7 @@
 <<widget "InitClothSocks">>
     <<set Avatars.legs to [
         {
-            id: 0,
+            id: 0, uid: 0,
             index : "naked",    name : "裸",     gender : "n",
             text : "无",   
             tag  : ["裸露"], 
@@ -419,7 +420,7 @@
             patterns: [],
         },
         {
-            id: 1,
+            id: 1, uid: 0,
             index : "sportsocks",    name : "运动短袜",     gender : "n",
             text : "一双简单的运动袜。",   
             tag  : ["日常","运动"], 

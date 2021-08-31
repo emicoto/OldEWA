@@ -98,8 +98,10 @@
 			<<replace "#money">>　<<printmoney $money>><</replace>>
 		<</if>>
 	<</repeat>>
-<</silently>>
 
 <<set $anounce to {flag:false, text:"", type:"弹出通知"}>>
+
+<</silently>>
+
 
 

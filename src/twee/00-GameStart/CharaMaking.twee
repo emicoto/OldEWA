@@ -4,7 +4,6 @@
 <div style="margin-left:16px;font-size:14px">∵ <<lang "预设人物卡" "Preset">>：
 <select id="preset" name="preset" onchange="V.preset = this.value; showcharainfo()">
 	<option value="魔女" selected>魔女</option>
-	<option value="羽轩">羽轩</option>
 	<option value="沐歌">沐歌</option>
 	<option value="云鹿">云鹿</option>
     <option value="魔女" hidden="hidden" selected="selected">魔女</option>
@@ -19,7 +18,7 @@
 <<widget "charainfo">>
 <<switch $preset>>
 <<case "魔女">>大家的魔女<br> 是个伪娘。既然是魔（法少）女，那当然擅长魔法。<br>以上都是大嘘。只是个一个二次元爱好者，喜欢玩游戏，会画点画，玩COSPLAY，搞搞女装直播的样子。
-<<case "沐歌">>新人爱豆<br> 初露头角的美少女爱豆。除了唱歌，跳舞和演艺也不错。<br> 说是新人，其实后台有点硬，起码家境不穷。
+<<case "沐歌">>新人爱豆<br> 初露头角的美少女爱豆。除了唱歌，跳舞和演艺也不错。<br> 虽然是新人，其实后台有点硬，起码家境不穷。
 <<case "云鹿">>修仙爱好者<br> 小正太，热衷修仙文学。从小跟着爷爷练武术，身体素质很好。<br> 除了追小说，自己也会试着写小说的样子。
 <<default>>大家的魔女<br> 是个伪娘。既然是魔（法少）女，那当然擅长魔法。<br>以上都是大嘘。只是个一个二次元爱好者，喜欢玩游戏，会画点画，玩COSPLAY，搞搞女装直播的样子。
 <</switch>>

@@ -151,7 +151,7 @@ namespace Avatar {
 				emoadd: { tear: false, shy: false, red: false, hurt: false },
 
 				eyebrow: null, hairfront: null, kemofront: { mimi: null, horn: null }, eyes: null,
-				mouth: null, tatoos: null, penis: null,
+				mouth: null, tatoos: null, dick: null, penis:null, nipple:null, plus: null,
 				body: null, hairback: null, kemoback: { wing: null, tail: null }, back: null,
 				background: null,
 				animation: "",
@@ -190,7 +190,7 @@ namespace Avatar {
 				emoadd: { tear: false, shy: false, red: false, hurt: false },
 
 				eyebrow: null, hairfront: null, kemofront: { mimi: null, horn: null }, eyes: null,
-				mouth: null, tatoos: null, penis: null,
+				mouth: null, tatoos: null, dick: null, penis:null, nipple:null, plus: null,
 				body: null, hairback: null, kemoback: { wing: null, tail: null }, back: null,
 				background: null,
 				animation: "",
@@ -230,7 +230,7 @@ namespace Avatar {
 				emoadd: { tear: false, shy: false, red: false, hurt: false },
 
 				eyebrow: null, hairfront: null, kemofront: { mimi: null, horn: null }, eyes: null,
-				mouth: null, tatoos: null, penis: null,
+				mouth: null, tatoos: null, dick: null, penis:null, nipple:null, plus: null,
 				body: null, hairback: null, kemoback: { wing: null, tail: null }, back: null,
 				background: null,
 				animation: "",
@@ -463,10 +463,21 @@ namespace Avatar {
 				return options.body ? __resolve(AVATARPATH, `body/${options.body}.png`) : options.dummy
 			},
 
-
-
 		})
 
+		setLayer(ID, "nipple", {
+			width: 180,
+			height: 260,
+			z: layerID++,
+			dx: dx,
+			showfn(options) {
+				return !!options.nipple
+			},
+			srcfn(options) {
+				return options.nipple ? __resolve(AVATARPATH, `${options.nipple}.png`) : options.dummy
+			},
+
+		})
 
 		setLayer(ID, "hand", {
 			width: 180,
@@ -533,6 +544,24 @@ namespace Avatar {
 					}
 				}
 			}
+		})
+		setLayer(ID, "inner_up_acc", {
+			width: 180,
+			height: 260,
+			z: layerID++,
+			dx: dx,
+			showfn(options) {
+				if (isObject(options.inner_up)) {
+					return !!options.inner_up.acc
+				}
+				return false
+			},
+			srcfn(options) {
+				if (isObject(options.inner_up)) {
+					return options.inner_up.acc ? __resolve(AVATARPATH, `inner_up/${options.inner_up.acc}.png`) : options.dummy
+				}
+				return options.dummy
+			},
 		})
 		setLayer(ID, "top", {
 			width: 180,
@@ -616,6 +645,24 @@ namespace Avatar {
 					}
 				}
 			}
+		})
+		setLayer(ID, "outter_acc", {
+			width: 180,
+			height: 260,
+			z: layerID++,
+			dx: dx,
+			showfn(options) {
+				if (isObject(options.outter)) {
+					return !!options.outter.acc
+				}
+				return false
+			},
+			srcfn(options) {
+				if (isObject(options.outter)) {
+					return options.outter.acc ? __resolve(AVATARPATH, `top/${options.outter.acc}.png`) : options.dummy
+				}
+				return options.dummy
+			},
 		})
 		setLayer(ID, "mouth", {
 			width: 180,
@@ -1192,21 +1239,53 @@ namespace Avatar {
 				return options.body ? __resolve(AVATARPATH, `body/${options.body}.png`) : options.dummy
 			},
 
-
-
 		})
-		setLayer(ID, "penis", {
+		setLayer(ID, "plus", {
+			width: 180,
+			height: 260,
+			z: layerID++,
+			showfn(options) {
+				return !!options.plus
+			},
+			srcfn(options) {
+
+				return options.plus ? __resolve(AVATARPATH, `${options.plus}.png`) : options.dummy
+			},
+		})
+		setLayer(ID, "nipple", {
+			width: 180,
+			height: 260,
+			z: layerID++,
+			showfn(options) {
+				return !!options.nipple
+			},
+			srcfn(options) {
+
+				return options.nipple ? __resolve(AVATARPATH, `${options.nipple}.png`) : options.dummy
+			},
+		})
+		setLayer(ID, "dick", {
 			width: 180,
 			height: 260,
 			z: layerID++,
 			show:true,
 			srcfn(options) {
 
-				return options.penis ? __resolve(AVATARPATH, `body/${options.penis}.png`) : options.dummy
+				return options.dick ? __resolve(AVATARPATH, `body/${options.dick}.png`) : options.dummy
 			},
 
+		})
+		setLayer(ID, "penis", {
+			width: 180,
+			height: 260,
+			z: layerID++,
+			showfn(options) {
+				return !!options.penis
+			},
+			srcfn(options) {
 
-
+				return options.penis ? __resolve(AVATARPATH, `${options.penis}.png`) : options.dummy
+			},
 		})
 		setLayer(ID, "legs", {
 			width: 180,
@@ -1236,6 +1315,23 @@ namespace Avatar {
 					}
 				}
 			}
+		})
+		setLayer(ID, "legs_acc", {
+			width: 180,
+			height: 260,
+			z: layerID++,
+			showfn(options) {
+				if (isObject(options.legs)) {
+					return !!options.legs.acc
+				}
+				return false
+			},
+			srcfn(options) {
+				if (isObject(options.legs)) {
+					return options.legs.acc ? __resolve(AVATARPATH, `legs/${options.legs.acc}.png`) : options.dummy
+				}
+				return options.dummy
+			},
 		})
 		setLayer(ID, "shoes", {
 			width: 180,
@@ -1525,6 +1621,23 @@ namespace Avatar {
 				}
 			}
 		})
+		setLayer(ID, "outter_acc", {
+			width: 180,
+			height: 260,
+			z: layerID++,
+			showfn(options) {
+				if (isObject(options.outter)) {
+					return !!options.outter.acc
+				}
+				return false
+			},
+			srcfn(options) {
+				if (isObject(options.outter)) {
+					return options.outter.acc ? __resolve(AVATARPATH, `outter/${options.outter.acc}.png`) : options.dummy
+				}
+				return options.dummy
+			},
+		})
 		setLayer(ID, "mouth", {
 			width: 180,
 			height: 260,
@@ -1706,6 +1819,23 @@ namespace Avatar {
 					}
 				}
 			}
+		})
+		setLayer(ID, "neck_acc", {
+			width: 180,
+			height: 260,
+			z: layerID++,
+			showfn(options) {
+				if (isObject(options.neck)) {
+					return !!options.neck.acc
+				}
+				return false
+			},
+			srcfn(options) {
+				if (isObject(options.neck)) {
+					return options.neck.acc ? __resolve(AVATARPATH, `outter/${options.neck.acc}.png`) : options.dummy
+				}
+				return options.dummy
+			},
 		})
 		setLayer(ID, "hairfront", {
 			width: 180,

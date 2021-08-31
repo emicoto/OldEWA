@@ -5,12 +5,21 @@
 </div>
 <<set $shoptype to ["all","offline"]>>
 
-<<EnterTryRoom>>
+<<if $temp.tryoncomeback is undefined>>
+    <<EnterTryRoom>>
+<<else>>
+    <<set $temp to {}>>
+    <<set $location to "试衣间">>
+<</if>>
+
 <div id="action-text2"></div>
 
+
+<<if $shoptype.includes("offline")>>
 <div id="show_container">
     <<if $showcase isnot null>><<ShowCase>><</if>>  
 </div>
+<</if>>
 
 <div id="ShopList">
   <ul>
@@ -73,19 +82,35 @@
 <<link "只看内衣">><<showinner>><</link>>
 </div>
 <div class="redress">
-<<link "衣服复位">><<redress>><</link>>
+<<link "衣服复位">><<redress>><<leavecheck>><<resettryon>><</link>>
 </div>
 
-<div class="buybotton">
-<<link "购买">><<run BuyOutFit()>><</link>>
-</div>
-<div class="trybotton">
-<<link "试穿">><<tryon $showcase.layer>><</link>>
+<div class="buybutton">
+<<link "购买">><<run BuyOutFit("select")>><<leavecheck>><</link>>
 </div>
 
-<div class="backbutton">
-<<link "离开" "怡安小区">><<redress>><</link>><br>
+<<if $shoptype.includes("offline")>>
+<div class="trybutton">
+<<link "试穿">><<tryon $showcase.layer>><<leavecheck>><</link>>
 </div>
+
+<div id="buyall">
+<<if tryoncheck() is true>>
+<<link "购买身上的衣服">><<run BuyOutFit("tryon")>><<leavecheck>><</link>>
+<</if>>
+</div>
+
+<</if>>
+
+<div id="leave" class="backbutton">
+    <<if tryoncheck() is true>>
+        <<link "离开" "试衣偷窥：触发">><</link>>
+    <<else>>
+        <<link "离开" "怡安小区">><<resettryon>><</link>>
+    <</if>>
+</div>
+
+<div id="shopoverlay"></div>
 
 
 
@@ -101,4 +126,52 @@
     <<set _timer to _timer -1>>
     <<if _timer lte 0>><<stop>><</if>>
 <</repeat>>
+
 <</silently>>
+
+<<widget "leavecheck">>
+<<replace "#leave">>
+<<if tryoncheck() is true>>
+    <<link "离开" "试衣偷窥：触发">><<set $eventexit to [$passage,"怡安小区"]>><</link>>
+<<else>>
+    <<link "离开" "怡安小区">><<resettryon>><</link>>
+<</if>>
+<</replace>>
+
+<<replace "#buyall">>
+<<if tryoncheck() is true>>
+<<link "购买身上的衣服">><<run BuyOutFit("tryon")>><<leavecheck>><</link>>
+<</if>>
+<</replace>>
+<</widget>>
+
+<<widget "resettryon">>
+    <<set $tryon to {neck: null, hand: null, face: null,hat: null, outter: null, top: null,bottom: null,inner_up: null, inner_bt: null,shoes: null, legs: null,}>>
+<</widget>>
+
+:: 试衣偷窥：触发
+
+<<you>>还穿着商店里的衣服，确定就这么离开商店吗？<br>
+<br>
+<<link "不买，就这么离开" "试衣偷窥：不买">><</link>><br>
+<<link "还是回去付钱吧" $eventexit[0]>><<set $temp.tryoncomeback to true>><</link>><br>
+
+
+:: 试衣偷窥：不买
+
+<<set _luck to random(1,100)>>
+
+<<you>>打算就这么穿着衣服走……<br>
+
+<<timed 1s>>
+    <div class="delay">
+        <<if _luck lt 10>>
+            幸运的是，警报器没有响起来。故障了吗？ 总之<<you>>成功穿着商店的衣服跑了。
+            <<link "离开" $eventexit[1]>><</link>>
+        <<else>>
+            才到门口就触发警报器了，你被捉了起来……
+            (事件未完成……)
+            <<link "离开" $eventexit[0]>><<set $temp.tryoncomeback to true>><</link>>
+        <</if>>
+    </div>
+<</timed>>

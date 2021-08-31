@@ -346,3 +346,9 @@ sugarcube-2:
       name: getitem
     anouncePopUP:
       name: anouncePopUP
+    leavecheck:
+      name: leavecheck
+    resettryon:
+      name: resettryon
+    InitLewdEquip:
+      name: InitLewdEquip

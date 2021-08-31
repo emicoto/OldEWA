@@ -158,6 +158,37 @@
 <</if>>
  */
 
+ /* 乳头/丁丁等特殊装备 */
+<<if $Equip.penis isnot null>>
+    <<set $avatar.penis to setAvatar("penis", $Equip.penis.png)>>
+<<else>>
+    <<set $avatar.penis to setAvatar("penis", null)>>
+<</if>>
+
+<<if $Equip.nipple isnot null>>
+    <<if $Equip.nipple.breast is true>>
+        <<set _path to $Equip.nipple.png + "_" + breastsize()>>
+    <<else>>
+        <<set _path to $Equip.nipple.png>>
+    <</if>>
+    <<set $avatar.nipple to setAvatar("nipple", _path)>>
+<<else>>
+    <<set $avatar.nipple to setAvatar("nipple", null)>>
+<</if>>
+
+<<if $Equip.anal isnot null and $Equip.anal.png isnot null>>
+<<set $avatar.plus to setAvatar("plus", $Equip.anal.png)>>
+<<else>>
+<<set $avatar.plus to setAvatar("plus", null)>>
+<</if>>
+
+<<if $Equip.vagina isnot null and $Equip.vagina.png isnot null>>
+<<set $avatar.plus to setAvatar("plus", $Equip.vagina.png)>>
+<<else>>
+<<set $avatar.plus to setAvatar("plus", null)>>
+<</if>>
+
+
 /* 眼睛 */
 <<set _eyegroup to ["full","blink2","lookup3"]>>
 <<set _type to [null,"a","b","c"]>>
@@ -178,6 +209,10 @@
 <<set $avatar.emoadd.tear to setAvatar("emoadd.tear",$PFace.tear)>>
 <<set $avatar.emoadd.red to setAvatar("emoadd.red",$PFace.red)>>
 
+<<if $PC.base.快感[0] gte ($PC.base.快感[1]/3) or $PC.state.发情 is true or $PC.base.酒精[0] gte ($PC.base.酒精[1]/2) or $PC.base.药物[0] gte 50>>
+    <<set $avatar.emoadd.red to setAvatar("emoadd.red",true)>>
+<</if>>
+
 /* 淫纹 */
 <<if $Pskin.腹部 isnot null>>
     <<set _apath to "./image/avatar/body/"+$Pskin.腹部.index+".png">>
@@ -195,11 +230,15 @@
 <<set $avatar.body to setAvatar("body",$PC.info.skin +"/body_"+ breastsize() + isPregnant())>>
 
 
-/* JJ */
-<<if $PC.genital.阴茎 gt 3 and $Pflag.bottom lte 1>>
-    <<set $avatar.penis to setAvatar("penis",$PC.info.skin +"/penis",true)>>
+/* JJ，套上贞操笼时要变成软丁丁 */
+<<if $Equip.inner_bt isnot null and $Equip.inner_bt.index is "chastitycage">>
+
 <<else>>
-    <<set $avatar.penis to setAvatar("penis",null)>>
+    <<if $PC.genital.阴茎 gt 3 and $Pflag.bottom lte 1>>
+        <<set $avatar.dick to setAvatar("dick",$PC.info.skin +"/penis",true)>>
+    <<else>>
+        <<set $avatar.dick to setAvatar("dick",null)>>
+    <</if>>
 <</if>>
 
 

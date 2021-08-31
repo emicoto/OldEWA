@@ -144,6 +144,7 @@ window.Revent = Revent
 DefineMacroS("Revent", Revent);
 
 function getitem(catgr, item, num=1) {
+    var cname, ename
     if(D.itemlist[catgr][item].name.length > 0){
         if (V.items[catgr][item]){
             V.items[catgr][item].num += num
@@ -155,7 +156,11 @@ function getitem(catgr, item, num=1) {
                 thumb: D.itemlist[catgr][item].thumb,
                 num: num,
             }
+
+        cname = D.itemlist[catgr][item].name;
+        ename = D.itemlist[catgr][item].name_en;
         }
+        
     }else{
         if (V.items.other.通用物品){
             V.items.other.通用物品 += num
@@ -168,9 +173,11 @@ function getitem(catgr, item, num=1) {
                 num: num,
             }
         }
+        cname = "通用物品";
+        ename = "Common Material";
     }
     V.anounce.flag = true
-    V.anounce.text = "获得了《"+item+"》x "+num
+    V.anounce.text = "获得了《"+cname+"》x "+num
     if(V.lang == "EN"){
         V.anounce.text = "got《"+D.itemlist[catgr][item].en_name+"》 x "+num
     }

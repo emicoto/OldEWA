@@ -48,23 +48,17 @@
     emoadd      : {tear:false, shy:false, red:false, hurt:false},
 
     eyebrow     : null, hairfront   : null, kemofront: {mimi:null, horn:null}, eyes : null,
-    mouth       : null, tatoos      : null, penis       : null,
+    mouth       : null, tatoos      : null, dick       : null,
+    penis       : null, nipple      : null, plus       : null,
     body        : null, hairback    : null, kemoback: {wing:null, tail:null},  back : null,
     background  : null,
 }>>
 
 <<set $tryon to {
-    frame       : null,
-        
     neck        : null, hand        : null, face        : null,
     hat         : null, outter      : null, top         : null,
     bottom      : null, inner_up    : null, inner_bt    : null,
     shoes       : null, legs       : null,
-
-    eyebrow     : null, hairfront   : null, kemofront: {mimi:null, horn:null}, eyes : null,
-    mouth       : null, tatoos      : null, penis       : null,
-    body        : null, hairback    : null, kemoback: {wing:null, tail:null},  back : null,
-    background  : null,
 }>>
 
 /* 商店种类 */
@@ -75,6 +69,11 @@
 <<set $items to {
     foods: {}, medicine: {}, sextoy: {}, weapon: {}, accesory: {}, 
     material: {}, important:{}, other:{},
+}>>
+
+/* 特殊装备物 */
+<<set $FEquip to {
+    nipple: false, vagina: false, anal: false, ureth: false, penis: false, inner_bt: false, inner_up: false,
 }>>
 
 <!-- 衣柜。身上的衣服会从衣柜里取出来放到 Equip里 -->

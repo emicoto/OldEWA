@@ -97,7 +97,10 @@ var Avatar;
         eyes: null,
         mouth: null,
         tatoos: null,
+        dick: null,
         penis: null,
+        nipple: null,
+        plus: null,
         body: null,
         hairback: null,
         kemoback: { wing: null, tail: null },
@@ -144,7 +147,10 @@ var Avatar;
         eyes: null,
         mouth: null,
         tatoos: null,
+        dick: null,
         penis: null,
+        nipple: null,
+        plus: null,
         body: null,
         hairback: null,
         kemoback: { wing: null, tail: null },
@@ -191,7 +197,10 @@ var Avatar;
         eyes: null,
         mouth: null,
         tatoos: null,
+        dick: null,
         penis: null,
+        nipple: null,
+        plus: null,
         body: null,
         hairback: null,
         kemoback: { wing: null, tail: null },
@@ -379,6 +388,18 @@ var Avatar;
         return options2.body ? __resolve(AVATARPATH, `body/${options2.body}.png`) : options2.dummy;
       }
     });
+    setLayer(ID, "nipple", {
+      width: 180,
+      height: 260,
+      z: layerID++,
+      dx,
+      showfn(options2) {
+        return !!options2.nipple;
+      },
+      srcfn(options2) {
+        return options2.nipple ? __resolve(AVATARPATH, `${options2.nipple}.png`) : options2.dummy;
+      }
+    });
     setLayer(ID, "hand", {
       width: 180,
       height: 260,
@@ -435,6 +456,24 @@ var Avatar;
             return options2.inner_up.color;
           }
         }
+      }
+    });
+    setLayer(ID, "inner_up_acc", {
+      width: 180,
+      height: 260,
+      z: layerID++,
+      dx,
+      showfn(options2) {
+        if (isObject(options2.inner_up)) {
+          return !!options2.inner_up.acc;
+        }
+        return false;
+      },
+      srcfn(options2) {
+        if (isObject(options2.inner_up)) {
+          return options2.inner_up.acc ? __resolve(AVATARPATH, `inner_up/${options2.inner_up.acc}.png`) : options2.dummy;
+        }
+        return options2.dummy;
       }
     });
     setLayer(ID, "top", {
@@ -511,6 +550,24 @@ var Avatar;
             return options2.outter.color;
           }
         }
+      }
+    });
+    setLayer(ID, "outter_acc", {
+      width: 180,
+      height: 260,
+      z: layerID++,
+      dx,
+      showfn(options2) {
+        if (isObject(options2.outter)) {
+          return !!options2.outter.acc;
+        }
+        return false;
+      },
+      srcfn(options2) {
+        if (isObject(options2.outter)) {
+          return options2.outter.acc ? __resolve(AVATARPATH, `top/${options2.outter.acc}.png`) : options2.dummy;
+        }
+        return options2.dummy;
       }
     });
     setLayer(ID, "mouth", {
@@ -1018,13 +1075,46 @@ var Avatar;
         return options2.body ? __resolve(AVATARPATH, `body/${options2.body}.png`) : options2.dummy;
       }
     });
-    setLayer(ID, "penis", {
+    setLayer(ID, "plus", {
+      width: 180,
+      height: 260,
+      z: layerID++,
+      showfn(options2) {
+        return !!options2.plus;
+      },
+      srcfn(options2) {
+        return options2.plus ? __resolve(AVATARPATH, `${options2.plus}.png`) : options2.dummy;
+      }
+    });
+    setLayer(ID, "nipple", {
+      width: 180,
+      height: 260,
+      z: layerID++,
+      showfn(options2) {
+        return !!options2.nipple;
+      },
+      srcfn(options2) {
+        return options2.nipple ? __resolve(AVATARPATH, `${options2.nipple}.png`) : options2.dummy;
+      }
+    });
+    setLayer(ID, "dick", {
       width: 180,
       height: 260,
       z: layerID++,
       show: true,
       srcfn(options2) {
-        return options2.penis ? __resolve(AVATARPATH, `body/${options2.penis}.png`) : options2.dummy;
+        return options2.dick ? __resolve(AVATARPATH, `body/${options2.dick}.png`) : options2.dummy;
+      }
+    });
+    setLayer(ID, "penis", {
+      width: 180,
+      height: 260,
+      z: layerID++,
+      showfn(options2) {
+        return !!options2.penis;
+      },
+      srcfn(options2) {
+        return options2.penis ? __resolve(AVATARPATH, `${options2.penis}.png`) : options2.dummy;
       }
     });
     setLayer(ID, "legs", {
@@ -1053,6 +1143,23 @@ var Avatar;
             return options2.legs.color;
           }
         }
+      }
+    });
+    setLayer(ID, "legs_acc", {
+      width: 180,
+      height: 260,
+      z: layerID++,
+      showfn(options2) {
+        if (isObject(options2.legs)) {
+          return !!options2.legs.acc;
+        }
+        return false;
+      },
+      srcfn(options2) {
+        if (isObject(options2.legs)) {
+          return options2.legs.acc ? __resolve(AVATARPATH, `legs/${options2.legs.acc}.png`) : options2.dummy;
+        }
+        return options2.dummy;
       }
     });
     setLayer(ID, "shoes", {
@@ -1319,6 +1426,23 @@ var Avatar;
         }
       }
     });
+    setLayer(ID, "outter_acc", {
+      width: 180,
+      height: 260,
+      z: layerID++,
+      showfn(options2) {
+        if (isObject(options2.outter)) {
+          return !!options2.outter.acc;
+        }
+        return false;
+      },
+      srcfn(options2) {
+        if (isObject(options2.outter)) {
+          return options2.outter.acc ? __resolve(AVATARPATH, `outter/${options2.outter.acc}.png`) : options2.dummy;
+        }
+        return options2.dummy;
+      }
+    });
     setLayer(ID, "mouth", {
       width: 180,
       height: 260,
@@ -1476,6 +1600,23 @@ var Avatar;
             return options2.neck.color;
           }
         }
+      }
+    });
+    setLayer(ID, "neck_acc", {
+      width: 180,
+      height: 260,
+      z: layerID++,
+      showfn(options2) {
+        if (isObject(options2.neck)) {
+          return !!options2.neck.acc;
+        }
+        return false;
+      },
+      srcfn(options2) {
+        if (isObject(options2.neck)) {
+          return options2.neck.acc ? __resolve(AVATARPATH, `outter/${options2.neck.acc}.png`) : options2.dummy;
+        }
+        return options2.dummy;
       }
     });
     setLayer(ID, "hairfront", {

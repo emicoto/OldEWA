@@ -4324,16 +4324,6 @@ function LangSpl(CN,EN) {
 }
 window.LangSpl = LangSpl
 DefineMacroS("lang", LangSpl)
-
-function test(arg) {
-	if (arg){
-		return "测试成功？"
-	}else{
-		return "2333"
-	}
-}
-
-window.test = test
 /* twine-user-script #10: "sugarcubeConfig.js" */
 Config.history.controls = true;
 
@@ -9513,7 +9503,10 @@ var Avatar;
         eyes: null,
         mouth: null,
         tatoos: null,
+        dick: null,
         penis: null,
+        nipple: null,
+        plus: null,
         body: null,
         hairback: null,
         kemoback: { wing: null, tail: null },
@@ -9560,7 +9553,10 @@ var Avatar;
         eyes: null,
         mouth: null,
         tatoos: null,
+        dick: null,
         penis: null,
+        nipple: null,
+        plus: null,
         body: null,
         hairback: null,
         kemoback: { wing: null, tail: null },
@@ -9607,7 +9603,10 @@ var Avatar;
         eyes: null,
         mouth: null,
         tatoos: null,
+        dick: null,
         penis: null,
+        nipple: null,
+        plus: null,
         body: null,
         hairback: null,
         kemoback: { wing: null, tail: null },
@@ -9795,6 +9794,18 @@ var Avatar;
         return options2.body ? __resolve(AVATARPATH, `body/${options2.body}.png`) : options2.dummy;
       }
     });
+    setLayer(ID, "nipple", {
+      width: 180,
+      height: 260,
+      z: layerID++,
+      dx,
+      showfn(options2) {
+        return !!options2.nipple;
+      },
+      srcfn(options2) {
+        return options2.nipple ? __resolve(AVATARPATH, `${options2.nipple}.png`) : options2.dummy;
+      }
+    });
     setLayer(ID, "hand", {
       width: 180,
       height: 260,
@@ -9851,6 +9862,24 @@ var Avatar;
             return options2.inner_up.color;
           }
         }
+      }
+    });
+    setLayer(ID, "inner_up_acc", {
+      width: 180,
+      height: 260,
+      z: layerID++,
+      dx,
+      showfn(options2) {
+        if (isObject(options2.inner_up)) {
+          return !!options2.inner_up.acc;
+        }
+        return false;
+      },
+      srcfn(options2) {
+        if (isObject(options2.inner_up)) {
+          return options2.inner_up.acc ? __resolve(AVATARPATH, `inner_up/${options2.inner_up.acc}.png`) : options2.dummy;
+        }
+        return options2.dummy;
       }
     });
     setLayer(ID, "top", {
@@ -9927,6 +9956,24 @@ var Avatar;
             return options2.outter.color;
           }
         }
+      }
+    });
+    setLayer(ID, "outter_acc", {
+      width: 180,
+      height: 260,
+      z: layerID++,
+      dx,
+      showfn(options2) {
+        if (isObject(options2.outter)) {
+          return !!options2.outter.acc;
+        }
+        return false;
+      },
+      srcfn(options2) {
+        if (isObject(options2.outter)) {
+          return options2.outter.acc ? __resolve(AVATARPATH, `top/${options2.outter.acc}.png`) : options2.dummy;
+        }
+        return options2.dummy;
       }
     });
     setLayer(ID, "mouth", {
@@ -10434,13 +10481,46 @@ var Avatar;
         return options2.body ? __resolve(AVATARPATH, `body/${options2.body}.png`) : options2.dummy;
       }
     });
-    setLayer(ID, "penis", {
+    setLayer(ID, "plus", {
+      width: 180,
+      height: 260,
+      z: layerID++,
+      showfn(options2) {
+        return !!options2.plus;
+      },
+      srcfn(options2) {
+        return options2.plus ? __resolve(AVATARPATH, `${options2.plus}.png`) : options2.dummy;
+      }
+    });
+    setLayer(ID, "nipple", {
+      width: 180,
+      height: 260,
+      z: layerID++,
+      showfn(options2) {
+        return !!options2.nipple;
+      },
+      srcfn(options2) {
+        return options2.nipple ? __resolve(AVATARPATH, `${options2.nipple}.png`) : options2.dummy;
+      }
+    });
+    setLayer(ID, "dick", {
       width: 180,
       height: 260,
       z: layerID++,
       show: true,
       srcfn(options2) {
-        return options2.penis ? __resolve(AVATARPATH, `body/${options2.penis}.png`) : options2.dummy;
+        return options2.dick ? __resolve(AVATARPATH, `body/${options2.dick}.png`) : options2.dummy;
+      }
+    });
+    setLayer(ID, "penis", {
+      width: 180,
+      height: 260,
+      z: layerID++,
+      showfn(options2) {
+        return !!options2.penis;
+      },
+      srcfn(options2) {
+        return options2.penis ? __resolve(AVATARPATH, `${options2.penis}.png`) : options2.dummy;
       }
     });
     setLayer(ID, "legs", {
@@ -10469,6 +10549,23 @@ var Avatar;
             return options2.legs.color;
           }
         }
+      }
+    });
+    setLayer(ID, "legs_acc", {
+      width: 180,
+      height: 260,
+      z: layerID++,
+      showfn(options2) {
+        if (isObject(options2.legs)) {
+          return !!options2.legs.acc;
+        }
+        return false;
+      },
+      srcfn(options2) {
+        if (isObject(options2.legs)) {
+          return options2.legs.acc ? __resolve(AVATARPATH, `legs/${options2.legs.acc}.png`) : options2.dummy;
+        }
+        return options2.dummy;
       }
     });
     setLayer(ID, "shoes", {
@@ -10735,6 +10832,23 @@ var Avatar;
         }
       }
     });
+    setLayer(ID, "outter_acc", {
+      width: 180,
+      height: 260,
+      z: layerID++,
+      showfn(options2) {
+        if (isObject(options2.outter)) {
+          return !!options2.outter.acc;
+        }
+        return false;
+      },
+      srcfn(options2) {
+        if (isObject(options2.outter)) {
+          return options2.outter.acc ? __resolve(AVATARPATH, `outter/${options2.outter.acc}.png`) : options2.dummy;
+        }
+        return options2.dummy;
+      }
+    });
     setLayer(ID, "mouth", {
       width: 180,
       height: 260,
@@ -10892,6 +11006,23 @@ var Avatar;
             return options2.neck.color;
           }
         }
+      }
+    });
+    setLayer(ID, "neck_acc", {
+      width: 180,
+      height: 260,
+      z: layerID++,
+      showfn(options2) {
+        if (isObject(options2.neck)) {
+          return !!options2.neck.acc;
+        }
+        return false;
+      },
+      srcfn(options2) {
+        if (isObject(options2.neck)) {
+          return options2.neck.acc ? __resolve(AVATARPATH, `outter/${options2.neck.acc}.png`) : options2.dummy;
+        }
+        return options2.dummy;
       }
     });
     setLayer(ID, "hairfront", {
@@ -11865,9 +11996,17 @@ function warmth() {
 window.warmth = warmth
 
 /* 商店处理 */
+
+function setShowCaseUID(){
+    V.showcase.uid = random(100000,999999)
+}
+window.setShowCaseUID = setShowCaseUID
+
 function setShowCase(table) {
     if (typeof(table) == "object") {
-        V.showcase = table
+        V.showcase = clone(table)
+        setShowCaseUID()
+
         new Wikifier(null,"<<replace '#show_container'>><<ShowCase>><</replace>>")
     }else{
         console.log(table,"error: is not object")
@@ -11878,6 +12017,8 @@ window.setShowCase = setShowCase
 
 function setPatterns(arg) {
     V.showcase.acc = arg
+    setShowCaseUID()
+
     Avatar.setShop()
     /*new Wikifier(null,"<<replace '#showcase'>><<ShowManequin>><</replace>>")*/
 }
@@ -11886,32 +12027,95 @@ window.setPatterns = setPatterns
 function setColors(arg,name,change = false) {
     if (change) {
         Avatar.setShop(arg)
+        setShowCaseUID()
         return
     }
     V.showcase.color = arg
     V.showcase.colorname = name
+    setShowCaseUID()
     Avatar.setShop()
     /*new Wikifier(null,"<<replace '#showcase'>><<ShowManequin>><</replace>>")*/
 }
 window.setColors = setColors
 
-function BuyOutFit() {
-    if (V.money > V.showcase.cost) {
+function tryoncost() {
+    const group = Object.keys(V.tryon)
+    var n = 0
+
+    for (let i=0; i < group.length; i++){
+        if(V.tryon[group[i]] && V.tryon[group[i]].cost > 0) n += V.tryon[group[i]].cost;
+    }
+    return n
+}
+window.tryoncost = tryoncost
+
+function BuyOutFit(args) {
+    var layer = V.showcase.layer
+    var text
+
+    if (args=="select" && V.money > V.showcase.cost) {
         V.money = V.money - V.showcase.cost
         let buystuff = clone(V.showcase)
-        V.closet[V.showcase.layer].push(buystuff)
+        V.closet[layer].push(buystuff)
 
-        var text = "你花费了"+V.showcase.cost+"元购买了"+V.showcase.name+"<</replace>>"
-    }else{
-        var text = "虽然你想买"+V.showcase.name+"，但钱不够……"
+        /* 如果买了就直接清除掉 */
+        if (V.tryon[layer] && V.tryon[layer].uid==V.Equip[layer].uid && V.tryon[layer].uid == V.showcase.uid){
+        V.tryon[layer] = null;
+        }
+
+        text = "你花费了"+V.showcase.cost+"元购买了"+V.showcase.name+"。"
+    }
+    else if (args=="tryon" && V.money > tryoncost() ){
+        V.money = V.money - tryoncost()
+
+        let group = Object.keys(V.tryon)
+
+        for (let i=0; i < group.length;i++){
+            if (V.tryon[group[i]]){
+                let buystuff = clone(V.tryon[group[i]])
+                let layer = buystuff.layer
+                V.closet[layer].push(buystuff)
+            }
+        }
+
+        for (let i=0; i < group.length; i++){
+            if ( V.TEquip[group[i]] && V.TEquip[group[i]].uid != V.Equip[group[i]].uid){
+                let leftstuff = clone(V.TEquip[group[i]])
+                let layer = leftstuff.layer
+                V.closet[layer].push(leftstuff)
+            }
+        }
+        
+        text = "你花费了"+tryoncost()+"元购买了身上试穿的衣服。"
+        
+        V.tryon = {neck: null, hand: null, face: null,hat: null, outter: null, top: null,bottom: null,inner_up: null, inner_bt: null,shoes: null, legs: null,}
+        V.TEquip = clone(V.Equip)
+
+        
+    }
+    else{
+        if (args =="select") text = "虽然你想买"+V.showcase.name+"，但钱不够……";
+        if (args == "tryon") text = "虽然你想买身上试穿的衣服，但钱不够……"
     }
 
-    new Wikifier(null,"<<replace '#action-text'>>"+text)
-    new Wikifier(null,"<<replace '#action-text2'>>"+text)
+    new Wikifier(null,"<<replace '#action-text'>>"+text+"<</replace>>")
+    new Wikifier(null,"<<replace '#action-text2'>>"+text+"<</replace>>")
     ShowPopUP()
     
 }
 window.BuyOutFit = BuyOutFit
+
+function tryoncheck() {
+    const group = ["neck","hand","face","hat","outter","top","bottom","inner_up","inner_bt","shoes","legs"]
+    var i,n
+    for ( i=0; i<group.length; i++){
+        if (V.tryon[group[i]]) return true;
+        else n++
+    }
+
+    if(n==group.length) return false
+}
+window.tryoncheck = tryoncheck
 
 /* 衣柜处理 */
 function strip(arg) {
@@ -11937,6 +12141,7 @@ function strip(arg) {
     ShowPopUP()
 }
 window.strip = strip
+
 
 function dressOn(args, arg) {
 
@@ -11987,6 +12192,10 @@ function dressOn(args, arg) {
             V.closet.bottom.push(obj)
             V.Equip.bottom = null
         }
+    }
+
+    if(V.Equip[args].functional){
+        V.Equip[args].effect()
     }
 
     const group = ["face","neck","hand","back"]
@@ -12149,6 +12358,7 @@ window.Revent = Revent
 DefineMacroS("Revent", Revent);
 
 function getitem(catgr, item, num=1) {
+    var cname, ename
     if(D.itemlist[catgr][item].name.length > 0){
         if (V.items[catgr][item]){
             V.items[catgr][item].num += num
@@ -12160,7 +12370,11 @@ function getitem(catgr, item, num=1) {
                 thumb: D.itemlist[catgr][item].thumb,
                 num: num,
             }
+
+        cname = D.itemlist[catgr][item].name;
+        ename = D.itemlist[catgr][item].name_en;
         }
+        
     }else{
         if (V.items.other.通用物品){
             V.items.other.通用物品 += num
@@ -12173,9 +12387,11 @@ function getitem(catgr, item, num=1) {
                 num: num,
             }
         }
+        cname = "通用物品";
+        ename = "Common Material";
     }
     V.anounce.flag = true
-    V.anounce.text = "获得了《"+item+"》x "+num
+    V.anounce.text = "获得了《"+cname+"》x "+num
     if(V.lang == "EN"){
         V.anounce.text = "got《"+D.itemlist[catgr][item].en_name+"》 x "+num
     }
@@ -12614,6 +12830,7 @@ Macro.add('time', {
 
 &lt;&lt;InitFrontHairStyle&gt;&gt;
 &lt;&lt;InitBackHairStyle&gt;&gt;
+&lt;&lt;InitLewdEquip&gt;&gt;
 
 &lt;&lt;/widget&gt;&gt;
 
@@ -12623,7 +12840,7 @@ Macro.add('time', {
 &lt;&lt;widget &quot;InitClothTop&quot;&gt;&gt;
     &lt;&lt;set Avatars.top to [
         {
-            id: 0,
+            id: 0, uid: 0,
             index : &quot;naked&quot;,    name : &quot;裸&quot;,     gender : &quot;n&quot;,
             text : &quot;无&quot;,   
             tag  : [&quot;裸露&quot;],
@@ -12644,7 +12861,7 @@ Macro.add('time', {
             patterns: [],
         },
         {
-            id: 1,
+            id: 1, uid: 0,
             index : &quot;Tshirt&quot;,    name : &quot;T恤&quot;,     gender : &quot;n&quot;,
             text : &quot;一件简单的T恤。 并不能给你太多保护，但总比没有好。&quot;,   
             tag  : [&quot;日常&quot;],
@@ -12665,7 +12882,7 @@ Macro.add('time', {
             patterns: [&quot;slime&quot;,&quot;heart&quot;],
         },
         {
-            id: 2,
+            id: 2, uid: 0,
             index : &quot;shirt&quot;,    name : &quot;衬衫&quot;,     gender : &quot;n&quot;,
             text : &quot;一件简单的西式长袖衬衫。浅浅的暗纹给你增加了些许气质。&quot;,   
             tag  : [&quot;日常&quot;,&quot;正式&quot;,&quot;商务&quot;],
@@ -12686,7 +12903,7 @@ Macro.add('time', {
             patterns: [],
         },
         {
-            id: 3,
+            id: 3, uid: 0,
             index : &quot;bwopiece&quot;,    name : &quot;BW连衣裙&quot;,     gender : &quot;f&quot;,
             text : &quot;一件设计简单的连衣裙。修身的设计显得你身材更苗条。毕竟是易淘上的便宜货，不能指望布料的防御效果。&quot;,   
             tag  : [&quot;日常&quot;],
@@ -12706,7 +12923,7 @@ Macro.add('time', {
             patterns: [],
         },
         {
-            id: 4,
+            id: 4, uid: 0,
             index : &quot;slpshortup&quot;,    name : &quot;短袖睡衣&quot;,     gender : &quot;n&quot;,
             text : &quot;一件设计简单的睡衣。轻柔透气的布料给你带来好梦。&quot;,   
             tag  : [&quot;日常&quot;,&quot;睡衣&quot;],
@@ -12731,7 +12948,7 @@ Macro.add('time', {
 &lt;&lt;widget &quot;InitClothBottom&quot;&gt;&gt;
     &lt;&lt;set Avatars.bottom to [
         {
-            id: 0,
+            id: 0, uid: 0,
             index : &quot;naked&quot;,    name : &quot;裸&quot;,     gender : &quot;n&quot;,
             text : &quot;无&quot;,   
             tag  : [&quot;裸露&quot;],
@@ -12750,7 +12967,7 @@ Macro.add('time', {
             patterns: [],
         },
         {
-            id: 1,
+            id: 1, uid: 0,
             index : &quot;shortpant&quot;,    name : &quot;短裤&quot;,     gender : &quot;n&quot;,
             text : &quot;一条简单的短裤。&quot;,   
             tag  : [&quot;日常&quot;],
@@ -12769,7 +12986,7 @@ Macro.add('time', {
             patterns: [],
         },
         {
-            id: 2,
+            id: 2, uid: 0,
             index : &quot;shortskirt&quot;,    name : &quot;短裙&quot;,     gender : &quot;f&quot;,
             text : &quot;一条简单的短裙。&quot;,   
             tag  : [&quot;日常&quot;],
@@ -12788,7 +13005,7 @@ Macro.add('time', {
             patterns: [],
         },
         {
-            id: 3,
+            id: 3, uid: 0,
             index : &quot;bskirt&quot;,    name : &quot;西装短裙&quot;,     gender : &quot;f&quot;,
             text : &quot;一条简单的西式短裙。毕竟是廉价款，不能指望耐久度。&quot;,   
             tag  : [&quot;日常&quot;,&quot;商务&quot;],
@@ -12807,7 +13024,7 @@ Macro.add('time', {
             patterns: [],
         },
         {
-            id: 4,
+            id: 4, uid: 0,
             index : &quot;slpshortbt&quot;,    name : &quot;睡衣短裤&quot;,     gender : &quot;n&quot;,
             text : &quot;一件设计简单的睡衣短裤。轻柔透气的布料给你带来好梦。&quot;,   
             tag  : [&quot;日常&quot;,&quot;睡衣&quot;],
@@ -12831,7 +13048,7 @@ Macro.add('time', {
 &lt;&lt;widget &quot;InitClothUnderbottoms&quot;&gt;&gt;
     &lt;&lt;set Avatars.inner_bt to [
         {
-            id: 0,
+            id: 0, uid: 0,
             index : &quot;naked&quot;,    name : &quot;裸&quot;,     gender : &quot;n&quot;,
             text : &quot;无&quot;,   
             tag  : [&quot;裸露&quot;],
@@ -12850,7 +13067,7 @@ Macro.add('time', {
             patterns: [],
         },
         {
-            id: 1,
+            id: 1, uid: 0,
             index : &quot;boxer&quot;,    name : &quot;四角内裤&quot;,     gender : &quot;m&quot;,
             text : &quot;一条简单的四角内裤。&quot;,   
             tag  : [&quot;日常&quot;],
@@ -12869,7 +13086,7 @@ Macro.add('time', {
             patterns: [],
         },
         {
-            id: 2,
+            id: 2, uid: 0,
             index : &quot;pantie&quot;,    name : &quot;内裤&quot;,     gender : &quot;f&quot;,
             text : &quot;一款简单朴素的内裤。&quot;,   
             tag  : [&quot;日常&quot;],
@@ -12893,7 +13110,7 @@ Macro.add('time', {
 &lt;&lt;widget &quot;InitClothShoes&quot;&gt;&gt;
     &lt;&lt;set Avatars.shoes to [
         {
-            id: 0,
+            id: 0, uid: 0,
             index : &quot;naked&quot;,    name : &quot;裸&quot;,     gender : &quot;n&quot;,
             text : &quot;无&quot;,   
             tag  : [&quot;裸露&quot;], 
@@ -12911,7 +13128,7 @@ Macro.add('time', {
             patterns: [],
         },
         {
-            id: 1,
+            id: 1, uid: 0,
             index : &quot;sportshoes&quot;,    name : &quot;运动鞋&quot;,     gender : &quot;n&quot;,
             text : &quot;一双普通的白色运动鞋。&quot;,   
             tag  : [&quot;日常&quot;,&quot;运动&quot;], 
@@ -12929,7 +13146,7 @@ Macro.add('time', {
             patterns: [],
         },
         {
-            id: 2,
+            id: 2, uid: 0,
             index : &quot;highheel&quot;,    name : &quot;高跟鞋&quot;,     gender : &quot;f&quot;,
             text : &quot;一双简单设计的高跟鞋。&quot;,   
             tag  : [&quot;日常&quot;,&quot;商务&quot;], 
@@ -12952,7 +13169,7 @@ Macro.add('time', {
 &lt;&lt;widget &quot;InitClothSocks&quot;&gt;&gt;
     &lt;&lt;set Avatars.legs to [
         {
-            id: 0,
+            id: 0, uid: 0,
             index : &quot;naked&quot;,    name : &quot;裸&quot;,     gender : &quot;n&quot;,
             text : &quot;无&quot;,   
             tag  : [&quot;裸露&quot;], 
@@ -12970,7 +13187,7 @@ Macro.add('time', {
             patterns: [],
         },
         {
-            id: 1,
+            id: 1, uid: 0,
             index : &quot;sportsocks&quot;,    name : &quot;运动短袜&quot;,     gender : &quot;n&quot;,
             text : &quot;一双简单的运动袜。&quot;,   
             tag  : [&quot;日常&quot;,&quot;运动&quot;], 
@@ -12992,7 +13209,7 @@ Macro.add('time', {
 
     &lt;&lt;set Avatars.neck to [
         {
-            id: 0,
+            id: 0, uid: 0,
             index : &quot;naked&quot;,    name : &quot;裸&quot;,     gender : &quot;n&quot;,
             text : &quot;无&quot;,   
             tag  : [&quot;裸露&quot;],
@@ -13010,7 +13227,7 @@ Macro.add('time', {
 
     &lt;&lt;set Avatars.hat to [
         {
-            id: 0,
+            id: 0, uid: 0,
             index : &quot;naked&quot;,    name : &quot;裸&quot;,     gender : &quot;n&quot;,
             text : &quot;无&quot;,   
             tag  : [&quot;裸露&quot;],
@@ -13030,7 +13247,7 @@ Macro.add('time', {
 
     &lt;&lt;set Avatars.face to [
         {
-            id: 0,
+            id: 0, uid: 0,
             index : &quot;naked&quot;,    name : &quot;裸&quot;,     gender : &quot;n&quot;,
             text : &quot;无&quot;,   
             tag  : [&quot;裸露&quot;],
@@ -13048,7 +13265,7 @@ Macro.add('time', {
 
     &lt;&lt;set Avatars.hand to [
         {
-            id : 0,
+            id : 0, uid: 0,
             index : &quot;naked&quot;,    name : &quot;裸&quot;,     gender : &quot;n&quot;,
             text : &quot;无&quot;,   
             tag  : [&quot;裸露&quot;],
@@ -13070,7 +13287,7 @@ Macro.add('time', {
 
     &lt;&lt;set Avatars.outter to [
         {
-            id: 0,
+            id: 0, uid: 0,
             index : &quot;naked&quot;,    name : &quot;裸&quot;,     gender : &quot;n&quot;,
             text : &quot;无&quot;,   
             tag  : [&quot;裸露&quot;],
@@ -13098,7 +13315,7 @@ Macro.add('time', {
 
     &lt;&lt;set Avatars.inner_up to [
         {
-            id: 0,
+            id: 0, uid: 0,
             index : &quot;naked&quot;,    name : &quot;裸&quot;,     gender : &quot;n&quot;,
             text : &quot;无&quot;,   
             tag  : [&quot;裸露&quot;],
@@ -13119,7 +13336,7 @@ Macro.add('time', {
             patterns: []
         },
         {
-            id: 1,
+            id: 1, uid: 0,
             index : &quot;camisole&quot;,    name : &quot;吊带背心&quot;,     gender : &quot;f&quot;,
             text : &quot;一件简单的吊带背心，给胸部小小的你带来些许安全感。&quot;,   
             tag  : [&quot;日常&quot;],
@@ -13140,7 +13357,7 @@ Macro.add('time', {
             patterns: []
         },
         {
-            id: 2,
+            id: 2, uid: 0,
             index : &quot;simplebra&quot;,    name : &quot;胸罩&quot;,     gender : &quot;f&quot;,
             text : &quot;一件设计朴素的胸罩。&quot;,   
             tag  : [&quot;日常&quot;],
@@ -13188,6 +13405,37 @@ Macro.add('time', {
             id:1, index:&quot;curly&quot;, long:true, fixcolor:false,
         }
     }&gt;&gt;
+&lt;&lt;/widget&gt;&gt;
+
+&lt;&lt;widget &quot;InitLewdEquip&quot;&gt;&gt;
+    &lt;&lt;set Avatars.lewdup to {
+        乳环:{
+            id:1, name:&quot;乳环&quot;, png: &quot;sp/nipring&quot;,
+            breast: true, imgenable:false, functional: true,
+            cost: 20, energy: 0,
+            category:&quot;特殊&quot;, layer:&quot;nipple&quot;,
+            shop: &quot;adult&quot;,
+
+            effect(min){
+                V.FEquip.nipple = true;
+                V.PC.base.快B[0] += 0.5*min;
+                V.PC.base.疼痛[0] += 2*min;
+                return V.PC.base.快B;
+            },
+        },
+        乳环项链:{},
+        乳头跳蛋:{},
+    }&gt;&gt;
+
+    /*  贞操笼、贞操带、贞操内裤算内裤范围内!带震动棒版本的穿上时联动这里的function? */
+    &lt;&lt;set Avatars.lewdbt to {
+        V震动棒:{},
+        A震动棒:{},
+        双震动棒:{},
+        V跳蛋:{},
+        A跳蛋:{},
+    }&gt;&gt;
+    
 &lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="3" name="EmotionList" tags="widget" position="350,100" size="100,100">&lt;&lt;widget &quot;InitEmotion&quot;&gt;&gt;
     &lt;&lt;set A.l.eyebrows to [&quot;angry&quot;,&quot;confuse&quot;,&quot;happy&quot;,&quot;normal&quot;,&quot;sad&quot;]&gt;&gt;
     &lt;&lt;set A.l.eyes to [&quot;ahe&quot;,&quot;blink1&quot;,&quot;blink2&quot;,&quot;blink2&quot;,&quot;close1&quot;,&quot;close2&quot;,&quot;full&quot;,&quot;idle&quot;,&quot;half&quot;,&quot;lookdown&quot;,&quot;lookleft&quot;,&quot;lookup1&quot;,&quot;lookup2&quot;,&quot;lookup3&quot;,&quot;quater1&quot;,&quot;quater2&quot;]&gt;&gt;
@@ -13426,9 +13674,9 @@ Macro.add('time', {
             name:&quot;汉堡包&quot;, type:&quot;食物&quot;, category:&quot;food&quot;,
             thumb:null, price:6, num:0,
             shop:&quot;快餐&quot;,
-            name_en:&quot;hamburger&quot;,
+            name_en:&quot;Hamburger&quot;,
             text:&quot;只要是快餐店就一定会有卖的汉堡包。毕竟是最便宜的汉堡，份量不怎么的，味道也很一般。&quot;,
-            text_en:&quot;&quot;,
+            text_en:&quot;The burger that definitely will be sold in all kind of fast food restaurant. Because it&#39;s the cheapest burger, so you can&#39;t expect its volumn and taste.&quot;,
             effect(){
                 V.PC.base.饮食[0] += 200;
                 return V.PC.base.饮食;
@@ -13443,11 +13691,10 @@ Macro.add('time', {
         魔力方块:{
             name:&quot;魔力方块&quot;, type:&quot;重要&quot;, category:&quot;important&quot;,
             thumb:null, effect:&quot;剧情&quot;, value:0, price:0, num:0,
-            
             shop:null,
-            name_en:&quot;&quot;,
+            name_en:&quot;M-Cube&quot;,
             text:&quot;不知道有什么用的含有魔力的方块。往方块注入魔力的话，似乎能测试出自己的魔力类型。&quot;,
-            text_en:&quot;&quot;,
+            text_en:&quot;A cube can contain mana but not way to use it. You may test your own mana type if you put mana into the cube. &quot;,
         },
     }, 
     material:{},
@@ -13456,9 +13703,9 @@ Macro.add('time', {
             name:&quot;通用物品&quot;, type:&quot;其他&quot;, category:&quot;other&quot;,
             thumb:null, effect:&quot;无&quot;, value:0, price:1,num:0, 
             shop:null,
-            name_en:&quot;&quot;,
+            name_en:&quot;Common Material&quot;,
             text:&quot;一个万能的通用物品。虽然万能，却又什么都做不到。当玩家尝试获取某个不存在的物品是才会产生的物质。只能用来合成。&quot;,
-            text_en:&quot;&quot;,
+            text_en:&quot;A common material for everything. Although it&#39;s universal but it can&#39;t do anything. It only will happen When player try to get an item doesn&#39;t exist.&quot;,
         },
     },
 }&gt;&gt;
@@ -13594,23 +13841,17 @@ Macro.add('time', {
     emoadd      : {tear:false, shy:false, red:false, hurt:false},
 
     eyebrow     : null, hairfront   : null, kemofront: {mimi:null, horn:null}, eyes : null,
-    mouth       : null, tatoos      : null, penis       : null,
+    mouth       : null, tatoos      : null, dick       : null,
+    penis       : null, nipple      : null, plus       : null,
     body        : null, hairback    : null, kemoback: {wing:null, tail:null},  back : null,
     background  : null,
 }&gt;&gt;
 
 &lt;&lt;set $tryon to {
-    frame       : null,
-        
     neck        : null, hand        : null, face        : null,
     hat         : null, outter      : null, top         : null,
     bottom      : null, inner_up    : null, inner_bt    : null,
     shoes       : null, legs       : null,
-
-    eyebrow     : null, hairfront   : null, kemofront: {mimi:null, horn:null}, eyes : null,
-    mouth       : null, tatoos      : null, penis       : null,
-    body        : null, hairback    : null, kemoback: {wing:null, tail:null},  back : null,
-    background  : null,
 }&gt;&gt;
 
 /* 商店种类 */
@@ -13621,6 +13862,11 @@ Macro.add('time', {
 &lt;&lt;set $items to {
     foods: {}, medicine: {}, sextoy: {}, weapon: {}, accesory: {}, 
     material: {}, important:{}, other:{},
+}&gt;&gt;
+
+/* 特殊装备物 */
+&lt;&lt;set $FEquip to {
+    nipple: false, vagina: false, anal: false, ureth: false, penis: false, inner_bt: false, inner_up: false,
 }&gt;&gt;
 
 &lt;!-- 衣柜。身上的衣服会从衣柜里取出来放到 Equip里 --&gt;
@@ -13889,7 +14135,7 @@ Macro.add('time', {
 
 &lt;!-- PC的状态 --&gt;
 &lt;&lt;set $PC.state to {
-    生病 : false,    怀孕 : false,    寄生 : false,    肠内受孕 : false,    失眠 : false,
+    生病 : false,    怀孕 : false,    寄生 : false,    肠内受孕 : false,    失眠 : false,   发情:false,
 }&gt;&gt;
 
 &lt;&lt;set $PC.genital to { &quot;阴茎&quot; : 14, &quot;子宫&quot; : null,}&gt;&gt;
@@ -13946,16 +14192,14 @@ $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌}
     back    : null,
     hairfront : &quot;natural&quot;,    hairback  : &quot;straight&quot;,
     emote     : &quot;正常&quot;,
+
+    /* 特殊装备，不属于衣服，而是属于道具装备的范围 */
+    vagina : null, penis: null, ureth: null, anal: null,
+    nipple : null,
 }&gt;&gt;
 
 &lt;!-- 临时备份 --&gt;
-&lt;&lt;set $TEquip to {
-    neck        : null,  hat        : null,  face       : null,
-    outter      : null,  top        : null,  hand       : null,
-    bottom      : null,  inner_up   : null,  inner_bt: null,
-    shoes       : null,  legs       : null,  back       : null,
-    hairfront   : null,  hairback   : null,  emote      : null,
-}&gt;&gt;
+&lt;&lt;set $TEquip to {}&gt;&gt;
 
 &lt;&lt;dressup &quot;top&quot; 1 &quot;#F14660&quot; &quot;红&quot;&gt;&gt;
 &lt;&lt;dressup &quot;inner_bt&quot; 1&gt;&gt;
@@ -13974,7 +14218,6 @@ $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌}
 &lt;div style=&quot;margin-left:16px;font-size:14px&quot;&gt;∵ &lt;&lt;lang &quot;预设人物卡&quot; &quot;Preset&quot;&gt;&gt;：
 &lt;select id=&quot;preset&quot; name=&quot;preset&quot; onchange=&quot;V.preset = this.value; showcharainfo()&quot;&gt;
 	&lt;option value=&quot;魔女&quot; selected&gt;魔女&lt;/option&gt;
-	&lt;option value=&quot;羽轩&quot;&gt;羽轩&lt;/option&gt;
 	&lt;option value=&quot;沐歌&quot;&gt;沐歌&lt;/option&gt;
 	&lt;option value=&quot;云鹿&quot;&gt;云鹿&lt;/option&gt;
     &lt;option value=&quot;魔女&quot; hidden=&quot;hidden&quot; selected=&quot;selected&quot;&gt;魔女&lt;/option&gt;
@@ -13989,7 +14232,7 @@ $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌}
 &lt;&lt;widget &quot;charainfo&quot;&gt;&gt;
 &lt;&lt;switch $preset&gt;&gt;
 &lt;&lt;case &quot;魔女&quot;&gt;&gt;大家的魔女&lt;br&gt; 是个伪娘。既然是魔（法少）女，那当然擅长魔法。&lt;br&gt;以上都是大嘘。只是个一个二次元爱好者，喜欢玩游戏，会画点画，玩COSPLAY，搞搞女装直播的样子。
-&lt;&lt;case &quot;沐歌&quot;&gt;&gt;新人爱豆&lt;br&gt; 初露头角的美少女爱豆。除了唱歌，跳舞和演艺也不错。&lt;br&gt; 说是新人，其实后台有点硬，起码家境不穷。
+&lt;&lt;case &quot;沐歌&quot;&gt;&gt;新人爱豆&lt;br&gt; 初露头角的美少女爱豆。除了唱歌，跳舞和演艺也不错。&lt;br&gt; 虽然是新人，其实后台有点硬，起码家境不穷。
 &lt;&lt;case &quot;云鹿&quot;&gt;&gt;修仙爱好者&lt;br&gt; 小正太，热衷修仙文学。从小跟着爷爷练武术，身体素质很好。&lt;br&gt; 除了追小说，自己也会试着写小说的样子。
 &lt;&lt;default&gt;&gt;大家的魔女&lt;br&gt; 是个伪娘。既然是魔（法少）女，那当然擅长魔法。&lt;br&gt;以上都是大嘘。只是个一个二次元爱好者，喜欢玩游戏，会画点画，玩COSPLAY，搞搞女装直播的样子。
 &lt;&lt;/switch&gt;&gt;
@@ -14077,7 +14320,7 @@ $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌}
 &lt;&lt;/widget&gt;&gt;
 
 &lt;&lt;widget &quot;CMCri&quot;&gt;&gt;
-　阴蒂感度 &lt;&lt;CMPenis&gt;&gt;&lt;br&gt;
+　阴蒂感度　&lt;&lt;CMPenis&gt;&gt;&lt;br&gt;
 &lt;&lt;/widget&gt;&gt;
 
 &lt;&lt;widget &quot;CMGirl&quot;&gt;&gt;
@@ -14847,9 +15090,10 @@ $(document).on(&#39;:passagerender&#39;, function (ev) {
 			&lt;&lt;replace &quot;#money&quot;&gt;&gt;　&lt;&lt;printmoney $money&gt;&gt;&lt;&lt;/replace&gt;&gt;
 		&lt;&lt;/if&gt;&gt;
 	&lt;&lt;/repeat&gt;&gt;
-&lt;&lt;/silently&gt;&gt;
 
-&lt;&lt;set $anounce to {flag:false, text:&quot;&quot;, type:&quot;弹出通知&quot;}&gt;&gt;</tw-passagedata><tw-passagedata pid="21" name="SidebarWidget" tags="widget" position="100,350" size="100,100">&lt;&lt;widget &quot;showtitle&quot;&gt;&gt;
+&lt;&lt;set $anounce to {flag:false, text:&quot;&quot;, type:&quot;弹出通知&quot;}&gt;&gt;
+
+&lt;&lt;/silently&gt;&gt;</tw-passagedata><tw-passagedata pid="21" name="SidebarWidget" tags="widget" position="100,350" size="100,100">&lt;&lt;widget &quot;showtitle&quot;&gt;&gt;
     &lt;div align=&quot;center&quot;&gt;
         &lt;img src=&quot;image/banner.png&quot;&gt;
         &lt;div id=&quot;story-title&quot;&gt;失乐园物语&lt;/div&gt;
@@ -15797,6 +16041,37 @@ Total &lt;&lt;print $PC.sexrec.高潮.t&gt;&gt;&lt;br&gt;
 &lt;&lt;/if&gt;&gt;
  */
 
+ /* 乳头/丁丁等特殊装备 */
+&lt;&lt;if $Equip.penis isnot null&gt;&gt;
+    &lt;&lt;set $avatar.penis to setAvatar(&quot;penis&quot;, $Equip.penis.png)&gt;&gt;
+&lt;&lt;else&gt;&gt;
+    &lt;&lt;set $avatar.penis to setAvatar(&quot;penis&quot;, null)&gt;&gt;
+&lt;&lt;/if&gt;&gt;
+
+&lt;&lt;if $Equip.nipple isnot null&gt;&gt;
+    &lt;&lt;if $Equip.nipple.breast is true&gt;&gt;
+        &lt;&lt;set _path to $Equip.nipple.png + &quot;_&quot; + breastsize()&gt;&gt;
+    &lt;&lt;else&gt;&gt;
+        &lt;&lt;set _path to $Equip.nipple.png&gt;&gt;
+    &lt;&lt;/if&gt;&gt;
+    &lt;&lt;set $avatar.nipple to setAvatar(&quot;nipple&quot;, _path)&gt;&gt;
+&lt;&lt;else&gt;&gt;
+    &lt;&lt;set $avatar.nipple to setAvatar(&quot;nipple&quot;, null)&gt;&gt;
+&lt;&lt;/if&gt;&gt;
+
+&lt;&lt;if $Equip.anal isnot null and $Equip.anal.png isnot null&gt;&gt;
+&lt;&lt;set $avatar.plus to setAvatar(&quot;plus&quot;, $Equip.anal.png)&gt;&gt;
+&lt;&lt;else&gt;&gt;
+&lt;&lt;set $avatar.plus to setAvatar(&quot;plus&quot;, null)&gt;&gt;
+&lt;&lt;/if&gt;&gt;
+
+&lt;&lt;if $Equip.vagina isnot null and $Equip.vagina.png isnot null&gt;&gt;
+&lt;&lt;set $avatar.plus to setAvatar(&quot;plus&quot;, $Equip.vagina.png)&gt;&gt;
+&lt;&lt;else&gt;&gt;
+&lt;&lt;set $avatar.plus to setAvatar(&quot;plus&quot;, null)&gt;&gt;
+&lt;&lt;/if&gt;&gt;
+
+
 /* 眼睛 */
 &lt;&lt;set _eyegroup to [&quot;full&quot;,&quot;blink2&quot;,&quot;lookup3&quot;]&gt;&gt;
 &lt;&lt;set _type to [null,&quot;a&quot;,&quot;b&quot;,&quot;c&quot;]&gt;&gt;
@@ -15817,6 +16092,10 @@ Total &lt;&lt;print $PC.sexrec.高潮.t&gt;&gt;&lt;br&gt;
 &lt;&lt;set $avatar.emoadd.tear to setAvatar(&quot;emoadd.tear&quot;,$PFace.tear)&gt;&gt;
 &lt;&lt;set $avatar.emoadd.red to setAvatar(&quot;emoadd.red&quot;,$PFace.red)&gt;&gt;
 
+&lt;&lt;if $PC.base.快感[0] gte ($PC.base.快感[1]/3) or $PC.state.发情 is true or $PC.base.酒精[0] gte ($PC.base.酒精[1]/2) or $PC.base.药物[0] gte 50&gt;&gt;
+    &lt;&lt;set $avatar.emoadd.red to setAvatar(&quot;emoadd.red&quot;,true)&gt;&gt;
+&lt;&lt;/if&gt;&gt;
+
 /* 淫纹 */
 &lt;&lt;if $Pskin.腹部 isnot null&gt;&gt;
     &lt;&lt;set _apath to &quot;./image/avatar/body/&quot;+$Pskin.腹部.index+&quot;.png&quot;&gt;&gt;
@@ -15834,11 +16113,15 @@ Total &lt;&lt;print $PC.sexrec.高潮.t&gt;&gt;&lt;br&gt;
 &lt;&lt;set $avatar.body to setAvatar(&quot;body&quot;,$PC.info.skin +&quot;/body_&quot;+ breastsize() + isPregnant())&gt;&gt;
 
 
-/* JJ */
-&lt;&lt;if $PC.genital.阴茎 gt 3 and $Pflag.bottom lte 1&gt;&gt;
-    &lt;&lt;set $avatar.penis to setAvatar(&quot;penis&quot;,$PC.info.skin +&quot;/penis&quot;,true)&gt;&gt;
+/* JJ，套上贞操笼时要变成软丁丁 */
+&lt;&lt;if $Equip.inner_bt isnot null and $Equip.inner_bt.index is &quot;chastitycage&quot;&gt;&gt;
+
 &lt;&lt;else&gt;&gt;
-    &lt;&lt;set $avatar.penis to setAvatar(&quot;penis&quot;,null)&gt;&gt;
+    &lt;&lt;if $PC.genital.阴茎 gt 3 and $Pflag.bottom lte 1&gt;&gt;
+        &lt;&lt;set $avatar.dick to setAvatar(&quot;dick&quot;,$PC.info.skin +&quot;/penis&quot;,true)&gt;&gt;
+    &lt;&lt;else&gt;&gt;
+        &lt;&lt;set $avatar.dick to setAvatar(&quot;dick&quot;,null)&gt;&gt;
+    &lt;&lt;/if&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 
 
@@ -16439,12 +16722,21 @@ Total &lt;&lt;print $PC.sexrec.高潮.t&gt;&gt;&lt;br&gt;
 &lt;/div&gt;
 &lt;&lt;set $shoptype to [&quot;all&quot;,&quot;offline&quot;]&gt;&gt;
 
-&lt;&lt;EnterTryRoom&gt;&gt;
+&lt;&lt;if $temp.tryoncomeback is undefined&gt;&gt;
+    &lt;&lt;EnterTryRoom&gt;&gt;
+&lt;&lt;else&gt;&gt;
+    &lt;&lt;set $temp to {}&gt;&gt;
+    &lt;&lt;set $location to &quot;试衣间&quot;&gt;&gt;
+&lt;&lt;/if&gt;&gt;
+
 &lt;div id=&quot;action-text2&quot;&gt;&lt;/div&gt;
 
+
+&lt;&lt;if $shoptype.includes(&quot;offline&quot;)&gt;&gt;
 &lt;div id=&quot;show_container&quot;&gt;
     &lt;&lt;if $showcase isnot null&gt;&gt;&lt;&lt;ShowCase&gt;&gt;&lt;&lt;/if&gt;&gt;  
 &lt;/div&gt;
+&lt;&lt;/if&gt;&gt;
 
 &lt;div id=&quot;ShopList&quot;&gt;
   &lt;ul&gt;
@@ -16507,19 +16799,35 @@ Total &lt;&lt;print $PC.sexrec.高潮.t&gt;&gt;&lt;br&gt;
 &lt;&lt;link &quot;只看内衣&quot;&gt;&gt;&lt;&lt;showinner&gt;&gt;&lt;&lt;/link&gt;&gt;
 &lt;/div&gt;
 &lt;div class=&quot;redress&quot;&gt;
-&lt;&lt;link &quot;衣服复位&quot;&gt;&gt;&lt;&lt;redress&gt;&gt;&lt;&lt;/link&gt;&gt;
+&lt;&lt;link &quot;衣服复位&quot;&gt;&gt;&lt;&lt;redress&gt;&gt;&lt;&lt;leavecheck&gt;&gt;&lt;&lt;resettryon&gt;&gt;&lt;&lt;/link&gt;&gt;
 &lt;/div&gt;
 
-&lt;div class=&quot;buybotton&quot;&gt;
-&lt;&lt;link &quot;购买&quot;&gt;&gt;&lt;&lt;run BuyOutFit()&gt;&gt;&lt;&lt;/link&gt;&gt;
-&lt;/div&gt;
-&lt;div class=&quot;trybotton&quot;&gt;
-&lt;&lt;link &quot;试穿&quot;&gt;&gt;&lt;&lt;tryon $showcase.layer&gt;&gt;&lt;&lt;/link&gt;&gt;
+&lt;div class=&quot;buybutton&quot;&gt;
+&lt;&lt;link &quot;购买&quot;&gt;&gt;&lt;&lt;run BuyOutFit(&quot;select&quot;)&gt;&gt;&lt;&lt;leavecheck&gt;&gt;&lt;&lt;/link&gt;&gt;
 &lt;/div&gt;
 
-&lt;div class=&quot;backbutton&quot;&gt;
-&lt;&lt;link &quot;离开&quot; &quot;怡安小区&quot;&gt;&gt;&lt;&lt;redress&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
+&lt;&lt;if $shoptype.includes(&quot;offline&quot;)&gt;&gt;
+&lt;div class=&quot;trybutton&quot;&gt;
+&lt;&lt;link &quot;试穿&quot;&gt;&gt;&lt;&lt;tryon $showcase.layer&gt;&gt;&lt;&lt;leavecheck&gt;&gt;&lt;&lt;/link&gt;&gt;
 &lt;/div&gt;
+
+&lt;div id=&quot;buyall&quot;&gt;
+&lt;&lt;if tryoncheck() is true&gt;&gt;
+&lt;&lt;link &quot;购买身上的衣服&quot;&gt;&gt;&lt;&lt;run BuyOutFit(&quot;tryon&quot;)&gt;&gt;&lt;&lt;leavecheck&gt;&gt;&lt;&lt;/link&gt;&gt;
+&lt;&lt;/if&gt;&gt;
+&lt;/div&gt;
+
+&lt;&lt;/if&gt;&gt;
+
+&lt;div id=&quot;leave&quot; class=&quot;backbutton&quot;&gt;
+    &lt;&lt;if tryoncheck() is true&gt;&gt;
+        &lt;&lt;link &quot;离开&quot; &quot;试衣偷窥：触发&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;
+    &lt;&lt;else&gt;&gt;
+        &lt;&lt;link &quot;离开&quot; &quot;怡安小区&quot;&gt;&gt;&lt;&lt;resettryon&gt;&gt;&lt;&lt;/link&gt;&gt;
+    &lt;&lt;/if&gt;&gt;
+&lt;/div&gt;
+
+&lt;div id=&quot;shopoverlay&quot;&gt;&lt;/div&gt;
 
 
 
@@ -16535,7 +16843,46 @@ Total &lt;&lt;print $PC.sexrec.高潮.t&gt;&gt;&lt;br&gt;
     &lt;&lt;set _timer to _timer -1&gt;&gt;
     &lt;&lt;if _timer lte 0&gt;&gt;&lt;&lt;stop&gt;&gt;&lt;&lt;/if&gt;&gt;
 &lt;&lt;/repeat&gt;&gt;
-&lt;&lt;/silently&gt;&gt;</tw-passagedata><tw-passagedata pid="39" name="服装店-工具" tags="widget" position="1100,475" size="100,100">&lt;&lt;widget &quot;EnterTryRoom&quot;&gt;&gt;
+
+&lt;&lt;/silently&gt;&gt;
+
+&lt;&lt;widget &quot;leavecheck&quot;&gt;&gt;
+&lt;&lt;replace &quot;#leave&quot;&gt;&gt;
+&lt;&lt;if tryoncheck() is true&gt;&gt;
+    &lt;&lt;link &quot;离开&quot; &quot;试衣偷窥：触发&quot;&gt;&gt;&lt;&lt;set $eventexit to [$passage,&quot;怡安小区&quot;]&gt;&gt;&lt;&lt;/link&gt;&gt;
+&lt;&lt;else&gt;&gt;
+    &lt;&lt;link &quot;离开&quot; &quot;怡安小区&quot;&gt;&gt;&lt;&lt;resettryon&gt;&gt;&lt;&lt;/link&gt;&gt;
+&lt;&lt;/if&gt;&gt;
+&lt;&lt;/replace&gt;&gt;
+
+&lt;&lt;replace &quot;#buyall&quot;&gt;&gt;
+&lt;&lt;if tryoncheck() is true&gt;&gt;
+&lt;&lt;link &quot;购买身上的衣服&quot;&gt;&gt;&lt;&lt;run BuyOutFit(&quot;tryon&quot;)&gt;&gt;&lt;&lt;leavecheck&gt;&gt;&lt;&lt;/link&gt;&gt;
+&lt;&lt;/if&gt;&gt;
+&lt;&lt;/replace&gt;&gt;
+&lt;&lt;/widget&gt;&gt;
+
+&lt;&lt;widget &quot;resettryon&quot;&gt;&gt;
+    &lt;&lt;set $tryon to {neck: null, hand: null, face: null,hat: null, outter: null, top: null,bottom: null,inner_up: null, inner_bt: null,shoes: null, legs: null,}&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="39" name="试衣偷窥：触发" tags="" position="1100,475" size="100,100">&lt;&lt;you&gt;&gt;还穿着商店里的衣服，确定就这么离开商店吗？&lt;br&gt;
+&lt;br&gt;
+&lt;&lt;link &quot;不买，就这么离开&quot; &quot;试衣偷窥：不买&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
+&lt;&lt;link &quot;还是回去付钱吧&quot; $eventexit[0]&gt;&gt;&lt;&lt;set $temp.tryoncomeback to true&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;</tw-passagedata><tw-passagedata pid="40" name="试衣偷窥：不买" tags="" position="1225,475" size="100,100">&lt;&lt;set _luck to random(1,100)&gt;&gt;
+
+&lt;&lt;you&gt;&gt;打算就这么穿着衣服走……&lt;br&gt;
+
+&lt;&lt;timed 1s&gt;&gt;
+    &lt;div class=&quot;delay&quot;&gt;
+        &lt;&lt;if _luck lt 10&gt;&gt;
+            幸运的是，警报器没有响起来。故障了吗？ 总之&lt;&lt;you&gt;&gt;成功穿着商店的衣服跑了。
+            &lt;&lt;link &quot;离开&quot; $eventexit[1]&gt;&gt;&lt;&lt;/link&gt;&gt;
+        &lt;&lt;else&gt;&gt;
+            才到门口就触发警报器了，你被捉了起来……
+            (事件未完成……)
+            &lt;&lt;link &quot;离开&quot; $eventexit[0]&gt;&gt;&lt;&lt;set $temp.tryoncomeback to true&gt;&gt;&lt;&lt;/link&gt;&gt;
+        &lt;&lt;/if&gt;&gt;
+    &lt;/div&gt;
+&lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="41" name="服装店-工具" tags="widget" position="100,600" size="100,100">&lt;&lt;widget &quot;EnterTryRoom&quot;&gt;&gt;
 /* 把身上衣服暂存在TEquip里 */
 &lt;&lt;set $TEquip to clone($Equip)&gt;&gt;
 
@@ -16672,8 +17019,8 @@ required:false,
 
 &lt;&lt;widget &quot;tryon&quot;&gt;&gt;
 &lt;&lt;set _layer to $args[0]&gt;&gt;
-
-&lt;&lt;set $Equip[_layer] to $showcase&gt;&gt;
+&lt;&lt;set $Equip[_layer] to clone($showcase)&gt;&gt;
+&lt;&lt;set $tryon[_layer] to clone($showcase)&gt;&gt;
 
 &lt;&lt;switch _layer&gt;&gt;
     &lt;&lt;case &quot;top&quot;&gt;&gt;
@@ -16701,7 +17048,7 @@ required:false,
     &lt;&lt;set $Equip.top to null&gt;&gt;
     &lt;&lt;set $Equip.bottom to null&gt;&gt;
     &lt;&lt;SetAvatar&gt;&gt;
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="40" name="你的家 单身公寓" tags="location" position="1225,475" size="100,100">&lt;&lt;location &quot;单身公寓&quot;&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="42" name="你的家 单身公寓" tags="location" position="225,600" size="100,100">&lt;&lt;location &quot;单身公寓&quot;&gt;&gt;
 &lt;span class=&quot;title&quot;&gt;&lt;&lt;you&gt;&gt;家&lt;/span&gt;&lt;br&gt;
 &lt;div class=&quot;lbox&quot;&gt;
 一个60平方米左右的单身公寓。简约现代风的装修，巨大的落地窗，还有一个阳台，两个人住也相当舒适的公寓。&lt;br&gt;
@@ -16733,8 +17080,8 @@ required:false,
 自慰
 使用道具
 和宠物（床伴？）聊天
-学习 */</tw-passagedata><tw-passagedata pid="41" name="城市生活_1" tags="" position="100,600" size="100,100">&lt;&lt;you&gt;&gt;最近离开父母家，独立出来自己住了。一切才刚开始各种不习惯……&lt;br&gt;
-幸好，有小宠物史莱姆相伴……嗯，要不要跟宠物做点什么呢……？&lt;br&gt;</tw-passagedata><tw-passagedata pid="42" name="怡安小区" tags="location" position="225,600" size="100,100">&lt;&lt;location &quot;怡安小区&quot;&gt;&gt;
+学习 */</tw-passagedata><tw-passagedata pid="43" name="城市生活_1" tags="" position="350,600" size="100,100">&lt;&lt;you&gt;&gt;最近离开父母家，独立出来自己住了。一切才刚开始各种不习惯……&lt;br&gt;
+幸好，有小宠物史莱姆相伴……嗯，要不要跟宠物做点什么呢……？&lt;br&gt;</tw-passagedata><tw-passagedata pid="44" name="怡安小区" tags="location" position="475,600" size="100,100">&lt;&lt;location &quot;怡安小区&quot;&gt;&gt;
 &lt;span class=&quot;title&quot;&gt;怡安小区&lt;/span&gt;&lt;br&gt;
 &lt;div class=&quot;lbox&quot;&gt;
 位于景南市南兴区的一个住宅小区。&lt;br&gt;
@@ -16755,10 +17102,10 @@ required:false,
 &lt;/div&gt;
 
 /* 景南市。一个位于周唐南方大省柳洲省的一级大城市。&lt;br&gt;
-有山有水，面朝大海，四季分明，是个风景优美的旅游城市。&lt;br&gt; */</tw-passagedata><tw-passagedata pid="43" name="怡安小区 links" tags="links" position="350,600" size="100,100">&lt;div class=&quot;links&quot; title=&quot;移动时间：3分钟&quot;&gt;&lt;&lt;link &quot;・ 小区公园&quot; &quot;怡安小区公园&quot;&gt;&gt;&lt;&lt;passtime 3&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
+有山有水，面朝大海，四季分明，是个风景优美的旅游城市。&lt;br&gt; */</tw-passagedata><tw-passagedata pid="45" name="怡安小区 links" tags="links" position="600,600" size="100,100">&lt;div class=&quot;links&quot; title=&quot;移动时间：3分钟&quot;&gt;&lt;&lt;link &quot;・ 小区公园&quot; &quot;怡安小区公园&quot;&gt;&gt;&lt;&lt;passtime 3&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
 &lt;div class=&quot;links&quot; title=&quot;移动时间：12分钟&quot;&gt;&lt;&lt;link &quot;・ 宜兴广场&quot; &quot;商店&quot;&gt;&gt;&lt;&lt;passtime 12&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
 &lt;div class=&quot;links&quot; title=&quot;移动时间：5分钟&quot;&gt;&lt;&lt;link &quot;・ 巴士站&quot; $passage&gt;&gt;&lt;&lt;passtime 5&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
-&lt;div class=&quot;links&quot; title=&quot;移动时间：10分钟&quot;&gt;&lt;&lt;link &quot;・ 地铁站&quot; $passage&gt;&gt;&lt;&lt;passtime 10&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="44" name="怡安小区公园" tags="location" position="475,600" size="100,100">&lt;&lt;location &quot;怡安小区公园&quot;&gt;&gt;
+&lt;div class=&quot;links&quot; title=&quot;移动时间：10分钟&quot;&gt;&lt;&lt;link &quot;・ 地铁站&quot; $passage&gt;&gt;&lt;&lt;passtime 10&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="46" name="怡安小区公园" tags="location" position="725,600" size="100,100">&lt;&lt;location &quot;怡安小区公园&quot;&gt;&gt;
 &lt;span class=&quot;title&quot;&gt;怡安小区 - 公园&lt;/span&gt;&lt;br&gt;
 &lt;div class=&quot;lbox&quot;&gt;
 绿意盎然，四周都种着花草树木。最吸引人的是南面一侧的用假山搭造的山泉景。&lt;br&gt;
@@ -16777,8 +17124,8 @@ required:false,
 
 &lt;div id=&quot;navi&quot; class=&quot;navi_unable&quot;&gt;
     &lt;&lt;navi&gt;&gt;
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="45" name="怡安小区公园 links" tags="" position="600,600" size="100,100">&lt;div class=&quot;links&quot; title=&quot;移动时间：3分钟&quot;&gt;&lt;&lt;link &quot;・ 小区大门&quot; &quot;怡安小区&quot;&gt;&gt;&lt;&lt;passtime 3&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="46" name="商店" tags="location" position="725,600" size="100,100">&lt;&lt;location &quot;商店&quot;&gt;&gt;
-&lt;&lt;include &quot;试衣间&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="47" name="Event" tags="eventloop nosave" position="850,600" size="100,100">&lt;div id=&quot;eventsituation&quot;&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="47" name="怡安小区公园 links" tags="" position="850,600" size="100,100">&lt;div class=&quot;links&quot; title=&quot;移动时间：3分钟&quot;&gt;&lt;&lt;link &quot;・ 小区大门&quot; &quot;怡安小区&quot;&gt;&gt;&lt;&lt;passtime 3&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="48" name="商店" tags="location" position="975,600" size="100,100">&lt;&lt;location &quot;商店&quot;&gt;&gt;
+&lt;&lt;include &quot;试衣间&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="49" name="Event" tags="eventloop nosave" position="1100,600" size="100,100">&lt;div id=&quot;eventsituation&quot;&gt;
 &lt;&lt;CallEvent&gt;&gt;
 &lt;/div&gt;
 
@@ -16795,7 +17142,7 @@ required:false,
 
 &lt;div id=&quot;eventeffect&quot;&gt;
 &lt;&lt;CallEventEffect&gt;&gt;
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="48" name="EventSystem" tags="widget" position="975,600" size="100,100">/* 再现ERA口上系统的TRYCALL体系 主 */
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="50" name="EventSystem" tags="widget" position="1225,600" size="100,100">/* 再现ERA口上系统的TRYCALL体系 主 */
 &lt;&lt;widget &quot;CallEvent&quot;&gt;&gt;
 &lt;&lt;if setEvent() isnot false&gt;&gt;
     &lt;&lt;set _passagename to setEvent()&gt;&gt;
@@ -16879,10 +17226,10 @@ required:false,
 
 &lt;&lt;/if&gt;&gt;
 
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="49" name="主线 开幕：EventFirst" tags="" position="1100,600" size="100,100">&lt;&lt;set $count to 0&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="51" name="主线 开幕：EventFirst" tags="" position="100,725" size="100,100">&lt;&lt;set $count to 0&gt;&gt;
 &lt;&lt;set $Eflag.nonext to true&gt;&gt;
 &lt;&lt;set $eventnext to 0&gt;&gt;
-&lt;&lt;bookmark &quot;主线开幕_初次&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="50" name="主线 开幕-初次" tags="" position="1225,600" size="100,100">&lt;&lt;Opening $count&gt;&gt;</tw-passagedata><tw-passagedata pid="51" name="主线 开幕-初次：E" tags="" position="100,725" size="100,100">&lt;&lt;if $count lt 8&gt;&gt;
+&lt;&lt;bookmark &quot;主线开幕_初次&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="52" name="主线 开幕-初次" tags="" position="225,725" size="100,100">&lt;&lt;Opening $count&gt;&gt;</tw-passagedata><tw-passagedata pid="53" name="主线 开幕-初次：E" tags="" position="350,725" size="100,100">&lt;&lt;if $count lt 8&gt;&gt;
 &lt;&lt;addclass &quot;#eventsituation&quot; &quot;weirdtext&quot;&gt;&gt;
 &lt;&lt;silently&gt;&gt;&lt;&lt;script&gt;&gt;
 //requires jQuery because I am lazy.
@@ -16891,7 +17238,7 @@ $(document).ready(function(){
 });
 &lt;&lt;/script&gt;&gt;
 &lt;&lt;/silently&gt;&gt;
-&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="52" name="主线 开幕-初次：W" tags="widget" position="225,725" size="100,100">&lt;&lt;widget &quot;Opening&quot;&gt;&gt;
+&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="54" name="主线 开幕-初次：W" tags="widget" position="475,725" size="100,100">&lt;&lt;widget &quot;Opening&quot;&gt;&gt;
 
 &lt;&lt;switch $args[0]&gt;&gt;
 &lt;&lt;case 0&gt;&gt;
@@ -17005,7 +17352,7 @@ $(document).ready(function(){
 
 &lt;&lt;/switch&gt;&gt;
 
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="53" name="主线 开幕-初次：S" tags="" position="350,725" size="100,100">&lt;&lt;switch $count&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="55" name="主线 开幕-初次：S" tags="" position="600,725" size="100,100">&lt;&lt;switch $count&gt;&gt;
 &lt;&lt;case 0&gt;&gt;
 	&lt;&lt;set _text to LangSpl(&quot;睁开眼睛&quot;,&quot;Open The Eyes&quot;)&gt;&gt;
 	&lt;div class=&quot;Wselect&quot;&gt;&lt;&lt;link _text&gt;&gt;&lt;&lt;set $count to 1&gt;&gt;&lt;&lt;Revent&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
@@ -17048,7 +17395,7 @@ $(document).ready(function(){
 	&lt;&lt;set _text to LangSpl(&quot;继续&quot;,&quot;Next&quot;)&gt;&gt;
 	&lt;div @class=&quot;($count &gt;= 8 ? &#39;Eselect&#39; : &#39;Wselect&#39; )&quot;&gt;&lt;&lt;link _text&gt;&gt;&lt;&lt;set $count to $eventnext&gt;&gt;&lt;&lt;Revent&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
 
-&lt;&lt;/switch&gt;&gt;</tw-passagedata><tw-passagedata pid="54" name="主线 开幕-初次-穿越版" tags="" position="475,725" size="100,100">&lt;&lt;Opening2 $count&gt;&gt;</tw-passagedata><tw-passagedata pid="55" name="主线 开幕-初次-穿越版：W" tags="widget" position="600,725" size="100,100">&lt;&lt;widget &quot;Opening2&quot;&gt;&gt;
+&lt;&lt;/switch&gt;&gt;</tw-passagedata><tw-passagedata pid="56" name="主线 开幕-初次-穿越版" tags="" position="725,725" size="100,100">&lt;&lt;Opening2 $count&gt;&gt;</tw-passagedata><tw-passagedata pid="57" name="主线 开幕-初次-穿越版：W" tags="widget" position="850,725" size="100,100">&lt;&lt;widget &quot;Opening2&quot;&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
 &lt;&lt;switch $count&gt;&gt;
 &lt;&lt;case 0&gt;&gt;
@@ -17170,7 +17517,7 @@ $(document).ready(function(){
 &lt;&lt;/switch&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
 
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="56" name="主线 开幕-初次-穿越版：S" tags="" position="725,725" size="100,100">&lt;&lt;switch $count&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="58" name="主线 开幕-初次-穿越版：S" tags="" position="975,725" size="100,100">&lt;&lt;switch $count&gt;&gt;
 &lt;&lt;case 1&gt;&gt;
 &lt;&lt;set _text to LangSpl(&quot;拿起手机&quot;,&quot;Pick up the phone&quot;)&gt;&gt;
 &lt;div class=&quot;Eselect&quot;&gt;&lt;&lt;link _text&gt;&gt;&lt;&lt;set $count to 2&gt;&gt;&lt;&lt;Revent&gt;&gt;&lt;&lt;passtime 2&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
@@ -17218,7 +17565,7 @@ $(document).ready(function(){
 &lt;&lt;set _text to LangSpl(&quot;继续&quot;,&quot;Next&quot;)&gt;&gt;
 &lt;div class=&quot;Eselect&quot;&gt;&lt;&lt;link _text&gt;&gt;&lt;&lt;set $count to $eventnext&gt;&gt;&lt;&lt;Revent&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
 
-&lt;&lt;/switch&gt;&gt;</tw-passagedata><tw-passagedata pid="57" name="主线 开幕-轮回" tags="" position="850,725" size="100,100">&lt;&lt;bookmark &quot;主线开幕_轮回&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="58" name="PC 主线-开幕-房间描述" tags="nobr" position="975,725" size="100,100">&lt;&lt;lang 
+&lt;&lt;/switch&gt;&gt;</tw-passagedata><tw-passagedata pid="59" name="主线 开幕-轮回" tags="" position="1100,725" size="100,100">&lt;&lt;bookmark &quot;主线开幕_轮回&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="60" name="PC 主线-开幕-房间描述" tags="nobr" position="1225,725" size="100,100">&lt;&lt;lang 
 &quot;一睁开眼，首先看到的是茂绿的窗外，响亮的蝉鸣宣告着当前的季节。窗户旁摆放着一张大书桌，上面摆放着&lt;&lt;if $PC.type is 2&gt;&gt;一个宽屏大液显&lt;&lt;elseif $PC.type is 1&gt;&gt;新帝HQ24数位屏和数位板&lt;&lt;else&gt;&gt;一个电脑屏幕&lt;&lt;/if&gt;&gt;，书桌旁的小桌子上则是电脑主机。在靠近书桌的墙边，则整齐地摆放着两个书架，书架上是&lt;&lt;switch $PC.type&gt;&gt;&lt;&lt;case 1&gt;&gt;各种漫画和小说还有塑料小人&lt;&lt;case 2&gt;&gt;各种各样的书籍&lt;&lt;case 3&gt;&gt;各种修仙小说和漫画&lt;&lt;/switch&gt;&gt;，墙上则&lt;&lt;switch $PC.type&gt;&gt;&lt;&lt;case 1&gt;&gt;挂着一些远古生物的挂画和各种游戏海报&lt;&lt;case 2&gt;&gt;挂着一些漂亮的装饰画&lt;&lt;case 3&gt;&gt;挂着一个黑白两色的八卦阵和一些仙侠作品的海报&lt;&lt;/switch&gt;&gt;&quot;
 
 &quot;Across from the bed is the window, and outside the window is the loud sound of cicadas announcing the current season. Right next to the window sits a large desk with a computer with two screens, two bookshelves lined up side by side with various books and comics and some anime figurines, and posters of superheroes on the wall&quot;

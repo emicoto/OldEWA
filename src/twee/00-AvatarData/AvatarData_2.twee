@@ -4,7 +4,7 @@
 
     <<set Avatars.neck to [
         {
-            id: 0,
+            id: 0, uid: 0,
             index : "naked",    name : "裸",     gender : "n",
             text : "无",   
             tag  : ["裸露"],
@@ -22,7 +22,7 @@
 
     <<set Avatars.hat to [
         {
-            id: 0,
+            id: 0, uid: 0,
             index : "naked",    name : "裸",     gender : "n",
             text : "无",   
             tag  : ["裸露"],
@@ -42,7 +42,7 @@
 
     <<set Avatars.face to [
         {
-            id: 0,
+            id: 0, uid: 0,
             index : "naked",    name : "裸",     gender : "n",
             text : "无",   
             tag  : ["裸露"],
@@ -60,7 +60,7 @@
 
     <<set Avatars.hand to [
         {
-            id : 0,
+            id : 0, uid: 0,
             index : "naked",    name : "裸",     gender : "n",
             text : "无",   
             tag  : ["裸露"],
@@ -82,7 +82,7 @@
 
     <<set Avatars.outter to [
         {
-            id: 0,
+            id: 0, uid: 0,
             index : "naked",    name : "裸",     gender : "n",
             text : "无",   
             tag  : ["裸露"],
@@ -110,7 +110,7 @@
 
     <<set Avatars.inner_up to [
         {
-            id: 0,
+            id: 0, uid: 0,
             index : "naked",    name : "裸",     gender : "n",
             text : "无",   
             tag  : ["裸露"],
@@ -131,7 +131,7 @@
             patterns: []
         },
         {
-            id: 1,
+            id: 1, uid: 0,
             index : "camisole",    name : "吊带背心",     gender : "f",
             text : "一件简单的吊带背心，给胸部小小的你带来些许安全感。",   
             tag  : ["日常"],
@@ -152,7 +152,7 @@
             patterns: []
         },
         {
-            id: 2,
+            id: 2, uid: 0,
             index : "simplebra",    name : "胸罩",     gender : "f",
             text : "一件设计朴素的胸罩。",   
             tag  : ["日常"],
@@ -200,4 +200,35 @@
             id:1, index:"curly", long:true, fixcolor:false,
         }
     }>>
+<</widget>>
+
+<<widget "InitLewdEquip">>
+    <<set Avatars.lewdup to {
+        乳环:{
+            id:1, name:"乳环", png: "sp/nipring",
+            breast: true, imgenable:false, functional: true,
+            cost: 20, energy: 0,
+            category:"特殊", layer:"nipple",
+            shop: "adult",
+
+            effect(min){
+                V.FEquip.nipple = true;
+                V.PC.base.快B[0] += 0.5*min;
+                V.PC.base.疼痛[0] += 2*min;
+                return V.PC.base.快B;
+            },
+        },
+        乳环项链:{},
+        乳头跳蛋:{},
+    }>>
+
+    /*  贞操笼、贞操带、贞操内裤算内裤范围内!带震动棒版本的穿上时联动这里的function? */
+    <<set Avatars.lewdbt to {
+        V震动棒:{},
+        A震动棒:{},
+        双震动棒:{},
+        V跳蛋:{},
+        A跳蛋:{},
+    }>>
+    
 <</widget>>

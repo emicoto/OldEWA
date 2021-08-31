@@ -60,9 +60,17 @@ function warmth() {
 window.warmth = warmth
 
 /* 商店处理 */
+
+function setShowCaseUID(){
+    V.showcase.uid = random(100000,999999)
+}
+window.setShowCaseUID = setShowCaseUID
+
 function setShowCase(table) {
     if (typeof(table) == "object") {
-        V.showcase = table
+        V.showcase = clone(table)
+        setShowCaseUID()
+
         new Wikifier(null,"<<replace '#show_container'>><<ShowCase>><</replace>>")
     }else{
         console.log(table,"error: is not object")
@@ -73,6 +81,8 @@ window.setShowCase = setShowCase
 
 function setPatterns(arg) {
     V.showcase.acc = arg
+    setShowCaseUID()
+
     Avatar.setShop()
     /*new Wikifier(null,"<<replace '#showcase'>><<ShowManequin>><</replace>>")*/
 }
@@ -81,32 +91,95 @@ window.setPatterns = setPatterns
 function setColors(arg,name,change = false) {
     if (change) {
         Avatar.setShop(arg)
+        setShowCaseUID()
         return
     }
     V.showcase.color = arg
     V.showcase.colorname = name
+    setShowCaseUID()
     Avatar.setShop()
     /*new Wikifier(null,"<<replace '#showcase'>><<ShowManequin>><</replace>>")*/
 }
 window.setColors = setColors
 
-function BuyOutFit() {
-    if (V.money > V.showcase.cost) {
+function tryoncost() {
+    const group = Object.keys(V.tryon)
+    var n = 0
+
+    for (let i=0; i < group.length; i++){
+        if(V.tryon[group[i]] && V.tryon[group[i]].cost > 0) n += V.tryon[group[i]].cost;
+    }
+    return n
+}
+window.tryoncost = tryoncost
+
+function BuyOutFit(args) {
+    var layer = V.showcase.layer
+    var text
+
+    if (args=="select" && V.money > V.showcase.cost) {
         V.money = V.money - V.showcase.cost
         let buystuff = clone(V.showcase)
-        V.closet[V.showcase.layer].push(buystuff)
+        V.closet[layer].push(buystuff)
 
-        var text = "你花费了"+V.showcase.cost+"元购买了"+V.showcase.name+"<</replace>>"
-    }else{
-        var text = "虽然你想买"+V.showcase.name+"，但钱不够……"
+        /* 如果买了就直接清除掉 */
+        if (V.tryon[layer] && V.tryon[layer].uid==V.Equip[layer].uid && V.tryon[layer].uid == V.showcase.uid){
+        V.tryon[layer] = null;
+        }
+
+        text = "你花费了"+V.showcase.cost+"元购买了"+V.showcase.name+"。"
+    }
+    else if (args=="tryon" && V.money > tryoncost() ){
+        V.money = V.money - tryoncost()
+
+        let group = Object.keys(V.tryon)
+
+        for (let i=0; i < group.length;i++){
+            if (V.tryon[group[i]]){
+                let buystuff = clone(V.tryon[group[i]])
+                let layer = buystuff.layer
+                V.closet[layer].push(buystuff)
+            }
+        }
+
+        for (let i=0; i < group.length; i++){
+            if ( V.TEquip[group[i]] && V.TEquip[group[i]].uid != V.Equip[group[i]].uid){
+                let leftstuff = clone(V.TEquip[group[i]])
+                let layer = leftstuff.layer
+                V.closet[layer].push(leftstuff)
+            }
+        }
+        
+        text = "你花费了"+tryoncost()+"元购买了身上试穿的衣服。"
+        
+        V.tryon = {neck: null, hand: null, face: null,hat: null, outter: null, top: null,bottom: null,inner_up: null, inner_bt: null,shoes: null, legs: null,}
+        V.TEquip = clone(V.Equip)
+
+        
+    }
+    else{
+        if (args =="select") text = "虽然你想买"+V.showcase.name+"，但钱不够……";
+        if (args == "tryon") text = "虽然你想买身上试穿的衣服，但钱不够……"
     }
 
-    new Wikifier(null,"<<replace '#action-text'>>"+text)
-    new Wikifier(null,"<<replace '#action-text2'>>"+text)
+    new Wikifier(null,"<<replace '#action-text'>>"+text+"<</replace>>")
+    new Wikifier(null,"<<replace '#action-text2'>>"+text+"<</replace>>")
     ShowPopUP()
     
 }
 window.BuyOutFit = BuyOutFit
+
+function tryoncheck() {
+    const group = ["neck","hand","face","hat","outter","top","bottom","inner_up","inner_bt","shoes","legs"]
+    var i,n
+    for ( i=0; i<group.length; i++){
+        if (V.tryon[group[i]]) return true;
+        else n++
+    }
+
+    if(n==group.length) return false
+}
+window.tryoncheck = tryoncheck
 
 /* 衣柜处理 */
 function strip(arg) {
@@ -132,6 +205,7 @@ function strip(arg) {
     ShowPopUP()
 }
 window.strip = strip
+
 
 function dressOn(args, arg) {
 
@@ -182,6 +256,10 @@ function dressOn(args, arg) {
             V.closet.bottom.push(obj)
             V.Equip.bottom = null
         }
+    }
+
+    if(V.Equip[args].functional){
+        V.Equip[args].effect()
     }
 
     const group = ["face","neck","hand","back"]

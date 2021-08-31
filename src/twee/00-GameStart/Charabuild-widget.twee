@@ -6,7 +6,7 @@
 <</widget>>
 
 <<widget "CMCri">>
-　阴蒂感度 <<CMPenis>><br>
+　阴蒂感度　<<CMPenis>><br>
 <</widget>>
 
 <<widget "CMGirl">>
@@ -508,6 +508,13 @@
                 <<set $PC.trait.兽尾 to true>>
         <</switch>>
     <</if>>
+
+    <<if $PC.info.race isnot "人类">>
+        <<set $Flag.非人类 to true>>
+    <<else>>
+        <<set $Flag.非人类 to false>>
+    <</if>>
+    
     <<switch $PC.info.tag>>
         <<case "少女">>
             <<set $PC.produce.精液 to [0,0]>>

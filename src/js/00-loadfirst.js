@@ -113,13 +113,3 @@ function LangSpl(CN,EN) {
 }
 window.LangSpl = LangSpl
 DefineMacroS("lang", LangSpl)
-
-function test(arg) {
-	if (arg){
-		return "测试成功？"
-	}else{
-		return "2333"
-	}
-}
-
-window.test = test
