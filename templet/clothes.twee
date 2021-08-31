@@ -6,7 +6,7 @@
         index : "indexname",    name : "名称",     gender : "n",/* 服装的性别倾向，n=无/中性, f=女性 m=男性 */
         text : "说明",   
         tag  : [], /* 物品的属性 */
-        dfpng  : {breast:false, pregnant:false}, /* 差分支持情况 */
+        hasDif : {breast:false, pregnant:false}, /* 差分支持情况 */
 
         cost : 0,        reveal : 0,        hot : 0, cold : 0, 
         durable : 0,        maxdurable : 0,     beauty: 0, /* 魅力加成 */
@@ -27,7 +27,7 @@
         index : "indexname",    name : "名称",     gender : "n",
         text : "说明",   
         tag  : [], 
-        dfpng  : {breast:false, pregnant:false},
+        hasDif : {breast:false, pregnant:false},
 
         cost : 0,       reveal : 0,         hot : 0, cold : 0,
         durable : 0,    maxdurable : 0,     beauty: 0,

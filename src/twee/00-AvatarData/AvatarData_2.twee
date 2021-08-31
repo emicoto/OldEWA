@@ -8,7 +8,7 @@
             index : "naked",    name : "裸",     gender : "n",
             text : "无",   
             tag  : ["裸露"],
-            imgenable : false,
+            hasImg : false,
 
             cost : 0,   reveal : 0,    hot : 0,     cold : 0,
             durable : 0,     maxdurable : 0,     beauty: 0,     defence: 0,
@@ -26,7 +26,7 @@
             index : "naked",    name : "裸",     gender : "n",
             text : "无",   
             tag  : ["裸露"],
-            imgenable : false,
+            hasImg : false,
 
             cost : 0,   reveal : 0,    hot : 0,     cold : 0,
             durable : 0,     maxdurable : 0,     beauty: 0,     defence: 0,
@@ -46,7 +46,7 @@
             index : "naked",    name : "裸",     gender : "n",
             text : "无",   
             tag  : ["裸露"],
-            imgenable : false,
+            hasImg : false,
 
             cost : 0,   reveal : 0,    hot : 0,     cold : 0,
             durable : 0,     maxdurable : 0,     beauty: 0,     defence: 0,
@@ -64,7 +64,7 @@
             index : "naked",    name : "裸",     gender : "n",
             text : "无",   
             tag  : ["裸露"],
-            imgenable : false,
+            hasImg : false,
 
             cost : 0,   reveal : 0,    hot : 0,     cold : 0,
             durable : 0,     maxdurable : 0,     beauty: 0,     defence: 0,
@@ -86,8 +86,8 @@
             index : "naked",    name : "裸",     gender : "n",
             text : "无",   
             tag  : ["裸露"],
-            dfpng  : {breast:false, pregnant:false},
-            imgenable : false,
+            hasDif : {breast:false, pregnant:false},
+            hasImg : false,
 
             cost : 0,        reveal : 0,        hot : 0, cold : 0,
             durable : 0,     maxdurable : 0,     beauty: 0,     defence: 0,
@@ -114,8 +114,8 @@
             index : "naked",    name : "裸",     gender : "n",
             text : "无",   
             tag  : ["裸露"],
-            dfpng  : {breast:false, pregnant:false},
-            imgenable : false,
+            hasDif : {breast:false, pregnant:false},
+            hasImg : false,
 
             cost : 0,        reveal : 0,        hot : 0, cold : 0,
             durable : 0,     maxdurable : 0,     beauty: 0,     defence: 0,
@@ -135,8 +135,8 @@
             index : "camisole",    name : "吊带背心",     gender : "f",
             text : "一件简单的吊带背心，给胸部小小的你带来些许安全感。",   
             tag  : ["日常"],
-            dfpng  : {breast:false, pregnant:false},
-            imgenable : false,
+            hasDif : {breast:false, pregnant:false},
+            hasImg : false,
 
             cost : 30,        reveal : 7,        hot : -0.2, cold : -0.2,
             durable : 10,     maxdurable : 10,     beauty: 0,     defence: 0,
@@ -156,8 +156,8 @@
             index : "simplebra",    name : "胸罩",     gender : "f",
             text : "一件设计朴素的胸罩。",   
             tag  : ["日常"],
-            dfpng  : {breast:false, pregnant:false},
-            imgenable : false,
+            hasDif : {breast:false, pregnant:false},
+            hasImg : false,
 
             cost : 60,        reveal : 4,        hot : 0, cold : 0,
             durable : 10,     maxdurable : 10,     beauty: 0,     defence: 0,
@@ -206,7 +206,7 @@
     <<set Avatars.lewdup to {
         乳环:{
             id:1, name:"乳环", png: "sp/nipring",
-            breast: true, imgenable:false, functional: true,
+            breast: true, hasImg:false, functional: true,
             cost: 20, energy: 0,
             category:"特殊", layer:"nipple",
             shop: "adult",

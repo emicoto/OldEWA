@@ -52,7 +52,7 @@
 
 <<for _i to 0; _i lt _group.length; _i++ >>
 <<set _n to _group[_i]>>
-<<if $Equip[_n] isnot null and $Equip[_n].imgenable is true>>
+<<if $Equip[_n] isnot null and $Equip[_n].hasImg is true>>
     <<if $Equip[_n].fixcolor is true>>
         <<set $avatar[_n] to { fixcolor: true, color: $Equip[_n].color, src: $Equip[_n].index + "/" + $Equip[_n].color, acc: null,}>>
     <<else>>
@@ -61,7 +61,7 @@
     <<if $Equip[_n].acc isnot null>>
         <<set $avatar[_n].acc to $Equip[_n].index + "/"+ $Equip[_n].acc >>
     <</if>>
-<<elseif $Equip[_n] isnot null and $Equip[_n].imgenable is false>>
+<<elseif $Equip[_n] isnot null and $Equip[_n].hasImg is false>>
     <<switch _n>>
         <<case "bottom">>
             <<set $avatar.bottom to { fixcolor: true, color: "white", src: "shortpant/basic", acc: null, }>>
@@ -82,7 +82,7 @@
 <<for _i to 0; _i lt _group.length; _i++>>
 <<set _n to _group[_i]>>
 
-<<if $Equip[_n] isnot null and $Equip[_n].imgenable is true>>
+<<if $Equip[_n] isnot null and $Equip[_n].hasImg is true>>
     <<if $Equip[_n].fixcolor is true>>
         <<set $avatar[_n] to {fixcolor:true, color: $Equip[_n].color, src: $Equip[_n].index + "/" + $Equip[_n].color, acc: null, tuckin:false}>>
     <<else>>
@@ -96,11 +96,11 @@
         <<set $avatar[_n].acc to $Equip[_n].index + "/"+ $Equip[_n].acc >>
     <</if>>
 
-    <<if $Equip[_n].dfpng.breast is true>>
+    <<if $Equip[_n].hasDif.breast is true>>
         <<set $avatar[_n].src to $avatar[_n].src + "_" + breastsize()>>
     <</if>>
 
-    <<if $Equip[_n].dfpng.pregnant is true>>
+    <<if $Equip[_n].hasDif.pregnant is true>>
         <<set $avatar[_n].src to $avatar[_n].src + isPregnant()>>
     <</if>>
 

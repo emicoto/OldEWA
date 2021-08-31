@@ -110,7 +110,7 @@ required:false,
     <<if Avatars[_catgr][_i].shop is null or $shoptype.includes(Avatars[_catgr][_i].shop) is false>>
         <<continue>>
     <<else>>
-        <<if Avatars[_catgr][_i].imgenable is true>>
+        <<if Avatars[_catgr][_i].hasImg is true>>
             <<set _img to "image/avatar/"+_catgr+"/"+Avatars[_catgr][_i].index + "/thumb.png">>
         <<else>>
             <<set _img to _placeholder>>

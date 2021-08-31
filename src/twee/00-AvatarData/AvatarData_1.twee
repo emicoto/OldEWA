@@ -77,8 +77,8 @@
             index : "naked",    name : "裸",     gender : "n",
             text : "无",   
             tag  : ["裸露"],
-            imgenable : false,
-            dfpng  : {breast:false, pregnant:false},
+            hasImg : false,
+            hasDif : {breast:false, pregnant:false},
 
             cost : 0,        reveal : 0,        hot : 0, cold : 0,
             durable : 0,     maxdurable : 0,     beauty: 0,     defence: 0,
@@ -98,8 +98,8 @@
             index : "Tshirt",    name : "T恤",     gender : "n",
             text : "一件简单的T恤。 并不能给你太多保护，但总比没有好。",   
             tag  : ["日常"],
-            imgenable : true,
-            dfpng  : {breast:true, pregnant:true},
+            hasImg : true,
+            hasDif : {breast:true, pregnant:true},
 
             cost : 35,        reveal : 9,        hot : -1, cold : -1,  /* 数值是直接在21上加减 */
             durable : 20,     maxdurable : 20,     beauty: 0,     defence: 0.5,
@@ -119,8 +119,8 @@
             index : "shirt",    name : "衬衫",     gender : "n",
             text : "一件简单的西式长袖衬衫。浅浅的暗纹给你增加了些许气质。",   
             tag  : ["日常","正式","商务"],
-            imgenable : true,
-            dfpng  : {breast:true, pregnant:true},
+            hasImg : true,
+            hasDif : {breast:true, pregnant:true},
 
             cost : 120,        reveal : 10,        hot : -1.5, cold : -1.5,  /* 数值是直接在21上加减 */
             durable : 20,     maxdurable : 20,     beauty: 0.02,     defence: 0.5,
@@ -140,8 +140,8 @@
             index : "bwopiece",    name : "BW连衣裙",     gender : "f",
             text : "一件设计简单的连衣裙。修身的设计显得你身材更苗条。毕竟是易淘上的便宜货，不能指望布料的防御效果。",   
             tag  : ["日常"],
-            imgenable : true,
-            dfpng  : {breast:true, pregnant:true},
+            hasImg : true,
+            hasDif : {breast:true, pregnant:true},
 
             cost : 200,        reveal : 9,        hot : -0.5, cold : -0.5,  /* 数值是直接在21上加减 */
             durable : 15,     maxdurable : 15,     beauty: 0.05,     defence: 0,
@@ -160,8 +160,8 @@
             index : "slpshortup",    name : "短袖睡衣",     gender : "n",
             text : "一件设计简单的睡衣。轻柔透气的布料给你带来好梦。",   
             tag  : ["日常","睡衣"],
-            imgenable : true,
-            dfpng  : {breast:true, pregnant:true},
+            hasImg : true,
+            hasDif : {breast:true, pregnant:true},
 
             cost : 60,        reveal : 9,        hot : -0.5, cold : -0.5,  /* 数值是直接在21上加减 */
             durable : 10,     maxdurable : 10,     beauty: 0,     defence: 0,
@@ -185,8 +185,8 @@
             index : "naked",    name : "裸",     gender : "n",
             text : "无",   
             tag  : ["裸露"],
-            imgenable : false,
-            dfpng  : {breast:false, pregnant:false},
+            hasImg : false,
+            hasDif : {breast:false, pregnant:false},
 
             cost : 0,        reveal : 0,    hot : 0,    cold : 0,
             durable : 0,     maxdurable : 0,     beauty: 0,     defence: 0,
@@ -204,8 +204,8 @@
             index : "shortpant",    name : "短裤",     gender : "n",
             text : "一条简单的短裤。",   
             tag  : ["日常"],
-            imgenable : true,
-            dfpng  : {breast:false, pregnant:true},
+            hasImg : true,
+            hasDif : {breast:false, pregnant:true},
 
             cost : 50,        reveal : 4,   hot : -0.5,   cold : -0.5, 
             durable : 20,     maxdurable : 20,     beauty: 0,     defence: 0.2,
@@ -223,8 +223,8 @@
             index : "shortskirt",    name : "短裙",     gender : "f",
             text : "一条简单的短裙。",   
             tag  : ["日常"],
-            imgenable : true,
-            dfpng  : {breast:false, pregnant:true},
+            hasImg : true,
+            hasDif : {breast:false, pregnant:true},
 
             cost : 60,        reveal : 4,   hot : -0.2,   cold : -0.2, 
             durable : 12,     maxdurable : 12,     beauty: 0.01,     defence: 0,
@@ -242,8 +242,8 @@
             index : "bskirt",    name : "西装短裙",     gender : "f",
             text : "一条简单的西式短裙。毕竟是廉价款，不能指望耐久度。",   
             tag  : ["日常","商务"],
-            imgenable : true,
-            dfpng  : {breast:false, pregnant:true},
+            hasImg : true,
+            hasDif : {breast:false, pregnant:true},
 
             cost : 120,        reveal : 4,   hot : -0.2,   cold : -0.2, 
             durable : 10,     maxdurable : 10,     beauty: 0.03,     defence: 0,
@@ -261,8 +261,8 @@
             index : "slpshortbt",    name : "睡衣短裤",     gender : "n",
             text : "一件设计简单的睡衣短裤。轻柔透气的布料给你带来好梦。",   
             tag  : ["日常","睡衣"],
-            imgenable : true,
-            dfpng  : {breast:false, pregnant:true},
+            hasImg : true,
+            hasDif : {breast:false, pregnant:true},
 
             cost : 50,        reveal : 4,   hot : -0.5,   cold : -0.5, 
             durable : 10,     maxdurable : 10,     beauty: 0,     defence: 0.2,
@@ -285,8 +285,8 @@
             index : "naked",    name : "裸",     gender : "n",
             text : "无",   
             tag  : ["裸露"],
-            imgenable : false,
-            dfpng  : {breast:false, pregnant:false},
+            hasImg : false,
+            hasDif : {breast:false, pregnant:false},
 
             cost : 0,        reveal : 0,    hot : 0,    cold : 0,
             durable : 0,     maxdurable : 0,     beauty: 0,     defence: 0,
@@ -304,8 +304,8 @@
             index : "boxer",    name : "四角内裤",     gender : "m",
             text : "一条简单的四角内裤。",   
             tag  : ["日常"],
-            imgenable : true,
-            dfpng  : {breast:false, pregnant:false},
+            hasImg : true,
+            hasDif : {breast:false, pregnant:false},
 
             cost : 12,        reveal : 2,    hot : -0.1,    cold : -0.1,
             durable : 10,     maxdurable : 10,     beauty: 0,     defence: 0,
@@ -323,8 +323,8 @@
             index : "pantie",    name : "内裤",     gender : "f",
             text : "一款简单朴素的内裤。",   
             tag  : ["日常"],
-            imgenable : true,
-            dfpng  : {breast:false, pregnant:false},
+            hasImg : true,
+            hasDif : {breast:false, pregnant:false},
 
             cost : 15,        reveal : 2,    hot : 0,    cold : 0,
             durable : 10,     maxdurable : 10,     beauty: 0,     defence: 0,
@@ -347,7 +347,7 @@
             index : "naked",    name : "裸",     gender : "n",
             text : "无",   
             tag  : ["裸露"], 
-            imgenable : false,
+            hasImg : false,
 
             cost : 0,       reveal : 0,    hot : 0,    cold : 0,
             durable : 0,    maxdurable : 0,     beauty: 0,     defence: 0,
@@ -365,7 +365,7 @@
             index : "sportshoes",    name : "运动鞋",     gender : "n",
             text : "一双普通的白色运动鞋。",   
             tag  : ["日常","运动"], 
-            imgenable : true,
+            hasImg : true,
 
             cost : 60,       reveal : 0,    hot : -0.1,    cold : -0.1,
             durable : 30,    maxdurable : 30,     beauty: 0,     defence: 0,
@@ -383,7 +383,7 @@
             index : "highheel",    name : "高跟鞋",     gender : "f",
             text : "一双简单设计的高跟鞋。",   
             tag  : ["日常","商务"], 
-            imgenable : true,
+            hasImg : true,
 
             cost : 80,       reveal : 0,    hot : 0,    cold : 0,
             durable : 20,    maxdurable : 20,     beauty: 0.02,     defence: 0,
@@ -406,7 +406,7 @@
             index : "naked",    name : "裸",     gender : "n",
             text : "无",   
             tag  : ["裸露"], 
-            imgenable : false,
+            hasImg : false,
 
             cost : 0,       reveal : 0,    hot : 0,    cold : 0,
             durable : 0,    maxdurable : 0,     beauty: 0,     defence: 0,
@@ -424,7 +424,7 @@
             index : "sportsocks",    name : "运动短袜",     gender : "n",
             text : "一双简单的运动袜。",   
             tag  : ["日常","运动"], 
-            imgenable : true,
+            hasImg : true,
 
             cost : 10,       reveal : 0,    hot : -0.2,    cold : -0.2,
             durable : 0,    maxdurable : 0,     beauty: 0,     defence: 0,

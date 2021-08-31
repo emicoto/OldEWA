@@ -190,7 +190,7 @@ set manequin
     <<set _path to "./image/avatar/"+ $showcase.layer +"/">>
 
 
-    <<if $showcase.imgenable is false>>
+    <<if $showcase.hasImg is false>>
         <<set _path to _path + "dummy">>
     <<else>>
          <<if $showcase.acc isnot null and $showcase.patterns.length gt 0>>
@@ -206,7 +206,7 @@ set manequin
             <<set _path to _path + $showcase.index + "/basic">>
         <</if>>
 
-        <<if _group.includes($showcase.layer) is true and $showcase.dfpng.breast is true>>
+        <<if _group.includes($showcase.layer) is true and $showcase.hasDif.breast is true>>
             <<set _path to _path + "_1">>
         <</if>>
 

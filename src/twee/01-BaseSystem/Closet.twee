@@ -107,7 +107,7 @@
 
 <<if $closet[_catgr].length gte 1>>
     <<for _i to 0; _i lt $closet[_catgr].length; _i ++>>
-        <<if $closet[_catgr][_i].imgenable is true>>
+        <<if $closet[_catgr][_i].hasImg is true>>
             <<set _img to "image/avatar/"+_catgr+"/"+$closet[_catgr][_i].index + "/thumb.png">>
         <<else>>
             <<set _img to _placeholder>>
