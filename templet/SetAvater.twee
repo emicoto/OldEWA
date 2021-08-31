@@ -10,19 +10,19 @@
 <<set $avatar.frame to $PFace.frame>>
 
 /* 浴精喷精冒汗气息之类的 */
-<<if $Pflag.bukkake.body is true>>
+<<if $PFlag.bukkake.body is true>>
     <<set $avatar.addon.body to true>>
 <<else>>
     <<set $avatar.addon.body to false>>
 <</if>>
 
-<<if $Pflag.bukkake.face is true>>
+<<if $PFlag.bukkake.face is true>>
     <<set $avatar.addon.face to true>>
 <<else>>
     <<set $avatar.addon.face to false>>
 <</if>>
 
-<<if $Pflag.bukkake.hair is true>>
+<<if $PFlag.bukkake.hair is true>>
     <<set $avatar.addon.hair to true>>
 <<else>>
     <<set $avatar.addon.hair to false>>
@@ -34,13 +34,13 @@
     <<set $avatar.addon.face to false>>
 <</if>>
 
-<<if ($PC.sexrec.肛内射.c + $PC.sexrec.内射.c) gt 200 and $Pflag.bottom lte 1>>
+<<if ($PC.sexrec.肛内射.c + $PC.sexrec.内射.c) gt 200 and $PFlag.bottom lte 1>>
     <<set $avatar.addon.bottom to true>>
 <<else>>
     <<set $avatar.addon.bottom to false>>
 <</if>>
 
-<<if ($PC.sexrec.射精.c gt 10) and $Pflag.bottom lte 1>>
+<<if ($PC.sexrec.射精.c gt 10) and $PFlag.bottom lte 1>>
     <<set $avatar.addon.penis to true>>
 <<else>>
     <<set $avatar.addon.penis to false>>
@@ -188,7 +188,7 @@
 
 
 /* JJ */
-<<if $PC.genital.阴茎 gt 3 and $Pflag.bottom lte 1>>
+<<if $PC.genital.阴茎 gt 3 and $PFlag.bottom lte 1>>
     <<set $avatar.penis to $PC.info.skin +"/penis">>
 <<else>>
     <<set $avatar.penis to null>>

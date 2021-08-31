@@ -3,7 +3,7 @@
 
 <<silently>>
 
-<<if $intro is true or $debug is true>>
+<<if $charamaking is true>>
     <<setface $Equip.emote "loop">>
 <</if>>
 /* 相框 OR 特效 */
@@ -226,20 +226,35 @@
     <<set $avatar.tatoos to setAvatar("tatoos",null)>>
 <</if>>
 
+<<set _group to "羽族","兽族">>
 /* 素体 */
-<<set $avatar.body to setAvatar("body",$PC.info.skin +"/body_"+ breastsize() + isPregnant())>>
-
-
-/* JJ，套上贞操笼时要变成软丁丁 */
-<<if $Equip.inner_bt isnot null and $Equip.inner_bt.index is "chastitycage">>
-
-<<else>>
-    <<if $PC.genital.阴茎 gt 3 and $Pflag.bottom lte 1>>
-        <<set $avatar.dick to setAvatar("dick",$PC.info.skin +"/penis",true)>>
+<<if $Pflag.kemoform is true and _group.includes($PC.info.race)>>
+    <<set $avatar.body to setAvatar("body", {src:"furry/body_"+ breastsize() + isPregnant(), color:A.haircolor[$PC.info.haircolor]})>>>>
+        /* JJ，套上贞操笼时要变成软丁丁 */
+    <<if $Equip.inner_bt isnot null and $Equip.inner_bt.index is "chastitycage">>
+        <<set $avatar.dick to setAvatar("dick","furry/penis_d",true)>>
     <<else>>
-        <<set $avatar.dick to setAvatar("dick",null)>>
+        <<if $PC.genital.阴茎 gt 3 and $Pflag.bottom lte 1>>
+            <<set $avatar.dick to setAvatar("dick","furry/penis",true)>>
+        <<else>>
+            <<set $avatar.dick to setAvatar("dick",null)>>
+        <</if>>
+    <</if>>
+<<else>>
+    <<set $avatar.body to setAvatar("body",$PC.info.skin +"/body_"+ breastsize() + isPregnant())>>
+        /* JJ，套上贞操笼时要变成软丁丁 */
+    <<if $Equip.inner_bt isnot null and $Equip.inner_bt.index is "chastitycage">>
+            <<set $avatar.dick to setAvatar("dick",$PC.info.skin +"/penis_d",true)>>
+    <<else>>
+        <<if $PC.genital.阴茎 gt 3 and $Pflag.bottom lte 1>>
+            <<set $avatar.dick to setAvatar("dick",$PC.info.skin +"/penis",true)>>
+        <<else>>
+            <<set $avatar.dick to setAvatar("dick",null)>>
+        <</if>>
     <</if>>
 <</if>>
+
+
 
 
 /* 背景 */

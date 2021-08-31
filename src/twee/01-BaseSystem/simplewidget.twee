@@ -199,18 +199,6 @@
 
 /*<<dressup category id color pattern>>*/
 
-<<widget "setface">>
-    <<if A.facelist.includes($args[0])>>
-        <<set $PFace to A.emote[$args[0]]>>
-        <<set $Equip.emote to $args[0]>>
-    <<else>>
-        <<set $PFace to A.emote.正常>>
-        <<set $Equip.emote to $args[0]>>
-    <</if>>
-    <<if $args[1] isnot "loop">>
-        <<SetAvatar>>
-    <</if>>
-<</widget>>
 
 <<widget "gonaked">>
     <<set $TEquip to clone($Equip)>>

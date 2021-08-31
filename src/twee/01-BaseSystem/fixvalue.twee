@@ -61,7 +61,7 @@
         <<set $PC.produce.精液[0] to Math.clamp($PC.produce.精液[0],0,$PC.produce.精液[1])>>
     <</if>>
 
-    <<if $Pflag.lactation is true>>
+    <<if $PFlag.lactation is true>>
         <<set $PC.produce.乳汁[1] to Math.clamp($PC.produce.乳汁[1],$PC.breast*10,$PC.breast*40)>>
         <<set $PC.produce.乳汁[0] to Math.clamp($PC.produce.乳汁[0],0,$PC.produce.乳汁[1])>>
     <</if>>

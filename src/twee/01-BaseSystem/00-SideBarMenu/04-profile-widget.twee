@@ -69,7 +69,7 @@
 <<widget "breast_info">>
 /* 感度、罩杯大小、泌乳情报 */
 <<you>><<breast>><<sensitive "b">>。
-<<if $Pflag.lactation is true and $PC.produce.乳汁[1] gt 0>>
+<<if $PFlag.lactation is true and $PC.produce.乳汁[1] gt 0>>
 已经开始分泌乳汁，总共能容纳<<print $PC.produce.乳汁[1]>>cc的乳汁。现在有<<print ($PC.produce.乳汁[0]/$PC.produce.乳汁[1])*100>>%的量。
 <</if>>
 <br>

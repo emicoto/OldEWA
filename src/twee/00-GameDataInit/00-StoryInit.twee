@@ -13,7 +13,7 @@
 	<<set $debug to false>>
 <</if>>
 <<set $harddebug to false>>
-
+<<set $charamaking to null>>
 <!-- 游戏系统环境设定 -->
 <<set $temp to {}>>
 <<set $lang to "CN">>

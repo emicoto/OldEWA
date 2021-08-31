@@ -51,7 +51,7 @@
     <</if>> 
 
     /* 腹部、胸部纹身 */
-    <<if _layer[_i] is "body" and $avatar.tatoos isnot null and $Pflag.top lte 2>>
+    <<if _layer[_i] is "body" and $avatar.tatoos isnot null and $PFlag.top lte 2>>
         <<set _path2 to _path1 + $avatar.tatoos>>
         <img class="Layer" @src="_path2 + '.png'" @style="_zindex">
     <</if>>
@@ -86,7 +86,7 @@
     /* 液体效果 */
     <<if _layer[_i] is "addon">>
 
-        <<if $avatar.addon.bottom is true and $Pflag.bottom lte 2>>
+        <<if $avatar.addon.bottom is true and $PFlag.bottom lte 2>>
             <<set _path2 to _path1 + "bottom">>
             <img class="Layer" @src="_path2 + '.png'" @style="_zindex">
         <</if>>
@@ -111,7 +111,7 @@
             <img class="Layer" @src="_path2 + '.png'" @style="_zindex">
         <</if>>
 
-        <<if $avatar.addon.penis is true and $Pflag.bottom lte 1>>
+        <<if $avatar.addon.penis is true and $PFlag.bottom lte 1>>
             <<set _path2 to _path1 + "penis">>
             <img class="Layer" @src="_path2 + '.png'" @style="_zindex">
         <</if>>
@@ -196,7 +196,7 @@
     <</if>> 
 
     /* 腹部、胸部纹身 */
-    <<if _layer[_i] is "body" and $avatar.tatoos isnot null and $Pflag.top lte 2>>
+    <<if _layer[_i] is "body" and $avatar.tatoos isnot null and $PFlag.top lte 2>>
         <<set _path2 to _path1 + $avatar.tatoos>>
         <img class="P_Layer flipx" @src="_path2 + '.png'" @style="_zindex">
     <</if>>
@@ -231,7 +231,7 @@
     /* 液体效果 */
     <<if _layer[_i] is "addon">>
 
-        <<if $avatar.addon.bottom is true and $Pflag.bottom lte 2>>
+        <<if $avatar.addon.bottom is true and $PFlag.bottom lte 2>>
             <<set _path2 to _path1 + "bottom">>
             <img class="P_Layer flipx" @src="_path2 + '.png'" @style="_zindex">
         <</if>>
@@ -256,7 +256,7 @@
             <img class="P_Layer flipx" @src="_path2 + '.png'" @style="_zindex">
         <</if>>
 
-        <<if $avatar.addon.penis is true and $Pflag.bottom lte 1>>
+        <<if $avatar.addon.penis is true and $PFlag.bottom lte 1>>
             <<set _path2 to _path1 + "penis">>
             <img class="P_Layer flipx" @src="_path2 + '.png'" @style="_zindex">
         <</if>>

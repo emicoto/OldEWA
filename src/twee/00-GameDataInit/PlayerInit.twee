@@ -158,12 +158,12 @@ $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌}
 和奸文：XX的处女在X年X月X日，献给了爱人的巨屌 
 自己破处：XX的处女在X年X月X日，用玩具自行贯穿了 -->
 
-<<set $Pflag to {
+<<set $PFlag to {
     lactation : false,    lactatecd : 0,
     top      : 9,     bottom   : 4, 
     bukkake   : { body:false, face:false, hair:false, },
-    pregnant: { type:null, seed:null, phrase:null, date:null, }
-    /* 怀孕flag type:A怀孕还是正常怀孕 seed：孩子种类, father:父亲, phrase：阶段 date:预产期 */
+    pregnant: { type:null, seed:null, phrase:null, date:null, }, /* 怀孕flag type:A怀孕还是正常怀孕 seed：孩子种类, father:父亲, phrase：阶段 date:预产期 */
+    kemoform : null,
 }>>
 
 <!-- 记录 -->
