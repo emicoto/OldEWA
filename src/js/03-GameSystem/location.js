@@ -13,10 +13,12 @@
         if(V.local){
             if(V.local.tag.includes("家"))V.local.chara.push("player");
         }
+        return ""
     }
     else{
-        return "<div id='error-view'>error: no args</div>"
+        return "<div id='error-view'>error: args不是string或为空, args:"+args+"</div>"
     }
 }
 
 window.setLocation = setLocation
+DefineMacroS("location",setLocation)

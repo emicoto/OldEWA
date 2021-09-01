@@ -40,87 +40,88 @@ function GetTime() {
     return t;
 }
 
-Macro.add('timeprocess', {
-	handler: function () {
-		var time = V.date.time;
-		var day = V.date.day;
-		var week = V.date.week;
-		var month = V.date.month;
-		var year = V.date.year;
-		var min,hour,zone,weekday;
+function timeprocess() {
+	var time = V.date.time;
+	var day = V.date.day;
+	var week = V.date.week;
+	var month = V.date.month;
+	var year = V.date.year;
+	var min,hour,zone,weekday;
 
 
-		/* 时间的处理 */
-		if (time < 0) time = 0;
+	/* 时间的处理 */
+	if (time < 0) time = 0;
 
-			min = time % 60;
-			hour = Math.floor(time/60);
+		min = time % 60;
+		hour = Math.floor(time/60);
 
-		if (time >= 1440) time -= 1440;
+	if (time >= 1440) time -= 1440;
 
-		if (hour > 23){
-			day += Math.floor(hour/24);
-			V.days += Math.floor(hour/24);
+	if (hour > 23){
+		day += Math.floor(hour/24);
+		V.days += Math.floor(hour/24);
 
-			week = week + Math.floor(hour/24);
-			hour = hour % 24;
-			V.daychange = true
-		};
+		week = week + Math.floor(hour/24);
+		hour = hour % 24;
+		V.daychange = true
+	};
 
-		zone = gettimezone(hour);
+	zone = gettimezone(hour);
 
-		/* 周的处理 */
-		week = week%7;
-		switch(week){
-			case 0:
-				weekday = "周日";
-				break;
-			case 1:
-				weekday = "周一";
-				break;
-			case 2:
-				weekday = "周二";
-				break;
-			case 3:
-				weekday = "周三";
-				break;
-			case 4:
-				weekday = "周四";
-				break;
-			case 5:
-				weekday = "周五";
-				break;
-			case 6:
-				weekday = "周六";
-				break;
-		};
+	/* 周的处理 */
+	week = week%7;
+	switch(week){
+		case 0:
+			weekday = "周日";
+			break;
+		case 1:
+			weekday = "周一";
+			break;
+		case 2:
+			weekday = "周二";
+			break;
+		case 3:
+			weekday = "周三";
+			break;
+		case 4:
+			weekday = "周四";
+			break;
+		case 5:
+			weekday = "周五";
+			break;
+		case 6:
+			weekday = "周六";
+			break;
+	};
 
-		/* 月的处理，每月固定30天 */
-		while(day > 30){
-			month = month + 1;
-			day = Math.max(day-30,1);
-		};
+	/* 月的处理，每月固定30天 */
+	while(day > 30){
+		month = month + 1;
+		day = Math.max(day-30,1);
+	};
 
-		/* 年的处理 */
-		if (month>12){
-			year = year+Math.floor(month/12);
-			month = Math.max(month%12,1);
-		};
+	/* 年的处理 */
+	if (month>12){
+		year = year+Math.floor(month/12);
+		month = Math.max(month%12,1);
+	};
 
-		V.date.time = time;
-		V.date.min = min;
-		V.date.hour = hour;
+	V.date.time = time;
+	V.date.min = min;
+	V.date.hour = hour;
 
-		V.date.zone = zone;
-		V.date.weekday = weekday;
+	V.date.zone = zone;
+	V.date.weekday = weekday;
 
-		V.date.day = day;
-		V.date.week = week;
-		V.date.month = month;
-		V.date.year = year;
-	}
+	V.date.day = day;
+	V.date.week = week;
+	V.date.month = month;
+	V.date.year = year;
 
-});
+	return ""
+}
+window.timeprocess = timeprocess
+DefineMacroS("timeprocess",timeprocess)
 
 Macro.add('time', {
 	handler: function () {
@@ -141,3 +142,7 @@ Macro.add('time', {
 		V.date.zone = zone
 	}
 });
+
+function daychange(){
+	return ""
+}

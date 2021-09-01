@@ -104,30 +104,6 @@
 <</if>>
 <</widget>>
 
-<<widget "location">>
-<<if $args[0]>>
-
-    <<set $location to $args[0]>>
-
-    <<if D.placedata[$args[0]]>>
-        <<set $local to D.placedata[$args[0]]>>
-    <<else>>
-        <<set $local to null>>
-    <</if>>
-
-    <<set $movebutton to false>>
-
-    <<if $local isnot null>>
-        <<if $local.tag.includes("家")>><<run V.local.chara.push("player")>><</if>>
-    <</if>>
-        /*
-        设定地点时的各种处理。包括NPC角色的移动。
-        */
-<<else>>
-    <div id="error-view">error: no args</div>
-<</if>>
-<</widget>>
-
 <<widget "passtime">>
 <<set $date.time to $date.time+$args[0]>>
 <</widget>>
