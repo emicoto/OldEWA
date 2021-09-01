@@ -32,36 +32,7 @@ function randomColor() {
 function isObject(props) {
 	return Object.prototype.toString.call(props) === "[object Object]"
 }
-Renderer.GeneratedPatterns = {};
 
-function registerGeneratedPattern(name, generator) {
-	Renderer.GeneratedPatterns[name] = generator;
-}
-
-function registerImagePattern(name, src) {
-	let image = new Image();
-	image.onload = function () {
-		Renderer.Patterns[name] = Renderer.globalC2D.createPattern(image, "repeat")
-	};
-	image.src = src;
-}
-
-
-Renderer.PatternProvider = function (spec) {
-	// Return named pattern
-	if (typeof spec === "string") return Renderer.Patterns[spec]
-
-	// Indexed patterns
-	if (spec.type in Renderer.GeneratedPatterns) {
-		let image = Renderer.GeneratedPatterns[spec.type](spec);
-		return Renderer.globalC2D.createPattern(image, "repeat");
-	}
-
-	// Unknown pattern
-	console.warn("Unknown pattern spec " + JSON.stringify(spec));
-	return null;
-}
-console.log(Story);
 
 
 
@@ -105,6 +76,49 @@ namespace Avatar {
 		widthfn?: (options) => number,
 		heightfn?: (options) => number
 	}
+	function CanvasModels(name,width,height) {
+		Renderer.CanvasModels[name] = {
+		name: name,
+		width: width,
+		height: height,
+		frames: 8,
+		generatedOptions() {
+			// console.log("generatedOptions");
+			return []
+		},
+		defaultOptions() {
+			return {
+				frame       : null,
+				addon       : {body:false,bottom:false,face:false,hair:false,mouth:false,penis:false},
+					
+				neck        : null, hand        : null, face        : null,
+				hat         : null, outter      : null, top         : null,
+				bottom      : null, inner_up    : null, inner_bt    : null,
+				shoes       : null, legs       : null,
+
+				emoadd      : {tear:false, shy:false, red:false, hurt:false},
+
+				eyebrow     : null, hairfront   : null, kemofront: {mimi:null, horn:null}, eyes : null,
+				mouth       : null, tatoos      : null, dick       : null,
+				penis       : null, nipple      : null, plus       : null,
+				body        : null, hairback    : null, kemoback: {wing:null, tail:null},  back : null,
+				background  : null,
+				animation: "",
+				dummy: __resolve(AVATARPATH, "dummy.png"),
+				eyesframe: 1,
+				filters: {}
+			}
+		}, preprocess(options) {
+			// console.log("preprocess", options);
+		},
+		layers: {
+		},
+
+	}
+	}
+	new CanvasModels("Avatar",180,260)
+	new CanvasModels("Portrait",120,120)
+	new CanvasModels("Emoji",120,120)
 	Renderer.CanvasModels["Shop"] = {
 		name: "Avatar",
 		width: 166,
@@ -120,122 +134,6 @@ namespace Avatar {
 				dress:null,
 				acc:null,
 				dummy: __resolve(AVATARPATH, "dummy.png"),
-				filters: {}
-			}
-		}, preprocess(options) {
-			// console.log("preprocess", options);
-		},
-		layers: {
-		},
-
-	}
-	Renderer.CanvasModels["Avatar"] = {
-		name: "Avatar",
-		width: 180,
-		height: 260,
-		frames: 8,
-		generatedOptions() {
-			// console.log("generatedOptions");
-			return []
-		},
-		defaultOptions() {
-			return {
-				frame: null,
-				addon: { body: false, bottom: false, face: false, hair: false, mouth: false, penis: false },
-
-				neck: null, hand: null, face: null,
-				hat: null, outter: null, top: null,
-				bottom: null, inner_up: null, inner_bt: null,
-				shoes: null, legs: null,
-
-				emoadd: { tear: false, shy: false, red: false, hurt: false },
-
-				eyebrow: null, hairfront: null, kemofront: { mimi: null, horn: null }, eyes: null,
-				mouth: null, tatoos: null, dick: null, penis:null, nipple:null, plus: null,
-				body: null, hairback: null, kemoback: { wing: null, tail: null }, back: null,
-				background: null,
-				animation: "",
-				dummy: __resolve(AVATARPATH, "dummy.png"),
-				eyesframe: 1,
-				filters: {}
-			}
-		}, preprocess(options) {
-			// console.log("preprocess", options);
-		},
-		layers: {
-		},
-
-	}
-	Renderer.CanvasModels["Portrait"] = {
-		name: "Avatar",
-		width: 120,
-		height: 120,
-		frames: 8,
-		generatedOptions() {
-			// console.log("generatedOptions");
-			return []
-		},
-		defaultOptions() {
-			console.log("defaultOptions", V.avatar);
-
-			return {
-				frame: null,
-				addon: { body: false, bottom: false, face: false, hair: false, mouth: false, penis: false },
-
-				neck: null, hand: null, face: null,
-				hat: null, outter: null, top: null,
-				bottom: null, inner_up: null, inner_bt: null,
-				shoes: null, legs: null,
-
-				emoadd: { tear: false, shy: false, red: false, hurt: false },
-
-				eyebrow: null, hairfront: null, kemofront: { mimi: null, horn: null }, eyes: null,
-				mouth: null, tatoos: null, dick: null, penis:null, nipple:null, plus: null,
-				body: null, hairback: null, kemoback: { wing: null, tail: null }, back: null,
-				background: null,
-				animation: "",
-				dummy: __resolve(AVATARPATH, "dummy.png"),
-				eyesframe: 1,
-				filters: {}
-			}
-		}, preprocess(options) {
-			// console.log("preprocess", options);
-		},
-		layers: {
-		},
-
-	}
-
-	Renderer.CanvasModels["Emoji"] = {
-		name: "Avatar",
-		width: 120,
-		height: 120,
-		frames: 8,
-		generatedOptions() {
-			// console.log("generatedOptions");
-			return []
-		},
-		defaultOptions() {
-			console.log("defaultOptions", V.avatar);
-
-			return {
-				frame: null,
-				addon: { body: false, bottom: false, face: false, hair: false, mouth: false, penis: false },
-
-				neck: null, hand: null, face: null,
-				hat: null, outter: null, top: null,
-				bottom: null, inner_up: null, inner_bt: null,
-				shoes: null, legs: null,
-
-				emoadd: { tear: false, shy: false, red: false, hurt: false },
-
-				eyebrow: null, hairfront: null, kemofront: { mimi: null, horn: null }, eyes: null,
-				mouth: null, tatoos: null, dick: null, penis:null, nipple:null, plus: null,
-				body: null, hairback: null, kemoback: { wing: null, tail: null }, back: null,
-				background: null,
-				animation: "",
-				dummy: __resolve(AVATARPATH, "dummy.png"),
-				eyesframe: 1,
 				filters: {}
 			}
 		}, preprocess(options) {
@@ -450,21 +348,59 @@ namespace Avatar {
 
 
 		})
-		setLayer(ID, "body", {
+			setLayer(ID, "body", {
 			width: 180,
 			height: 260,
 			z: layerID++,
-			dx: dx,
 			showfn(options) {
 				return !!options.body
 			},
 			srcfn(options) {
-
+	if (isObject(options.body)) {
+					return options.body ? __resolve(AVATARPATH, `body/${options.body.src}.png`) : options.dummy
+				}
 				return options.body ? __resolve(AVATARPATH, `body/${options.body}.png`) : options.dummy
 			},
 
 		})
+			setLayer(ID, "body_msk", {
+			width: 180,
+			height: 260,
+			z: layerID++,
+			showfn(options) {
 
+				return isObject(options.body) ? options.body.src.includes("furry") :false
+			},
+			srcfn(options) {
+				if (isObject(options.body)) {
+					return options.body.src.includes("furry") ? __resolve(AVATARPATH, `body/${options.body.src}.png`) : options.dummy
+				}
+			},
+			blendModefn(options) {
+				if (isObject(options.body)) {
+					if (!options.body.fixcolor) {
+						return BLENDMODE.MULTIPLY
+					}
+				}
+
+			},
+			blendfn(options) {
+				if (isObject(options.body)) {
+
+					if (!options.body.fixcolor) {
+
+						return options.body.color
+					}
+				}
+			},
+			masksrcfn(options) {
+				if (isObject(options.body)) {
+					if (options.body.src.includes("furry")) {
+						return __resolve(AVATARPATH, `body/furry/mask.png`)
+					}
+				}
+			}
+		})
 		setLayer(ID, "nipple", {
 			width: 180,
 			height: 260,
@@ -1227,7 +1163,7 @@ namespace Avatar {
 
 
 		})
-		setLayer(ID, "body", {
+			setLayer(ID, "body", {
 			width: 180,
 			height: 260,
 			z: layerID++,
@@ -1235,10 +1171,50 @@ namespace Avatar {
 				return !!options.body
 			},
 			srcfn(options) {
-
+	if (isObject(options.body)) {
+					return options.body ? __resolve(AVATARPATH, `body/${options.body.src}.png`) : options.dummy
+				}
 				return options.body ? __resolve(AVATARPATH, `body/${options.body}.png`) : options.dummy
 			},
 
+		})
+			setLayer(ID, "body_msk", {
+			width: 180,
+			height: 260,
+			z: layerID++,
+			showfn(options) {
+
+				return isObject(options.body) ? options.body.src.includes("furry") :false
+			},
+			srcfn(options) {
+				if (isObject(options.body)) {
+					return options.body.src.includes("furry") ? __resolve(AVATARPATH, `body/${options.body.src}.png`) : options.dummy
+				}
+			},
+			blendModefn(options) {
+				if (isObject(options.body)) {
+					if (!options.body.fixcolor) {
+						return BLENDMODE.MULTIPLY
+					}
+				}
+
+			},
+			blendfn(options) {
+				if (isObject(options.body)) {
+
+					if (!options.body.fixcolor) {
+
+						return options.body.color
+					}
+				}
+			},
+			masksrcfn(options) {
+				if (isObject(options.body)) {
+					if (options.body.src.includes("furry")) {
+						return __resolve(AVATARPATH, `body/furry/mask.png`)
+					}
+				}
+			}
 		})
 		setLayer(ID, "plus", {
 			width: 180,
@@ -2152,7 +2128,7 @@ namespace Avatar {
 		})
 
 	}
-	Avatarlayer("Avatar")
+	new Avatarlayer("Avatar")
 	new Portraitlayer("Portrait")
 	new Portraitlayer("Emoji")
 	new Shoplayer("Shop")
@@ -2409,7 +2385,9 @@ namespace Avatar {
 			const keyOption = option ? Object.entries(option) : []
 			keyOption.forEach((value, index) => {
 				if (change[last][value[0]] !== value[1]) {
-					change[last][value[0]] = value[1]
+					// console.log(change[last]);
+					
+					typeof change[last] ==="string" ? change[last] = option  :change[last][value[0]] = value[1]
 					update = true
 				}
 			});
