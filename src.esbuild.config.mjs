@@ -21,7 +21,7 @@ esbuild.build({
   charset: "utf8",
   bundle: true,
   entryNames: "[dir]/[name]",
-  outdir: "./src/js/02-General",
+  outdir: "./src/js/03-GameSystem/avatar/",
   outbase: "Code",
 
   // outfile: "test.js",

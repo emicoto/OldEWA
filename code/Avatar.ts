@@ -34,8 +34,6 @@ function isObject(props) {
 }
 
 
-
-
 namespace Avatar {
 	const AVATARPATH = "image/avatar"
 	const __resolve = (mainpath, ...paths) => path.resolve(mainpath, ...paths)
