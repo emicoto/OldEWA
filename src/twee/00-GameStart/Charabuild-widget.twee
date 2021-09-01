@@ -40,6 +40,13 @@
     <<listbox "$PC.info.race" autoselect>>
 	<<optionsfrom _optionlist>>
     <</listbox>>
+    <script>
+        $("#listbox-pcinforace").on("change",()=>{
+            V.PC.info.race == "兽族" ? 
+            new Wikifier(null,"<<replace #CMFurOption>>　　原型　<<CMFurType>><</replace>>"):
+            new Wikifier(null,"<<replace #CMFurOption>><</replace>><<set $PC.info.kemotype to null>>")
+        })
+    </script>
 <</widget>>
 
 <<widget "CMMainclass">>

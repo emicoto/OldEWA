@@ -88,12 +88,6 @@
                 <<case "扶她">>
                     <<replace #CMgenital>><<CMGirl>><<CMBoy>><</replace>>
             <</switch>>
-            <<if $PC.info.race is "兽族">>
-                <<replace #CMFurOption>>　　原型　<<CMFurType>><</replace>>
-            <<else>>
-                <<replace #CMFurOption>><</replace>>
-                <<set $PC.info.kemotype to null>>
-            <</if>>
             <<CMChangeApply>>
         <<else>>
             <<stop>>
