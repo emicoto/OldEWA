@@ -534,15 +534,15 @@
 
     <<if $PC.trait.泌乳体质 is 1>>
         <<set $PC.produce.乳汁 to [($PC.breast*20),($PC.breast*20)]>>
-        <<set $Pflag.lactation to true>>
-        <<set $Pflag.lactatecd to 60>>
+        <<set $PFlag.lactation to true>>
+        <<set $PFlag.lactatecd to 60>>
     <<else>>
         <<set $PC.produce.乳汁 to [0,0]>>
-        <<set $Pflag.lactation to false>>
-        <<set $Pflag.lactatecd to null>>
+        <<set $PFlag.lactation to false>>
+        <<set $PFlag.lactatecd to null>>
     <</if>>
 
-    <<if $Pflag.top lt 2>>
+    <<if $PFlag.top lt 2>>
         <<redress>>
         <<setface "正常">>
     <</if>>

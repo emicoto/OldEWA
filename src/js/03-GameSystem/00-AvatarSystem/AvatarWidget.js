@@ -90,14 +90,19 @@ function setPatterns(arg) {
 }
 window.setPatterns = setPatterns
 
-function setColors(arg,name,change = false) {
+function setColors(arg,name,change = false, mode="base") {
     if (change) {
         Avatar.setShop(arg)
         setShowCaseUID()
         return
     }
-    V.showcase.color = arg
-    V.showcase.colorname = name
+    if(mode=="base"){
+        V.showcase.color = arg
+        V.showcase.colorname = name
+    }
+    if(mode=="acc"){
+        V.showcase.subcolor = arg
+    }
     setShowCaseUID()
     Avatar.setShop()
     /*new Wikifier(null,"<<replace '#showcase'>><<ShowManequin>><</replace>>")*/

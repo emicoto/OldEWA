@@ -190,11 +190,11 @@
             shop : "all",
             
             tuckinable: false,        tuckin : false, 
-            acc : "blackline",
+            acc : "whiteline",
             patterns: ["blackline","tealine","whiteline","yellowline","greenline"],
-            fixacc  : true,
-            subcolor : null,
-        }
+            fixacc  : false,
+            subcolor : "#6C84C5",
+        },
     ]>>
 <</widget>>
 

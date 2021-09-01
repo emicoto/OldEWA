@@ -212,14 +212,13 @@
     <<set $Equip.legs to null>>
     <<set $Equip.hand to null>>
     <<fixvalue>>
-    <<SetAvatar>>
+    <<run stAvatar()>>
 <</widget>>
 
 <<widget "redress">>
     <<set $Equip to clone($TEquip)>>
-
     <<fixvalue>>
-    <<SetAvatar>>
+    <<run stAvatar()>>
 <</widget>>
 
 

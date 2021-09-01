@@ -35,7 +35,7 @@
     
     <div id="item_info">
         <div id="description">
-        <<print lang($showcase.text,$showcase.text_en)>><br>
+        <<print Lang($showcase.text,$showcase.text_en)>><br>
         </div>
         <div class="warmth">适应温度：<<print ($fix.cold+$showcase.cold)>>C～<<print ($fix.hot+$showcase.hot)>>C</div>
 
@@ -49,14 +49,30 @@
     </div>
     
     <div id="option_containter">
-        <<if $showcase.patterns.length gt 0>>
-            可选图案：<br>
-            <div id="pattern_option">
-                <<for _i to 0; _i lt $showcase.patterns.length; _i++>>
-                    <<set _name to $showcase.patterns[_i]>>
-                    <<print "<<button _name>><<run setPatterns('"+_name+"')>><</button>>">>
-                <</for>>          
-            </div>
+        <<if $showcase.fixacc is false or $showcase.patterns.length gt 0>>
+            <<if $showcase.patterns.length gt 0>>
+                可选花样: <br>
+                <div id="pattern_option">
+                    <<for _i to 0; _i lt $showcase.patterns.length; _i++>>
+                        <<set _name to $showcase.patterns[_i]>>
+                        <<print "<<button _name>><<run setPatterns('"+_name+"')>><</button>>">>
+                    <</for>>          
+                </div>
+            <</if>>
+
+            <<if $showcase.fixacc is false>>
+                花样颜色：<br>
+                <div id="color_plate">
+                     <<for _i to 0; _i lt A.colorlist.length; _i ++>>
+                        <div class="color_plate" @style="'background-color:'+ A.colorlist[_i].code">
+                        <<set _name to A.colorlist[_i].name>>
+                        <<print "<<button _name>><<run setColors(A.colorlist["+_i+"].code,A.colorlist["+_i+"].name,false,'acc')>><</button>>">>
+                        </div>
+                    <</for>>
+                    <div><button id="customColor2">自定义颜色</button></div>        
+                </div>
+            <</if>>
+            
         <</if>>
 
         <<if $showcase.fixcolor is false or $showcase.colors.length gt 0>>
@@ -88,6 +104,16 @@
 <<if $showcase.fixcolor is false>>
 <script>
 var myPicker = new JSColor('#customColor', {format:'hex',value:'#000000',onInput:"setColors(this.toHEXString(),null,true)",
+onChange:"setColors(this.toHEXString(),'自定义')",
+required:false, 
+	palette:'#000000 #FFFFFF #636363 #FF0000 #00FF00 #0000FF', 
+	hideOnPaletteClick:true, backgroundColor:'#ddd', 
+	borderColor:'rgba(0,0,0,1)', borderRadius:10, width:200, 
+	closeButton:true, closeText:'关闭', sliderSize:20, 
+	shadowColor:'rgba(255,121,247,0.2)'
+});
+
+var myPicker2 = new JSColor('#customColor2', {format:'hex',value:'#000000',onInput:"setColors(this.toHEXString(),null,true,'acc')",
 onChange:"setColors(this.toHEXString(),'自定义')",
 required:false, 
 	palette:'#000000 #FFFFFF #636363 #FF0000 #00FF00 #0000FF', 

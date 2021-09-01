@@ -103,7 +103,8 @@ window.imglocation = imglocation
 
 
 function isFurry(){
-    if (PFlag.kemofrom == true && group.includes(V.PC.info.race)) return "furry/"
+    const group = ["兽族","羽族"]
+    if ((V.PFlag.kemoform == true ||  V.charamaking == true) && group.includes(V.PC.info.race)) return "furry/"
     else return V.PC.info.skin+"/"
 }
 
@@ -132,7 +133,7 @@ function stAvatar() {
         if(V.Equip[n] != null && V.Equip[n].hasImg==true){
             V.avatar[n] = setAvatar(n,{
                 fixcolor: V.Equip[n].fixcolor, color: V.Equip[n].color,
-                src: setAPath(V.Equip[n]), acc: V.Equip[n].index + "/"+ V.Equip[n].acc,
+                src: setAPath(V.Equip[n]), acc: ( V.Equip[n].acc !=null ? V.Equip[n].index + "/"+ V.Equip[n].acc : null),
             })
 
             if(V.Equip[n].fixacc){
@@ -166,8 +167,11 @@ function stAvatar() {
                 })
             }
             else{
-                V.avatar[n] = setAvatar(n,{ fixcolor: true, color: "", src: null, acc: null, })
+                V.avatar[n] = setAvatar(n,null)
             }
+        }
+        else{
+            V.avatar[n] = setAvatar(n,null)
         }
     }
 
@@ -197,7 +201,7 @@ function stAvatar() {
 
 
     /*兽耳兽角兽尾部分, 还未实装。 */
-    if(V.PFlag.kemoform == true){
+    if((V.PFlag.kemoform == true || V.charamaking == true)){
         /* let kemotype = V.PC.info.kemotype
         
         if(V.PC.trait.兽耳 == true){
@@ -248,11 +252,11 @@ function stAvatar() {
 
     /* 小丁丁的显示 */
     if(V.PFlag.bottom <= 1 && V.PC.genital.阴茎 > 3){
-        V.avatar.dick = setAvatar("dick", isFurry()+"penis"+isCaged,true)
+        V.avatar.dick = setAvatar("dick", isFurry()+"penis"+isCaged(),true)
     }
     
     const kemorace = ["羽族","兽族"]
-    if(V.PFlag.kemoform == true && kemorace.includes(V.PC.info.race)){
+    if((V.PFlag.kemoform == true ||  V.charamaking == true)&& kemorace.includes(V.PC.info.race)){
         V.avatar.body = setAvatar("body",{
             src:"furry/body_"+breastsize()+isPregnant(), color: haircolor[0],
         },true)
@@ -300,7 +304,7 @@ function stAvatar() {
 
     V.avatar.background = setAvatar("background",imglocation())
 
-    console.log("log",V.avatar)
+    if(V.harddebug)console.log("log",V.avatar);
     return ""
 }
 

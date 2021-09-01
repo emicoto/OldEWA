@@ -91,209 +91,6 @@ var saveAs=saveAs||navigator.msSaveBlob&&navigator.msSaveBlob.bind(navigator)||f
 <style id="style-ui" type="text/css">#ui-dialog-body.settings [id|=setting-body]>div:first-child{display:table;width:100%}#ui-dialog-body.settings [id|=setting-label]{display:table-cell;padding:.4em 2em .4em 0}#ui-dialog-body.settings [id|=setting-label]+div{display:table-cell;min-width:8em;text-align:right;vertical-align:middle;white-space:nowrap}#ui-dialog-body.list{padding:0}#ui-dialog-body.list ul{margin:0;padding:0;list-style:none;border:1px solid transparent}#ui-dialog-body.list li{margin:0}#ui-dialog-body.list li:not(:first-child){border-top:1px solid #444}#ui-dialog-body.list li a{display:block;padding:.25em .75em;border:1px solid transparent;color:#eee;text-decoration:none}#ui-dialog-body.list li a:hover{background-color:#333;border-color:#eee}#ui-dialog-body.saves{padding:0 0 1px}#ui-dialog-body.saves>:not(:first-child){border-top:1px solid #444}#ui-dialog-body.saves table{border-spacing:0;width:100%}#ui-dialog-body.saves tr:not(:first-child){border-top:1px solid #444}#ui-dialog-body.saves td{padding:.33em .33em}#ui-dialog-body.saves td:first-child{min-width:1.5em;text-align:center}#ui-dialog-body.saves td:nth-child(3){line-height:1.2}#ui-dialog-body.saves td:last-child{text-align:right}#ui-dialog-body.saves .empty{color:#999;speak:none;text-align:center;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}#ui-dialog-body.saves .datestamp{font-size:75%;margin-left:1em}#ui-dialog-body.saves ul.buttons li{padding:.4em}#ui-dialog-body.saves ul.buttons>li+li>button{margin-left:.2em}#ui-dialog-body.saves ul.buttons li:last-child{float:right}#ui-dialog-body.settings div[id|=header-body]{margin:1em 0}#ui-dialog-body.settings div[id|=header-body]:first-child{margin-top:0}#ui-dialog-body.settings div[id|=header-body]:not(:first-child){border-top:1px solid #444;padding-top:1em}#ui-dialog-body.settings div[id|=header-body]>*{margin:0}#ui-dialog-body.settings h2[id|=header-heading]{font-size:1.375em}#ui-dialog-body.settings p[id|=header-desc],#ui-dialog-body.settings p[id|=setting-desc]{font-size:87.5%;margin:0 0 0 .5em}#ui-dialog-body.settings div[id|=setting-body]+div[id|=setting-body]{margin:1em 0}#ui-dialog-body.settings [id|=setting-control]{white-space:nowrap}#ui-dialog-body.settings button[id|=setting-control]{color:#eee;background-color:transparent;border:1px solid #444;padding:.4em}#ui-dialog-body.settings button[id|=setting-control]:hover{background-color:#333;border-color:#eee}#ui-dialog-body.settings button[id|=setting-control].enabled{background-color:#282;border-color:#4a4}#ui-dialog-body.settings button[id|=setting-control].enabled:hover{background-color:#4a4;border-color:#6c6}#ui-dialog-body.settings input[type=range][id|=setting-control]{max-width:35vw}#ui-dialog-body.list a,#ui-dialog-body.settings span[id|=setting-input]{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}#ui-dialog-body.saves button[id=saves-clear]:before,#ui-dialog-body.saves button[id=saves-export]:before,#ui-dialog-body.saves button[id=saves-import]:before,#ui-dialog-body.settings button[id|=setting-control].enabled:after,#ui-dialog-body.settings button[id|=setting-control]:after{font-family:tme-fa-icons;font-style:normal;font-weight:400;font-variant:normal;text-transform:none;line-height:1;speak:none}#ui-dialog-body.saves button[id=saves-export]:before{content:"\e829\00a0"}#ui-dialog-body.saves button[id=saves-import]:before{content:"\e82a\00a0"}#ui-dialog-body.saves button[id=saves-clear]:before{content:"\e827\00a0"}#ui-dialog-body.settings button[id|=setting-control]:after{content:"\00a0\00a0\e830"}#ui-dialog-body.settings button[id|=setting-control].enabled:after{content:"\00a0\00a0\e831"}</style>
 <style id="style-ui-bar" type="text/css">#story{margin-left:20em;-webkit-transition:margin-left .2s ease-in;-o-transition:margin-left .2s ease-in;transition:margin-left .2s ease-in}#ui-bar.stowed~#story{margin-left:4.5em}@media screen and (max-width:1136px){#story{margin-left:19em}#ui-bar.stowed~#story{margin-left:3.5em}}@media screen and (max-width:768px){#story{margin-left:3.5em}}#ui-bar{position:fixed;z-index:50;top:0;left:0;width:17.5em;height:100%;margin:0;padding:0;-webkit-transition:left .2s ease-in;-o-transition:left .2s ease-in;transition:left .2s ease-in}#ui-bar.stowed{left:-15.5em}#ui-bar-tray{position:absolute;top:.2em;left:0;right:0}#ui-bar-body{height:90%;height:calc(100% - 2.5em);margin:2.5em 0;padding:0 1.5em}#ui-bar.stowed #ui-bar-body,#ui-bar.stowed #ui-bar-history{visibility:hidden;-webkit-transition:visibility .2s step-end;-o-transition:visibility .2s step-end;transition:visibility .2s step-end}#ui-bar{background-color:#222;border-right:1px solid #444;text-align:center}#ui-bar a{text-decoration:none}#ui-bar hr{border-color:#444}#ui-bar-history [id|=history],#ui-bar-toggle{font-size:1.2em;line-height:inherit;color:#eee;background-color:transparent;border:1px solid #444}#ui-bar-toggle{display:block;position:absolute;top:0;right:0;border-right:none;padding:.3em .45em .25em}#ui-bar.stowed #ui-bar-toggle{padding:.3em .35em .25em .55em}#ui-bar-toggle:hover{background-color:#444;border-color:#eee}#ui-bar-history{margin:0 auto}#ui-bar-history [id|=history]{padding:.2em .45em .35em}#ui-bar-history #history-jumpto{padding:.2em .665em .35em}#ui-bar-history [id|=history]:not(:first-child){margin-left:1.2em}#ui-bar-history [id|=history]:hover{background-color:#444;border-color:#eee}#ui-bar-history [id|=history]:disabled{color:#444;background-color:transparent;border-color:#444}#ui-bar-body{line-height:1.5;overflow:auto}#ui-bar-body>:not(:first-child){margin-top:2em}#story-title{margin:0;font-size:162.5%}#story-author{margin-top:2em;font-weight:700}#menu ul{margin:1em 0 0;padding:0;list-style:none;border:1px solid #444}#menu ul:empty{display:none}#menu li{margin:0}#menu li:not(:first-child){border-top:1px solid #444}#menu li a{display:block;padding:.25em .75em;border:1px solid transparent;color:#eee;text-transform:uppercase}#menu li a:hover{background-color:#444;border-color:#eee}#menu a,#ui-bar-history [id|=history],#ui-bar-toggle{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}#menu-core li[id|=menu-item] a:before,#ui-bar-history [id|=history],#ui-bar-toggle:before{font-family:tme-fa-icons;font-style:normal;font-weight:400;font-variant:normal;text-transform:none;line-height:1;speak:none}#ui-bar-toggle:before{content:"\e81d"}#ui-bar.stowed #ui-bar-toggle:before{content:"\e81e"}#menu-item-saves a:before{content:"\e82b\00a0"}#menu-item-settings a:before{content:"\e82d\00a0"}#menu-item-restart a:before{content:"\e82c\00a0"}#menu-item-share a:before{content:"\e82f\00a0"}</style>
 <style id="style-ui-debug" type="text/css">#debug-bar{background-color:#222;border-left:1px solid #444;border-top:1px solid #444;bottom:0;margin:0;max-height:75%;padding:.5em;position:fixed;right:0;z-index:99900}#debug-bar>div:not([id])+div{margin-top:.5em}#debug-bar>div>label{margin-right:.5em}#debug-bar>div>input[type=text]{min-width:10px}#debug-bar>div>select{width:15em}#debug-bar-toggle{color:#eee;background-color:#222;border:1px solid #444;height:101%;height:calc(100% + 1px);left:-2em;left:calc(-2em - 1px);position:absolute;top:-1px;width:2em}#debug-bar-toggle:hover{background-color:#333;border-color:#eee}#debug-bar-hint{bottom:.175em;font-size:4.5em;opacity:.33;pointer-events:none;position:fixed;right:.6em;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;white-space:nowrap}#debug-bar-watch{background-color:#222;border-left:1px solid #444;border-top:1px solid #444;bottom:102%;bottom:calc(100% + 1px);font-size:.9em;left:-1px;max-height:650%;max-height:65vh;position:absolute;overflow-x:hidden;overflow-y:scroll;right:0;z-index:99800}#debug-bar-watch[hidden]{display:none}#debug-bar-watch div{color:#999;font-style:italic;margin:1em auto;text-align:center}#debug-bar-watch table{width:100%}#debug-bar-watch tr:nth-child(2n){background-color:rgba(127,127,127,.15)}#debug-bar-watch td{padding:.2em 0}#debug-bar-watch td:first-child+td{padding:.2em .3em .2em .1em}#debug-bar-watch .watch-delete{background-color:transparent;border:none;color:#c00}#debug-bar-watch-all,#debug-bar-watch-none{margin-left:.5em}#debug-bar-views-toggle,#debug-bar-watch-toggle{color:#eee;background-color:transparent;border:1px solid #444;margin-right:1em;padding:.4em}#debug-bar-views-toggle:hover,#debug-bar-watch-toggle:hover{background-color:#333;border-color:#eee}#debug-bar-watch:not([hidden])~div #debug-bar-watch-toggle,html[data-debug-view] #debug-bar-views-toggle{background-color:#282;border-color:#4a4}#debug-bar-watch:not([hidden])~div #debug-bar-watch-toggle:hover,html[data-debug-view] #debug-bar-views-toggle:hover{background-color:#4a4;border-color:#6c6}#debug-bar-hint:after,#debug-bar-toggle:before,#debug-bar-views-toggle:after,#debug-bar-watch .watch-delete:before,#debug-bar-watch-add:before,#debug-bar-watch-all:before,#debug-bar-watch-none:before,#debug-bar-watch-toggle:after{font-family:tme-fa-icons;font-style:normal;font-weight:400;font-variant:normal;text-transform:none;line-height:1;speak:none}#debug-bar-toggle:before{content:"\e838"}#debug-bar-hint:after{content:"\e838\202f\e822"}#debug-bar-watch .watch-delete:before{content:"\e804"}#debug-bar-watch-add:before{content:"\e805"}#debug-bar-watch-all:before{content:"\e83a"}#debug-bar-watch-none:before{content:"\e827"}#debug-bar-views-toggle:after,#debug-bar-watch-toggle:after{content:"\00a0\00a0\e830"}#debug-bar-watch:not([hidden])~div #debug-bar-watch-toggle:after,html[data-debug-view] #debug-bar-views-toggle:after{content:"\00a0\00a0\e831"}html[data-debug-view] .debug{padding:.25em;background-color:#234}html[data-debug-view] .debug[title]{cursor:help}html[data-debug-view] .debug.block{display:inline-block;vertical-align:middle}html[data-debug-view] .debug.invalid{text-decoration:line-through}html[data-debug-view] .debug.hidden,html[data-debug-view] .debug.hidden .debug{background-color:#555}html:not([data-debug-view]) .debug.hidden{display:none}html[data-debug-view] .debug[data-name][data-type].nonvoid:after,html[data-debug-view] .debug[data-name][data-type]:before{background-color:rgba(0,0,0,.25);font-family:monospace,monospace;white-space:pre}html[data-debug-view] .debug[data-name][data-type]:before{content:attr(data-name)}html[data-debug-view] .debug[data-name][data-type|=macro]:before{content:"<<" attr(data-name) ">>"}html[data-debug-view] .debug[data-name][data-type|=macro].nonvoid:after{content:"<</" attr(data-name) ">>"}html[data-debug-view] .debug[data-name][data-type|=html]:before{content:"<" attr(data-name) ">"}html[data-debug-view] .debug[data-name][data-type|=html].nonvoid:after{content:"</" attr(data-name) ">"}html[data-debug-view] .debug[data-name][data-type]:not(:empty):before{margin-right:.25em}html[data-debug-view] .debug[data-name][data-type].nonvoid:not(:empty):after{margin-left:.25em}html[data-debug-view] .debug[data-name][data-type|=special],html[data-debug-view] .debug[data-name][data-type|=special]:before{display:block}</style>
-<script id="script-module-Game" type="text/javascript">// Code/Game.js
-var Game = {
-  Data: {
-    Player: {},
-    Npc: {}
-  },
-  Character: {},
-  Utils: {},
-  Mods: {}
-};
-console.log(Game);</script>
-<script id="script-module-Manager" type="text/javascript">var __defProp = Object.defineProperty;
-var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
-var __markAsModule = (target) => __defProp(target, "__esModule", { value: true });
-var __esm = (fn, res) => function __init() {
-  return fn && (res = (0, fn[Object.keys(fn)[0]])(fn = 0)), res;
-};
-var __export = (target, all) => {
-  __markAsModule(target);
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __publicField = (obj, key, value) => {
-  __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
-  return value;
-};
-
-// dsv:H:\_EWA\Code\Data\csv\test.csv
-var test_exports = {};
-__export(test_exports, {
-  default: () => test_default
-});
-var test_default;
-var init_test = __esm({
-  "dsv:H:\\_EWA\\Code\\Data\\csv\\test.csv"() {
-    test_default = [
-      {
-        ";编号": "0",
-        "名字": "鸽子",
-        "设置": ""
-      },
-      {
-        ";编号": "1",
-        "名字": "狐狸",
-        "设置": "true"
-      }
-    ];
-  }
-});
-
-// import-glob:./Data/**/*.csv
-var __exports = {};
-__export(__exports, {
-  default: () => __default,
-  filenames: () => filenames
-});
-var modules, __default, filenames;
-var init__ = __esm({
-  "import-glob:./Data/**/*.csv"() {
-    init_test();
-    modules = [test_exports];
-    __default = modules;
-    filenames = ["./Data/csv/test.csv"];
-  }
-});
-
-// Code/Data/JSON/CHARACTER.json
-var CHARACTER_exports = {};
-__export(CHARACTER_exports, {
-  default: () => CHARACTER_default
-});
-var CHARACTER_default;
-var init_CHARACTER = __esm({
-  "Code/Data/JSON/CHARACTER.json"() {
-    CHARACTER_default = [
-      {
-        CID: "1",
-        名字: "黎渊",
-        性别: "男",
-        genital: { 阴茎: 16, 子宫: -1 },
-        vaginity: { 初吻: "自己的姐姐", 童贞: 1, 处女: -1, A处女: 1 },
-        好感: 0,
-        信赖: 0,
-        欲望: 0,
-        支配: 10,
-        items: {},
-        type: 3
-      },
-      {
-        CID: "2",
-        名字: "变态总裁",
-        性别: "男",
-        genital: { 阴茎: 18, 子宫: -1 },
-        vaginity: { 初吻: "初恋对象", 童贞: "不知哪的谁", 处女: -1, A处女: 1 },
-        好感: 0,
-        信赖: 0,
-        欲望: 0,
-        支配: 100,
-        items: {},
-        type: 1
-      },
-      {
-        CID: "3",
-        名字: "腹黑金毛富二代",
-        性别: "男",
-        genital: { 阴茎: 18, 子宫: -1 },
-        vaginity: { 初吻: "", 童贞: "", 处女: -1, A处女: 1 },
-        好感: 0,
-        信赖: 0,
-        欲望: 10,
-        支配: 20,
-        items: {},
-        type: 1
-      },
-      {
-        CID: "4",
-        名字: "鬼畜将军",
-        性别: "男",
-        genital: { 阴茎: 18, 子宫: -1 },
-        vaginity: { 初吻: "初恋对象", 童贞: "不知哪的谁", 处女: -1, A处女: 1 },
-        好感: 0,
-        信赖: 0,
-        欲望: 30,
-        支配: 100,
-        items: {},
-        type: 1
-      }
-    ];
-  }
-});
-
-// import-glob:./Data/**/*.json
-var __exports2 = {};
-__export(__exports2, {
-  default: () => __default2,
-  filenames: () => filenames2
-});
-var modules2, __default2, filenames2;
-var init__2 = __esm({
-  "import-glob:./Data/**/*.json"() {
-    init_CHARACTER();
-    modules2 = [CHARACTER_exports];
-    __default2 = modules2;
-    filenames2 = ["./Data/JSON/CHARACTER.json"];
-  }
-});
-
-// yaml:H:\_EWA\Code\Data\YAML\test.yml
-var test_exports2 = {};
-__export(test_exports2, {
-  default: () => test_default2,
-  名字: () => 名字
-});
-var 名字, test_default2;
-var init_test2 = __esm({
-  "yaml:H:\\_EWA\\Code\\Data\\YAML\\test.yml"() {
-    名字 = "鸽子";
-    test_default2 = { 名字 };
-  }
-});
-
-// import-glob:./Data/**/*.yml
-var __exports3 = {};
-__export(__exports3, {
-  default: () => __default3,
-  filenames: () => filenames3
-});
-var modules3, __default3, filenames3;
-var init__3 = __esm({
-  "import-glob:./Data/**/*.yml"() {
-    init_test2();
-    modules3 = [test_exports2];
-    __default3 = modules3;
-    filenames3 = ["./Data/YAML/test.yml"];
-  }
-});
-
-// Code/Manager.js
-var Csv = (init__(), __exports);
-var Json = (init__2(), __exports2);
-var Yaml = (init__3(), __exports3);
-var Manager = class {
-  constructor(files) {
-    __publicField(this, "files", new Map());
-    const File = (file) => {
-      const obj = {};
-      file.filenames.map((v, i) => {
-        const filename = v.split("/").slice(2).join("/");
-        obj[filename] = file.default[i].default;
-      });
-      return obj;
-    };
-    Object.keys(files).map((v) => this.files.set(v, File(files[v])));
-  }
-  getFile(key, filename) {
-    return this.files.get(key)[filename];
-  }
-};
-Game.Manager = new Manager({
-  csv: Csv,
-  json: Json,
-  yaml: Yaml
-});</script>
 <link type="image/png" rel="icon" sizes="24x24" href="icon.png" />
 <link rel="stylesheet" href="CSS/jquery-ui.css">
 <script src="lib/path.min.js"></script>
@@ -9410,2120 +9207,6 @@ window.isJsonString = function(s) {
 	return true;
 }
 /* twine-user-script #27: "Avatar.js" */
-// Code/Avatar.ts
-window["BLENDMODE"] = {
-  "SOURCE_OVER": "source-over",
-  "SOURCE_IN": "source-in",
-  "SOURCE_OUT": "source-out",
-  "SOURCE_ATOP": "source-atop",
-  "DESTINATION_OVER": "destination-over",
-  "DESTINATION_IN": "destination-in",
-  "DESTINATION_OUT": "destination-out",
-  "DESTINATION_ATOP": "destination-atop",
-  "LIGHTER": "lighter",
-  "COPY": "copy",
-  "XOR": "xor",
-  "MULTIPLY": "multiply",
-  "SCREEN": "screen",
-  "OVERLAY": "overlay",
-  "DARKEN": "darken",
-  "LIGHTEN": "lighten",
-  "COLOR_DODGE": "color-dodge",
-  "COLOR_BURN": "color-burn",
-  "HARD_LIGHT": "hard-light",
-  "SOFT_LIGHT": "soft-light",
-  "DIFFERENCE": "difference",
-  "EXCLUSION": "exclusion",
-  "HUE": "hue",
-  "SATURATION": "saturation",
-  "COLOR": "color",
-  "LUMINOSITY": "luminosity"
-};
-function isObject(props) {
-  return Object.prototype.toString.call(props) === "[object Object]";
-}
-var Avatar;
-(function(Avatar2) {
-  const AVATARPATH = "image/avatar";
-  const __resolve = (mainpath, ...paths) => path.resolve(mainpath, ...paths);
-  const cache = {};
-  function CanvasModels(name, width, height) {
-    Renderer.CanvasModels[name] = {
-      name,
-      width,
-      height,
-      frames: 8,
-      generatedOptions() {
-        return [];
-      },
-      defaultOptions() {
-        return {
-          frame: null,
-          addon: { body: false, bottom: false, face: false, hair: false, mouth: false, penis: false },
-          neck: null,
-          hand: null,
-          face: null,
-          hat: null,
-          outter: null,
-          top: null,
-          bottom: null,
-          inner_up: null,
-          inner_bt: null,
-          shoes: null,
-          legs: null,
-          emoadd: { tear: false, shy: false, red: false, hurt: false },
-          eyebrow: null,
-          hairfront: null,
-          kemofront: { mimi: null, horn: null },
-          eyes: null,
-          mouth: null,
-          tatoos: null,
-          dick: null,
-          penis: null,
-          nipple: null,
-          plus: null,
-          body: null,
-          hairback: null,
-          kemoback: { wing: null, tail: null },
-          back: null,
-          background: null,
-          animation: "",
-          dummy: __resolve(AVATARPATH, "dummy.png"),
-          eyesframe: 1,
-          filters: {}
-        };
-      },
-      preprocess(options2) {
-      },
-      layers: {}
-    };
-  }
-  new CanvasModels("Avatar", 180, 260);
-  new CanvasModels("Portrait", 120, 120);
-  new CanvasModels("Emoji", 120, 120);
-  Renderer.CanvasModels["Shop"] = {
-    name: "Avatar",
-    width: 166,
-    height: 240,
-    frames: 8,
-    generatedOptions() {
-      return [];
-    },
-    defaultOptions() {
-      return {
-        dress: null,
-        acc: null,
-        dummy: __resolve(AVATARPATH, "dummy.png"),
-        filters: {}
-      };
-    },
-    preprocess(options2) {
-    },
-    layers: {}
-  };
-  function setLayer(id, name, options2) {
-    Renderer.CanvasModels[id].layers[name] = options2;
-  }
-  Avatar2.setLayer = setLayer;
-  function Shoplayer(ID) {
-    let layerID = 0;
-    setLayer(ID, "manekin", {
-      width: 166,
-      height: 240,
-      z: layerID++,
-      show: true,
-      srcfn() {
-        return __resolve(AVATARPATH, `manekin.png`);
-      }
-    });
-    setLayer(ID, "dress", {
-      width: 166,
-      height: 240,
-      z: layerID++,
-      show: true,
-      srcfn(options2) {
-        if (isObject(options2.dress)) {
-          return options2.dress ? __resolve(AVATARPATH, `${options2.dress.src}.png`) : options2.dummy;
-        }
-        return options2.dress ? __resolve(AVATARPATH, `${options2.dress.src}.png`) : options2.dummy;
-      },
-      blendModefn(options2) {
-        if (isObject(options2.dress)) {
-          if (!options2.dress.fixcolor) {
-            return BLENDMODE.MULTIPLY;
-          }
-        }
-      },
-      blendfn(options2) {
-        if (isObject(options2.dress)) {
-          if (!options2.dress.fixcolor) {
-            return options2.dress.color;
-          }
-        }
-      }
-    });
-    setLayer(ID, "acc", {
-      width: 166,
-      height: 240,
-      z: layerID++,
-      show: true,
-      srcfn(options2) {
-        return options2.acc ? __resolve(AVATARPATH, `${options2.acc}.png`) : options2.dummy;
-      }
-    });
-  }
-  function Portraitlayer(ID, dx = -25) {
-    let layerID = 0;
-    setLayer(ID, "kemoback_wing", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      dx,
-      showfn(options2) {
-        return !!options2.kemoback.wing;
-      },
-      srcfn(options2) {
-        return options2.kemoback.wing ? __resolve(AVATARPATH, `kemoback/${options2.kemoback.wing.src}.png`) : options2.dummy;
-      },
-      blendModefn(options2) {
-        if (options2.kemoback.wing) {
-          if (!options2.kemoback.wing.fixcolor) {
-            return BLENDMODE.MULTIPLY;
-          }
-        }
-      },
-      blendfn(options2) {
-        if (options2.kemoback.wing) {
-          if (!options2.kemoback.wing.fixcolor) {
-            return options2.kemoback.wing.color;
-          }
-        }
-      }
-    });
-    setLayer(ID, "kemoback_tail", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      dx,
-      showfn(options2) {
-        return !!options2.kemoback.tail;
-      },
-      srcfn(options2) {
-        return options2.kemoback.tail ? __resolve(AVATARPATH, `kemoback/${options2.kemoback.tail.src}.png`) : options2.dummy;
-      },
-      blendModefn(options2) {
-        if (options2.kemoback.tail) {
-          if (!options2.kemoback.tail.fixcolor) {
-            return BLENDMODE.MULTIPLY;
-          }
-        }
-      },
-      blendfn(options2) {
-        if (options2.kemoback.tail) {
-          if (!options2.kemoback.tail.fixcolor) {
-            return options2.kemoback.tail.color;
-          }
-        }
-      }
-    });
-    setLayer(ID, "back", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      dx,
-      showfn(options2) {
-        return !!options2.back;
-      },
-      srcfn(options2) {
-        return options2.back ? __resolve(AVATARPATH, `back/${options2.back.src}.png`) : options2.dummy;
-      },
-      blendModefn(options2) {
-        if (options2.back) {
-          if (!options2.back.fixcolor) {
-            return BLENDMODE.MULTIPLY;
-          }
-        }
-      },
-      blendfn(options2) {
-        if (options2.back) {
-          if (!options2.back.fixcolor) {
-            return options2.back.color;
-          }
-        }
-      }
-    });
-    setLayer(ID, "hairback", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      dx,
-      showfn(options2) {
-        return !!options2.hairback;
-      },
-      srcfn(options2) {
-        if (isObject(options2.hairback)) {
-          return options2.hairback ? __resolve(AVATARPATH, `hairback/${options2.hairback.src}.png`) : options2.dummy;
-        }
-        return options2.hairback ? __resolve(AVATARPATH, `hairback/${options2.hairback}.png`) : options2.dummy;
-      },
-      blendModefn(options2) {
-        if (isObject(options2.hairback)) {
-          if (!options2.hairback.fixcolor) {
-            return BLENDMODE.MULTIPLY;
-          }
-        }
-      },
-      blendfn(options2) {
-        if (isObject(options2.hairback)) {
-          if (!options2.hairback.fixcolor) {
-            return options2.hairback.color[0];
-          }
-        }
-      }
-    });
-    setLayer(ID, "body", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      showfn(options2) {
-        return !!options2.body;
-      },
-      srcfn(options2) {
-        if (isObject(options2.body)) {
-          return options2.body ? __resolve(AVATARPATH, `body/${options2.body.src}.png`) : options2.dummy;
-        }
-        return options2.body ? __resolve(AVATARPATH, `body/${options2.body}.png`) : options2.dummy;
-      }
-    });
-    setLayer(ID, "body_msk", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      showfn(options2) {
-        return isObject(options2.body) ? options2.body.src.includes("furry") : false;
-      },
-      srcfn(options2) {
-        if (isObject(options2.body)) {
-          return options2.body.src.includes("furry") ? __resolve(AVATARPATH, `body/${options2.body.src}.png`) : options2.dummy;
-        }
-      },
-      blendModefn(options2) {
-        if (isObject(options2.body)) {
-          if (!options2.body.fixcolor) {
-            return BLENDMODE.MULTIPLY;
-          }
-        }
-      },
-      blendfn(options2) {
-        if (isObject(options2.body)) {
-          if (!options2.body.fixcolor) {
-            return options2.body.color;
-          }
-        }
-      },
-      masksrcfn(options2) {
-        if (isObject(options2.body)) {
-          if (options2.body.src.includes("furry")) {
-            return __resolve(AVATARPATH, `body/furry/mask.png`);
-          }
-        }
-      }
-    });
-    setLayer(ID, "nipple", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      dx,
-      showfn(options2) {
-        return !!options2.nipple;
-      },
-      srcfn(options2) {
-        return options2.nipple ? __resolve(AVATARPATH, `${options2.nipple}.png`) : options2.dummy;
-      }
-    });
-    setLayer(ID, "hand", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      dx,
-      showfn(options2) {
-        return !!options2.hand;
-      },
-      srcfn(options2) {
-        if (isObject(options2.hand)) {
-          return options2.hand ? __resolve(AVATARPATH, `hand/${options2.hand.src}.png`) : options2.dummy;
-        }
-        return options2.hand ? __resolve(AVATARPATH, `hand/${options2.hand}.png`) : options2.dummy;
-      },
-      blendModefn(options2) {
-        if (isObject(options2.hand)) {
-          if (!options2.hand.fixcolor) {
-            return BLENDMODE.MULTIPLY;
-          }
-        }
-      },
-      blendfn(options2) {
-        if (isObject(options2.hand)) {
-          if (!options2.hand.fixcolor) {
-            return options2.hand.color;
-          }
-        }
-      }
-    });
-    setLayer(ID, "inner_up", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      dx,
-      showfn(options2) {
-        return !!options2.inner_up;
-      },
-      srcfn(options2) {
-        if (isObject(options2.inner_up)) {
-          return options2.inner_up ? __resolve(AVATARPATH, `inner_up/${options2.inner_up.src}.png`) : options2.dummy;
-        }
-        return options2.inner_up ? __resolve(AVATARPATH, `inner_up/${options2.inner_up}.png`) : options2.dummy;
-      },
-      blendModefn(options2) {
-        if (isObject(options2.inner_up)) {
-          if (!options2.inner_up.fixcolor) {
-            return BLENDMODE.MULTIPLY;
-          }
-        }
-      },
-      blendfn(options2) {
-        if (isObject(options2.inner_up)) {
-          if (!options2.inner_up.fixcolor) {
-            return options2.inner_up.color;
-          }
-        }
-      }
-    });
-    setLayer(ID, "inner_up_acc", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      dx,
-      showfn(options2) {
-        if (isObject(options2.inner_up)) {
-          return !!options2.inner_up.acc;
-        }
-        return false;
-      },
-      srcfn(options2) {
-        if (isObject(options2.inner_up)) {
-          return options2.inner_up.acc ? __resolve(AVATARPATH, `inner_up/${options2.inner_up.acc}.png`) : options2.dummy;
-        }
-        return options2.dummy;
-      }
-    });
-    setLayer(ID, "top", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      dx,
-      showfn(options2) {
-        return !!options2.top;
-      },
-      srcfn(options2) {
-        if (isObject(options2.top)) {
-          return options2.top ? __resolve(AVATARPATH, `top/${options2.top.src}.png`) : options2.dummy;
-        }
-        return options2.top ? __resolve(AVATARPATH, `top/${options2.top}.png`) : options2.dummy;
-      },
-      blendModefn(options2) {
-        if (isObject(options2.top)) {
-          if (!options2.top.fixcolor) {
-            return BLENDMODE.MULTIPLY;
-          }
-        }
-      },
-      blendfn(options2) {
-        if (isObject(options2.top)) {
-          if (!options2.top.fixcolor) {
-            return options2.top.color;
-          }
-        }
-      }
-    });
-    setLayer(ID, "top_acc", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      dx,
-      showfn(options2) {
-        if (isObject(options2.top)) {
-          return !!options2.top.acc;
-        }
-        return false;
-      },
-      srcfn(options2) {
-        if (isObject(options2.top)) {
-          return options2.top.acc ? __resolve(AVATARPATH, `top/${options2.top.acc}.png`) : options2.dummy;
-        }
-        return options2.dummy;
-      }
-    });
-    setLayer(ID, "outter", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      dx,
-      showfn(options2) {
-        return !!options2.inner_up;
-      },
-      srcfn(options2) {
-        if (isObject(options2.outter)) {
-          return options2.outter ? __resolve(AVATARPATH, `outter/${options2.outter.src}.png`) : options2.dummy;
-        }
-        return options2.outter ? __resolve(AVATARPATH, `outter/${options2.outter}.png`) : options2.dummy;
-      },
-      blendModefn(options2) {
-        if (isObject(options2.outter)) {
-          if (!options2.outter.fixcolor) {
-            return BLENDMODE.MULTIPLY;
-          }
-        }
-      },
-      blendfn(options2) {
-        if (isObject(options2.outter)) {
-          if (!options2.outter.fixcolor) {
-            return options2.outter.color;
-          }
-        }
-      }
-    });
-    setLayer(ID, "outter_acc", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      dx,
-      showfn(options2) {
-        if (isObject(options2.outter)) {
-          return !!options2.outter.acc;
-        }
-        return false;
-      },
-      srcfn(options2) {
-        if (isObject(options2.outter)) {
-          return options2.outter.acc ? __resolve(AVATARPATH, `top/${options2.outter.acc}.png`) : options2.dummy;
-        }
-        return options2.dummy;
-      }
-    });
-    setLayer(ID, "mouth", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      dx,
-      showfn(options2) {
-        return !!options2.mouth;
-      },
-      srcfn(options2) {
-        if (isObject(options2.mouth)) {
-          return options2.mouth ? __resolve(AVATARPATH, `mouth/${options2.mouth.src}.png`) : options2.dummy;
-        }
-        return options2.mouth ? __resolve(AVATARPATH, `mouth/${options2.mouth}.png`) : options2.dummy;
-      },
-      blendModefn(options2) {
-        if (isObject(options2.mouth)) {
-          if (!options2.mouth.fixcolor) {
-            return BLENDMODE.MULTIPLY;
-          }
-        }
-      },
-      blendfn(options2) {
-        if (isObject(options2.mouth)) {
-          if (!options2.mouth.fixcolor) {
-            return options2.mouth.color;
-          }
-        }
-      }
-    });
-    setLayer(ID, "eyes", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      dx,
-      showfn(options2) {
-        return !!options2.eyes;
-      },
-      srcfn(options2) {
-        if (isObject(options2.eyes)) {
-          return options2.eyes ? __resolve(AVATARPATH, `eyes/${options2.eyes.src}.png`) : options2.dummy;
-        }
-        return options2.eyes ? __resolve(AVATARPATH, `eyes/${options2.eyes}.png`) : options2.dummy;
-      },
-      blendModefn(options2) {
-        if (isObject(options2.eyes)) {
-          if (!options2.eyes.fixcolor) {
-            return BLENDMODE.MULTIPLY;
-          }
-        }
-      },
-      blendfn(options2) {
-        if (isObject(options2.eyes)) {
-          if (!options2.eyes.fixcolor) {
-            return options2.eyes.color;
-          }
-        }
-      },
-      animationfn(options2) {
-        return "eyes";
-      }
-    });
-    setLayer(ID, "emoadd_tear", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      dx,
-      showfn(options2) {
-        return !!options2.emoadd.tear;
-      },
-      srcfn(options2) {
-        return options2.emoadd.tear ? __resolve(AVATARPATH, `emoadd/tear.png`) : options2.dummy;
-      }
-    });
-    setLayer(ID, "emoadd_shy", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      dx,
-      showfn(options2) {
-        return !!options2.emoadd.shy;
-      },
-      srcfn(options2) {
-        return options2.emoadd.shy ? __resolve(AVATARPATH, `emoadd/shy.png`) : options2.dummy;
-      }
-    });
-    setLayer(ID, "emoadd_red", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      dx,
-      showfn(options2) {
-        return !!options2.emoadd.red;
-      },
-      srcfn(options2) {
-        return options2.emoadd.red ? __resolve(AVATARPATH, `emoadd/red.png`) : options2.dummy;
-      }
-    });
-    setLayer(ID, "emoadd_hurt", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      dx,
-      showfn(options2) {
-        return !!options2.emoadd.hurt;
-      },
-      srcfn(options2) {
-        return options2.emoadd.hurt ? __resolve(AVATARPATH, `emoadd/hurt.png`) : options2.dummy;
-      }
-    });
-    setLayer(ID, "face", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      dx,
-      showfn(options2) {
-        return !!options2.face;
-      },
-      srcfn(options2) {
-        if (isObject(options2.face)) {
-          return options2.face ? __resolve(AVATARPATH, `face/${options2.face.src}.png`) : options2.dummy;
-        }
-        return options2.face ? __resolve(AVATARPATH, `face/${options2.face}.png`) : options2.dummy;
-      },
-      blendModefn(options2) {
-        if (isObject(options2.face)) {
-          if (!options2.face.fixcolor) {
-            return BLENDMODE.MULTIPLY;
-          }
-        }
-      },
-      blendfn(options2) {
-        if (isObject(options2.face)) {
-          if (!options2.face.fixcolor) {
-            return options2.face.color;
-          }
-        }
-      }
-    });
-    setLayer(ID, "neck", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      dx,
-      showfn(options2) {
-        return !!options2.neck;
-      },
-      srcfn(options2) {
-        if (isObject(options2.neck)) {
-          return options2.neck ? __resolve(AVATARPATH, `neck/${options2.neck.src}.png`) : options2.dummy;
-        }
-        return options2.neck ? __resolve(AVATARPATH, `neck/${options2.neck}.png`) : options2.dummy;
-      },
-      blendModefn(options2) {
-        if (isObject(options2.neck)) {
-          if (!options2.neck.fixcolor) {
-            return BLENDMODE.MULTIPLY;
-          }
-        }
-      },
-      blendfn(options2) {
-        if (isObject(options2.neck)) {
-          if (!options2.neck.fixcolor) {
-            return options2.neck.color;
-          }
-        }
-      }
-    });
-    setLayer(ID, "hairfront", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      dx,
-      showfn(options2) {
-        return !!options2.hairfront;
-      },
-      srcfn(options2) {
-        if (isObject(options2.hairfront)) {
-          return options2.hairfront ? __resolve(AVATARPATH, `hairfront/${options2.hairfront.src}.png`) : options2.dummy;
-        }
-        return options2.hairfront ? __resolve(AVATARPATH, `hairfront/${options2.hairfront}.png`) : options2.dummy;
-      },
-      blendModefn(options2) {
-        if (isObject(options2.hairfront)) {
-          if (!options2.hairfront.fixcolor) {
-            return BLENDMODE.MULTIPLY;
-          }
-        }
-      },
-      blendfn(options2) {
-        if (isObject(options2.hairfront)) {
-          if (!options2.hairfront.fixcolor) {
-            return options2.hairfront.color[0];
-          }
-        }
-      }
-    });
-    setLayer(ID, "eyebrow", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      dx,
-      showfn(options2) {
-        return !!options2.eyebrow;
-      },
-      srcfn(options2) {
-        if (isObject(options2.eyebrow)) {
-          return options2.eyebrow ? __resolve(AVATARPATH, `eyebrow/${options2.eyebrow.src}.png`) : options2.dummy;
-        }
-        return options2.eyebrow ? __resolve(AVATARPATH, `eyebrow/${options2.eyebrow}.png`) : options2.dummy;
-      },
-      blendModefn(options2) {
-        if (isObject(options2.eyebrow)) {
-          if (!options2.eyebrow.fixcolor) {
-            return BLENDMODE.MULTIPLY;
-          }
-        }
-      },
-      blendfn(options2) {
-        if (isObject(options2.eyebrow)) {
-          if (!options2.eyebrow.fixcolor) {
-            return options2.eyebrow.color;
-          }
-        }
-      }
-    });
-    setLayer(ID, "kemofront_mimi", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      dx,
-      showfn(options2) {
-        return !!options2.kemofront.mimi;
-      },
-      srcfn(options2) {
-        if (isObject(options2.kemofront.mimi)) {
-          return options2.kemofront.mimi ? __resolve(AVATARPATH, `kemofront/${options2.kemofront.mimi.src}.png`) : options2.dummy;
-        }
-        return options2.kemofront.mimi ? __resolve(AVATARPATH, `kemofront/${options2.kemofront.mimi}.png`) : options2.dummy;
-      },
-      blendModefn(options2) {
-        if (isObject(options2.kemofront.mimi)) {
-          if (!options2.kemofront.mimi.fixcolor) {
-            return BLENDMODE.MULTIPLY;
-          }
-        }
-      },
-      blendfn(options2) {
-        if (isObject(options2.kemofront.mimi)) {
-          if (!options2.kemofront.mimi.fixcolor) {
-            return options2.kemofront.mimi.color;
-          }
-        }
-      }
-    });
-    setLayer(ID, "kemofront_horn", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      dx,
-      showfn(options2) {
-        return !!options2.kemofront.horn;
-      },
-      srcfn(options2) {
-        if (isObject(options2.kemofront.horn)) {
-          return options2.kemofront.horn ? __resolve(AVATARPATH, `kemofront/${options2.kemofront.horn.src}.png`) : options2.dummy;
-        }
-        return options2.kemofront.horn ? __resolve(AVATARPATH, `kemofront/${options2.kemofront.horn}.png`) : options2.dummy;
-      },
-      blendModefn(options2) {
-        if (isObject(options2.kemofront.horn)) {
-          if (!options2.kemofront.horn.fixcolor) {
-            return BLENDMODE.MULTIPLY;
-          }
-        }
-      },
-      blendfn(options2) {
-        if (isObject(options2.kemofront.horn)) {
-          if (!options2.kemofront.horn.fixcolor) {
-            return options2.kemofront.horn.color;
-          }
-        }
-      }
-    });
-    setLayer(ID, "hat", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      dx,
-      showfn(options2) {
-        return !!options2.hat;
-      },
-      srcfn(options2) {
-        if (isObject(options2.hat)) {
-          return options2.hat ? __resolve(AVATARPATH, `hat/${options2.hat.src}.png`) : options2.dummy;
-        }
-        return options2.hat ? __resolve(AVATARPATH, `hat/${options2.hat}.png`) : options2.dummy;
-      },
-      blendModefn(options2) {
-        if (isObject(options2.hat)) {
-          if (!options2.hat.fixcolor) {
-            return BLENDMODE.MULTIPLY;
-          }
-        }
-      },
-      blendfn(options2) {
-        if (isObject(options2.hat)) {
-          if (!options2.hat.fixcolor) {
-            return options2.hat.color;
-          }
-        }
-      }
-    });
-    setLayer(ID, "addon_face", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      dx,
-      showfn(options2) {
-        return !!options2.addon.face;
-      },
-      srcfn(options2) {
-        return options2.addon.face ? __resolve(AVATARPATH, `addon/face.png`) : options2.dummy;
-      }
-    });
-    setLayer(ID, "addon_hair", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      dx,
-      showfn(options2) {
-        return !!options2.addon.hair;
-      },
-      srcfn(options2) {
-        return options2.addon.hair ? __resolve(AVATARPATH, `addon/hair.png`) : options2.dummy;
-      }
-    });
-    setLayer(ID, "addon_mouth", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      dx,
-      showfn(options2) {
-        return !!options2.addon.mouth;
-      },
-      srcfn(options2) {
-        return options2.addon.mouth ? __resolve(AVATARPATH, `addon/mouth.png`) : options2.dummy;
-      }
-    });
-    setLayer(ID, "frame", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      dx,
-      showfn(options2) {
-        return !!options2.frame;
-      },
-      srcfn(options2) {
-        if (isObject(options2.frame)) {
-          return options2.frame ? __resolve(AVATARPATH, `frame/${options2.frame.src}.png`) : options2.dummy;
-        }
-        return options2.frame ? __resolve(AVATARPATH, `frame/${options2.frame}.png`) : options2.dummy;
-      },
-      blendModefn(options2) {
-        if (isObject(options2.frame)) {
-          if (!options2.frame.fixcolor) {
-            return BLENDMODE.MULTIPLY;
-          }
-        }
-      },
-      blendfn(options2) {
-        if (isObject(options2.frame)) {
-          if (!options2.frame.fixcolor) {
-            return options2.frame.color;
-          }
-        }
-      }
-    });
-  }
-  function Avatarlayer(ID) {
-    let layerID = 0;
-    setLayer(ID, "background", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      showfn(options2) {
-        return !!options2.background;
-      },
-      srcfn(options2) {
-        return options2.background ? __resolve(AVATARPATH, `background/${options2.background}.png`) : options2.dummy;
-      }
-    });
-    setLayer(ID, "kemoback_wing", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      showfn(options2) {
-        return !!options2.kemoback.wing;
-      },
-      srcfn(options2) {
-        return options2.kemoback.wing ? __resolve(AVATARPATH, `kemoback/${options2.kemoback.wing.src}.png`) : options2.dummy;
-      },
-      blendModefn(options2) {
-        if (options2.kemoback.wing) {
-          if (!options2.kemoback.wing.fixcolor) {
-            return BLENDMODE.MULTIPLY;
-          }
-        }
-      },
-      blendfn(options2) {
-        if (options2.kemoback.wing) {
-          if (!options2.kemoback.wing.fixcolor) {
-            return options2.kemoback.wing.color;
-          }
-        }
-      }
-    });
-    setLayer(ID, "kemoback_tail", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      showfn(options2) {
-        return !!options2.kemoback.tail;
-      },
-      srcfn(options2) {
-        return options2.kemoback.tail ? __resolve(AVATARPATH, `kemoback/${options2.kemoback.tail.src}.png`) : options2.dummy;
-      },
-      blendModefn(options2) {
-        if (options2.kemoback.tail) {
-          if (!options2.kemoback.tail.fixcolor) {
-            return BLENDMODE.MULTIPLY;
-          }
-        }
-      },
-      blendfn(options2) {
-        if (options2.kemoback.tail) {
-          if (!options2.kemoback.tail.fixcolor) {
-            return options2.kemoback.tail.color;
-          }
-        }
-      }
-    });
-    setLayer(ID, "back", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      showfn(options2) {
-        return !!options2.back;
-      },
-      srcfn(options2) {
-        return options2.back ? __resolve(AVATARPATH, `back/${options2.back.src}.png`) : options2.dummy;
-      },
-      blendModefn(options2) {
-        if (options2.back) {
-          if (!options2.back.fixcolor) {
-            return BLENDMODE.MULTIPLY;
-          }
-        }
-      },
-      blendfn(options2) {
-        if (options2.back) {
-          if (!options2.back.fixcolor) {
-            return options2.back.color;
-          }
-        }
-      }
-    });
-    setLayer(ID, "hairback", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      showfn(options2) {
-        return !!options2.hairback;
-      },
-      srcfn(options2) {
-        if (isObject(options2.hairback)) {
-          return options2.hairback ? __resolve(AVATARPATH, `hairback/${options2.hairback.src}.png`) : options2.dummy;
-        }
-        return options2.hairback ? __resolve(AVATARPATH, `hairback/${options2.hairback}.png`) : options2.dummy;
-      },
-      blendModefn(options2) {
-        if (isObject(options2.hairback)) {
-          if (!options2.hairback.fixcolor) {
-            return BLENDMODE.MULTIPLY;
-          }
-        }
-      },
-      blendfn(options2) {
-        if (isObject(options2.hairback)) {
-          if (!options2.hairback.fixcolor) {
-            return options2.hairback.color[0];
-          }
-        }
-      }
-    });
-    setLayer(ID, "body", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      showfn(options2) {
-        return !!options2.body;
-      },
-      srcfn(options2) {
-        if (isObject(options2.body)) {
-          return options2.body ? __resolve(AVATARPATH, `body/${options2.body.src}.png`) : options2.dummy;
-        }
-        return options2.body ? __resolve(AVATARPATH, `body/${options2.body}.png`) : options2.dummy;
-      }
-    });
-    setLayer(ID, "body_msk", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      showfn(options2) {
-        return isObject(options2.body) ? options2.body.src.includes("furry") : false;
-      },
-      srcfn(options2) {
-        if (isObject(options2.body)) {
-          return options2.body.src.includes("furry") ? __resolve(AVATARPATH, `body/${options2.body.src}.png`) : options2.dummy;
-        }
-      },
-      blendModefn(options2) {
-        if (isObject(options2.body)) {
-          if (!options2.body.fixcolor) {
-            return BLENDMODE.MULTIPLY;
-          }
-        }
-      },
-      blendfn(options2) {
-        if (isObject(options2.body)) {
-          if (!options2.body.fixcolor) {
-            return options2.body.color;
-          }
-        }
-      },
-      masksrcfn(options2) {
-        if (isObject(options2.body)) {
-          if (options2.body.src.includes("furry")) {
-            return __resolve(AVATARPATH, `body/furry/mask.png`);
-          }
-        }
-      }
-    });
-    setLayer(ID, "plus", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      showfn(options2) {
-        return !!options2.plus;
-      },
-      srcfn(options2) {
-        return options2.plus ? __resolve(AVATARPATH, `${options2.plus}.png`) : options2.dummy;
-      }
-    });
-    setLayer(ID, "nipple", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      showfn(options2) {
-        return !!options2.nipple;
-      },
-      srcfn(options2) {
-        return options2.nipple ? __resolve(AVATARPATH, `${options2.nipple}.png`) : options2.dummy;
-      }
-    });
-    setLayer(ID, "dick", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      show: true,
-      srcfn(options2) {
-        return options2.dick ? __resolve(AVATARPATH, `body/${options2.dick}.png`) : options2.dummy;
-      }
-    });
-    setLayer(ID, "penis", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      showfn(options2) {
-        return !!options2.penis;
-      },
-      srcfn(options2) {
-        return options2.penis ? __resolve(AVATARPATH, `${options2.penis}.png`) : options2.dummy;
-      }
-    });
-    setLayer(ID, "legs", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      showfn(options2) {
-        return !!options2.legs;
-      },
-      srcfn(options2) {
-        if (isObject(options2.legs)) {
-          return options2.legs ? __resolve(AVATARPATH, `legs/${options2.legs.src}.png`) : options2.dummy;
-        }
-        return options2.legs ? __resolve(AVATARPATH, `legs/${options2.legs}.png`) : options2.dummy;
-      },
-      blendModefn(options2) {
-        if (isObject(options2.legs)) {
-          if (!options2.legs.fixcolor) {
-            return BLENDMODE.MULTIPLY;
-          }
-        }
-      },
-      blendfn(options2) {
-        if (isObject(options2.legs)) {
-          if (!options2.legs.fixcolor) {
-            return options2.legs.color;
-          }
-        }
-      }
-    });
-    setLayer(ID, "legs_acc", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      showfn(options2) {
-        if (isObject(options2.legs)) {
-          return !!options2.legs.acc;
-        }
-        return false;
-      },
-      srcfn(options2) {
-        if (isObject(options2.legs)) {
-          return options2.legs.acc ? __resolve(AVATARPATH, `legs/${options2.legs.acc}.png`) : options2.dummy;
-        }
-        return options2.dummy;
-      }
-    });
-    setLayer(ID, "shoes", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      showfn(options2) {
-        return !!options2.shoes;
-      },
-      srcfn(options2) {
-        if (isObject(options2.shoes)) {
-          return options2.shoes ? __resolve(AVATARPATH, `shoes/${options2.shoes.src}.png`) : options2.dummy;
-        }
-        return options2.shoes ? __resolve(AVATARPATH, `shoes/${options2.shoes}.png`) : options2.dummy;
-      },
-      blendModefn(options2) {
-        if (isObject(options2.shoes)) {
-          if (!options2.shoes.fixcolor) {
-            return BLENDMODE.MULTIPLY;
-          }
-        }
-      },
-      blendfn(options2) {
-        if (isObject(options2.shoes)) {
-          if (!options2.shoes.fixcolor) {
-            return options2.shoes.color;
-          }
-        }
-      }
-    });
-    setLayer(ID, "inner_bt", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      showfn(options2) {
-        return !!options2.inner_bt;
-      },
-      srcfn(options2) {
-        if (isObject(options2.inner_bt)) {
-          return options2.inner_bt ? __resolve(AVATARPATH, `inner_bt/${options2.inner_bt.src}.png`) : options2.dummy;
-        }
-        return options2.inner_bt ? __resolve(AVATARPATH, `inner_bt/${options2.inner_bt}.png`) : options2.dummy;
-      },
-      blendModefn(options2) {
-        if (isObject(options2.inner_bt)) {
-          if (!options2.inner_bt.fixcolor) {
-            return BLENDMODE.MULTIPLY;
-          }
-        }
-      },
-      blendfn(options2) {
-        if (isObject(options2.inner_bt)) {
-          if (!options2.inner_bt.fixcolor) {
-            return options2.inner_bt.color;
-          }
-        }
-      }
-    });
-    setLayer(ID, "inner_bt_acc", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      showfn(options2) {
-        if (isObject(options2.inner_bt)) {
-          return !!options2.inner_bt.acc;
-        }
-        return false;
-      },
-      srcfn(options2) {
-        if (isObject(options2.inner_bt)) {
-          return options2.inner_bt.acc ? __resolve(AVATARPATH, `inner_bt/${options2.inner_bt.acc}.png`) : options2.dummy;
-        }
-        return options2.dummy;
-      }
-    });
-    setLayer(ID, "bottom", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      showfn(options2) {
-        return !!options2.bottom;
-      },
-      srcfn(options2) {
-        if (isObject(options2.bottom)) {
-          return options2.bottom ? __resolve(AVATARPATH, `bottom/${options2.bottom.src}.png`) : options2.dummy;
-        }
-        return options2.bottom ? __resolve(AVATARPATH, `bottom/${options2.bottom}.png`) : options2.dummy;
-      },
-      blendModefn(options2) {
-        if (isObject(options2.bottom)) {
-          if (!options2.bottom.fixcolor) {
-            return BLENDMODE.MULTIPLY;
-          }
-        }
-      },
-      blendfn(options2) {
-        if (isObject(options2.bottom)) {
-          if (!options2.bottom.fixcolor) {
-            return options2.bottom.color;
-          }
-        }
-      }
-    });
-    setLayer(ID, "bottom_acc", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      showfn(options2) {
-        if (isObject(options2.bottom)) {
-          return !!options2.bottom.acc;
-        }
-        return false;
-      },
-      srcfn(options2) {
-        if (isObject(options2.bottom)) {
-          return options2.bottom.acc ? __resolve(AVATARPATH, `bottom/${options2.bottom.acc}.png`) : options2.dummy;
-        }
-        return options2.dummy;
-      }
-    });
-    setLayer(ID, "hand", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      showfn(options2) {
-        return !!options2.hand;
-      },
-      srcfn(options2) {
-        if (isObject(options2.hand)) {
-          return options2.hand ? __resolve(AVATARPATH, `hand/${options2.hand.src}.png`) : options2.dummy;
-        }
-        return options2.hand ? __resolve(AVATARPATH, `hand/${options2.hand}.png`) : options2.dummy;
-      },
-      blendModefn(options2) {
-        if (isObject(options2.hand)) {
-          if (!options2.hand.fixcolor) {
-            return BLENDMODE.MULTIPLY;
-          }
-        }
-      },
-      blendfn(options2) {
-        if (isObject(options2.hand)) {
-          if (!options2.hand.fixcolor) {
-            return options2.hand.color;
-          }
-        }
-      }
-    });
-    setLayer(ID, "inner_up", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      showfn(options2) {
-        return !!options2.inner_up;
-      },
-      srcfn(options2) {
-        if (isObject(options2.inner_up)) {
-          return options2.inner_up ? __resolve(AVATARPATH, `inner_up/${options2.inner_up.src}.png`) : options2.dummy;
-        }
-        return options2.inner_up ? __resolve(AVATARPATH, `inner_up/${options2.inner_up}.png`) : options2.dummy;
-      },
-      blendModefn(options2) {
-        if (isObject(options2.inner_up)) {
-          if (!options2.inner_up.fixcolor) {
-            return BLENDMODE.MULTIPLY;
-          }
-        }
-      },
-      blendfn(options2) {
-        if (isObject(options2.inner_up)) {
-          if (!options2.inner_up.fixcolor) {
-            return options2.inner_up.color;
-          }
-        }
-      }
-    });
-    setLayer(ID, "inner_up_acc", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      showfn(options2) {
-        if (isObject(options2.inner_up)) {
-          return !!options2.inner_up.acc;
-        }
-        return false;
-      },
-      srcfn(options2) {
-        if (isObject(options2.inner_up)) {
-          return options2.inner_up.acc ? __resolve(AVATARPATH, `inner_up/${options2.inner_up.acc}.png`) : options2.dummy;
-        }
-        return options2.dummy;
-      }
-    });
-    setLayer(ID, "top", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      showfn(options2) {
-        return !!options2.top;
-      },
-      srcfn(options2) {
-        if (isObject(options2.top)) {
-          return options2.top ? __resolve(AVATARPATH, `top/${options2.top.src}.png`) : options2.dummy;
-        }
-        return options2.top ? __resolve(AVATARPATH, `top/${options2.top}.png`) : options2.dummy;
-      },
-      blendModefn(options2) {
-        if (isObject(options2.top)) {
-          if (!options2.top.fixcolor) {
-            return BLENDMODE.MULTIPLY;
-          }
-        }
-      },
-      blendfn(options2) {
-        if (isObject(options2.top)) {
-          if (!options2.top.fixcolor) {
-            return options2.top.color;
-          }
-        }
-      }
-    });
-    setLayer(ID, "top_acc", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      showfn(options2) {
-        if (isObject(options2.top)) {
-          return !!options2.top.acc;
-        }
-        return false;
-      },
-      srcfn(options2) {
-        if (isObject(options2.top)) {
-          return options2.top.acc ? __resolve(AVATARPATH, `top/${options2.top.acc}.png`) : options2.dummy;
-        }
-        return options2.dummy;
-      }
-    });
-    setLayer(ID, "outter", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      showfn(options2) {
-        return !!options2.inner_up;
-      },
-      srcfn(options2) {
-        if (isObject(options2.outter)) {
-          return options2.outter ? __resolve(AVATARPATH, `outter/${options2.outter.src}.png`) : options2.dummy;
-        }
-        return options2.outter ? __resolve(AVATARPATH, `outter/${options2.outter}.png`) : options2.dummy;
-      },
-      blendModefn(options2) {
-        if (isObject(options2.outter)) {
-          if (!options2.outter.fixcolor) {
-            return BLENDMODE.MULTIPLY;
-          }
-        }
-      },
-      blendfn(options2) {
-        if (isObject(options2.outter)) {
-          if (!options2.outter.fixcolor) {
-            return options2.outter.color;
-          }
-        }
-      }
-    });
-    setLayer(ID, "outter_acc", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      showfn(options2) {
-        if (isObject(options2.outter)) {
-          return !!options2.outter.acc;
-        }
-        return false;
-      },
-      srcfn(options2) {
-        if (isObject(options2.outter)) {
-          return options2.outter.acc ? __resolve(AVATARPATH, `outter/${options2.outter.acc}.png`) : options2.dummy;
-        }
-        return options2.dummy;
-      }
-    });
-    setLayer(ID, "mouth", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      showfn(options2) {
-        return !!options2.mouth;
-      },
-      srcfn(options2) {
-        if (isObject(options2.mouth)) {
-          return options2.mouth ? __resolve(AVATARPATH, `mouth/${options2.mouth.src}.png`) : options2.dummy;
-        }
-        return options2.mouth ? __resolve(AVATARPATH, `mouth/${options2.mouth}.png`) : options2.dummy;
-      },
-      blendModefn(options2) {
-        if (isObject(options2.mouth)) {
-          if (!options2.mouth.fixcolor) {
-            return BLENDMODE.MULTIPLY;
-          }
-        }
-      },
-      blendfn(options2) {
-        if (isObject(options2.mouth)) {
-          if (!options2.mouth.fixcolor) {
-            return options2.mouth.color;
-          }
-        }
-      }
-    });
-    setLayer(ID, "eyes", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      showfn(options2) {
-        return !!options2.eyes;
-      },
-      srcfn(options2) {
-        if (isObject(options2.eyes)) {
-          return options2.eyes ? __resolve(AVATARPATH, `eyes/${options2.eyes.src}.png`) : options2.dummy;
-        }
-        return options2.eyes ? __resolve(AVATARPATH, `eyes/${options2.eyes}.png`) : options2.dummy;
-      },
-      blendModefn(options2) {
-        if (isObject(options2.eyes)) {
-          if (!options2.eyes.fixcolor) {
-            return BLENDMODE.MULTIPLY;
-          }
-        }
-      },
-      blendfn(options2) {
-        if (isObject(options2.eyes)) {
-          if (!options2.eyes.fixcolor) {
-            return options2.eyes.color;
-          }
-        }
-      },
-      animationfn(options2) {
-        return "eyes";
-      }
-    });
-    setLayer(ID, "emoadd_tear", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      showfn(options2) {
-        return !!options2.emoadd.tear;
-      },
-      srcfn(options2) {
-        return options2.emoadd.tear ? __resolve(AVATARPATH, `emoadd/tear.png`) : options2.dummy;
-      }
-    });
-    setLayer(ID, "emoadd_shy", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      showfn(options2) {
-        return !!options2.emoadd.shy;
-      },
-      srcfn(options2) {
-        return options2.emoadd.shy ? __resolve(AVATARPATH, `emoadd/shy.png`) : options2.dummy;
-      }
-    });
-    setLayer(ID, "emoadd_red", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      showfn(options2) {
-        return !!options2.emoadd.red;
-      },
-      srcfn(options2) {
-        return options2.emoadd.red ? __resolve(AVATARPATH, `emoadd/red.png`) : options2.dummy;
-      }
-    });
-    setLayer(ID, "emoadd_hurt", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      showfn(options2) {
-        return !!options2.emoadd.hurt;
-      },
-      srcfn(options2) {
-        return options2.emoadd.hurt ? __resolve(AVATARPATH, `emoadd/hurt.png`) : options2.dummy;
-      }
-    });
-    setLayer(ID, "face", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      showfn(options2) {
-        return !!options2.face;
-      },
-      srcfn(options2) {
-        if (isObject(options2.face)) {
-          return options2.face ? __resolve(AVATARPATH, `face/${options2.face.src}.png`) : options2.dummy;
-        }
-        return options2.face ? __resolve(AVATARPATH, `face/${options2.face}.png`) : options2.dummy;
-      },
-      blendModefn(options2) {
-        if (isObject(options2.face)) {
-          if (!options2.face.fixcolor) {
-            return BLENDMODE.MULTIPLY;
-          }
-        }
-      },
-      blendfn(options2) {
-        if (isObject(options2.face)) {
-          if (!options2.face.fixcolor) {
-            return options2.face.color;
-          }
-        }
-      }
-    });
-    setLayer(ID, "neck", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      showfn(options2) {
-        return !!options2.neck;
-      },
-      srcfn(options2) {
-        if (isObject(options2.neck)) {
-          return options2.neck ? __resolve(AVATARPATH, `neck/${options2.neck.src}.png`) : options2.dummy;
-        }
-        return options2.neck ? __resolve(AVATARPATH, `neck/${options2.neck}.png`) : options2.dummy;
-      },
-      blendModefn(options2) {
-        if (isObject(options2.neck)) {
-          if (!options2.neck.fixcolor) {
-            return BLENDMODE.MULTIPLY;
-          }
-        }
-      },
-      blendfn(options2) {
-        if (isObject(options2.neck)) {
-          if (!options2.neck.fixcolor) {
-            return options2.neck.color;
-          }
-        }
-      }
-    });
-    setLayer(ID, "neck_acc", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      showfn(options2) {
-        if (isObject(options2.neck)) {
-          return !!options2.neck.acc;
-        }
-        return false;
-      },
-      srcfn(options2) {
-        if (isObject(options2.neck)) {
-          return options2.neck.acc ? __resolve(AVATARPATH, `outter/${options2.neck.acc}.png`) : options2.dummy;
-        }
-        return options2.dummy;
-      }
-    });
-    setLayer(ID, "hairfront", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      showfn(options2) {
-        return !!options2.hairfront;
-      },
-      srcfn(options2) {
-        if (isObject(options2.hairfront)) {
-          return options2.hairfront ? __resolve(AVATARPATH, `hairfront/${options2.hairfront.src}.png`) : options2.dummy;
-        }
-        return options2.hairfront ? __resolve(AVATARPATH, `hairfront/${options2.hairfront}.png`) : options2.dummy;
-      },
-      blendModefn(options2) {
-        if (isObject(options2.hairfront)) {
-          if (!options2.hairfront.fixcolor) {
-            return BLENDMODE.MULTIPLY;
-          }
-        }
-      },
-      blendfn(options2) {
-        if (isObject(options2.hairfront)) {
-          if (!options2.hairfront.fixcolor) {
-            return options2.hairfront.color[0];
-          }
-        }
-      }
-    });
-    setLayer(ID, "hairfront_msk", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      showfn(options2) {
-        return !!options2.hairfront;
-      },
-      srcfn(options2) {
-        if (isObject(options2.hairfront)) {
-          return options2.hairfront ? __resolve(AVATARPATH, `hairfront/${options2.hairfront.src}.png`) : options2.dummy;
-        }
-        return options2.hairfront ? __resolve(AVATARPATH, `hairfront/${options2.hairfront}.png`) : options2.dummy;
-      },
-      blendModefn(options2) {
-        if (isObject(options2.hairfront)) {
-          if (!options2.hairfront.fixcolor) {
-            return BLENDMODE.MULTIPLY;
-          }
-        }
-      },
-      blendfn(options2) {
-        if (isObject(options2.hairfront)) {
-          if (!options2.hairfront.fixcolor) {
-            return options2.hairfront.color[1];
-          }
-        }
-      },
-      masksrcfn(options2) {
-        if (isObject(options2.hairfront)) {
-          if (options2.hairfront) {
-            return __resolve(AVATARPATH, `hairfront/` + V.Equip.hairfront + `/hl_mask.png`);
-          }
-        }
-        if (options2.hairfront) {
-          __resolve(AVATARPATH, `hairfront/` + V.Equip.hairfront + `/hl_mask.png`);
-        }
-      }
-    });
-    setLayer(ID, "eyebrow", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      showfn(options2) {
-        return !!options2.eyebrow;
-      },
-      srcfn(options2) {
-        if (isObject(options2.eyebrow)) {
-          return options2.eyebrow ? __resolve(AVATARPATH, `eyebrow/${options2.eyebrow.src}.png`) : options2.dummy;
-        }
-        return options2.eyebrow ? __resolve(AVATARPATH, `eyebrow/${options2.eyebrow}.png`) : options2.dummy;
-      },
-      blendModefn(options2) {
-        if (isObject(options2.eyebrow)) {
-          if (!options2.eyebrow.fixcolor) {
-            return BLENDMODE.MULTIPLY;
-          }
-        }
-      },
-      blendfn(options2) {
-        if (isObject(options2.eyebrow)) {
-          if (!options2.eyebrow.fixcolor) {
-            return options2.eyebrow.color;
-          }
-        }
-      }
-    });
-    setLayer(ID, "kemofront_mimi", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      showfn(options2) {
-        return !!options2.kemofront.mimi;
-      },
-      srcfn(options2) {
-        if (isObject(options2.kemofront.mimi)) {
-          return options2.kemofront.mimi ? __resolve(AVATARPATH, `kemofront/${options2.kemofront.mimi.src}.png`) : options2.dummy;
-        }
-        return options2.kemofront.mimi ? __resolve(AVATARPATH, `kemofront/${options2.kemofront.mimi}.png`) : options2.dummy;
-      },
-      blendModefn(options2) {
-        if (isObject(options2.kemofront.mimi)) {
-          if (!options2.kemofront.mimi.fixcolor) {
-            return BLENDMODE.MULTIPLY;
-          }
-        }
-      },
-      blendfn(options2) {
-        if (isObject(options2.kemofront.mimi)) {
-          if (!options2.kemofront.mimi.fixcolor) {
-            return options2.kemofront.mimi.color;
-          }
-        }
-      }
-    });
-    setLayer(ID, "kemofront_horn", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      showfn(options2) {
-        return !!options2.kemofront.horn;
-      },
-      srcfn(options2) {
-        if (isObject(options2.kemofront.horn)) {
-          return options2.kemofront.horn ? __resolve(AVATARPATH, `kemofront/${options2.kemofront.horn.src}.png`) : options2.dummy;
-        }
-        return options2.kemofront.horn ? __resolve(AVATARPATH, `kemofront/${options2.kemofront.horn}.png`) : options2.dummy;
-      },
-      blendModefn(options2) {
-        if (isObject(options2.kemofront.horn)) {
-          if (!options2.kemofront.horn.fixcolor) {
-            return BLENDMODE.MULTIPLY;
-          }
-        }
-      },
-      blendfn(options2) {
-        if (isObject(options2.kemofront.horn)) {
-          if (!options2.kemofront.horn.fixcolor) {
-            return options2.kemofront.horn.color;
-          }
-        }
-      }
-    });
-    setLayer(ID, "hat", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      showfn(options2) {
-        return !!options2.hat;
-      },
-      srcfn(options2) {
-        if (isObject(options2.hat)) {
-          return options2.hat ? __resolve(AVATARPATH, `hat/${options2.hat.src}.png`) : options2.dummy;
-        }
-        return options2.hat ? __resolve(AVATARPATH, `hat/${options2.hat}.png`) : options2.dummy;
-      },
-      blendModefn(options2) {
-        if (isObject(options2.hat)) {
-          if (!options2.hat.fixcolor) {
-            return BLENDMODE.MULTIPLY;
-          }
-        }
-      },
-      blendfn(options2) {
-        if (isObject(options2.hat)) {
-          if (!options2.hat.fixcolor) {
-            return options2.hat.color;
-          }
-        }
-      }
-    });
-    setLayer(ID, "addon_body", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      showfn(options2) {
-        return !!options2.addon.body;
-      },
-      srcfn(options2) {
-        return options2.addon.tear ? __resolve(AVATARPATH, `addon/body.png`) : options2.dummy;
-      }
-    });
-    setLayer(ID, "addon_bottom", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      showfn(options2) {
-        return !!options2.addon.bottom;
-      },
-      srcfn(options2) {
-        return options2.addon.bottom ? __resolve(AVATARPATH, `addon/bottom.png`) : options2.dummy;
-      }
-    });
-    setLayer(ID, "addon_face", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      showfn(options2) {
-        return !!options2.addon.face;
-      },
-      srcfn(options2) {
-        return options2.addon.face ? __resolve(AVATARPATH, `addon/face.png`) : options2.dummy;
-      }
-    });
-    setLayer(ID, "addon_hair", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      showfn(options2) {
-        return !!options2.addon.hair;
-      },
-      srcfn(options2) {
-        return options2.addon.hair ? __resolve(AVATARPATH, `addon/hair.png`) : options2.dummy;
-      }
-    });
-    setLayer(ID, "addon_mouth", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      showfn(options2) {
-        return !!options2.addon.mouth;
-      },
-      srcfn(options2) {
-        return options2.addon.mouth ? __resolve(AVATARPATH, `addon/mouth.png`) : options2.dummy;
-      }
-    });
-    setLayer(ID, "addon_penis", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      showfn(options2) {
-        return !!options2.addon.penis;
-      },
-      srcfn(options2) {
-        return options2.addon.penis ? __resolve(AVATARPATH, `addon/penis.png`) : options2.dummy;
-      }
-    });
-    setLayer(ID, "frame", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      showfn(options2) {
-        return !!options2.frame;
-      },
-      srcfn(options2) {
-        if (isObject(options2.frame)) {
-          return options2.frame ? __resolve(AVATARPATH, `frame/${options2.frame.src}.png`) : options2.dummy;
-        }
-        return options2.frame ? __resolve(AVATARPATH, `frame/${options2.frame}.png`) : options2.dummy;
-      },
-      blendModefn(options2) {
-        if (isObject(options2.frame)) {
-          if (!options2.frame.fixcolor) {
-            return BLENDMODE.MULTIPLY;
-          }
-        }
-      },
-      blendfn(options2) {
-        if (isObject(options2.frame)) {
-          if (!options2.frame.fixcolor) {
-            return options2.frame.color;
-          }
-        }
-      }
-    });
-  }
-  new Avatarlayer("Avatar");
-  new Portraitlayer("Portrait");
-  new Portraitlayer("Emoji");
-  new Shoplayer("Shop");
-  function animation(options2, props = {}) {
-    if (!options2.seconds) {
-      throw new Error("options对象必须有name frames seconds 属性" + JSON.stringify(options2));
-    }
-    if (!options2.frames) {
-      throw new Error("options对象必须有name frames seconds 属性" + JSON.stringify(options2));
-    }
-    if (!options2.name) {
-      throw new Error("options对象必须有name frames seconds 属性" + JSON.stringify(options2));
-    }
-    const s = 1e3 * options2.seconds;
-    let n = 0;
-    const obj = {};
-    const propskey = Object.keys(props);
-    const frames = options2.frames;
-    if (typeof options2.frames === "number") {
-      obj["frames"] = options2.frames;
-      options2.duration ? obj["duration"] = options2.duration : obj["duration"] = s / options2.frames;
-    }
-    if (Array.isArray(options2.frames) && Array.isArray(options2.percentual)) {
-      obj["keyframes"] = options2.percentual.map((v1, i1) => v1.map((v2, i2) => {
-        let num;
-        if (n === 0) {
-          n = s / 100 * v2;
-          num = n;
-        } else {
-          num = n;
-          n = s / 100 * v2;
-          num = n - num;
-        }
-        const o = {
-          duration: num
-        };
-        Array.isArray(frames[i1]) ? o["frame"] = frames[i1][i2] : o["frame"] = frames[i2];
-        propskey.forEach((v3) => {
-          if (Array.isArray(props[v3])) {
-            if (Array.isArray(props[v3][i1])) {
-              o[v3] = props[v3][i1][i2];
-            } else {
-              o[v3] = props[v3][i2];
-            }
-          } else {
-            o[v3] = props[v3];
-          }
-        });
-        return o;
-      })).flat();
-    }
-    console.log(obj);
-    Renderer.Animations[options2.name] = obj;
-  }
-  Avatar2.animation = animation;
-  animation({
-    name: "eyes",
-    seconds: 5,
-    frames: [0, 1, 2, 3, 2, 1, 0],
-    percentual: [[58, 60, 62, 64, 66, 68, 70], [84, 85, 86, 87, 88, 89, 90], [94, 95, 96, 97, 98, 99, 100]]
-  });
-  Avatar2.AVATARMODEL = Renderer.locateModel("Avatar", "avatar");
-  Avatar2.PORTRAITMODEL = Renderer.locateModel("Portrait", "portrait");
-  Avatar2.SHOPMODEL = Renderer.locateModel("Shop", "shop");
-  Avatar2.options = Avatar2.AVATARMODEL.defaultOptions();
-  Avatar2.shopoptions = Avatar2.SHOPMODEL.defaultOptions();
-  var AVATARCANVAS = Avatar2.AVATARMODEL.createCanvas();
-  Avatar2.AVATARMODEL.render(AVATARCANVAS, Avatar2.options);
-  Avatar2.AVATARMODEL.animate(AVATARCANVAS, Avatar2.options);
-  var PORTRAITCANVAS = Avatar2.PORTRAITMODEL.createCanvas();
-  Avatar2.PORTRAITMODEL.render(PORTRAITCANVAS, Avatar2.options);
-  Avatar2.PORTRAITMODEL.animate(PORTRAITCANVAS, Avatar2.options);
-  var SHOPCANVAS = Avatar2.AVATARMODEL.createCanvas();
-  Avatar2.SHOPMODEL.render(SHOPCANVAS, Avatar2.shopoptions);
-  Avatar2.cacheEmoji = new Map();
-  function RandomNPCEmoji(FACES, O) {
-    const randomArray = (arr) => arr[parseInt(Math.random() * (arr.length - 1))];
-    const OPTION = {
-      fliter: {},
-      emoadd: {}
-    };
-    const CM = {
-      CMSkin: [
-        "health",
-        "white",
-        "mugi",
-        "dark",
-        "black"
-      ],
-      CMHairColor: [
-        "black",
-        "darkbrown",
-        "wine",
-        "brown",
-        "milktea",
-        "blond",
-        "softblond",
-        "platinum",
-        "silver",
-        "white",
-        "purple",
-        "green",
-        "blue",
-        "aqua",
-        "pink"
-      ],
-      CMHairstyle: [
-        "natural",
-        "straight"
-      ],
-      CMEyeColor: [
-        "black",
-        "brown",
-        "emerald",
-        "green",
-        "lightgreen",
-        "blue",
-        "aqua",
-        "purple",
-        "lightpurple",
-        "white",
-        "amber",
-        "red"
-      ],
-      CMEyetype: ["a", "b"]
-    };
-    const hair = randomArray(CM.CMHairColor);
-    const randomplus1 = (v) => parseInt(Math.random() * v) + 1;
-    OPTION["hairback"] = `straight/${hair}_${randomplus1(4)}`;
-    OPTION["hairfront"] = `${randomArray(CM.CMHairstyle)}/${hair}_1`;
-    OPTION["body"] = `${randomArray(CM.CMSkin)}/body_${randomplus1(3)}`;
-    let emote = A.emote[FACES];
-    const emoadd = ["tear", "shy", "red", "hurt"];
-    const nomal = ["eyebrow", "mouth", "frame"];
-    emoadd.forEach((va) => {
-      OPTION["emoadd"][va] = emote[va];
-    });
-    nomal.forEach((va) => {
-      OPTION[va] = emote[va];
-    });
-    OPTION["eyes"] = [randomArray(CM.CMEyeColor), emote["eyes"].includes("full") ? emote["eyes"] + randomArray(CM.CMEyetype) + "_idle" : emote["eyes"]].join("/");
-    var EMOJIMODEL = Renderer.locateModel("Emoji");
-    var EMOJICANVAS = EMOJIMODEL.createCanvas();
-    EMOJIMODEL.render(EMOJICANVAS, OPTION);
-    EMOJIMODEL.animate(EMOJICANVAS, OPTION);
-    O["ID"] ? EMOJICANVAS.canvas.id = O["ID"] : null;
-    O["CLASS"] ? EMOJICANVAS.canvas.className = O["CLASS"] : null;
-    return EMOJICANVAS.canvas;
-  }
-  Avatar2.RandomNPCEmoji = RandomNPCEmoji;
-  function avatarEmoji(FACES, O) {
-    const OPTIONSTR = JSON.stringify(Avatar2.options);
-    const OPTION = JSON.parse(OPTIONSTR);
-    let emote = A.emote[FACES];
-    const emoadd = ["tear", "shy", "red", "hurt"];
-    const nomal = ["eyebrow", "mouth", "frame"];
-    emoadd.forEach((va) => {
-      OPTION["emoadd"][va] = emote[va];
-    });
-    nomal.forEach((va) => {
-      OPTION[va] = emote[va];
-    });
-    OPTION["eyes"] = [V.PC.瞳色, emote["eyes"].includes("full") ? emote["eyes"] + T.type[V.PC.眼型] + "_idle" : emote["eyes"]].join("/");
-    var EMOJIMODEL = Renderer.locateModel("Emoji");
-    var EMOJICANVAS = EMOJIMODEL.createCanvas();
-    EMOJIMODEL.render(EMOJICANVAS, OPTION);
-    EMOJIMODEL.animate(EMOJICANVAS, OPTION);
-    O["ID"] ? EMOJICANVAS.canvas.id = O["ID"] : null;
-    O["CLASS"] ? EMOJICANVAS.canvas.className = O["CLASS"] : null;
-    return EMOJICANVAS.canvas;
-  }
-  Avatar2.avatarEmoji = avatarEmoji;
-  function getCanvas() {
-    return AVATARCANVAS.canvas;
-  }
-  Avatar2.getCanvas = getCanvas;
-  function getShop() {
-    return SHOPCANVAS.canvas;
-  }
-  Avatar2.getShop = getShop;
-  function getPortrait() {
-    return PORTRAITCANVAS.canvas;
-  }
-  Avatar2.getPortrait = getPortrait;
-  function setShop(colors) {
-    const group = ["outter", "top", "inner_up"];
-    const opt = Avatar2.shopoptions;
-    const showcase = V.showcase;
-    const isbeast = group.includes(showcase.layer) && showcase.dfpng.breast;
-    const fixcolor = showcase.fixcolor;
-    const color = colors ? colors : showcase.color;
-    let src = fixcolor ? __resolve(showcase.layer, showcase.index, `${color}${isbeast ? "_1" : ""}`) : __resolve(showcase.layer, showcase.index, `basic${isbeast ? "_1" : ""}`);
-    opt["acc"] = showcase.acc ? __resolve(showcase.layer, showcase.index, showcase.acc) : null;
-    opt["dress"] = {
-      fixcolor,
-      color,
-      src
-    };
-    Avatar2.SHOPMODEL.redraw();
-  }
-  Avatar2.setShop = setShop;
-  function setAvatar(key, option, updates) {
-    if (!Avatar2.options) {
-      return option;
-    }
-    const keyName = key.includes(".");
-    const keys = key.split(".");
-    let change;
-    let last = key;
-    if (keyName) {
-      last = keys[keys.length - 1];
-      change = Avatar2.options[keys[0]];
-    } else {
-      change = Avatar2.options;
-    }
-    if (!change[last])
-      change[last] = option;
-    let update = updates ? true : false;
-    const isObject2 = Object.prototype.toString.call(option) === "[object Object]";
-    const isArray = Array.isArray(Avatar2.options);
-    if (isObject2) {
-      const keyOption = option ? Object.entries(option) : [];
-      keyOption.forEach((value, index) => {
-        if (change[last][value[0]] !== value[1]) {
-          typeof change[last] === "string" ? change[last] = option : change[last][value[0]] = value[1];
-          update = true;
-        }
-      });
-    }
-    if (!isObject2 && !isArray) {
-      if (change[last] !== option) {
-        change[last] = option;
-        update = true;
-      }
-    }
-    if (!update) {
-      if (V.harddebug)
-        console.log("未更新:", key, option, last, change[last], change);
-    }
-    if (update) {
-      if (V.harddebug)
-        console.log("更新:", key, option, last, change[last], change);
-      Avatar2.AVATARMODEL.redraw();
-      Avatar2.PORTRAITMODEL.redraw();
-    }
-    return option;
-  }
-  Avatar2.setAvatar = setAvatar;
-})(Avatar || (Avatar = {}));
-window.Avatar = Avatar;
-window.setAvatar = (key, options, updates) => Avatar.setAvatar(key, options, updates);
-window["avatarEmoji"] = (FACE, option) => Avatar.avatarEmoji(FACE, option);
-window["RandomNPCEmoji"] = (FACE, option) => Avatar.RandomNPCEmoji(FACE, option);
 /* twine-user-script #28: "AvatarWidget.js" */
 /* 属性集算 */
 function setreveal(){
@@ -11617,14 +9300,19 @@ function setPatterns(arg) {
 }
 window.setPatterns = setPatterns
 
-function setColors(arg,name,change = false) {
+function setColors(arg,name,change = false, mode="base") {
     if (change) {
         Avatar.setShop(arg)
         setShowCaseUID()
         return
     }
-    V.showcase.color = arg
-    V.showcase.colorname = name
+    if(mode=="base"){
+        V.showcase.color = arg
+        V.showcase.colorname = name
+    }
+    if(mode=="acc"){
+        V.showcase.subcolor = arg
+    }
     setShowCaseUID()
     Avatar.setShop()
     /*new Wikifier(null,"<<replace '#showcase'>><<ShowManequin>><</replace>>")*/
@@ -11912,7 +9600,8 @@ window.imglocation = imglocation
 
 
 function isFurry(){
-    if (PFlag.kemofrom == true && group.includes(V.PC.info.race)) return "furry/"
+    const group = ["兽族","羽族"]
+    if ((V.PFlag.kemoform == true ||  V.charamaking == true) && group.includes(V.PC.info.race)) return "furry/"
     else return V.PC.info.skin+"/"
 }
 
@@ -11941,7 +9630,7 @@ function stAvatar() {
         if(V.Equip[n] != null && V.Equip[n].hasImg==true){
             V.avatar[n] = setAvatar(n,{
                 fixcolor: V.Equip[n].fixcolor, color: V.Equip[n].color,
-                src: setAPath(V.Equip[n]), acc: V.Equip[n].index + "/"+ V.Equip[n].acc,
+                src: setAPath(V.Equip[n]), acc: ( V.Equip[n].acc !=null ? V.Equip[n].index + "/"+ V.Equip[n].acc : null),
             })
 
             if(V.Equip[n].fixacc){
@@ -11975,8 +9664,11 @@ function stAvatar() {
                 })
             }
             else{
-                V.avatar[n] = setAvatar(n,{ fixcolor: true, color: "", src: null, acc: null, })
+                V.avatar[n] = setAvatar(n,null)
             }
+        }
+        else{
+            V.avatar[n] = setAvatar(n,null)
         }
     }
 
@@ -12006,7 +9698,7 @@ function stAvatar() {
 
 
     /*兽耳兽角兽尾部分, 还未实装。 */
-    if(V.PFlag.kemoform == true){
+    if((V.PFlag.kemoform == true || V.charamaking == true)){
         /* let kemotype = V.PC.info.kemotype
         
         if(V.PC.trait.兽耳 == true){
@@ -12057,11 +9749,11 @@ function stAvatar() {
 
     /* 小丁丁的显示 */
     if(V.PFlag.bottom <= 1 && V.PC.genital.阴茎 > 3){
-        V.avatar.dick = setAvatar("dick", isFurry()+"penis"+isCaged,true)
+        V.avatar.dick = setAvatar("dick", isFurry()+"penis"+isCaged(),true)
     }
     
     const kemorace = ["羽族","兽族"]
-    if(V.PFlag.kemoform == true && kemorace.includes(V.PC.info.race)){
+    if((V.PFlag.kemoform == true ||  V.charamaking == true)&& kemorace.includes(V.PC.info.race)){
         V.avatar.body = setAvatar("body",{
             src:"furry/body_"+breastsize()+isPregnant(), color: haircolor[0],
         },true)
@@ -12109,12 +9801,360 @@ function stAvatar() {
 
     V.avatar.background = setAvatar("background",imglocation())
 
-    console.log("log",V.avatar)
+    if(V.harddebug)console.log("log",V.avatar);
     return ""
 }
 
 window.stAvatar = stAvatar
-/* twine-user-script #30: "PlayerInfo.js" */
+/* twine-user-script #30: "EventWidget.js" */
+function setEvent() {
+    var event = V.event
+    event.lang = V.lang
+
+    if (event == null || event.type == null || event.name == null){
+        return false
+    }
+
+    var eventname
+
+    if (event.branch != null && event.phrase != null){
+        eventname = event.type + " " + event.name + "-"+ event.branch + "-" +  event.phrase
+
+    }else if (event.phrase == null && event.branch != null){
+        eventname = event.type + " " + event.name + "-" + event.branch 
+
+    }else if (event.branch == null && event.phrase != null){
+        eventname = event.type + " " + event.name + "-" + event.phrase
+
+    }else{
+        eventname = event.type + " " + event.name
+    }
+
+    V.event.passage = eventname
+
+    if (Story.has(eventname+" "+event.lang)==true) eventname += " "+event.lang;
+    else if (V.lang == "EN" && Story.has(eventname+" CN")) eventname += " CN";
+    else if (V.lang == "CN" && Story.has(eventname+" EN")) eventname += " EN";
+
+    if(Story.has(eventname)==true){       
+        return eventname
+    }
+    else{
+        return false
+    }
+}
+
+window.setEvent = setEvent
+
+function setEventSelect() {
+    if (V.event.passage.length > 0){
+        var eventname
+
+        if(Story.has(V.event.passage+"：S "+V.lang)==true){
+            eventname = V.event.passage+"：S "+V.lang
+        }
+
+        else if (V.lang == "EN" && Story.has(V.event.passage+"：S CN")==true) {
+            eventname = V.event.passage + "：S CN"
+        }
+
+        else if (V.lang == "CN" && Story.has(V.event.passage+"：S EN")==true) {
+            eventname = V.event.passage + "：S EN"
+        }
+        else if (Story.has(V.event.passage+"：S")==true){
+            eventname = V.event.passage+"：S"
+        }
+        else{
+            return false
+        }
+
+        return eventname
+
+    }else{
+        return false
+    }
+}
+window.setEventSelect = setEventSelect
+
+function setEventEffect() {
+
+    if (V.event.passage.length > 0){
+        var eventname
+
+        if(Story.has(V.event.passage+"：E")==true){
+            eventname = V.event.passage+"：E"
+        }       
+        else{
+
+            if(Story.has(V.event.type+" "+V.event.name+" "+V.event.branch+"：E")==true){
+                eventname = V.event.type+" "+V.event.name+" "+V.event.branch+"：E"
+            }
+            else if(Story.has(V.event.type+" "+V.event.name+"：E")==true){
+                eventname= V.event.type+" "+V.event.name+"：E"
+            }
+            else{
+                return false
+            }
+        }
+        return eventname
+
+    }else{
+        return false
+    }
+
+}
+window.setEventEffect = setEventEffect
+
+function kojo(pc,uid,type,name,branch=null,phrase=null){
+/* 最少关键词必须有 pc uid type name
+  例：PC, 1, 主线, 事件名
+  最后组合
+  PC-1 主线 开幕-房间描述-1
+*/
+  var kojoname
+  
+  if(branch != null && phrase != null){
+      kojoname = `${pc}-${uid} ${type}-${name}-${branch}-${phrase}`
+  }
+  else if (phrase != null){
+      kojoname = `${pc}-${uid} ${type}-${name}-${phrase}`
+  }
+  else if (branch != null){
+      kojoname = `${pc}-${uid} ${type}-${name}-${branch}`
+  }else{
+      kojoname = `${pc}-${uid} ${type}-${name}`
+  }
+
+  if (Story.has(kojoname+" "+V.lang)==true) kojoname += " "+V.lang;
+  else if (V.lang == "EN" && Story.has(kojoname+" CN")) kojoname += " CN";
+  else if (V.lang == "CN" && Story.has(kojoname+" EN")) kojoname += " EN";
+
+  if(Story.has(kojoname)==true){       
+      return kojoname
+  }
+  else{
+      return false
+  }
+
+}
+
+window.kojo = kojo
+
+function Revent() {
+
+    $('#eventsituation').addClass('delay'); setTimeout(() => { $('#eventsituation').removeClass('delay') }, 1000);
+    $('#eventselectarea').addClass('delay'); setTimeout(() => { $('#eventselectarea').removeClass('delay') }, 1000);
+    new Wikifier(null,"<<replace '#eventsituation'>><<CallEvent>><</replace>>")
+    new Wikifier(null,"<<replace '#eventselectarea'>><<CallEventSelect>><</replace>>")
+    new Wikifier(null,"<<replace '#eventeffect'>><<CallEventEffect>><</replace>>")
+
+}
+window.Revent = Revent
+DefineMacroS("Revent", Revent);
+
+function getitem(catgr, item, num=1) {
+    var cname, ename
+    if(D.itemlist[catgr][item].name.length > 0){
+        if (V.items[catgr][item]){
+            V.items[catgr][item].num += num
+        }else{
+            V.items[catgr][item] = {
+                name: D.itemlist[catgr][item].name,
+                type: D.itemlist[catgr][item].type,
+                category: D.itemlist[catgr][item].category,                
+                thumb: D.itemlist[catgr][item].thumb,
+                num: num,
+            }
+
+        cname = D.itemlist[catgr][item].name;
+        ename = D.itemlist[catgr][item].name_en;
+        }
+        
+    }else{
+        if (V.items.other.通用物品){
+            V.items.other.通用物品 += num
+        }else{
+            V.items.other.通用物品 = {
+                name : "通用物品",
+                type : "其他",
+                category:"other",
+                thumb : null,
+                num: num,
+            }
+        }
+        cname = "通用物品";
+        ename = "Common Material";
+    }
+    V.anounce.flag = true
+    V.anounce.text = "获得了《"+cname+"》x "+num
+    if(V.lang == "EN"){
+        V.anounce.text = "got《"+D.itemlist[catgr][item].en_name+"》 x "+num
+    }
+    return V.items
+}
+
+window.getitem = getitem
+DefineMacroS("getitem", getitem);
+
+function useitem(catgr,item) {
+    D.itemlist[catgr][item].effect()
+    V.items[catgr][item].num -= 1
+    return V.items
+}
+
+window.useitem = useitem
+
+/*
+列表先读取object的keys，然后以keys的array顺序来打印显示
+使用=>
+    print V.items[catgt][_keys[_i]].name
+    useitem(catgr,_keys[_i])
+*/
+/* twine-user-script #31: "timeprocess.js" */
+
+function gettimezone(h) {
+	switch(true){
+		case select(2,3,4)(h):
+			return "凌晨";
+		case select(5,6,7)(h):
+			return "黎明";
+		case select(8,9,10)(h):
+			return "上午";
+		case select(11,12,13)(h):
+			return "中午";
+		case select(14,15,16)(h):
+			return "下午";
+		case select(17,18,19)(h):
+			return "傍晚";			
+		case select(20,21,22)(h):
+			return "晚上";			
+		case select(23,0,1)(h):
+			return "深夜";
+	};
+}
+
+function GetTime() {
+    const t = new Map();
+    const obj = {
+      凌晨: [2, 3, 4],
+      黎明: [5, 6, 7],
+      上午: [8, 9, 10],
+      中午: [11, 12, 13],
+      下午: [14, 15, 16],
+      傍晚: [17, 18, 19],
+      晚上: [20, 21, 22],
+      深夜: [23, 0, 1],
+    };
+  
+    const setTime = (word, args) => args.map((v) => t.set(v, word));
+    for (const times in obj) {
+      setTime(times, obj[times]);
+    }
+    return t;
+}
+
+Macro.add('timeprocess', {
+	handler: function () {
+		var time = V.date.time;
+		var day = V.date.day;
+		var week = V.date.week;
+		var month = V.date.month;
+		var year = V.date.year;
+		var min,hour,zone,weekday;
+
+
+		/* 时间的处理 */
+		if (time < 0) time = 0;
+
+			min = time % 60;
+			hour = Math.floor(time/60);
+
+		if (time >= 1440) time -= 1440;
+
+		if (hour > 23){
+			day += Math.floor(hour/24);
+			V.days += Math.floor(hour/24);
+
+			week = week + Math.floor(hour/24);
+			hour = hour % 24;
+			V.daychange = true
+		};
+
+		zone = gettimezone(hour);
+
+		/* 周的处理 */
+		week = week%7;
+		switch(week){
+			case 0:
+				weekday = "周日";
+				break;
+			case 1:
+				weekday = "周一";
+				break;
+			case 2:
+				weekday = "周二";
+				break;
+			case 3:
+				weekday = "周三";
+				break;
+			case 4:
+				weekday = "周四";
+				break;
+			case 5:
+				weekday = "周五";
+				break;
+			case 6:
+				weekday = "周六";
+				break;
+		};
+
+		/* 月的处理，每月固定30天 */
+		while(day > 30){
+			month = month + 1;
+			day = Math.max(day-30,1);
+		};
+
+		/* 年的处理 */
+		if (month>12){
+			year = year+Math.floor(month/12);
+			month = Math.max(month%12,1);
+		};
+
+		V.date.time = time;
+		V.date.min = min;
+		V.date.hour = hour;
+
+		V.date.zone = zone;
+		V.date.weekday = weekday;
+
+		V.date.day = day;
+		V.date.week = week;
+		V.date.month = month;
+		V.date.year = year;
+	}
+
+});
+
+Macro.add('time', {
+	handler: function () {
+		var time = V.date.time;
+		var min, hour, zone;
+
+		if (time < 0) time = 0;
+
+		if (time >= 24*60 ) time = 23*59+59;
+
+		hour = Math.floor(time/60);
+		min = time%60;
+
+		zone = gettimezone(hour)
+
+		V.date.min = min
+		V.date.hour = hour
+		V.date.zone = zone
+	}
+});
+/* twine-user-script #32: "PlayerInfo.js" */
 /* 名字和称呼的处理 */
 function gsplit(m,f,p="chara"){
   if (p=="player"){
@@ -12388,7 +10428,7 @@ function it(){
 }
 DefineMacroS("it", it);
 
-/* twine-user-script #31: "SkillRank.js" */
+/* twine-user-script #33: "SkillRank.js" */
 function displayskillrank(num){
     const select = new SelectCase()
     select.add(0,100,"<span style='color:#839EC0;'><b>F</b></span>")
@@ -12474,211 +10514,7 @@ window.rankcolor = function(num){
         return "#D7A800";
     }
 }
-/* twine-user-script #32: "EventWidget.js" */
-function setEvent() {
-    var event = V.event
-    event.lang = V.lang
-
-    if (event == null || event.type == null || event.name == null){
-        return false
-    }
-
-    var eventname
-
-    if (event.branch != null && event.phrase != null){
-        eventname = event.type + " " + event.name + "-"+ event.branch + "-" +  event.phrase
-
-    }else if (event.phrase == null && event.branch != null){
-        eventname = event.type + " " + event.name + "-" + event.branch 
-
-    }else if (event.branch == null && event.phrase != null){
-        eventname = event.type + " " + event.name + "-" + event.phrase
-
-    }else{
-        eventname = event.type + " " + event.name
-    }
-
-    V.event.passage = eventname
-
-    if (Story.has(eventname+" "+event.lang)==true) eventname += " "+event.lang;
-    else if (V.lang == "EN" && Story.has(eventname+" CN")) eventname += " CN";
-    else if (V.lang == "CN" && Story.has(eventname+" EN")) eventname += " EN";
-
-    if(Story.has(eventname)==true){       
-        return eventname
-    }
-    else{
-        return false
-    }
-}
-
-window.setEvent = setEvent
-
-function setEventSelect() {
-    if (V.event.passage.length > 0){
-        var eventname
-
-        if(Story.has(V.event.passage+"：S "+V.lang)==true){
-            eventname = V.event.passage+"：S "+V.lang
-        }
-
-        else if (V.lang == "EN" && Story.has(V.event.passage+"：S CN")==true) {
-            eventname = V.event.passage + "：S CN"
-        }
-
-        else if (V.lang == "CN" && Story.has(V.event.passage+"：S EN")==true) {
-            eventname = V.event.passage + "：S EN"
-        }
-        else if (Story.has(V.event.passage+"：S")==true){
-            eventname = V.event.passage+"：S"
-        }
-        else{
-            return false
-        }
-
-        return eventname
-
-    }else{
-        return false
-    }
-}
-window.setEventSelect = setEventSelect
-
-function setEventEffect() {
-
-    if (V.event.passage.length > 0){
-        var eventname
-
-        if(Story.has(V.event.passage+"：E")==true){
-            eventname = V.event.passage+"：E"
-        }       
-        else{
-
-            if(Story.has(V.event.type+" "+V.event.name+" "+V.event.branch+"：E")==true){
-                eventname = V.event.type+" "+V.event.name+" "+V.event.branch+"：E"
-            }
-            else if(Story.has(V.event.type+" "+V.event.name+"：E")==true){
-                eventname= V.event.type+" "+V.event.name+"：E"
-            }
-            else{
-                return false
-            }
-        }
-        return eventname
-
-    }else{
-        return false
-    }
-
-}
-window.setEventEffect = setEventEffect
-
-function kojo(pc,uid,type,name,branch=null,phrase=null){
-/* 最少关键词必须有 pc uid type name
-  例：PC, 1, 主线, 事件名
-  最后组合
-  PC-1 主线 开幕-房间描述-1
-*/
-  var kojoname
-  
-  if(branch != null && phrase != null){
-      kojoname = `${pc}-${uid} ${type}-${name}-${branch}-${phrase}`
-  }
-  else if (phrase != null){
-      kojoname = `${pc}-${uid} ${type}-${name}-${phrase}`
-  }
-  else if (branch != null){
-      kojoname = `${pc}-${uid} ${type}-${name}-${branch}`
-  }else{
-      kojoname = `${pc}-${uid} ${type}-${name}`
-  }
-
-  if (Story.has(kojoname+" "+V.lang)==true) kojoname += " "+V.lang;
-  else if (V.lang == "EN" && Story.has(kojoname+" CN")) kojoname += " CN";
-  else if (V.lang == "CN" && Story.has(kojoname+" EN")) kojoname += " EN";
-
-  if(Story.has(kojoname)==true){       
-      return kojoname
-  }
-  else{
-      return false
-  }
-
-}
-
-window.kojo = kojo
-
-function Revent() {
-
-    $('#eventsituation').addClass('delay'); setTimeout(() => { $('#eventsituation').removeClass('delay') }, 1000);
-    $('#eventselectarea').addClass('delay'); setTimeout(() => { $('#eventselectarea').removeClass('delay') }, 1000);
-    new Wikifier(null,"<<replace '#eventsituation'>><<CallEvent>><</replace>>")
-    new Wikifier(null,"<<replace '#eventselectarea'>><<CallEventSelect>><</replace>>")
-    new Wikifier(null,"<<replace '#eventeffect'>><<CallEventEffect>><</replace>>")
-
-}
-window.Revent = Revent
-DefineMacroS("Revent", Revent);
-
-function getitem(catgr, item, num=1) {
-    var cname, ename
-    if(D.itemlist[catgr][item].name.length > 0){
-        if (V.items[catgr][item]){
-            V.items[catgr][item].num += num
-        }else{
-            V.items[catgr][item] = {
-                name: D.itemlist[catgr][item].name,
-                type: D.itemlist[catgr][item].type,
-                category: D.itemlist[catgr][item].category,                
-                thumb: D.itemlist[catgr][item].thumb,
-                num: num,
-            }
-
-        cname = D.itemlist[catgr][item].name;
-        ename = D.itemlist[catgr][item].name_en;
-        }
-        
-    }else{
-        if (V.items.other.通用物品){
-            V.items.other.通用物品 += num
-        }else{
-            V.items.other.通用物品 = {
-                name : "通用物品",
-                type : "其他",
-                category:"other",
-                thumb : null,
-                num: num,
-            }
-        }
-        cname = "通用物品";
-        ename = "Common Material";
-    }
-    V.anounce.flag = true
-    V.anounce.text = "获得了《"+cname+"》x "+num
-    if(V.lang == "EN"){
-        V.anounce.text = "got《"+D.itemlist[catgr][item].en_name+"》 x "+num
-    }
-    return V.items
-}
-
-window.getitem = getitem
-DefineMacroS("getitem", getitem);
-
-function useitem(catgr,item) {
-    D.itemlist[catgr][item].effect()
-    V.items[catgr][item].num -= 1
-    return V.items
-}
-
-window.useitem = useitem
-
-/*
-列表先读取object的keys，然后以keys的array顺序来打印显示
-使用=>
-    print V.items[catgt][_keys[_i]].name
-    useitem(catgr,_keys[_i])
-*/
-/* twine-user-script #33: "SimpleWidget.js" */
+/* twine-user-script #34: "SimpleWidget.js" */
 
 function printmoney(num) {
     return num && num.toString()
@@ -12725,7 +10561,7 @@ window.hairlenth = function(num){
     else if(num>= 800) return 4;
     else return 1;
 }
-/* twine-user-script #34: "UI Widget.js" */
+/* twine-user-script #35: "UI Widget.js" */
 
 /* 通用 */
 
@@ -12791,7 +10627,7 @@ function movebutton() {
 }
 window.movebutton = movebutton
 
-/* twine-user-script #35: "chs.min.js" */
+/* twine-user-script #36: "chs.min.js" */
 /*! chs.js – 简体中文, by: Liyro Pen. | Copyright © 2017 Thomas Michael Edwards <thomasmedwards@gmail.com>. All rights reserved. | Licensed under a BSD 2-clause "Simplified" License. */
 !(function () {
   (l10nStrings.identity = "游戏"),
@@ -12850,150 +10686,7 @@ window.movebutton = movebutton
     (l10nStrings.macroBackText = "返回"),
     (l10nStrings.macroReturnText = "返回");
 })();
-/* twine-user-script #36: "timeprocess.js" */
-
-function gettimezone(h) {
-	switch(true){
-		case select(2,3,4)(h):
-			return "凌晨";
-		case select(5,6,7)(h):
-			return "黎明";
-		case select(8,9,10)(h):
-			return "上午";
-		case select(11,12,13)(h):
-			return "中午";
-		case select(14,15,16)(h):
-			return "下午";
-		case select(17,18,19)(h):
-			return "傍晚";			
-		case select(20,21,22)(h):
-			return "晚上";			
-		case select(23,0,1)(h):
-			return "深夜";
-	};
-}
-
-function GetTime() {
-    const t = new Map();
-    const obj = {
-      凌晨: [2, 3, 4],
-      黎明: [5, 6, 7],
-      上午: [8, 9, 10],
-      中午: [11, 12, 13],
-      下午: [14, 15, 16],
-      傍晚: [17, 18, 19],
-      晚上: [20, 21, 22],
-      深夜: [23, 0, 1],
-    };
-  
-    const setTime = (word, args) => args.map((v) => t.set(v, word));
-    for (const times in obj) {
-      setTime(times, obj[times]);
-    }
-    return t;
-}
-
-Macro.add('timeprocess', {
-	handler: function () {
-		var time = V.date.time;
-		var day = V.date.day;
-		var week = V.date.week;
-		var month = V.date.month;
-		var year = V.date.year;
-		var min,hour,zone,weekday;
-
-
-		/* 时间的处理 */
-		if (time < 0) time = 0;
-
-			min = time % 60;
-			hour = Math.floor(time/60);
-
-		if (time >= 1440) time -= 1440;
-
-		if (hour > 23){
-			day += Math.floor(hour/24);
-			V.days += Math.floor(hour/24);
-
-			week = week + Math.floor(hour/24);
-			hour = hour % 24;
-			V.daychange = true
-		};
-
-		zone = gettimezone(hour);
-
-		/* 周的处理 */
-		week = week%7;
-		switch(week){
-			case 0:
-				weekday = "周日";
-				break;
-			case 1:
-				weekday = "周一";
-				break;
-			case 2:
-				weekday = "周二";
-				break;
-			case 3:
-				weekday = "周三";
-				break;
-			case 4:
-				weekday = "周四";
-				break;
-			case 5:
-				weekday = "周五";
-				break;
-			case 6:
-				weekday = "周六";
-				break;
-		};
-
-		/* 月的处理，每月固定30天 */
-		while(day > 30){
-			month = month + 1;
-			day = Math.max(day-30,1);
-		};
-
-		/* 年的处理 */
-		if (month>12){
-			year = year+Math.floor(month/12);
-			month = Math.max(month%12,1);
-		};
-
-		V.date.time = time;
-		V.date.min = min;
-		V.date.hour = hour;
-
-		V.date.zone = zone;
-		V.date.weekday = weekday;
-
-		V.date.day = day;
-		V.date.week = week;
-		V.date.month = month;
-		V.date.year = year;
-	}
-
-});
-
-Macro.add('time', {
-	handler: function () {
-		var time = V.date.time;
-		var min, hour, zone;
-
-		if (time < 0) time = 0;
-
-		if (time >= 24*60 ) time = 23*59+59;
-
-		hour = Math.floor(time/60);
-		min = time%60;
-
-		zone = gettimezone(hour)
-
-		V.date.min = min
-		V.date.hour = hour
-		V.date.zone = zone
-	}
-});</script><tw-passagedata pid="1" name="AvatarData 1" tags="widget" position="100,100" size="100,100">&lt;&lt;widget &quot;InitAvatar&quot;&gt;&gt;
+</script><tw-passagedata pid="1" name="AvatarData 1" tags="widget" position="100,100" size="100,100">&lt;&lt;widget &quot;InitAvatar&quot;&gt;&gt;
 
 &lt;&lt;set A.layer to [
     &quot;frame&quot;,&quot;addon&quot;,
@@ -13183,11 +10876,11 @@ Macro.add('time', {
             shop : &quot;all&quot;,
             
             tuckinable: false,        tuckin : false, 
-            acc : &quot;blackline&quot;,
+            acc : &quot;whiteline&quot;,
             patterns: [&quot;blackline&quot;,&quot;tealine&quot;,&quot;whiteline&quot;,&quot;yellowline&quot;,&quot;greenline&quot;],
-            fixacc  : true,
-            subcolor : null,
-        }
+            fixacc  : false,
+            subcolor : &quot;#6C84C5&quot;,
+        },
     ]&gt;&gt;
 &lt;&lt;/widget&gt;&gt;
 
@@ -15194,15 +12887,15 @@ $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌}
 
     &lt;&lt;if $PC.trait.泌乳体质 is 1&gt;&gt;
         &lt;&lt;set $PC.produce.乳汁 to [($PC.breast*20),($PC.breast*20)]&gt;&gt;
-        &lt;&lt;set $Pflag.lactation to true&gt;&gt;
-        &lt;&lt;set $Pflag.lactatecd to 60&gt;&gt;
+        &lt;&lt;set $PFlag.lactation to true&gt;&gt;
+        &lt;&lt;set $PFlag.lactatecd to 60&gt;&gt;
     &lt;&lt;else&gt;&gt;
         &lt;&lt;set $PC.produce.乳汁 to [0,0]&gt;&gt;
-        &lt;&lt;set $Pflag.lactation to false&gt;&gt;
-        &lt;&lt;set $Pflag.lactatecd to null&gt;&gt;
+        &lt;&lt;set $PFlag.lactation to false&gt;&gt;
+        &lt;&lt;set $PFlag.lactatecd to null&gt;&gt;
     &lt;&lt;/if&gt;&gt;
 
-    &lt;&lt;if $Pflag.top lt 2&gt;&gt;
+    &lt;&lt;if $PFlag.top lt 2&gt;&gt;
         &lt;&lt;redress&gt;&gt;
         &lt;&lt;setface &quot;正常&quot;&gt;&gt;
     &lt;&lt;/if&gt;&gt;
@@ -16753,14 +14446,13 @@ Total &lt;&lt;print $PC.sexrec.高潮.t&gt;&gt;&lt;br&gt;
     &lt;&lt;set $Equip.legs to null&gt;&gt;
     &lt;&lt;set $Equip.hand to null&gt;&gt;
     &lt;&lt;fixvalue&gt;&gt;
-    &lt;&lt;SetAvatar&gt;&gt;
+    &lt;&lt;run stAvatar()&gt;&gt;
 &lt;&lt;/widget&gt;&gt;
 
 &lt;&lt;widget &quot;redress&quot;&gt;&gt;
     &lt;&lt;set $Equip to clone($TEquip)&gt;&gt;
-
     &lt;&lt;fixvalue&gt;&gt;
-    &lt;&lt;SetAvatar&gt;&gt;
+    &lt;&lt;run stAvatar()&gt;&gt;
 &lt;&lt;/widget&gt;&gt;
 
 
@@ -17000,7 +14692,7 @@ Total &lt;&lt;print $PC.sexrec.高潮.t&gt;&gt;&lt;br&gt;
     
     &lt;div id=&quot;item_info&quot;&gt;
         &lt;div id=&quot;description&quot;&gt;
-        &lt;&lt;print lang($showcase.text,$showcase.text_en)&gt;&gt;&lt;br&gt;
+        &lt;&lt;print Lang($showcase.text,$showcase.text_en)&gt;&gt;&lt;br&gt;
         &lt;/div&gt;
         &lt;div class=&quot;warmth&quot;&gt;适应温度：&lt;&lt;print ($fix.cold+$showcase.cold)&gt;&gt;C～&lt;&lt;print ($fix.hot+$showcase.hot)&gt;&gt;C&lt;/div&gt;
 
@@ -17014,14 +14706,30 @@ Total &lt;&lt;print $PC.sexrec.高潮.t&gt;&gt;&lt;br&gt;
     &lt;/div&gt;
     
     &lt;div id=&quot;option_containter&quot;&gt;
-        &lt;&lt;if $showcase.patterns.length gt 0&gt;&gt;
-            可选图案：&lt;br&gt;
-            &lt;div id=&quot;pattern_option&quot;&gt;
-                &lt;&lt;for _i to 0; _i lt $showcase.patterns.length; _i++&gt;&gt;
-                    &lt;&lt;set _name to $showcase.patterns[_i]&gt;&gt;
-                    &lt;&lt;print &quot;&lt;&lt;button _name&gt;&gt;&lt;&lt;run setPatterns(&#39;&quot;+_name+&quot;&#39;)&gt;&gt;&lt;&lt;/button&gt;&gt;&quot;&gt;&gt;
-                &lt;&lt;/for&gt;&gt;          
-            &lt;/div&gt;
+        &lt;&lt;if $showcase.fixacc is false or $showcase.patterns.length gt 0&gt;&gt;
+            &lt;&lt;if $showcase.patterns.length gt 0&gt;&gt;
+                可选花样: &lt;br&gt;
+                &lt;div id=&quot;pattern_option&quot;&gt;
+                    &lt;&lt;for _i to 0; _i lt $showcase.patterns.length; _i++&gt;&gt;
+                        &lt;&lt;set _name to $showcase.patterns[_i]&gt;&gt;
+                        &lt;&lt;print &quot;&lt;&lt;button _name&gt;&gt;&lt;&lt;run setPatterns(&#39;&quot;+_name+&quot;&#39;)&gt;&gt;&lt;&lt;/button&gt;&gt;&quot;&gt;&gt;
+                    &lt;&lt;/for&gt;&gt;          
+                &lt;/div&gt;
+            &lt;&lt;/if&gt;&gt;
+
+            &lt;&lt;if $showcase.fixacc is false&gt;&gt;
+                花样颜色：&lt;br&gt;
+                &lt;div id=&quot;color_plate&quot;&gt;
+                     &lt;&lt;for _i to 0; _i lt A.colorlist.length; _i ++&gt;&gt;
+                        &lt;div class=&quot;color_plate&quot; @style=&quot;&#39;background-color:&#39;+ A.colorlist[_i].code&quot;&gt;
+                        &lt;&lt;set _name to A.colorlist[_i].name&gt;&gt;
+                        &lt;&lt;print &quot;&lt;&lt;button _name&gt;&gt;&lt;&lt;run setColors(A.colorlist[&quot;+_i+&quot;].code,A.colorlist[&quot;+_i+&quot;].name,false,&#39;acc&#39;)&gt;&gt;&lt;&lt;/button&gt;&gt;&quot;&gt;&gt;
+                        &lt;/div&gt;
+                    &lt;&lt;/for&gt;&gt;
+                    &lt;div&gt;&lt;button id=&quot;customColor2&quot;&gt;自定义颜色&lt;/button&gt;&lt;/div&gt;        
+                &lt;/div&gt;
+            &lt;&lt;/if&gt;&gt;
+            
         &lt;&lt;/if&gt;&gt;
 
         &lt;&lt;if $showcase.fixcolor is false or $showcase.colors.length gt 0&gt;&gt;
@@ -17053,6 +14761,16 @@ Total &lt;&lt;print $PC.sexrec.高潮.t&gt;&gt;&lt;br&gt;
 &lt;&lt;if $showcase.fixcolor is false&gt;&gt;
 &lt;script&gt;
 var myPicker = new JSColor(&#39;#customColor&#39;, {format:&#39;hex&#39;,value:&#39;#000000&#39;,onInput:&quot;setColors(this.toHEXString(),null,true)&quot;,
+onChange:&quot;setColors(this.toHEXString(),&#39;自定义&#39;)&quot;,
+required:false, 
+	palette:&#39;#000000 #FFFFFF #636363 #FF0000 #00FF00 #0000FF&#39;, 
+	hideOnPaletteClick:true, backgroundColor:&#39;#ddd&#39;, 
+	borderColor:&#39;rgba(0,0,0,1)&#39;, borderRadius:10, width:200, 
+	closeButton:true, closeText:&#39;关闭&#39;, sliderSize:20, 
+	shadowColor:&#39;rgba(255,121,247,0.2)&#39;
+});
+
+var myPicker2 = new JSColor(&#39;#customColor2&#39;, {format:&#39;hex&#39;,value:&#39;#000000&#39;,onInput:&quot;setColors(this.toHEXString(),null,true,&#39;acc&#39;)&quot;,
 onChange:&quot;setColors(this.toHEXString(),&#39;自定义&#39;)&quot;,
 required:false, 
 	palette:&#39;#000000 #FFFFFF #636363 #FF0000 #00FF00 #0000FF&#39;, 
