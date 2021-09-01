@@ -29,10 +29,10 @@
 <<widget "notification">>
     现在是暑假<br>
     <<if $Equip.inner_up is null and $PC.breast gt 1>>
-        <<pink-t "你没有穿内衣。">>
+        <<pink-t "没有穿内衣。">>
     <</if>>
     <<if $Equip.inner_bt is null>>
-        <<pink-t "你没有穿内裤。">>
+        <<pink-t "没有穿内裤。">>
     <</if>>
 <</widget>>
 

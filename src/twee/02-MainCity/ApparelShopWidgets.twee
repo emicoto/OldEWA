@@ -112,7 +112,11 @@ required:false,
 	closeButton:true, closeText:'关闭', sliderSize:20, 
 	shadowColor:'rgba(255,121,247,0.2)'
 });
+</script>
+<</if>>
 
+<<if $showcase.fixacc is false>>
+<script>
 var myPicker2 = new JSColor('#customColor2', {format:'hex',value:'#000000',onInput:"setColors(this.toHEXString(),null,true,'acc')",
 onChange:"setColors(this.toHEXString(),'自定义')",
 required:false, 
@@ -124,6 +128,7 @@ required:false,
 });
 </script>
 <</if>>
+
 
 <</widget>>
 

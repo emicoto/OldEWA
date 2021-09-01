@@ -50,23 +50,6 @@
 
 <</widget>>
 
-<<widget "printL">>
-    <<if $args[0]>>
-        <<switch $lang>>
-            <<case "CN">>
-                <<print $args[0]>>
-            <<case "EN">>
-                <<print setup.L.EN[$args[0]]>>
-            <<case "JP">>
-                <<print setup.L.JP[$args[0]]>>
-        <</switch>>
-    <<else>>
-        <div class="error-view">
-            error: args is null
-        </div>
-    <</if>>
-<</widget>>
-
 
 <<widget "setchara">>
     <<if $args[0] is "player">>
@@ -124,22 +107,22 @@
 <<widget "location">>
 <<if $args[0]>>
 
-<<set $location to $args[0]>>
+    <<set $location to $args[0]>>
 
-<<if D.placedata[$args[0]]>>
-    <<set $local to D.placedata[$args[0]]>>
-<<else>>
-    <<set $local to null>>
-<</if>>
+    <<if D.placedata[$args[0]]>>
+        <<set $local to D.placedata[$args[0]]>>
+    <<else>>
+        <<set $local to null>>
+    <</if>>
 
-<<set $movebutton to false>>
+    <<set $movebutton to false>>
 
- <<if $local isnot null>>
-    <<if $local.tag.includes("家")>><<run V.local.chara.push("player")>><</if>>
-<</if>>
-    /*
-    设定地点时的各种处理。包括NPC角色的移动。
-     */
+    <<if $local isnot null>>
+        <<if $local.tag.includes("家")>><<run V.local.chara.push("player")>><</if>>
+    <</if>>
+        /*
+        设定地点时的各种处理。包括NPC角色的移动。
+        */
 <<else>>
     <div id="error-view">error: no args</div>
 <</if>>

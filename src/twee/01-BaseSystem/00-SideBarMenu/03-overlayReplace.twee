@@ -88,9 +88,6 @@
 		<</if>>
 	<</if>>
 
-	
-
-
 <<if $args[0]>><li>$args[0]</li><<else>>　　<</if>>
 
 <<dashline>>
