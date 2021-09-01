@@ -54,7 +54,7 @@
 <<dashline>>
 <li> 宠物资料 </li>
 <div id="rpgstatus">
-· 名字：<<print $pet.name>>　　 品种：<<petstype>>　　 等级：<<print $pet.level>><br>
+· 名字：<<print $pet.name>>　　 品种：<<print $pet.type>>　　 等级：<<print $pet.level>><br>
 · HP　<<print $pet.HP[0]>> / <<print $pet.HP[1]>>　　· MP　<<print $pet.MP[0]>> / <<print $pet.MP[1]>> 　　· SP　<<print $pet.SP[0]>> / <<print $pet.SP[1]>><br>
 · 物攻 <<print $pet.ATK>>　　 物防 <<print $pet.DEF>>　　魔攻 <<print $pet.MATK>>　　魔防 <<print $pet.MDEF>>　　速度 <<print $pet.SPD>><br>
 说明：

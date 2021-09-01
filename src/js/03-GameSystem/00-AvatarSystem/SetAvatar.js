@@ -251,9 +251,18 @@ function stAvatar() {
     }
 
     /* 小丁丁的显示 */
-    if(V.PFlag.bottom <= 1 && V.PC.genital.阴茎 > 3){
-        V.avatar.dick = setAvatar("dick", isFurry()+"penis"+isCaged(),true)
+    if(V.charamaking == true){
+        if(V.PC.info.tag != "少女")V.avatar.dick = setAvatar("dick", isFurry()+"penis"+isCaged(),true);
+        else V.avatar.dick = setAvatar("dick", null,true);
+
+    }else{
+        if(V.PFlag.bottom <= 1 && V.PC.genital.阴茎 > 3){
+            V.avatar.dick = setAvatar("dick", isFurry()+"penis"+isCaged(),true)
+        }else{
+            V.avatar.dick = setAvatar("dick", null,true)
+        }     
     }
+
     
     const kemorace = ["羽族","兽族"]
     if((V.PFlag.kemoform == true ||  V.charamaking == true)&& kemorace.includes(V.PC.info.race)){
@@ -300,6 +309,8 @@ function stAvatar() {
         if(ImgExist(path)){
             V.avatar.tatoos = setAvatar("tatoos",V.Pskin.腹部.index)
         }
+    }else{
+        V.avatar.tatoos = setAvatar("tatoos",null)
     }
 
     V.avatar.background = setAvatar("background",imglocation())

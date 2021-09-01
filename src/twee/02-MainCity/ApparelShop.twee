@@ -82,7 +82,7 @@
 <<link "只看内衣">><<showinner>><</link>>
 </div>
 <div class="redress">
-<<link "衣服复位">><<redress>><<leavecheck>><<resettryon>><</link>>
+<<link "衣服复位">><<redress>><<resettryon>><<leavecheck>><</link>>
 </div>
 
 <div class="buybutton">
@@ -165,7 +165,7 @@
 
 <<timed 1s>>
     <div class="delay">
-        <<if _luck lt 10>>
+        <<if _luck lte 6>>
             幸运的是，警报器没有响起来。故障了吗？ 总之<<you>>成功穿着商店的衣服跑了。
             <<link "离开" $eventexit[1]>><</link>>
         <<else>>

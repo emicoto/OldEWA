@@ -1,0 +1,152 @@
+﻿:: Combat [core combat loop]
+
+<div id="combat">
+
+<div id="enemyside">
+/* 显示敌人信息 */
+<div id="characard">
+    <div class="CC_name">敌人A</div>
+    <div class="CC_statsbar">
+        <div id="showHP"><div class="metername">HP</div><<RPGbar $PC.rpg.HP "#FF755F">></div>
+        <div id="showMP"><div class="metername">MP</div><<RPGbar $PC.rpg.MP "#98B5FF">></div>
+        <div id="showSP"><div class="metername">SP</div><<RPGbar $PC.rpg.SP "#FFC8F5">></div>
+    </div>
+    <div class="CC_state"></div>
+</div>
+
+<div id="characard">
+    <div class="CC_name">敌人B</div>
+    <div class="CC_statsbar">
+        <div id="showHP"><div class="metername">HP</div><<RPGbar $PC.rpg.HP "#FF755F">></div>
+        <div id="showMP"><div class="metername">MP</div><<RPGbar $PC.rpg.MP "#98B5FF">></div>
+        <div id="showSP"><div class="metername">SP</div><<RPGbar $PC.rpg.SP "#FFC8F5">></div>
+    </div>
+    <div class="CC_state"></div>
+</div>
+
+<div id="characard">
+    <div class="CC_name">敌人C</div>
+    <div class="CC_statsbar">
+        <div id="showHP"><div class="metername">HP</div><<RPGbar $PC.rpg.HP "#FF755F">></div>
+        <div id="showMP"><div class="metername">MP</div><<RPGbar $PC.rpg.MP "#98B5FF">></div>
+        <div id="showSP"><div class="metername">SP</div><<RPGbar $PC.rpg.SP "#FFC8F5">></div>
+    </div>
+    <div class="CC_state"></div>
+</div>
+
+<div id="characard">
+    <div class="CC_name">敌人D</div>
+    <div class="CC_statsbar">
+        <div id="showHP"><div class="metername">HP</div><<RPGbar $PC.rpg.HP "#FF755F">></div>
+        <div id="showMP"><div class="metername">MP</div><<RPGbar $PC.rpg.MP "#98B5FF">></div>
+        <div id="showSP"><div class="metername">SP</div><<RPGbar $PC.rpg.SP "#FFC8F5">></div>
+    </div>
+    <div class="CC_state"></div>
+</div>
+
+<div id="characard">
+    <div class="CC_name">敌人E</div>
+    <div class="CC_statsbar">
+        <div id="showHP"><div class="metername">HP</div><<RPGbar $PC.rpg.HP "#FF755F">></div>
+        <div id="showMP"><div class="metername">MP</div><<RPGbar $PC.rpg.MP "#98B5FF">></div>
+        <div id="showSP"><div class="metername">SP</div><<RPGbar $PC.rpg.SP "#FFC8F5">></div>
+    </div>
+    <div class="CC_state"></div>
+</div>
+/*end */
+</div>
+
+<div id="message_container">
+<div id="combat_message">
+/* 显示战斗信息 */
+敌人A攻击了你，你受到了10点伤害！<br>
+敌人E骚扰了你，对你使用了性技：缠绕。你的身体被缠住无法动弹了！<br>
+</div>
+<div id="msg_end" style="height:0px; overflow:hidden"></div>
+</div>
+
+<div id="playerside">
+/* 玩家侧任务卡 */
+<div id="characard">
+    <div class="face"><<portrait>></div>
+    <div class="CC_name">玩家</div>
+    <div class="CC_statsbar">
+        <div id="showHP">
+        <div class="metername">HP</div><<RPGbar $PC.rpg.HP "#FF755F">>
+        <div class="showHP"><<print $PC.rpg.HP[0]+"/"+$PC.rpg.HP[1]>></div>
+        </div>
+
+        <div id="showMP">
+        <div class="metername">MP</div><<RPGbar $PC.rpg.MP "#98B5FF">>
+        <div class="showMP"><<print $PC.rpg.MP[0]+"/"+$PC.rpg.MP[1]>></div>
+        </div>
+
+        <div id="showSP">
+        <div class="metername">SP</div><<RPGbar $PC.rpg.SP "#FFC8F5">>
+        <div class="showSP"><<print $PC.rpg.SP[0]+"/"+$PC.rpg.SP[1]>></div>
+        </div>
+    </div>
+    <div class="CC_state"></div>
+</div>
+
+<div id="characard">
+    <div class="face"><<portrait>></div>
+    <div class="CC_name">宠物</div>
+    <div class="CC_statsbar">
+        <div id="showHP">
+        <div class="metername">HP</div><<RPGbar $pet.HP "#FF755F">>
+        <div class="showHP"><<print $pet.HP[0]+"/"+$pet.HP[1]>></div>
+        </div>
+
+        <div id="showMP">
+        <div class="metername">MP</div><<RPGbar $pet.MP "#98B5FF">>
+        <div class="showMP"><<print $pet.MP[0]+"/"+$pet.MP[1]>></div>
+        </div>
+
+        <div id="showSP">
+        <div class="metername">SP</div><<RPGbar $pet.SP "#FFC8F5">>
+        <div class="showSP"><<print $pet.SP[0]+"/"+$pet.SP[1]>></div>
+        </div>
+    </div>
+    <div class="CC_state"></div>
+</div>
+
+<div id="characard">
+    <div class="face"><<portrait>></div>
+    <div class="CC_name">队友</div>
+    <div class="CC_statsbar">
+        <div id="showHP">
+        <div class="metername">HP</div><<RPGbar $PC.rpg.HP "#FF755F">>
+        <div class="showHP"><<print $PC.rpg.HP[0]+"/"+$PC.rpg.HP[1]>></div>
+        </div>
+
+        <div id="showMP">
+        <div class="metername">MP</div><<RPGbar $PC.rpg.MP "#98B5FF">>
+        <div class="showMP"><<print $PC.rpg.MP[0]+"/"+$PC.rpg.MP[1]>></div>
+        </div>
+
+        <div id="showSP">
+        <div class="metername">SP</div><<RPGbar $PC.rpg.SP "#FFC8F5">>
+        <div class="showSP"><<print $PC.rpg.SP[0]+"/"+$PC.rpg.SP[1]>></div>
+        </div>
+    </div>
+    <div class="CC_state"></div>
+</div>
+/*end */
+</div>
+
+/*  */
+<div id="command_container">
+    <div id="combat_command">
+        <<link "攻击">><<append "#combat_message" t8n>>你攻击了敌人A。<br><</append>><<run msg_end.scrollIntoView()>><</link>>
+        <<link "防御">><</link>>
+        <<link "技能">><</link>>
+        <<link "挑逗">><</link>>
+        <<link "道具">><</link>>
+        <<link "宠物">><</link>>
+        <<link "队友">><</link>>
+        <<link "逃跑">><</link>>
+    </div>
+</div>
+
+</div>

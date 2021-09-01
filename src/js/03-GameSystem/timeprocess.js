@@ -19,26 +19,7 @@ function gettimezone(h) {
 			return "深夜";
 	};
 }
-
-function GetTime() {
-    const t = new Map();
-    const obj = {
-      凌晨: [2, 3, 4],
-      黎明: [5, 6, 7],
-      上午: [8, 9, 10],
-      中午: [11, 12, 13],
-      下午: [14, 15, 16],
-      傍晚: [17, 18, 19],
-      晚上: [20, 21, 22],
-      深夜: [23, 0, 1],
-    };
-  
-    const setTime = (word, args) => args.map((v) => t.set(v, word));
-    for (const times in obj) {
-      setTime(times, obj[times]);
-    }
-    return t;
-}
+F.gettimezone = gettimezone
 
 function timeprocess() {
 	var time = V.date.time;
@@ -121,6 +102,7 @@ function timeprocess() {
 	return ""
 }
 window.timeprocess = timeprocess
+F.timeprocess = timeprocess
 DefineMacroS("timeprocess",timeprocess)
 
 Macro.add('time', {
@@ -142,6 +124,10 @@ Macro.add('time', {
 		V.date.zone = zone
 	}
 });
+
+function passtime(arg,mode){
+	
+}
 
 function daychange(){
 	return ""

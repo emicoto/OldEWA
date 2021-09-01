@@ -1,0 +1,70 @@
+﻿:: InitAvatar [widget]
+
+<<widget "InitAvatar">>
+
+<<set A.layer to [
+    "frame","addon",
+    "hat","kemofront","eyebrow","hairfront",
+    "neck","face","emoadd","eyes","mouth",
+    "outter","top","inner_up","hand","bottom","inner_bt","shoes","legs",
+    "body","hairback","back","kemoback","background",
+]>>
+
+<<set A.colorlist to [
+    { name:"黑",    code:"#56545A" },
+    { name:"白",    code:"#FFFFFF" },
+    { name:"灰",    code:"#CBC8C7" },   
+    { name:"蓝",    code:"#4089F9" },
+    { name:"青",    code:"#5DD9FA" },
+    { name:"天蓝",  code:"#DDFDFF" },
+    { name:"粉",    code:"#FB83C4" },
+    { name:"紫",    code:"#B36CF6" },
+    { name:"红",    code:"#F14660" },
+    { name:"橙",    code:"#FC7051" },
+    { name:"黄",    code:"#F8F45F" },
+    { name:"米黄",  code:"#FDF3B1" },
+    { name:"绿",    code:"#8DC862" },
+    { name:"薄荷",  code:"#BBEEC1" },
+    { name:"棕",    code:"#9C6C51" },
+]>>
+
+<<set A.categoryname to {
+    hat:"帽子", outter:"外搭", top:"上衣", bottom:"下衣", inner_up:"内衣", inner_bt:"内裤", legs:"袜子",
+    shoes: "鞋子", neck:"颈饰", face:"脸饰", hand:"手饰", back:"背饰",
+}>>
+
+<<set A.haircolor to {
+    "black":["#4F4240","#CAA799"],      "darkbrown":["#765646","#EACFB2"],      "wine":["#9D5755","#EACFB2"] , 
+    "brown":["#A07856","#EACFB2"],      "milktea":["#D5AEA0","#FFEDEA"],        "blond":["#FFD87C","#FFFFFF"],
+    "softblond":["#FFEEA9","#FFFFFF"],  "platinum":["#FFF1D5","#FFFFFF"],       "silver":["#EBF0F3","#FFFFFF"],
+    "white":["#FFFFFF","#EAFDFF"],      "purple":["#C8B5F9","#FFF1FE"],         "green":["#CEF3A0","#FFFDDA"],
+    "blue":["#6B97F6","#FFFFFF"],       "aqua":["#BADDFF","#FFFFFF"],           "pink":["#FFC0DA","#FFFDDA"],
+}>>
+
+<<set A.colors to {
+    mint : { name:"薄荷绿", code: "#BBEEC1" },
+    white : { name:"白", code:"#FFFFFF"},
+    black : { name:"黑", code:"#56545A"},
+}>>
+
+<<InitEmotion>>
+
+<<InitClothAccesory>>
+
+<<InitClothCoat>>
+<<InitClothTop>>
+<<InitClothBottom>>
+
+<<InitClothShoes>>
+<<InitClothSocks>>
+
+<<InitClothUndertops>>
+<<InitClothUnderbottoms>>
+
+<<InitFrontHairStyle>>
+<<InitBackHairStyle>>
+<<InitLewdEquip>>
+
+<</widget>>
+/* 上身的裸露范围  10=完全不露  9=手臂范围可见 8=手臂到肩膀范围可见 7=手臂到上半胸可见 6=只有下腹可见 5=手臂+下腹可见 4=手臂到肩膀+下腹 3=手臂到上半胸+下腹 2=只有敏感部位有遮掩 1=半透明装 0=全裸*/
+/* 下身的裸露范围  5=完全不露  4=到膝盖  3=到大腿  2=三角区  1=半透明/暴露装/接近全裸  0=全裸  */

@@ -18,6 +18,12 @@ window.basepercent = function(name) {
     return Math.clamp(Math.trunc(((min/max)*100)),1,100)
 };
 
+function percent(min,max){
+    return Math.clamp(Math.trunc(((min/max)*100)),1,100)
+}
+window.percent = percent
+F.percent = percent
+
 // Make .divs-links clickable as if they're anchors
 window.linkifyDivs = function (parentSelector = "") {
 	$(document).ready(() => { $(parentSelector + " .div-link").click(function (e) { $(this).find('a').first().click(); }) });
@@ -33,7 +39,7 @@ function bookmark(name) {
 
     return ""
 }
-
+F.bookmark = bookmark
 DefineMacroS("bookmark", bookmark)
 
 

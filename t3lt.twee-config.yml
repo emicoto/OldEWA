@@ -352,3 +352,5 @@ sugarcube-2:
       name: resettryon
     InitLewdEquip:
       name: InitLewdEquip
+    RPGbar:
+      name: RPGbar

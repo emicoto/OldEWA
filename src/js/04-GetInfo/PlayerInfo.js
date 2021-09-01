@@ -247,18 +247,6 @@ function penis(){
 }
 DefineMacroS("penis", penis);
 
-/* 宠物类型 */
-function petstype(){
-  switch (V.pet.type) {
-    case 1:
-      return "史莱姆"
-    case 2:
-      return "魔狼"
-    case 3: 
-      return "灵虫"
-  }
-}
-DefineMacroS("petstype", petstype);
 
 /* 宠物的第三人称 */
 function it(){

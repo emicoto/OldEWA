@@ -307,7 +307,7 @@ Game.Manager = new Manager({
 		<div id="init-lacking">Your browser lacks required capabilities. Please upgrade it or switch to another to continue.</div>
 		<div id="init-loading"><div>Loading&hellip;</div></div>
 	</div>
-	<!-- UUID://731DEBA3-F846-4AA9-97C0-8137F28469AC// --><tw-storydata name="失乐园物语" startnode="16" creator="Tweego" creator-version="2.1.1+81d1d71" ifid="731DEBA3-F846-4AA9-97C0-8137F28469AC" zoom="1" format="SugarCube" format-version="2.33.4" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">/* twine-user-stylesheet #1: "00-Base.css" */
+	<!-- UUID://731DEBA3-F846-4AA9-97C0-8137F28469AC// --><tw-storydata name="失乐园物语" startnode="20" creator="Tweego" creator-version="2.1.1+81d1d71" ifid="731DEBA3-F846-4AA9-97C0-8137F28469AC" zoom="1" format="SugarCube" format-version="2.33.4" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">/* twine-user-stylesheet #1: "00-Base.css" */
 @font-face{
 font-family : "黄婷婷"; /*18*/
 src : url("CSS/FZSJ-SNH48HTTJW.otf");
@@ -421,7 +421,7 @@ body {
 #passages {
     float: left;
     width: 80%;
-    min-width: 600px;
+    min-width: 400px;
 }
 
 .passage {
@@ -449,7 +449,7 @@ body {
     font-size: 90%;
     }
     #passages {
-    width: 80%;
+    width: 90%;
     }
 }
 @media screen and (max-width: 960px) {
@@ -2974,7 +2974,7 @@ body #story-caption #storyCaptionDiv {
 
 .P_Layer {
     top: -15px;
-    left: -35px;
+    left: 0px;
     position: absolute;
 }
 
@@ -3284,6 +3284,135 @@ body #story-caption #storyCaptionDiv {
     height: 18px;
     background-color: rgba(238, 238, 238, 0.5);
     text-shadow: -1px -1px 0px #fff,1px 1px 0px #fff,-1px 1px 0px #fff,1px -1px 0px #fff;
+}
+/* twine-user-stylesheet #12: "09-combat.css" */
+#combat {
+    text-align:center;
+}
+#enemyside, #playerside{
+    width: fit-content;
+    height: fit-content;
+    min-height: 120px;
+    display: inline-block;
+    padding: 2px;
+    position: relative;
+    text-align: center;
+}
+
+#message_container {
+    border: 1px solid #ccc;
+    width: 100%;
+    min-width: 500px;
+    height: 150px;
+    font-size: 14px;
+    overflow-y: scroll;
+    font-family: 新综艺B;
+    letter-spacing: 1px;
+    line-height: 18px;
+    padding: 5px;
+    display: inline-block;
+    position: relative;
+}
+
+#characard {
+    width: 120px;
+    min-width: 120px;
+    min-height: 80px;
+    border: 1px solid #ddd;
+    margin: 2px;
+    position: relative;
+    padding: 5px;
+    float: left;
+}
+
+#playerside #characard{
+    width: 240px;
+    min-width: 240px;
+    min-height: 120px;
+}
+
+#characard .metername { 
+    width:16px; 
+    height:18px; 
+    font-size: 10px;
+    z-index:1;
+    font-family: 新综艺B;
+    color:darkolivegreen;
+    text-shadow: 1px 1px 1px#fff,-1px -1px 1px#fff,-1px 1px 1px#fff,1px -1px 1px#fff;
+}   
+
+.showHP, .showMP, .showSP{
+    font-size: 10px;
+    font-family: 新综艺B;
+    letter-spacing: 1px;
+}
+
+#characard .metercon {
+    z-index:1;
+    width:100px;
+    height: 6px;
+    background-color: #ddd;
+    border:1px solid #ccc;
+    margin-left: 2px;
+}
+
+#characard .bar {
+    z-index:2;
+    max-width: 100px;
+    min-width: 0px;
+    height:6px;
+    background-color: #ccc;
+    transition: all 0.75s;
+}
+
+#characard .face {
+    position:absolute;
+    top:2px;
+    left:2px;
+}
+
+#playerside #characard .CC_name {
+    position: absolute;
+    top:100px;
+    left:10px;
+    text-shadow: 1px 1px 1px#fff,-1px -1px 1px#fff,-1px 1px 1px#fff,1px -1px 1px#fff;
+}
+
+#playerside #showHP{
+    width: 120px;
+    height: 20px;
+    position: absolute;
+    left:120px;
+    top:10px;
+}
+
+#playerside .showHP, #playerside .showMP, #playerside .showSP{
+    position: absolute;
+    right: 5px;
+    height: 16px;
+    text-shadow: 1px 1px 1px#fff,-1px -1px 1px#fff,-1px 1px 1px#fff,1px -1px 1px#fff;
+}
+
+#playerside #showMP{
+    width: 120px;
+    height: 20px;
+    position: absolute;
+    left:120px;
+    top:30px;
+}
+
+#playerside #showSP {
+    width: 120px;
+    height: 20px;
+    position: absolute;
+    left:120px;
+    top:50px;
+}
+
+#enemyside #showHP, #enemyside #showMP, #enemyside #showSP {
+    width: 120px;
+    height: 20px;
+    position: relative;
 }</style><script role="script" id="twine-user-script" type="text/twine-javascript">/* twine-user-script #1: "namespace.js" */
 /**
  * As part of my various refactors, I ended up introducing a bunch of
@@ -3364,10 +3493,12 @@ window.GameData = {}
 window.GameConfig = {
 	max_aslot: 3,
 }
+window.Afunction = {}
 
 window.EWA.Avatars = Avatars
 window.EWA.GameData = GameData
 window.EWA.GameConfig = GameConfig
+window.EWA.function = Afunction
 
 /**
  * Patches to make javascript execution more consistent
@@ -4213,6 +4344,11 @@ Object.defineProperties(window, {
 			return GameConfig
 		}
 	},
+	F: {
+		get: function (){
+			return Afunction
+		}
+	}
 });
 /* twine-user-script #9: "00-loadfirst.js" */
 if (document.location.href.toLowerCase().includes("/temp/") || document.location.href.toLowerCase().includes("/private/") || hasOwnProperty.call(window, "storyFormat")) {
@@ -12065,9 +12201,18 @@ function stAvatar() {
     }
 
     /* 小丁丁的显示 */
-    if(V.PFlag.bottom <= 1 && V.PC.genital.阴茎 > 3){
-        V.avatar.dick = setAvatar("dick", isFurry()+"penis"+isCaged(),true)
+    if(V.charamaking == true){
+        if(V.PC.info.tag != "少女")V.avatar.dick = setAvatar("dick", isFurry()+"penis"+isCaged(),true);
+        else V.avatar.dick = setAvatar("dick", null,true);
+
+    }else{
+        if(V.PFlag.bottom <= 1 && V.PC.genital.阴茎 > 3){
+            V.avatar.dick = setAvatar("dick", isFurry()+"penis"+isCaged(),true)
+        }else{
+            V.avatar.dick = setAvatar("dick", null,true)
+        }     
     }
+
     
     const kemorace = ["羽族","兽族"]
     if((V.PFlag.kemoform == true ||  V.charamaking == true)&& kemorace.includes(V.PC.info.race)){
@@ -12114,6 +12259,8 @@ function stAvatar() {
         if(ImgExist(path)){
             V.avatar.tatoos = setAvatar("tatoos",V.Pskin.腹部.index)
         }
+    }else{
+        V.avatar.tatoos = setAvatar("tatoos",null)
     }
 
     V.avatar.background = setAvatar("background",imglocation())
@@ -12374,28 +12521,9 @@ function gettimezone(h) {
 			return "深夜";
 	};
 }
+F.gettimezone = gettimezone
 
-function GetTime() {
-    const t = new Map();
-    const obj = {
-      凌晨: [2, 3, 4],
-      黎明: [5, 6, 7],
-      上午: [8, 9, 10],
-      中午: [11, 12, 13],
-      下午: [14, 15, 16],
-      傍晚: [17, 18, 19],
-      晚上: [20, 21, 22],
-      深夜: [23, 0, 1],
-    };
-  
-    const setTime = (word, args) => args.map((v) => t.set(v, word));
-    for (const times in obj) {
-      setTime(times, obj[times]);
-    }
-    return t;
-}
-
-windows.timeprocess = function () {
+function timeprocess() {
 	var time = V.date.time;
 	var day = V.date.day;
 	var week = V.date.week;
@@ -12472,7 +12600,11 @@ windows.timeprocess = function () {
 	V.date.week = week;
 	V.date.month = month;
 	V.date.year = year;
+
+	return ""
 }
+window.timeprocess = timeprocess
+F.timeprocess = timeprocess
 DefineMacroS("timeprocess",timeprocess)
 
 Macro.add('time', {
@@ -12494,6 +12626,14 @@ Macro.add('time', {
 		V.date.zone = zone
 	}
 });
+
+function passtime(arg,mode){
+	
+}
+
+function daychange(){
+	return ""
+}
 /* twine-user-script #33: "PlayerInfo.js" */
 /* 名字和称呼的处理 */
 function gsplit(m,f,p="chara"){
@@ -12744,18 +12884,6 @@ function penis(){
 }
 DefineMacroS("penis", penis);
 
-/* 宠物类型 */
-function petstype(){
-  switch (V.pet.type) {
-    case 1:
-      return "史莱姆"
-    case 2:
-      return "魔狼"
-    case 3: 
-      return "灵虫"
-  }
-}
-DefineMacroS("petstype", petstype);
 
 /* 宠物的第三人称 */
 function it(){
@@ -12875,6 +13003,12 @@ window.basepercent = function(name) {
     return Math.clamp(Math.trunc(((min/max)*100)),1,100)
 };
 
+function percent(min,max){
+    return Math.clamp(Math.trunc(((min/max)*100)),1,100)
+}
+window.percent = percent
+F.percent = percent
+
 // Make .divs-links clickable as if they're anchors
 window.linkifyDivs = function (parentSelector = "") {
 	$(document).ready(() => { $(parentSelector + " .div-link").click(function (e) { $(this).find('a').first().click(); }) });
@@ -12890,7 +13024,7 @@ function bookmark(name) {
 
     return ""
 }
-
+F.bookmark = bookmark
 DefineMacroS("bookmark", bookmark)
 
 
@@ -13026,7 +13160,7 @@ window.movebutton = movebutton
     (l10nStrings.macroBackText = "返回"),
     (l10nStrings.macroReturnText = "返回");
 })();
-</script><tw-passagedata pid="1" name="AvatarData 1" tags="widget" position="100,100" size="100,100">&lt;&lt;widget &quot;InitAvatar&quot;&gt;&gt;
+</script><tw-passagedata pid="1" name="InitAvatar" tags="widget" position="100,100" size="100,100">&lt;&lt;widget &quot;InitAvatar&quot;&gt;&gt;
 
 &lt;&lt;set A.layer to [
     &quot;frame&quot;,&quot;addon&quot;,
@@ -13092,451 +13226,8 @@ window.movebutton = movebutton
 &lt;&lt;InitLewdEquip&gt;&gt;
 
 &lt;&lt;/widget&gt;&gt;
-
 /* 上身的裸露范围  10=完全不露  9=手臂范围可见 8=手臂到肩膀范围可见 7=手臂到上半胸可见 6=只有下腹可见 5=手臂+下腹可见 4=手臂到肩膀+下腹 3=手臂到上半胸+下腹 2=只有敏感部位有遮掩 1=半透明装 0=全裸*/
-/* 下身的裸露范围  5=完全不露  4=到膝盖  3=到大腿  2=三角区  1=半透明/暴露装/接近全裸  0=全裸  */
-
-&lt;&lt;widget &quot;InitClothTop&quot;&gt;&gt;
-    &lt;&lt;set Avatars.top to [
-        {
-            id: 0, uid: 0,
-            index : &quot;naked&quot;,    name : &quot;裸&quot;,     gender : &quot;n&quot;,
-            text : &quot;无&quot;,   
-            name_en:&quot;&quot;,
-            text_en:&quot;&quot;, 
-            tag  : [&quot;裸露&quot;],
-            hasImg : false,
-            hasDif : {breast:false, pregnant:false},
-
-            cost : 0,        reveal : 0,        hot : 0, cold : 0,
-            durable : 0,     maxdurable : 0,     beauty: 0,     defence: 0,
-            fixcolor: true,    color:null,  colorname: null,
-            colors : [],
-            
-            category: &quot;上衣/连衣裙&quot;, layer : &quot;top&quot;,
-            shop : null, 
-            
-            slot : &quot;tops&quot;, 
-            tuckinable: false,        tuckin : false, 
-            acc : null,
-            patterns: [],
-            fixacc  : true,
-            subcolor : null,
-        },
-        {
-            id: 1, uid: 0,
-            index : &quot;Tshirt&quot;,    name : &quot;T恤&quot;,     gender : &quot;n&quot;,
-            text : &quot;一件简单的T恤。 并不能给你太多保护，但总比没有好。&quot;,  
-            name_en:&quot;T-shirt&quot;,
-            text_en:&quot;A simple design T-shirt. May give you a littel bit of protection, but better than nothing.&quot;,
-            tag  : [&quot;日常&quot;],
-            hasImg : true,
-            hasDif : {breast:true, pregnant:true},
-
-            cost : 35,        reveal : 9,        hot : -1, cold : -1,  /* 数值是直接在21上加减 */
-            durable : 20,     maxdurable : 20,     beauty: 0,     defence: 0.5,
-            fixcolor: false,    color:&quot;#FDFFFF&quot;,  colorname: &quot;白&quot;,
-            colors : [],
-            
-            category: &quot;上衣&quot;, layer : &quot;top&quot;,
-            shop : &quot;all&quot;,
-            
-            slot : &quot;tops&quot;, 
-            tuckinable: true,        tuckin : false, 
-            acc : &quot;slime&quot;,
-            patterns: [&quot;slime&quot;,&quot;heart&quot;],
-            fixacc  : true,
-            subcolor : null,
-        },
-        {
-            id: 2, uid: 0,
-            index : &quot;shirt&quot;,    name : &quot;衬衫&quot;,     gender : &quot;n&quot;,
-            text : &quot;一件简单的西式长袖衬衫。浅浅的暗纹给你增加了些许气质。&quot;,
-            name_en:&quot;business shirt&quot;,
-            text_en:&quot;A simple long-sleeved dress shirt. The dark line design adds a touch of grace to you.&quot;,
-            tag  : [&quot;日常&quot;,&quot;正式&quot;,&quot;商务&quot;],
-            hasImg : true,
-            hasDif : {breast:true, pregnant:true},
-
-            cost : 120,        reveal : 10,        hot : -1.5, cold : -1.5,  /* 数值是直接在21上加减 */
-            durable : 20,     maxdurable : 20,     beauty: 0.02,     defence: 0.5,
-            fixcolor: false,    color:&quot;#FDFFFF&quot;,  colorname: &quot;白&quot;,
-            colors : [&quot;mint&quot;],
-            
-            category: &quot;上衣&quot;, layer : &quot;top&quot;,
-            shop : &quot;all&quot;,
-            
-            slot : &quot;tops&quot;, 
-            tuckinable: true,        tuckin : false, 
-            acc : null,
-            patterns: [],
-            fixacc  : true,
-            subcolor : null,
-        },
-        {
-            id: 3, uid: 0,
-            index : &quot;bwopiece&quot;,    name : &quot;BW连衣裙&quot;,     gender : &quot;f&quot;,
-            text : &quot;一件设计简单的连衣裙。修身的设计显得你身材更苗条。毕竟是易淘上的便宜货，不能指望布料的防御效果。&quot;,
-            name_en:&quot;BW onepiece&quot;,
-            text_en:&quot;a simple design onepiece. The slim fit design looks slimmer on your body. The cheap goods on Ebay, can not expect the fabric defense effect.&quot;,
-            tag  : [&quot;日常&quot;],
-            hasImg : true,
-            hasDif : {breast:true, pregnant:true},
-
-            cost : 200,        reveal : 9,        hot : -0.5, cold : -0.5,  /* 数值是直接在21上加减 */
-            durable : 15,     maxdurable : 15,     beauty: 0.05,     defence: 0,
-            fixcolor: true,    color:&quot;black&quot;,  colorname: &quot;黑&quot;,
-            colors : [&quot;white&quot;,&quot;black&quot;],
-            
-            category: &quot;上衣&quot;, layer : &quot;top&quot;,  slot : &quot;onepiece&quot;, 
-            shop : &quot;all&quot;,
-            
-            tuckinable: false,        tuckin : false, 
-            acc : null,
-            patterns: [],
-            fixacc  : true,
-            subcolor : null,
-        },
-        {
-            id: 4, uid: 0,
-            index : &quot;slpshortup&quot;,    name : &quot;短袖睡衣&quot;,     gender : &quot;n&quot;,
-            text : &quot;一件设计简单的睡衣。轻柔透气的布料给你带来好梦。&quot;,
-            name_en:&quot;summer pajamas&quot;,
-            text_en:&quot;A simple design pajamas. The light and breathable fabric brings you good dreams.&quot;,
-            tag  : [&quot;日常&quot;,&quot;睡衣&quot;],
-            hasImg : true,
-            hasDif : {breast:true, pregnant:true},
-
-            cost : 60,        reveal : 9,        hot : -0.5, cold : -0.5,  /* 数值是直接在21上加减 */
-            durable : 10,     maxdurable : 10,     beauty: 0,     defence: 0,
-            fixcolor: false,    color:&quot;#FDFFFF&quot;,  colorname: &quot;白&quot;,
-            colors : [],
-            
-            category: &quot;上衣&quot;, layer : &quot;top&quot;,  slot : &quot;top&quot;, 
-            shop : &quot;all&quot;,
-            
-            tuckinable: false,        tuckin : false, 
-            acc : &quot;whiteline&quot;,
-            patterns: [&quot;blackline&quot;,&quot;tealine&quot;,&quot;whiteline&quot;,&quot;yellowline&quot;,&quot;greenline&quot;],
-            fixacc  : false,
-            subcolor : &quot;#6C84C5&quot;,
-        },
-    ]&gt;&gt;
-&lt;&lt;/widget&gt;&gt;
-
-&lt;&lt;widget &quot;InitClothBottom&quot;&gt;&gt;
-    &lt;&lt;set Avatars.bottom to [
-        {
-            id: 0, uid: 0,
-            index : &quot;naked&quot;,    name : &quot;裸&quot;,     gender : &quot;n&quot;,
-            text : &quot;无&quot;,  
-            name_en:&quot;&quot;,
-            text_en:&quot;&quot;, 
-            tag  : [&quot;裸露&quot;],
-            hasImg : false,
-            hasDif : {breast:false, pregnant:false},
-
-            cost : 0,        reveal : 0,    hot : 0,    cold : 0,
-            durable : 0,     maxdurable : 0,     beauty: 0,     defence: 0,
-            fixcolor: true,    color:null,  colorname: null,
-            colors : [],
-            
-            category: &quot;下衣&quot;, layer : &quot;bottom&quot;, slot : &quot;bottom&quot;, 
-            shop : null, 
-            
-            acc : null,
-            patterns: [],
-            fixacc  : true,
-            subcolor : null,
-        },
-        {
-            id: 1, uid: 0,
-            index : &quot;shortpant&quot;,    name : &quot;短裤&quot;,     gender : &quot;n&quot;,
-            text : &quot;一条简单的短裤。&quot;,   
-            name_en:&quot;shortpant&quot;,
-            text_en:&quot;A simple shortpant.&quot;,
-            tag  : [&quot;日常&quot;],
-            hasImg : true,
-            hasDif : {breast:false, pregnant:true},
-
-            cost : 50,        reveal : 4,   hot : -0.5,   cold : -0.5, 
-            durable : 20,     maxdurable : 20,     beauty: 0,     defence: 0.2,
-            fixcolor: false,    color:&quot;#787878&quot;,  colorname: &quot;黑&quot;,
-            colors : [],
-            
-            category: &quot;下衣&quot;, layer : &quot;bottom&quot;, slot : &quot;bottom&quot;, 
-            shop : &quot;all&quot;, 
-            
-            acc : null,
-            patterns: [],
-            fixacc  : true,
-            subcolor : null,
-        },
-        {
-            id: 2, uid: 0,
-            index : &quot;shortskirt&quot;,    name : &quot;短裙&quot;,     gender : &quot;f&quot;,
-            text : &quot;一条简单的短裙。&quot;,  
-            name_en:&quot;skirt&quot;,
-            text_en:&quot;A simple skirt.&quot;,
-            tag  : [&quot;日常&quot;],
-            hasImg : true,
-            hasDif : {breast:false, pregnant:true},
-
-            cost : 60,        reveal : 4,   hot : -0.2,   cold : -0.2, 
-            durable : 12,     maxdurable : 12,     beauty: 0.01,     defence: 0,
-            fixcolor: false,    color:&quot;#787878&quot;,  colorname: &quot;黑&quot;,
-            colors : [&quot;black&quot;],
-            
-            category: &quot;下衣&quot;, layer : &quot;bottom&quot;, slot : &quot;bottom&quot;,
-            shop : &quot;all&quot;, 
-             
-            acc : null,
-            patterns: [],
-            fixacc  : true,
-            subcolor : null,
-        },
-        {
-            id: 3, uid: 0,
-            index : &quot;bskirt&quot;,    name : &quot;西装短裙&quot;,     gender : &quot;f&quot;,
-            text : &quot;一条简单的西式短裙。毕竟是廉价款，不能指望耐久度。&quot;,  
-            name_en:&quot;business skirt&quot;,
-            text_en:&quot;A simple business skirt. Because it&#39;s cheap so you can&#39;t expect its durability.&quot; ,
-            tag  : [&quot;日常&quot;,&quot;商务&quot;],
-            hasImg : true,
-            hasDif : {breast:false, pregnant:true},
-
-            cost : 120,        reveal : 4,   hot : -0.2,   cold : -0.2, 
-            durable : 10,     maxdurable : 10,     beauty: 0.03,     defence: 0,
-            fixcolor: false,    color:&quot;#787878&quot;,  colorname: &quot;黑&quot;,
-            colors : [&quot;black&quot;],
-            
-            category: &quot;下衣&quot;, layer : &quot;bottom&quot;, slot : &quot;bottom&quot;, 
-            shop : &quot;all&quot;, 
-            
-            acc : null,
-            patterns: [],
-            fixacc  : true,
-            subcolor : null,
-        },
-        {
-            id: 4, uid: 0,
-            index : &quot;slpshortbt&quot;,    name : &quot;睡衣短裤&quot;,     gender : &quot;n&quot;,
-            text : &quot;一件设计简单的睡衣短裤。轻柔透气的布料给你带来好梦。&quot;,  
-            name_en:&quot;summer pajamas&quot;,
-            text_en:&quot;A simple design pajamas. The light and breathable fabric brings you good dreams.&quot;, 
-            tag  : [&quot;日常&quot;,&quot;睡衣&quot;],
-            hasImg : true,
-            hasDif : {breast:false, pregnant:true},
-
-            cost : 50,        reveal : 4,   hot : -0.5,   cold : -0.5, 
-            durable : 10,     maxdurable : 10,     beauty: 0,     defence: 0.2,
-            fixcolor: false,    color:&quot;#FDFFFF&quot;,  colorname: &quot;白&quot;,
-            colors : [],
-            
-            category: &quot;下衣&quot;, layer : &quot;bottom&quot;, slot : &quot;bottom&quot;, 
-            shop : &quot;all&quot;, 
-            
-            acc : &quot;blackline&quot;,
-            patterns: [&quot;blackline&quot;,&quot;tealine&quot;,&quot;whiteline&quot;,&quot;yellowline&quot;,&quot;greenline&quot;],
-            fixacc  : true,
-            subcolor : null,
-        },
-    ]&gt;&gt;
-&lt;&lt;/widget&gt;&gt;
-
-&lt;&lt;widget &quot;InitClothUnderbottoms&quot;&gt;&gt;
-    &lt;&lt;set Avatars.inner_bt to [
-        {
-            id: 0, uid: 0,
-            index : &quot;naked&quot;,    name : &quot;裸&quot;,     gender : &quot;n&quot;,
-            text : &quot;无&quot;,  
-            name_en:&quot;&quot;,
-            text_en:&quot;&quot;, 
-            tag  : [&quot;裸露&quot;],
-            hasImg : false,
-            hasDif : {breast:false, pregnant:false},
-
-            cost : 0,        reveal : 0,    hot : 0,    cold : 0,
-            durable : 0,     maxdurable : 0,     beauty: 0,     defence: 0,
-            fixcolor: true,    color:null,  colorname: null,
-            colors : [],
-            
-            category: &quot;内裤&quot;, layer : &quot;inner_bt&quot;, slot : &quot;bottom&quot;, 
-            shop : null, 
-            
-            acc : null,
-            patterns: [],
-            fixacc  : true,
-            subcolor : null,
-        },
-        {
-            id: 1, uid: 0,
-            index : &quot;boxer&quot;,    name : &quot;四角内裤&quot;,     gender : &quot;m&quot;,
-            text : &quot;一条简单的四角内裤。&quot;,
-            name_en:&quot;boxer brief&quot;,
-            text_en:&quot;A simple boxer brief.&quot;,
-            tag  : [&quot;日常&quot;],
-            hasImg : true,
-            hasDif : {breast:false, pregnant:false},
-
-            cost : 12,        reveal : 2,    hot : -0.1,    cold : -0.1,
-            durable : 10,     maxdurable : 10,     beauty: 0,     defence: 0,
-            fixcolor: false,    color:&quot;#FDFFFF&quot;,  colorname: &quot;白&quot;,
-            colors : [],
-            
-            category: &quot;内裤&quot;, layer : &quot;inner_bt&quot;, slot : &quot;bottom&quot;, 
-            shop : &quot;all&quot;, 
-            
-            acc : null,
-            patterns: [],
-            fixacc  : true,
-            subcolor : null,
-        },
-        {
-            id: 2, uid: 0,
-            index : &quot;pantie&quot;,    name : &quot;内裤&quot;,     gender : &quot;f&quot;,
-            text : &quot;一款简单朴素的内裤。&quot;,
-            name_en:&quot;pantie&quot;,
-            text_en:&quot;A simple pantie.&quot;,
-            tag  : [&quot;日常&quot;],
-            hasImg : true,
-            hasDif : {breast:false, pregnant:false},
-
-            cost : 15,        reveal : 2,    hot : 0,    cold : 0,
-            durable : 10,     maxdurable : 10,     beauty: 0,     defence: 0,
-            fixcolor: false,    color:&quot;#FDFFFF&quot;,  colorname: &quot;白&quot;,
-            colors : [],
-            
-            category: &quot;内裤&quot;, layer : &quot;inner_bt&quot;, slot : &quot;bottom&quot;, 
-            shop : &quot;all&quot;, 
-            
-            acc : null,
-            patterns: [],
-            fixacc  : true,
-            subcolor : null,
-        },
-    ]&gt;&gt;
-&lt;&lt;/widget&gt;&gt;
-
-&lt;&lt;widget &quot;InitClothShoes&quot;&gt;&gt;
-    &lt;&lt;set Avatars.shoes to [
-        {
-            id: 0, uid: 0,
-            index : &quot;naked&quot;,    name : &quot;裸&quot;,     gender : &quot;n&quot;,
-            text : &quot;无&quot;,
-            name_en:&quot;&quot;,
-            text_en:&quot;&quot;, 
-            tag  : [&quot;裸露&quot;], 
-            hasImg : false,
-
-            cost : 0,       reveal : 0,    hot : 0,    cold : 0,
-            durable : 0,    maxdurable : 0,     beauty: 0,     defence: 0,
-            fixcolor: true,    color:null,  colorname: null,
-            colors : [],
-            
-            category: &quot;鞋子&quot;,     layer : &quot;shoes&quot;,      slot : &quot;shoes&quot;,
-            shop : null, 
-
-            acc : null,
-            patterns: [],
-            fixacc  : true,
-            subcolor : null,
-        },
-        {
-            id: 1, uid: 0,
-            index : &quot;sportshoes&quot;,    name : &quot;运动鞋&quot;,     gender : &quot;n&quot;,
-            text : &quot;一双普通的白色运动鞋。&quot;,
-            name_en:&quot;sport shoes&quot;,
-            text_en:&quot;A simple designed sport shoes.&quot;,
-            tag  : [&quot;日常&quot;,&quot;运动&quot;], 
-            hasImg : true,
-
-            cost : 60,       reveal : 0,    hot : -0.1,    cold : -0.1,
-            durable : 30,    maxdurable : 30,     beauty: 0,     defence: 0,
-            fixcolor: true,    color:&quot;white&quot;,  colorname: &quot;白&quot;,
-            colors : [&quot;white&quot;],
-            
-            category: &quot;鞋子&quot;,     layer : &quot;shoes&quot;,      slot : &quot;shoes&quot;,
-            shop : &quot;all&quot;, 
-
-            acc : null,
-            patterns: [],
-            fixacc  : true,
-            subcolor : null,
-        },
-        {
-            id: 2, uid: 0,
-            index : &quot;highheel&quot;,    name : &quot;高跟鞋&quot;,     gender : &quot;f&quot;,
-            text : &quot;一双简单设计的高跟鞋。&quot;, 
-            name_en:&quot;high heel&quot;,
-            text_en:&quot;A simple design high heel&quot;,
-            tag  : [&quot;日常&quot;,&quot;商务&quot;], 
-            hasImg : true,
-
-            cost : 80,       reveal : 0,    hot : 0,    cold : 0,
-            durable : 20,    maxdurable : 20,     beauty: 0.02,     defence: 0,
-            fixcolor: false,    color:&quot;#FDFFFF&quot;,  colorname: &quot;白&quot;,
-            colors : [],
-            
-            category: &quot;鞋子&quot;,     layer : &quot;shoes&quot;,      slot : &quot;shoes&quot;,
-            shop : &quot;all&quot;, 
-
-            acc : null,
-            patterns: [],
-            fixacc  : true,
-            subcolor : null,
-        },
-    ]&gt;&gt;
-&lt;&lt;/widget&gt;&gt;
-
-&lt;&lt;widget &quot;InitClothSocks&quot;&gt;&gt;
-    &lt;&lt;set Avatars.legs to [
-        {
-            id: 0, uid: 0,
-            index : &quot;naked&quot;,    name : &quot;裸&quot;,     gender : &quot;n&quot;,
-            text : &quot;无&quot;, 
-            name_en:&quot;&quot;,
-            text_en:&quot;&quot;, 
-            tag  : [&quot;裸露&quot;], 
-            hasImg : false,
-
-            cost : 0,       reveal : 0,    hot : 0,    cold : 0,
-            durable : 0,    maxdurable : 0,     beauty: 0,     defence: 0,
-            fixcolor: true,    color:null,  colorname: null,
-            colors : [],
-            
-            category: &quot;袜子&quot;,     layer : &quot;legs&quot;,      slot : &quot;legs&quot;,
-            shop : null, 
-
-            acc : null,
-            patterns: [],
-            fixacc  : true,
-            subcolor : null,
-        },
-        {
-            id: 1, uid: 0,
-            index : &quot;sportsocks&quot;,    name : &quot;运动短袜&quot;,     gender : &quot;n&quot;,
-            text : &quot;一双简单的运动袜。&quot;,
-            name_en:&quot;sports socks&quot;,
-            text_en:&quot;A simple design sports socks&quot;,  
-            tag  : [&quot;日常&quot;,&quot;运动&quot;], 
-            hasImg : true,
-
-            cost : 10,       reveal : 0,    hot : -0.2,    cold : -0.2,
-            durable : 0,    maxdurable : 0,     beauty: 0,     defence: 0,
-            fixcolor: false,    color:&quot;#FDFFFF&quot;,  colorname: &quot;白&quot;,
-            colors : [],
-            
-            category: &quot;袜子&quot;,     layer : &quot;legs&quot;,      slot : &quot;legs&quot;,
-            shop : &quot;all&quot;, 
-
-            acc : null,
-            patterns: [],
-            fixacc  : true,
-            subcolor : null,
-        },
-    ]&gt;&gt;
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="2" name="AvatarData 2" tags="widget" position="225,100" size="100,100">&lt;&lt;widget &quot;InitClothAccesory&quot;&gt;&gt;
+/* 下身的裸露范围  5=完全不露  4=到膝盖  3=到大腿  2=三角区  1=半透明/暴露装/接近全裸  0=全裸  */</tw-passagedata><tw-passagedata pid="2" name="AvatarData 2" tags="widget" position="225,100" size="100,100">&lt;&lt;widget &quot;InitClothAccesory&quot;&gt;&gt;
 
     &lt;&lt;set Avatars.neck to [
         {
@@ -13656,87 +13347,6 @@ window.movebutton = movebutton
 
 &lt;&lt;/widget&gt;&gt;
 
-&lt;&lt;widget &quot;InitClothUndertops&quot;&gt;&gt;
-
-    &lt;&lt;set Avatars.inner_up to [
-        {
-            id: 0, uid: 0,
-            index : &quot;naked&quot;,    name : &quot;裸&quot;,     gender : &quot;n&quot;,
-            text : &quot;无&quot;,   
-            name_en:&quot;&quot;,
-            text_en:&quot;&quot;, 
-            tag  : [&quot;裸露&quot;],
-            hasDif : {breast:false, pregnant:false},
-            hasImg : false,
-
-            cost : 0,        reveal : 0,        hot : 0, cold : 0,
-            durable : 0,     maxdurable : 0,     beauty: 0,     defence: 0,
-            fixcolor: true,    color:null,  colorname: null,
-            colors : [],
-            
-            category: &quot;内衣&quot;, layer : &quot;inner_up&quot;,
-            shop : null, 
-            
-            slot : &quot;top&quot;,
-            tuckinable: false,        tuckin : false, 
-            acc : null,
-            patterns: [],
-            fixacc  : true,
-            subcolor : null,
-        },
-        {
-            id: 1, uid: 0,
-            index : &quot;camisole&quot;,    name : &quot;吊带背心&quot;,     gender : &quot;f&quot;,
-            text : &quot;一件简单的吊带背心，给胸部小小的你带来些许安全感。&quot;,   
-            tag  : [&quot;日常&quot;],
-            name_en:&quot;camisole&quot;,
-            text_en:&quot;A simple camisole, can give you a little bit comfort.&quot;, 
-            hasDif : {breast:false, pregnant:false},
-            hasImg : false,
-
-            cost : 30,        reveal : 7,        hot : -0.2, cold : -0.2,
-            durable : 10,     maxdurable : 10,     beauty: 0,     defence: 0,
-            fixcolor: false,    color:&quot;#FFFFF&quot;,  colorname: &quot;白&quot;,
-            colors : [],
-            
-            category: &quot;内衣&quot;, layer : &quot;inner_up&quot;,
-            shop : &quot;all&quot;, 
-            
-            slot : &quot;top&quot;,
-            tuckinable: false,        tuckin : false, 
-            acc : null,
-            patterns: [],
-            fixacc  : true,
-            subcolor : null,
-        },
-        {
-            id: 2, uid: 0,
-            index : &quot;simplebra&quot;,    name : &quot;胸罩&quot;,     gender : &quot;f&quot;,
-            text : &quot;一件设计朴素的胸罩。&quot;,   
-            tag  : [&quot;日常&quot;],
-            name_en:&quot;bra&quot;,
-            text_en:&quot;A simple design bra.&quot;, 
-            hasDif : {breast:false, pregnant:false},
-            hasImg : false,
-
-            cost : 60,        reveal : 4,        hot : 0, cold : 0,
-            durable : 10,     maxdurable : 10,     beauty: 0,     defence: 0,
-            fixcolor: false,    color:&quot;#FFFFF&quot;,  colorname: &quot;白&quot;,
-            colors : [],
-            
-            category: &quot;内衣&quot;, layer : &quot;inner_up&quot;,
-            shop : &quot;all&quot;, 
-            
-            slot : &quot;top&quot;,
-            tuckinable: false,        tuckin : false, 
-            acc : null,
-            patterns: [],
-            fixacc  : true,
-            subcolor : null,
-        },
-    ]&gt;&gt;
-&lt;&lt;/widget&gt;&gt;
-
 &lt;&lt;widget &quot;InitFrontHairStyle&quot;&gt;&gt;
     &lt;&lt;set Avatars.l.hairfront to [&quot;natural&quot;,&quot;himecut&quot;]&gt;&gt;
     &lt;&lt;set Avatars.hairfront to {
@@ -13806,75 +13416,591 @@ window.movebutton = movebutton
         A跳蛋:{},
     }&gt;&gt;
     
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="3" name="EmotionList" tags="widget" position="350,100" size="100,100">&lt;&lt;widget &quot;InitEmotion&quot;&gt;&gt;
-    &lt;&lt;set A.l.eyebrows to [&quot;angry&quot;,&quot;confuse&quot;,&quot;happy&quot;,&quot;normal&quot;,&quot;sad&quot;]&gt;&gt;
-    &lt;&lt;set A.l.eyes to [&quot;ahe&quot;,&quot;blink1&quot;,&quot;blink2&quot;,&quot;blink2&quot;,&quot;close1&quot;,&quot;close2&quot;,&quot;full&quot;,&quot;idle&quot;,&quot;half&quot;,&quot;lookdown&quot;,&quot;lookleft&quot;,&quot;lookup1&quot;,&quot;lookup2&quot;,&quot;lookup3&quot;,&quot;quater1&quot;,&quot;quater2&quot;]&gt;&gt;
-    &lt;&lt;set A.l.mouth to [&quot;angry&quot;,&quot;laugh&quot;,&quot;oop&quot;,&quot;open&quot;,&quot;sad&quot;,&quot;sign&quot;,&quot;smile&quot;,&quot;unhappy&quot;]&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="3" name="InitClothTop" tags="widget" position="350,100" size="100,100">&lt;&lt;widget &quot;InitClothTop&quot;&gt;&gt;
+&lt;&lt;set Avatars.top to [
+    {
+        id: 0, uid: 0,
+        index : &quot;naked&quot;,    name : &quot;裸&quot;,     gender : &quot;n&quot;,
+        text : &quot;无&quot;,   
+        name_en:&quot;&quot;,
+        text_en:&quot;&quot;, 
+        tag  : [&quot;裸露&quot;],
+        hasImg : false,
+        hasDif : {breast:false, pregnant:false},
 
-    &lt;&lt;set A.facelist to [&quot;正常&quot;,&quot;开心&quot;,&quot;伤心&quot;,&quot;生气&quot;,&quot;害羞&quot;,&quot;困惑&quot;,&quot;受伤&quot;,&quot;快感1&quot;,&quot;快感2&quot;,&quot;高潮&quot;,]&gt;&gt;
-    &lt;&lt;set A.emote to {
-        正常 : {
-            name : &quot;正常&quot;,
-            eyebrow : &quot;normal&quot;,  eyes : &quot;full&quot;,  mouth : &quot;smile&quot;,  frame : null,
-            tear : false,   shy  : false,
-            red  : false,   hurt : false,          
-        },
-        开心:  {
-            name :&quot;开心&quot;,           
-            eyebrow :&quot;happy&quot;,   eyes :&quot;quater2&quot;,  mouth :&quot;laugh&quot;,  frame :null,
-            tear :false,    shy  :true,
-            red  :false,    hurt :false,
-        },
-        伤心: {
-            name : &quot;伤心&quot;,
-            eyebrow : &quot;sad&quot;,  eyes : &quot;quater1&quot;,  mouth : &quot;sad&quot;,  frame : null,
-            tear : true,    shy  : false,
-            red  : false,   hurt : false,
-        },
-        生气: {
-            name : &quot;生气&quot;,
-            eyebrow : &quot;angry&quot;,  eyes : &quot;quater2&quot;,  mouth : &quot;open&quot;,  frame : null,
-            tear : false,    shy  : false, 
-            red  : false,    hurt : false,
-        },
-        害羞:{
-            name : &quot;害羞&quot;,             
-            eyebrow : &quot;happy&quot;,  eyes : &quot;lookleft&quot;,  mouth : &quot;smile&quot;,  frame : null,
-            tear : false,   shy  : true,
-            red  : false,   hurt : false,
-        },
-        困惑:{
-            name : &quot;困惑&quot;, 
-            eyebrow : &quot;confuse&quot;,  eyes : &quot;quater2&quot;,    mouth : &quot;unhappy&quot;, frame : &quot;confuse&quot;,
-            tear : false,   shy  : false,
-            red  : false,   hurt : false,
-        },
-        受伤: {
-            name : &quot;受伤&quot;,            
-            eyebrow : &quot;angry&quot;,  eyes : &quot;blink1&quot;, mouth : &quot;open&quot;,  frame : null,
-            tear : false,    shy  : false,
-            red  : false,    hurt : true,
-        },
-        快感1: {
-            name : &quot;快感&quot;,           
-            eyebrow : &quot;sad&quot;,    eyes : &quot;quater2&quot;,  mouth : &quot;open&quot;,  frame : null,
-            tear : false,    shy  : false,
-            red  : true,     hurt : false,
-        },
-        快感2: {
-            name : &quot;快感&quot;,            
-            eyebrow : &quot;confuse&quot;,    eyes : &quot;lookup2&quot;,  mouth : &quot;open&quot;,  frame : null,
-            tear : true,    shy  : false,
-            red  : true,    hurt : false,
-        },
-        高潮:{
-            name : &quot;高潮&quot;,             
-            eyebrow : &quot;sad&quot;,    eyes : &quot;lookup1&quot;,  mouth : &quot;open&quot;,  frame : null,
-            tear : true,    shy  : false,
-            red  : true,    hurt : false,
-        },
-    }&gt;&gt;
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="4" name="StoryInit" tags="" position="475,100" size="100,100">&lt;!-- 快速检索法 luatable[&quot;indexname&quot;] = $test.名字 ; $test.历史 
+        cost : 0,        reveal : 0,        hot : 0, cold : 0,
+        durable : 0,     maxdurable : 0,     beauty: 0,     defence: 0,
+        fixcolor: true,    color:null,  colorname: null,
+        colors : [],
+        
+        category: &quot;上衣/连衣裙&quot;, layer : &quot;top&quot;,
+        shop : null, 
+        
+        slot : &quot;tops&quot;, 
+        tuckinable: false,        tuckin : false, 
+        acc : null,
+        patterns: [],
+        fixacc  : true,
+        subcolor : null,
+    },
+    {
+        id: 1, uid: 0,
+        index : &quot;Tshirt&quot;,    name : &quot;T恤&quot;,     gender : &quot;n&quot;,
+        text : &quot;一件简单的T恤。 并不能给你太多保护，但总比没有好。&quot;,  
+        name_en:&quot;T-shirt&quot;,
+        text_en:&quot;A simple design T-shirt. May give you a littel bit of protection, but better than nothing.&quot;,
+        tag  : [&quot;日常&quot;],
+        hasImg : true,
+        hasDif : {breast:true, pregnant:true},
+
+        cost : 35,        reveal : 9,        hot : -1, cold : -1,  /* 数值是直接在21上加减 */
+        durable : 20,     maxdurable : 20,     beauty: 0,     defence: 0.5,
+        fixcolor: false,    color:&quot;#FDFFFF&quot;,  colorname: &quot;白&quot;,
+        colors : [],
+        
+        category: &quot;上衣&quot;, layer : &quot;top&quot;,
+        shop : &quot;all&quot;,
+        
+        slot : &quot;tops&quot;, 
+        tuckinable: true,        tuckin : false, 
+        acc : &quot;slime&quot;,
+        patterns: [&quot;slime&quot;,&quot;heart&quot;],
+        fixacc  : true,
+        subcolor : null,
+    },
+    {
+        id: 2, uid: 0,
+        index : &quot;shirt&quot;,    name : &quot;衬衫&quot;,     gender : &quot;n&quot;,
+        text : &quot;一件简单的西式长袖衬衫。浅浅的暗纹给你增加了些许气质。&quot;,
+        name_en:&quot;business shirt&quot;,
+        text_en:&quot;A simple long-sleeved dress shirt. The dark line design adds a touch of grace to you.&quot;,
+        tag  : [&quot;日常&quot;,&quot;正式&quot;,&quot;商务&quot;],
+        hasImg : true,
+        hasDif : {breast:true, pregnant:true},
+
+        cost : 120,        reveal : 10,        hot : -1.5, cold : -1.5,  /* 数值是直接在21上加减 */
+        durable : 20,     maxdurable : 20,     beauty: 0.02,     defence: 0.5,
+        fixcolor: false,    color:&quot;#FDFFFF&quot;,  colorname: &quot;白&quot;,
+        colors : [&quot;mint&quot;],
+        
+        category: &quot;上衣&quot;, layer : &quot;top&quot;,
+        shop : &quot;all&quot;,
+        
+        slot : &quot;tops&quot;, 
+        tuckinable: true,        tuckin : false, 
+        acc : null,
+        patterns: [],
+        fixacc  : true,
+        subcolor : null,
+    },
+    {
+        id: 3, uid: 0,
+        index : &quot;bwopiece&quot;,    name : &quot;BW连衣裙&quot;,     gender : &quot;f&quot;,
+        text : &quot;一件设计简单的连衣裙。修身的设计显得你身材更苗条。毕竟是易淘上的便宜货，不能指望布料的防御效果。&quot;,
+        name_en:&quot;BW onepiece&quot;,
+        text_en:&quot;a simple design onepiece. The slim fit design looks slimmer on your body. The cheap goods on Ebay, can not expect the fabric defense effect.&quot;,
+        tag  : [&quot;日常&quot;],
+        hasImg : true,
+        hasDif : {breast:true, pregnant:true},
+
+        cost : 200,        reveal : 9,        hot : -0.5, cold : -0.5,  /* 数值是直接在21上加减 */
+        durable : 15,     maxdurable : 15,     beauty: 0.05,     defence: 0,
+        fixcolor: true,    color:&quot;black&quot;,  colorname: &quot;黑&quot;,
+        colors : [&quot;white&quot;,&quot;black&quot;],
+        
+        category: &quot;上衣&quot;, layer : &quot;top&quot;,  slot : &quot;onepiece&quot;, 
+        shop : &quot;all&quot;,
+        
+        tuckinable: false,        tuckin : false, 
+        acc : null,
+        patterns: [],
+        fixacc  : true,
+        subcolor : null,
+    },
+    {
+        id: 4, uid: 0,
+        index : &quot;slpshortup&quot;,    name : &quot;短袖睡衣&quot;,     gender : &quot;n&quot;,
+        text : &quot;一件设计简单的睡衣。轻柔透气的布料给你带来好梦。&quot;,
+        name_en:&quot;summer pajamas&quot;,
+        text_en:&quot;A simple design pajamas. The light and breathable fabric brings you good dreams.&quot;,
+        tag  : [&quot;日常&quot;,&quot;睡衣&quot;],
+        hasImg : true,
+        hasDif : {breast:true, pregnant:true},
+
+        cost : 60,        reveal : 9,        hot : -0.5, cold : -0.5,  /* 数值是直接在21上加减 */
+        durable : 10,     maxdurable : 10,     beauty: 0,     defence: 0,
+        fixcolor: false,    color:&quot;#FDFFFF&quot;,  colorname: &quot;白&quot;,
+        colors : [],
+        
+        category: &quot;上衣&quot;, layer : &quot;top&quot;,  slot : &quot;top&quot;, 
+        shop : &quot;all&quot;,
+        
+        tuckinable: false,        tuckin : false, 
+        acc : &quot;whiteline&quot;,
+        patterns: [&quot;blackline&quot;,&quot;tealine&quot;,&quot;whiteline&quot;,&quot;yellowline&quot;,&quot;greenline&quot;],
+        fixacc  : false,
+        subcolor : &quot;#6C84C5&quot;,
+    },
+]&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="4" name="InitClothUnderbottoms" tags="widget" position="475,100" size="100,100">&lt;&lt;widget &quot;InitClothBottom&quot;&gt;&gt;
+&lt;&lt;set Avatars.bottom to [
+    {
+        id: 0, uid: 0,
+        index : &quot;naked&quot;,    name : &quot;裸&quot;,     gender : &quot;n&quot;,
+        text : &quot;无&quot;,  
+        name_en:&quot;&quot;,
+        text_en:&quot;&quot;, 
+        tag  : [&quot;裸露&quot;],
+        hasImg : false,
+        hasDif : {breast:false, pregnant:false},
+
+        cost : 0,        reveal : 0,    hot : 0,    cold : 0,
+        durable : 0,     maxdurable : 0,     beauty: 0,     defence: 0,
+        fixcolor: true,    color:null,  colorname: null,
+        colors : [],
+        
+        category: &quot;下衣&quot;, layer : &quot;bottom&quot;, slot : &quot;bottom&quot;, 
+        shop : null, 
+        
+        acc : null,
+        patterns: [],
+        fixacc  : true,
+        subcolor : null,
+    },
+    {
+        id: 1, uid: 0,
+        index : &quot;shortpant&quot;,    name : &quot;短裤&quot;,     gender : &quot;n&quot;,
+        text : &quot;一条简单的短裤。&quot;,   
+        name_en:&quot;shortpant&quot;,
+        text_en:&quot;A simple shortpant.&quot;,
+        tag  : [&quot;日常&quot;],
+        hasImg : true,
+        hasDif : {breast:false, pregnant:true},
+
+        cost : 50,        reveal : 4,   hot : -0.5,   cold : -0.5, 
+        durable : 20,     maxdurable : 20,     beauty: 0,     defence: 0.2,
+        fixcolor: false,    color:&quot;#787878&quot;,  colorname: &quot;黑&quot;,
+        colors : [],
+        
+        category: &quot;下衣&quot;, layer : &quot;bottom&quot;, slot : &quot;bottom&quot;, 
+        shop : &quot;all&quot;, 
+        
+        acc : null,
+        patterns: [],
+        fixacc  : true,
+        subcolor : null,
+    },
+    {
+        id: 2, uid: 0,
+        index : &quot;shortskirt&quot;,    name : &quot;短裙&quot;,     gender : &quot;f&quot;,
+        text : &quot;一条简单的短裙。&quot;,  
+        name_en:&quot;skirt&quot;,
+        text_en:&quot;A simple skirt.&quot;,
+        tag  : [&quot;日常&quot;],
+        hasImg : true,
+        hasDif : {breast:false, pregnant:true},
+
+        cost : 60,        reveal : 4,   hot : -0.2,   cold : -0.2, 
+        durable : 12,     maxdurable : 12,     beauty: 0.01,     defence: 0,
+        fixcolor: false,    color:&quot;#787878&quot;,  colorname: &quot;黑&quot;,
+        colors : [&quot;black&quot;],
+        
+        category: &quot;下衣&quot;, layer : &quot;bottom&quot;, slot : &quot;bottom&quot;,
+        shop : &quot;all&quot;, 
+            
+        acc : null,
+        patterns: [],
+        fixacc  : true,
+        subcolor : null,
+    },
+    {
+        id: 3, uid: 0,
+        index : &quot;bskirt&quot;,    name : &quot;西装短裙&quot;,     gender : &quot;f&quot;,
+        text : &quot;一条简单的西式短裙。毕竟是廉价款，不能指望耐久度。&quot;,  
+        name_en:&quot;business skirt&quot;,
+        text_en:&quot;A simple business skirt. Because it&#39;s cheap so you can&#39;t expect its durability.&quot; ,
+        tag  : [&quot;日常&quot;,&quot;商务&quot;],
+        hasImg : true,
+        hasDif : {breast:false, pregnant:true},
+
+        cost : 120,        reveal : 4,   hot : -0.2,   cold : -0.2, 
+        durable : 10,     maxdurable : 10,     beauty: 0.03,     defence: 0,
+        fixcolor: false,    color:&quot;#787878&quot;,  colorname: &quot;黑&quot;,
+        colors : [&quot;black&quot;],
+        
+        category: &quot;下衣&quot;, layer : &quot;bottom&quot;, slot : &quot;bottom&quot;, 
+        shop : &quot;all&quot;, 
+        
+        acc : null,
+        patterns: [],
+        fixacc  : true,
+        subcolor : null,
+    },
+    {
+        id: 4, uid: 0,
+        index : &quot;slpshortbt&quot;,    name : &quot;睡衣短裤&quot;,     gender : &quot;n&quot;,
+        text : &quot;一件设计简单的睡衣短裤。轻柔透气的布料给你带来好梦。&quot;,  
+        name_en:&quot;summer pajamas&quot;,
+        text_en:&quot;A simple design pajamas. The light and breathable fabric brings you good dreams.&quot;, 
+        tag  : [&quot;日常&quot;,&quot;睡衣&quot;],
+        hasImg : true,
+        hasDif : {breast:false, pregnant:true},
+
+        cost : 50,        reveal : 4,   hot : -0.5,   cold : -0.5, 
+        durable : 10,     maxdurable : 10,     beauty: 0,     defence: 0.2,
+        fixcolor: false,    color:&quot;#FDFFFF&quot;,  colorname: &quot;白&quot;,
+        colors : [],
+        
+        category: &quot;下衣&quot;, layer : &quot;bottom&quot;, slot : &quot;bottom&quot;, 
+        shop : &quot;all&quot;, 
+        
+        acc : &quot;blackline&quot;,
+        patterns: [&quot;blackline&quot;,&quot;tealine&quot;,&quot;whiteline&quot;,&quot;yellowline&quot;,&quot;greenline&quot;],
+        fixacc  : true,
+        subcolor : null,
+    },
+]&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="5" name="ClothInnerData" tags="widget" position="600,100" size="100,100">&lt;&lt;widget &quot;InitClothUndertops&quot;&gt;&gt;
+&lt;&lt;set Avatars.inner_up to [
+    {
+        id: 0, uid: 0,
+        index : &quot;naked&quot;,    name : &quot;裸&quot;,     gender : &quot;n&quot;,
+        text : &quot;无&quot;,   
+        name_en:&quot;&quot;,
+        text_en:&quot;&quot;, 
+        tag  : [&quot;裸露&quot;],
+        hasDif : {breast:false, pregnant:false},
+        hasImg : false,
+
+        cost : 0,        reveal : 0,        hot : 0, cold : 0,
+        durable : 0,     maxdurable : 0,     beauty: 0,     defence: 0,
+        fixcolor: true,    color:null,  colorname: null,
+        colors : [],
+        
+        category: &quot;内衣&quot;, layer : &quot;inner_up&quot;,
+        shop : null, 
+        
+        slot : &quot;top&quot;,
+        tuckinable: false,        tuckin : false, 
+        acc : null,
+        patterns: [],
+        fixacc  : true,
+        subcolor : null,
+    },
+    {
+        id: 1, uid: 0,
+        index : &quot;camisole&quot;,    name : &quot;吊带背心&quot;,     gender : &quot;f&quot;,
+        text : &quot;一件简单的吊带背心，给胸部小小的你带来些许安全感。&quot;,   
+        tag  : [&quot;日常&quot;],
+        name_en:&quot;camisole&quot;,
+        text_en:&quot;A simple camisole, can give you a little bit comfort.&quot;, 
+        hasDif : {breast:false, pregnant:false},
+        hasImg : false,
+
+        cost : 30,        reveal : 7,        hot : -0.2, cold : -0.2,
+        durable : 10,     maxdurable : 10,     beauty: 0,     defence: 0,
+        fixcolor: false,    color:&quot;#FFFFF&quot;,  colorname: &quot;白&quot;,
+        colors : [],
+        
+        category: &quot;内衣&quot;, layer : &quot;inner_up&quot;,
+        shop : &quot;all&quot;, 
+        
+        slot : &quot;top&quot;,
+        tuckinable: false,        tuckin : false, 
+        acc : null,
+        patterns: [],
+        fixacc  : true,
+        subcolor : null,
+    },
+    {
+        id: 2, uid: 0,
+        index : &quot;simplebra&quot;,    name : &quot;胸罩&quot;,     gender : &quot;f&quot;,
+        text : &quot;一件设计朴素的胸罩。&quot;,   
+        tag  : [&quot;日常&quot;],
+        name_en:&quot;bra&quot;,
+        text_en:&quot;A simple design bra.&quot;, 
+        hasDif : {breast:false, pregnant:false},
+        hasImg : false,
+
+        cost : 60,        reveal : 4,        hot : 0, cold : 0,
+        durable : 10,     maxdurable : 10,     beauty: 0,     defence: 0,
+        fixcolor: false,    color:&quot;#FFFFF&quot;,  colorname: &quot;白&quot;,
+        colors : [],
+        
+        category: &quot;内衣&quot;, layer : &quot;inner_up&quot;,
+        shop : &quot;all&quot;, 
+        
+        slot : &quot;top&quot;,
+        tuckinable: false,        tuckin : false, 
+        acc : null,
+        patterns: [],
+        fixacc  : true,
+        subcolor : null,
+    },
+]&gt;&gt;
+&lt;&lt;/widget&gt;&gt;
+
+&lt;&lt;widget &quot;InitClothUnderbottoms&quot;&gt;&gt;
+&lt;&lt;set Avatars.inner_bt to [
+    {
+        id: 0, uid: 0,
+        index : &quot;naked&quot;,    name : &quot;裸&quot;,     gender : &quot;n&quot;,
+        text : &quot;无&quot;,  
+        name_en:&quot;&quot;,
+        text_en:&quot;&quot;, 
+        tag  : [&quot;裸露&quot;],
+        hasImg : false,
+        hasDif : {breast:false, pregnant:false},
+
+        cost : 0,        reveal : 0,    hot : 0,    cold : 0,
+        durable : 0,     maxdurable : 0,     beauty: 0,     defence: 0,
+        fixcolor: true,    color:null,  colorname: null,
+        colors : [],
+        
+        category: &quot;内裤&quot;, layer : &quot;inner_bt&quot;, slot : &quot;bottom&quot;, 
+        shop : null, 
+        
+        acc : null,
+        patterns: [],
+        fixacc  : true,
+        subcolor : null,
+    },
+    {
+        id: 1, uid: 0,
+        index : &quot;boxer&quot;,    name : &quot;四角内裤&quot;,     gender : &quot;m&quot;,
+        text : &quot;一条简单的四角内裤。&quot;,
+        name_en:&quot;boxer brief&quot;,
+        text_en:&quot;A simple boxer brief.&quot;,
+        tag  : [&quot;日常&quot;],
+        hasImg : true,
+        hasDif : {breast:false, pregnant:false},
+
+        cost : 12,        reveal : 2,    hot : -0.1,    cold : -0.1,
+        durable : 10,     maxdurable : 10,     beauty: 0,     defence: 0,
+        fixcolor: false,    color:&quot;#FDFFFF&quot;,  colorname: &quot;白&quot;,
+        colors : [],
+        
+        category: &quot;内裤&quot;, layer : &quot;inner_bt&quot;, slot : &quot;bottom&quot;, 
+        shop : &quot;all&quot;, 
+        
+        acc : null,
+        patterns: [],
+        fixacc  : true,
+        subcolor : null,
+    },
+    {
+        id: 2, uid: 0,
+        index : &quot;pantie&quot;,    name : &quot;内裤&quot;,     gender : &quot;f&quot;,
+        text : &quot;一款简单朴素的内裤。&quot;,
+        name_en:&quot;pantie&quot;,
+        text_en:&quot;A simple pantie.&quot;,
+        tag  : [&quot;日常&quot;],
+        hasImg : true,
+        hasDif : {breast:false, pregnant:false},
+
+        cost : 15,        reveal : 2,    hot : 0,    cold : 0,
+        durable : 10,     maxdurable : 10,     beauty: 0,     defence: 0,
+        fixcolor: false,    color:&quot;#FDFFFF&quot;,  colorname: &quot;白&quot;,
+        colors : [],
+        
+        category: &quot;内裤&quot;, layer : &quot;inner_bt&quot;, slot : &quot;bottom&quot;, 
+        shop : &quot;all&quot;, 
+        
+        acc : null,
+        patterns: [],
+        fixacc  : true,
+        subcolor : null,
+    },
+]&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="6" name="ClothLegsData" tags="widget" position="725,100" size="100,100">&lt;&lt;widget &quot;InitClothShoes&quot;&gt;&gt;
+&lt;&lt;set Avatars.shoes to [
+    {
+        id: 0, uid: 0,
+        index : &quot;naked&quot;,    name : &quot;裸&quot;,     gender : &quot;n&quot;,
+        text : &quot;无&quot;,
+        name_en:&quot;&quot;,
+        text_en:&quot;&quot;, 
+        tag  : [&quot;裸露&quot;], 
+        hasImg : false,
+
+        cost : 0,       reveal : 0,    hot : 0,    cold : 0,
+        durable : 0,    maxdurable : 0,     beauty: 0,     defence: 0,
+        fixcolor: true,    color:null,  colorname: null,
+        colors : [],
+        
+        category: &quot;鞋子&quot;,     layer : &quot;shoes&quot;,      slot : &quot;shoes&quot;,
+        shop : null, 
+
+        acc : null,
+        patterns: [],
+        fixacc  : true,
+        subcolor : null,
+    },
+    {
+        id: 1, uid: 0,
+        index : &quot;sportshoes&quot;,    name : &quot;运动鞋&quot;,     gender : &quot;n&quot;,
+        text : &quot;一双普通的白色运动鞋。&quot;,
+        name_en:&quot;sport shoes&quot;,
+        text_en:&quot;A simple designed sport shoes.&quot;,
+        tag  : [&quot;日常&quot;,&quot;运动&quot;], 
+        hasImg : true,
+
+        cost : 60,       reveal : 0,    hot : -0.1,    cold : -0.1,
+        durable : 30,    maxdurable : 30,     beauty: 0,     defence: 0,
+        fixcolor: true,    color:&quot;white&quot;,  colorname: &quot;白&quot;,
+        colors : [&quot;white&quot;],
+        
+        category: &quot;鞋子&quot;,     layer : &quot;shoes&quot;,      slot : &quot;shoes&quot;,
+        shop : &quot;all&quot;, 
+
+        acc : null,
+        patterns: [],
+        fixacc  : true,
+        subcolor : null,
+    },
+    {
+        id: 2, uid: 0,
+        index : &quot;highheel&quot;,    name : &quot;高跟鞋&quot;,     gender : &quot;f&quot;,
+        text : &quot;一双简单设计的高跟鞋。&quot;, 
+        name_en:&quot;high heel&quot;,
+        text_en:&quot;A simple design high heel&quot;,
+        tag  : [&quot;日常&quot;,&quot;商务&quot;], 
+        hasImg : true,
+
+        cost : 80,       reveal : 0,    hot : 0,    cold : 0,
+        durable : 20,    maxdurable : 20,     beauty: 0.02,     defence: 0,
+        fixcolor: false,    color:&quot;#FDFFFF&quot;,  colorname: &quot;白&quot;,
+        colors : [],
+        
+        category: &quot;鞋子&quot;,     layer : &quot;shoes&quot;,      slot : &quot;shoes&quot;,
+        shop : &quot;all&quot;, 
+
+        acc : null,
+        patterns: [],
+        fixacc  : true,
+        subcolor : null,
+    },
+]&gt;&gt;
+&lt;&lt;/widget&gt;&gt;
+
+&lt;&lt;widget &quot;InitClothSocks&quot;&gt;&gt;
+&lt;&lt;set Avatars.legs to [
+    {
+        id: 0, uid: 0,
+        index : &quot;naked&quot;,    name : &quot;裸&quot;,     gender : &quot;n&quot;,
+        text : &quot;无&quot;, 
+        name_en:&quot;&quot;,
+        text_en:&quot;&quot;, 
+        tag  : [&quot;裸露&quot;], 
+        hasImg : false,
+
+        cost : 0,       reveal : 0,    hot : 0,    cold : 0,
+        durable : 0,    maxdurable : 0,     beauty: 0,     defence: 0,
+        fixcolor: true,    color:null,  colorname: null,
+        colors : [],
+        
+        category: &quot;袜子&quot;,     layer : &quot;legs&quot;,      slot : &quot;legs&quot;,
+        shop : null, 
+
+        acc : null,
+        patterns: [],
+        fixacc  : true,
+        subcolor : null,
+    },
+    {
+        id: 1, uid: 0,
+        index : &quot;sportsocks&quot;,    name : &quot;运动短袜&quot;,     gender : &quot;n&quot;,
+        text : &quot;一双简单的运动袜。&quot;,
+        name_en:&quot;sports socks&quot;,
+        text_en:&quot;A simple design sports socks&quot;,  
+        tag  : [&quot;日常&quot;,&quot;运动&quot;], 
+        hasImg : true,
+
+        cost : 10,       reveal : 0,    hot : -0.2,    cold : -0.2,
+        durable : 0,    maxdurable : 0,     beauty: 0,     defence: 0,
+        fixcolor: false,    color:&quot;#FDFFFF&quot;,  colorname: &quot;白&quot;,
+        colors : [],
+        
+        category: &quot;袜子&quot;,     layer : &quot;legs&quot;,      slot : &quot;legs&quot;,
+        shop : &quot;all&quot;, 
+
+        acc : null,
+        patterns: [],
+        fixacc  : true,
+        subcolor : null,
+    },
+]&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="7" name="EmotionList" tags="widget" position="850,100" size="100,100">&lt;&lt;widget &quot;InitEmotion&quot;&gt;&gt;
+&lt;&lt;set A.l.eyebrows to [&quot;angry&quot;,&quot;confuse&quot;,&quot;happy&quot;,&quot;normal&quot;,&quot;sad&quot;]&gt;&gt;
+&lt;&lt;set A.l.eyes to [&quot;ahe&quot;,&quot;blink1&quot;,&quot;blink2&quot;,&quot;blink2&quot;,&quot;close1&quot;,&quot;close2&quot;,&quot;full&quot;,&quot;idle&quot;,&quot;half&quot;,&quot;lookdown&quot;,&quot;lookleft&quot;,&quot;lookup1&quot;,&quot;lookup2&quot;,&quot;lookup3&quot;,&quot;quater1&quot;,&quot;quater2&quot;]&gt;&gt;
+&lt;&lt;set A.l.mouth to [&quot;angry&quot;,&quot;laugh&quot;,&quot;oop&quot;,&quot;open&quot;,&quot;sad&quot;,&quot;sign&quot;,&quot;smile&quot;,&quot;unhappy&quot;]&gt;&gt;
+
+&lt;&lt;set A.emote to {
+    正常 : {
+        name : &quot;正常&quot;,
+        eyebrow : &quot;normal&quot;,  eyes : &quot;full&quot;,  mouth : &quot;smile&quot;,  frame : null,
+        tear : false,   shy  : false,
+        red  : false,   hurt : false,          
+    },
+    开心:  {
+        name :&quot;开心&quot;,           
+        eyebrow :&quot;happy&quot;,   eyes :&quot;quater2&quot;,  mouth :&quot;laugh&quot;,  frame :null,
+        tear :false,    shy  :true,
+        red  :false,    hurt :false,
+    },
+    伤心: {
+        name : &quot;伤心&quot;,
+        eyebrow : &quot;sad&quot;,  eyes : &quot;quater1&quot;,  mouth : &quot;sad&quot;,  frame : null,
+        tear : true,    shy  : false,
+        red  : false,   hurt : false,
+    },
+    生气: {
+        name : &quot;生气&quot;,
+        eyebrow : &quot;angry&quot;,  eyes : &quot;quater2&quot;,  mouth : &quot;open&quot;,  frame : null,
+        tear : false,    shy  : false, 
+        red  : false,    hurt : false,
+    },
+    害羞:{
+        name : &quot;害羞&quot;,             
+        eyebrow : &quot;happy&quot;,  eyes : &quot;lookleft&quot;,  mouth : &quot;smile&quot;,  frame : null,
+        tear : false,   shy  : true,
+        red  : false,   hurt : false,
+    },
+    困惑:{
+        name : &quot;困惑&quot;, 
+        eyebrow : &quot;confuse&quot;,  eyes : &quot;quater2&quot;,    mouth : &quot;unhappy&quot;, frame : &quot;confuse&quot;,
+        tear : false,   shy  : false,
+        red  : false,   hurt : false,
+    },
+    受伤: {
+        name : &quot;受伤&quot;,            
+        eyebrow : &quot;angry&quot;,  eyes : &quot;blink1&quot;, mouth : &quot;open&quot;,  frame : null,
+        tear : false,    shy  : false,
+        red  : false,    hurt : true,
+    },
+    快感1: {
+        name : &quot;快感&quot;,           
+        eyebrow : &quot;sad&quot;,    eyes : &quot;quater2&quot;,  mouth : &quot;open&quot;,  frame : null,
+        tear : false,    shy  : false,
+        red  : true,     hurt : false,
+    },
+    快感2: {
+        name : &quot;快感&quot;,            
+        eyebrow : &quot;confuse&quot;,    eyes : &quot;lookup2&quot;,  mouth : &quot;open&quot;,  frame : null,
+        tear : true,    shy  : false,
+        red  : true,    hurt : false,
+    },
+    高潮:{
+        name : &quot;高潮&quot;,             
+        eyebrow : &quot;sad&quot;,    eyes : &quot;lookup1&quot;,  mouth : &quot;open&quot;,  frame : null,
+        tear : true,    shy  : false,
+        red  : true,    hurt : false,
+    },
+}&gt;&gt;
+
+&lt;&lt;run A.facelist = Object.keys(A.emote)&gt;&gt;
+
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="8" name="StoryInit" tags="" position="975,100" size="100,100">&lt;!-- 快速检索法 luatable[&quot;indexname&quot;] = $test.名字 ; $test.历史 
      var=[0,1,2,3] , luatable[0] = $var[0]  --&gt;
 &lt;!-- 首先初始化资料库 --&gt;
 &lt;&lt;InitDataBase&gt;&gt;
@@ -13948,7 +14074,7 @@ window.movebutton = movebutton
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;if $saveId is undefined&gt;&gt;
 	&lt;&lt;set $saveId to random(10000, 99999)&gt;&gt;
-&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="5" name="Widgets variablesStatic" tags="widget" position="600,100" size="100,100">&lt;&lt;widget &quot;InitDataBase&quot;&gt;&gt;
+&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="9" name="Widgets variablesStatic" tags="widget" position="1100,100" size="100,100">&lt;&lt;widget &quot;InitDataBase&quot;&gt;&gt;
 
 /* 加载语言库 */
 &lt;&lt;SetupLanguage&gt;&gt;
@@ -14136,33 +14262,75 @@ window.movebutton = movebutton
 &lt;&lt;cacheaudio &quot;获得成就&quot; &quot;sound/rising.mp3&quot;&gt;&gt;
 
 
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="6" name="EventList" tags="widget" position="725,100" size="100,100">&lt;&lt;widget &quot;registerEventList&quot;&gt;&gt;
-
-&lt;&lt;set D.event to {
-    主线:[],
-    支线:[],
-    任务:[],
-    日常:[],
-    角色:{},
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="10" name="LanguageDictionaryr" tags="widget" position="1225,100" size="100,100">&lt;&lt;widget &quot;SetupLanguage&quot;&gt;&gt;
+&lt;&lt;set setup.L to {}&gt;&gt;
+&lt;&lt;set setup.L.CN to {
+        肤色:{
+        &quot;dark&quot;   : &quot;棕色&quot;,  &quot;black&quot; : &quot;黝黑&quot;,   &quot;mugi&quot;  : &quot;麦色&quot;,
+        &quot;health&quot; : &quot;健康&quot;,  &quot;white&quot; : &quot;白皙&quot;,   &quot;skin&quot;  : &quot;的肌肤&quot;,
+        }, 
+        瞳色:{
+            &quot;black&quot; : &quot;黑色&quot;,   &quot;brown&quot; : &quot;棕色&quot;,   &quot;emerald&quot;: &quot;碧绿色&quot;,
+            &quot;green&quot; : &quot;绿色&quot;,   &quot;blue&quot;  : &quot;蓝色&quot;,   &quot;aqua&quot;   : &quot;水色&quot;,
+            &quot;purple&quot;: &quot;紫红色&quot;, &quot;white&quot; : &quot;银色&quot;,   &quot;amber&quot;  : &quot;金色&quot;,
+            &quot;red&quot;   : &quot;红色&quot;,   &quot;lightgreen&quot; : &quot;淡绿色&quot;, &quot;lightpurple&quot;:&quot;淡紫色&quot;,
+            &quot;eyes&quot;  : &quot;的眼睛&quot;,
+        },
+        发色:{
+            &quot;black&quot;     :&quot;黑色&quot;,    &quot;darkbrown&quot; :&quot;深棕色&quot;,  &quot;wine&quot;  :&quot;酒红色&quot;,
+            &quot;brown&quot;     :&quot;棕色&quot;,    &quot;milktea&quot;   :&quot;奶茶色&quot;,  &quot;blond&quot; :&quot;金色&quot;,
+            &quot;softblond&quot; :&quot;米黄色&quot;,  &quot;platinum&quot;  :&quot;白金色&quot;,  &quot;silver&quot;:&quot;银色&quot;,
+            &quot;white&quot;     :&quot;纯白色&quot;,  &quot;purple&quot;    :&quot;紫色&quot;,    &quot;green&quot; :&quot;绿色&quot;,
+            &quot;blue&quot;      :&quot;蓝色&quot;,    &quot;aqua&quot;      :&quot;水色&quot;,    &quot;pink&quot;  :&quot;粉色&quot;,
+        },
+        发型:{
+            &quot;straight&quot;  :&quot;顺直的&quot;,   &quot;natural&quot;  :&quot;自然的&quot;,
+            &quot;curly&quot;     :&quot;卷曲的&quot;,   &quot;himecut&quot;  :&quot;齐刘海&quot;,
+            &quot;bigwave&quot;   :&quot;大波浪卷&quot;, &quot;pony&quot;     :&quot;马尾&quot;,
+            &quot;twintail&quot;  :&quot;双马尾&quot;,   &quot;twosider&quot; :&quot;披肩双马尾&quot;,
+            &quot;sidetail&quot;  :&quot;侧马尾&quot;,   &quot;bob&quot;      :&quot;波波头&quot;,
+            &quot;manjyu&quot;    :&quot;包子头&quot;,   &quot;drill&quot;    :&quot;螺旋卷发&quot;,
+            &quot;drilltail&quot; :&quot;螺旋双马尾&quot;,
+        },
+        少年:&quot;少年&quot;, 少女:&quot;少女&quot;, 伪娘:&quot;伪娘&quot;, 扶她:&quot;扶她&quot;,
+        兽型:{
+            cat:&quot;猫&quot;, dog:&quot;狗&quot;, fox:&quot;狐&quot;, wolf:&quot;狼&quot;, 
+            sheep:&quot;羊&quot;, deer:&quot;鹿&quot;, cow:&quot;牛&quot;,
+        },
 }&gt;&gt;
 
-&lt;&lt;set D.event.主线 to [
-    {id:0, type:&quot;主线&quot;, name:&quot;开幕&quot;, branch:[&quot;初次&quot;,&quot;轮回&quot;,&quot;初次-穿越版&quot;], phrase:0},
-    {id:1, type:&quot;主线&quot;, name:&quot;梦醒&quot;, branch:[&quot;初次&quot;,&quot;轮回&quot;], phrase:0},
-]&gt;&gt;
+&lt;&lt;set setup.L.EN to {
+        肤色:{
+        &quot;dark&quot;  : &quot;dark&quot;,           &quot;black&quot; : &quot;black&quot;,      &quot;mugi&quot; : &quot;wheatish&quot;,
+        &quot;health&quot;: &quot;healthy white&quot;,  &quot;white&quot; : &quot;pale white&quot;, &quot;skin&quot;  : &quot;skin&quot;, 
+        },
+        瞳色:{
+            &quot;eyes&quot;   : &quot;eyes&quot;,      &quot;black&quot; : &quot;black&quot;,      &quot;brown&quot;: &quot;brown&quot;,
+            &quot;emerald&quot;: &quot;emerald&quot;,   &quot;green&quot; : &quot;green&quot;,      &quot;blue&quot; : &quot;blue&quot;,
+            &quot;aqua&quot;   : &quot;aqua&quot;,      &quot;purple&quot;: &quot;purple&quot;,     &quot;white&quot;: &quot;silver&quot;,
+            &quot;amber&quot;  : &quot;amber&quot;,     &quot;red&quot;   : &quot;red&quot;,      &quot;lightgreen&quot; : &quot;light green&quot;,
+            &quot;lightpurple&quot;:&quot;light purple&quot;,
+        },
+        发色:{
+            &quot;black&quot;:&quot;black&quot;,    &quot;darkbrown&quot;:&quot;dark-brown&quot;,   &quot;wine&quot;:&quot;red-wine-color&quot;,
+            &quot;brown&quot;:&quot;brown&quot;,    &quot;milktea&quot;:&quot;milktea-color&quot;,  &quot;blond&quot;:&quot;blond&quot;,
+            &quot;softblond&quot;:&quot;soft-blond&quot;,   &quot;platinum&quot;:&quot;platinum-blond&quot;,
 
-&lt;&lt;set D.event.角色 to {
-    黎渊: [],
-    云鹿: [],
-    魔女: [],
-    凌寻: [],
+            &quot;silver&quot;:&quot;silver&quot;,  &quot;white&quot;:&quot;white&quot;,    &quot;purple&quot;:&quot;purple&quot;,  &quot;green&quot;:&quot;green&quot;,
+            &quot;blue&quot;:&quot;blue&quot;,      &quot;aqua&quot;:&quot;aqua&quot;,      &quot;pink&quot;:&quot;pink&quot;,
+        }, 
+        发型:{
+            &quot;straight&quot;  : &quot;straight&quot;,   &quot;natural&quot; : &quot;natural&quot;,
+            &quot;curly&quot;     : &quot;curly&quot;,      &quot;himecut&quot; : &quot;himecut&quot;,
+        },
+        少年:&quot;boy&quot;, 少女:&quot;girl&quot;, 伪娘:&quot;trap&quot;, 扶她:&quot;futa&quot;,
+        兽型:{
+            cat:&quot;cat&quot;, dog:&quot;dog&quot;, fox:&quot;fox&quot;, wolf:&quot;wolf&quot;, 
+            sheep:&quot;sheep&quot;, deer:&quot;deer&quot;, cow:&quot;cow&quot;,
+        },
 }&gt;&gt;
 
-&lt;&lt;set D.event.凌寻 to [
-    {id:0, type:&quot;角色-凌寻&quot;, name:&quot;初遇&quot;, branch:[&quot;开头&quot;,&quot;英雄救美-成功&quot;,&quot;英雄救美-失败&quot;,&quot;结尾&quot;], phrase:0},
-]&gt;&gt;
-
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="7" name="InitGameData" tags="widget" position="850,100" size="100,100">&lt;&lt;widget &quot;InitGameData&quot;&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="11" name="InitGameData" tags="widget" position="100,225" size="100,100">&lt;&lt;widget &quot;InitGameData&quot;&gt;&gt;
 
 &lt;!-- 初始化游戏数据 --&gt;
 &lt;&lt;set $gametime to 0&gt;&gt;
@@ -14170,7 +14338,9 @@ window.movebutton = movebutton
 &lt;&lt;set $tutorial to false&gt;&gt;
 
 &lt;!-- 日期相关 --&gt;
-&lt;&lt;set $days to 1 &gt;&gt;
+&lt;&lt;set $days = 1&gt;&gt;
+&lt;&lt;set $wakeuptime = 540&gt;&gt;
+
 &lt;&lt;set $date to {
     &quot;year&quot; : 2024,    &quot;month&quot; : 7,    &quot;day&quot; : 1,    &quot;week&quot; : 1,
     &quot;time&quot; : 540,    &quot;hour&quot; : 9,    &quot;min&quot; : 0,
@@ -14183,8 +14353,7 @@ window.movebutton = movebutton
 &lt;&lt;set $location to &quot;单身公寓&quot;&gt;&gt;
 
 &lt;&lt;set $money to 5000&gt;&gt;
-&lt;&lt;set $follow to 1&gt;&gt;
-&lt;&lt;set $follower to 100&gt;&gt;
+&lt;&lt;set $follow = 1, $follower = 100&gt;&gt;
 
 &lt;&lt;set $actmode = &quot;自由&quot;, $chaos = 0&gt;&gt;
 
@@ -14299,75 +14468,7 @@ window.movebutton = movebutton
   例 PCKOJO 1 与史莱姆玩耍 高潮 0 CN
   */
 
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="8" name="LanguageDictionaryr" tags="widget" position="975,100" size="100,100">&lt;&lt;widget &quot;SetupLanguage&quot;&gt;&gt;
-&lt;&lt;set setup.L to {}&gt;&gt;
-&lt;&lt;set setup.L.CN to {
-        肤色:{
-        &quot;dark&quot;   : &quot;棕色&quot;,  &quot;black&quot; : &quot;黝黑&quot;,   &quot;mugi&quot;  : &quot;麦色&quot;,
-        &quot;health&quot; : &quot;健康&quot;,  &quot;white&quot; : &quot;白皙&quot;,   &quot;skin&quot;  : &quot;的肌肤&quot;,
-        }, 
-        瞳色:{
-            &quot;black&quot; : &quot;黑色&quot;,   &quot;brown&quot; : &quot;棕色&quot;,   &quot;emerald&quot;: &quot;碧绿色&quot;,
-            &quot;green&quot; : &quot;绿色&quot;,   &quot;blue&quot;  : &quot;蓝色&quot;,   &quot;aqua&quot;   : &quot;水色&quot;,
-            &quot;purple&quot;: &quot;紫红色&quot;, &quot;white&quot; : &quot;银色&quot;,   &quot;amber&quot;  : &quot;金色&quot;,
-            &quot;red&quot;   : &quot;红色&quot;,   &quot;lightgreen&quot; : &quot;淡绿色&quot;, &quot;lightpurple&quot;:&quot;淡紫色&quot;,
-            &quot;eyes&quot;  : &quot;的眼睛&quot;,
-        },
-        发色:{
-            &quot;black&quot;     :&quot;黑色&quot;,    &quot;darkbrown&quot; :&quot;深棕色&quot;,  &quot;wine&quot;  :&quot;酒红色&quot;,
-            &quot;brown&quot;     :&quot;棕色&quot;,    &quot;milktea&quot;   :&quot;奶茶色&quot;,  &quot;blond&quot; :&quot;金色&quot;,
-            &quot;softblond&quot; :&quot;米黄色&quot;,  &quot;platinum&quot;  :&quot;白金色&quot;,  &quot;silver&quot;:&quot;银色&quot;,
-            &quot;white&quot;     :&quot;纯白色&quot;,  &quot;purple&quot;    :&quot;紫色&quot;,    &quot;green&quot; :&quot;绿色&quot;,
-            &quot;blue&quot;      :&quot;蓝色&quot;,    &quot;aqua&quot;      :&quot;水色&quot;,    &quot;pink&quot;  :&quot;粉色&quot;,
-        },
-        发型:{
-            &quot;straight&quot;  :&quot;顺直的&quot;,   &quot;natural&quot;  :&quot;自然的&quot;,
-            &quot;curly&quot;     :&quot;卷曲的&quot;,   &quot;himecut&quot;  :&quot;齐刘海&quot;,
-            &quot;bigwave&quot;   :&quot;大波浪卷&quot;, &quot;pony&quot;     :&quot;马尾&quot;,
-            &quot;twintail&quot;  :&quot;双马尾&quot;,   &quot;twosider&quot; :&quot;披肩双马尾&quot;,
-            &quot;sidetail&quot;  :&quot;侧马尾&quot;,   &quot;bob&quot;      :&quot;波波头&quot;,
-            &quot;manjyu&quot;    :&quot;包子头&quot;,   &quot;drill&quot;    :&quot;螺旋卷发&quot;,
-            &quot;drilltail&quot; :&quot;螺旋双马尾&quot;,
-        },
-        少年:&quot;少年&quot;, 少女:&quot;少女&quot;, 伪娘:&quot;伪娘&quot;, 扶她:&quot;扶她&quot;,
-        兽型:{
-            cat:&quot;猫&quot;, dog:&quot;狗&quot;, fox:&quot;狐&quot;, wolf:&quot;狼&quot;, 
-            sheep:&quot;羊&quot;, deer:&quot;鹿&quot;, cow:&quot;牛&quot;,
-        },
-}&gt;&gt;
-
-&lt;&lt;set setup.L.EN to {
-        肤色:{
-        &quot;dark&quot;  : &quot;dark&quot;,           &quot;black&quot; : &quot;black&quot;,      &quot;mugi&quot; : &quot;wheatish&quot;,
-        &quot;health&quot;: &quot;healthy white&quot;,  &quot;white&quot; : &quot;pale white&quot;, &quot;skin&quot;  : &quot;skin&quot;, 
-        },
-        瞳色:{
-            &quot;eyes&quot;   : &quot;eyes&quot;,      &quot;black&quot; : &quot;black&quot;,      &quot;brown&quot;: &quot;brown&quot;,
-            &quot;emerald&quot;: &quot;emerald&quot;,   &quot;green&quot; : &quot;green&quot;,      &quot;blue&quot; : &quot;blue&quot;,
-            &quot;aqua&quot;   : &quot;aqua&quot;,      &quot;purple&quot;: &quot;purple&quot;,     &quot;white&quot;: &quot;silver&quot;,
-            &quot;amber&quot;  : &quot;amber&quot;,     &quot;red&quot;   : &quot;red&quot;,      &quot;lightgreen&quot; : &quot;light green&quot;,
-            &quot;lightpurple&quot;:&quot;light purple&quot;,
-        },
-        发色:{
-            &quot;black&quot;:&quot;black&quot;,    &quot;darkbrown&quot;:&quot;dark-brown&quot;,   &quot;wine&quot;:&quot;red-wine-color&quot;,
-            &quot;brown&quot;:&quot;brown&quot;,    &quot;milktea&quot;:&quot;milktea-color&quot;,  &quot;blond&quot;:&quot;blond&quot;,
-            &quot;softblond&quot;:&quot;soft-blond&quot;,   &quot;platinum&quot;:&quot;platinum-blond&quot;,
-
-            &quot;silver&quot;:&quot;silver&quot;,  &quot;white&quot;:&quot;white&quot;,    &quot;purple&quot;:&quot;purple&quot;,  &quot;green&quot;:&quot;green&quot;,
-            &quot;blue&quot;:&quot;blue&quot;,      &quot;aqua&quot;:&quot;aqua&quot;,      &quot;pink&quot;:&quot;pink&quot;,
-        }, 
-        发型:{
-            &quot;straight&quot;  : &quot;straight&quot;,   &quot;natural&quot; : &quot;natural&quot;,
-            &quot;curly&quot;     : &quot;curly&quot;,      &quot;himecut&quot; : &quot;himecut&quot;,
-        },
-        少年:&quot;boy&quot;, 少女:&quot;girl&quot;, 伪娘:&quot;trap&quot;, 扶她:&quot;futa&quot;,
-        兽型:{
-            cat:&quot;cat&quot;, dog:&quot;dog&quot;, fox:&quot;fox&quot;, wolf:&quot;wolf&quot;, 
-            sheep:&quot;sheep&quot;, deer:&quot;deer&quot;, cow:&quot;cow&quot;,
-        },
-}&gt;&gt;
-
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="9" name="InitPlayerChara" tags="widget" position="1100,100" size="100,100">&lt;&lt;widget &quot;InitPlayerData&quot;&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="12" name="InitPlayerChara" tags="widget" position="225,225" size="100,100">&lt;&lt;widget &quot;InitPlayerData&quot;&gt;&gt;
 &lt;!-- 角色创建 --&gt;
 &lt;&lt;set $starttrait to 0&gt;&gt;
 
@@ -14593,7 +14694,33 @@ $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌}
     red     : false,    hurt    : false,
 }&gt;&gt;
 
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="10" name="快速开始" tags="widget" position="1225,100" size="100,100">&lt;&lt;widget &quot;QuickStart&quot;&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="13" name="EventList" tags="widget" position="350,225" size="100,100">&lt;&lt;widget &quot;registerEventList&quot;&gt;&gt;
+
+&lt;&lt;set D.event to {
+    主线:[],
+    支线:[],
+    任务:[],
+    日常:[],
+    角色:{},
+}&gt;&gt;
+
+&lt;&lt;set D.event.主线 to [
+    {id:0, type:&quot;主线&quot;, name:&quot;开幕&quot;, branch:[&quot;初次&quot;,&quot;轮回&quot;,&quot;初次-穿越版&quot;], phrase:0},
+    {id:1, type:&quot;主线&quot;, name:&quot;梦醒&quot;, branch:[&quot;初次&quot;,&quot;轮回&quot;], phrase:0},
+]&gt;&gt;
+
+&lt;&lt;set D.event.角色 to {
+    黎渊: [],
+    云鹿: [],
+    魔女: [],
+    凌寻: [],
+}&gt;&gt;
+
+&lt;&lt;set D.event.凌寻 to [
+    {id:0, type:&quot;角色-凌寻&quot;, name:&quot;初遇&quot;, branch:[&quot;开头&quot;,&quot;英雄救美-成功&quot;,&quot;英雄救美-失败&quot;,&quot;结尾&quot;], phrase:0},
+]&gt;&gt;
+
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="14" name="快速开始" tags="widget" position="475,225" size="100,100">&lt;&lt;widget &quot;QuickStart&quot;&gt;&gt;
 &lt;div style=&quot;margin-left:16px;font-size:14px&quot;&gt;∵ &lt;&lt;lang &quot;预设人物卡&quot; &quot;Preset&quot;&gt;&gt;：
 &lt;select id=&quot;preset&quot; name=&quot;preset&quot; onchange=&quot;V.preset = this.value; showcharainfo()&quot;&gt;
 	&lt;option value=&quot;魔女&quot; selected&gt;魔女&lt;/option&gt;
@@ -14616,7 +14743,7 @@ $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌}
 &lt;&lt;default&gt;&gt;大家的魔女&lt;br&gt; 是个伪娘。既然是魔（法少）女，那当然擅长魔法。&lt;br&gt;以上都是大嘘。只是个一个二次元爱好者，喜欢玩游戏，会画点画，玩COSPLAY，搞搞女装直播的样子。
 &lt;&lt;/switch&gt;&gt;
 
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="11" name="创建人物" tags="widget" position="100,225" size="100,100">&lt;&lt;widget &quot;CharaMaking&quot;&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="15" name="创建人物" tags="widget" position="600,225" size="100,100">&lt;&lt;widget &quot;CharaMaking&quot;&gt;&gt;
 &lt;&lt;set $charamaking to true&gt;&gt;
 &lt;&lt;if $PC.trait.泌乳体质 is undefined&gt;&gt;
     &lt;&lt;set $PC.trait.泌乳体质 to 0&gt;&gt;
@@ -14687,7 +14814,7 @@ $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌}
 &lt;&lt;/silently&gt;&gt;
 &lt;!-- Event --&gt;
 
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="12" name="创建人物组件" tags="widget" position="225,225" size="100,100">&lt;&lt;widget &quot;CMBoy&quot;&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="16" name="创建人物组件" tags="widget" position="725,225" size="100,100">&lt;&lt;widget &quot;CMBoy&quot;&gt;&gt;
 　阴茎大小　&lt;&lt;CMPsize&gt;&gt;&lt;br&gt;
 　阴茎感度　&lt;&lt;CMPenis&gt;&gt;&lt;br&gt;
 &lt;&lt;/widget&gt;&gt;
@@ -15241,7 +15368,7 @@ $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌}
         &lt;&lt;setface &quot;正常&quot;&gt;&gt;
     &lt;&lt;/if&gt;&gt;
 
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="13" name="游戏设定" tags="widget" position="350,225" size="100,100">&lt;&lt;widget &quot;GameSetting&quot;&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="17" name="游戏设定" tags="widget" position="850,225" size="100,100">&lt;&lt;widget &quot;GameSetting&quot;&gt;&gt;
 &lt;div id=&quot;GameSetting&quot;&gt;
 　&lt;&lt;lang &quot;游戏视角&quot; &quot;Persons&quot;&gt;&gt;： &lt;label&gt;&lt;&lt;radiobutton &quot;$persons&quot; 1 autocheck&gt;&gt; &lt;&lt;lang &quot;第一人称&quot; &quot;First: I&quot;&gt;&gt;&lt;/label&gt;　|　&lt;label&gt;&lt;&lt;radiobutton &quot;$persons&quot; 2 autocheck&gt;&gt;&lt;&lt;lang &quot;第二人称&quot; &quot;Second: You&quot;&gt;&gt;&lt;/label&gt;　|　&lt;label&gt;&lt;&lt;radiobutton &quot;$persons&quot; 3 autocheck&gt;&gt;&lt;&lt;lang &quot;第三人称(默认)&quot; &quot;Third: Call Name(defalt)&quot;&gt;&gt;&lt;/label&gt;
 &lt;&lt;lang &quot; &quot; &quot;※Not full support on English&quot;&gt;&gt;&lt;br&gt;
@@ -15256,7 +15383,7 @@ $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌}
 
 　&lt;&lt;link &quot;&gt; 改变语言/Comfirm Language&quot; &quot;Start&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;
 &lt;/div&gt;
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="14" name="StoryBanner" tags="" position="475,225" size="100,100">&lt;img src=&quot;image/banner.png&quot;&gt;</tw-passagedata><tw-passagedata pid="15" name="StorySubtitle" tags="" position="600,225" size="100,100">Elysion World Adventure</tw-passagedata><tw-passagedata pid="16" name="Start" tags="nosave" position="725,225" size="100,100">&lt;&lt;audio &quot;标题&quot; volume 0.5 play loop&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="18" name="StoryBanner" tags="" position="975,225" size="100,100">&lt;img src=&quot;image/banner.png&quot;&gt;</tw-passagedata><tw-passagedata pid="19" name="StorySubtitle" tags="" position="1100,225" size="100,100">Elysion World Adventure</tw-passagedata><tw-passagedata pid="20" name="Start" tags="nosave" position="1225,225" size="100,100">&lt;&lt;audio &quot;标题&quot; volume 0.5 play loop&gt;&gt;
 &lt;div id=&quot;startpage&quot;&gt;
 &lt;span class=&quot;intro&quot;&gt;
 &lt;&lt;lang 
@@ -15293,7 +15420,7 @@ $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌}
 &lt;div class=&quot;delayed&quot;&gt;
 &lt;span style=&quot;line-height:40px;font-size:13px;padding:0px;margin:0px&quot;&gt;　
 &lt;&lt;set _text to Lang(&quot;＞ 开始游戏&quot;,&quot;＞ Game Start&quot;)&gt;&gt;
-&lt;&lt;link [[_text|开始]]&gt;&gt;&lt;&lt;GSApply&gt;&gt;&lt;&lt;set $intro to false&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/span&gt;&lt;br&gt;
+&lt;&lt;link [[_text|Combat]]&gt;&gt;&lt;&lt;GSApply&gt;&gt;&lt;&lt;set $intro to false&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/span&gt;&lt;br&gt;
 
 &lt;&lt;include &quot;初始设定&quot;&gt;&gt;
 &lt;/div&gt;
@@ -15321,7 +15448,7 @@ $(document).on(&#39;:passagerender&#39;, function (ev) {
 });
 &lt;&lt;/script&gt;&gt;
 
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="17" name="初始设定" tags="" position="850,225" size="100,100">&lt;&lt;set $activepage to &quot;QuickStart&quot;&gt;&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="21" name="初始设定" tags="" position="100,350" size="100,100">&lt;&lt;set $activepage to &quot;QuickStart&quot;&gt;&gt;
 
 &lt;div id=&quot;StartingPageMenu&quot;&gt;
 	&lt;&lt;set _text to Lang(&quot;快速开始&quot;,&quot;QuickStart&quot;)&gt;&gt;
@@ -15347,7 +15474,7 @@ $(document).on(&#39;:passagerender&#39;, function (ev) {
 &lt;/div&gt;
 
 &lt;br&gt;
-&lt;&lt;dashline&gt;&gt;</tw-passagedata><tw-passagedata pid="18" name="开始" tags="" position="975,225" size="100,100">&lt;&lt;masteraudio stop&gt;&gt;
+&lt;&lt;dashline&gt;&gt;</tw-passagedata><tw-passagedata pid="22" name="开始" tags="" position="225,350" size="100,100">&lt;&lt;masteraudio stop&gt;&gt;
 
 
 &lt;div id=&quot;eventsituation&quot;&gt;
@@ -15372,7 +15499,7 @@ $(document).on(&#39;:passagerender&#39;, function (ev) {
 [[回到开头|Start]]
 &lt;/div&gt;
 
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="19" name="Upgrade Waiting Room" tags="" position="1100,225" size="100,100">欢迎来到失乐园物语（Elysion Wolrd Adventure） &lt;&lt;print StartConfig.version&gt;&gt;。 游戏升级中，请稍后。&lt;br&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="23" name="Upgrade Waiting Room" tags="" position="350,350" size="100,100">欢迎来到失乐园物语（Elysion Wolrd Adventure） &lt;&lt;print StartConfig.version&gt;&gt;。 游戏升级中，请稍后。&lt;br&gt;
 
 &lt;&lt;silently&gt;&gt;
 &lt;&lt;variablesVersionUpdate&gt;&gt;
@@ -15380,7 +15507,7 @@ $(document).on(&#39;:passagerender&#39;, function (ev) {
 
 升级完毕。&lt;br&gt;
 
-[[继续|$navigation.stack.last()][$navigation.stack.pop()]]</tw-passagedata><tw-passagedata pid="20" name="StoryCaption" tags="" position="1225,225" size="100,100">&lt;div @class=&quot;(Errors.log.length==0?&#39;hidden&#39;:&#39;&#39;) + &#39; error-reporter-btn&#39;&quot; onclick=&quot;Errors.Reporter.toggle()&quot;&gt;&lt;/div&gt;
+[[继续|$navigation.stack.last()][$navigation.stack.pop()]]</tw-passagedata><tw-passagedata pid="24" name="StoryCaption" tags="" position="475,350" size="100,100">&lt;div @class=&quot;(Errors.log.length==0?&#39;hidden&#39;:&#39;&#39;) + &#39; error-reporter-btn&#39;&quot; onclick=&quot;Errors.Reporter.toggle()&quot;&gt;&lt;/div&gt;
 &lt;&lt;if $anounce.flag is true&gt;&gt;
 	&lt;&lt;anouncePopUP $anounce.text $anounce.type&gt;&gt;
 &lt;&lt;/if&gt;&gt;
@@ -15481,7 +15608,7 @@ $(document).on(&#39;:passagerender&#39;, function (ev) {
 
 &lt;&lt;set $anounce to {flag:false, text:&quot;&quot;, type:&quot;弹出通知&quot;}&gt;&gt;
 
-&lt;&lt;/silently&gt;&gt;</tw-passagedata><tw-passagedata pid="21" name="SidebarWidget" tags="widget" position="100,350" size="100,100">&lt;&lt;widget &quot;showtitle&quot;&gt;&gt;
+&lt;&lt;/silently&gt;&gt;</tw-passagedata><tw-passagedata pid="25" name="SidebarWidget" tags="widget" position="600,350" size="100,100">&lt;&lt;widget &quot;showtitle&quot;&gt;&gt;
     &lt;div align=&quot;center&quot;&gt;
         &lt;img src=&quot;image/banner.png&quot;&gt;
         &lt;div id=&quot;story-title&quot;&gt;失乐园物语&lt;/div&gt;
@@ -15543,7 +15670,7 @@ $(document).on(&#39;:passagerender&#39;, function (ev) {
     &lt;&lt;showbasebar &quot;抑郁&quot; &quot;#9070DA&quot;&gt;&gt;&lt;br&gt;
 &lt;&lt;/if&gt;&gt;
     
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="22" name="Options" tags="widget" position="225,350" size="100,100">&lt;&lt;widget &quot;options&quot;&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="26" name="Options" tags="widget" position="725,350" size="100,100">&lt;&lt;widget &quot;options&quot;&gt;&gt;
  制作中……&lt;br&gt;
 &lt;&lt;/widget&gt;&gt;
 
@@ -15836,7 +15963,7 @@ $(document).on(&#39;:passagerender&#39;, function (ev) {
 	&lt;&lt;replace #saveList&gt;&gt;
 		&lt;&lt;deleteWarning $args[0]&gt;&gt;
 	&lt;&lt;/replace&gt;&gt;
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="23" name="overlayReplace" tags="widget" position="350,350" size="100,100">&lt;&lt;widget &quot;overlayReplace&quot;&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="27" name="overlayReplace" tags="widget" position="850,350" size="100,100">&lt;&lt;widget &quot;overlayReplace&quot;&gt;&gt;
 	&lt;&lt;if $args[0]&gt;&gt;
 		&lt;&lt;if $currentOverlay isnot $args[0]&gt;&gt;
 			&lt;&lt;set $currentOverlay to $args[0]&gt;&gt;
@@ -15931,7 +16058,7 @@ $(document).on(&#39;:passagerender&#39;, function (ev) {
 &lt;/div&gt;
 
 &lt;br&gt;&lt;br&gt;
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="24" name="Profile Detail" tags="widget" position="475,350" size="100,100">&lt;&lt;widget &quot;statistics&quot;&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="28" name="Profile Detail" tags="widget" position="975,350" size="100,100">&lt;&lt;widget &quot;statistics&quot;&gt;&gt;
 
 &lt;&lt;/widget&gt;&gt;
 
@@ -15982,7 +16109,7 @@ $(document).on(&#39;:passagerender&#39;, function (ev) {
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="25" name="Profile" tags="widget" position="600,350" size="100,100">&lt;&lt;widget &quot;profile&quot;&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="29" name="Profile" tags="widget" position="1100,350" size="100,100">&lt;&lt;widget &quot;profile&quot;&gt;&gt;
 &lt;div id=&quot;profile&quot;&gt;
 
 &lt;&lt;set _like to random(($PC.beauty/100),($PC.beauty/10))&gt;&gt;
@@ -16037,7 +16164,7 @@ $(document).on(&#39;:passagerender&#39;, function (ev) {
 &lt;&lt;dashline&gt;&gt;
 &lt;li&gt; 宠物资料 &lt;/li&gt;
 &lt;div id=&quot;rpgstatus&quot;&gt;
-· 名字：&lt;&lt;print $pet.name&gt;&gt;　　 品种：&lt;&lt;petstype&gt;&gt;　　 等级：&lt;&lt;print $pet.level&gt;&gt;&lt;br&gt;
+· 名字：&lt;&lt;print $pet.name&gt;&gt;　　 品种：&lt;&lt;print $pet.type&gt;&gt;　　 等级：&lt;&lt;print $pet.level&gt;&gt;&lt;br&gt;
 · HP　&lt;&lt;print $pet.HP[0]&gt;&gt; / &lt;&lt;print $pet.HP[1]&gt;&gt;　　· MP　&lt;&lt;print $pet.MP[0]&gt;&gt; / &lt;&lt;print $pet.MP[1]&gt;&gt; 　　· SP　&lt;&lt;print $pet.SP[0]&gt;&gt; / &lt;&lt;print $pet.SP[1]&gt;&gt;&lt;br&gt;
 · 物攻 &lt;&lt;print $pet.ATK&gt;&gt;　　 物防 &lt;&lt;print $pet.DEF&gt;&gt;　　魔攻 &lt;&lt;print $pet.MATK&gt;&gt;　　魔防 &lt;&lt;print $pet.MDEF&gt;&gt;　　速度 &lt;&lt;print $pet.SPD&gt;&gt;&lt;br&gt;
 说明：
@@ -16053,7 +16180,7 @@ $(document).on(&#39;:passagerender&#39;, function (ev) {
 
 &lt;/div&gt;
 
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="26" name="Profile Secret" tags="widget" position="725,350" size="100,100">&lt;&lt;widget &quot;secretfile&quot;&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="30" name="Profile Secret" tags="widget" position="1225,350" size="100,100">&lt;&lt;widget &quot;secretfile&quot;&gt;&gt;
 &lt;div id=&quot;profile&quot;&gt;
 ♥&lt;u&gt; &lt;b&gt;性感状态&lt;/b&gt; &lt;/u&gt;&lt;br&gt;
 &lt;div id=&quot;statusdisplay&quot;&gt;
@@ -16118,7 +16245,7 @@ Total &lt;&lt;print $PC.sexrec.高潮.t&gt;&gt;&lt;br&gt;
 
 &lt;&lt;dashline&gt;&gt;
 &lt;/div&gt;
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="27" name="Profile-widget" tags="widget" position="850,350" size="100,100">&lt;&lt;widget &quot;changeinfo&quot;&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="31" name="Profile-widget" tags="widget" position="100,475" size="100,100">&lt;&lt;widget &quot;changeinfo&quot;&gt;&gt;
 &lt;&lt;if _infochange is true&gt;&gt;
     一名&lt;&lt;print $PC.info.tag&gt;&gt;&lt;&lt;print $PC.title&gt;&gt;&lt;&lt;textbox &quot;$shortinfo&quot; $shortinfo&gt;&gt; &lt;&lt;link &quot;保存修改&quot;&gt;&gt;&lt;&lt;set _infochange to false&gt;&gt;&lt;&lt;replace #shortinfo&gt;&gt;&lt;&lt;changeinfo&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
 &lt;&lt;else&gt;&gt;
@@ -16249,7 +16376,7 @@ Total &lt;&lt;print $PC.sexrec.高潮.t&gt;&gt;&lt;br&gt;
 &lt;&lt;else&gt;&gt;
     &lt;div class=&quot;error-view&quot;&gt;error: no args&lt;/div&gt;
 &lt;&lt;/if&gt;&gt;
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="28" name="SideMenuPage" tags="widget" position="975,350" size="100,100">&lt;&lt;widget &quot;items&quot;&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="32" name="SideMenuPage" tags="widget" position="225,475" size="100,100">&lt;&lt;widget &quot;items&quot;&gt;&gt;
 
 &lt;&lt;/widget&gt;&gt;
 
@@ -16267,13 +16394,13 @@ Total &lt;&lt;print $PC.sexrec.高潮.t&gt;&gt;&lt;br&gt;
 
 &lt;&lt;widget &quot;achivement&quot;&gt;&gt;
 
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="29" name="AvatarSetup" tags="widget" position="1100,350" size="100,100">&lt;&lt;widget &quot;SetAvatar&quot;&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="33" name="AvatarSetup" tags="widget" position="350,475" size="100,100">&lt;&lt;widget &quot;SetAvatar&quot;&gt;&gt;
 
 &lt;&lt;silently&gt;&gt;
 &lt;&lt;run stAvatar()&gt;&gt;
 &lt;&lt;/silently&gt;&gt;
 
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="30" name="ShowAvatar" tags="widget" position="1225,350" size="100,100">&lt;&lt;widget &quot;avatar&quot;&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="34" name="ShowAvatar" tags="widget" position="475,475" size="100,100">&lt;&lt;widget &quot;avatar&quot;&gt;&gt;
 &lt;&lt;if $render is &quot;canvas&quot;&gt;&gt;
     &lt;&lt;twinescript&gt;&gt;
     output.appendChild(Avatar.getCanvas())
@@ -16286,7 +16413,7 @@ Total &lt;&lt;print $PC.sexrec.高潮.t&gt;&gt;&lt;br&gt;
 &lt;div id=&quot;portrait&quot;&gt;
 
 &lt;&lt;if $render is &quot;canvas&quot;&gt;&gt;
-    &lt;div class=&quot;flipx&quot;&gt;
+    &lt;div class=&quot;P_Layer flipx&quot;&gt;
     &lt;&lt;twinescript&gt;&gt;
     output.appendChild(Avatar.getPortrait())
     &lt;&lt;/twinescript&gt;&gt;
@@ -16294,7 +16421,7 @@ Total &lt;&lt;print $PC.sexrec.高潮.t&gt;&gt;&lt;br&gt;
 &lt;&lt;/if&gt;&gt;
 
 &lt;/div&gt;
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="31" name="衣柜" tags="" position="100,475" size="100,100">&lt;div id=&quot;action-text2&quot;&gt;&lt;&lt;you&gt;&gt;打开了衣柜。&lt;/div&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="35" name="衣柜" tags="" position="600,475" size="100,100">&lt;div id=&quot;action-text2&quot;&gt;&lt;&lt;you&gt;&gt;打开了衣柜。&lt;/div&gt;
 
 &lt;div id=&quot;ClosetList&quot;&gt;
   &lt;ul&gt;
@@ -16383,7 +16510,7 @@ Total &lt;&lt;print $PC.sexrec.高潮.t&gt;&gt;&lt;br&gt;
     &lt;&lt;set _timer to _timer -1&gt;&gt;
     &lt;&lt;if _timer lte 0&gt;&gt;&lt;&lt;stop&gt;&gt;&lt;&lt;/if&gt;&gt;
 &lt;&lt;/repeat&gt;&gt;
-&lt;&lt;/silently&gt;&gt;</tw-passagedata><tw-passagedata pid="32" name="Closet-Widget" tags="widget" position="225,475" size="100,100">&lt;&lt;widget &quot;showcloset&quot;&gt;&gt;
+&lt;&lt;/silently&gt;&gt;</tw-passagedata><tw-passagedata pid="36" name="Closet-Widget" tags="widget" position="725,475" size="100,100">&lt;&lt;widget &quot;showcloset&quot;&gt;&gt;
 &lt;&lt;set _catgr to $args[0]&gt;&gt;
 &lt;&lt;set _catgrname to A.categoryname&gt;&gt;
 &lt;&lt;set _nakeimg to &quot;image/avatar/&quot;+_catgr+&quot;/thumb.png&quot;&gt;&gt;
@@ -16427,7 +16554,156 @@ Total &lt;&lt;print $PC.sexrec.高潮.t&gt;&gt;&lt;br&gt;
         &lt;/div&gt;
     &lt;&lt;/for&gt;&gt;
 &lt;&lt;/if&gt;&gt;
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="33" name="TimeProcess" tags="widget" position="350,475" size="100,100">&lt;&lt;widget &quot;TimeEffect&quot;&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="37" name="Combat" tags="core combat loop" position="850,475" size="100,100">&lt;div id=&quot;combat&quot;&gt;
+
+&lt;div id=&quot;enemyside&quot;&gt;
+/* 显示敌人信息 */
+&lt;div id=&quot;characard&quot;&gt;
+    &lt;div class=&quot;CC_name&quot;&gt;敌人A&lt;/div&gt;
+    &lt;div class=&quot;CC_statsbar&quot;&gt;
+        &lt;div id=&quot;showHP&quot;&gt;&lt;div class=&quot;metername&quot;&gt;HP&lt;/div&gt;&lt;&lt;RPGbar $PC.rpg.HP &quot;#FF755F&quot;&gt;&gt;&lt;/div&gt;
+        &lt;div id=&quot;showMP&quot;&gt;&lt;div class=&quot;metername&quot;&gt;MP&lt;/div&gt;&lt;&lt;RPGbar $PC.rpg.MP &quot;#98B5FF&quot;&gt;&gt;&lt;/div&gt;
+        &lt;div id=&quot;showSP&quot;&gt;&lt;div class=&quot;metername&quot;&gt;SP&lt;/div&gt;&lt;&lt;RPGbar $PC.rpg.SP &quot;#FFC8F5&quot;&gt;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;CC_state&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div id=&quot;characard&quot;&gt;
+    &lt;div class=&quot;CC_name&quot;&gt;敌人B&lt;/div&gt;
+    &lt;div class=&quot;CC_statsbar&quot;&gt;
+        &lt;div id=&quot;showHP&quot;&gt;&lt;div class=&quot;metername&quot;&gt;HP&lt;/div&gt;&lt;&lt;RPGbar $PC.rpg.HP &quot;#FF755F&quot;&gt;&gt;&lt;/div&gt;
+        &lt;div id=&quot;showMP&quot;&gt;&lt;div class=&quot;metername&quot;&gt;MP&lt;/div&gt;&lt;&lt;RPGbar $PC.rpg.MP &quot;#98B5FF&quot;&gt;&gt;&lt;/div&gt;
+        &lt;div id=&quot;showSP&quot;&gt;&lt;div class=&quot;metername&quot;&gt;SP&lt;/div&gt;&lt;&lt;RPGbar $PC.rpg.SP &quot;#FFC8F5&quot;&gt;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;CC_state&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div id=&quot;characard&quot;&gt;
+    &lt;div class=&quot;CC_name&quot;&gt;敌人C&lt;/div&gt;
+    &lt;div class=&quot;CC_statsbar&quot;&gt;
+        &lt;div id=&quot;showHP&quot;&gt;&lt;div class=&quot;metername&quot;&gt;HP&lt;/div&gt;&lt;&lt;RPGbar $PC.rpg.HP &quot;#FF755F&quot;&gt;&gt;&lt;/div&gt;
+        &lt;div id=&quot;showMP&quot;&gt;&lt;div class=&quot;metername&quot;&gt;MP&lt;/div&gt;&lt;&lt;RPGbar $PC.rpg.MP &quot;#98B5FF&quot;&gt;&gt;&lt;/div&gt;
+        &lt;div id=&quot;showSP&quot;&gt;&lt;div class=&quot;metername&quot;&gt;SP&lt;/div&gt;&lt;&lt;RPGbar $PC.rpg.SP &quot;#FFC8F5&quot;&gt;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;CC_state&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div id=&quot;characard&quot;&gt;
+    &lt;div class=&quot;CC_name&quot;&gt;敌人D&lt;/div&gt;
+    &lt;div class=&quot;CC_statsbar&quot;&gt;
+        &lt;div id=&quot;showHP&quot;&gt;&lt;div class=&quot;metername&quot;&gt;HP&lt;/div&gt;&lt;&lt;RPGbar $PC.rpg.HP &quot;#FF755F&quot;&gt;&gt;&lt;/div&gt;
+        &lt;div id=&quot;showMP&quot;&gt;&lt;div class=&quot;metername&quot;&gt;MP&lt;/div&gt;&lt;&lt;RPGbar $PC.rpg.MP &quot;#98B5FF&quot;&gt;&gt;&lt;/div&gt;
+        &lt;div id=&quot;showSP&quot;&gt;&lt;div class=&quot;metername&quot;&gt;SP&lt;/div&gt;&lt;&lt;RPGbar $PC.rpg.SP &quot;#FFC8F5&quot;&gt;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;CC_state&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div id=&quot;characard&quot;&gt;
+    &lt;div class=&quot;CC_name&quot;&gt;敌人E&lt;/div&gt;
+    &lt;div class=&quot;CC_statsbar&quot;&gt;
+        &lt;div id=&quot;showHP&quot;&gt;&lt;div class=&quot;metername&quot;&gt;HP&lt;/div&gt;&lt;&lt;RPGbar $PC.rpg.HP &quot;#FF755F&quot;&gt;&gt;&lt;/div&gt;
+        &lt;div id=&quot;showMP&quot;&gt;&lt;div class=&quot;metername&quot;&gt;MP&lt;/div&gt;&lt;&lt;RPGbar $PC.rpg.MP &quot;#98B5FF&quot;&gt;&gt;&lt;/div&gt;
+        &lt;div id=&quot;showSP&quot;&gt;&lt;div class=&quot;metername&quot;&gt;SP&lt;/div&gt;&lt;&lt;RPGbar $PC.rpg.SP &quot;#FFC8F5&quot;&gt;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;CC_state&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+/*end */
+&lt;/div&gt;
+
+&lt;div id=&quot;message_container&quot;&gt;
+&lt;div id=&quot;combat_message&quot;&gt;
+/* 显示战斗信息 */
+敌人A攻击了你，你受到了10点伤害！&lt;br&gt;
+敌人E骚扰了你，对你使用了性技：缠绕。你的身体被缠住无法动弹了！&lt;br&gt;
+&lt;/div&gt;
+&lt;div id=&quot;msg_end&quot; style=&quot;height:0px; overflow:hidden&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div id=&quot;playerside&quot;&gt;
+/* 玩家侧任务卡 */
+&lt;div id=&quot;characard&quot;&gt;
+    &lt;div class=&quot;face&quot;&gt;&lt;&lt;portrait&gt;&gt;&lt;/div&gt;
+    &lt;div class=&quot;CC_name&quot;&gt;玩家&lt;/div&gt;
+    &lt;div class=&quot;CC_statsbar&quot;&gt;
+        &lt;div id=&quot;showHP&quot;&gt;
+        &lt;div class=&quot;metername&quot;&gt;HP&lt;/div&gt;&lt;&lt;RPGbar $PC.rpg.HP &quot;#FF755F&quot;&gt;&gt;
+        &lt;div class=&quot;showHP&quot;&gt;&lt;&lt;print $PC.rpg.HP[0]+&quot;/&quot;+$PC.rpg.HP[1]&gt;&gt;&lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;div id=&quot;showMP&quot;&gt;
+        &lt;div class=&quot;metername&quot;&gt;MP&lt;/div&gt;&lt;&lt;RPGbar $PC.rpg.MP &quot;#98B5FF&quot;&gt;&gt;
+        &lt;div class=&quot;showMP&quot;&gt;&lt;&lt;print $PC.rpg.MP[0]+&quot;/&quot;+$PC.rpg.MP[1]&gt;&gt;&lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;div id=&quot;showSP&quot;&gt;
+        &lt;div class=&quot;metername&quot;&gt;SP&lt;/div&gt;&lt;&lt;RPGbar $PC.rpg.SP &quot;#FFC8F5&quot;&gt;&gt;
+        &lt;div class=&quot;showSP&quot;&gt;&lt;&lt;print $PC.rpg.SP[0]+&quot;/&quot;+$PC.rpg.SP[1]&gt;&gt;&lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;CC_state&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div id=&quot;characard&quot;&gt;
+    &lt;div class=&quot;face&quot;&gt;&lt;&lt;portrait&gt;&gt;&lt;/div&gt;
+    &lt;div class=&quot;CC_name&quot;&gt;宠物&lt;/div&gt;
+    &lt;div class=&quot;CC_statsbar&quot;&gt;
+        &lt;div id=&quot;showHP&quot;&gt;
+        &lt;div class=&quot;metername&quot;&gt;HP&lt;/div&gt;&lt;&lt;RPGbar $pet.HP &quot;#FF755F&quot;&gt;&gt;
+        &lt;div class=&quot;showHP&quot;&gt;&lt;&lt;print $pet.HP[0]+&quot;/&quot;+$pet.HP[1]&gt;&gt;&lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;div id=&quot;showMP&quot;&gt;
+        &lt;div class=&quot;metername&quot;&gt;MP&lt;/div&gt;&lt;&lt;RPGbar $pet.MP &quot;#98B5FF&quot;&gt;&gt;
+        &lt;div class=&quot;showMP&quot;&gt;&lt;&lt;print $pet.MP[0]+&quot;/&quot;+$pet.MP[1]&gt;&gt;&lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;div id=&quot;showSP&quot;&gt;
+        &lt;div class=&quot;metername&quot;&gt;SP&lt;/div&gt;&lt;&lt;RPGbar $pet.SP &quot;#FFC8F5&quot;&gt;&gt;
+        &lt;div class=&quot;showSP&quot;&gt;&lt;&lt;print $pet.SP[0]+&quot;/&quot;+$pet.SP[1]&gt;&gt;&lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;CC_state&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div id=&quot;characard&quot;&gt;
+    &lt;div class=&quot;face&quot;&gt;&lt;&lt;portrait&gt;&gt;&lt;/div&gt;
+    &lt;div class=&quot;CC_name&quot;&gt;队友&lt;/div&gt;
+    &lt;div class=&quot;CC_statsbar&quot;&gt;
+        &lt;div id=&quot;showHP&quot;&gt;
+        &lt;div class=&quot;metername&quot;&gt;HP&lt;/div&gt;&lt;&lt;RPGbar $PC.rpg.HP &quot;#FF755F&quot;&gt;&gt;
+        &lt;div class=&quot;showHP&quot;&gt;&lt;&lt;print $PC.rpg.HP[0]+&quot;/&quot;+$PC.rpg.HP[1]&gt;&gt;&lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;div id=&quot;showMP&quot;&gt;
+        &lt;div class=&quot;metername&quot;&gt;MP&lt;/div&gt;&lt;&lt;RPGbar $PC.rpg.MP &quot;#98B5FF&quot;&gt;&gt;
+        &lt;div class=&quot;showMP&quot;&gt;&lt;&lt;print $PC.rpg.MP[0]+&quot;/&quot;+$PC.rpg.MP[1]&gt;&gt;&lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;div id=&quot;showSP&quot;&gt;
+        &lt;div class=&quot;metername&quot;&gt;SP&lt;/div&gt;&lt;&lt;RPGbar $PC.rpg.SP &quot;#FFC8F5&quot;&gt;&gt;
+        &lt;div class=&quot;showSP&quot;&gt;&lt;&lt;print $PC.rpg.SP[0]+&quot;/&quot;+$PC.rpg.SP[1]&gt;&gt;&lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;CC_state&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+/*end */
+&lt;/div&gt;
+
+/*  */
+&lt;div id=&quot;command_container&quot;&gt;
+    &lt;div id=&quot;combat_command&quot;&gt;
+        &lt;&lt;link &quot;攻击&quot;&gt;&gt;&lt;&lt;append &quot;#combat_message&quot; t8n&gt;&gt;你攻击了敌人A。&lt;br&gt;&lt;&lt;/append&gt;&gt;&lt;&lt;run msg_end.scrollIntoView()&gt;&gt;&lt;&lt;/link&gt;&gt;
+        &lt;&lt;link &quot;防御&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;
+        &lt;&lt;link &quot;技能&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;
+        &lt;&lt;link &quot;挑逗&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;
+        &lt;&lt;link &quot;道具&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;
+        &lt;&lt;link &quot;宠物&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;
+        &lt;&lt;link &quot;队友&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;
+        &lt;&lt;link &quot;逃跑&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="38" name="TimeProcess" tags="widget" position="975,475" size="100,100">&lt;&lt;widget &quot;TimeEffect&quot;&gt;&gt;
 &lt;&lt;timeprocess&gt;&gt;
 
 /* 每日结束时的处理 */
@@ -16438,7 +16714,7 @@ Total &lt;&lt;print $PC.sexrec.高潮.t&gt;&gt;&lt;br&gt;
 &lt;&lt;set $daychange to false&gt;&gt;
 &lt;&lt;/if&gt;&gt;
     
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="34" name="FixValue" tags="widget" position="475,475" size="100,100">&lt;&lt;widget &quot;fixvalue&quot;&gt;&gt;  
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="39" name="FixValue" tags="widget" position="1100,475" size="100,100">&lt;&lt;widget &quot;fixvalue&quot;&gt;&gt;  
     &lt;&lt;set $money to Math.clamp($money,0,9999999999)&gt;&gt;
 
     /* 固定数值的修正 */
@@ -16556,7 +16832,7 @@ Total &lt;&lt;print $PC.sexrec.高潮.t&gt;&gt;&lt;br&gt;
     
     &lt;&lt;run setreveal()&gt;&gt;
 
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="35" name="PassageHeader" tags="" position="600,475" size="100,100">&lt;&lt;set $passage to passage()&gt;&gt;&lt;&lt;set $tags to tags($passage)&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="40" name="PassageHeader" tags="" position="1225,475" size="100,100">&lt;&lt;set $passage to passage()&gt;&gt;&lt;&lt;set $tags to tags($passage)&gt;&gt;
 /* 时间经过处理 */
 &lt;&lt;fixvalue&gt;&gt;&lt;&lt;TimeEffect&gt;&gt;
 /* 通知弹出框 */
@@ -16565,14 +16841,14 @@ Total &lt;&lt;print $PC.sexrec.高潮.t&gt;&gt;&lt;br&gt;
 /* 其他通用预处理 */
 
 /* AVATAR设定的更新检测 */
-&lt;&lt;SetAvatar&gt;&gt;&lt;&lt;timed 1s&gt;&gt;&lt;&lt;SetAvatar&gt;&gt;&lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="36" name="PassageFooter" tags="" position="725,475" size="100,100">&lt;div id=&quot;gameVersionDisplay&quot;&gt;EWA ver&lt;&lt;print StartConfig.version&gt;&gt;&lt;/div&gt;
+&lt;&lt;SetAvatar&gt;&gt;&lt;&lt;timed 1s&gt;&gt;&lt;&lt;SetAvatar&gt;&gt;&lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="41" name="PassageFooter" tags="" position="100,600" size="100,100">&lt;div id=&quot;gameVersionDisplay&quot;&gt;EWA ver&lt;&lt;print StartConfig.version&gt;&gt;&lt;/div&gt;
 
 
 /* 事件的各种数值变化后续处理 */
 
 
 /* AVATAR设定的更新检测 ，一个页面显示完毕之后重新调整左边栏的表情变化 */
-&lt;&lt;SetAvatar&gt;&gt;&lt;&lt;timed 1s&gt;&gt;&lt;&lt;SetAvatar&gt;&gt;&lt;&lt;/timed&gt;&gt;&lt;&lt;setchara &quot;player&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="37" name="Widget" tags="widget" position="850,475" size="100,100">&lt;&lt;widget &quot;dashline&quot;&gt;&gt;
+&lt;&lt;SetAvatar&gt;&gt;&lt;&lt;timed 1s&gt;&gt;&lt;&lt;SetAvatar&gt;&gt;&lt;&lt;/timed&gt;&gt;&lt;&lt;setchara &quot;player&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="42" name="Widget" tags="widget" position="225,600" size="100,100">&lt;&lt;widget &quot;dashline&quot;&gt;&gt;
     &lt;div class=&quot;dashline&quot;&gt;&lt;/div&gt;
 &lt;&lt;/widget&gt;&gt;
 
@@ -16788,7 +17064,14 @@ Total &lt;&lt;print $PC.sexrec.高潮.t&gt;&gt;&lt;br&gt;
 &lt;&lt;masteraudio stop&gt;&gt;
 &lt;&lt;playlist &quot;mainloop&quot; shuffle play&gt;&gt;
 
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="38" name="试衣间" tags="" position="975,475" size="100,100">&lt;span class=&quot;title&quot;&gt;服装店&lt;/span&gt;&lt;br&gt;
+&lt;&lt;/widget&gt;&gt;
+
+&lt;&lt;widget &quot;RPGbar&quot;&gt;&gt;
+    &lt;&lt;set _num to $args[0]&gt;&gt;
+    &lt;&lt;set _percent to percent(_num[0],_num[1])&gt;&gt;
+    &lt;&lt;set _color to $args[1]&gt;&gt;
+    &lt;&lt;meterbar _percent _color&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="43" name="试衣间" tags="" position="350,600" size="100,100">&lt;span class=&quot;title&quot;&gt;服装店&lt;/span&gt;&lt;br&gt;
 &lt;div class=&quot;lbox&quot;&gt;
 商场里的服装店。商品琳琅满目，什么都有。&lt;br&gt;
 &lt;/div&gt;
@@ -16871,7 +17154,7 @@ Total &lt;&lt;print $PC.sexrec.高潮.t&gt;&gt;&lt;br&gt;
 &lt;&lt;link &quot;只看内衣&quot;&gt;&gt;&lt;&lt;showinner&gt;&gt;&lt;&lt;/link&gt;&gt;
 &lt;/div&gt;
 &lt;div class=&quot;redress&quot;&gt;
-&lt;&lt;link &quot;衣服复位&quot;&gt;&gt;&lt;&lt;redress&gt;&gt;&lt;&lt;leavecheck&gt;&gt;&lt;&lt;resettryon&gt;&gt;&lt;&lt;/link&gt;&gt;
+&lt;&lt;link &quot;衣服复位&quot;&gt;&gt;&lt;&lt;redress&gt;&gt;&lt;&lt;resettryon&gt;&gt;&lt;&lt;leavecheck&gt;&gt;&lt;&lt;/link&gt;&gt;
 &lt;/div&gt;
 
 &lt;div class=&quot;buybutton&quot;&gt;
@@ -16936,16 +17219,16 @@ Total &lt;&lt;print $PC.sexrec.高潮.t&gt;&gt;&lt;br&gt;
 
 &lt;&lt;widget &quot;resettryon&quot;&gt;&gt;
     &lt;&lt;set $tryon to {neck: null, hand: null, face: null,hat: null, outter: null, top: null,bottom: null,inner_up: null, inner_bt: null,shoes: null, legs: null,}&gt;&gt;
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="39" name="试衣偷窥：触发" tags="" position="1100,475" size="100,100">&lt;&lt;you&gt;&gt;还穿着商店里的衣服，确定就这么离开商店吗？&lt;br&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="44" name="试衣偷窥：触发" tags="" position="475,600" size="100,100">&lt;&lt;you&gt;&gt;还穿着商店里的衣服，确定就这么离开商店吗？&lt;br&gt;
 &lt;br&gt;
 &lt;&lt;link &quot;不买，就这么离开&quot; &quot;试衣偷窥：不买&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
-&lt;&lt;link &quot;还是回去付钱吧&quot; $eventexit[0]&gt;&gt;&lt;&lt;set $temp.tryoncomeback to true&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;</tw-passagedata><tw-passagedata pid="40" name="试衣偷窥：不买" tags="" position="1225,475" size="100,100">&lt;&lt;set _luck to random(1,100)&gt;&gt;
+&lt;&lt;link &quot;还是回去付钱吧&quot; $eventexit[0]&gt;&gt;&lt;&lt;set $temp.tryoncomeback to true&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;</tw-passagedata><tw-passagedata pid="45" name="试衣偷窥：不买" tags="" position="600,600" size="100,100">&lt;&lt;set _luck to random(1,100)&gt;&gt;
 
 &lt;&lt;you&gt;&gt;打算就这么穿着衣服走……&lt;br&gt;
 
 &lt;&lt;timed 1s&gt;&gt;
     &lt;div class=&quot;delay&quot;&gt;
-        &lt;&lt;if _luck lt 10&gt;&gt;
+        &lt;&lt;if _luck lte 6&gt;&gt;
             幸运的是，警报器没有响起来。故障了吗？ 总之&lt;&lt;you&gt;&gt;成功穿着商店的衣服跑了。
             &lt;&lt;link &quot;离开&quot; $eventexit[1]&gt;&gt;&lt;&lt;/link&gt;&gt;
         &lt;&lt;else&gt;&gt;
@@ -16954,7 +17237,7 @@ Total &lt;&lt;print $PC.sexrec.高潮.t&gt;&gt;&lt;br&gt;
             &lt;&lt;link &quot;离开&quot; $eventexit[0]&gt;&gt;&lt;&lt;set $temp.tryoncomeback to true&gt;&gt;&lt;&lt;/link&gt;&gt;
         &lt;&lt;/if&gt;&gt;
     &lt;/div&gt;
-&lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="41" name="服装店-工具" tags="widget" position="100,600" size="100,100">&lt;&lt;widget &quot;EnterTryRoom&quot;&gt;&gt;
+&lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="46" name="服装店-工具" tags="widget" position="725,600" size="100,100">&lt;&lt;widget &quot;EnterTryRoom&quot;&gt;&gt;
 /* 把身上衣服暂存在TEquip里 */
 &lt;&lt;set $TEquip to clone($Equip)&gt;&gt;
 
@@ -17151,7 +17434,7 @@ required:false,
     &lt;&lt;set $Equip.top to null&gt;&gt;
     &lt;&lt;set $Equip.bottom to null&gt;&gt;
     &lt;&lt;SetAvatar&gt;&gt;
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="42" name="你的家 单身公寓" tags="location" position="225,600" size="100,100">&lt;&lt;location &quot;单身公寓&quot;&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="47" name="你的家 单身公寓" tags="location" position="850,600" size="100,100">&lt;&lt;location &quot;单身公寓&quot;&gt;&gt;
 &lt;span class=&quot;title&quot;&gt;&lt;&lt;you&gt;&gt;家&lt;/span&gt;&lt;br&gt;
 &lt;div class=&quot;lbox&quot;&gt;
 一个60平方米左右的单身公寓。简约现代风的装修，巨大的落地窗，还有一个阳台，两个人住也相当舒适的公寓。&lt;br&gt;
@@ -17183,8 +17466,8 @@ required:false,
 自慰
 使用道具
 和宠物（床伴？）聊天
-学习 */</tw-passagedata><tw-passagedata pid="43" name="城市生活_1" tags="" position="350,600" size="100,100">&lt;&lt;you&gt;&gt;最近离开父母家，独立出来自己住了。一切才刚开始各种不习惯……&lt;br&gt;
-幸好，有小宠物史莱姆相伴……嗯，要不要跟宠物做点什么呢……？&lt;br&gt;</tw-passagedata><tw-passagedata pid="44" name="怡安小区" tags="location" position="475,600" size="100,100">&lt;&lt;location &quot;怡安小区&quot;&gt;&gt;
+学习 */</tw-passagedata><tw-passagedata pid="48" name="城市生活_1" tags="" position="975,600" size="100,100">&lt;&lt;you&gt;&gt;最近离开父母家，独立出来自己住了。一切才刚开始各种不习惯……&lt;br&gt;
+幸好，有小宠物史莱姆相伴……嗯，要不要跟宠物做点什么呢……？&lt;br&gt;</tw-passagedata><tw-passagedata pid="49" name="怡安小区" tags="location" position="1100,600" size="100,100">&lt;&lt;location &quot;怡安小区&quot;&gt;&gt;
 &lt;span class=&quot;title&quot;&gt;怡安小区&lt;/span&gt;&lt;br&gt;
 &lt;div class=&quot;lbox&quot;&gt;
 位于景南市南兴区的一个住宅小区。&lt;br&gt;
@@ -17205,10 +17488,10 @@ required:false,
 &lt;/div&gt;
 
 /* 景南市。一个位于周唐南方大省柳洲省的一级大城市。&lt;br&gt;
-有山有水，面朝大海，四季分明，是个风景优美的旅游城市。&lt;br&gt; */</tw-passagedata><tw-passagedata pid="45" name="怡安小区 links" tags="links" position="600,600" size="100,100">&lt;div class=&quot;links&quot; title=&quot;移动时间：3分钟&quot;&gt;&lt;&lt;link &quot;・ 小区公园&quot; &quot;怡安小区公园&quot;&gt;&gt;&lt;&lt;passtime 3&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
+有山有水，面朝大海，四季分明，是个风景优美的旅游城市。&lt;br&gt; */</tw-passagedata><tw-passagedata pid="50" name="怡安小区 links" tags="links" position="1225,600" size="100,100">&lt;div class=&quot;links&quot; title=&quot;移动时间：3分钟&quot;&gt;&lt;&lt;link &quot;・ 小区公园&quot; &quot;怡安小区公园&quot;&gt;&gt;&lt;&lt;passtime 3&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
 &lt;div class=&quot;links&quot; title=&quot;移动时间：12分钟&quot;&gt;&lt;&lt;link &quot;・ 宜兴广场&quot; &quot;商店&quot;&gt;&gt;&lt;&lt;passtime 12&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
 &lt;div class=&quot;links&quot; title=&quot;移动时间：5分钟&quot;&gt;&lt;&lt;link &quot;・ 巴士站&quot; $passage&gt;&gt;&lt;&lt;passtime 5&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
-&lt;div class=&quot;links&quot; title=&quot;移动时间：10分钟&quot;&gt;&lt;&lt;link &quot;・ 地铁站&quot; $passage&gt;&gt;&lt;&lt;passtime 10&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="46" name="怡安小区公园" tags="location" position="725,600" size="100,100">&lt;&lt;location &quot;怡安小区公园&quot;&gt;&gt;
+&lt;div class=&quot;links&quot; title=&quot;移动时间：10分钟&quot;&gt;&lt;&lt;link &quot;・ 地铁站&quot; $passage&gt;&gt;&lt;&lt;passtime 10&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="51" name="怡安小区公园" tags="location" position="100,725" size="100,100">&lt;&lt;location &quot;怡安小区公园&quot;&gt;&gt;
 &lt;span class=&quot;title&quot;&gt;怡安小区 - 公园&lt;/span&gt;&lt;br&gt;
 &lt;div class=&quot;lbox&quot;&gt;
 绿意盎然，四周都种着花草树木。最吸引人的是南面一侧的用假山搭造的山泉景。&lt;br&gt;
@@ -17227,8 +17510,8 @@ required:false,
 
 &lt;div id=&quot;navi&quot; class=&quot;navi_unable&quot;&gt;
     &lt;&lt;navi&gt;&gt;
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="47" name="怡安小区公园 links" tags="" position="850,600" size="100,100">&lt;div class=&quot;links&quot; title=&quot;移动时间：3分钟&quot;&gt;&lt;&lt;link &quot;・ 小区大门&quot; &quot;怡安小区&quot;&gt;&gt;&lt;&lt;passtime 3&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="48" name="商店" tags="location" position="975,600" size="100,100">&lt;&lt;location &quot;商店&quot;&gt;&gt;
-&lt;&lt;include &quot;试衣间&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="49" name="Event" tags="eventloop nosave" position="1100,600" size="100,100">&lt;div id=&quot;eventsituation&quot;&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="52" name="怡安小区公园 links" tags="" position="225,725" size="100,100">&lt;div class=&quot;links&quot; title=&quot;移动时间：3分钟&quot;&gt;&lt;&lt;link &quot;・ 小区大门&quot; &quot;怡安小区&quot;&gt;&gt;&lt;&lt;passtime 3&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="53" name="商店" tags="location" position="350,725" size="100,100">&lt;&lt;location &quot;商店&quot;&gt;&gt;
+&lt;&lt;include &quot;试衣间&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="54" name="Event" tags="eventloop nosave" position="475,725" size="100,100">&lt;div id=&quot;eventsituation&quot;&gt;
 &lt;&lt;CallEvent&gt;&gt;
 &lt;/div&gt;
 
@@ -17245,7 +17528,7 @@ required:false,
 
 &lt;div id=&quot;eventeffect&quot;&gt;
 &lt;&lt;CallEventEffect&gt;&gt;
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="50" name="EventSystem" tags="widget" position="1225,600" size="100,100">/* 再现ERA口上系统的TRYCALL体系 主 */
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="55" name="EventSystem" tags="widget" position="600,725" size="100,100">/* 再现ERA口上系统的TRYCALL体系 主 */
 &lt;&lt;widget &quot;CallEvent&quot;&gt;&gt;
 &lt;&lt;if setEvent() isnot false&gt;&gt;
     &lt;&lt;set _passagename to setEvent()&gt;&gt;
@@ -17329,10 +17612,10 @@ required:false,
 
 &lt;&lt;/if&gt;&gt;
 
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="51" name="主线 开幕：EventFirst" tags="" position="100,725" size="100,100">&lt;&lt;set $count to 0&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="56" name="主线 开幕：EventFirst" tags="" position="725,725" size="100,100">&lt;&lt;set $count to 0&gt;&gt;
 &lt;&lt;set $Eflag.nonext to true&gt;&gt;
 &lt;&lt;set $eventnext to 0&gt;&gt;
-&lt;&lt;bookmark &quot;主线开幕_初次&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="52" name="主线 开幕-初次" tags="" position="225,725" size="100,100">&lt;&lt;Opening $count&gt;&gt;</tw-passagedata><tw-passagedata pid="53" name="主线 开幕-初次：E" tags="" position="350,725" size="100,100">&lt;&lt;if $count lt 8&gt;&gt;
+&lt;&lt;bookmark &quot;主线开幕_初次&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="57" name="主线 开幕-初次" tags="" position="850,725" size="100,100">&lt;&lt;Opening $count&gt;&gt;</tw-passagedata><tw-passagedata pid="58" name="主线 开幕-初次：E" tags="" position="975,725" size="100,100">&lt;&lt;if $count lt 8&gt;&gt;
 &lt;&lt;addclass &quot;#eventsituation&quot; &quot;weirdtext&quot;&gt;&gt;
 &lt;&lt;silently&gt;&gt;&lt;&lt;script&gt;&gt;
 //requires jQuery because I am lazy.
@@ -17341,7 +17624,7 @@ $(document).ready(function(){
 });
 &lt;&lt;/script&gt;&gt;
 &lt;&lt;/silently&gt;&gt;
-&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="54" name="主线 开幕-初次：W" tags="widget" position="475,725" size="100,100">&lt;&lt;widget &quot;Opening&quot;&gt;&gt;
+&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="59" name="主线 开幕-初次：W" tags="widget" position="1100,725" size="100,100">&lt;&lt;widget &quot;Opening&quot;&gt;&gt;
 
 &lt;&lt;switch $args[0]&gt;&gt;
 &lt;&lt;case 0&gt;&gt;
@@ -17455,7 +17738,7 @@ $(document).ready(function(){
 
 &lt;&lt;/switch&gt;&gt;
 
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="55" name="主线 开幕-初次：S" tags="" position="600,725" size="100,100">&lt;&lt;switch $count&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="60" name="主线 开幕-初次：S" tags="" position="1225,725" size="100,100">&lt;&lt;switch $count&gt;&gt;
 &lt;&lt;case 0&gt;&gt;
 	&lt;&lt;set _text to Lang(&quot;睁开眼睛&quot;,&quot;Open The Eyes&quot;)&gt;&gt;
 	&lt;div class=&quot;Wselect&quot;&gt;&lt;&lt;link _text&gt;&gt;&lt;&lt;set $count to 1&gt;&gt;&lt;&lt;Revent&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
@@ -17498,7 +17781,7 @@ $(document).ready(function(){
 	&lt;&lt;set _text to Lang(&quot;继续&quot;,&quot;Next&quot;)&gt;&gt;
 	&lt;div @class=&quot;($count &gt;= 8 ? &#39;Eselect&#39; : &#39;Wselect&#39; )&quot;&gt;&lt;&lt;link _text&gt;&gt;&lt;&lt;set $count to $eventnext&gt;&gt;&lt;&lt;Revent&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
 
-&lt;&lt;/switch&gt;&gt;</tw-passagedata><tw-passagedata pid="56" name="主线 开幕-初次-穿越版" tags="" position="725,725" size="100,100">&lt;&lt;Opening2 $count&gt;&gt;</tw-passagedata><tw-passagedata pid="57" name="主线 开幕-初次-穿越版：W" tags="widget" position="850,725" size="100,100">&lt;&lt;widget &quot;Opening2&quot;&gt;&gt;
+&lt;&lt;/switch&gt;&gt;</tw-passagedata><tw-passagedata pid="61" name="主线 开幕-初次-穿越版" tags="" position="100,850" size="100,100">&lt;&lt;Opening2 $count&gt;&gt;</tw-passagedata><tw-passagedata pid="62" name="主线 开幕-初次-穿越版：W" tags="widget" position="225,850" size="100,100">&lt;&lt;widget &quot;Opening2&quot;&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
 &lt;&lt;switch $count&gt;&gt;
 &lt;&lt;case 0&gt;&gt;
@@ -17620,7 +17903,7 @@ $(document).ready(function(){
 &lt;&lt;/switch&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
 
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="58" name="主线 开幕-初次-穿越版：S" tags="" position="975,725" size="100,100">&lt;&lt;switch $count&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="63" name="主线 开幕-初次-穿越版：S" tags="" position="350,850" size="100,100">&lt;&lt;switch $count&gt;&gt;
 &lt;&lt;case 1&gt;&gt;
 &lt;&lt;set _text to Lang(&quot;拿起手机&quot;,&quot;Pick up the phone&quot;)&gt;&gt;
 &lt;div class=&quot;Eselect&quot;&gt;&lt;&lt;link _text&gt;&gt;&lt;&lt;set $count to 2&gt;&gt;&lt;&lt;Revent&gt;&gt;&lt;&lt;passtime 2&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
@@ -17668,7 +17951,7 @@ $(document).ready(function(){
 &lt;&lt;set _text to Lang(&quot;继续&quot;,&quot;Next&quot;)&gt;&gt;
 &lt;div class=&quot;Eselect&quot;&gt;&lt;&lt;link _text&gt;&gt;&lt;&lt;set $count to $eventnext&gt;&gt;&lt;&lt;Revent&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
 
-&lt;&lt;/switch&gt;&gt;</tw-passagedata><tw-passagedata pid="59" name="主线 开幕-轮回" tags="" position="1100,725" size="100,100">&lt;&lt;bookmark &quot;主线开幕_轮回&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="60" name="PC 主线-开幕-房间描述" tags="nobr" position="1225,725" size="100,100">&lt;&lt;lang 
+&lt;&lt;/switch&gt;&gt;</tw-passagedata><tw-passagedata pid="64" name="主线 开幕-轮回" tags="" position="475,850" size="100,100">&lt;&lt;bookmark &quot;主线开幕_轮回&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="65" name="PC 主线-开幕-房间描述" tags="nobr" position="600,850" size="100,100">&lt;&lt;lang 
 &quot;一睁开眼，首先看到的是茂绿的窗外，响亮的蝉鸣宣告着当前的季节。窗户旁摆放着一张大书桌，上面摆放着&lt;&lt;if $PC.type is 2&gt;&gt;一个宽屏大液显&lt;&lt;elseif $PC.type is 1&gt;&gt;新帝HQ24数位屏和数位板&lt;&lt;else&gt;&gt;一个电脑屏幕&lt;&lt;/if&gt;&gt;，书桌旁的小桌子上则是电脑主机。在靠近书桌的墙边，则整齐地摆放着两个书架，书架上是&lt;&lt;switch $PC.type&gt;&gt;&lt;&lt;case 1&gt;&gt;各种漫画和小说还有塑料小人&lt;&lt;case 2&gt;&gt;各种各样的书籍&lt;&lt;case 3&gt;&gt;各种修仙小说和漫画&lt;&lt;/switch&gt;&gt;，墙上则&lt;&lt;switch $PC.type&gt;&gt;&lt;&lt;case 1&gt;&gt;挂着一些远古生物的挂画和各种游戏海报&lt;&lt;case 2&gt;&gt;挂着一些漂亮的装饰画&lt;&lt;case 3&gt;&gt;挂着一个黑白两色的八卦阵和一些仙侠作品的海报&lt;&lt;/switch&gt;&gt;&quot;
 
 &quot;Across from the bed is the window, and outside the window is the loud sound of cicadas announcing the current season. Right next to the window sits a large desk with a computer with two screens, two bookshelves lined up side by side with various books and comics and some anime figurines, and posters of superheroes on the wall&quot;

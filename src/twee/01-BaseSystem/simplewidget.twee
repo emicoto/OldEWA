@@ -217,3 +217,10 @@
 <<playlist "mainloop" shuffle play>>
 
 <</widget>>
+
+<<widget "RPGbar">>
+    <<set _num to $args[0]>>
+    <<set _percent to percent(_num[0],_num[1])>>
+    <<set _color to $args[1]>>
+    <<meterbar _percent _color>>
+<</widget>>

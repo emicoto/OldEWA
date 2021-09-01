@@ -38,4 +38,9 @@ Object.defineProperties(window, {
 			return GameConfig
 		}
 	},
+	F: {
+		get: function (){
+			return Afunction
+		}
+	}
 });

@@ -7,7 +7,9 @@
 <<set $tutorial to false>>
 
 <!-- 日期相关 -->
-<<set $days to 1 >>
+<<set $days = 1>>
+<<set $wakeuptime = 540>>
+
 <<set $date to {
     "year" : 2024,    "month" : 7,    "day" : 1,    "week" : 1,
     "time" : 540,    "hour" : 9,    "min" : 0,
@@ -20,8 +22,7 @@
 <<set $location to "单身公寓">>
 
 <<set $money to 5000>>
-<<set $follow to 1>>
-<<set $follower to 100>>
+<<set $follow = 1, $follower = 100>>
 
 <<set $actmode = "自由", $chaos = 0>>
 

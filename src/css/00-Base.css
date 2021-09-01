@@ -111,7 +111,7 @@ body {
 #passages {
     float: left;
     width: 80%;
-    min-width: 600px;
+    min-width: 400px;
 }
 
 .passage {
@@ -139,7 +139,7 @@ body {
     font-size: 90%;
     }
     #passages {
-    width: 80%;
+    width: 90%;
     }
 }
 @media screen and (max-width: 960px) {
