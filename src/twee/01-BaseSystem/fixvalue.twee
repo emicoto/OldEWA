@@ -9,7 +9,7 @@
 
     <<set $fix.beauty = 1600>>
     <<set $PC.info.hairlen to Math.clamp($PC.info.hairlen,0,9999)>>
-    <<set $PC.info.fhairlen to Math.clamp($PC.info.fhairlen,0,9999)>>
+    <<set $PC.info.hairlenf to Math.clamp($PC.info.hairlenf,0,9999)>>
     <<set $PC.beauty to Math.clamp($fix.beauty*allureBuff(),0,9999)>>
     <<set _warmth to warmth()>>
 

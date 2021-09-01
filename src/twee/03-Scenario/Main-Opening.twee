@@ -144,28 +144,28 @@ $(document).ready(function(){
 :: 主线 开幕-初次：S
 <<switch $count>>
 <<case 0>>
-	<<set _text to LangSpl("睁开眼睛","Open The Eyes")>>
+	<<set _text to Lang("睁开眼睛","Open The Eyes")>>
 	<div class="Wselect"><<link _text>><<set $count to 1>><<Revent>><</link>></div>
 
-	<<set _text to LangSpl("回忆梦境","Recall The Dream")>>
+	<<set _text to Lang("回忆梦境","Recall The Dream")>>
 	<div class="Wselect"><<link _text>><<set $count to 2>><<Revent>><</link>></div>
 
 <<case 4>>
-	<<set _text to LangSpl("但这不是梦","But it's not just a dream")>>
+	<<set _text to Lang("但这不是梦","But it's not just a dream")>>
 	<div class="Wselect"><<link _text>><<set $count to 5>><<Revent>><</link>></div>
 
-	<<set _text to LangSpl("这只是个梦","It just a dream")>>
+	<<set _text to Lang("这只是个梦","It just a dream")>>
 	<div class="Wselect"><<link _text>><<set $count to 6>><<Revent>><</link>></div>
 
 <<case 8>>
-	<<set _text to LangSpl("没错，这是<<you>>的房间","Yes, it's <<my>> room.")>>
+	<<set _text to Lang("没错，这是<<you>>的房间","Yes, it's <<my>> room.")>>
 	<div class="Eselect"><<link _text>><<set $count to 9>><<Revent>><<masteraudio stop>><</link>></div>
 
-	<<set _text to LangSpl("不对，这是哪？","Wait, where <<am>> <<I>>?")>>
+	<<set _text to Lang("不对，这是哪？","Wait, where <<am>> <<I>>?")>>
 	<div class="Eselect"><<link _text>><<set $count to 10>><<Revent>><</link>></div>
 
 <<case 10>>
-	<<set _text to LangSpl("继续","Next")>>
+	<<set _text to Lang("继续","Next")>>
 	<div @class="($count >= 8 ? 'Eselect' : 'Wselect' )"><<link _text $passage>>
 	<<set $event.branch to "初次-穿越版">>
 	<<set $eventnext to 0>>
@@ -174,7 +174,7 @@ $(document).ready(function(){
 	<</link>></div>
 
 <<case 15>>
-<<set _text to LangSpl("继续","Next")>>
+<<set _text to Lang("继续","Next")>>
 <div class="Eselect">
 <<link _text "你的家 单身公寓">>
 <<masteraudio stop>>
@@ -182,7 +182,7 @@ $(document).ready(function(){
 <</link>></div>
 
 <<default>>
-	<<set _text to LangSpl("继续","Next")>>
+	<<set _text to Lang("继续","Next")>>
 	<div @class="($count >= 8 ? 'Eselect' : 'Wselect' )"><<link _text>><<set $count to $eventnext>><<Revent>><</link>></div>
 
 <</switch>>
@@ -320,50 +320,50 @@ $(document).ready(function(){
 :: 主线 开幕-初次-穿越版：S
 <<switch $count>>
 <<case 1>>
-<<set _text to LangSpl("拿起手机","Pick up the phone")>>
+<<set _text to Lang("拿起手机","Pick up the phone")>>
 <div class="Eselect"><<link _text>><<set $count to 2>><<Revent>><<passtime 2>><</link>></div>
 
 <<case 2>>
-<<set _text to LangSpl("只是记忆混乱","Just confused memory")>>
+<<set _text to Lang("只是记忆混乱","Just confused memory")>>
 <div class="Eselect"><<link _text>><<set $event.branch to "初次">><<set $count to 11>><<set $Flag.穿越者 to false>><<Revent>><</link>></div>
 
-<<set _text to LangSpl("或许是重生穿越","Maybe reborn to the younger <<me>>")>>
+<<set _text to Lang("或许是重生穿越","Maybe reborn to the younger <<me>>")>>
 <div class="Eselect"><<link _text>><<set $count to 3>><<anouncePopUP "获得头衔《穿越者》" "获得成就">><<set $Flag.穿越者 to true>><<set $pctitle.穿越者 to true>><<Revent>><</link>></div>
 
 <<case 4>>
 <<if $eflag.includes("查看手机") is false>>
-<<set _text to LangSpl("查看手机","Check the phone")>>
+<<set _text to Lang("查看手机","Check the phone")>>
 <div class="Eselect"><<link _text>><<run V.eflag.push("查看手机")>><<set $count to 5>><<passtime 30>><<Revent>><</link>></div>
 <</if>>
 
 <<if $eflag.includes("查看电脑") is false>>
-<<set _text to LangSpl("查看电脑","Check the Computer")>>
+<<set _text to Lang("查看电脑","Check the Computer")>>
 <div class="Eselect"><<link _text>><<run V.eflag.push("查看电脑")>><<set $count to 6>><<passtime 30>><<Revent>><</link>></div>
 <</if>>
 
 <<if $eflag.includes("四处翻找") is false>>
-<<set _text to LangSpl("四处翻找","Find around in the room")>>
+<<set _text to Lang("四处翻找","Find around in the room")>>
 <div class="Eselect"><<link _text>><<run V.eflag.push("四处翻找")>><<set $count to 7>><<passtime 60>><<Revent>><</link>></div>
 <</if>>
 
 <<if $eflag.length is 3>>
-<<set _text to LangSpl("继续","Next")>>
+<<set _text to Lang("继续","Next")>>
 <div class="Eselect"><<link _text>><<set $count to $eventnext>><<unset $eflag>><<Revent>><</link>></div>
 <</if>>
 
 <<case 7>>
-<<set _text to LangSpl("继续","Next")>>
+<<set _text to Lang("继续","Next")>>
 <div class="Eselect"><<link _text $passage>><<set $count to $eventnext>><<if $temp.c is 2>><<getitem "important" "魔力方块">><</if>><</link>></div>
 
 <<case 9>>
-<<set _text to LangSpl("继续","Next")>>
+<<set _text to Lang("继续","Next")>>
 <div class="Eselect">
 <<link _text "你的家 单身公寓">>
 <<EventEnd>>
 <</link>></div>
 
 <<default>>
-<<set _text to LangSpl("继续","Next")>>
+<<set _text to Lang("继续","Next")>>
 <div class="Eselect"><<link _text>><<set $count to $eventnext>><<Revent>><</link>></div>
 
 <</switch>>

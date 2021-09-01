@@ -12,56 +12,11 @@ window.showcharainfo = function () {
 	new Wikifier(null, '<<replace #charainfo>><<charainfo>><</replace>><<CMApply>>');
 }
 
-
-window.imglocation = function(){
-    var location = V.location
-    
-    if (GameData.placedata[location].img == undefined  || GameData.placedata[location].img == null){
-      return "dummy"
-
-    }else{
-      
-      let img = GameData.placedata[location].img
-      return img
-
-    }
-}
-
 window.basepercent = function(name) {
     var min = V.PC.base[name][0]
     var max = V.PC.base[name][1]
     return Math.clamp(Math.trunc(((min/max)*100)),1,100)
 };
-
-function isPregnant() {
-    if (V.PC.state.怀孕 == true || V.PC.state.肠内受孕 == true){
-        return "p"
-    }else{
-        return ""
-    }
-}
-
-window.isPregnant = isPregnant
-
-function isFixhair(table) {
-    if (table.fixcolor == true) {
-        return V.PC.info.haircolor
-    }else{
-        return "basic"
-    }
-}
-
-window.isFixhair = isFixhair
-
-function hasLength(table) {
-    if (table.long == true) {
-        return "_" + hairlenth(V.PC.info.fhairlen)
-    }else{
-        return "_1"
-    }
-}
-
-window.hasLength = hasLength
 
 // Make .divs-links clickable as if they're anchors
 window.linkifyDivs = function (parentSelector = "") {
@@ -81,3 +36,11 @@ function bookmark(name) {
 
 DefineMacroS("bookmark", bookmark)
 
+
+window.hairlenth = function(num){
+    if( between(num,0,99)) return 1;
+    else if(between(num,100,499)) return 2;
+    else if(between(num,500,799)) return 3;
+    else if(num>= 800) return 4;
+    else return 1;
+}

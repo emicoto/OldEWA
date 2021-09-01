@@ -35,9 +35,9 @@
     
     <div id="item_info">
         <div id="description">
-        <<print $showcase.text>><br>
+        <<print lang($showcase.text,$showcase.text_en)>><br>
         </div>
-        <div class="warmth">适应温度：18C～28C</div>
+        <div class="warmth">适应温度：<<print ($fix.cold+$showcase.cold)>>C～<<print ($fix.hot+$showcase.hot)>>C</div>
 
         <div id="outfit_trait">
             <div class="of_title">属性：</div>

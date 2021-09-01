@@ -117,6 +117,7 @@ function dressOn(args, arg) {
     if(group.includes(args)) id = accesory
     new Wikifier(null,"<<replace '#"+id+"'>><<showcloset '"+id+"'>><</replace>>")
     setreveal()
+    stAvatar()
 }
 
 window.dressOn = dressOn

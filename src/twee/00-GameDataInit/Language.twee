@@ -31,6 +31,10 @@
             "drilltail" :"螺旋双马尾",
         },
         少年:"少年", 少女:"少女", 伪娘:"伪娘", 扶她:"扶她",
+        兽型:{
+            cat:"猫", dog:"狗", fox:"狐", wolf:"狼", 
+            sheep:"羊", deer:"鹿", cow:"牛",
+        },
 }>>
 
 <<set setup.L.EN to {
@@ -58,6 +62,10 @@
             "curly"     : "curly",      "himecut" : "himecut",
         },
         少年:"boy", 少女:"girl", 伪娘:"trap", 扶她:"futa",
+        兽型:{
+            cat:"cat", dog:"dog", fox:"fox", wolf:"wolf", 
+            sheep:"sheep", deer:"deer", cow:"cow",
+        },
 }>>
 
 <</widget>>

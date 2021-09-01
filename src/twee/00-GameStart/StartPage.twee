@@ -51,7 +51,7 @@ Elysion World Adventure
 
 <div class="delayed">
 <span style="line-height:40px;font-size:13px;padding:0px;margin:0px">　
-<<set _text to LangSpl("＞ 开始游戏","＞ Game Start")>>
+<<set _text to Lang("＞ 开始游戏","＞ Game Start")>>
 <<link [[_text|开始]]>><<GSApply>><<set $intro to false>><</link>></span><br>
 
 <<include "初始设定">>
@@ -86,18 +86,18 @@ $(document).on(':passagerender', function (ev) {
 <<set $activepage to "QuickStart">>
 
 <div id="StartingPageMenu">
-	<<set _text to LangSpl("快速开始","QuickStart")>>
+	<<set _text to Lang("快速开始","QuickStart")>>
     <<button _text>>
 	<<replace #StartingPage>><<set $activepage to "QuickStart">><<QuickStart>><</replace>><</button>>
 
-	<<set _text to LangSpl("创建角色","CharaMaking")>>
+	<<set _text to Lang("创建角色","CharaMaking")>>
     <<button _text>><<replace #StartingPage>><<set $activepage to "CharaMaking">><<CharaMaking>><</replace>><</button>>
 
-	<<set _text to LangSpl("游戏设定","GameSetting")>>
+	<<set _text to Lang("游戏设定","GameSetting")>>
     <<button _text>><<replace #StartingPage>><<set $activepage to "GameSetting">><<GameSetting>><</replace>><</button>>
 
     <<if $achivement.scores gt 0>>
-	<<set _text to LangSpl("周回特典","Bonus")>>
+	<<set _text to Lang("周回特典","Bonus")>>
     <<button _text>><<replace #StartingPage>><<set $activepage to "StartBonus">><<StartBonus>><</replace>><</button>><</if>>
 
 </div>

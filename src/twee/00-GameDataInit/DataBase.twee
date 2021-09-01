@@ -21,7 +21,7 @@
     种族 : ["人类","兽族","灵族","羽族","夜族"],
     专长 : ["文艺创作","物理科学","自然科学","生理科学","音乐表演","运动格斗"],
     初期角色 : ["魔法少女","爱抖露","修仙者"],
-    兽型 : ["猫","狗","狼","狐","鹿","羊","牛"],
+    兽型 : ["cat","dog","wolf","fox","deer","sheep","cow"],
     
     肤色 : ["dark","black","mugi","health","white"],
     发色 : ["black","darkbrown","wine","brown","milktea","blond","softblond","platinum","silver","white","purple","green","blue","aqua","pink"],

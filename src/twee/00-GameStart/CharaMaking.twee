@@ -68,7 +68,7 @@
 <!-- 自动纠正 -->
 <<silently>>
     <<repeat 0.3s>>
-        <<set $PC.info.fhairlen to $PC.info.hairlen>>
+        <<set $PC.info.hairlenf to $PC.info.hairlen>>
         <<if $activepage is "CharaMaking">>
             <<if $PC.info.race is "夜族">>
                 <<set $PC.eye to "银色">><<replace #CMEyeoption>>瞳色　<<CMEyeColor>><</replace>>
@@ -92,7 +92,7 @@
                 <<replace #CMFurOption>>　　原型　<<CMFurType>><</replace>>
             <<else>>
                 <<replace #CMFurOption>><</replace>>
-                <<set $PC.兽型 to null>>
+                <<set $PC.info.kemotype to null>>
             <</if>>
             <<CMChangeApply>>
         <<else>>

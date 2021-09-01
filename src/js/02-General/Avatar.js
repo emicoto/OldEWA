@@ -2081,7 +2081,7 @@ var Avatar;
     const group = ["outter", "top", "inner_up"];
     const opt = Avatar2.shopoptions;
     const showcase = V.showcase;
-    const isbeast = group.includes(showcase.layer) && showcase.hasDif.breast;
+    const isbeast = group.includes(showcase.layer) && showcase.dfpng.breast;
     const fixcolor = showcase.fixcolor;
     const color = colors ? colors : showcase.color;
     let src = fixcolor ? __resolve(showcase.layer, showcase.index, `${color}${isbeast ? "_1" : ""}`) : __resolve(showcase.layer, showcase.index, `basic${isbeast ? "_1" : ""}`);

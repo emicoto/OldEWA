@@ -30,7 +30,7 @@
 
 <<set A.categoryname to {
     hat:"帽子", outter:"外搭", top:"上衣", bottom:"下衣", inner_up:"内衣", inner_bt:"内裤", legs:"袜子",
-    shoes: "鞋子", neck:"颈饰", face:"脸饰", hand:"手饰", back:"背包"
+    shoes: "鞋子", neck:"颈饰", face:"脸饰", hand:"手饰", back:"背饰",
 }>>
 
 <<set A.haircolor to {
@@ -76,6 +76,8 @@
             id: 0, uid: 0,
             index : "naked",    name : "裸",     gender : "n",
             text : "无",   
+            name_en:"",
+            text_en:"", 
             tag  : ["裸露"],
             hasImg : false,
             hasDif : {breast:false, pregnant:false},
@@ -92,11 +94,15 @@
             tuckinable: false,        tuckin : false, 
             acc : null,
             patterns: [],
+            fixacc  : true,
+            subcolor : null,
         },
         {
             id: 1, uid: 0,
             index : "Tshirt",    name : "T恤",     gender : "n",
-            text : "一件简单的T恤。 并不能给你太多保护，但总比没有好。",   
+            text : "一件简单的T恤。 并不能给你太多保护，但总比没有好。",  
+            name_en:"T-shirt",
+            text_en:"A simple design T-shirt. May give you a littel bit of protection, but better than nothing.",
             tag  : ["日常"],
             hasImg : true,
             hasDif : {breast:true, pregnant:true},
@@ -113,11 +119,15 @@
             tuckinable: true,        tuckin : false, 
             acc : "slime",
             patterns: ["slime","heart"],
+            fixacc  : true,
+            subcolor : null,
         },
         {
             id: 2, uid: 0,
             index : "shirt",    name : "衬衫",     gender : "n",
-            text : "一件简单的西式长袖衬衫。浅浅的暗纹给你增加了些许气质。",   
+            text : "一件简单的西式长袖衬衫。浅浅的暗纹给你增加了些许气质。",
+            name_en:"business shirt",
+            text_en:"A simple long-sleeved dress shirt. The dark line design adds a touch of grace to you.",
             tag  : ["日常","正式","商务"],
             hasImg : true,
             hasDif : {breast:true, pregnant:true},
@@ -134,11 +144,15 @@
             tuckinable: true,        tuckin : false, 
             acc : null,
             patterns: [],
+            fixacc  : true,
+            subcolor : null,
         },
         {
             id: 3, uid: 0,
             index : "bwopiece",    name : "BW连衣裙",     gender : "f",
-            text : "一件设计简单的连衣裙。修身的设计显得你身材更苗条。毕竟是易淘上的便宜货，不能指望布料的防御效果。",   
+            text : "一件设计简单的连衣裙。修身的设计显得你身材更苗条。毕竟是易淘上的便宜货，不能指望布料的防御效果。",
+            name_en:"BW onepiece",
+            text_en:"a simple design onepiece. The slim fit design looks slimmer on your body. The cheap goods on Ebay, can not expect the fabric defense effect.",
             tag  : ["日常"],
             hasImg : true,
             hasDif : {breast:true, pregnant:true},
@@ -154,11 +168,15 @@
             tuckinable: false,        tuckin : false, 
             acc : null,
             patterns: [],
+            fixacc  : true,
+            subcolor : null,
         },
         {
             id: 4, uid: 0,
             index : "slpshortup",    name : "短袖睡衣",     gender : "n",
-            text : "一件设计简单的睡衣。轻柔透气的布料给你带来好梦。",   
+            text : "一件设计简单的睡衣。轻柔透气的布料给你带来好梦。",
+            name_en:"summer pajamas",
+            text_en:"A simple design pajamas. The light and breathable fabric brings you good dreams.",
             tag  : ["日常","睡衣"],
             hasImg : true,
             hasDif : {breast:true, pregnant:true},
@@ -174,6 +192,8 @@
             tuckinable: false,        tuckin : false, 
             acc : "blackline",
             patterns: ["blackline","tealine","whiteline","yellowline","greenline"],
+            fixacc  : true,
+            subcolor : null,
         }
     ]>>
 <</widget>>
@@ -183,7 +203,9 @@
         {
             id: 0, uid: 0,
             index : "naked",    name : "裸",     gender : "n",
-            text : "无",   
+            text : "无",  
+            name_en:"",
+            text_en:"", 
             tag  : ["裸露"],
             hasImg : false,
             hasDif : {breast:false, pregnant:false},
@@ -198,11 +220,15 @@
             
             acc : null,
             patterns: [],
+            fixacc  : true,
+            subcolor : null,
         },
         {
             id: 1, uid: 0,
             index : "shortpant",    name : "短裤",     gender : "n",
             text : "一条简单的短裤。",   
+            name_en:"shortpant",
+            text_en:"A simple shortpant.",
             tag  : ["日常"],
             hasImg : true,
             hasDif : {breast:false, pregnant:true},
@@ -217,11 +243,15 @@
             
             acc : null,
             patterns: [],
+            fixacc  : true,
+            subcolor : null,
         },
         {
             id: 2, uid: 0,
             index : "shortskirt",    name : "短裙",     gender : "f",
-            text : "一条简单的短裙。",   
+            text : "一条简单的短裙。",  
+            name_en:"skirt",
+            text_en:"A simple skirt.",
             tag  : ["日常"],
             hasImg : true,
             hasDif : {breast:false, pregnant:true},
@@ -236,11 +266,15 @@
              
             acc : null,
             patterns: [],
+            fixacc  : true,
+            subcolor : null,
         },
         {
             id: 3, uid: 0,
             index : "bskirt",    name : "西装短裙",     gender : "f",
-            text : "一条简单的西式短裙。毕竟是廉价款，不能指望耐久度。",   
+            text : "一条简单的西式短裙。毕竟是廉价款，不能指望耐久度。",  
+            name_en:"business skirt",
+            text_en:"A simple business skirt. Because it's cheap so you can't expect its durability." ,
             tag  : ["日常","商务"],
             hasImg : true,
             hasDif : {breast:false, pregnant:true},
@@ -255,11 +289,15 @@
             
             acc : null,
             patterns: [],
+            fixacc  : true,
+            subcolor : null,
         },
         {
             id: 4, uid: 0,
             index : "slpshortbt",    name : "睡衣短裤",     gender : "n",
-            text : "一件设计简单的睡衣短裤。轻柔透气的布料给你带来好梦。",   
+            text : "一件设计简单的睡衣短裤。轻柔透气的布料给你带来好梦。",  
+            name_en:"summer pajamas",
+            text_en:"A simple design pajamas. The light and breathable fabric brings you good dreams.", 
             tag  : ["日常","睡衣"],
             hasImg : true,
             hasDif : {breast:false, pregnant:true},
@@ -274,6 +312,8 @@
             
             acc : "blackline",
             patterns: ["blackline","tealine","whiteline","yellowline","greenline"],
+            fixacc  : true,
+            subcolor : null,
         },
     ]>>
 <</widget>>
@@ -283,7 +323,9 @@
         {
             id: 0, uid: 0,
             index : "naked",    name : "裸",     gender : "n",
-            text : "无",   
+            text : "无",  
+            name_en:"",
+            text_en:"", 
             tag  : ["裸露"],
             hasImg : false,
             hasDif : {breast:false, pregnant:false},
@@ -298,11 +340,15 @@
             
             acc : null,
             patterns: [],
+            fixacc  : true,
+            subcolor : null,
         },
         {
             id: 1, uid: 0,
             index : "boxer",    name : "四角内裤",     gender : "m",
-            text : "一条简单的四角内裤。",   
+            text : "一条简单的四角内裤。",
+            name_en:"boxer brief",
+            text_en:"A simple boxer brief.",
             tag  : ["日常"],
             hasImg : true,
             hasDif : {breast:false, pregnant:false},
@@ -317,11 +363,15 @@
             
             acc : null,
             patterns: [],
+            fixacc  : true,
+            subcolor : null,
         },
         {
             id: 2, uid: 0,
             index : "pantie",    name : "内裤",     gender : "f",
-            text : "一款简单朴素的内裤。",   
+            text : "一款简单朴素的内裤。",
+            name_en:"pantie",
+            text_en:"A simple pantie.",
             tag  : ["日常"],
             hasImg : true,
             hasDif : {breast:false, pregnant:false},
@@ -336,6 +386,8 @@
             
             acc : null,
             patterns: [],
+            fixacc  : true,
+            subcolor : null,
         },
     ]>>
 <</widget>>
@@ -345,7 +397,9 @@
         {
             id: 0, uid: 0,
             index : "naked",    name : "裸",     gender : "n",
-            text : "无",   
+            text : "无",
+            name_en:"",
+            text_en:"", 
             tag  : ["裸露"], 
             hasImg : false,
 
@@ -359,11 +413,15 @@
 
             acc : null,
             patterns: [],
+            fixacc  : true,
+            subcolor : null,
         },
         {
             id: 1, uid: 0,
             index : "sportshoes",    name : "运动鞋",     gender : "n",
-            text : "一双普通的白色运动鞋。",   
+            text : "一双普通的白色运动鞋。",
+            name_en:"sport shoes",
+            text_en:"A simple designed sport shoes.",
             tag  : ["日常","运动"], 
             hasImg : true,
 
@@ -377,11 +435,15 @@
 
             acc : null,
             patterns: [],
+            fixacc  : true,
+            subcolor : null,
         },
         {
             id: 2, uid: 0,
             index : "highheel",    name : "高跟鞋",     gender : "f",
-            text : "一双简单设计的高跟鞋。",   
+            text : "一双简单设计的高跟鞋。", 
+            name_en:"high heel",
+            text_en:"A simple design high heel",
             tag  : ["日常","商务"], 
             hasImg : true,
 
@@ -395,6 +457,8 @@
 
             acc : null,
             patterns: [],
+            fixacc  : true,
+            subcolor : null,
         },
     ]>>
 <</widget>>
@@ -404,7 +468,9 @@
         {
             id: 0, uid: 0,
             index : "naked",    name : "裸",     gender : "n",
-            text : "无",   
+            text : "无", 
+            name_en:"",
+            text_en:"", 
             tag  : ["裸露"], 
             hasImg : false,
 
@@ -418,11 +484,15 @@
 
             acc : null,
             patterns: [],
+            fixacc  : true,
+            subcolor : null,
         },
         {
             id: 1, uid: 0,
             index : "sportsocks",    name : "运动短袜",     gender : "n",
-            text : "一双简单的运动袜。",   
+            text : "一双简单的运动袜。",
+            name_en:"sports socks",
+            text_en:"A simple design sports socks",  
             tag  : ["日常","运动"], 
             hasImg : true,
 
@@ -436,6 +506,8 @@
 
             acc : null,
             patterns: [],
+            fixacc  : true,
+            subcolor : null,
         },
     ]>>
 <</widget>>

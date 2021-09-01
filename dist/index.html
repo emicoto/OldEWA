@@ -91,209 +91,6 @@ var saveAs=saveAs||navigator.msSaveBlob&&navigator.msSaveBlob.bind(navigator)||f
 <style id="style-ui" type="text/css">#ui-dialog-body.settings [id|=setting-body]>div:first-child{display:table;width:100%}#ui-dialog-body.settings [id|=setting-label]{display:table-cell;padding:.4em 2em .4em 0}#ui-dialog-body.settings [id|=setting-label]+div{display:table-cell;min-width:8em;text-align:right;vertical-align:middle;white-space:nowrap}#ui-dialog-body.list{padding:0}#ui-dialog-body.list ul{margin:0;padding:0;list-style:none;border:1px solid transparent}#ui-dialog-body.list li{margin:0}#ui-dialog-body.list li:not(:first-child){border-top:1px solid #444}#ui-dialog-body.list li a{display:block;padding:.25em .75em;border:1px solid transparent;color:#eee;text-decoration:none}#ui-dialog-body.list li a:hover{background-color:#333;border-color:#eee}#ui-dialog-body.saves{padding:0 0 1px}#ui-dialog-body.saves>:not(:first-child){border-top:1px solid #444}#ui-dialog-body.saves table{border-spacing:0;width:100%}#ui-dialog-body.saves tr:not(:first-child){border-top:1px solid #444}#ui-dialog-body.saves td{padding:.33em .33em}#ui-dialog-body.saves td:first-child{min-width:1.5em;text-align:center}#ui-dialog-body.saves td:nth-child(3){line-height:1.2}#ui-dialog-body.saves td:last-child{text-align:right}#ui-dialog-body.saves .empty{color:#999;speak:none;text-align:center;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}#ui-dialog-body.saves .datestamp{font-size:75%;margin-left:1em}#ui-dialog-body.saves ul.buttons li{padding:.4em}#ui-dialog-body.saves ul.buttons>li+li>button{margin-left:.2em}#ui-dialog-body.saves ul.buttons li:last-child{float:right}#ui-dialog-body.settings div[id|=header-body]{margin:1em 0}#ui-dialog-body.settings div[id|=header-body]:first-child{margin-top:0}#ui-dialog-body.settings div[id|=header-body]:not(:first-child){border-top:1px solid #444;padding-top:1em}#ui-dialog-body.settings div[id|=header-body]>*{margin:0}#ui-dialog-body.settings h2[id|=header-heading]{font-size:1.375em}#ui-dialog-body.settings p[id|=header-desc],#ui-dialog-body.settings p[id|=setting-desc]{font-size:87.5%;margin:0 0 0 .5em}#ui-dialog-body.settings div[id|=setting-body]+div[id|=setting-body]{margin:1em 0}#ui-dialog-body.settings [id|=setting-control]{white-space:nowrap}#ui-dialog-body.settings button[id|=setting-control]{color:#eee;background-color:transparent;border:1px solid #444;padding:.4em}#ui-dialog-body.settings button[id|=setting-control]:hover{background-color:#333;border-color:#eee}#ui-dialog-body.settings button[id|=setting-control].enabled{background-color:#282;border-color:#4a4}#ui-dialog-body.settings button[id|=setting-control].enabled:hover{background-color:#4a4;border-color:#6c6}#ui-dialog-body.settings input[type=range][id|=setting-control]{max-width:35vw}#ui-dialog-body.list a,#ui-dialog-body.settings span[id|=setting-input]{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}#ui-dialog-body.saves button[id=saves-clear]:before,#ui-dialog-body.saves button[id=saves-export]:before,#ui-dialog-body.saves button[id=saves-import]:before,#ui-dialog-body.settings button[id|=setting-control].enabled:after,#ui-dialog-body.settings button[id|=setting-control]:after{font-family:tme-fa-icons;font-style:normal;font-weight:400;font-variant:normal;text-transform:none;line-height:1;speak:none}#ui-dialog-body.saves button[id=saves-export]:before{content:"\e829\00a0"}#ui-dialog-body.saves button[id=saves-import]:before{content:"\e82a\00a0"}#ui-dialog-body.saves button[id=saves-clear]:before{content:"\e827\00a0"}#ui-dialog-body.settings button[id|=setting-control]:after{content:"\00a0\00a0\e830"}#ui-dialog-body.settings button[id|=setting-control].enabled:after{content:"\00a0\00a0\e831"}</style>
 <style id="style-ui-bar" type="text/css">#story{margin-left:20em;-webkit-transition:margin-left .2s ease-in;-o-transition:margin-left .2s ease-in;transition:margin-left .2s ease-in}#ui-bar.stowed~#story{margin-left:4.5em}@media screen and (max-width:1136px){#story{margin-left:19em}#ui-bar.stowed~#story{margin-left:3.5em}}@media screen and (max-width:768px){#story{margin-left:3.5em}}#ui-bar{position:fixed;z-index:50;top:0;left:0;width:17.5em;height:100%;margin:0;padding:0;-webkit-transition:left .2s ease-in;-o-transition:left .2s ease-in;transition:left .2s ease-in}#ui-bar.stowed{left:-15.5em}#ui-bar-tray{position:absolute;top:.2em;left:0;right:0}#ui-bar-body{height:90%;height:calc(100% - 2.5em);margin:2.5em 0;padding:0 1.5em}#ui-bar.stowed #ui-bar-body,#ui-bar.stowed #ui-bar-history{visibility:hidden;-webkit-transition:visibility .2s step-end;-o-transition:visibility .2s step-end;transition:visibility .2s step-end}#ui-bar{background-color:#222;border-right:1px solid #444;text-align:center}#ui-bar a{text-decoration:none}#ui-bar hr{border-color:#444}#ui-bar-history [id|=history],#ui-bar-toggle{font-size:1.2em;line-height:inherit;color:#eee;background-color:transparent;border:1px solid #444}#ui-bar-toggle{display:block;position:absolute;top:0;right:0;border-right:none;padding:.3em .45em .25em}#ui-bar.stowed #ui-bar-toggle{padding:.3em .35em .25em .55em}#ui-bar-toggle:hover{background-color:#444;border-color:#eee}#ui-bar-history{margin:0 auto}#ui-bar-history [id|=history]{padding:.2em .45em .35em}#ui-bar-history #history-jumpto{padding:.2em .665em .35em}#ui-bar-history [id|=history]:not(:first-child){margin-left:1.2em}#ui-bar-history [id|=history]:hover{background-color:#444;border-color:#eee}#ui-bar-history [id|=history]:disabled{color:#444;background-color:transparent;border-color:#444}#ui-bar-body{line-height:1.5;overflow:auto}#ui-bar-body>:not(:first-child){margin-top:2em}#story-title{margin:0;font-size:162.5%}#story-author{margin-top:2em;font-weight:700}#menu ul{margin:1em 0 0;padding:0;list-style:none;border:1px solid #444}#menu ul:empty{display:none}#menu li{margin:0}#menu li:not(:first-child){border-top:1px solid #444}#menu li a{display:block;padding:.25em .75em;border:1px solid transparent;color:#eee;text-transform:uppercase}#menu li a:hover{background-color:#444;border-color:#eee}#menu a,#ui-bar-history [id|=history],#ui-bar-toggle{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}#menu-core li[id|=menu-item] a:before,#ui-bar-history [id|=history],#ui-bar-toggle:before{font-family:tme-fa-icons;font-style:normal;font-weight:400;font-variant:normal;text-transform:none;line-height:1;speak:none}#ui-bar-toggle:before{content:"\e81d"}#ui-bar.stowed #ui-bar-toggle:before{content:"\e81e"}#menu-item-saves a:before{content:"\e82b\00a0"}#menu-item-settings a:before{content:"\e82d\00a0"}#menu-item-restart a:before{content:"\e82c\00a0"}#menu-item-share a:before{content:"\e82f\00a0"}</style>
 <style id="style-ui-debug" type="text/css">#debug-bar{background-color:#222;border-left:1px solid #444;border-top:1px solid #444;bottom:0;margin:0;max-height:75%;padding:.5em;position:fixed;right:0;z-index:99900}#debug-bar>div:not([id])+div{margin-top:.5em}#debug-bar>div>label{margin-right:.5em}#debug-bar>div>input[type=text]{min-width:10px}#debug-bar>div>select{width:15em}#debug-bar-toggle{color:#eee;background-color:#222;border:1px solid #444;height:101%;height:calc(100% + 1px);left:-2em;left:calc(-2em - 1px);position:absolute;top:-1px;width:2em}#debug-bar-toggle:hover{background-color:#333;border-color:#eee}#debug-bar-hint{bottom:.175em;font-size:4.5em;opacity:.33;pointer-events:none;position:fixed;right:.6em;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;white-space:nowrap}#debug-bar-watch{background-color:#222;border-left:1px solid #444;border-top:1px solid #444;bottom:102%;bottom:calc(100% + 1px);font-size:.9em;left:-1px;max-height:650%;max-height:65vh;position:absolute;overflow-x:hidden;overflow-y:scroll;right:0;z-index:99800}#debug-bar-watch[hidden]{display:none}#debug-bar-watch div{color:#999;font-style:italic;margin:1em auto;text-align:center}#debug-bar-watch table{width:100%}#debug-bar-watch tr:nth-child(2n){background-color:rgba(127,127,127,.15)}#debug-bar-watch td{padding:.2em 0}#debug-bar-watch td:first-child+td{padding:.2em .3em .2em .1em}#debug-bar-watch .watch-delete{background-color:transparent;border:none;color:#c00}#debug-bar-watch-all,#debug-bar-watch-none{margin-left:.5em}#debug-bar-views-toggle,#debug-bar-watch-toggle{color:#eee;background-color:transparent;border:1px solid #444;margin-right:1em;padding:.4em}#debug-bar-views-toggle:hover,#debug-bar-watch-toggle:hover{background-color:#333;border-color:#eee}#debug-bar-watch:not([hidden])~div #debug-bar-watch-toggle,html[data-debug-view] #debug-bar-views-toggle{background-color:#282;border-color:#4a4}#debug-bar-watch:not([hidden])~div #debug-bar-watch-toggle:hover,html[data-debug-view] #debug-bar-views-toggle:hover{background-color:#4a4;border-color:#6c6}#debug-bar-hint:after,#debug-bar-toggle:before,#debug-bar-views-toggle:after,#debug-bar-watch .watch-delete:before,#debug-bar-watch-add:before,#debug-bar-watch-all:before,#debug-bar-watch-none:before,#debug-bar-watch-toggle:after{font-family:tme-fa-icons;font-style:normal;font-weight:400;font-variant:normal;text-transform:none;line-height:1;speak:none}#debug-bar-toggle:before{content:"\e838"}#debug-bar-hint:after{content:"\e838\202f\e822"}#debug-bar-watch .watch-delete:before{content:"\e804"}#debug-bar-watch-add:before{content:"\e805"}#debug-bar-watch-all:before{content:"\e83a"}#debug-bar-watch-none:before{content:"\e827"}#debug-bar-views-toggle:after,#debug-bar-watch-toggle:after{content:"\00a0\00a0\e830"}#debug-bar-watch:not([hidden])~div #debug-bar-watch-toggle:after,html[data-debug-view] #debug-bar-views-toggle:after{content:"\00a0\00a0\e831"}html[data-debug-view] .debug{padding:.25em;background-color:#234}html[data-debug-view] .debug[title]{cursor:help}html[data-debug-view] .debug.block{display:inline-block;vertical-align:middle}html[data-debug-view] .debug.invalid{text-decoration:line-through}html[data-debug-view] .debug.hidden,html[data-debug-view] .debug.hidden .debug{background-color:#555}html:not([data-debug-view]) .debug.hidden{display:none}html[data-debug-view] .debug[data-name][data-type].nonvoid:after,html[data-debug-view] .debug[data-name][data-type]:before{background-color:rgba(0,0,0,.25);font-family:monospace,monospace;white-space:pre}html[data-debug-view] .debug[data-name][data-type]:before{content:attr(data-name)}html[data-debug-view] .debug[data-name][data-type|=macro]:before{content:"<<" attr(data-name) ">>"}html[data-debug-view] .debug[data-name][data-type|=macro].nonvoid:after{content:"<</" attr(data-name) ">>"}html[data-debug-view] .debug[data-name][data-type|=html]:before{content:"<" attr(data-name) ">"}html[data-debug-view] .debug[data-name][data-type|=html].nonvoid:after{content:"</" attr(data-name) ">"}html[data-debug-view] .debug[data-name][data-type]:not(:empty):before{margin-right:.25em}html[data-debug-view] .debug[data-name][data-type].nonvoid:not(:empty):after{margin-left:.25em}html[data-debug-view] .debug[data-name][data-type|=special],html[data-debug-view] .debug[data-name][data-type|=special]:before{display:block}</style>
-<script id="script-module-Game" type="text/javascript">// Code/Game.js
-var Game = {
-  Data: {
-    Player: {},
-    Npc: {}
-  },
-  Character: {},
-  Utils: {},
-  Mods: {}
-};
-console.log(Game);</script>
-<script id="script-module-Manager" type="text/javascript">var __defProp = Object.defineProperty;
-var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
-var __markAsModule = (target) => __defProp(target, "__esModule", { value: true });
-var __esm = (fn, res) => function __init() {
-  return fn && (res = (0, fn[Object.keys(fn)[0]])(fn = 0)), res;
-};
-var __export = (target, all) => {
-  __markAsModule(target);
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __publicField = (obj, key, value) => {
-  __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
-  return value;
-};
-
-// dsv:H:\_EWA\Code\Data\csv\test.csv
-var test_exports = {};
-__export(test_exports, {
-  default: () => test_default
-});
-var test_default;
-var init_test = __esm({
-  "dsv:H:\\_EWA\\Code\\Data\\csv\\test.csv"() {
-    test_default = [
-      {
-        ";编号": "0",
-        "名字": "鸽子",
-        "设置": ""
-      },
-      {
-        ";编号": "1",
-        "名字": "狐狸",
-        "设置": "true"
-      }
-    ];
-  }
-});
-
-// import-glob:./Data/**/*.csv
-var __exports = {};
-__export(__exports, {
-  default: () => __default,
-  filenames: () => filenames
-});
-var modules, __default, filenames;
-var init__ = __esm({
-  "import-glob:./Data/**/*.csv"() {
-    init_test();
-    modules = [test_exports];
-    __default = modules;
-    filenames = ["./Data/csv/test.csv"];
-  }
-});
-
-// Code/Data/JSON/CHARACTER.json
-var CHARACTER_exports = {};
-__export(CHARACTER_exports, {
-  default: () => CHARACTER_default
-});
-var CHARACTER_default;
-var init_CHARACTER = __esm({
-  "Code/Data/JSON/CHARACTER.json"() {
-    CHARACTER_default = [
-      {
-        CID: "1",
-        名字: "黎渊",
-        性别: "男",
-        genital: { 阴茎: 16, 子宫: -1 },
-        vaginity: { 初吻: "自己的姐姐", 童贞: 1, 处女: -1, A处女: 1 },
-        好感: 0,
-        信赖: 0,
-        欲望: 0,
-        支配: 10,
-        items: {},
-        type: 3
-      },
-      {
-        CID: "2",
-        名字: "变态总裁",
-        性别: "男",
-        genital: { 阴茎: 18, 子宫: -1 },
-        vaginity: { 初吻: "初恋对象", 童贞: "不知哪的谁", 处女: -1, A处女: 1 },
-        好感: 0,
-        信赖: 0,
-        欲望: 0,
-        支配: 100,
-        items: {},
-        type: 1
-      },
-      {
-        CID: "3",
-        名字: "腹黑金毛富二代",
-        性别: "男",
-        genital: { 阴茎: 18, 子宫: -1 },
-        vaginity: { 初吻: "", 童贞: "", 处女: -1, A处女: 1 },
-        好感: 0,
-        信赖: 0,
-        欲望: 10,
-        支配: 20,
-        items: {},
-        type: 1
-      },
-      {
-        CID: "4",
-        名字: "鬼畜将军",
-        性别: "男",
-        genital: { 阴茎: 18, 子宫: -1 },
-        vaginity: { 初吻: "初恋对象", 童贞: "不知哪的谁", 处女: -1, A处女: 1 },
-        好感: 0,
-        信赖: 0,
-        欲望: 30,
-        支配: 100,
-        items: {},
-        type: 1
-      }
-    ];
-  }
-});
-
-// import-glob:./Data/**/*.json
-var __exports2 = {};
-__export(__exports2, {
-  default: () => __default2,
-  filenames: () => filenames2
-});
-var modules2, __default2, filenames2;
-var init__2 = __esm({
-  "import-glob:./Data/**/*.json"() {
-    init_CHARACTER();
-    modules2 = [CHARACTER_exports];
-    __default2 = modules2;
-    filenames2 = ["./Data/JSON/CHARACTER.json"];
-  }
-});
-
-// yaml:H:\_EWA\Code\Data\YAML\test.yml
-var test_exports2 = {};
-__export(test_exports2, {
-  default: () => test_default2,
-  名字: () => 名字
-});
-var 名字, test_default2;
-var init_test2 = __esm({
-  "yaml:H:\\_EWA\\Code\\Data\\YAML\\test.yml"() {
-    名字 = "鸽子";
-    test_default2 = { 名字 };
-  }
-});
-
-// import-glob:./Data/**/*.yml
-var __exports3 = {};
-__export(__exports3, {
-  default: () => __default3,
-  filenames: () => filenames3
-});
-var modules3, __default3, filenames3;
-var init__3 = __esm({
-  "import-glob:./Data/**/*.yml"() {
-    init_test2();
-    modules3 = [test_exports2];
-    __default3 = modules3;
-    filenames3 = ["./Data/YAML/test.yml"];
-  }
-});
-
-// Code/Manager.js
-var Csv = (init__(), __exports);
-var Json = (init__2(), __exports2);
-var Yaml = (init__3(), __exports3);
-var Manager = class {
-  constructor(files) {
-    __publicField(this, "files", new Map());
-    const File = (file) => {
-      const obj = {};
-      file.filenames.map((v, i) => {
-        const filename = v.split("/").slice(2).join("/");
-        obj[filename] = file.default[i].default;
-      });
-      return obj;
-    };
-    Object.keys(files).map((v) => this.files.set(v, File(files[v])));
-  }
-  getFile(key, filename) {
-    return this.files.get(key)[filename];
-  }
-};
-Game.Manager = new Manager({
-  csv: Csv,
-  json: Json,
-  yaml: Yaml
-});</script>
 <link type="image/png" rel="icon" sizes="24x24" href="icon.png" />
 <link rel="stylesheet" href="CSS/jquery-ui.css">
 <script src="lib/path.min.js"></script>
@@ -4179,29 +3976,35 @@ Object.defineProperties(window, {
 			return State.variables;
 		}
 	},
+
 	T: {
 		get: function() {
 			return State.temporary;
 		}
 	},
+
 	C: {
 		value: {}
 	},
+
 	S: {
 		get: function(){
 			return setup
 		}
 	},
+	
 	A: {
 		get: function() {
 			return Avatars
 		}
 	},
+
 	D: {
 		get: function() {
 			return GameData
 		}
 	},
+
 	cf: {
 		get: function() {
 			return GameConfig
@@ -4318,12 +4121,12 @@ Macro.add('volume', {
 	}
 });
 
-function LangSpl(CN,EN) {
+function Lang(CN,EN) {
   if(V.lang=="CN")return CN;
   if(V.lang=="EN")return EN;
 }
-window.LangSpl = LangSpl
-DefineMacroS("lang", LangSpl)
+window.Lang = Lang
+DefineMacroS("lang", Lang)
 /* twine-user-script #10: "sugarcubeConfig.js" */
 Config.history.controls = true;
 
@@ -11487,7 +11290,7 @@ var Avatar;
     const group = ["outter", "top", "inner_up"];
     const opt = Avatar2.shopoptions;
     const showcase = V.showcase;
-    const isbeast = group.includes(showcase.layer) && showcase.hasDif.breast;
+    const isbeast = group.includes(showcase.layer) && showcase.dfpng.breast;
     const fixcolor = showcase.fixcolor;
     const color = colors ? colors : showcase.color;
     let src = fixcolor ? __resolve(showcase.layer, showcase.index, `${color}${isbeast ? "_1" : ""}`) : __resolve(showcase.layer, showcase.index, `basic${isbeast ? "_1" : ""}`);
@@ -11552,388 +11355,7 @@ window.Avatar = Avatar;
 window.setAvatar = (key, options, updates) => Avatar.setAvatar(key, options, updates);
 window["avatarEmoji"] = (FACE, option) => Avatar.avatarEmoji(FACE, option);
 window["RandomNPCEmoji"] = (FACE, option) => Avatar.RandomNPCEmoji(FACE, option);
-/* twine-user-script #28: "PlayerInfo.js" */
-/* 名字和称呼的处理 */
-function gsplit(m,f,p="chara"){
-  if (p=="player"){
-    if (V.PC.gender == "m" ) return m;
-    else return f;
-  }else {
-    if (V.currentchara.gender == "m" ) return m;
-    else return f;
-  }
-}
-window.gsplit = gsplit
-DefineMacroS("gsplit", gsplit);
-/* 除了我，你他之外，其他都是英文限定。所以中文用you，英文用Im分开算了。英文描写玩家统一用I、me、my、mine */
-function you() {
-    var name = V.PC.info.name;
-    switch (V.persons){
-    case 1:
-      return "我";
-    case 2:
-      return "你";
-    default:
-      return name;
-    }
-  }
-DefineMacroS("you", you);
-
-function I(key=null) {
-  var name = V.PC.info.name;
-  switch (V.persons){
-  case 1:
-    return "I";    
-  case 2:
-    if(key!=null)return "You";
-    else return "you";
-  default:
-    if(key!=null)return "<span class='Abc'>"+name+"</span>";
-    return name;
-  }
-}
-DefineMacroS("I", I);
-
-function my(key=null) {
-  switch (V.persons){
-  case 1:
-    if(key!=null)return "My";
-    else return "my";
-  case 2:
-    if(key!=null)return "Your";
-    else return "your";
-  default:
-    if(key!=null)return gsplit("His","Her","player");
-    else return gsplit("his","her","player");
-  }
-}
-DefineMacroS("my", my);
-
-function me(key=null) {
-  switch (V.persons){
-  case 1:
-    if(key!=null)return "Me";
-    else return "me";
-  case 2:
-    if(key!=null)return "You";
-    else return "you";
-  default:
-    if(key!=null)return gsplit("Him","Her","player");
-    else return gsplit("him","her","player");
-  }
-}
-DefineMacroS("me", me);
-
-function Iam() {
-  switch (V.persons){
-    case 1:
-      return "I am";
-    case 2:
-      return "You are";
-    default:
-      if (PC.gender == "m") return "He is";
-      else return "She is";
-    }
-}
-DefineMacroS("Iam", Iam);
-
-function myself() {
-  switch (V.persons){
-    case 1:
-      return "myself";
-    case 2:
-      return "yourself";
-    default:
-      return gsplit("himself","herself","player");
-    }
-}
-DefineMacroS("myself", myself);
-
-function am() {
-  switch (V.persons){
-    case 1:
-      return "am";
-    case 2:
-      return "are";
-    default:
-     return "is";
-    }
-}
-DefineMacroS("am", am);
-
-function mine(){
-  switch (V.persons){
-    case 1:
-      return "mine";
-    case 2:
-      return "yours";
-    default:
-     if (PC.gender == "m") return "his";
-      else return "hers";
-    }
-}
-
-function he(key=null) {
-  var gender = V.currentchara.gender
-    if(gender=="m"){
-      if(key!=null)return LangSpl("他","He");
-      else return LangSpl("他","he");
-    }else{
-      if(key!=null)return LangSpl("她","She");
-      else return LangSpl("她","she");
-    }
-}
-DefineMacroS("he", he);
-
-
-function his(key=null) {
-  var gender = V.currentchara.gender
-    if(gender=="m"){
-      if(key!=null)return LangSpl("他的","His");
-      else return LangSpl("他的","his");
-    }else{
-      if(key!=null)return LangSpl("她的","Her");
-      else return LangSpl("她的","her");
-    }
-}
-DefineMacroS("his", his);
-
-function him(key=null) {
-  var gender = V.currentchara.gender
-    if(gender=="m"){
-      if(key!=null)return "Him";
-      else return "him";
-    }else{
-      if(key!=null)return "Her";
-      else return "her";
-    }
-}
-DefineMacroS("him", him);
-
-
-/* 头发 */
-function hair(){
-  const select = new SelectCase();
-  var num = V.PC.info.hairlen
-  select.add(0, 49, "超短发");
-  select.add(50, 99, "齐耳短发");
-  select.add(100, 249, "及脖中发");
-  select.add(250, 499, "及肩中发");
-  select.add(500, 799, "及胸长发");
-  select.add(800, 1200, "及腰长发");
-  select.default = "超长长发";
-  const hairlength = select.has(num);
-  return `${setup.L[V.lang]["发色"][V.PC.info.haircolor] + setup.L[V.lang]["发型"][V.PC.info.hairstyle] + hairlength}`;
-}
-
-window.hairlenth = function(num){
-  const select = new SelectCase();
-  select.add(0,99, 1);
-  select.add(100,499, 2);
-  select.add(500,799,3)
-  select.default = 4
-  const lenth = select.has(num)
-  return lenth
-}
-DefineMacroS("hair",hair);
-
-/* 容貌描述 */
-function beauty(){
-  var num = V.PC.beauty
-  const select = new SelectCase()
-  select.add(0,100,"脸部被毁容，丑得惨绝人寰")
-  select.add(101,200,"脸上有重大伤痕，显得很狰狞")
-  select.add(201,300,"脸看着像被打成了猪头")
-  select.add(301,500,"长得有点丑")
-  select.add(501,700,"脸上有点脏，看着有点丑")
-  select.add(701,1000,"长得很一般，扔人群里就找不着的样子")
-  select.add(1001,1200,"长得还不错")
-  select.add(1201,1500,"长得有点可爱")
-  select.add(1501,1800,"长得很可爱")
-  select.add(1801,2300,"长得挺漂亮")
-  select.add(2300,3000,"长得很漂亮，一眼就能从人群中找到")
-  select.add(3001,4500,"气质出众，长得十分有魅力")
-  select.add(4501,6000,"有着倾国倾城的美貌")
-  select.default = "有着能颠覆世界的绝美神颜";
-  return `${select.has(num)}`
-}
-DefineMacroS("beauty", beauty);
-
-/* 眼睛 */
-function eye(){
-  return setup.L[V.lang]["瞳色"][V.PC.info.eyecolor] + setup.L[V.lang]["瞳色"]["eyes"]
-}
-DefineMacroS("eye", eye);
-
-/* 皮肤 */
-function skin(){
-  return setup.L[V.lang]["肤色"][V.PC.info.skin] + setup.L[V.lang]["肤色"]["skin"]
-}
-DefineMacroS("skin", skin);
-
-/*胸部 */
-window.breastsize = function() {
-  var size = V.PC.breast
-  if (between(size,0,1)){
-    return 1;
-  }
-  else if (between(size,2,3)){
-    return 2;
-  }
-  else if (size>=4){
-    return 3;
-  }
-}
-
-function breast(){
-  switch(V.PC.breast){
-    case 1:
-      return "微微隆起的胸部"
-    case 2:
-      return "可爱小巧的胸部"
-    case 3:
-      return "小山峰一样的胸部"
-    case 4:
-      return "有着傲人曲线的胸部"
-    case 5:
-      return "有着惊人吸引力的胸部"
-    default:
-      return "平坦的胸部"
-  }
-}
-DefineMacroS("breast", breast);
-
-/* 阴茎 */
-function penis(){
-  var size = V.PC.genital.阴茎
-  var a = random(0,2)
-  const text1 = ["惊人的","魔鬼般的","巨大无比的"]
-  const text2 = ["可爱的","小孩一般的","短小"]
-  const text3 = ["幼儿一般的","迷你可爱的","牙签般的"]
-  const select = new SelectCase()
-  select
-  select.add(1,8,text3[a]+"小丁丁")
-  select.add(9,12,text2[a]+"阴茎")
-  select.add(13,16,"阴茎")
-  select.add(17,19,"粗长阴茎")
-  select.add(20,24,"巨大阴茎")
-  select.add(25,30,"超大阴茎")
-  select.add(30,50,text1[0]+"马屌")
-  return `${select.has(size)}`
-}
-DefineMacroS("penis", penis);
-
-/* 宠物类型 */
-function petstype(){
-  switch (V.pet.type) {
-    case 1:
-      return "史莱姆"
-    case 2:
-      return "魔狼"
-    case 3: 
-      return "灵虫"
-  }
-}
-DefineMacroS("petstype", petstype);
-
-/* 宠物的第三人称 */
-function it(){
-  switch (V.pet.type) {
-    case 1:  case 4:
-      return "它"
-    case 2:  case 3:
-      return "他"
-  }
-}
-DefineMacroS("it", it);
-
-/* twine-user-script #29: "SkillRank.js" */
-function displayskillrank(num){
-    const select = new SelectCase()
-    select.add(0,100,"<span style='color:#839EC0;'><b>F</b></span>")
-    select.add(101,200,"<span style='color:#B07455;'><b>E</b></span>")
-    select.add(201,400,"<span style='color:#8E57E6;'><b>D</b></span>")
-    select.add(401,600,"<span style='color:#4DE4C1;'><b>C</b></span>")
-    select.add(601,800,"<span style='color:#2AAAFF;'><b>B</b></span>")
-    select.add(800,1000,"<span style='color:#FF2A52;'><b>A</b></span>")
-    select.add(1000,1200,"<span style='color:#D7A800;'><b>S</b></span>")
-    return `${select.has(num)}`
-  }
-DefineMacroS("displayskillrank", displayskillrank);
-  
-function skillrank(num){
-const select = new SelectCase()
-    select
-    select.add(0,100,"F")
-    select.add(101,200,"E")
-    select.add(201,400,"D")
-    select.add(401,600,"C")
-    select.add(601,800,"B")
-    select.add(801,1000,"A")
-    select.add(1000,1200,"S")
-        
-    return `${select.has(num)}`
-}
-window.skillrank = skillrank
-DefineMacroS("skillrank", skillrank);
-  
-window.skillrequire = function(args){
-    switch(args){
-      case "E":
-        return 101;
-      case "D":
-        return 201;
-      case "C":
-        return 401;
-      case "B":
-        return 601;
-      case "A":
-        return 801;
-      case "S":
-        return 1000;
-    }
-}
-  
-window.skillprocess = function (num){
-    var rank = skillrank(num)
-    switch(rank){
-      case "F":
-        return num
-      case "E":
-        return (num-100)
-      case "D":
-        return ((num-200)/2)
-      case "C":
-        return ((num-400)/2)
-      case "B":
-        return ((num-600)/2)
-      case "A":
-        return ((num-800)/2)
-      case "S":
-        return ((num-1000)/2)
-    }
-}
-  
-window.rankcolor = function(num){
-    var rank = skillrank(num)
-    switch(rank){
-      case "F":
-        return "#839EC0";
-      case "E":
-        return "#B07455";
-      case "D":
-        return "#8E57E6";
-      case "C":
-        return "#4DE4C1";
-      case "B":
-        return "#2AAAFF";
-      case "A":
-        return "#FF2A52";
-      case "S":
-        return "#D7A800";
-    }
-}
-/* twine-user-script #30: "AvatarWidget.js" */
+/* twine-user-script #28: "AvatarWidget.js" */
 /* 属性集算 */
 function setreveal(){
     const isReveal=w=>V.Equip[w] ?V.Equip[w].reveal :0;
@@ -11997,10 +11419,12 @@ window.warmth = warmth
 
 /* 商店处理 */
 
-function setShowCaseUID(){
-    V.showcase.uid = random(100000,999999)
+window.setShowCaseUID = function(){
+    if(V.showcase){
+        V.showcase.uid = random(100000,999999)
+    }
 }
-window.setShowCaseUID = setShowCaseUID
+
 
 function setShowCase(table) {
     if (typeof(table) == "object") {
@@ -12139,6 +11563,7 @@ function strip(arg) {
     new Wikifier(null,"<<replace '#action-text'>>"+text+"<</replace>>")
     new Wikifier(null,"<<replace '#action-text2'>>"+text+"<</replace>>")
     ShowPopUP()
+    stAvatar()
 }
 window.strip = strip
 
@@ -12207,11 +11632,680 @@ function dressOn(args, arg) {
     new Wikifier(null,"<<replace '#action-text'>>"+text+"<</replace>>")
     new Wikifier(null,"<<replace '#action-text2'>>"+text+"<</replace>>")
     ShowPopUP()
+    stAvatar()
 }
 
 window.dressOn = dressOn
 
-/* twine-user-script #31: "EventWidget.js" */
+/* twine-user-script #29: "SetAvatar.js" */
+function SetFace(args,key) {
+
+    if(A.facelist.includes(args)==true){
+        V.PFace = A.emote[args]
+        V.Equip.emote = args
+    }else{
+        V.PFace = A.emote.正常
+        V.Equip.emote = args
+    }
+
+   if (!key){
+       stAvatar()
+   }
+   return V.PFace
+}
+window.SetFace = SetFace
+DefineMacroS("setface",SetFace)
+
+window.breastsize = function() {
+  var size = V.PC.breast
+  if (between(size,0,1)){
+    return 1;
+  }
+  else if (between(size,2,3)){
+    return 2;
+  }
+  else if (size>=4){
+    return 3;
+  }
+}
+
+window.breastDif = function(obj){
+    if( typeof(obj) == "object" && obj && obj.hasDif && obj.hasDif.breast==true) return `_${breastsize()}`;
+    else return "";
+}
+
+window.isPregnant = function() {
+    if(V.PC.state.怀孕 == true || V.PC.state.肠内受孕 == true) return "p";
+    else return ""
+}
+
+window.PregDif = function(obj) {
+
+    if(typeof(obj)=="object" && obj && obj.hasDif && obj.hasDif.pregnant==true){
+        if(V.PC.state.怀孕 == true || V.PC.state.肠内受孕 == true) return "p";
+        else return ""
+    }
+    else return ""
+}
+
+
+window.isfixed = function(obj){
+    if(typeof(obj)=="object" && obj && obj.fixcolor == true) return obj.index+"/"+obj.color;
+        else return obj.index+"/basic"
+}
+
+
+window.hasLength = function(obj,num) {
+
+    var lenth = function(num){
+        if( between(num,0,99)) return 1;
+        else if(between(num,100,499)) return 2;
+        else if(between(num,500,799)) return 3;
+        else if(num>= 800) return 4;
+        else return 1;
+    }
+
+    if (typeof(obj) == "object" && obj){
+        if (lenth(num) <= obj.max) {
+            return "_" + lenth(num)
+        }
+        else {
+            return "_" + obj.max
+        }
+    }else{
+        return ""
+    }
+}
+
+
+function setAPath(obj){
+
+    if(typeof(obj)=="object" && obj) return isfixed(obj)+breastDif(obj)+PregDif(obj)
+    else return ""
+
+}
+window.setAPath = setAPath
+
+/* 背景设置 */
+function imglocation(){
+    var location = V.location
+    
+    if ( !D.placedata[location] || D.placedata[location].img == undefined  || D.placedata[location].img == null){
+      return "dummy"
+
+    }else{
+      let img = D.placedata[location].img
+      return img
+    }
+}
+window.imglocation = imglocation
+
+
+
+function isFurry(){
+    if (PFlag.kemofrom == true && group.includes(V.PC.info.race)) return "furry/"
+    else return V.PC.info.skin+"/"
+}
+
+function isCaged(){
+    if(V.Equip.inner_bt && V.Equip.inner_bt.index =="chastitycage") return "_d";
+    else return ""
+}
+
+/* 设置AVATAR（重要） */
+function stAvatar() {
+
+    /*浴精喷精喷奶冒汗气息一类 */
+    V.avatar.addon.body = setAvatar("addon.body",V.PFlag.bukkake.body)
+    V.avatar.addon.face = setAvatar("addon.face",V.PFlag.bukkake.face)
+    V.avatar.addon.hair = setAvatar("addon.hair",V.PFlag.bukkake.hair)
+    V.avatar.addon.face = setAvatar("addon.face",(V.PC.sexrec.饮精.c > 100))
+    V.avatar.addon.bottom = setAvatar("addon.bottom", (V.PC.sexrec.肛内射 + V.PC.sexrec.内射.c > 200 && V.PFlag.bottom <= 1))
+    V.avatar.addon.penis = setAvatar("addon.penis",(V.PC.sexrec.射精.c > 10 && V.PFlag.bottom <= 1))
+
+    /* 设置身上的服装 */
+    const layers = ["outter","top","bottom","inner_up","inner_bt","neck","hat","face","hand","legs","shoes","back"]
+
+    for(let i=0;i<layers.length;i++){
+        let n = layers[i]
+
+        if(V.Equip[n] != null && V.Equip[n].hasImg==true){
+            V.avatar[n] = setAvatar(n,{
+                fixcolor: V.Equip[n].fixcolor, color: V.Equip[n].color,
+                src: setAPath(V.Equip[n]), acc: V.Equip[n].index + "/"+ V.Equip[n].acc,
+            })
+
+            if(V.Equip[n].fixacc){
+                V.avatar[n].fixacc = true
+                V.avatar[n].subcolor = V.avatar[n].subcolor
+            }
+            
+            if(V.Equip[n].tuckinable==true){
+                V.avatar[n].tuckin = setAvatar(`${n}.tuckin`,V.Equip.tuckin)
+            }    
+        }
+        else if(V.Equip[n] != null && V.Equip[n].hasImg==false){
+            if(n=="bottom"){
+                V.avatar[n] = setAvatar(n,{
+                    fixcolor: false, color:"#445687", src:"shortpant/basic", acc:null
+                })
+            }
+            else if(n=="inner_bt"){
+                V.avatar[n] = setAvatar(n,{
+                    fixcolor: false, color:"#FFFFFF", src:"boxer/basic", acc:null
+                })
+            }
+            else if(n=="top" && V.Equip[n].slot != "onepiece"){
+                V.avatar[n] = setAvatar(n,{
+                    fixcolor: false, color:"#FFFFFF", src:`Tshirt/basic${breastDif(V.Equip[n])}${PregDif(V.Equip[n])}`, acc:null
+                })
+            }
+            else if(n=="top"&& V.Equip[n].slot == "onepiece"){
+                V.avatar[n] = setAvatar(n,{
+                    fixcolor: true, color:"white", src:`bwopiece/white${breastDif(V.Equip[n])}${PregDif(V.Equip[n])}`, acc:null
+                })
+            }
+            else{
+                V.avatar[n] = setAvatar(n,{ fixcolor: true, color: "", src: null, acc: null, })
+            }
+        }
+    }
+
+    /*头发部分*/
+    const hairfront = A.hairfront[V.Equip.hairfront]
+    const hairback = A.hairback[V.Equip.hairback]
+    const haircolor = A.haircolor[V.PC.info.haircolor]
+    const fixhair = function(obj){
+        if (typeof(obj)=="object" && obj){
+            if(obj.fixcolor == true) return V.PC.info.haircolor;
+            else return "basic";
+            
+        }else{
+            return ""
+        }
+    }
+
+    V.avatar.hairfront = setAvatar("hairfront",{
+        fixcolor: hairfront.fixcolor, color: (hairfront.fixcolor==true? null : haircolor),
+        src: V.Equip.hairfront + "/" + fixhair(hairfront) + hasLength(hairfront,V.PC.info.hairlenf),
+    })
+
+    V.avatar.hairback = setAvatar("hairback",{
+        fixcolor: hairback.fixcolor, color: (hairback.fixcolor==true? null : haircolor),
+        src: V.Equip.hairback + "/" + fixhair(hairback) + hasLength(hairback,V.PC.info.hairlen),
+    })
+
+
+    /*兽耳兽角兽尾部分, 还未实装。 */
+    if(V.PFlag.kemoform == true){
+        /* let kemotype = V.PC.info.kemotype
+        
+        if(V.PC.trait.兽耳 == true){
+            V.avatar.kemofront.mimi = setAvatar("kemofront.mimi",{
+                fixcolor: A.kemo[kemotype].mimi.fixcolor,
+                color: (A.kemo[kemotype].mimi.fixcolor==true? null: haircolor[0]),
+                src= `${kemotype}/${FixMimi(A.kemo[kemotype].mimi)}`,
+            })
+        }
+
+        if(V.PC.trait.兽角==true){
+            V.avatar.kemofront.horn = setAvatar("kemofront.horn",
+                {src= `${kemotype}/horn`, acc= hornacc(kemotype)
+            })
+        }
+
+        if(V.PC.trait.兽尾==true){
+            V.avatar.kemoback.tail = setAvatar("kemoback.tail",{
+                fixcolor: A.kemo[kemotype].tail.fixcolor,
+                color: (A.kemo[kemotype].tail.fixcolor==true? null: haircolor[0]),
+                src= `${kemotype}/${FixTail(A.kemo[kemotype].tail)}`,
+            })
+        }
+
+        if(V.PC.race=="羽族"){
+            V.avatar.kemoback.wing = setAvatar("kemoback.wing",{
+                fixcolor: A.kemo[kemotype].wing.fixcolor,
+                color: (A.kemo[kemotype].wing,fixcolor==true? null : haircolor),
+                src= `${kemotype}/${FixWings(A.kemo[kemotype].wing)}`
+            })
+        }
+        */
+    }
+
+    /*乳头、小丁丁等特殊装备 */
+    V.avatar.penis = setAvatar("penis",(V.Equip.penis ? V.Equip.penis.png : null),true)
+    V.avatar.nipple = setAvatar("nipple",(V.Equip.nipple ? V.Equip.nipple.png+breastDif(V.Equip.nipple) : null),true)
+    
+    if (V.Equip.vagina || V.Equip.anal){
+        let img
+
+        if(V.Equip.vagina.png) img = V.Equip.vagina.png;
+        else if(V.Equip.anal.png) img = V.Equip.anal.png;
+        else img = null;
+
+        V.avatar.plus = setAvatar("plus",img,true)
+    }
+
+    /* 小丁丁的显示 */
+    if(V.PFlag.bottom <= 1 && V.PC.genital.阴茎 > 3){
+        V.avatar.dick = setAvatar("dick", isFurry()+"penis"+isCaged,true)
+    }
+    
+    const kemorace = ["羽族","兽族"]
+    if(V.PFlag.kemoform == true && kemorace.includes(V.PC.info.race)){
+        V.avatar.body = setAvatar("body",{
+            src:"furry/body_"+breastsize()+isPregnant(), color: haircolor[0],
+        },true)
+
+    }else{
+        V.avatar.body = setAvatar("body", V.PC.info.skin+"/body_"+breastsize()+isPregnant(),true)
+    }
+
+    /* 设置表情 */
+    if (V.charamaking == true) SetFace(V.Equip.emote,1)
+
+    const eyegroup = ["full","blink2","lookup3"]
+    const type = [null,"a","b","c"]
+
+    /*相框 OR 特效 */
+    V.avatar.frame = setAvatar("frame",V.PFace.frame, true)
+    /* 表情部分 */
+    V.avatar.eyebrow = setAvatar("eyebrow", V.PFace.eyebrow, true)
+    V.avatar.eyes = setAvatar("eyes",
+        V.PC.info.eyecolor+"/"+V.PFace.eyes
+        + (eyegroup.includes(V.PFace.eyes) == true ? type[V.PC.eyes] :"")
+        + (V.PFace.eyes.includes("full") == true && V.PFace.name == "正常" ? "_idle" : "")
+        ,true
+    )
+
+    V.avatar.mouth = setAvatar("mouth", V.PFace.mouth, true)
+
+    const ad = Object.keys(V.avatar.emoadd)
+    for(let i=0;i<ad.length;i++){
+        let n=ad[i]
+        V.avatar.emoadd[n] = setAvatar(`emoadd.${n}`, V.PFace[n], true)
+    }
+
+    if(V.PC.base.快感[0] > V.PC.base.快感[1]/3 || V.PC.state.发情 == true || V.PC.base.酒精[0] > V.PC.base.酒精[1]/2 || V.PC.base.药物[0] > 20){
+        V.avatar.emoadd.red = setAvatar("emoadd.red",true, true)
+    }
+
+    /* 淫纹 */
+    if(V.Pskin.腹部){
+        let path = "./image/avatar/body/"+V.Pskin.腹部.index+".png"
+        if(ImgExist(path)){
+            V.avatar.tatoos = setAvatar("tatoos",V.Pskin.腹部.index)
+        }
+    }
+
+    V.avatar.background = setAvatar("background",imglocation())
+
+    console.log("log",V.avatar)
+    return ""
+}
+
+window.stAvatar = stAvatar
+/* twine-user-script #30: "PlayerInfo.js" */
+/* 名字和称呼的处理 */
+function gsplit(m,f,p="chara"){
+  if (p=="player"){
+    if (V.PC.gender == "m" ) return m;
+    else return f;
+  }else {
+    if (V.currentchara.gender == "m" ) return m;
+    else return f;
+  }
+}
+window.gsplit = gsplit
+DefineMacroS("gsplit", gsplit);
+/* 除了我，你他之外，其他都是英文限定。所以中文用you，英文用Im分开算了。英文描写玩家统一用I、me、my、mine */
+function you() {
+    var name = V.PC.info.name;
+    switch (V.persons){
+    case 1:
+      return "我";
+    case 2:
+      return "你";
+    default:
+      return name;
+    }
+  }
+DefineMacroS("you", you);
+
+function I(key=null) {
+  var name = V.PC.info.name;
+  switch (V.persons){
+  case 1:
+    return "I";    
+  case 2:
+    if(key!=null)return "You";
+    else return "you";
+  default:
+    if(key!=null)return "<span class='Abc'>"+name+"</span>";
+    return name;
+  }
+}
+DefineMacroS("I", I);
+
+function my(key=null) {
+  switch (V.persons){
+  case 1:
+    if(key!=null)return "My";
+    else return "my";
+  case 2:
+    if(key!=null)return "Your";
+    else return "your";
+  default:
+    if(key!=null)return gsplit("His","Her","player");
+    else return gsplit("his","her","player");
+  }
+}
+DefineMacroS("my", my);
+
+function me(key=null) {
+  switch (V.persons){
+  case 1:
+    if(key!=null)return "Me";
+    else return "me";
+  case 2:
+    if(key!=null)return "You";
+    else return "you";
+  default:
+    if(key!=null)return gsplit("Him","Her","player");
+    else return gsplit("him","her","player");
+  }
+}
+DefineMacroS("me", me);
+
+function Iam() {
+  switch (V.persons){
+    case 1:
+      return "I am";
+    case 2:
+      return "You are";
+    default:
+      if (PC.gender == "m") return "He is";
+      else return "She is";
+    }
+}
+DefineMacroS("Iam", Iam);
+
+function myself() {
+  switch (V.persons){
+    case 1:
+      return "myself";
+    case 2:
+      return "yourself";
+    default:
+      return gsplit("himself","herself","player");
+    }
+}
+DefineMacroS("myself", myself);
+
+function am() {
+  switch (V.persons){
+    case 1:
+      return "am";
+    case 2:
+      return "are";
+    default:
+     return "is";
+    }
+}
+DefineMacroS("am", am);
+
+function mine(){
+  switch (V.persons){
+    case 1:
+      return "mine";
+    case 2:
+      return "yours";
+    default:
+     if (PC.gender == "m") return "his";
+      else return "hers";
+    }
+}
+
+function he(key=null) {
+  var gender = V.currentchara.gender
+    if(gender=="m"){
+      if(key!=null)return Lang("他","He");
+      else return Lang("他","he");
+    }else{
+      if(key!=null)return Lang("她","She");
+      else return Lang("她","she");
+    }
+}
+DefineMacroS("he", he);
+
+
+function his(key=null) {
+  var gender = V.currentchara.gender
+    if(gender=="m"){
+      if(key!=null)return Lang("他的","His");
+      else return Lang("他的","his");
+    }else{
+      if(key!=null)return Lang("她的","Her");
+      else return Lang("她的","her");
+    }
+}
+DefineMacroS("his", his);
+
+function him(key=null) {
+  var gender = V.currentchara.gender
+    if(gender=="m"){
+      if(key!=null)return "Him";
+      else return "him";
+    }else{
+      if(key!=null)return "Her";
+      else return "her";
+    }
+}
+DefineMacroS("him", him);
+
+
+/* 头发 */
+function hair(){
+  const select = new SelectCase();
+  var num = V.PC.info.hairlen
+  select.add(0, 49, "超短发");
+  select.add(50, 99, "齐耳短发");
+  select.add(100, 249, "及脖中发");
+  select.add(250, 499, "及肩中发");
+  select.add(500, 799, "及胸长发");
+  select.add(800, 1200, "及腰长发");
+  select.default = "超长长发";
+  const hairlength = select.has(num);
+  return `${setup.L[V.lang]["发色"][V.PC.info.haircolor] + setup.L[V.lang]["发型"][V.PC.info.hairstyle] + hairlength}`;
+}
+
+DefineMacroS("hair",hair);
+
+/* 容貌描述 */
+function beauty(){
+  var num = V.PC.beauty
+  const select = new SelectCase()
+  select.add(0,100,"脸部被毁容，丑得惨绝人寰")
+  select.add(101,200,"脸上有重大伤痕，显得很狰狞")
+  select.add(201,300,"脸看着像被打成了猪头")
+  select.add(301,500,"长得有点丑")
+  select.add(501,700,"脸上有点脏，看着有点丑")
+  select.add(701,1000,"长得很一般，扔人群里就找不着的样子")
+  select.add(1001,1200,"长得还不错")
+  select.add(1201,1500,"长得有点可爱")
+  select.add(1501,1800,"长得很可爱")
+  select.add(1801,2300,"长得挺漂亮")
+  select.add(2300,3000,"长得很漂亮，一眼就能从人群中找到")
+  select.add(3001,4500,"气质出众，长得十分有魅力")
+  select.add(4501,6000,"有着倾国倾城的美貌")
+  select.default = "有着能颠覆世界的绝美神颜";
+  return `${select.has(num)}`
+}
+DefineMacroS("beauty", beauty);
+
+/* 眼睛 */
+function eye(){
+  return setup.L[V.lang]["瞳色"][V.PC.info.eyecolor] + setup.L[V.lang]["瞳色"]["eyes"]
+}
+DefineMacroS("eye", eye);
+
+/* 皮肤 */
+function skin(){
+  return setup.L[V.lang]["肤色"][V.PC.info.skin] + setup.L[V.lang]["肤色"]["skin"]
+}
+DefineMacroS("skin", skin);
+
+/*胸部 */
+
+function breast(){
+  switch(V.PC.breast){
+    case 1:
+      return "微微隆起的胸部"
+    case 2:
+      return "可爱小巧的胸部"
+    case 3:
+      return "小山峰一样的胸部"
+    case 4:
+      return "有着傲人曲线的胸部"
+    case 5:
+      return "有着惊人吸引力的胸部"
+    default:
+      return "平坦的胸部"
+  }
+}
+DefineMacroS("breast", breast);
+
+/* 阴茎 */
+function penis(){
+  var size = V.PC.genital.阴茎
+  var a = random(0,2)
+  const text1 = ["惊人的","魔鬼般的","巨大无比的"]
+  const text2 = ["可爱的","小孩一般的","短小"]
+  const text3 = ["幼儿一般的","迷你可爱的","牙签般的"]
+  const select = new SelectCase()
+  select
+  select.add(1,8,text3[a]+"小丁丁")
+  select.add(9,12,text2[a]+"阴茎")
+  select.add(13,16,"阴茎")
+  select.add(17,19,"粗长阴茎")
+  select.add(20,24,"巨大阴茎")
+  select.add(25,30,"超大阴茎")
+  select.add(30,50,text1[0]+"马屌")
+  return `${select.has(size)}`
+}
+DefineMacroS("penis", penis);
+
+/* 宠物类型 */
+function petstype(){
+  switch (V.pet.type) {
+    case 1:
+      return "史莱姆"
+    case 2:
+      return "魔狼"
+    case 3: 
+      return "灵虫"
+  }
+}
+DefineMacroS("petstype", petstype);
+
+/* 宠物的第三人称 */
+function it(){
+  switch (V.pet.type) {
+    case 1:  case 4:
+      return "它"
+    case 2:  case 3:
+      return "他"
+  }
+}
+DefineMacroS("it", it);
+
+/* twine-user-script #31: "SkillRank.js" */
+function displayskillrank(num){
+    const select = new SelectCase()
+    select.add(0,100,"<span style='color:#839EC0;'><b>F</b></span>")
+    select.add(101,200,"<span style='color:#B07455;'><b>E</b></span>")
+    select.add(201,400,"<span style='color:#8E57E6;'><b>D</b></span>")
+    select.add(401,600,"<span style='color:#4DE4C1;'><b>C</b></span>")
+    select.add(601,800,"<span style='color:#2AAAFF;'><b>B</b></span>")
+    select.add(800,1000,"<span style='color:#FF2A52;'><b>A</b></span>")
+    select.add(1000,1200,"<span style='color:#D7A800;'><b>S</b></span>")
+    return `${select.has(num)}`
+  }
+DefineMacroS("displayskillrank", displayskillrank);
+  
+function skillrank(num){
+const select = new SelectCase()
+    select
+    select.add(0,100,"F")
+    select.add(101,200,"E")
+    select.add(201,400,"D")
+    select.add(401,600,"C")
+    select.add(601,800,"B")
+    select.add(801,1000,"A")
+    select.add(1000,1200,"S")
+        
+    return `${select.has(num)}`
+}
+window.skillrank = skillrank
+DefineMacroS("skillrank", skillrank);
+  
+window.skillrequire = function(args){
+    switch(args){
+      case "E":
+        return 101;
+      case "D":
+        return 201;
+      case "C":
+        return 401;
+      case "B":
+        return 601;
+      case "A":
+        return 801;
+      case "S":
+        return 1000;
+    }
+}
+  
+window.skillprocess = function (num){
+    var rank = skillrank(num)
+    switch(rank){
+      case "F":
+        return num
+      case "E":
+        return (num-100)
+      case "D":
+        return ((num-200)/2)
+      case "C":
+        return ((num-400)/2)
+      case "B":
+        return ((num-600)/2)
+      case "A":
+        return ((num-800)/2)
+      case "S":
+        return ((num-1000)/2)
+    }
+}
+  
+window.rankcolor = function(num){
+    var rank = skillrank(num)
+    switch(rank){
+      case "F":
+        return "#839EC0";
+      case "E":
+        return "#B07455";
+      case "D":
+        return "#8E57E6";
+      case "C":
+        return "#4DE4C1";
+      case "B":
+        return "#2AAAFF";
+      case "A":
+        return "#FF2A52";
+      case "S":
+        return "#D7A800";
+    }
+}
+/* twine-user-script #32: "EventWidget.js" */
 function setEvent() {
     var event = V.event
     event.lang = V.lang
@@ -12415,109 +12509,6 @@ window.useitem = useitem
     print V.items[catgt][_keys[_i]].name
     useitem(catgr,_keys[_i])
 */
-/* twine-user-script #32: "SetAvatar.js" */
-function SetFace(args,key) {
-
-    if(A.facelist.includes(args)==true){
-        V.PFace = A.emote[args]
-        V.Equip.emote = args
-    }else{
-        V.PFace = A.emote.正常
-        V.Equip.emote = args
-    }
-
-   if (!key){
-       new Wikifier(null,"<<SetAvatar>>")
-   }
-   return V.PFace
-}
-window.SetFace = SetFace
-DefineMacroS("setface",SetFace)
-
-function inAvatar() {
-
-    /* 设置表情 */
-    if (V.charamaking == true) SetFace(V.Equip.emote,1)
-
-    /*相框 OR 特效 */
-    V.avatar.frame = setAvatar("frame",V.PFace.frame)
-
-    /*浴精喷精喷奶冒汗气息一类 */
-
-    V.avatar.addon.body = setAvatar("addon.body",V.PFlag.bukkake.body)
-    V.avatar.addon.face = setAvatar("addon.face",V.PFlag.bukkake.face)
-    V.avatar.addon.hair = setAvatar("addon.hair",V.PFlag.bukkake.hair)
-
-    V.avatar.addon.face = setAvatar("addon.face",(V.PC.sexrec.饮精.c > 100))
-    V.avatar.addon.bottom = setAvatar("addon.bottom", (V.PC.sexrec.肛内射+PC.sexrec.内射.c > 200 && V.PFlag.bottom <= 1))
-    V.avatar.addon.penis = setAvatar("addon.penis",(V.PC.sexrec.射精.c > 10 && V.PFlag.bottom <= 1))
-
-    const group = ["neck","hat","face","hand","bottom","inner_bt","shoes","legs","back"]
-
-    for(let i=0;i<group.length;i++){
-        let n = group[i]
-
-        if ( V.Equip[n] && V.Equip[n].imagenable == true){
-            if(V.Equip[n].fixcolor == ture){
-                V.avatar[n] = setAvatar(n,{ fixcolor: false, color: V.Equip[n].color, src: `${V.Equip[n].index}/${V.Equip[n].color}`, acc: null})
-            }else{
-                V.avatar[n] = setAvatar(n,{ fixcolor: false, color: V.Equip[n].color, src:`${V.Equip[n].index}/basic`, acc: null})
-            }
-            if(V.Equip[n].acc){
-                V.avatar[n].acc = setAvatar(`$[n].acc`,`${V.Equip[n].index}/${V.Equip[n].acc}`)
-            }
-
-        }else if( V.Equip[n] && V.Equip[n].imagenable == false){
-            if(n=="bottom"){
-                V.avatar.bottom = setAvatar("bottom",{ fixcolor: false, color: "#445687", src: "shortpant/basic", acc: null, })
-            }
-            else if(n=="inner_bt"){
-                V.avatar.inner_bt = setAvatar("inner_bt",{ fixcolor: false, color: "white", src: "boxer/basic", acc: null, })
-            }
-            else{
-                V.avatar[n] = setAvatar(n,{ fixcolor: true, color: "", src: null, acc: null, })
-            }
-
-        }else {
-            V.avatar[n] = setAvatar(n,null)
-        }
-    }
-
-    const groupb = ["outter","top","inner_up"]
-
-    for(let i=0;i<groupb.length;i++){
-        let n = groupb[i]
-
-        if(V.Equip[n] && V.Equip[n].imagenable == true){
-            if(V.Equip[n].fixcolor == true){
-                V.avatar[n] = setAvatar(n,{fixcolor:true, color: $Equip[n].color, src: `${V.Equip[n].index}/${V.Equip[n].color}`, acc: null, tuckin:false})
-            }else{
-                V.avatar[n] = setAvatar(n,{fixcolor:false, color: $Equip[n].color, src: `${V.Equip[n].index}/basic` , acc: null, tuckin:false})
-            }
-            V.avatar[n].tuckin = setAvatar(`${n}.tuckin`,(V.Equip[n].tuckinable == true && V.Euip[n].tuckin == true))
-            
-            if(V.Equip[n].acc){
-                V.avatar[n].acc = setAvatar(`${n}.acc`,`${V.Equip[n].index}/${V.Equip[n].acc}`)
-            }
-        }
-    }
-
-
-}
-
-function breastDif(obj){
-    var size = function () {
-        let size = V.PC.breast
-        if (between(size,0,1)) return 1;
-        else if (between(size,2,3)) return 2;
-        else if (size>=4) return 3;
-    }
-    
-    if( typeof(obj) == "object" ){
-        if(obj.hasDif.breast) return `_${size()}`;else return "";
-    }else return "";
-}
-window.breastDif = breastDif
 /* twine-user-script #33: "SimpleWidget.js" */
 
 function printmoney(num) {
@@ -12533,56 +12524,11 @@ window.showcharainfo = function () {
 	new Wikifier(null, '<<replace #charainfo>><<charainfo>><</replace>><<CMApply>>');
 }
 
-
-window.imglocation = function(){
-    var location = V.location
-    
-    if (GameData.placedata[location].img == undefined  || GameData.placedata[location].img == null){
-      return "dummy"
-
-    }else{
-      
-      let img = GameData.placedata[location].img
-      return img
-
-    }
-}
-
 window.basepercent = function(name) {
     var min = V.PC.base[name][0]
     var max = V.PC.base[name][1]
     return Math.clamp(Math.trunc(((min/max)*100)),1,100)
 };
-
-function isPregnant() {
-    if (V.PC.state.怀孕 == true || V.PC.state.肠内受孕 == true){
-        return "p"
-    }else{
-        return ""
-    }
-}
-
-window.isPregnant = isPregnant
-
-function isFixhair(table) {
-    if (table.fixcolor == true) {
-        return V.PC.info.haircolor
-    }else{
-        return "basic"
-    }
-}
-
-window.isFixhair = isFixhair
-
-function hasLength(table) {
-    if (table.long == true) {
-        return "_" + hairlenth(V.PC.info.fhairlen)
-    }else{
-        return "_1"
-    }
-}
-
-window.hasLength = hasLength
 
 // Make .divs-links clickable as if they're anchors
 window.linkifyDivs = function (parentSelector = "") {
@@ -12602,6 +12548,14 @@ function bookmark(name) {
 
 DefineMacroS("bookmark", bookmark)
 
+
+window.hairlenth = function(num){
+    if( between(num,0,99)) return 1;
+    else if(between(num,100,499)) return 2;
+    else if(between(num,500,799)) return 3;
+    else if(num>= 800) return 4;
+    else return 1;
+}
 /* twine-user-script #34: "UI Widget.js" */
 
 /* 通用 */
@@ -12900,7 +12854,7 @@ Macro.add('time', {
 
 &lt;&lt;set A.categoryname to {
     hat:&quot;帽子&quot;, outter:&quot;外搭&quot;, top:&quot;上衣&quot;, bottom:&quot;下衣&quot;, inner_up:&quot;内衣&quot;, inner_bt:&quot;内裤&quot;, legs:&quot;袜子&quot;,
-    shoes: &quot;鞋子&quot;, neck:&quot;颈饰&quot;, face:&quot;脸饰&quot;, hand:&quot;手饰&quot;, back:&quot;背包&quot;
+    shoes: &quot;鞋子&quot;, neck:&quot;颈饰&quot;, face:&quot;脸饰&quot;, hand:&quot;手饰&quot;, back:&quot;背饰&quot;,
 }&gt;&gt;
 
 &lt;&lt;set A.haircolor to {
@@ -12946,6 +12900,8 @@ Macro.add('time', {
             id: 0, uid: 0,
             index : &quot;naked&quot;,    name : &quot;裸&quot;,     gender : &quot;n&quot;,
             text : &quot;无&quot;,   
+            name_en:&quot;&quot;,
+            text_en:&quot;&quot;, 
             tag  : [&quot;裸露&quot;],
             hasImg : false,
             hasDif : {breast:false, pregnant:false},
@@ -12962,11 +12918,15 @@ Macro.add('time', {
             tuckinable: false,        tuckin : false, 
             acc : null,
             patterns: [],
+            fixacc  : true,
+            subcolor : null,
         },
         {
             id: 1, uid: 0,
             index : &quot;Tshirt&quot;,    name : &quot;T恤&quot;,     gender : &quot;n&quot;,
-            text : &quot;一件简单的T恤。 并不能给你太多保护，但总比没有好。&quot;,   
+            text : &quot;一件简单的T恤。 并不能给你太多保护，但总比没有好。&quot;,  
+            name_en:&quot;T-shirt&quot;,
+            text_en:&quot;A simple design T-shirt. May give you a littel bit of protection, but better than nothing.&quot;,
             tag  : [&quot;日常&quot;],
             hasImg : true,
             hasDif : {breast:true, pregnant:true},
@@ -12983,11 +12943,15 @@ Macro.add('time', {
             tuckinable: true,        tuckin : false, 
             acc : &quot;slime&quot;,
             patterns: [&quot;slime&quot;,&quot;heart&quot;],
+            fixacc  : true,
+            subcolor : null,
         },
         {
             id: 2, uid: 0,
             index : &quot;shirt&quot;,    name : &quot;衬衫&quot;,     gender : &quot;n&quot;,
-            text : &quot;一件简单的西式长袖衬衫。浅浅的暗纹给你增加了些许气质。&quot;,   
+            text : &quot;一件简单的西式长袖衬衫。浅浅的暗纹给你增加了些许气质。&quot;,
+            name_en:&quot;business shirt&quot;,
+            text_en:&quot;A simple long-sleeved dress shirt. The dark line design adds a touch of grace to you.&quot;,
             tag  : [&quot;日常&quot;,&quot;正式&quot;,&quot;商务&quot;],
             hasImg : true,
             hasDif : {breast:true, pregnant:true},
@@ -13004,11 +12968,15 @@ Macro.add('time', {
             tuckinable: true,        tuckin : false, 
             acc : null,
             patterns: [],
+            fixacc  : true,
+            subcolor : null,
         },
         {
             id: 3, uid: 0,
             index : &quot;bwopiece&quot;,    name : &quot;BW连衣裙&quot;,     gender : &quot;f&quot;,
-            text : &quot;一件设计简单的连衣裙。修身的设计显得你身材更苗条。毕竟是易淘上的便宜货，不能指望布料的防御效果。&quot;,   
+            text : &quot;一件设计简单的连衣裙。修身的设计显得你身材更苗条。毕竟是易淘上的便宜货，不能指望布料的防御效果。&quot;,
+            name_en:&quot;BW onepiece&quot;,
+            text_en:&quot;a simple design onepiece. The slim fit design looks slimmer on your body. The cheap goods on Ebay, can not expect the fabric defense effect.&quot;,
             tag  : [&quot;日常&quot;],
             hasImg : true,
             hasDif : {breast:true, pregnant:true},
@@ -13024,11 +12992,15 @@ Macro.add('time', {
             tuckinable: false,        tuckin : false, 
             acc : null,
             patterns: [],
+            fixacc  : true,
+            subcolor : null,
         },
         {
             id: 4, uid: 0,
             index : &quot;slpshortup&quot;,    name : &quot;短袖睡衣&quot;,     gender : &quot;n&quot;,
-            text : &quot;一件设计简单的睡衣。轻柔透气的布料给你带来好梦。&quot;,   
+            text : &quot;一件设计简单的睡衣。轻柔透气的布料给你带来好梦。&quot;,
+            name_en:&quot;summer pajamas&quot;,
+            text_en:&quot;A simple design pajamas. The light and breathable fabric brings you good dreams.&quot;,
             tag  : [&quot;日常&quot;,&quot;睡衣&quot;],
             hasImg : true,
             hasDif : {breast:true, pregnant:true},
@@ -13044,6 +13016,8 @@ Macro.add('time', {
             tuckinable: false,        tuckin : false, 
             acc : &quot;blackline&quot;,
             patterns: [&quot;blackline&quot;,&quot;tealine&quot;,&quot;whiteline&quot;,&quot;yellowline&quot;,&quot;greenline&quot;],
+            fixacc  : true,
+            subcolor : null,
         }
     ]&gt;&gt;
 &lt;&lt;/widget&gt;&gt;
@@ -13053,7 +13027,9 @@ Macro.add('time', {
         {
             id: 0, uid: 0,
             index : &quot;naked&quot;,    name : &quot;裸&quot;,     gender : &quot;n&quot;,
-            text : &quot;无&quot;,   
+            text : &quot;无&quot;,  
+            name_en:&quot;&quot;,
+            text_en:&quot;&quot;, 
             tag  : [&quot;裸露&quot;],
             hasImg : false,
             hasDif : {breast:false, pregnant:false},
@@ -13068,11 +13044,15 @@ Macro.add('time', {
             
             acc : null,
             patterns: [],
+            fixacc  : true,
+            subcolor : null,
         },
         {
             id: 1, uid: 0,
             index : &quot;shortpant&quot;,    name : &quot;短裤&quot;,     gender : &quot;n&quot;,
             text : &quot;一条简单的短裤。&quot;,   
+            name_en:&quot;shortpant&quot;,
+            text_en:&quot;A simple shortpant.&quot;,
             tag  : [&quot;日常&quot;],
             hasImg : true,
             hasDif : {breast:false, pregnant:true},
@@ -13087,11 +13067,15 @@ Macro.add('time', {
             
             acc : null,
             patterns: [],
+            fixacc  : true,
+            subcolor : null,
         },
         {
             id: 2, uid: 0,
             index : &quot;shortskirt&quot;,    name : &quot;短裙&quot;,     gender : &quot;f&quot;,
-            text : &quot;一条简单的短裙。&quot;,   
+            text : &quot;一条简单的短裙。&quot;,  
+            name_en:&quot;skirt&quot;,
+            text_en:&quot;A simple skirt.&quot;,
             tag  : [&quot;日常&quot;],
             hasImg : true,
             hasDif : {breast:false, pregnant:true},
@@ -13106,11 +13090,15 @@ Macro.add('time', {
              
             acc : null,
             patterns: [],
+            fixacc  : true,
+            subcolor : null,
         },
         {
             id: 3, uid: 0,
             index : &quot;bskirt&quot;,    name : &quot;西装短裙&quot;,     gender : &quot;f&quot;,
-            text : &quot;一条简单的西式短裙。毕竟是廉价款，不能指望耐久度。&quot;,   
+            text : &quot;一条简单的西式短裙。毕竟是廉价款，不能指望耐久度。&quot;,  
+            name_en:&quot;business skirt&quot;,
+            text_en:&quot;A simple business skirt. Because it&#39;s cheap so you can&#39;t expect its durability.&quot; ,
             tag  : [&quot;日常&quot;,&quot;商务&quot;],
             hasImg : true,
             hasDif : {breast:false, pregnant:true},
@@ -13125,11 +13113,15 @@ Macro.add('time', {
             
             acc : null,
             patterns: [],
+            fixacc  : true,
+            subcolor : null,
         },
         {
             id: 4, uid: 0,
             index : &quot;slpshortbt&quot;,    name : &quot;睡衣短裤&quot;,     gender : &quot;n&quot;,
-            text : &quot;一件设计简单的睡衣短裤。轻柔透气的布料给你带来好梦。&quot;,   
+            text : &quot;一件设计简单的睡衣短裤。轻柔透气的布料给你带来好梦。&quot;,  
+            name_en:&quot;summer pajamas&quot;,
+            text_en:&quot;A simple design pajamas. The light and breathable fabric brings you good dreams.&quot;, 
             tag  : [&quot;日常&quot;,&quot;睡衣&quot;],
             hasImg : true,
             hasDif : {breast:false, pregnant:true},
@@ -13144,6 +13136,8 @@ Macro.add('time', {
             
             acc : &quot;blackline&quot;,
             patterns: [&quot;blackline&quot;,&quot;tealine&quot;,&quot;whiteline&quot;,&quot;yellowline&quot;,&quot;greenline&quot;],
+            fixacc  : true,
+            subcolor : null,
         },
     ]&gt;&gt;
 &lt;&lt;/widget&gt;&gt;
@@ -13153,7 +13147,9 @@ Macro.add('time', {
         {
             id: 0, uid: 0,
             index : &quot;naked&quot;,    name : &quot;裸&quot;,     gender : &quot;n&quot;,
-            text : &quot;无&quot;,   
+            text : &quot;无&quot;,  
+            name_en:&quot;&quot;,
+            text_en:&quot;&quot;, 
             tag  : [&quot;裸露&quot;],
             hasImg : false,
             hasDif : {breast:false, pregnant:false},
@@ -13168,11 +13164,15 @@ Macro.add('time', {
             
             acc : null,
             patterns: [],
+            fixacc  : true,
+            subcolor : null,
         },
         {
             id: 1, uid: 0,
             index : &quot;boxer&quot;,    name : &quot;四角内裤&quot;,     gender : &quot;m&quot;,
-            text : &quot;一条简单的四角内裤。&quot;,   
+            text : &quot;一条简单的四角内裤。&quot;,
+            name_en:&quot;boxer brief&quot;,
+            text_en:&quot;A simple boxer brief.&quot;,
             tag  : [&quot;日常&quot;],
             hasImg : true,
             hasDif : {breast:false, pregnant:false},
@@ -13187,11 +13187,15 @@ Macro.add('time', {
             
             acc : null,
             patterns: [],
+            fixacc  : true,
+            subcolor : null,
         },
         {
             id: 2, uid: 0,
             index : &quot;pantie&quot;,    name : &quot;内裤&quot;,     gender : &quot;f&quot;,
-            text : &quot;一款简单朴素的内裤。&quot;,   
+            text : &quot;一款简单朴素的内裤。&quot;,
+            name_en:&quot;pantie&quot;,
+            text_en:&quot;A simple pantie.&quot;,
             tag  : [&quot;日常&quot;],
             hasImg : true,
             hasDif : {breast:false, pregnant:false},
@@ -13206,6 +13210,8 @@ Macro.add('time', {
             
             acc : null,
             patterns: [],
+            fixacc  : true,
+            subcolor : null,
         },
     ]&gt;&gt;
 &lt;&lt;/widget&gt;&gt;
@@ -13215,7 +13221,9 @@ Macro.add('time', {
         {
             id: 0, uid: 0,
             index : &quot;naked&quot;,    name : &quot;裸&quot;,     gender : &quot;n&quot;,
-            text : &quot;无&quot;,   
+            text : &quot;无&quot;,
+            name_en:&quot;&quot;,
+            text_en:&quot;&quot;, 
             tag  : [&quot;裸露&quot;], 
             hasImg : false,
 
@@ -13229,11 +13237,15 @@ Macro.add('time', {
 
             acc : null,
             patterns: [],
+            fixacc  : true,
+            subcolor : null,
         },
         {
             id: 1, uid: 0,
             index : &quot;sportshoes&quot;,    name : &quot;运动鞋&quot;,     gender : &quot;n&quot;,
-            text : &quot;一双普通的白色运动鞋。&quot;,   
+            text : &quot;一双普通的白色运动鞋。&quot;,
+            name_en:&quot;sport shoes&quot;,
+            text_en:&quot;A simple designed sport shoes.&quot;,
             tag  : [&quot;日常&quot;,&quot;运动&quot;], 
             hasImg : true,
 
@@ -13247,11 +13259,15 @@ Macro.add('time', {
 
             acc : null,
             patterns: [],
+            fixacc  : true,
+            subcolor : null,
         },
         {
             id: 2, uid: 0,
             index : &quot;highheel&quot;,    name : &quot;高跟鞋&quot;,     gender : &quot;f&quot;,
-            text : &quot;一双简单设计的高跟鞋。&quot;,   
+            text : &quot;一双简单设计的高跟鞋。&quot;, 
+            name_en:&quot;high heel&quot;,
+            text_en:&quot;A simple design high heel&quot;,
             tag  : [&quot;日常&quot;,&quot;商务&quot;], 
             hasImg : true,
 
@@ -13265,6 +13281,8 @@ Macro.add('time', {
 
             acc : null,
             patterns: [],
+            fixacc  : true,
+            subcolor : null,
         },
     ]&gt;&gt;
 &lt;&lt;/widget&gt;&gt;
@@ -13274,7 +13292,9 @@ Macro.add('time', {
         {
             id: 0, uid: 0,
             index : &quot;naked&quot;,    name : &quot;裸&quot;,     gender : &quot;n&quot;,
-            text : &quot;无&quot;,   
+            text : &quot;无&quot;, 
+            name_en:&quot;&quot;,
+            text_en:&quot;&quot;, 
             tag  : [&quot;裸露&quot;], 
             hasImg : false,
 
@@ -13288,11 +13308,15 @@ Macro.add('time', {
 
             acc : null,
             patterns: [],
+            fixacc  : true,
+            subcolor : null,
         },
         {
             id: 1, uid: 0,
             index : &quot;sportsocks&quot;,    name : &quot;运动短袜&quot;,     gender : &quot;n&quot;,
-            text : &quot;一双简单的运动袜。&quot;,   
+            text : &quot;一双简单的运动袜。&quot;,
+            name_en:&quot;sports socks&quot;,
+            text_en:&quot;A simple design sports socks&quot;,  
             tag  : [&quot;日常&quot;,&quot;运动&quot;], 
             hasImg : true,
 
@@ -13306,6 +13330,8 @@ Macro.add('time', {
 
             acc : null,
             patterns: [],
+            fixacc  : true,
+            subcolor : null,
         },
     ]&gt;&gt;
 &lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="2" name="AvatarData 2" tags="widget" position="225,100" size="100,100">&lt;&lt;widget &quot;InitClothAccesory&quot;&gt;&gt;
@@ -13314,7 +13340,9 @@ Macro.add('time', {
         {
             id: 0, uid: 0,
             index : &quot;naked&quot;,    name : &quot;裸&quot;,     gender : &quot;n&quot;,
-            text : &quot;无&quot;,   
+            text : &quot;无&quot;, 
+            name_en:&quot;&quot;,
+            text_en:&quot;&quot;, 
             tag  : [&quot;裸露&quot;],
             hasImg : false,
 
@@ -13332,7 +13360,9 @@ Macro.add('time', {
         {
             id: 0, uid: 0,
             index : &quot;naked&quot;,    name : &quot;裸&quot;,     gender : &quot;n&quot;,
-            text : &quot;无&quot;,   
+            text : &quot;无&quot;,
+            name_en: &quot;&quot;,
+            text_en: &quot;&quot;, 
             tag  : [&quot;裸露&quot;],
             hasImg : false,
 
@@ -13344,7 +13374,9 @@ Macro.add('time', {
             category: &quot;头饰&quot;, layer : &quot;hat&quot;,
             shop : null,
             acc : null,
-            patterns: []
+            patterns: [],
+            fixacc  : true,
+            subcolor : null,
         },
     ]&gt;&gt;
 
@@ -13352,7 +13384,9 @@ Macro.add('time', {
         {
             id: 0, uid: 0,
             index : &quot;naked&quot;,    name : &quot;裸&quot;,     gender : &quot;n&quot;,
-            text : &quot;无&quot;,   
+            text : &quot;无&quot;, 
+            name_en:&quot;&quot;,
+            text_en:&quot;&quot;, 
             tag  : [&quot;裸露&quot;],
             hasImg : false,
 
@@ -13370,7 +13404,9 @@ Macro.add('time', {
         {
             id : 0, uid: 0,
             index : &quot;naked&quot;,    name : &quot;裸&quot;,     gender : &quot;n&quot;,
-            text : &quot;无&quot;,   
+            text : &quot;无&quot;,  
+            name_en:&quot;&quot;,
+            text_en:&quot;&quot;, 
             tag  : [&quot;裸露&quot;],
             hasImg : false,
 
@@ -13393,6 +13429,8 @@ Macro.add('time', {
             id: 0, uid: 0,
             index : &quot;naked&quot;,    name : &quot;裸&quot;,     gender : &quot;n&quot;,
             text : &quot;无&quot;,   
+            name_en:&quot;&quot;,
+            text_en:&quot;&quot;, 
             tag  : [&quot;裸露&quot;],
             hasDif : {breast:false, pregnant:false},
             hasImg : false,
@@ -13408,7 +13446,9 @@ Macro.add('time', {
             slot : &quot;top&quot;, 
             tuckinable: false,        tuckin : false, 
             acc : null,
-            patterns: []
+            patterns: [],
+            fixacc  : true,
+            subcolor : null,
         },
     ]&gt;&gt;
 
@@ -13421,6 +13461,8 @@ Macro.add('time', {
             id: 0, uid: 0,
             index : &quot;naked&quot;,    name : &quot;裸&quot;,     gender : &quot;n&quot;,
             text : &quot;无&quot;,   
+            name_en:&quot;&quot;,
+            text_en:&quot;&quot;, 
             tag  : [&quot;裸露&quot;],
             hasDif : {breast:false, pregnant:false},
             hasImg : false,
@@ -13436,13 +13478,17 @@ Macro.add('time', {
             slot : &quot;top&quot;,
             tuckinable: false,        tuckin : false, 
             acc : null,
-            patterns: []
+            patterns: [],
+            fixacc  : true,
+            subcolor : null,
         },
         {
             id: 1, uid: 0,
             index : &quot;camisole&quot;,    name : &quot;吊带背心&quot;,     gender : &quot;f&quot;,
             text : &quot;一件简单的吊带背心，给胸部小小的你带来些许安全感。&quot;,   
             tag  : [&quot;日常&quot;],
+            name_en:&quot;camisole&quot;,
+            text_en:&quot;A simple camisole, can give you a little bit comfort.&quot;, 
             hasDif : {breast:false, pregnant:false},
             hasImg : false,
 
@@ -13457,13 +13503,17 @@ Macro.add('time', {
             slot : &quot;top&quot;,
             tuckinable: false,        tuckin : false, 
             acc : null,
-            patterns: []
+            patterns: [],
+            fixacc  : true,
+            subcolor : null,
         },
         {
             id: 2, uid: 0,
             index : &quot;simplebra&quot;,    name : &quot;胸罩&quot;,     gender : &quot;f&quot;,
             text : &quot;一件设计朴素的胸罩。&quot;,   
             tag  : [&quot;日常&quot;],
+            name_en:&quot;bra&quot;,
+            text_en:&quot;A simple design bra.&quot;, 
             hasDif : {breast:false, pregnant:false},
             hasImg : false,
 
@@ -13478,7 +13528,9 @@ Macro.add('time', {
             slot : &quot;top&quot;,
             tuckinable: false,        tuckin : false, 
             acc : null,
-            patterns: []
+            patterns: [],
+            fixacc  : true,
+            subcolor : null,
         },
     ]&gt;&gt;
 &lt;&lt;/widget&gt;&gt;
@@ -13487,13 +13539,13 @@ Macro.add('time', {
     &lt;&lt;set Avatars.l.hairfront to [&quot;natural&quot;,&quot;himecut&quot;]&gt;&gt;
     &lt;&lt;set Avatars.hairfront to {
         natural: {
-            id:0, index:&quot;natural&quot;, long: false, fixcolor: false,
+            id:0, index:&quot;natural&quot;, fixcolor: false, max: 1
         },
         himecut : {
-            id:1, index:&quot;himecut&quot;, long: false, fixcolor: false,
+            id:1, index:&quot;himecut&quot;, fixcolor: false, max: 1
         },
         curly : {
-            id:1, index:&quot;curly&quot;, long: true, fixcolor: false,
+            id:1, index:&quot;curly&quot;, fixcolor: false, max: 4
         }
     }&gt;&gt;
 &lt;&lt;/widget&gt;&gt;
@@ -13502,10 +13554,10 @@ Macro.add('time', {
     &lt;&lt;set Avatars.l.hairback to [&quot;straight&quot;]&gt;&gt;
     &lt;&lt;set Avatars.hairback to {
         straight: {
-            id:0, index:&quot;straight&quot;, long: true, fixcolor: false,
+            id:0, index:&quot;straight&quot;, fixcolor: false, max: 4
         },
         curly: {
-            id:1, index:&quot;curly&quot;, long:true, fixcolor:false,
+            id:1, index:&quot;curly&quot;, fixcolor:false, max: 4
         }
     }&gt;&gt;
 &lt;&lt;/widget&gt;&gt;
@@ -13513,20 +13565,33 @@ Macro.add('time', {
 &lt;&lt;widget &quot;InitLewdEquip&quot;&gt;&gt;
     &lt;&lt;set Avatars.lewdup to {
         乳环:{
-            id:1, name:&quot;乳环&quot;, png: &quot;sp/nipring&quot;,
-            breast: true, hasImg:false, functional: true,
+            name:&quot;乳环&quot;, png: &quot;sp/nipring&quot;,
+            hasDif:{breast: true, pregnant:false}, hasImg:false, functional: true,
             cost: 20, energy: 0,
             category:&quot;特殊&quot;, layer:&quot;nipple&quot;,
             shop: &quot;adult&quot;,
+            text:&quot;一对设计简单的乳环。毕竟是便宜货，戴久了可能会有不适。&quot;,
 
             effect(min){
-                V.FEquip.nipple = true;
-                V.PC.base.快B[0] += 0.5*min;
-                V.PC.base.疼痛[0] += 2*min;
-                return V.PC.base.快B;
+                V.source.快B += 0.5*min;
+                V.source.疼痛 += 2*min;
+                return [V.FEquip.nipple,V.source.快B,V.source.疼痛]
             },
         },
-        乳环项链:{},
+        乳环项链:{
+            name:&quot;乳环项链&quot;, png:&quot;sp/nipnecklace&quot;,
+            hasDif:{breast:true, pregnant:false}, hasImg:false, functional: true,
+            cost: 50, energy: 0,
+            category:&quot;特殊&quot;, layer:&quot;nipple&quot;,
+            shop:&quot;adult&quot;,
+            text:&quot;色气的乳环项链。毕竟是便宜货，戴久了可能会有不适。&quot;,
+
+            effect(min){
+                V.source.快B += 0.5*min;
+                V.source.疼痛 += 2*min;
+                return [V.FEquip.nipple,V.source.快B,V.source.疼痛]
+            },
+        },
         乳头跳蛋:{},
     }&gt;&gt;
 
@@ -13702,7 +13767,7 @@ Macro.add('time', {
     种族 : [&quot;人类&quot;,&quot;兽族&quot;,&quot;灵族&quot;,&quot;羽族&quot;,&quot;夜族&quot;],
     专长 : [&quot;文艺创作&quot;,&quot;物理科学&quot;,&quot;自然科学&quot;,&quot;生理科学&quot;,&quot;音乐表演&quot;,&quot;运动格斗&quot;],
     初期角色 : [&quot;魔法少女&quot;,&quot;爱抖露&quot;,&quot;修仙者&quot;],
-    兽型 : [&quot;猫&quot;,&quot;狗&quot;,&quot;狼&quot;,&quot;狐&quot;,&quot;鹿&quot;,&quot;羊&quot;,&quot;牛&quot;],
+    兽型 : [&quot;cat&quot;,&quot;dog&quot;,&quot;wolf&quot;,&quot;fox&quot;,&quot;deer&quot;,&quot;sheep&quot;,&quot;cow&quot;],
     
     肤色 : [&quot;dark&quot;,&quot;black&quot;,&quot;mugi&quot;,&quot;health&quot;,&quot;white&quot;],
     发色 : [&quot;black&quot;,&quot;darkbrown&quot;,&quot;wine&quot;,&quot;brown&quot;,&quot;milktea&quot;,&quot;blond&quot;,&quot;softblond&quot;,&quot;platinum&quot;,&quot;silver&quot;,&quot;white&quot;,&quot;purple&quot;,&quot;green&quot;,&quot;blue&quot;,&quot;aqua&quot;,&quot;pink&quot;],
@@ -14063,6 +14128,10 @@ Macro.add('time', {
             &quot;drilltail&quot; :&quot;螺旋双马尾&quot;,
         },
         少年:&quot;少年&quot;, 少女:&quot;少女&quot;, 伪娘:&quot;伪娘&quot;, 扶她:&quot;扶她&quot;,
+        兽型:{
+            cat:&quot;猫&quot;, dog:&quot;狗&quot;, fox:&quot;狐&quot;, wolf:&quot;狼&quot;, 
+            sheep:&quot;羊&quot;, deer:&quot;鹿&quot;, cow:&quot;牛&quot;,
+        },
 }&gt;&gt;
 
 &lt;&lt;set setup.L.EN to {
@@ -14090,6 +14159,10 @@ Macro.add('time', {
             &quot;curly&quot;     : &quot;curly&quot;,      &quot;himecut&quot; : &quot;himecut&quot;,
         },
         少年:&quot;boy&quot;, 少女:&quot;girl&quot;, 伪娘:&quot;trap&quot;, 扶她:&quot;futa&quot;,
+        兽型:{
+            cat:&quot;cat&quot;, dog:&quot;dog&quot;, fox:&quot;fox&quot;, wolf:&quot;wolf&quot;, 
+            sheep:&quot;sheep&quot;, deer:&quot;deer&quot;, cow:&quot;cow&quot;,
+        },
 }&gt;&gt;
 
 &lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="9" name="InitPlayerChara" tags="widget" position="1100,100" size="100,100">&lt;&lt;widget &quot;InitPlayerData&quot;&gt;&gt;
@@ -14107,10 +14180,11 @@ Macro.add('time', {
 &lt;&lt;set $PC.info to {
     name  : &quot;魔女&quot;,   tag : &quot;伪娘&quot;,    race : &quot;人类&quot;,
     major  : &quot;文艺创作&quot;,
-    fhairlen: 120,      hairlen : 120,
+    hairlenf: 120,      hairlen : 120,
     haircolor  : &quot;aqua&quot;,   hairstyle : &quot;natural&quot;, /* 不做修饰时的发型，只有自然、卷发、顺直三种，只能在美容店修改*/
     eyecolor  : &quot;aqua&quot;,
     skin  : &quot;white&quot;,
+    kemotype: null,
 }&gt;&gt;
 
 &lt;&lt;set $PC.equip to {
@@ -14381,7 +14455,7 @@ $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌}
 &lt;!-- 自动纠正 --&gt;
 &lt;&lt;silently&gt;&gt;
     &lt;&lt;repeat 0.3s&gt;&gt;
-        &lt;&lt;set $PC.info.fhairlen to $PC.info.hairlen&gt;&gt;
+        &lt;&lt;set $PC.info.hairlenf to $PC.info.hairlen&gt;&gt;
         &lt;&lt;if $activepage is &quot;CharaMaking&quot;&gt;&gt;
             &lt;&lt;if $PC.info.race is &quot;夜族&quot;&gt;&gt;
                 &lt;&lt;set $PC.eye to &quot;银色&quot;&gt;&gt;&lt;&lt;replace #CMEyeoption&gt;&gt;瞳色　&lt;&lt;CMEyeColor&gt;&gt;&lt;&lt;/replace&gt;&gt;
@@ -14405,7 +14479,7 @@ $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌}
                 &lt;&lt;replace #CMFurOption&gt;&gt;　　原型　&lt;&lt;CMFurType&gt;&gt;&lt;&lt;/replace&gt;&gt;
             &lt;&lt;else&gt;&gt;
                 &lt;&lt;replace #CMFurOption&gt;&gt;&lt;&lt;/replace&gt;&gt;
-                &lt;&lt;set $PC.兽型 to null&gt;&gt;
+                &lt;&lt;set $PC.info.kemotype to null&gt;&gt;
             &lt;&lt;/if&gt;&gt;
             &lt;&lt;CMChangeApply&gt;&gt;
         &lt;&lt;else&gt;&gt;
@@ -14481,8 +14555,8 @@ $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌}
 &lt;&lt;/widget&gt;&gt;
 
 &lt;&lt;widget &quot;CMFurType&quot;&gt;&gt;
-    &lt;&lt;set _optionlist to [&quot;猫&quot;,&quot;狗&quot;,&quot;狼&quot;,&quot;狐&quot;,&quot;鹿&quot;,&quot;羊&quot;,&quot;牛&quot;]&gt;&gt;
-    &lt;&lt;listbox &quot;$PC.兽型&quot; autoselect&gt;&gt;
+    &lt;&lt;set _optionlist to {&quot;猫&quot;:&quot;cat&quot;,&quot;狗&quot;:&quot;dog&quot;,&quot;狼&quot;:&quot;wolf&quot;,&quot;狐&quot;:&quot;fox&quot;,&quot;鹿&quot;:&quot;deer&quot;,&quot;羊&quot;:&quot;sheep&quot;,&quot;牛&quot;:&quot;cow&quot;}&gt;&gt;
+    &lt;&lt;listbox &quot;$PC.info.kemotype&quot; autoselect&gt;&gt;
         &lt;&lt;optionsfrom _optionlist&gt;&gt;
     &lt;&lt;/listbox&gt;&gt;
 &lt;&lt;/widget&gt;&gt;
@@ -14605,7 +14679,7 @@ $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌}
             &lt;&lt;set $PC.hips to 1&gt;&gt;
             &lt;&lt;set $PC.body to 1&gt;&gt;
             &lt;&lt;set $PC.info.hairlen to 100&gt;&gt;
-            &lt;&lt;set $PC.info.fhairlen to 100&gt;&gt;
+            &lt;&lt;set $PC.info.hairlenf to 100&gt;&gt;
             &lt;&lt;set $PC.info.hairstyle to &quot;straight&quot;&gt;&gt;
             &lt;&lt;set $PC.info.haircolor to &quot;aqua&quot;&gt;&gt;
             &lt;&lt;set $PC.info.eyecolor to &quot;aqua&quot;&gt;&gt;
@@ -14625,7 +14699,7 @@ $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌}
             &lt;&lt;set $PC.hips to 2&gt;&gt;
             &lt;&lt;set $PC.body to 1&gt;&gt;
             &lt;&lt;set $PC.info.hairlen to 250&gt;&gt;
-            &lt;&lt;set $PC.info.fhairlen to 250&gt;&gt;
+            &lt;&lt;set $PC.info.hairlenf to 250&gt;&gt;
             &lt;&lt;set $PC.info.hairstyle to &quot;straight&quot;&gt;&gt;
             &lt;&lt;set $PC.info.haircolor to &quot;darkbrown&quot;&gt;&gt;
             &lt;&lt;set $PC.info.eyecolor to &quot;brown&quot;&gt;&gt;
@@ -14645,7 +14719,7 @@ $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌}
             &lt;&lt;set $PC.breast to 0&gt;&gt;
             &lt;&lt;set $PC.hips to 1&gt;&gt;
             &lt;&lt;set $PC.body to 1&gt;&gt;
-            &lt;&lt;set $PC.info.hairlen to 120&gt;&gt; &lt;&lt;set $PC.info.fhairlen to 120&gt;&gt;
+            &lt;&lt;set $PC.info.hairlen to 120&gt;&gt; &lt;&lt;set $PC.info.hairlenf to 120&gt;&gt;
             &lt;&lt;set $PC.info.hairstyle to &quot;straight&quot;&gt;&gt;
             &lt;&lt;set $PC.info.haircolor to &quot;platinum&quot;&gt;&gt;
             &lt;&lt;set $PC.info.eyecolor to &quot;emerald&quot;&gt;&gt;
@@ -14655,7 +14729,7 @@ $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌}
             &lt;&lt;set $PC.genital to { &quot;阴茎&quot; : 10, &quot;子宫&quot; : null }&gt;&gt;
 
             &lt;&lt;set $starttrait to &quot;菜鸟&quot;&gt;&gt;
-            &lt;&lt;set $PC.兽型 to &quot;鹿&quot;&gt;&gt;        
+            &lt;&lt;set $PC.info.kemotype to &quot;deer&quot;&gt;&gt;        
     &lt;&lt;/switch&gt;&gt;
     &lt;&lt;CMChangeApply&gt;&gt;
 &lt;&lt;/widget&gt;&gt;
@@ -14916,11 +14990,11 @@ $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌}
             }&gt;&gt;
     &lt;&lt;/switch&gt;&gt;
     &lt;&lt;if $PC.info.race is &quot;兽族&quot;&gt;&gt;
-        &lt;&lt;switch $PC.兽型&gt;&gt;
-            &lt;&lt;case &quot;猫&quot; &quot;狗&quot; &quot;狼&quot; &quot;狐&quot;&gt;&gt;
+        &lt;&lt;switch $PC.info.kemotype&gt;&gt;
+            &lt;&lt;case &quot;cat&quot; &quot;dog&quot; &quot;wolf&quot; &quot;fox&quot;&gt;&gt;
                 &lt;&lt;set $PC.trait.兽耳 to true&gt;&gt;
                 &lt;&lt;set $PC.trait.兽尾 to true&gt;&gt;
-            &lt;&lt;case &quot;鹿&quot; &quot;牛&quot; &quot;羊&quot;&gt;&gt;
+            &lt;&lt;case &quot;deer&quot; &quot;cow&quot; &quot;sheep&quot;&gt;&gt;
                 &lt;&lt;set $PC.trait.兽角 to true&gt;&gt;
                 &lt;&lt;set $PC.trait.兽耳 to true&gt;&gt;
                 &lt;&lt;set $PC.trait.兽尾 to true&gt;&gt;
@@ -14951,15 +15025,15 @@ $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌}
 
     &lt;&lt;if $PC.trait.泌乳体质 is 1&gt;&gt;
         &lt;&lt;set $PC.produce.乳汁 to [($PC.breast*20),($PC.breast*20)]&gt;&gt;
-        &lt;&lt;set $PFlag.lactation to true&gt;&gt;
-        &lt;&lt;set $PFlag.lactatecd to 60&gt;&gt;
+        &lt;&lt;set $Pflag.lactation to true&gt;&gt;
+        &lt;&lt;set $Pflag.lactatecd to 60&gt;&gt;
     &lt;&lt;else&gt;&gt;
         &lt;&lt;set $PC.produce.乳汁 to [0,0]&gt;&gt;
-        &lt;&lt;set $PFlag.lactation to false&gt;&gt;
-        &lt;&lt;set $PFlag.lactatecd to null&gt;&gt;
+        &lt;&lt;set $Pflag.lactation to false&gt;&gt;
+        &lt;&lt;set $Pflag.lactatecd to null&gt;&gt;
     &lt;&lt;/if&gt;&gt;
 
-    &lt;&lt;if $PFlag.top lt 2&gt;&gt;
+    &lt;&lt;if $Pflag.top lt 2&gt;&gt;
         &lt;&lt;redress&gt;&gt;
         &lt;&lt;setface &quot;正常&quot;&gt;&gt;
     &lt;&lt;/if&gt;&gt;
@@ -15015,7 +15089,7 @@ $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌}
 
 &lt;div class=&quot;delayed&quot;&gt;
 &lt;span style=&quot;line-height:40px;font-size:13px;padding:0px;margin:0px&quot;&gt;　
-&lt;&lt;set _text to LangSpl(&quot;＞ 开始游戏&quot;,&quot;＞ Game Start&quot;)&gt;&gt;
+&lt;&lt;set _text to Lang(&quot;＞ 开始游戏&quot;,&quot;＞ Game Start&quot;)&gt;&gt;
 &lt;&lt;link [[_text|开始]]&gt;&gt;&lt;&lt;GSApply&gt;&gt;&lt;&lt;set $intro to false&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/span&gt;&lt;br&gt;
 
 &lt;&lt;include &quot;初始设定&quot;&gt;&gt;
@@ -15047,18 +15121,18 @@ $(document).on(&#39;:passagerender&#39;, function (ev) {
 &lt;/div&gt;</tw-passagedata><tw-passagedata pid="17" name="初始设定" tags="" position="850,225" size="100,100">&lt;&lt;set $activepage to &quot;QuickStart&quot;&gt;&gt;
 
 &lt;div id=&quot;StartingPageMenu&quot;&gt;
-	&lt;&lt;set _text to LangSpl(&quot;快速开始&quot;,&quot;QuickStart&quot;)&gt;&gt;
+	&lt;&lt;set _text to Lang(&quot;快速开始&quot;,&quot;QuickStart&quot;)&gt;&gt;
     &lt;&lt;button _text&gt;&gt;
 	&lt;&lt;replace #StartingPage&gt;&gt;&lt;&lt;set $activepage to &quot;QuickStart&quot;&gt;&gt;&lt;&lt;QuickStart&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;/button&gt;&gt;
 
-	&lt;&lt;set _text to LangSpl(&quot;创建角色&quot;,&quot;CharaMaking&quot;)&gt;&gt;
+	&lt;&lt;set _text to Lang(&quot;创建角色&quot;,&quot;CharaMaking&quot;)&gt;&gt;
     &lt;&lt;button _text&gt;&gt;&lt;&lt;replace #StartingPage&gt;&gt;&lt;&lt;set $activepage to &quot;CharaMaking&quot;&gt;&gt;&lt;&lt;CharaMaking&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;/button&gt;&gt;
 
-	&lt;&lt;set _text to LangSpl(&quot;游戏设定&quot;,&quot;GameSetting&quot;)&gt;&gt;
+	&lt;&lt;set _text to Lang(&quot;游戏设定&quot;,&quot;GameSetting&quot;)&gt;&gt;
     &lt;&lt;button _text&gt;&gt;&lt;&lt;replace #StartingPage&gt;&gt;&lt;&lt;set $activepage to &quot;GameSetting&quot;&gt;&gt;&lt;&lt;GameSetting&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;/button&gt;&gt;
 
     &lt;&lt;if $achivement.scores gt 0&gt;&gt;
-	&lt;&lt;set _text to LangSpl(&quot;周回特典&quot;,&quot;Bonus&quot;)&gt;&gt;
+	&lt;&lt;set _text to Lang(&quot;周回特典&quot;,&quot;Bonus&quot;)&gt;&gt;
     &lt;&lt;button _text&gt;&gt;&lt;&lt;replace #StartingPage&gt;&gt;&lt;&lt;set $activepage to &quot;StartBonus&quot;&gt;&gt;&lt;&lt;StartBonus&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;&lt;/if&gt;&gt;
 
 &lt;/div&gt;
@@ -15996,281 +16070,8 @@ Total &lt;&lt;print $PC.sexrec.高潮.t&gt;&gt;&lt;br&gt;
 &lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="29" name="AvatarSetup" tags="widget" position="1100,350" size="100,100">&lt;&lt;widget &quot;SetAvatar&quot;&gt;&gt;
 
 &lt;&lt;silently&gt;&gt;
-
-&lt;&lt;if $charamaking is true&gt;&gt;
-    &lt;&lt;setface $Equip.emote &quot;loop&quot;&gt;&gt;
-&lt;&lt;/if&gt;&gt;
-/* 相框 OR 特效 */
-&lt;&lt;set $avatar.frame to setAvatar(&quot;frame&quot;,$PFace.frame)&gt;&gt;
-
-/* 浴精喷精冒汗气息之类的 */
-&lt;&lt;if $PFlag.bukkake.body is true&gt;&gt;
-    &lt;&lt;set $avatar.addon.body to setAvatar(&quot;addon.body&quot;,true)&gt;&gt;
-&lt;&lt;else&gt;&gt;
-    &lt;&lt;set $avatar.addon.body to setAvatar(&quot;addon.body&quot;,false)&gt;&gt;
-&lt;&lt;/if&gt;&gt;
-
-&lt;&lt;if $PFlag.bukkake.face is true&gt;&gt;
-    &lt;&lt;set $avatar.addon.face to setAvatar(&quot;addon.face&quot;,true)&gt;&gt;
-&lt;&lt;else&gt;&gt;
-    &lt;&lt;set $avatar.addon.face to setAvatar(&quot;addon.face&quot;,false)&gt;&gt;
-&lt;&lt;/if&gt;&gt;
-
-&lt;&lt;if $PFlag.bukkake.hair is true&gt;&gt;
-    &lt;&lt;set $avatar.addon.hair to setAvatar(&quot;addon.hair&quot;,true)&gt;&gt;
-&lt;&lt;else&gt;&gt;
-    &lt;&lt;set $avatar.addon.hair to setAvatar(&quot;addon.hair&quot;,false)&gt;&gt;
-&lt;&lt;/if&gt;&gt;
-
-&lt;&lt;if ($PC.sexrec.饮精.c gt 100)&gt;&gt;
-    &lt;&lt;set $avatar.addon.face to setAvatar(&quot;addon.face&quot;,true)&gt;&gt;
-&lt;&lt;else&gt;&gt;
-    &lt;&lt;set $avatar.addon.face to setAvatar(&quot;addon.face&quot;,false)&gt;&gt;
-&lt;&lt;/if&gt;&gt;
-
-&lt;&lt;if ($PC.sexrec.肛内射.c + $PC.sexrec.内射.c) gt 200 and $PFlag.bottom lte 1&gt;&gt;
-    &lt;&lt;set $avatar.addon.bottom to setAvatar(&quot;addon.bottom&quot;,true)&gt;&gt;
-&lt;&lt;else&gt;&gt;
-    &lt;&lt;set $avatar.addon.bottom to setAvatar(&quot;addon.bottom&quot;,false)&gt;&gt;
-&lt;&lt;/if&gt;&gt;
-
-&lt;&lt;if ($PC.sexrec.射精.c gt 10) and $PFlag.bottom lte 1&gt;&gt;
-    &lt;&lt;set $avatar.addon.penis to setAvatar(&quot;addon.penis&quot;,true)&gt;&gt;
-&lt;&lt;else&gt;&gt;
-    &lt;&lt;set $avatar.addon.penis to setAvatar(&quot;addon.penis&quot;,false)&gt;&gt;
-&lt;&lt;/if&gt;&gt;
-
-
-/* 共通处理 */
-&lt;&lt;set _group to [&quot;neck&quot;,&quot;hat&quot;,&quot;face&quot;,&quot;hand&quot;,&quot;bottom&quot;,&quot;inner_bt&quot;,&quot;shoes&quot;,&quot;legs&quot;,&quot;back&quot;]&gt;&gt;
-
-&lt;&lt;for _i to 0; _i lt _group.length; _i++ &gt;&gt;
-&lt;&lt;set _n to _group[_i]&gt;&gt;
-&lt;&lt;if $Equip[_n] isnot null and $Equip[_n].hasImg is true&gt;&gt;
-   
-
-    &lt;&lt;if $Equip[_n].fixcolor is true&gt;&gt;
-        &lt;&lt;set $avatar[_n] to setAvatar(_n,{ fixcolor: true, color: $Equip[_n].color, src: $Equip[_n].index + &quot;/&quot; + $Equip[_n].color, acc: null,})&gt;&gt;
-    &lt;&lt;else&gt;&gt;
-        &lt;&lt;set $avatar[_n] to setAvatar(_n,{ fixcolor: false, color: $Equip[_n].color, src: $Equip[_n].index + &quot;/basic&quot;, acc: null,})&gt;&gt;
-    &lt;&lt;/if&gt;&gt;
-    &lt;&lt;if $Equip[_n].acc isnot null&gt;&gt;
-        &lt;&lt;set $avatar[_n].acc to setAvatar(`${_n}.acc`,$Equip[_n].index + &quot;/&quot;+ $Equip[_n].acc) &gt;&gt;
-    &lt;&lt;/if&gt;&gt;
-&lt;&lt;elseif $Equip[_n] isnot null and $Equip[_n].hasImg is false&gt;&gt;
-    &lt;&lt;switch _n&gt;&gt;
-        &lt;&lt;case &quot;bottom&quot;&gt;&gt;
-            &lt;&lt;set $avatar.bottom to setAvatar(&quot;bottom&quot;,{ fixcolor: true, color: &quot;white&quot;, src: &quot;shortpant/basic&quot;, acc: null, })&gt;&gt;
-        &lt;&lt;case &quot;inner_bt&quot;&gt;&gt;
-            &lt;&lt;set $avatar.inner_bt to setAvatar(&quot;inner_bt&quot;,{ fixcolor: true, color: &quot;white&quot;, src: &quot;boxer/basic&quot;, acc: null, })&gt;&gt;
-        &lt;&lt;default&gt;&gt;
-            &lt;&lt;set $avatar[_n] to setAvatar(_n,{ fixcolor: true, color: &quot;&quot;, src: null, acc: null, })&gt;&gt;
-    &lt;&lt;/switch&gt;&gt;
-&lt;&lt;else&gt;&gt;
-    &lt;&lt;set $avatar[_n] to setAvatar(_n,null)&gt;&gt;
-&lt;&lt;/if&gt;&gt;
-
-&lt;&lt;/for&gt;&gt;
-
-/* 有胸部跟怀孕差分的上衣部分处理 */
-&lt;&lt;set _group to [&quot;outter&quot;,&quot;top&quot;,&quot;inner_up&quot;]&gt;&gt;
-
-&lt;&lt;for _i to 0; _i lt _group.length; _i++&gt;&gt;
-&lt;&lt;set _n to _group[_i]&gt;&gt;
-
-&lt;&lt;if $Equip[_n] isnot null and $Equip[_n].hasImg is true&gt;&gt;
-    
-    &lt;&lt;if $Equip[_n].fixcolor is true&gt;&gt;
-        &lt;&lt;set $avatar[_n] to setAvatar(_n,{fixcolor:true, color: $Equip[_n].color, src: $Equip[_n].index + &quot;/&quot; + $Equip[_n].color, acc: null, tuckin:false})&gt;&gt;
-    &lt;&lt;else&gt;&gt;
-        &lt;&lt;set $avatar[_n] to setAvatar(_n,{fixcolor:false, color: $Equip[_n].color, src: $Equip[_n].index + &quot;/basic&quot; , acc: null, tuckin:false})&gt;&gt;
-    &lt;&lt;/if&gt;&gt;
-
-    &lt;&lt;if $Equip[_n].tuckinable is true and $Equip[_n].tuckin is true&gt;&gt;
-        &lt;&lt;set $avatar[_n].tuckin to setAvatar(`${_n}.tuckin`,true)&gt;&gt;
-    &lt;&lt;/if&gt;&gt;
-    &lt;&lt;if $Equip[_n].acc isnot null&gt;&gt;
-        &lt;&lt;set $avatar[_n].acc to setAvatar(`${_n}.acc`,$Equip[_n].index + &quot;/&quot;+ $Equip[_n].acc )&gt;&gt;
-    &lt;&lt;/if&gt;&gt;
-
-    &lt;&lt;if $Equip[_n].hasDif.breast is true&gt;&gt;
-        &lt;&lt;set $avatar[_n].src to setAvatar(`${_n}.src`,$avatar[_n].src + &quot;_&quot; + breastsize())&gt;&gt;
-    &lt;&lt;/if&gt;&gt;
-
-    &lt;&lt;if $Equip[_n].hasDif.pregnant is true&gt;&gt;
-        &lt;&lt;set $avatar[_n].src to setAvatar(`${_n}.src`,$avatar[_n].src + isPregnant())&gt;&gt;
-    &lt;&lt;/if&gt;&gt;
-
-&lt;&lt;elseif $Equip[_n] isnot null and $Equip[_n].imagenable is false&gt;&gt;
-    &lt;&lt;switch _n&gt;&gt;
-        &lt;&lt;case &quot;top&quot;&gt;&gt;
-            &lt;&lt;set $avatar.top to setAvatar(&quot;top&quot;,{ fixcolor: true, color: &quot;white&quot;, src: &quot;Tshirt/white_&quot; + breastsize() + isPregnant(), acc: &quot;Tshirt/slime&quot;, tuckin:false })&gt;&gt;
-        &lt;&lt;default&gt;&gt;
-            &lt;&lt;set $avatar[_n] to setAvatar(_n,{ fixcolor: true, color: &quot;&quot;, src: null, acc: null, })&gt;&gt;
-    &lt;&lt;/switch&gt;&gt;
-&lt;&lt;else&gt;&gt;
-    &lt;&lt;set $avatar[_n] to setAvatar(_n,null)&gt;&gt;
-&lt;&lt;/if&gt;&gt;
-
-&lt;&lt;/for&gt;&gt;
-
-/* 眉毛 */
-&lt;&lt;set $avatar.eyebrow to setAvatar(&quot;eyebrow&quot;,$PFace.eyebrow)&gt;&gt;
-
-
-/* 发型前面 */
-&lt;&lt;if Avatars.hairfront[$Equip.hairfront].fixcolor is true&gt;&gt;
-    &lt;&lt;set $avatar.hairfront to setAvatar(&quot;hairfront&quot;,{fixcolor:true, color:null, src: $Equip.hairfront+&quot;/&quot;+$PC.info.haircolor+hasLength(Avatars.hairfront[$Equip.hairfront])})&gt;&gt;
-&lt;&lt;else&gt;&gt;
-    &lt;&lt;set $avatar.hairfront to setAvatar(&quot;hairfront&quot;,{fixcolor:false, color:A.haircolor[$PC.info.haircolor], src: $Equip.hairfront+&quot;/basic&quot;+hasLength(Avatars.hairfront[$Equip.hairfront])})&gt;&gt;
-&lt;&lt;/if&gt;&gt;
-
-/* 发型后面 */
-&lt;&lt;if Avatars.hairback[$Equip.hairback].fixcolor is true&gt;&gt;
-    &lt;&lt;set $avatar.hairback to setAvatar(&quot;hairback&quot;,{fixcolor:true, color:null, src: $Equip.hairback+&quot;/&quot;+$PC.info.haircolor+hasLength(Avatars.hairback[$Equip.hairback])})&gt;&gt;
-&lt;&lt;else&gt;&gt;
-    &lt;&lt;set $avatar.hairback to setAvatar(&quot;hairback&quot;,{fixcolor:false, color:A.haircolor[$PC.info.haircolor], src: $Equip.hairback+&quot;/basic&quot;+hasLength(Avatars.hairback[$Equip.hairback])})&gt;&gt;
-&lt;&lt;/if&gt;&gt;
-
-
-/* 兽耳、兽角、兽尾 */
-/*
-&lt;&lt;if $PC.trait.兽耳 is true&gt;&gt;
-    &lt;&lt;set $avatar.kemofront.mimi to setAvatar(&quot;kemofront.mimi&quot;,{src= type/ + basic or color, color:=haircolor, fixcolor:true or false })&gt;&gt;
-&lt;&lt;/if&gt;&gt;
-
-&lt;&lt;if $PC.trait.兽角 is true&gt;&gt;
-    &lt;&lt;set $avatar.kemofront.horn to setAvatar(&quot;kemofront.horn&quot;,type )&gt;&gt;
-&lt;&lt;/if&gt;&gt;
-
-&lt;&lt;if $PC.trait.翅膀 is true&gt;&gt;
-    &lt;&lt;set $avatar.kemoback.wing  to setAvatar(&quot;kemoback.wing&quot;,{src= type/ + basic or color, color:=haircolor, fixcolor:true or false })&gt;&gt;
-&lt;&lt;/if&gt;&gt;
-
-&lt;&lt;if $PC.trait.兽尾 is true&gt;&gt;
-    &lt;&lt;set $avatar.kemoback.tail  to setAvatar(&quot;kemoback.tail&quot;,{src= type/ + basic or color, color:=haircolor, fixcolor:true or false })&gt;&gt;
-&lt;&lt;/if&gt;&gt;
- */
-
- /* 乳头/丁丁等特殊装备 */
-&lt;&lt;if $Equip.penis isnot null&gt;&gt;
-    &lt;&lt;set $avatar.penis to setAvatar(&quot;penis&quot;, $Equip.penis.png)&gt;&gt;
-&lt;&lt;else&gt;&gt;
-    &lt;&lt;set $avatar.penis to setAvatar(&quot;penis&quot;, null)&gt;&gt;
-&lt;&lt;/if&gt;&gt;
-
-&lt;&lt;if $Equip.nipple isnot null&gt;&gt;
-    &lt;&lt;if $Equip.nipple.breast is true&gt;&gt;
-        &lt;&lt;set _path to $Equip.nipple.png + &quot;_&quot; + breastsize()&gt;&gt;
-    &lt;&lt;else&gt;&gt;
-        &lt;&lt;set _path to $Equip.nipple.png&gt;&gt;
-    &lt;&lt;/if&gt;&gt;
-    &lt;&lt;set $avatar.nipple to setAvatar(&quot;nipple&quot;, _path)&gt;&gt;
-&lt;&lt;else&gt;&gt;
-    &lt;&lt;set $avatar.nipple to setAvatar(&quot;nipple&quot;, null)&gt;&gt;
-&lt;&lt;/if&gt;&gt;
-
-&lt;&lt;if $Equip.anal isnot null and $Equip.anal.png isnot null&gt;&gt;
-&lt;&lt;set $avatar.plus to setAvatar(&quot;plus&quot;, $Equip.anal.png)&gt;&gt;
-&lt;&lt;else&gt;&gt;
-&lt;&lt;set $avatar.plus to setAvatar(&quot;plus&quot;, null)&gt;&gt;
-&lt;&lt;/if&gt;&gt;
-
-&lt;&lt;if $Equip.vagina isnot null and $Equip.vagina.png isnot null&gt;&gt;
-&lt;&lt;set $avatar.plus to setAvatar(&quot;plus&quot;, $Equip.vagina.png)&gt;&gt;
-&lt;&lt;else&gt;&gt;
-&lt;&lt;set $avatar.plus to setAvatar(&quot;plus&quot;, null)&gt;&gt;
-&lt;&lt;/if&gt;&gt;
-
-
-/* 眼睛 */
-&lt;&lt;set _eyegroup to [&quot;full&quot;,&quot;blink2&quot;,&quot;lookup3&quot;]&gt;&gt;
-&lt;&lt;set _type to [null,&quot;a&quot;,&quot;b&quot;,&quot;c&quot;]&gt;&gt;
-&lt;&lt;set $avatar.eyes to setAvatar(&quot;eyes&quot;,$PC.info.eyecolor + &quot;/&quot; + $PFace.eyes)&gt;&gt;
-&lt;&lt;if _eyegroup.includes($PFace.eyes) is true&gt;&gt;
-    &lt;&lt;set $avatar.eyes to setAvatar(&quot;eyes&quot;,$avatar.eyes + _type[$PC.eyes])&gt;&gt;
-&lt;&lt;/if&gt;&gt;
-&lt;&lt;if $PFace.eyes.includes(&quot;full&quot;) is true and $PFace.name is &quot;正常&quot;&gt;&gt;
-    &lt;&lt;set $avatar.eyes to setAvatar(&quot;eyes&quot;,$avatar.eyes + &quot;_idle&quot;)&gt;&gt;
-&lt;&lt;/if&gt;&gt;
-
-/* 嘴巴 */
-&lt;&lt;set $avatar.mouth to setAvatar(&quot;mouth&quot;,$PFace.mouth)&gt;&gt;
-
-/* 表情追加 */
-&lt;&lt;set $avatar.emoadd.hurt to setAvatar(&quot;emoadd.hurt&quot;,$PFace.hurt)&gt;&gt;
-&lt;&lt;set $avatar.emoadd.shy to setAvatar(&quot;emoadd.shy&quot;,$PFace.shy)&gt;&gt;
-&lt;&lt;set $avatar.emoadd.tear to setAvatar(&quot;emoadd.tear&quot;,$PFace.tear)&gt;&gt;
-&lt;&lt;set $avatar.emoadd.red to setAvatar(&quot;emoadd.red&quot;,$PFace.red)&gt;&gt;
-
-&lt;&lt;if $PC.base.快感[0] gte ($PC.base.快感[1]/3) or $PC.state.发情 is true or $PC.base.酒精[0] gte ($PC.base.酒精[1]/2) or $PC.base.药物[0] gte 50&gt;&gt;
-    &lt;&lt;set $avatar.emoadd.red to setAvatar(&quot;emoadd.red&quot;,true)&gt;&gt;
-&lt;&lt;/if&gt;&gt;
-
-/* 淫纹 */
-&lt;&lt;if $Pskin.腹部 isnot null&gt;&gt;
-    &lt;&lt;set _apath to &quot;./image/avatar/body/&quot;+$Pskin.腹部.index+&quot;.png&quot;&gt;&gt;
-    
-    &lt;&lt;if ImgExist(_apath)&gt;&gt;
-        &lt;&lt;set $avatar.tatoos to setAvatar(&quot;tatoos&quot;,$Pskin.腹部.index)&gt;&gt;
-    &lt;&lt;else&gt;&gt;
-        &lt;&lt;set $avatar.tatoos to setAvatar(&quot;tatoos&quot;,&quot;dummy&quot;)&gt;&gt;
-    &lt;&lt;/if&gt;&gt;
-&lt;&lt;else&gt;&gt;
-    &lt;&lt;set $avatar.tatoos to setAvatar(&quot;tatoos&quot;,null)&gt;&gt;
-&lt;&lt;/if&gt;&gt;
-
-&lt;&lt;set _group to &quot;羽族&quot;,&quot;兽族&quot;&gt;&gt;
-/* 素体 */
-&lt;&lt;if $PFlag.kemoform is true and _group.includes($PC.info.race)&gt;&gt;
-    &lt;&lt;set $avatar.body to setAvatar(&quot;body&quot;, {src:&quot;furry/body_&quot;+ breastsize() + isPregnant(), color:A.haircolor[$PC.info.haircolor]})&gt;&gt;&gt;&gt;
-        /* JJ，套上贞操笼时要变成软丁丁 */
-    &lt;&lt;if $Equip.inner_bt isnot null and $Equip.inner_bt.index is &quot;chastitycage&quot;&gt;&gt;
-        &lt;&lt;set $avatar.dick to setAvatar(&quot;dick&quot;,&quot;furry/penis_d&quot;,true)&gt;&gt;
-    &lt;&lt;else&gt;&gt;
-        &lt;&lt;if $PC.genital.阴茎 gt 3 and $PFlag.bottom lte 1&gt;&gt;
-            &lt;&lt;set $avatar.dick to setAvatar(&quot;dick&quot;,&quot;furry/penis&quot;,true)&gt;&gt;
-        &lt;&lt;else&gt;&gt;
-            &lt;&lt;set $avatar.dick to setAvatar(&quot;dick&quot;,null)&gt;&gt;
-        &lt;&lt;/if&gt;&gt;
-    &lt;&lt;/if&gt;&gt;
-&lt;&lt;else&gt;&gt;
-    &lt;&lt;set $avatar.body to setAvatar(&quot;body&quot;,$PC.info.skin +&quot;/body_&quot;+ breastsize() + isPregnant())&gt;&gt;
-        /* JJ，套上贞操笼时要变成软丁丁 */
-    &lt;&lt;if $Equip.inner_bt isnot null and $Equip.inner_bt.index is &quot;chastitycage&quot;&gt;&gt;
-            &lt;&lt;set $avatar.dick to setAvatar(&quot;dick&quot;,$PC.info.skin +&quot;/penis_d&quot;,true)&gt;&gt;
-    &lt;&lt;else&gt;&gt;
-        &lt;&lt;if $PC.genital.阴茎 gt 3 and $PFlag.bottom lte 1&gt;&gt;
-            &lt;&lt;set $avatar.dick to setAvatar(&quot;dick&quot;,$PC.info.skin +&quot;/penis&quot;,true)&gt;&gt;
-        &lt;&lt;else&gt;&gt;
-            &lt;&lt;set $avatar.dick to setAvatar(&quot;dick&quot;,null)&gt;&gt;
-        &lt;&lt;/if&gt;&gt;
-    &lt;&lt;/if&gt;&gt;
-&lt;&lt;/if&gt;&gt;
-
-
-
-
-/* 背景 */
-&lt;&lt;set $avatar.background to setAvatar(&quot;background&quot;,imglocation())&gt;&gt;
-&lt;&lt;if $avatar.background is &quot;dummy&quot;&gt;&gt;
-    &lt;&lt;set $avatar.background to setAvatar(&quot;background&quot;,null)&gt;&gt;
-&lt;&lt;/if&gt;&gt;
-
+&lt;&lt;run stAvatar()&gt;&gt;
 &lt;&lt;/silently&gt;&gt;
-
-&lt;&lt;/widget&gt;&gt;
-
-&lt;&lt;widget &quot;checkimg&quot;&gt;&gt;
-&lt;&lt;set _checkpath to &quot;./image/avatar/&quot;+$args[0]+&quot;_&quot;+$args[1]+&quot;/&quot;+$args[2]+&quot;.png&quot;&gt;&gt;
-
-&lt;&lt;if ImgExist(_checkpath) is false&gt;&gt;
-    &lt;&lt;if $args[3]&gt;&gt;
-        &lt;&lt;set $avatar[$args[1]] to setAvatar($args[1],$args[3])&gt;&gt;
-    &lt;&lt;else&gt;&gt;
-         &lt;&lt;set $avatar[$args[1]] to setAvatar($args[1],&quot;dummy&quot;)&gt;&gt;
-    &lt;&lt;/if&gt;&gt;
-&lt;&lt;/if&gt;&gt;
 
 &lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="30" name="ShowAvatar" tags="widget" position="1225,350" size="100,100">&lt;&lt;widget &quot;avatar&quot;&gt;&gt;
 &lt;&lt;if $render is &quot;canvas&quot;&gt;&gt;
@@ -16355,9 +16156,8 @@ Total &lt;&lt;print $PC.sexrec.高潮.t&gt;&gt;&lt;br&gt;
 &lt;&lt;set $TEquip to clone($Equip)&gt;&gt;
 &lt;&lt;run strip(&quot;hat&quot;); strip(&quot;outter&quot;); strip(&quot;top&quot;); strip(&quot;bottom&quot;);
     strip(&quot;inner_up&quot;); strip(&quot;inner_bt&quot;); strip(&quot;legs&quot;); strip(&quot;shoes&quot;); strip(&quot;face&quot;);
-    strip(&quot;neck&quot;); strip(&quot;hand&quot;); strip(&quot;back&quot;)&gt;&gt;
-&lt;&lt;run setreveal()&gt;&gt;
-&lt;&lt;SetAvatar&gt;&gt;
+    strip(&quot;neck&quot;); strip(&quot;hand&quot;); strip(&quot;back&quot;);
+    setreveal();stAvatar()&gt;&gt;
 &lt;&lt;/link&gt;&gt;
 &lt;/div&gt;
 &lt;div class=&quot;redress&quot;&gt;
@@ -16390,7 +16190,7 @@ Total &lt;&lt;print $PC.sexrec.高潮.t&gt;&gt;&lt;br&gt;
 &lt;&lt;set _placeholder to &quot;image/avatar/thumb.png&quot;&gt;&gt;
 
 &lt;div id=&quot;W_showitems&quot;&gt;
-    &lt;div class=&quot;itemthumb&quot;&gt;&lt;&lt;print &quot;&lt;&lt;link [img[_nakeimg]] &gt;&gt;&lt;&lt;run strip(&#39;&quot;+_catgr+&quot;&#39;)&gt;&gt;&lt;&lt;fixvalue&gt;&gt;&lt;&lt;SetAvatar&gt;&gt;&lt;&lt;/link&gt;&gt;&quot;&gt;&gt;&lt;/div&gt;
+    &lt;div class=&quot;itemthumb&quot;&gt;&lt;&lt;print &quot;&lt;&lt;link [img[_nakeimg]] &gt;&gt;&lt;&lt;run strip(&#39;&quot;+_catgr+&quot;&#39;)&gt;&gt;&lt;&lt;fixvalue&gt;&gt;&lt;&lt;/link&gt;&gt;&quot;&gt;&gt;&lt;/div&gt;
     &lt;div class=&quot;W_itemname&quot;&gt;脱掉&lt;&lt;print _catgrname[$args[0]]&gt;&gt;&lt;/div&gt;
 &lt;/div&gt;
 
@@ -16404,7 +16204,7 @@ Total &lt;&lt;print $PC.sexrec.高潮.t&gt;&gt;&lt;br&gt;
         &lt;&lt;set _code to $closet[_catgr][_i].color&gt;&gt;
         &lt;&lt;set _name to $closet[_catgr][_i].colorname&gt;&gt;
         &lt;div id=&quot;W_showitems&quot;&gt;
-            &lt;div class=&quot;itemthumb&quot;&gt;&lt;&lt;print &quot;&lt;&lt;link [img[_img]]&gt;&gt;&lt;&lt;run dressOn(&#39;&quot;+_catgr+&quot;&#39;,&quot;+_i+&quot;)&gt;&gt;&lt;&lt;fixvalue&gt;&gt;&lt;&lt;SetAvatar&gt;&gt;&lt;&lt;/link&gt;&gt;&quot;&gt;&gt;&lt;/div&gt;
+            &lt;div class=&quot;itemthumb&quot;&gt;&lt;&lt;print &quot;&lt;&lt;link [img[_img]]&gt;&gt;&lt;&lt;run dressOn(&#39;&quot;+_catgr+&quot;&#39;,&quot;+_i+&quot;)&gt;&gt;&lt;&lt;fixvalue&gt;&gt;&lt;&lt;/link&gt;&gt;&quot;&gt;&gt;&lt;/div&gt;
             &lt;div class=&quot;W_color&quot; @style=&quot;&#39;background-color:&#39;+_code&quot;&gt;&lt;&lt;print _name&gt;&gt;&lt;/div&gt;
             &lt;&lt;if $closet[_catgr][_i].acc isnot null&gt;&gt;
                 &lt;div class=&quot;W_pattern&quot;&gt;&lt;&lt;print $closet[_catgr][_i].acc&gt;&gt;&lt;/div&gt;
@@ -16447,7 +16247,7 @@ Total &lt;&lt;print $PC.sexrec.高潮.t&gt;&gt;&lt;br&gt;
 
     &lt;&lt;set $fix.beauty = 1600&gt;&gt;
     &lt;&lt;set $PC.info.hairlen to Math.clamp($PC.info.hairlen,0,9999)&gt;&gt;
-    &lt;&lt;set $PC.info.fhairlen to Math.clamp($PC.info.fhairlen,0,9999)&gt;&gt;
+    &lt;&lt;set $PC.info.hairlenf to Math.clamp($PC.info.hairlenf,0,9999)&gt;&gt;
     &lt;&lt;set $PC.beauty to Math.clamp($fix.beauty*allureBuff(),0,9999)&gt;&gt;
     &lt;&lt;set _warmth to warmth()&gt;&gt;
 
@@ -17031,9 +16831,9 @@ Total &lt;&lt;print $PC.sexrec.高潮.t&gt;&gt;&lt;br&gt;
     
     &lt;div id=&quot;item_info&quot;&gt;
         &lt;div id=&quot;description&quot;&gt;
-        &lt;&lt;print $showcase.text&gt;&gt;&lt;br&gt;
+        &lt;&lt;print lang($showcase.text,$showcase.text_en)&gt;&gt;&lt;br&gt;
         &lt;/div&gt;
-        &lt;div class=&quot;warmth&quot;&gt;适应温度：18C～28C&lt;/div&gt;
+        &lt;div class=&quot;warmth&quot;&gt;适应温度：&lt;&lt;print ($fix.cold+$showcase.cold)&gt;&gt;C～&lt;&lt;print ($fix.hot+$showcase.hot)&gt;&gt;C&lt;/div&gt;
 
         &lt;div id=&quot;outfit_trait&quot;&gt;
             &lt;div class=&quot;of_title&quot;&gt;属性：&lt;/div&gt;
@@ -17468,28 +17268,28 @@ $(document).ready(function(){
 
 &lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="55" name="主线 开幕-初次：S" tags="" position="600,725" size="100,100">&lt;&lt;switch $count&gt;&gt;
 &lt;&lt;case 0&gt;&gt;
-	&lt;&lt;set _text to LangSpl(&quot;睁开眼睛&quot;,&quot;Open The Eyes&quot;)&gt;&gt;
+	&lt;&lt;set _text to Lang(&quot;睁开眼睛&quot;,&quot;Open The Eyes&quot;)&gt;&gt;
 	&lt;div class=&quot;Wselect&quot;&gt;&lt;&lt;link _text&gt;&gt;&lt;&lt;set $count to 1&gt;&gt;&lt;&lt;Revent&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
 
-	&lt;&lt;set _text to LangSpl(&quot;回忆梦境&quot;,&quot;Recall The Dream&quot;)&gt;&gt;
+	&lt;&lt;set _text to Lang(&quot;回忆梦境&quot;,&quot;Recall The Dream&quot;)&gt;&gt;
 	&lt;div class=&quot;Wselect&quot;&gt;&lt;&lt;link _text&gt;&gt;&lt;&lt;set $count to 2&gt;&gt;&lt;&lt;Revent&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
 
 &lt;&lt;case 4&gt;&gt;
-	&lt;&lt;set _text to LangSpl(&quot;但这不是梦&quot;,&quot;But it&#39;s not just a dream&quot;)&gt;&gt;
+	&lt;&lt;set _text to Lang(&quot;但这不是梦&quot;,&quot;But it&#39;s not just a dream&quot;)&gt;&gt;
 	&lt;div class=&quot;Wselect&quot;&gt;&lt;&lt;link _text&gt;&gt;&lt;&lt;set $count to 5&gt;&gt;&lt;&lt;Revent&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
 
-	&lt;&lt;set _text to LangSpl(&quot;这只是个梦&quot;,&quot;It just a dream&quot;)&gt;&gt;
+	&lt;&lt;set _text to Lang(&quot;这只是个梦&quot;,&quot;It just a dream&quot;)&gt;&gt;
 	&lt;div class=&quot;Wselect&quot;&gt;&lt;&lt;link _text&gt;&gt;&lt;&lt;set $count to 6&gt;&gt;&lt;&lt;Revent&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
 
 &lt;&lt;case 8&gt;&gt;
-	&lt;&lt;set _text to LangSpl(&quot;没错，这是&lt;&lt;you&gt;&gt;的房间&quot;,&quot;Yes, it&#39;s &lt;&lt;my&gt;&gt; room.&quot;)&gt;&gt;
+	&lt;&lt;set _text to Lang(&quot;没错，这是&lt;&lt;you&gt;&gt;的房间&quot;,&quot;Yes, it&#39;s &lt;&lt;my&gt;&gt; room.&quot;)&gt;&gt;
 	&lt;div class=&quot;Eselect&quot;&gt;&lt;&lt;link _text&gt;&gt;&lt;&lt;set $count to 9&gt;&gt;&lt;&lt;Revent&gt;&gt;&lt;&lt;masteraudio stop&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
 
-	&lt;&lt;set _text to LangSpl(&quot;不对，这是哪？&quot;,&quot;Wait, where &lt;&lt;am&gt;&gt; &lt;&lt;I&gt;&gt;?&quot;)&gt;&gt;
+	&lt;&lt;set _text to Lang(&quot;不对，这是哪？&quot;,&quot;Wait, where &lt;&lt;am&gt;&gt; &lt;&lt;I&gt;&gt;?&quot;)&gt;&gt;
 	&lt;div class=&quot;Eselect&quot;&gt;&lt;&lt;link _text&gt;&gt;&lt;&lt;set $count to 10&gt;&gt;&lt;&lt;Revent&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
 
 &lt;&lt;case 10&gt;&gt;
-	&lt;&lt;set _text to LangSpl(&quot;继续&quot;,&quot;Next&quot;)&gt;&gt;
+	&lt;&lt;set _text to Lang(&quot;继续&quot;,&quot;Next&quot;)&gt;&gt;
 	&lt;div @class=&quot;($count &gt;= 8 ? &#39;Eselect&#39; : &#39;Wselect&#39; )&quot;&gt;&lt;&lt;link _text $passage&gt;&gt;
 	&lt;&lt;set $event.branch to &quot;初次-穿越版&quot;&gt;&gt;
 	&lt;&lt;set $eventnext to 0&gt;&gt;
@@ -17498,7 +17298,7 @@ $(document).ready(function(){
 	&lt;&lt;/link&gt;&gt;&lt;/div&gt;
 
 &lt;&lt;case 15&gt;&gt;
-&lt;&lt;set _text to LangSpl(&quot;继续&quot;,&quot;Next&quot;)&gt;&gt;
+&lt;&lt;set _text to Lang(&quot;继续&quot;,&quot;Next&quot;)&gt;&gt;
 &lt;div class=&quot;Eselect&quot;&gt;
 &lt;&lt;link _text &quot;你的家 单身公寓&quot;&gt;&gt;
 &lt;&lt;masteraudio stop&gt;&gt;
@@ -17506,7 +17306,7 @@ $(document).ready(function(){
 &lt;&lt;/link&gt;&gt;&lt;/div&gt;
 
 &lt;&lt;default&gt;&gt;
-	&lt;&lt;set _text to LangSpl(&quot;继续&quot;,&quot;Next&quot;)&gt;&gt;
+	&lt;&lt;set _text to Lang(&quot;继续&quot;,&quot;Next&quot;)&gt;&gt;
 	&lt;div @class=&quot;($count &gt;= 8 ? &#39;Eselect&#39; : &#39;Wselect&#39; )&quot;&gt;&lt;&lt;link _text&gt;&gt;&lt;&lt;set $count to $eventnext&gt;&gt;&lt;&lt;Revent&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
 
 &lt;&lt;/switch&gt;&gt;</tw-passagedata><tw-passagedata pid="56" name="主线 开幕-初次-穿越版" tags="" position="725,725" size="100,100">&lt;&lt;Opening2 $count&gt;&gt;</tw-passagedata><tw-passagedata pid="57" name="主线 开幕-初次-穿越版：W" tags="widget" position="850,725" size="100,100">&lt;&lt;widget &quot;Opening2&quot;&gt;&gt;
@@ -17633,50 +17433,50 @@ $(document).ready(function(){
 
 &lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="58" name="主线 开幕-初次-穿越版：S" tags="" position="975,725" size="100,100">&lt;&lt;switch $count&gt;&gt;
 &lt;&lt;case 1&gt;&gt;
-&lt;&lt;set _text to LangSpl(&quot;拿起手机&quot;,&quot;Pick up the phone&quot;)&gt;&gt;
+&lt;&lt;set _text to Lang(&quot;拿起手机&quot;,&quot;Pick up the phone&quot;)&gt;&gt;
 &lt;div class=&quot;Eselect&quot;&gt;&lt;&lt;link _text&gt;&gt;&lt;&lt;set $count to 2&gt;&gt;&lt;&lt;Revent&gt;&gt;&lt;&lt;passtime 2&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
 
 &lt;&lt;case 2&gt;&gt;
-&lt;&lt;set _text to LangSpl(&quot;只是记忆混乱&quot;,&quot;Just confused memory&quot;)&gt;&gt;
+&lt;&lt;set _text to Lang(&quot;只是记忆混乱&quot;,&quot;Just confused memory&quot;)&gt;&gt;
 &lt;div class=&quot;Eselect&quot;&gt;&lt;&lt;link _text&gt;&gt;&lt;&lt;set $event.branch to &quot;初次&quot;&gt;&gt;&lt;&lt;set $count to 11&gt;&gt;&lt;&lt;set $Flag.穿越者 to false&gt;&gt;&lt;&lt;Revent&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
 
-&lt;&lt;set _text to LangSpl(&quot;或许是重生穿越&quot;,&quot;Maybe reborn to the younger &lt;&lt;me&gt;&gt;&quot;)&gt;&gt;
+&lt;&lt;set _text to Lang(&quot;或许是重生穿越&quot;,&quot;Maybe reborn to the younger &lt;&lt;me&gt;&gt;&quot;)&gt;&gt;
 &lt;div class=&quot;Eselect&quot;&gt;&lt;&lt;link _text&gt;&gt;&lt;&lt;set $count to 3&gt;&gt;&lt;&lt;anouncePopUP &quot;获得头衔《穿越者》&quot; &quot;获得成就&quot;&gt;&gt;&lt;&lt;set $Flag.穿越者 to true&gt;&gt;&lt;&lt;set $pctitle.穿越者 to true&gt;&gt;&lt;&lt;Revent&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
 
 &lt;&lt;case 4&gt;&gt;
 &lt;&lt;if $eflag.includes(&quot;查看手机&quot;) is false&gt;&gt;
-&lt;&lt;set _text to LangSpl(&quot;查看手机&quot;,&quot;Check the phone&quot;)&gt;&gt;
+&lt;&lt;set _text to Lang(&quot;查看手机&quot;,&quot;Check the phone&quot;)&gt;&gt;
 &lt;div class=&quot;Eselect&quot;&gt;&lt;&lt;link _text&gt;&gt;&lt;&lt;run V.eflag.push(&quot;查看手机&quot;)&gt;&gt;&lt;&lt;set $count to 5&gt;&gt;&lt;&lt;passtime 30&gt;&gt;&lt;&lt;Revent&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
 &lt;&lt;/if&gt;&gt;
 
 &lt;&lt;if $eflag.includes(&quot;查看电脑&quot;) is false&gt;&gt;
-&lt;&lt;set _text to LangSpl(&quot;查看电脑&quot;,&quot;Check the Computer&quot;)&gt;&gt;
+&lt;&lt;set _text to Lang(&quot;查看电脑&quot;,&quot;Check the Computer&quot;)&gt;&gt;
 &lt;div class=&quot;Eselect&quot;&gt;&lt;&lt;link _text&gt;&gt;&lt;&lt;run V.eflag.push(&quot;查看电脑&quot;)&gt;&gt;&lt;&lt;set $count to 6&gt;&gt;&lt;&lt;passtime 30&gt;&gt;&lt;&lt;Revent&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
 &lt;&lt;/if&gt;&gt;
 
 &lt;&lt;if $eflag.includes(&quot;四处翻找&quot;) is false&gt;&gt;
-&lt;&lt;set _text to LangSpl(&quot;四处翻找&quot;,&quot;Find around in the room&quot;)&gt;&gt;
+&lt;&lt;set _text to Lang(&quot;四处翻找&quot;,&quot;Find around in the room&quot;)&gt;&gt;
 &lt;div class=&quot;Eselect&quot;&gt;&lt;&lt;link _text&gt;&gt;&lt;&lt;run V.eflag.push(&quot;四处翻找&quot;)&gt;&gt;&lt;&lt;set $count to 7&gt;&gt;&lt;&lt;passtime 60&gt;&gt;&lt;&lt;Revent&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
 &lt;&lt;/if&gt;&gt;
 
 &lt;&lt;if $eflag.length is 3&gt;&gt;
-&lt;&lt;set _text to LangSpl(&quot;继续&quot;,&quot;Next&quot;)&gt;&gt;
+&lt;&lt;set _text to Lang(&quot;继续&quot;,&quot;Next&quot;)&gt;&gt;
 &lt;div class=&quot;Eselect&quot;&gt;&lt;&lt;link _text&gt;&gt;&lt;&lt;set $count to $eventnext&gt;&gt;&lt;&lt;unset $eflag&gt;&gt;&lt;&lt;Revent&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
 &lt;&lt;/if&gt;&gt;
 
 &lt;&lt;case 7&gt;&gt;
-&lt;&lt;set _text to LangSpl(&quot;继续&quot;,&quot;Next&quot;)&gt;&gt;
+&lt;&lt;set _text to Lang(&quot;继续&quot;,&quot;Next&quot;)&gt;&gt;
 &lt;div class=&quot;Eselect&quot;&gt;&lt;&lt;link _text $passage&gt;&gt;&lt;&lt;set $count to $eventnext&gt;&gt;&lt;&lt;if $temp.c is 2&gt;&gt;&lt;&lt;getitem &quot;important&quot; &quot;魔力方块&quot;&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
 
 &lt;&lt;case 9&gt;&gt;
-&lt;&lt;set _text to LangSpl(&quot;继续&quot;,&quot;Next&quot;)&gt;&gt;
+&lt;&lt;set _text to Lang(&quot;继续&quot;,&quot;Next&quot;)&gt;&gt;
 &lt;div class=&quot;Eselect&quot;&gt;
 &lt;&lt;link _text &quot;你的家 单身公寓&quot;&gt;&gt;
 &lt;&lt;EventEnd&gt;&gt;
 &lt;&lt;/link&gt;&gt;&lt;/div&gt;
 
 &lt;&lt;default&gt;&gt;
-&lt;&lt;set _text to LangSpl(&quot;继续&quot;,&quot;Next&quot;)&gt;&gt;
+&lt;&lt;set _text to Lang(&quot;继续&quot;,&quot;Next&quot;)&gt;&gt;
 &lt;div class=&quot;Eselect&quot;&gt;&lt;&lt;link _text&gt;&gt;&lt;&lt;set $count to $eventnext&gt;&gt;&lt;&lt;Revent&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
 
 &lt;&lt;/switch&gt;&gt;</tw-passagedata><tw-passagedata pid="59" name="主线 开幕-轮回" tags="" position="1100,725" size="100,100">&lt;&lt;bookmark &quot;主线开幕_轮回&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="60" name="PC 主线-开幕-房间描述" tags="nobr" position="1225,725" size="100,100">&lt;&lt;lang 

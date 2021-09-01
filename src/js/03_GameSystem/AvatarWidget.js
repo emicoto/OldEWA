@@ -61,10 +61,12 @@ window.warmth = warmth
 
 /* 商店处理 */
 
-function setShowCaseUID(){
-    V.showcase.uid = random(100000,999999)
+window.setShowCaseUID = function(){
+    if(V.showcase){
+        V.showcase.uid = random(100000,999999)
+    }
 }
-window.setShowCaseUID = setShowCaseUID
+
 
 function setShowCase(table) {
     if (typeof(table) == "object") {
@@ -203,6 +205,7 @@ function strip(arg) {
     new Wikifier(null,"<<replace '#action-text'>>"+text+"<</replace>>")
     new Wikifier(null,"<<replace '#action-text2'>>"+text+"<</replace>>")
     ShowPopUP()
+    stAvatar()
 }
 window.strip = strip
 
@@ -271,6 +274,7 @@ function dressOn(args, arg) {
     new Wikifier(null,"<<replace '#action-text'>>"+text+"<</replace>>")
     new Wikifier(null,"<<replace '#action-text2'>>"+text+"<</replace>>")
     ShowPopUP()
+    stAvatar()
 }
 
 window.dressOn = dressOn

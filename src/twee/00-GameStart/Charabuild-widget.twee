@@ -64,8 +64,8 @@
 <</widget>>
 
 <<widget "CMFurType">>
-    <<set _optionlist to ["猫","狗","狼","狐","鹿","羊","牛"]>>
-    <<listbox "$PC.兽型" autoselect>>
+    <<set _optionlist to {"猫":"cat","狗":"dog","狼":"wolf","狐":"fox","鹿":"deer","羊":"sheep","牛":"cow"}>>
+    <<listbox "$PC.info.kemotype" autoselect>>
         <<optionsfrom _optionlist>>
     <</listbox>>
 <</widget>>
@@ -188,7 +188,7 @@
             <<set $PC.hips to 1>>
             <<set $PC.body to 1>>
             <<set $PC.info.hairlen to 100>>
-            <<set $PC.info.fhairlen to 100>>
+            <<set $PC.info.hairlenf to 100>>
             <<set $PC.info.hairstyle to "straight">>
             <<set $PC.info.haircolor to "aqua">>
             <<set $PC.info.eyecolor to "aqua">>
@@ -208,7 +208,7 @@
             <<set $PC.hips to 2>>
             <<set $PC.body to 1>>
             <<set $PC.info.hairlen to 250>>
-            <<set $PC.info.fhairlen to 250>>
+            <<set $PC.info.hairlenf to 250>>
             <<set $PC.info.hairstyle to "straight">>
             <<set $PC.info.haircolor to "darkbrown">>
             <<set $PC.info.eyecolor to "brown">>
@@ -228,7 +228,7 @@
             <<set $PC.breast to 0>>
             <<set $PC.hips to 1>>
             <<set $PC.body to 1>>
-            <<set $PC.info.hairlen to 120>> <<set $PC.info.fhairlen to 120>>
+            <<set $PC.info.hairlen to 120>> <<set $PC.info.hairlenf to 120>>
             <<set $PC.info.hairstyle to "straight">>
             <<set $PC.info.haircolor to "platinum">>
             <<set $PC.info.eyecolor to "emerald">>
@@ -238,7 +238,7 @@
             <<set $PC.genital to { "阴茎" : 10, "子宫" : null }>>
 
             <<set $starttrait to "菜鸟">>
-            <<set $PC.兽型 to "鹿">>        
+            <<set $PC.info.kemotype to "deer">>        
     <</switch>>
     <<CMChangeApply>>
 <</widget>>
@@ -499,11 +499,11 @@
             }>>
     <</switch>>
     <<if $PC.info.race is "兽族">>
-        <<switch $PC.兽型>>
-            <<case "猫" "狗" "狼" "狐">>
+        <<switch $PC.info.kemotype>>
+            <<case "cat" "dog" "wolf" "fox">>
                 <<set $PC.trait.兽耳 to true>>
                 <<set $PC.trait.兽尾 to true>>
-            <<case "鹿" "牛" "羊">>
+            <<case "deer" "cow" "sheep">>
                 <<set $PC.trait.兽角 to true>>
                 <<set $PC.trait.兽耳 to true>>
                 <<set $PC.trait.兽尾 to true>>
@@ -534,15 +534,15 @@
 
     <<if $PC.trait.泌乳体质 is 1>>
         <<set $PC.produce.乳汁 to [($PC.breast*20),($PC.breast*20)]>>
-        <<set $PFlag.lactation to true>>
-        <<set $PFlag.lactatecd to 60>>
+        <<set $Pflag.lactation to true>>
+        <<set $Pflag.lactatecd to 60>>
     <<else>>
         <<set $PC.produce.乳汁 to [0,0]>>
-        <<set $PFlag.lactation to false>>
-        <<set $PFlag.lactatecd to null>>
+        <<set $Pflag.lactation to false>>
+        <<set $Pflag.lactatecd to null>>
     <</if>>
 
-    <<if $PFlag.top lt 2>>
+    <<if $Pflag.top lt 2>>
         <<redress>>
         <<setface "正常">>
     <</if>>

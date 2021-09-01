@@ -107,9 +107,9 @@ Macro.add('volume', {
 	}
 });
 
-function LangSpl(CN,EN) {
+function Lang(CN,EN) {
   if(V.lang=="CN")return CN;
   if(V.lang=="EN")return EN;
 }
-window.LangSpl = LangSpl
-DefineMacroS("lang", LangSpl)
+window.Lang = Lang
+DefineMacroS("lang", Lang)

@@ -121,11 +121,11 @@ function mine(){
 function he(key=null) {
   var gender = V.currentchara.gender
     if(gender=="m"){
-      if(key!=null)return LangSpl("他","He");
-      else return LangSpl("他","he");
+      if(key!=null)return Lang("他","He");
+      else return Lang("他","he");
     }else{
-      if(key!=null)return LangSpl("她","She");
-      else return LangSpl("她","she");
+      if(key!=null)return Lang("她","She");
+      else return Lang("她","she");
     }
 }
 DefineMacroS("he", he);
@@ -134,11 +134,11 @@ DefineMacroS("he", he);
 function his(key=null) {
   var gender = V.currentchara.gender
     if(gender=="m"){
-      if(key!=null)return LangSpl("他的","His");
-      else return LangSpl("他的","his");
+      if(key!=null)return Lang("他的","His");
+      else return Lang("他的","his");
     }else{
-      if(key!=null)return LangSpl("她的","Her");
-      else return LangSpl("她的","her");
+      if(key!=null)return Lang("她的","Her");
+      else return Lang("她的","her");
     }
 }
 DefineMacroS("his", his);
@@ -171,15 +171,6 @@ function hair(){
   return `${setup.L[V.lang]["发色"][V.PC.info.haircolor] + setup.L[V.lang]["发型"][V.PC.info.hairstyle] + hairlength}`;
 }
 
-window.hairlenth = function(num){
-  const select = new SelectCase();
-  select.add(0,99, 1);
-  select.add(100,499, 2);
-  select.add(500,799,3)
-  select.default = 4
-  const lenth = select.has(num)
-  return lenth
-}
 DefineMacroS("hair",hair);
 
 /* 容貌描述 */
@@ -217,18 +208,6 @@ function skin(){
 DefineMacroS("skin", skin);
 
 /*胸部 */
-window.breastsize = function() {
-  var size = V.PC.breast
-  if (between(size,0,1)){
-    return 1;
-  }
-  else if (between(size,2,3)){
-    return 2;
-  }
-  else if (size>=4){
-    return 3;
-  }
-}
 
 function breast(){
   switch(V.PC.breast){

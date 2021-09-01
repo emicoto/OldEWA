@@ -122,7 +122,7 @@
 
 /* 发型前面 */
 <<if Avatars.hairfront[$Equip.hairfront].long is true>>
-    <<set $avatar.hairfront to $Equip.hairfront + "/" + isFixhair(Avatars.hairfront[$Equip.hairfront]) + "_" + hairlenth($PC.info.fhairlen)>>
+    <<set $avatar.hairfront to $Equip.hairfront + "/" + isFixhair(Avatars.hairfront[$Equip.hairfront]) + "_" + hairlenth($PC.info.hairlenf)>>
 <<else>>
     <<set $avatar.hairfront to $Equip.hairfront + "/" + isFixhair(Avatars.hairfront[$Equip.hairfront]) + "_1">>
 <</if>>
