@@ -52,7 +52,7 @@ Elysion World Adventure
 <div class="delayed">
 <span style="line-height:40px;font-size:13px;padding:0px;margin:0px">　
 <<set _text to Lang("＞ 开始游戏","＞ Game Start")>>
-<<link [[_text|Combat]]>><<GSApply>><<set $intro to false>><</link>></span><br>
+<<link [[_text|开始]]>><<GSApply>><<set $intro to false>><</link>></span><br>
 
 <<include "初始设定">>
 </div>
@@ -131,6 +131,10 @@ $(document).on(':passagerender', function (ev) {
 
 <div class="Eselect">
 <<link "跳过开头" "你的家 单身公寓">><<playlist "mainloop" shuffle play>><</link>>
+</div>
+
+<div class="Eselect">
+[[战斗测试|Combat]]
 </div>
 
 <div class="Eselect">

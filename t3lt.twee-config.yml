@@ -354,3 +354,11 @@ sugarcube-2:
       name: InitLewdEquip
     RPGbar:
       name: RPGbar
+    CB_playerside:
+      name: CB_playerside
+    delay:
+      name: delay
+    showmoney:
+      name: showmoney
+    sidebar_stats:
+      name: sidebar_stats

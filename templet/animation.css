@@ -64,3 +64,49 @@ body {
   animation: blink 0.6s steps(4) infinite;
   margin: 100px;
 }
+
+#show_money{
+    width: fit-content;
+    min-width: 200px;
+    position: relative;
+    background-color: rgba(255, 255, 255, 0.5);
+    border: 2px solid rgba(224, 223, 204, 0.5);
+    border-radius: 0% 0px 0px 50px;
+    position: fixed;
+    top:-1px;
+    right:-1px;
+    padding-left: 20px;
+    text-align: right;
+}
+
+#show_money .slice {
+    color: rgb(221, 217, 212);
+}
+
+#show_money .points {
+    font-size: 18px;
+    line-height: 18px;
+    color:rgb(70, 208, 243);
+    font-family: 稚艺简体,'Times New Roman';
+    font-weight: 600;
+    letter-spacing: 3px;
+    float: left;
+    width: fit-content;
+    min-width: 100px;
+    height: 20px;
+    padding: 2px;
+}
+
+#show_money .money {
+    font-size: 18px;
+    line-height: 18px;
+    color:rgb(172, 169, 2);
+    font-family: 稚艺简体,'Times New Roman';
+    font-weight: 600;
+    letter-spacing: 3px;
+    float: right;
+    width: fit-content;
+    min-width: 100px;
+    height: 20px;
+    padding: 2px;
+}

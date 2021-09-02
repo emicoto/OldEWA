@@ -138,7 +138,7 @@ hr {
 
 #icon {
   position: static;
-  vertical-align: middle;
+  vertical-align: text-top;
 }
 
 .followleft {

@@ -2,7 +2,7 @@
 <<widget "InitGameData">>
 
 <!-- 初始化游戏数据 -->
-<<set $gametime to 0>>
+<<set $gametime to {pass:0, hour:0, min:0, sec:0, day:0}>>
 <<set $intro to true>>
 <<set $tutorial to false>>
 
@@ -22,6 +22,7 @@
 <<set $location to "单身公寓">>
 
 <<set $money to 5000>>
+<<set $points to 0>>
 <<set $follow = 1, $follower = 100>>
 
 <<set $actmode = "自由", $chaos = 0>>

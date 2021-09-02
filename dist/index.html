@@ -552,7 +552,7 @@ input[type=range]:focus {
   font-family: 'Times New Roman', "MS PGothic";
   position: fixed;
   top:0px;
-  right:10px;
+  left:55px;
 }
 
 .VolumeSlider, .VolumeSlider::-webkit-slider-runnable-track {
@@ -882,7 +882,7 @@ hr {
 
 #icon {
   position: static;
-  vertical-align: middle;
+  vertical-align: text-top;
 }
 
 .followleft {
@@ -1185,6 +1185,17 @@ transition: none !important;
 #ui-bar-toggle{
     color: rgb(59, 58, 49);
     border-color: rgb(219, 219, 211);
+    width: 30px;
+    height: 30px;
+}
+
+#ui-bar-history {
+    width: 40px;
+    height: 100px;
+    z-index: auto;
+    position: absolute;
+    top:40px;
+    right:0px;
 }
 
 #ui-bar-history [id|="history"] {
@@ -1200,6 +1211,22 @@ transition: none !important;
 #ui-bar-toggle:hover{
     background-color: #eee;
     border-color: rgb(59, 58, 49);
+}
+
+#history-backward{
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    top:30px;
+    right: -28px;
+}
+
+#history-forward {
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    top:0px;
+    right:-28px;
 }
 
 #ui-bar-history [id|="history"]:hover {
@@ -1463,16 +1490,37 @@ body #story-caption #storyCaptionDiv {
     color:rgb(240, 239, 231);
 }
 
-.money {
-    font-size: 18px;
-    color:rgb(172, 169, 2);
+#show_money {
+    font-size: 16px;
+    line-height: 18px;   
     vertical-align:middle;
-    background-image: url("image/icon/moneyicon.png");
-    background-repeat: no-repeat;
-    background-position-x: 0px;
     font-family: 稚艺简体,'Times New Roman';
     font-weight: 600;
     letter-spacing: 3px;
+    position: relative;
+    display: inline-block;
+    width: 80%;
+    height: 24px;
+}
+#show_money .points {
+    text-align: right;
+    width: fit-content;
+    width: 45%;
+    float: left;
+    color: rgb(86, 187, 255);
+}
+
+#show_money .slice {
+    color:#ccc;
+    width: 20px;
+}
+
+#show_money .money{
+    width: fit-content;
+    width: 45%;
+    float: right;
+    color:rgb(172, 169, 2);
+    text-align: left;
 }
 
 #notice {
@@ -1487,16 +1535,121 @@ body #story-caption #storyCaptionDiv {
     width: 170px;
     align-content: center;
     z-index: 0;
-    margin:auto;
-    margin-top: 5px;
+    margin-top: -10px;
     margin-bottom: 10px;
+    margin-left: 40px;
     line-height: 20px;
 }
 
-#splitbotton button{
+#menu_container {
+    width: 320px;
+    z-index: 10000;
+    background-color: rgba(255, 255, 255, 0.5);
+    border: 2px solid #FFF;
+    position: fixed;
+    border-radius: 0px 100px 100px 0px;
+    bottom:5%;
+    box-shadow: 0px 0px 5px rgba(109, 109, 100, 0.5);
+    transition: all 0.6s;
+    overflow: hidden;
+    display: inline-block;
+}
+
+@media screen and (max-height: 1200px) {
+    #menu_container{
+        bottom:30%;
+    }
+}
+
+@media screen and (max-height: 960px) {
+    #menu_container{
+        bottom:18%;
+    }
+}
+
+@media screen and (max-height: 820px) {
+    #menu_container{
+        bottom:10%;
+    }
+}
+
+@media screen and (max-height: 680px) {
+    #menu_container{
+        bottom:10px;
+    }
+}
+.menu_hide {
+    left:-300px;
+    height: 80px;
+    font-size: 14px;
+    line-height: 16px;
+    padding: 1% 20px 1% 0px;
+}
+
+
+
+#menu_container:hover,
+#menu_container:focus,
+#menu_container:focus-visible{
+    left: -10px;
+    background-color: rgba(255, 255, 255, 0.8);
+    box-shadow: 0px 0px 8px rgba(109, 109, 100, 0.2);
+    line-height: 20px;
+    font-size: 16px;
+    padding:10px 30px 10px 0px;
+    height: fit-content;
+}
+
+#menu_container:hover .menu,
+#menu_container:focus .menu,
+#menu_container:focus-visible .menu{
+ color:#c4c267;
+}
+
+#menu_container .menu {
+    width: 20px;
+    height: 100%;
+    float: right;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    position: relative;
+    font-family: 轻吟体M;
+    text-align: center;
+    vertical-align: middle;
+}
+
+#menu_container .splitbotton{
+    width: calc(100% - 50px);
+    float: left;
+    position: relative;
+}
+
+#menu_container .splitbotton button{
     width: 120px;
     max-width: 120px;
-    letter-spacing: 2px;
+    letter-spacing: 1px;
+    font-family: 新综艺;
+    font-size: 14px;
+    float: right;
+    margin: 2px;
+    background-color: transparent;
+}
+
+#menu_container .splitbotton button:hover{
+    background-color: transparent;
+}
+
+#sidebar_stats button{
+    min-width: 75px;
+    max-width: 75px;
+    max-height: 12px;
+    border: #ddd 1px solid;
+    color: #9A9242;
+    font-size: 10px;
+    line-height: 4px;
+    text-align: center;
+    vertical-align:top;
+    margin: 0px;
 }
 /* twine-user-stylesheet #7: "04-OverlayPage.css" */
 .customOverlay {
@@ -1517,7 +1670,8 @@ body #story-caption #storyCaptionDiv {
     overflow-y: scroll;
     z-index: 1000;
     max-width: 1000px;
-  user-select: none;
+    user-select: none;
+    transition: all 0.75s;
 }
   
 .customOverlay[data-overlay="canvasLayers"],
@@ -2961,6 +3115,14 @@ body #story-caption #storyCaptionDiv {
     position: absolute;
 }
 
+.portrait {
+    width: 160px;
+    width: 160px;
+    top: -15px;
+    left: -12px;
+    position: absolute;
+}
+
 #portrait {
     width: 120px;
     height: 120px;
@@ -2971,13 +3133,6 @@ body #story-caption #storyCaptionDiv {
     border-radius: 100%;
     margin: 5px;
 }
-
-.P_Layer {
-    top: -15px;
-    left: 0px;
-    position: absolute;
-}
-
 
 /* 商店相关 */
 
@@ -3293,7 +3448,7 @@ body #story-caption #storyCaptionDiv {
     width: fit-content;
     height: fit-content;
     min-height: 120px;
-    display: inline-block;
+    display: inline-flex;
     padding: 2px;
     position: relative;
     text-align: center;
@@ -3312,6 +3467,8 @@ body #story-caption #storyCaptionDiv {
     padding: 5px;
     display: inline-block;
     position: relative;
+    border-radius: 10px 0px 0px 10px;
+    background-color: rgba(255, 255, 255, 0.40);
 }
 
 #characard {
@@ -3354,6 +3511,7 @@ body #story-caption #storyCaptionDiv {
     background-color: #ddd;
     border:1px solid #ccc;
     margin-left: 2px;
+    transition: all 0.75s;
 }
 
 #characard .bar {
@@ -9580,7 +9738,7 @@ function isObject(props) {
 }
 var Avatar;
 (function(Avatar2) {
-  const AVATARPATH = "image/avatar";
+  const AVATARPATH = "./image/avatar";
   const __resolve = (mainpath, ...paths) => path.resolve(mainpath, ...paths);
   const cache = {};
   function CanvasModels(name, width, height) {
@@ -9635,8 +9793,8 @@ var Avatar;
     };
   }
   new CanvasModels("Avatar", 180, 260);
-  new CanvasModels("Portrait", 120, 120);
-  new CanvasModels("Emoji", 120, 120);
+  new CanvasModels("Portrait", 160, 160);
+  new CanvasModels("Emoji", 160, 160);
   Renderer.CanvasModels["Shop"] = {
     name: "Avatar",
     width: 166,
@@ -9708,739 +9866,34 @@ var Avatar;
       }
     });
   }
-  function Portraitlayer(ID, dx = -25) {
-    let layerID = 0;
-    setLayer(ID, "kemoback_wing", {
+  function Avatarlayer(ID, option = null) {
+    const defalutOpt = {
       width: 180,
       height: 260,
-      z: layerID++,
-      dx,
-      showfn(options2) {
-        return !!options2.kemoback.wing;
-      },
-      srcfn(options2) {
-        return options2.kemoback.wing ? __resolve(AVATARPATH, `kemoback/${options2.kemoback.wing.src}.png`) : options2.dummy;
-      },
-      blendModefn(options2) {
-        if (options2.kemoback.wing) {
-          if (!options2.kemoback.wing.fixcolor) {
-            return BLENDMODE.MULTIPLY;
-          }
-        }
-      },
-      blendfn(options2) {
-        if (options2.kemoback.wing) {
-          if (!options2.kemoback.wing.fixcolor) {
-            return options2.kemoback.wing.color;
-          }
-        }
-      }
-    });
-    setLayer(ID, "kemoback_tail", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      dx,
-      showfn(options2) {
-        return !!options2.kemoback.tail;
-      },
-      srcfn(options2) {
-        return options2.kemoback.tail ? __resolve(AVATARPATH, `kemoback/${options2.kemoback.tail.src}.png`) : options2.dummy;
-      },
-      blendModefn(options2) {
-        if (options2.kemoback.tail) {
-          if (!options2.kemoback.tail.fixcolor) {
-            return BLENDMODE.MULTIPLY;
-          }
-        }
-      },
-      blendfn(options2) {
-        if (options2.kemoback.tail) {
-          if (!options2.kemoback.tail.fixcolor) {
-            return options2.kemoback.tail.color;
-          }
-        }
-      }
-    });
-    setLayer(ID, "back", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      dx,
-      showfn(options2) {
-        return !!options2.back;
-      },
-      srcfn(options2) {
-        return options2.back ? __resolve(AVATARPATH, `back/${options2.back.src}.png`) : options2.dummy;
-      },
-      blendModefn(options2) {
-        if (options2.back) {
-          if (!options2.back.fixcolor) {
-            return BLENDMODE.MULTIPLY;
-          }
-        }
-      },
-      blendfn(options2) {
-        if (options2.back) {
-          if (!options2.back.fixcolor) {
-            return options2.back.color;
-          }
-        }
-      }
-    });
-    setLayer(ID, "hairback", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      dx,
-      showfn(options2) {
-        return !!options2.hairback;
-      },
-      srcfn(options2) {
-        if (isObject(options2.hairback)) {
-          return options2.hairback ? __resolve(AVATARPATH, `hairback/${options2.hairback.src}.png`) : options2.dummy;
-        }
-        return options2.hairback ? __resolve(AVATARPATH, `hairback/${options2.hairback}.png`) : options2.dummy;
-      },
-      blendModefn(options2) {
-        if (isObject(options2.hairback)) {
-          if (!options2.hairback.fixcolor) {
-            return BLENDMODE.MULTIPLY;
-          }
-        }
-      },
-      blendfn(options2) {
-        if (isObject(options2.hairback)) {
-          if (!options2.hairback.fixcolor) {
-            return options2.hairback.color[0];
-          }
-        }
-      }
-    });
-    setLayer(ID, "body", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      showfn(options2) {
-        return !!options2.body;
-      },
-      srcfn(options2) {
-        if (isObject(options2.body)) {
-          return options2.body ? __resolve(AVATARPATH, `body/${options2.body.src}.png`) : options2.dummy;
-        }
-        return options2.body ? __resolve(AVATARPATH, `body/${options2.body}.png`) : options2.dummy;
-      }
-    });
-    setLayer(ID, "body_msk", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      showfn(options2) {
-        return isObject(options2.body) ? options2.body.src.includes("furry") : false;
-      },
-      srcfn(options2) {
-        if (isObject(options2.body)) {
-          return options2.body.src.includes("furry") ? __resolve(AVATARPATH, `body/${options2.body.src}.png`) : options2.dummy;
-        }
-      },
-      blendModefn(options2) {
-        if (isObject(options2.body)) {
-          if (!options2.body.fixcolor) {
-            return BLENDMODE.MULTIPLY;
-          }
-        }
-      },
-      blendfn(options2) {
-        if (isObject(options2.body)) {
-          if (!options2.body.fixcolor) {
-            return options2.body.color;
-          }
-        }
-      },
-      masksrcfn(options2) {
-        if (isObject(options2.body)) {
-          if (options2.body.src.includes("furry")) {
-            return __resolve(AVATARPATH, `body/furry/mask.png`);
-          }
-        }
-      }
-    });
-    setLayer(ID, "nipple", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      dx,
-      showfn(options2) {
-        return !!options2.nipple;
-      },
-      srcfn(options2) {
-        return options2.nipple ? __resolve(AVATARPATH, `${options2.nipple}.png`) : options2.dummy;
-      }
-    });
-    setLayer(ID, "hand", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      dx,
-      showfn(options2) {
-        return !!options2.hand;
-      },
-      srcfn(options2) {
-        if (isObject(options2.hand)) {
-          return options2.hand ? __resolve(AVATARPATH, `hand/${options2.hand.src}.png`) : options2.dummy;
-        }
-        return options2.hand ? __resolve(AVATARPATH, `hand/${options2.hand}.png`) : options2.dummy;
-      },
-      blendModefn(options2) {
-        if (isObject(options2.hand)) {
-          if (!options2.hand.fixcolor) {
-            return BLENDMODE.MULTIPLY;
-          }
-        }
-      },
-      blendfn(options2) {
-        if (isObject(options2.hand)) {
-          if (!options2.hand.fixcolor) {
-            return options2.hand.color;
-          }
-        }
-      }
-    });
-    setLayer(ID, "inner_up", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      dx,
-      showfn(options2) {
-        return !!options2.inner_up;
-      },
-      srcfn(options2) {
-        if (isObject(options2.inner_up)) {
-          return options2.inner_up ? __resolve(AVATARPATH, `inner_up/${options2.inner_up.src}.png`) : options2.dummy;
-        }
-        return options2.inner_up ? __resolve(AVATARPATH, `inner_up/${options2.inner_up}.png`) : options2.dummy;
-      },
-      blendModefn(options2) {
-        if (isObject(options2.inner_up)) {
-          if (!options2.inner_up.fixcolor) {
-            return BLENDMODE.MULTIPLY;
-          }
-        }
-      },
-      blendfn(options2) {
-        if (isObject(options2.inner_up)) {
-          if (!options2.inner_up.fixcolor) {
-            return options2.inner_up.color;
-          }
-        }
-      }
-    });
-    setLayer(ID, "inner_up_acc", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      dx,
-      showfn(options2) {
-        if (isObject(options2.inner_up)) {
-          return !!options2.inner_up.acc;
-        }
-        return false;
-      },
-      srcfn(options2) {
-        if (isObject(options2.inner_up)) {
-          return options2.inner_up.acc ? __resolve(AVATARPATH, `inner_up/${options2.inner_up.acc}.png`) : options2.dummy;
-        }
-        return options2.dummy;
-      }
-    });
-    setLayer(ID, "top", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      dx,
-      showfn(options2) {
-        return !!options2.top;
-      },
-      srcfn(options2) {
-        if (isObject(options2.top)) {
-          return options2.top ? __resolve(AVATARPATH, `top/${options2.top.src}.png`) : options2.dummy;
-        }
-        return options2.top ? __resolve(AVATARPATH, `top/${options2.top}.png`) : options2.dummy;
-      },
-      blendModefn(options2) {
-        if (isObject(options2.top)) {
-          if (!options2.top.fixcolor) {
-            return BLENDMODE.MULTIPLY;
-          }
-        }
-      },
-      blendfn(options2) {
-        if (isObject(options2.top)) {
-          if (!options2.top.fixcolor) {
-            return options2.top.color;
-          }
-        }
-      }
-    });
-    setLayer(ID, "top_acc", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      dx,
-      showfn(options2) {
-        if (isObject(options2.top)) {
-          return !!options2.top.acc;
-        }
-        return false;
-      },
-      srcfn(options2) {
-        if (isObject(options2.top)) {
-          return options2.top.acc ? __resolve(AVATARPATH, `top/${options2.top.acc}.png`) : options2.dummy;
-        }
-        return options2.dummy;
-      }
-    });
-    setLayer(ID, "outter", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      dx,
-      showfn(options2) {
-        return !!options2.inner_up;
-      },
-      srcfn(options2) {
-        if (isObject(options2.outter)) {
-          return options2.outter ? __resolve(AVATARPATH, `outter/${options2.outter.src}.png`) : options2.dummy;
-        }
-        return options2.outter ? __resolve(AVATARPATH, `outter/${options2.outter}.png`) : options2.dummy;
-      },
-      blendModefn(options2) {
-        if (isObject(options2.outter)) {
-          if (!options2.outter.fixcolor) {
-            return BLENDMODE.MULTIPLY;
-          }
-        }
-      },
-      blendfn(options2) {
-        if (isObject(options2.outter)) {
-          if (!options2.outter.fixcolor) {
-            return options2.outter.color;
-          }
-        }
-      }
-    });
-    setLayer(ID, "outter_acc", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      dx,
-      showfn(options2) {
-        if (isObject(options2.outter)) {
-          return !!options2.outter.acc;
-        }
-        return false;
-      },
-      srcfn(options2) {
-        if (isObject(options2.outter)) {
-          return options2.outter.acc ? __resolve(AVATARPATH, `top/${options2.outter.acc}.png`) : options2.dummy;
-        }
-        return options2.dummy;
-      }
-    });
-    setLayer(ID, "mouth", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      dx,
-      showfn(options2) {
-        return !!options2.mouth;
-      },
-      srcfn(options2) {
-        if (isObject(options2.mouth)) {
-          return options2.mouth ? __resolve(AVATARPATH, `mouth/${options2.mouth.src}.png`) : options2.dummy;
-        }
-        return options2.mouth ? __resolve(AVATARPATH, `mouth/${options2.mouth}.png`) : options2.dummy;
-      },
-      blendModefn(options2) {
-        if (isObject(options2.mouth)) {
-          if (!options2.mouth.fixcolor) {
-            return BLENDMODE.MULTIPLY;
-          }
-        }
-      },
-      blendfn(options2) {
-        if (isObject(options2.mouth)) {
-          if (!options2.mouth.fixcolor) {
-            return options2.mouth.color;
-          }
-        }
-      }
-    });
-    setLayer(ID, "eyes", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      dx,
-      showfn(options2) {
-        return !!options2.eyes;
-      },
-      srcfn(options2) {
-        if (isObject(options2.eyes)) {
-          return options2.eyes ? __resolve(AVATARPATH, `eyes/${options2.eyes.src}.png`) : options2.dummy;
-        }
-        return options2.eyes ? __resolve(AVATARPATH, `eyes/${options2.eyes}.png`) : options2.dummy;
-      },
-      blendModefn(options2) {
-        if (isObject(options2.eyes)) {
-          if (!options2.eyes.fixcolor) {
-            return BLENDMODE.MULTIPLY;
-          }
-        }
-      },
-      blendfn(options2) {
-        if (isObject(options2.eyes)) {
-          if (!options2.eyes.fixcolor) {
-            return options2.eyes.color;
-          }
-        }
-      },
-      animationfn(options2) {
-        return "eyes";
-      }
-    });
-    setLayer(ID, "emoadd_tear", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      dx,
-      showfn(options2) {
-        return !!options2.emoadd.tear;
-      },
-      srcfn(options2) {
-        return options2.emoadd.tear ? __resolve(AVATARPATH, `emoadd/tear.png`) : options2.dummy;
-      }
-    });
-    setLayer(ID, "emoadd_shy", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      dx,
-      showfn(options2) {
-        return !!options2.emoadd.shy;
-      },
-      srcfn(options2) {
-        return options2.emoadd.shy ? __resolve(AVATARPATH, `emoadd/shy.png`) : options2.dummy;
-      }
-    });
-    setLayer(ID, "emoadd_red", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      dx,
-      showfn(options2) {
-        return !!options2.emoadd.red;
-      },
-      srcfn(options2) {
-        return options2.emoadd.red ? __resolve(AVATARPATH, `emoadd/red.png`) : options2.dummy;
-      }
-    });
-    setLayer(ID, "emoadd_hurt", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      dx,
-      showfn(options2) {
-        return !!options2.emoadd.hurt;
-      },
-      srcfn(options2) {
-        return options2.emoadd.hurt ? __resolve(AVATARPATH, `emoadd/hurt.png`) : options2.dummy;
-      }
-    });
-    setLayer(ID, "face", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      dx,
-      showfn(options2) {
-        return !!options2.face;
-      },
-      srcfn(options2) {
-        if (isObject(options2.face)) {
-          return options2.face ? __resolve(AVATARPATH, `face/${options2.face.src}.png`) : options2.dummy;
-        }
-        return options2.face ? __resolve(AVATARPATH, `face/${options2.face}.png`) : options2.dummy;
-      },
-      blendModefn(options2) {
-        if (isObject(options2.face)) {
-          if (!options2.face.fixcolor) {
-            return BLENDMODE.MULTIPLY;
-          }
-        }
-      },
-      blendfn(options2) {
-        if (isObject(options2.face)) {
-          if (!options2.face.fixcolor) {
-            return options2.face.color;
-          }
-        }
-      }
-    });
-    setLayer(ID, "neck", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      dx,
-      showfn(options2) {
-        return !!options2.neck;
-      },
-      srcfn(options2) {
-        if (isObject(options2.neck)) {
-          return options2.neck ? __resolve(AVATARPATH, `neck/${options2.neck.src}.png`) : options2.dummy;
-        }
-        return options2.neck ? __resolve(AVATARPATH, `neck/${options2.neck}.png`) : options2.dummy;
-      },
-      blendModefn(options2) {
-        if (isObject(options2.neck)) {
-          if (!options2.neck.fixcolor) {
-            return BLENDMODE.MULTIPLY;
-          }
-        }
-      },
-      blendfn(options2) {
-        if (isObject(options2.neck)) {
-          if (!options2.neck.fixcolor) {
-            return options2.neck.color;
-          }
-        }
-      }
-    });
-    setLayer(ID, "hairfront", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      dx,
-      showfn(options2) {
-        return !!options2.hairfront;
-      },
-      srcfn(options2) {
-        if (isObject(options2.hairfront)) {
-          return options2.hairfront ? __resolve(AVATARPATH, `hairfront/${options2.hairfront.src}.png`) : options2.dummy;
-        }
-        return options2.hairfront ? __resolve(AVATARPATH, `hairfront/${options2.hairfront}.png`) : options2.dummy;
-      },
-      blendModefn(options2) {
-        if (isObject(options2.hairfront)) {
-          if (!options2.hairfront.fixcolor) {
-            return BLENDMODE.MULTIPLY;
-          }
-        }
-      },
-      blendfn(options2) {
-        if (isObject(options2.hairfront)) {
-          if (!options2.hairfront.fixcolor) {
-            return options2.hairfront.color[0];
-          }
-        }
-      }
-    });
-    setLayer(ID, "eyebrow", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      dx,
-      showfn(options2) {
-        return !!options2.eyebrow;
-      },
-      srcfn(options2) {
-        if (isObject(options2.eyebrow)) {
-          return options2.eyebrow ? __resolve(AVATARPATH, `eyebrow/${options2.eyebrow.src}.png`) : options2.dummy;
-        }
-        return options2.eyebrow ? __resolve(AVATARPATH, `eyebrow/${options2.eyebrow}.png`) : options2.dummy;
-      },
-      blendModefn(options2) {
-        if (isObject(options2.eyebrow)) {
-          if (!options2.eyebrow.fixcolor) {
-            return BLENDMODE.MULTIPLY;
-          }
-        }
-      },
-      blendfn(options2) {
-        if (isObject(options2.eyebrow)) {
-          if (!options2.eyebrow.fixcolor) {
-            return options2.eyebrow.color;
-          }
-        }
-      }
-    });
-    setLayer(ID, "kemofront_mimi", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      dx,
-      showfn(options2) {
-        return !!options2.kemofront.mimi;
-      },
-      srcfn(options2) {
-        if (isObject(options2.kemofront.mimi)) {
-          return options2.kemofront.mimi ? __resolve(AVATARPATH, `kemofront/${options2.kemofront.mimi.src}.png`) : options2.dummy;
-        }
-        return options2.kemofront.mimi ? __resolve(AVATARPATH, `kemofront/${options2.kemofront.mimi}.png`) : options2.dummy;
-      },
-      blendModefn(options2) {
-        if (isObject(options2.kemofront.mimi)) {
-          if (!options2.kemofront.mimi.fixcolor) {
-            return BLENDMODE.MULTIPLY;
-          }
-        }
-      },
-      blendfn(options2) {
-        if (isObject(options2.kemofront.mimi)) {
-          if (!options2.kemofront.mimi.fixcolor) {
-            return options2.kemofront.mimi.color;
-          }
-        }
-      }
-    });
-    setLayer(ID, "kemofront_horn", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      dx,
-      showfn(options2) {
-        return !!options2.kemofront.horn;
-      },
-      srcfn(options2) {
-        if (isObject(options2.kemofront.horn)) {
-          return options2.kemofront.horn ? __resolve(AVATARPATH, `kemofront/${options2.kemofront.horn.src}.png`) : options2.dummy;
-        }
-        return options2.kemofront.horn ? __resolve(AVATARPATH, `kemofront/${options2.kemofront.horn}.png`) : options2.dummy;
-      },
-      blendModefn(options2) {
-        if (isObject(options2.kemofront.horn)) {
-          if (!options2.kemofront.horn.fixcolor) {
-            return BLENDMODE.MULTIPLY;
-          }
-        }
-      },
-      blendfn(options2) {
-        if (isObject(options2.kemofront.horn)) {
-          if (!options2.kemofront.horn.fixcolor) {
-            return options2.kemofront.horn.color;
-          }
-        }
-      }
-    });
-    setLayer(ID, "hat", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      dx,
-      showfn(options2) {
-        return !!options2.hat;
-      },
-      srcfn(options2) {
-        if (isObject(options2.hat)) {
-          return options2.hat ? __resolve(AVATARPATH, `hat/${options2.hat.src}.png`) : options2.dummy;
-        }
-        return options2.hat ? __resolve(AVATARPATH, `hat/${options2.hat}.png`) : options2.dummy;
-      },
-      blendModefn(options2) {
-        if (isObject(options2.hat)) {
-          if (!options2.hat.fixcolor) {
-            return BLENDMODE.MULTIPLY;
-          }
-        }
-      },
-      blendfn(options2) {
-        if (isObject(options2.hat)) {
-          if (!options2.hat.fixcolor) {
-            return options2.hat.color;
-          }
-        }
-      }
-    });
-    setLayer(ID, "addon_face", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      dx,
-      showfn(options2) {
-        return !!options2.addon.face;
-      },
-      srcfn(options2) {
-        return options2.addon.face ? __resolve(AVATARPATH, `addon/face.png`) : options2.dummy;
-      }
-    });
-    setLayer(ID, "addon_hair", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      dx,
-      showfn(options2) {
-        return !!options2.addon.hair;
-      },
-      srcfn(options2) {
-        return options2.addon.hair ? __resolve(AVATARPATH, `addon/hair.png`) : options2.dummy;
-      }
-    });
-    setLayer(ID, "addon_mouth", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      dx,
-      showfn(options2) {
-        return !!options2.addon.mouth;
-      },
-      srcfn(options2) {
-        return options2.addon.mouth ? __resolve(AVATARPATH, `addon/mouth.png`) : options2.dummy;
-      }
-    });
-    setLayer(ID, "frame", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      dx,
-      showfn(options2) {
-        return !!options2.frame;
-      },
-      srcfn(options2) {
-        if (isObject(options2.frame)) {
-          return options2.frame ? __resolve(AVATARPATH, `frame/${options2.frame.src}.png`) : options2.dummy;
-        }
-        return options2.frame ? __resolve(AVATARPATH, `frame/${options2.frame}.png`) : options2.dummy;
-      },
-      blendModefn(options2) {
-        if (isObject(options2.frame)) {
-          if (!options2.frame.fixcolor) {
-            return BLENDMODE.MULTIPLY;
-          }
-        }
-      },
-      blendfn(options2) {
-        if (isObject(options2.frame)) {
-          if (!options2.frame.fixcolor) {
-            return options2.frame.color;
-          }
-        }
-      }
-    });
-  }
-  function Avatarlayer(ID) {
+      dy: 0,
+      dx: 0,
+      show: true
+    };
+    const opt = option ? option : defalutOpt;
     let layerID = 0;
     setLayer(ID, "background", {
-      width: 180,
-      height: 260,
+      width: opt.width ? opt.width : defalutOpt.width,
+      height: opt.height ? opt.height : defalutOpt.height,
+      dx: opt.dx ? opt.dx : defalutOpt.dx,
+      dy: opt.dy ? opt.dy : defalutOpt.dy,
       z: layerID++,
       showfn(options2) {
-        return !!options2.background;
+        return opt.show ? !!options2.background : opt.show;
       },
       srcfn(options2) {
         return options2.background ? __resolve(AVATARPATH, `background/${options2.background}.png`) : options2.dummy;
       }
     });
     setLayer(ID, "kemoback_wing", {
-      width: 180,
-      height: 260,
+      width: opt.width ? opt.width : defalutOpt.width,
+      height: opt.height ? opt.height : defalutOpt.height,
+      dx: opt.dx ? opt.dx : defalutOpt.dx,
+      dy: opt.dy ? opt.dy : defalutOpt.dy,
       z: layerID++,
       showfn(options2) {
         return !!options2.kemoback.wing;
@@ -10464,8 +9917,10 @@ var Avatar;
       }
     });
     setLayer(ID, "kemoback_tail", {
-      width: 180,
-      height: 260,
+      width: opt.width ? opt.width : defalutOpt.width,
+      height: opt.height ? opt.height : defalutOpt.height,
+      dx: opt.dx ? opt.dx : defalutOpt.dx,
+      dy: opt.dy ? opt.dy : defalutOpt.dy,
       z: layerID++,
       showfn(options2) {
         return !!options2.kemoback.tail;
@@ -10489,8 +9944,10 @@ var Avatar;
       }
     });
     setLayer(ID, "back", {
-      width: 180,
-      height: 260,
+      width: opt.width ? opt.width : defalutOpt.width,
+      height: opt.height ? opt.height : defalutOpt.height,
+      dx: opt.dx ? opt.dx : defalutOpt.dx,
+      dy: opt.dy ? opt.dy : defalutOpt.dy,
       z: layerID++,
       showfn(options2) {
         return !!options2.back;
@@ -10514,8 +9971,10 @@ var Avatar;
       }
     });
     setLayer(ID, "hairback", {
-      width: 180,
-      height: 260,
+      width: opt.width ? opt.width : defalutOpt.width,
+      height: opt.height ? opt.height : defalutOpt.height,
+      dx: opt.dx ? opt.dx : defalutOpt.dx,
+      dy: opt.dy ? opt.dy : defalutOpt.dy,
       z: layerID++,
       showfn(options2) {
         return !!options2.hairback;
@@ -10542,8 +10001,10 @@ var Avatar;
       }
     });
     setLayer(ID, "body", {
-      width: 180,
-      height: 260,
+      width: opt.width ? opt.width : defalutOpt.width,
+      height: opt.height ? opt.height : defalutOpt.height,
+      dx: opt.dx ? opt.dx : defalutOpt.dx,
+      dy: opt.dy ? opt.dy : defalutOpt.dy,
       z: layerID++,
       showfn(options2) {
         return !!options2.body;
@@ -10556,8 +10017,10 @@ var Avatar;
       }
     });
     setLayer(ID, "body_msk", {
-      width: 180,
-      height: 260,
+      width: opt.width ? opt.width : defalutOpt.width,
+      height: opt.height ? opt.height : defalutOpt.height,
+      dx: opt.dx ? opt.dx : defalutOpt.dx,
+      dy: opt.dy ? opt.dy : defalutOpt.dy,
       z: layerID++,
       showfn(options2) {
         return isObject(options2.body) ? options2.body.src.includes("furry") : false;
@@ -10590,8 +10053,10 @@ var Avatar;
       }
     });
     setLayer(ID, "plus", {
-      width: 180,
-      height: 260,
+      width: opt.width ? opt.width : defalutOpt.width,
+      height: opt.height ? opt.height : defalutOpt.height,
+      dx: opt.dx ? opt.dx : defalutOpt.dx,
+      dy: opt.dy ? opt.dy : defalutOpt.dy,
       z: layerID++,
       showfn(options2) {
         return !!options2.plus;
@@ -10601,8 +10066,10 @@ var Avatar;
       }
     });
     setLayer(ID, "nipple", {
-      width: 180,
-      height: 260,
+      width: opt.width ? opt.width : defalutOpt.width,
+      height: opt.height ? opt.height : defalutOpt.height,
+      dx: opt.dx ? opt.dx : defalutOpt.dx,
+      dy: opt.dy ? opt.dy : defalutOpt.dy,
       z: layerID++,
       showfn(options2) {
         return !!options2.nipple;
@@ -10612,8 +10079,10 @@ var Avatar;
       }
     });
     setLayer(ID, "dick", {
-      width: 180,
-      height: 260,
+      width: opt.width ? opt.width : defalutOpt.width,
+      height: opt.height ? opt.height : defalutOpt.height,
+      dx: opt.dx ? opt.dx : defalutOpt.dx,
+      dy: opt.dy ? opt.dy : defalutOpt.dy,
       z: layerID++,
       show: true,
       srcfn(options2) {
@@ -10621,8 +10090,10 @@ var Avatar;
       }
     });
     setLayer(ID, "penis", {
-      width: 180,
-      height: 260,
+      width: opt.width ? opt.width : defalutOpt.width,
+      height: opt.height ? opt.height : defalutOpt.height,
+      dx: opt.dx ? opt.dx : defalutOpt.dx,
+      dy: opt.dy ? opt.dy : defalutOpt.dy,
       z: layerID++,
       showfn(options2) {
         return !!options2.penis;
@@ -10632,8 +10103,10 @@ var Avatar;
       }
     });
     setLayer(ID, "legs", {
-      width: 180,
-      height: 260,
+      width: opt.width ? opt.width : defalutOpt.width,
+      height: opt.height ? opt.height : defalutOpt.height,
+      dx: opt.dx ? opt.dx : defalutOpt.dx,
+      dy: opt.dy ? opt.dy : defalutOpt.dy,
       z: layerID++,
       showfn(options2) {
         return !!options2.legs;
@@ -10660,8 +10133,10 @@ var Avatar;
       }
     });
     setLayer(ID, "legs_acc", {
-      width: 180,
-      height: 260,
+      width: opt.width ? opt.width : defalutOpt.width,
+      height: opt.height ? opt.height : defalutOpt.height,
+      dx: opt.dx ? opt.dx : defalutOpt.dx,
+      dy: opt.dy ? opt.dy : defalutOpt.dy,
       z: layerID++,
       showfn(options2) {
         if (isObject(options2.legs)) {
@@ -10677,8 +10152,10 @@ var Avatar;
       }
     });
     setLayer(ID, "shoes", {
-      width: 180,
-      height: 260,
+      width: opt.width ? opt.width : defalutOpt.width,
+      height: opt.height ? opt.height : defalutOpt.height,
+      dx: opt.dx ? opt.dx : defalutOpt.dx,
+      dy: opt.dy ? opt.dy : defalutOpt.dy,
       z: layerID++,
       showfn(options2) {
         return !!options2.shoes;
@@ -10705,8 +10182,10 @@ var Avatar;
       }
     });
     setLayer(ID, "inner_bt", {
-      width: 180,
-      height: 260,
+      width: opt.width ? opt.width : defalutOpt.width,
+      height: opt.height ? opt.height : defalutOpt.height,
+      dx: opt.dx ? opt.dx : defalutOpt.dx,
+      dy: opt.dy ? opt.dy : defalutOpt.dy,
       z: layerID++,
       showfn(options2) {
         return !!options2.inner_bt;
@@ -10733,8 +10212,10 @@ var Avatar;
       }
     });
     setLayer(ID, "inner_bt_acc", {
-      width: 180,
-      height: 260,
+      width: opt.width ? opt.width : defalutOpt.width,
+      height: opt.height ? opt.height : defalutOpt.height,
+      dx: opt.dx ? opt.dx : defalutOpt.dx,
+      dy: opt.dy ? opt.dy : defalutOpt.dy,
       z: layerID++,
       showfn(options2) {
         if (isObject(options2.inner_bt)) {
@@ -10750,8 +10231,10 @@ var Avatar;
       }
     });
     setLayer(ID, "bottom", {
-      width: 180,
-      height: 260,
+      width: opt.width ? opt.width : defalutOpt.width,
+      height: opt.height ? opt.height : defalutOpt.height,
+      dx: opt.dx ? opt.dx : defalutOpt.dx,
+      dy: opt.dy ? opt.dy : defalutOpt.dy,
       z: layerID++,
       showfn(options2) {
         return !!options2.bottom;
@@ -10778,8 +10261,10 @@ var Avatar;
       }
     });
     setLayer(ID, "bottom_acc", {
-      width: 180,
-      height: 260,
+      width: opt.width ? opt.width : defalutOpt.width,
+      height: opt.height ? opt.height : defalutOpt.height,
+      dx: opt.dx ? opt.dx : defalutOpt.dx,
+      dy: opt.dy ? opt.dy : defalutOpt.dy,
       z: layerID++,
       showfn(options2) {
         if (isObject(options2.bottom)) {
@@ -10795,8 +10280,10 @@ var Avatar;
       }
     });
     setLayer(ID, "hand", {
-      width: 180,
-      height: 260,
+      width: opt.width ? opt.width : defalutOpt.width,
+      height: opt.height ? opt.height : defalutOpt.height,
+      dx: opt.dx ? opt.dx : defalutOpt.dx,
+      dy: opt.dy ? opt.dy : defalutOpt.dy,
       z: layerID++,
       showfn(options2) {
         return !!options2.hand;
@@ -10823,8 +10310,10 @@ var Avatar;
       }
     });
     setLayer(ID, "inner_up", {
-      width: 180,
-      height: 260,
+      width: opt.width ? opt.width : defalutOpt.width,
+      height: opt.height ? opt.height : defalutOpt.height,
+      dx: opt.dx ? opt.dx : defalutOpt.dx,
+      dy: opt.dy ? opt.dy : defalutOpt.dy,
       z: layerID++,
       showfn(options2) {
         return !!options2.inner_up;
@@ -10851,8 +10340,10 @@ var Avatar;
       }
     });
     setLayer(ID, "inner_up_acc", {
-      width: 180,
-      height: 260,
+      width: opt.width ? opt.width : defalutOpt.width,
+      height: opt.height ? opt.height : defalutOpt.height,
+      dx: opt.dx ? opt.dx : defalutOpt.dx,
+      dy: opt.dy ? opt.dy : defalutOpt.dy,
       z: layerID++,
       showfn(options2) {
         if (isObject(options2.inner_up)) {
@@ -10868,8 +10359,10 @@ var Avatar;
       }
     });
     setLayer(ID, "top", {
-      width: 180,
-      height: 260,
+      width: opt.width ? opt.width : defalutOpt.width,
+      height: opt.height ? opt.height : defalutOpt.height,
+      dx: opt.dx ? opt.dx : defalutOpt.dx,
+      dy: opt.dy ? opt.dy : defalutOpt.dy,
       z: layerID++,
       showfn(options2) {
         return !!options2.top;
@@ -10896,8 +10389,10 @@ var Avatar;
       }
     });
     setLayer(ID, "top_acc", {
-      width: 180,
-      height: 260,
+      width: opt.width ? opt.width : defalutOpt.width,
+      height: opt.height ? opt.height : defalutOpt.height,
+      dx: opt.dx ? opt.dx : defalutOpt.dx,
+      dy: opt.dy ? opt.dy : defalutOpt.dy,
       z: layerID++,
       showfn(options2) {
         if (isObject(options2.top)) {
@@ -10913,8 +10408,10 @@ var Avatar;
       }
     });
     setLayer(ID, "outter", {
-      width: 180,
-      height: 260,
+      width: opt.width ? opt.width : defalutOpt.width,
+      height: opt.height ? opt.height : defalutOpt.height,
+      dx: opt.dx ? opt.dx : defalutOpt.dx,
+      dy: opt.dy ? opt.dy : defalutOpt.dy,
       z: layerID++,
       showfn(options2) {
         return !!options2.inner_up;
@@ -10941,8 +10438,10 @@ var Avatar;
       }
     });
     setLayer(ID, "outter_acc", {
-      width: 180,
-      height: 260,
+      width: opt.width ? opt.width : defalutOpt.width,
+      height: opt.height ? opt.height : defalutOpt.height,
+      dx: opt.dx ? opt.dx : defalutOpt.dx,
+      dy: opt.dy ? opt.dy : defalutOpt.dy,
       z: layerID++,
       showfn(options2) {
         if (isObject(options2.outter)) {
@@ -10958,8 +10457,10 @@ var Avatar;
       }
     });
     setLayer(ID, "mouth", {
-      width: 180,
-      height: 260,
+      width: opt.width ? opt.width : defalutOpt.width,
+      height: opt.height ? opt.height : defalutOpt.height,
+      dx: opt.dx ? opt.dx : defalutOpt.dx,
+      dy: opt.dy ? opt.dy : defalutOpt.dy,
       z: layerID++,
       showfn(options2) {
         return !!options2.mouth;
@@ -10986,8 +10487,10 @@ var Avatar;
       }
     });
     setLayer(ID, "eyes", {
-      width: 180,
-      height: 260,
+      width: opt.width ? opt.width : defalutOpt.width,
+      height: opt.height ? opt.height : defalutOpt.height,
+      dx: opt.dx ? opt.dx : defalutOpt.dx,
+      dy: opt.dy ? opt.dy : defalutOpt.dy,
       z: layerID++,
       showfn(options2) {
         return !!options2.eyes;
@@ -11017,8 +10520,10 @@ var Avatar;
       }
     });
     setLayer(ID, "emoadd_tear", {
-      width: 180,
-      height: 260,
+      width: opt.width ? opt.width : defalutOpt.width,
+      height: opt.height ? opt.height : defalutOpt.height,
+      dx: opt.dx ? opt.dx : defalutOpt.dx,
+      dy: opt.dy ? opt.dy : defalutOpt.dy,
       z: layerID++,
       showfn(options2) {
         return !!options2.emoadd.tear;
@@ -11028,8 +10533,10 @@ var Avatar;
       }
     });
     setLayer(ID, "emoadd_shy", {
-      width: 180,
-      height: 260,
+      width: opt.width ? opt.width : defalutOpt.width,
+      height: opt.height ? opt.height : defalutOpt.height,
+      dx: opt.dx ? opt.dx : defalutOpt.dx,
+      dy: opt.dy ? opt.dy : defalutOpt.dy,
       z: layerID++,
       showfn(options2) {
         return !!options2.emoadd.shy;
@@ -11039,8 +10546,10 @@ var Avatar;
       }
     });
     setLayer(ID, "emoadd_red", {
-      width: 180,
-      height: 260,
+      width: opt.width ? opt.width : defalutOpt.width,
+      height: opt.height ? opt.height : defalutOpt.height,
+      dx: opt.dx ? opt.dx : defalutOpt.dx,
+      dy: opt.dy ? opt.dy : defalutOpt.dy,
       z: layerID++,
       showfn(options2) {
         return !!options2.emoadd.red;
@@ -11050,8 +10559,10 @@ var Avatar;
       }
     });
     setLayer(ID, "emoadd_hurt", {
-      width: 180,
-      height: 260,
+      width: opt.width ? opt.width : defalutOpt.width,
+      height: opt.height ? opt.height : defalutOpt.height,
+      dx: opt.dx ? opt.dx : defalutOpt.dx,
+      dy: opt.dy ? opt.dy : defalutOpt.dy,
       z: layerID++,
       showfn(options2) {
         return !!options2.emoadd.hurt;
@@ -11061,8 +10572,10 @@ var Avatar;
       }
     });
     setLayer(ID, "face", {
-      width: 180,
-      height: 260,
+      width: opt.width ? opt.width : defalutOpt.width,
+      height: opt.height ? opt.height : defalutOpt.height,
+      dx: opt.dx ? opt.dx : defalutOpt.dx,
+      dy: opt.dy ? opt.dy : defalutOpt.dy,
       z: layerID++,
       showfn(options2) {
         return !!options2.face;
@@ -11089,8 +10602,10 @@ var Avatar;
       }
     });
     setLayer(ID, "neck", {
-      width: 180,
-      height: 260,
+      width: opt.width ? opt.width : defalutOpt.width,
+      height: opt.height ? opt.height : defalutOpt.height,
+      dx: opt.dx ? opt.dx : defalutOpt.dx,
+      dy: opt.dy ? opt.dy : defalutOpt.dy,
       z: layerID++,
       showfn(options2) {
         return !!options2.neck;
@@ -11117,8 +10632,10 @@ var Avatar;
       }
     });
     setLayer(ID, "neck_acc", {
-      width: 180,
-      height: 260,
+      width: opt.width ? opt.width : defalutOpt.width,
+      height: opt.height ? opt.height : defalutOpt.height,
+      dx: opt.dx ? opt.dx : defalutOpt.dx,
+      dy: opt.dy ? opt.dy : defalutOpt.dy,
       z: layerID++,
       showfn(options2) {
         if (isObject(options2.neck)) {
@@ -11134,8 +10651,10 @@ var Avatar;
       }
     });
     setLayer(ID, "hairfront", {
-      width: 180,
-      height: 260,
+      width: opt.width ? opt.width : defalutOpt.width,
+      height: opt.height ? opt.height : defalutOpt.height,
+      dx: opt.dx ? opt.dx : defalutOpt.dx,
+      dy: opt.dy ? opt.dy : defalutOpt.dy,
       z: layerID++,
       showfn(options2) {
         return !!options2.hairfront;
@@ -11162,8 +10681,10 @@ var Avatar;
       }
     });
     setLayer(ID, "hairfront_msk", {
-      width: 180,
-      height: 260,
+      width: opt.width ? opt.width : defalutOpt.width,
+      height: opt.height ? opt.height : defalutOpt.height,
+      dx: opt.dx ? opt.dx : defalutOpt.dx,
+      dy: opt.dy ? opt.dy : defalutOpt.dy,
       z: layerID++,
       showfn(options2) {
         return !!options2.hairfront;
@@ -11200,8 +10721,10 @@ var Avatar;
       }
     });
     setLayer(ID, "eyebrow", {
-      width: 180,
-      height: 260,
+      width: opt.width ? opt.width : defalutOpt.width,
+      height: opt.height ? opt.height : defalutOpt.height,
+      dx: opt.dx ? opt.dx : defalutOpt.dx,
+      dy: opt.dy ? opt.dy : defalutOpt.dy,
       z: layerID++,
       showfn(options2) {
         return !!options2.eyebrow;
@@ -11228,8 +10751,10 @@ var Avatar;
       }
     });
     setLayer(ID, "kemofront_mimi", {
-      width: 180,
-      height: 260,
+      width: opt.width ? opt.width : defalutOpt.width,
+      height: opt.height ? opt.height : defalutOpt.height,
+      dx: opt.dx ? opt.dx : defalutOpt.dx,
+      dy: opt.dy ? opt.dy : defalutOpt.dy,
       z: layerID++,
       showfn(options2) {
         return !!options2.kemofront.mimi;
@@ -11256,8 +10781,10 @@ var Avatar;
       }
     });
     setLayer(ID, "kemofront_horn", {
-      width: 180,
-      height: 260,
+      width: opt.width ? opt.width : defalutOpt.width,
+      height: opt.height ? opt.height : defalutOpt.height,
+      dx: opt.dx ? opt.dx : defalutOpt.dx,
+      dy: opt.dy ? opt.dy : defalutOpt.dy,
       z: layerID++,
       showfn(options2) {
         return !!options2.kemofront.horn;
@@ -11284,8 +10811,10 @@ var Avatar;
       }
     });
     setLayer(ID, "hat", {
-      width: 180,
-      height: 260,
+      width: opt.width ? opt.width : defalutOpt.width,
+      height: opt.height ? opt.height : defalutOpt.height,
+      dx: opt.dx ? opt.dx : defalutOpt.dx,
+      dy: opt.dy ? opt.dy : defalutOpt.dy,
       z: layerID++,
       showfn(options2) {
         return !!options2.hat;
@@ -11312,8 +10841,10 @@ var Avatar;
       }
     });
     setLayer(ID, "addon_body", {
-      width: 180,
-      height: 260,
+      width: opt.width ? opt.width : defalutOpt.width,
+      height: opt.height ? opt.height : defalutOpt.height,
+      dx: opt.dx ? opt.dx : defalutOpt.dx,
+      dy: opt.dy ? opt.dy : defalutOpt.dy,
       z: layerID++,
       showfn(options2) {
         return !!options2.addon.body;
@@ -11323,8 +10854,10 @@ var Avatar;
       }
     });
     setLayer(ID, "addon_bottom", {
-      width: 180,
-      height: 260,
+      width: opt.width ? opt.width : defalutOpt.width,
+      height: opt.height ? opt.height : defalutOpt.height,
+      dx: opt.dx ? opt.dx : defalutOpt.dx,
+      dy: opt.dy ? opt.dy : defalutOpt.dy,
       z: layerID++,
       showfn(options2) {
         return !!options2.addon.bottom;
@@ -11334,8 +10867,10 @@ var Avatar;
       }
     });
     setLayer(ID, "addon_face", {
-      width: 180,
-      height: 260,
+      width: opt.width ? opt.width : defalutOpt.width,
+      height: opt.height ? opt.height : defalutOpt.height,
+      dx: opt.dx ? opt.dx : defalutOpt.dx,
+      dy: opt.dy ? opt.dy : defalutOpt.dy,
       z: layerID++,
       showfn(options2) {
         return !!options2.addon.face;
@@ -11345,8 +10880,10 @@ var Avatar;
       }
     });
     setLayer(ID, "addon_hair", {
-      width: 180,
-      height: 260,
+      width: opt.width ? opt.width : defalutOpt.width,
+      height: opt.height ? opt.height : defalutOpt.height,
+      dx: opt.dx ? opt.dx : defalutOpt.dx,
+      dy: opt.dy ? opt.dy : defalutOpt.dy,
       z: layerID++,
       showfn(options2) {
         return !!options2.addon.hair;
@@ -11356,8 +10893,10 @@ var Avatar;
       }
     });
     setLayer(ID, "addon_mouth", {
-      width: 180,
-      height: 260,
+      width: opt.width ? opt.width : defalutOpt.width,
+      height: opt.height ? opt.height : defalutOpt.height,
+      dx: opt.dx ? opt.dx : defalutOpt.dx,
+      dy: opt.dy ? opt.dy : defalutOpt.dy,
       z: layerID++,
       showfn(options2) {
         return !!options2.addon.mouth;
@@ -11367,8 +10906,10 @@ var Avatar;
       }
     });
     setLayer(ID, "addon_penis", {
-      width: 180,
-      height: 260,
+      width: opt.width ? opt.width : defalutOpt.width,
+      height: opt.height ? opt.height : defalutOpt.height,
+      dx: opt.dx ? opt.dx : defalutOpt.dx,
+      dy: opt.dy ? opt.dy : defalutOpt.dy,
       z: layerID++,
       showfn(options2) {
         return !!options2.addon.penis;
@@ -11378,8 +10919,10 @@ var Avatar;
       }
     });
     setLayer(ID, "frame", {
-      width: 180,
-      height: 260,
+      width: opt.width ? opt.width : defalutOpt.width,
+      height: opt.height ? opt.height : defalutOpt.height,
+      dx: opt.dx ? opt.dx : defalutOpt.dx,
+      dy: opt.dy ? opt.dy : defalutOpt.dy,
       z: layerID++,
       showfn(options2) {
         return !!options2.frame;
@@ -11407,8 +10950,8 @@ var Avatar;
     });
   }
   new Avatarlayer("Avatar");
-  new Portraitlayer("Portrait");
-  new Portraitlayer("Emoji");
+  new Avatarlayer("Portrait", { show: false });
+  new Avatarlayer("Emoji", { show: false });
   new Shoplayer("Shop");
   function animation(options2, props = {}) {
     if (!options2.seconds) {
@@ -11515,7 +11058,8 @@ var Avatar;
       ],
       CMHairstyle: [
         "natural",
-        "straight"
+        "straight",
+        "curly"
       ],
       CMEyeColor: [
         "black",
@@ -12628,7 +12172,7 @@ Macro.add('time', {
 });
 
 function passtime(arg,mode){
-	
+
 }
 
 function daychange(){
@@ -13036,7 +12580,6 @@ window.hairlenth = function(num){
     else return 1;
 }
 /* twine-user-script #36: "UI Widget.js" */
-
 /* 通用 */
 
 function weirdeffect(){
@@ -13101,6 +12644,16 @@ function movebutton() {
 }
 window.movebutton = movebutton
 
+function delay(id,text) {
+    if(typeof(text)=="string"){
+        $('#'+id).append("<span class='delay'>"+text+"<br></span>")
+    }else if(Array.isArray(text)){
+        $( "#"+id ).append( "<span class='h"+i+" hidden'>"+text[i]+"<br></span>");
+        setTimeout(() => {$("#combat_message .h"+i).removeClass('hidden').addClass('delay')}, (500*i))
+    }
+}
+F.delay = delay
+DefineMacroS("delay",delay)
 /* twine-user-script #37: "chs.min.js" */
 /*! chs.js – 简体中文, by: Liyro Pen. | Copyright © 2017 Thomas Michael Edwards <thomasmedwards@gmail.com>. All rights reserved. | Licensed under a BSD 2-clause "Simplified" License. */
 !(function () {
@@ -14333,7 +13886,7 @@ window.movebutton = movebutton
 &lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="11" name="InitGameData" tags="widget" position="100,225" size="100,100">&lt;&lt;widget &quot;InitGameData&quot;&gt;&gt;
 
 &lt;!-- 初始化游戏数据 --&gt;
-&lt;&lt;set $gametime to 0&gt;&gt;
+&lt;&lt;set $gametime to {pass:0, hour:0, min:0, sec:0, day:0}&gt;&gt;
 &lt;&lt;set $intro to true&gt;&gt;
 &lt;&lt;set $tutorial to false&gt;&gt;
 
@@ -14353,6 +13906,7 @@ window.movebutton = movebutton
 &lt;&lt;set $location to &quot;单身公寓&quot;&gt;&gt;
 
 &lt;&lt;set $money to 5000&gt;&gt;
+&lt;&lt;set $points to 0&gt;&gt;
 &lt;&lt;set $follow = 1, $follower = 100&gt;&gt;
 
 &lt;&lt;set $actmode = &quot;自由&quot;, $chaos = 0&gt;&gt;
@@ -15420,7 +14974,7 @@ $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌}
 &lt;div class=&quot;delayed&quot;&gt;
 &lt;span style=&quot;line-height:40px;font-size:13px;padding:0px;margin:0px&quot;&gt;　
 &lt;&lt;set _text to Lang(&quot;＞ 开始游戏&quot;,&quot;＞ Game Start&quot;)&gt;&gt;
-&lt;&lt;link [[_text|Combat]]&gt;&gt;&lt;&lt;GSApply&gt;&gt;&lt;&lt;set $intro to false&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/span&gt;&lt;br&gt;
+&lt;&lt;link [[_text|开始]]&gt;&gt;&lt;&lt;GSApply&gt;&gt;&lt;&lt;set $intro to false&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/span&gt;&lt;br&gt;
 
 &lt;&lt;include &quot;初始设定&quot;&gt;&gt;
 &lt;/div&gt;
@@ -15496,6 +15050,10 @@ $(document).on(&#39;:passagerender&#39;, function (ev) {
 &lt;/div&gt;
 
 &lt;div class=&quot;Eselect&quot;&gt;
+[[战斗测试|Combat]]
+&lt;/div&gt;
+
+&lt;div class=&quot;Eselect&quot;&gt;
 [[回到开头|Start]]
 &lt;/div&gt;
 
@@ -15507,11 +15065,11 @@ $(document).on(&#39;:passagerender&#39;, function (ev) {
 
 升级完毕。&lt;br&gt;
 
-[[继续|$navigation.stack.last()][$navigation.stack.pop()]]</tw-passagedata><tw-passagedata pid="24" name="StoryCaption" tags="" position="475,350" size="100,100">&lt;div @class=&quot;(Errors.log.length==0?&#39;hidden&#39;:&#39;&#39;) + &#39; error-reporter-btn&#39;&quot; onclick=&quot;Errors.Reporter.toggle()&quot;&gt;&lt;/div&gt;
+[[继续|$navigation.stack.last()][$navigation.stack.pop()]]</tw-passagedata><tw-passagedata pid="24" name="StoryCaption" tags="" position="475,350" size="100,100">&lt;&lt;set $statshidden to false&gt;&gt;
+&lt;div @class=&quot;(Errors.log.length==0?&#39;hidden&#39;:&#39;&#39;) + &#39; error-reporter-btn&#39;&quot; onclick=&quot;Errors.Reporter.toggle()&quot;&gt;&lt;/div&gt;
 &lt;&lt;if $anounce.flag is true&gt;&gt;
 	&lt;&lt;anouncePopUP $anounce.text $anounce.type&gt;&gt;
 &lt;&lt;/if&gt;&gt;
-
 &lt;&lt;timeprocess&gt;&gt;
 
 &lt;div id=&quot;volume&quot;&gt;
@@ -15532,31 +15090,41 @@ $(document).on(&#39;:passagerender&#39;, function (ev) {
 
 &lt;!-- 游戏内日期和时钟 --&gt;
 &lt;div id=&quot;showtimes&quot;&gt;&lt;&lt;timestats&gt;&gt;&lt;/div&gt;
-
-&lt;span id=&quot;money&quot; class=&quot;money&quot;&gt;　&lt;&lt;printmoney $money&gt;&gt;&lt;/span&gt;&lt;br&gt;
+&lt;div id=&#39;show_money&#39;&gt;&lt;&lt;showmoney&gt;&gt;&lt;/div&gt;
 &lt;!-- 简短通知 --&gt;
 &lt;div id=&quot;notice&quot;&gt;
 &lt;&lt;notification&gt;&gt;
 &lt;/div&gt;
 
 &lt;!-- 玩家状态 --&gt;
-&lt;div id=&quot;playerstats&quot;&gt;&lt;&lt;playerstatus&gt;&gt;&lt;/div&gt;
-
-&lt;!-- 菜单 --&gt;
-&lt;div id=&quot;splitbotton&quot;&gt;
-&lt;&lt;button PROFILE&gt;&gt;&lt;&lt;overlayReplace &quot;profile&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
-&lt;&lt;button JOURNAL&gt;&gt;&lt;&lt;overlayReplace &quot;journal&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;br&gt;
-&lt;&lt;button ITEMS&gt;&gt;&lt;&lt;overlayReplace &quot;items&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
-&lt;&lt;button SOCIAL&gt;&gt;&lt;&lt;overlayReplace &quot;social&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;br&gt;
+&lt;div id=&quot;sidebar_stats&quot;&gt;
+&lt;&lt;sidebar_stats&gt;&gt;
 &lt;/div&gt;
-&lt;&lt;button DICTIONARY&gt;&gt;&lt;&lt;overlayReplace &quot;dictionary&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;br&gt;
-&lt;&lt;button ACHIVEMENT&gt;&gt;&lt;&lt;overlayReplace &quot;achivement&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;br&gt;
+
 &lt;&lt;/if&gt;&gt;
 
-&lt;div id=&quot;splitbotton&quot;&gt;
-&lt;&lt;button SAVES&gt;&gt;&lt;&lt;overlayReplace &quot;saves&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
-&lt;&lt;button OPTIONS&gt;&gt;&lt;&lt;overlayReplace &quot;options&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;br&gt;
+
+&lt;!-- 菜单 --&gt;
+&lt;div id=&quot;menu_container&quot; class=&quot;menu_hide&quot;&gt;
+&lt;div class=&quot;menu&quot;&gt;
+MENU
 &lt;/div&gt;
+&lt;&lt;if $intro is false&gt;&gt;
+&lt;div class=&quot;splitbotton&quot;&gt;
+&lt;&lt;button PROFILE&gt;&gt;&lt;&lt;overlayReplace &quot;profile&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
+&lt;&lt;button JOURNAL&gt;&gt;&lt;&lt;overlayReplace &quot;journal&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
+&lt;&lt;button ITEMS&gt;&gt;&lt;&lt;overlayReplace &quot;items&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
+&lt;&lt;button SOCIAL&gt;&gt;&lt;&lt;overlayReplace &quot;social&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
+&lt;&lt;button DICTIONARY&gt;&gt;&lt;&lt;overlayReplace &quot;dictionary&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
+&lt;&lt;button ACHIVEMENT&gt;&gt;&lt;&lt;overlayReplace &quot;achivement&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
+&lt;/div&gt;
+&lt;&lt;/if&gt;&gt;
+&lt;div class=&quot;splitbotton&quot;&gt;
+&lt;&lt;button SAVES&gt;&gt;&lt;&lt;overlayReplace &quot;saves&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
+&lt;&lt;button OPTIONS&gt;&gt;&lt;&lt;overlayReplace &quot;options&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
 
 
 /* 框架的尾巴 */
@@ -15600,15 +15168,24 @@ $(document).on(&#39;:passagerender&#39;, function (ev) {
 		&lt;&lt;/if&gt;&gt;
 		&lt;&lt;if $intro isnot true&gt;&gt;
 			&lt;&lt;replace &quot;#showtimes&quot;&gt;&gt;&lt;&lt;timestats&gt;&gt;&lt;&lt;/replace&gt;&gt;
-			&lt;&lt;replace &quot;#playerstats&quot;&gt;&gt;&lt;&lt;playerstatus&gt;&gt;&lt;&lt;/replace&gt;&gt;
+			
 			&lt;&lt;replace &quot;#notice&quot;&gt;&gt;&lt;&lt;notification&gt;&gt;&lt;&lt;/replace&gt;&gt;
-			&lt;&lt;replace &quot;#money&quot;&gt;&gt;　&lt;&lt;printmoney $money&gt;&gt;&lt;&lt;/replace&gt;&gt;
+			&lt;&lt;replace &quot;#show_money&quot;&gt;&gt;&lt;&lt;showmoney&gt;&gt;&lt;&lt;/replace&gt;&gt;
+		&lt;&lt;/if&gt;&gt;
+		&lt;&lt;if $statshidden is false&gt;&gt;
+			&lt;&lt;replace &quot;#sidebar_stats&quot;&gt;&gt;&lt;&lt;sidebar_stats&gt;&gt;&lt;&lt;/replace&gt;&gt;
 		&lt;&lt;/if&gt;&gt;
 	&lt;&lt;/repeat&gt;&gt;
 
+/* 处理顺序的最后尾 */
 &lt;&lt;set $anounce to {flag:false, text:&quot;&quot;, type:&quot;弹出通知&quot;}&gt;&gt;
+&lt;&lt;setchara &quot;player&quot;&gt;&gt;
+/* 处理顺序的最后尾  */
+&lt;&lt;/silently&gt;&gt;</tw-passagedata><tw-passagedata pid="25" name="SidebarWidget" tags="widget" position="600,350" size="100,100">&lt;&lt;widget &quot;showmoney&quot;&gt;&gt;
+&lt;div class=&quot;points&quot;&gt;&lt;&lt;printmoney $points&gt;&gt;P&lt;/div&gt;&lt;span class=&quot;slice&quot;&gt; | &lt;/span&gt;&lt;div class=&quot;money&quot;&gt;&lt;&lt;printmoney $money&gt;&gt;&lt;&lt;icon &quot;moneyicon&quot;&gt;&gt;&lt;/div&gt;
+&lt;&lt;/widget&gt;&gt;
 
-&lt;&lt;/silently&gt;&gt;</tw-passagedata><tw-passagedata pid="25" name="SidebarWidget" tags="widget" position="600,350" size="100,100">&lt;&lt;widget &quot;showtitle&quot;&gt;&gt;
+&lt;&lt;widget &quot;showtitle&quot;&gt;&gt;
     &lt;div align=&quot;center&quot;&gt;
         &lt;img src=&quot;image/banner.png&quot;&gt;
         &lt;div id=&quot;story-title&quot;&gt;失乐园物语&lt;/div&gt;
@@ -15670,6 +15247,26 @@ $(document).on(&#39;:passagerender&#39;, function (ev) {
     &lt;&lt;showbasebar &quot;抑郁&quot; &quot;#9070DA&quot;&gt;&gt;&lt;br&gt;
 &lt;&lt;/if&gt;&gt;
     
+&lt;&lt;/widget&gt;&gt;
+
+&lt;&lt;widget &quot;sidebar_stats&quot;&gt;&gt;
+&lt;&lt;if $statshidden is true&gt;&gt;
+    &lt;&lt;button &quot;▲&quot;&gt;&gt;
+    &lt;&lt;set $statshidden to false&gt;&gt;
+    &lt;&lt;replace &quot;#sidebar_stats&quot;&gt;&gt;&lt;&lt;sidebar_stats&gt;&gt;&lt;&lt;/replace&gt;&gt;
+    &lt;&lt;/button&gt;&gt;
+    &lt;div id=&quot;playerstats&quot; class=&quot;hide&quot;&gt;
+    &lt;&lt;playerstatus&gt;&gt;
+    &lt;/div&gt;
+&lt;&lt;else&gt;&gt;
+    &lt;&lt;button &quot;▼&quot;&gt;&gt;
+    &lt;&lt;set $statshidden to true&gt;&gt;
+    &lt;&lt;replace &quot;#sidebar_stats&quot;&gt;&gt;&lt;&lt;sidebar_stats&gt;&gt;&lt;&lt;/replace&gt;&gt;
+    &lt;&lt;/button&gt;&gt;
+    &lt;div id=&quot;playerstats&quot;&gt;
+    &lt;&lt;playerstatus&gt;&gt;
+    &lt;/div&gt;
+&lt;&lt;/if&gt;&gt;
 &lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="26" name="Options" tags="widget" position="725,350" size="100,100">&lt;&lt;widget &quot;options&quot;&gt;&gt;
  制作中……&lt;br&gt;
 &lt;&lt;/widget&gt;&gt;
@@ -16413,7 +16010,7 @@ Total &lt;&lt;print $PC.sexrec.高潮.t&gt;&gt;&lt;br&gt;
 &lt;div id=&quot;portrait&quot;&gt;
 
 &lt;&lt;if $render is &quot;canvas&quot;&gt;&gt;
-    &lt;div class=&quot;P_Layer flipx&quot;&gt;
+    &lt;div class=&quot;portrait flipx&quot;&gt;
     &lt;&lt;twinescript&gt;&gt;
     output.appendChild(Avatar.getPortrait())
     &lt;&lt;/twinescript&gt;&gt;
@@ -16621,6 +16218,52 @@ Total &lt;&lt;print $PC.sexrec.高潮.t&gt;&gt;&lt;br&gt;
 
 &lt;div id=&quot;playerside&quot;&gt;
 /* 玩家侧任务卡 */
+&lt;&lt;CB_playerside&gt;&gt;
+/*end */
+&lt;/div&gt;
+
+/*  */
+&lt;div id=&quot;command_container&quot;&gt;
+    &lt;div id=&quot;combat_command&quot;&gt;
+        &lt;&lt;link &quot;攻击&quot;&gt;&gt;
+        &lt;&lt;run 
+            wait([&quot;你攻击了敌人A。&quot;,&quot;敌人A受到你的攻击损失了1点HP。&quot;,&quot;但你很快遭遇了反攻，被撕下一层衣服。&quot;
+            ]);
+            &gt;&gt;
+        &lt;&lt;set $PC.rpg.HP[0] -= 5&gt;&gt;
+        &lt;&lt;replace &quot;#playerside&quot;&gt;&gt;&lt;&lt;CB_playerside&gt;&gt;&lt;&lt;/replace&gt;&gt;
+        &lt;&lt;/link&gt;&gt;
+        &lt;&lt;link &quot;防御&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;
+        &lt;&lt;link &quot;技能&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;
+        &lt;&lt;link &quot;挑逗&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;
+        &lt;&lt;link &quot;道具&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;
+        &lt;&lt;link &quot;宠物&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;
+        &lt;&lt;link &quot;队友&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;
+        &lt;&lt;link &quot;逃跑&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;script&gt;
+function wait(text) {
+    for(let i=0;i&lt;text.length;i++){
+        $( &quot;#combat_message&quot; ).append( &quot;&lt;span class=&#39;h&quot;+i+&quot; hidden&#39;&gt;&quot;+text[i]+&quot;&lt;br&gt;&lt;/span&gt;&quot;);
+        setTimeout(() =&gt; {$(&quot;#combat_message .h&quot;+i).removeClass(&#39;hidden&#39;).addClass(&#39;delay&#39;);msg_end.scrollIntoView() }, (500*i))
+    }
+}
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="38" name="TimeProcess" tags="widget" position="975,475" size="100,100">&lt;&lt;widget &quot;TimeEffect&quot;&gt;&gt;
+&lt;&lt;timeprocess&gt;&gt;
+
+/* 每日结束时的处理 */
+&lt;&lt;if $daychange is true&gt;&gt;
+
+
+
+&lt;&lt;set $daychange to false&gt;&gt;
+&lt;&lt;/if&gt;&gt;
+    
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="39" name="CombatUIWidget" tags="widget" position="1100,475" size="100,100">&lt;&lt;widget &quot;CB_playerside&quot;&gt;&gt;
 &lt;div id=&quot;characard&quot;&gt;
     &lt;div class=&quot;face&quot;&gt;&lt;&lt;portrait&gt;&gt;&lt;/div&gt;
     &lt;div class=&quot;CC_name&quot;&gt;玩家&lt;/div&gt;
@@ -16686,35 +16329,7 @@ Total &lt;&lt;print $PC.sexrec.高潮.t&gt;&gt;&lt;br&gt;
     &lt;/div&gt;
     &lt;div class=&quot;CC_state&quot;&gt;&lt;/div&gt;
 &lt;/div&gt;
-/*end */
-&lt;/div&gt;
-
-/*  */
-&lt;div id=&quot;command_container&quot;&gt;
-    &lt;div id=&quot;combat_command&quot;&gt;
-        &lt;&lt;link &quot;攻击&quot;&gt;&gt;&lt;&lt;append &quot;#combat_message&quot; t8n&gt;&gt;你攻击了敌人A。&lt;br&gt;&lt;&lt;/append&gt;&gt;&lt;&lt;run msg_end.scrollIntoView()&gt;&gt;&lt;&lt;/link&gt;&gt;
-        &lt;&lt;link &quot;防御&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;
-        &lt;&lt;link &quot;技能&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;
-        &lt;&lt;link &quot;挑逗&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;
-        &lt;&lt;link &quot;道具&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;
-        &lt;&lt;link &quot;宠物&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;
-        &lt;&lt;link &quot;队友&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;
-        &lt;&lt;link &quot;逃跑&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;
-    &lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="38" name="TimeProcess" tags="widget" position="975,475" size="100,100">&lt;&lt;widget &quot;TimeEffect&quot;&gt;&gt;
-&lt;&lt;timeprocess&gt;&gt;
-
-/* 每日结束时的处理 */
-&lt;&lt;if $daychange is true&gt;&gt;
-
-
-
-&lt;&lt;set $daychange to false&gt;&gt;
-&lt;&lt;/if&gt;&gt;
-    
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="39" name="FixValue" tags="widget" position="1100,475" size="100,100">&lt;&lt;widget &quot;fixvalue&quot;&gt;&gt;  
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="40" name="FixValue" tags="widget" position="1225,475" size="100,100">&lt;&lt;widget &quot;fixvalue&quot;&gt;&gt;  
     &lt;&lt;set $money to Math.clamp($money,0,9999999999)&gt;&gt;
 
     /* 固定数值的修正 */
@@ -16832,23 +16447,24 @@ Total &lt;&lt;print $PC.sexrec.高潮.t&gt;&gt;&lt;br&gt;
     
     &lt;&lt;run setreveal()&gt;&gt;
 
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="40" name="PassageHeader" tags="" position="1225,475" size="100,100">&lt;&lt;set $passage to passage()&gt;&gt;&lt;&lt;set $tags to tags($passage)&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="41" name="PassageHeader" tags="" position="100,600" size="100,100">&lt;&lt;set $passage to passage()&gt;&gt;&lt;&lt;set $tags to tags($passage)&gt;&gt;
 /* 时间经过处理 */
 &lt;&lt;fixvalue&gt;&gt;&lt;&lt;TimeEffect&gt;&gt;
-/* 通知弹出框 */
-&lt;div id=&quot;action-popup&quot; class=&quot;hide&quot;&gt;&lt;span id=&quot;action-text&quot;&gt;&lt;/span&gt;&lt;/div&gt;
-
 /* 其他通用预处理 */
 
 /* AVATAR设定的更新检测 */
-&lt;&lt;SetAvatar&gt;&gt;&lt;&lt;timed 1s&gt;&gt;&lt;&lt;SetAvatar&gt;&gt;&lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="41" name="PassageFooter" tags="" position="100,600" size="100,100">&lt;div id=&quot;gameVersionDisplay&quot;&gt;EWA ver&lt;&lt;print StartConfig.version&gt;&gt;&lt;/div&gt;
+&lt;&lt;SetAvatar&gt;&gt;
+
+/* 通知弹出框 */
+&lt;div id=&quot;action-popup&quot; class=&quot;hide&quot;&gt;&lt;span id=&quot;action-text&quot;&gt;&lt;/span&gt;&lt;/div&gt;
+&lt;div id=&quot;append-text_top&quot; class=&quot;hide&quot;&gt;&lt;span id=&quot;append-text&quot;&gt;&lt;/span&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="42" name="PassageFooter" tags="" position="225,600" size="100,100">&lt;div id=&quot;gameVersionDisplay&quot;&gt;EWA ver&lt;&lt;print StartConfig.version&gt;&gt;&lt;/div&gt;
 
 
 /* 事件的各种数值变化后续处理 */
 
 
 /* AVATAR设定的更新检测 ，一个页面显示完毕之后重新调整左边栏的表情变化 */
-&lt;&lt;SetAvatar&gt;&gt;&lt;&lt;timed 1s&gt;&gt;&lt;&lt;SetAvatar&gt;&gt;&lt;&lt;/timed&gt;&gt;&lt;&lt;setchara &quot;player&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="42" name="Widget" tags="widget" position="225,600" size="100,100">&lt;&lt;widget &quot;dashline&quot;&gt;&gt;
+&lt;&lt;SetAvatar&gt;&gt;</tw-passagedata><tw-passagedata pid="43" name="Widget" tags="widget" position="350,600" size="100,100">&lt;&lt;widget &quot;dashline&quot;&gt;&gt;
     &lt;div class=&quot;dashline&quot;&gt;&lt;/div&gt;
 &lt;&lt;/widget&gt;&gt;
 
@@ -17071,7 +16687,7 @@ Total &lt;&lt;print $PC.sexrec.高潮.t&gt;&gt;&lt;br&gt;
     &lt;&lt;set _percent to percent(_num[0],_num[1])&gt;&gt;
     &lt;&lt;set _color to $args[1]&gt;&gt;
     &lt;&lt;meterbar _percent _color&gt;&gt;
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="43" name="试衣间" tags="" position="350,600" size="100,100">&lt;span class=&quot;title&quot;&gt;服装店&lt;/span&gt;&lt;br&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="44" name="试衣间" tags="" position="475,600" size="100,100">&lt;span class=&quot;title&quot;&gt;服装店&lt;/span&gt;&lt;br&gt;
 &lt;div class=&quot;lbox&quot;&gt;
 商场里的服装店。商品琳琅满目，什么都有。&lt;br&gt;
 &lt;/div&gt;
@@ -17219,10 +16835,10 @@ Total &lt;&lt;print $PC.sexrec.高潮.t&gt;&gt;&lt;br&gt;
 
 &lt;&lt;widget &quot;resettryon&quot;&gt;&gt;
     &lt;&lt;set $tryon to {neck: null, hand: null, face: null,hat: null, outter: null, top: null,bottom: null,inner_up: null, inner_bt: null,shoes: null, legs: null,}&gt;&gt;
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="44" name="试衣偷窥：触发" tags="" position="475,600" size="100,100">&lt;&lt;you&gt;&gt;还穿着商店里的衣服，确定就这么离开商店吗？&lt;br&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="45" name="试衣偷窥：触发" tags="" position="600,600" size="100,100">&lt;&lt;you&gt;&gt;还穿着商店里的衣服，确定就这么离开商店吗？&lt;br&gt;
 &lt;br&gt;
 &lt;&lt;link &quot;不买，就这么离开&quot; &quot;试衣偷窥：不买&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
-&lt;&lt;link &quot;还是回去付钱吧&quot; $eventexit[0]&gt;&gt;&lt;&lt;set $temp.tryoncomeback to true&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;</tw-passagedata><tw-passagedata pid="45" name="试衣偷窥：不买" tags="" position="600,600" size="100,100">&lt;&lt;set _luck to random(1,100)&gt;&gt;
+&lt;&lt;link &quot;还是回去付钱吧&quot; $eventexit[0]&gt;&gt;&lt;&lt;set $temp.tryoncomeback to true&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;</tw-passagedata><tw-passagedata pid="46" name="试衣偷窥：不买" tags="" position="725,600" size="100,100">&lt;&lt;set _luck to random(1,100)&gt;&gt;
 
 &lt;&lt;you&gt;&gt;打算就这么穿着衣服走……&lt;br&gt;
 
@@ -17237,7 +16853,7 @@ Total &lt;&lt;print $PC.sexrec.高潮.t&gt;&gt;&lt;br&gt;
             &lt;&lt;link &quot;离开&quot; $eventexit[0]&gt;&gt;&lt;&lt;set $temp.tryoncomeback to true&gt;&gt;&lt;&lt;/link&gt;&gt;
         &lt;&lt;/if&gt;&gt;
     &lt;/div&gt;
-&lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="46" name="服装店-工具" tags="widget" position="725,600" size="100,100">&lt;&lt;widget &quot;EnterTryRoom&quot;&gt;&gt;
+&lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="47" name="服装店-工具" tags="widget" position="850,600" size="100,100">&lt;&lt;widget &quot;EnterTryRoom&quot;&gt;&gt;
 /* 把身上衣服暂存在TEquip里 */
 &lt;&lt;set $TEquip to clone($Equip)&gt;&gt;
 
@@ -17434,7 +17050,7 @@ required:false,
     &lt;&lt;set $Equip.top to null&gt;&gt;
     &lt;&lt;set $Equip.bottom to null&gt;&gt;
     &lt;&lt;SetAvatar&gt;&gt;
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="47" name="你的家 单身公寓" tags="location" position="850,600" size="100,100">&lt;&lt;location &quot;单身公寓&quot;&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="48" name="你的家 单身公寓" tags="location" position="975,600" size="100,100">&lt;&lt;location &quot;单身公寓&quot;&gt;&gt;
 &lt;span class=&quot;title&quot;&gt;&lt;&lt;you&gt;&gt;家&lt;/span&gt;&lt;br&gt;
 &lt;div class=&quot;lbox&quot;&gt;
 一个60平方米左右的单身公寓。简约现代风的装修，巨大的落地窗，还有一个阳台，两个人住也相当舒适的公寓。&lt;br&gt;
@@ -17466,8 +17082,8 @@ required:false,
 自慰
 使用道具
 和宠物（床伴？）聊天
-学习 */</tw-passagedata><tw-passagedata pid="48" name="城市生活_1" tags="" position="975,600" size="100,100">&lt;&lt;you&gt;&gt;最近离开父母家，独立出来自己住了。一切才刚开始各种不习惯……&lt;br&gt;
-幸好，有小宠物史莱姆相伴……嗯，要不要跟宠物做点什么呢……？&lt;br&gt;</tw-passagedata><tw-passagedata pid="49" name="怡安小区" tags="location" position="1100,600" size="100,100">&lt;&lt;location &quot;怡安小区&quot;&gt;&gt;
+学习 */</tw-passagedata><tw-passagedata pid="49" name="城市生活_1" tags="" position="1100,600" size="100,100">&lt;&lt;you&gt;&gt;最近离开父母家，独立出来自己住了。一切才刚开始各种不习惯……&lt;br&gt;
+幸好，有小宠物史莱姆相伴……嗯，要不要跟宠物做点什么呢……？&lt;br&gt;</tw-passagedata><tw-passagedata pid="50" name="怡安小区" tags="location" position="1225,600" size="100,100">&lt;&lt;location &quot;怡安小区&quot;&gt;&gt;
 &lt;span class=&quot;title&quot;&gt;怡安小区&lt;/span&gt;&lt;br&gt;
 &lt;div class=&quot;lbox&quot;&gt;
 位于景南市南兴区的一个住宅小区。&lt;br&gt;
@@ -17488,10 +17104,10 @@ required:false,
 &lt;/div&gt;
 
 /* 景南市。一个位于周唐南方大省柳洲省的一级大城市。&lt;br&gt;
-有山有水，面朝大海，四季分明，是个风景优美的旅游城市。&lt;br&gt; */</tw-passagedata><tw-passagedata pid="50" name="怡安小区 links" tags="links" position="1225,600" size="100,100">&lt;div class=&quot;links&quot; title=&quot;移动时间：3分钟&quot;&gt;&lt;&lt;link &quot;・ 小区公园&quot; &quot;怡安小区公园&quot;&gt;&gt;&lt;&lt;passtime 3&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
+有山有水，面朝大海，四季分明，是个风景优美的旅游城市。&lt;br&gt; */</tw-passagedata><tw-passagedata pid="51" name="怡安小区 links" tags="links" position="100,725" size="100,100">&lt;div class=&quot;links&quot; title=&quot;移动时间：3分钟&quot;&gt;&lt;&lt;link &quot;・ 小区公园&quot; &quot;怡安小区公园&quot;&gt;&gt;&lt;&lt;passtime 3&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
 &lt;div class=&quot;links&quot; title=&quot;移动时间：12分钟&quot;&gt;&lt;&lt;link &quot;・ 宜兴广场&quot; &quot;商店&quot;&gt;&gt;&lt;&lt;passtime 12&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
 &lt;div class=&quot;links&quot; title=&quot;移动时间：5分钟&quot;&gt;&lt;&lt;link &quot;・ 巴士站&quot; $passage&gt;&gt;&lt;&lt;passtime 5&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
-&lt;div class=&quot;links&quot; title=&quot;移动时间：10分钟&quot;&gt;&lt;&lt;link &quot;・ 地铁站&quot; $passage&gt;&gt;&lt;&lt;passtime 10&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="51" name="怡安小区公园" tags="location" position="100,725" size="100,100">&lt;&lt;location &quot;怡安小区公园&quot;&gt;&gt;
+&lt;div class=&quot;links&quot; title=&quot;移动时间：10分钟&quot;&gt;&lt;&lt;link &quot;・ 地铁站&quot; $passage&gt;&gt;&lt;&lt;passtime 10&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="52" name="怡安小区公园" tags="location" position="225,725" size="100,100">&lt;&lt;location &quot;怡安小区公园&quot;&gt;&gt;
 &lt;span class=&quot;title&quot;&gt;怡安小区 - 公园&lt;/span&gt;&lt;br&gt;
 &lt;div class=&quot;lbox&quot;&gt;
 绿意盎然，四周都种着花草树木。最吸引人的是南面一侧的用假山搭造的山泉景。&lt;br&gt;
@@ -17510,8 +17126,8 @@ required:false,
 
 &lt;div id=&quot;navi&quot; class=&quot;navi_unable&quot;&gt;
     &lt;&lt;navi&gt;&gt;
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="52" name="怡安小区公园 links" tags="" position="225,725" size="100,100">&lt;div class=&quot;links&quot; title=&quot;移动时间：3分钟&quot;&gt;&lt;&lt;link &quot;・ 小区大门&quot; &quot;怡安小区&quot;&gt;&gt;&lt;&lt;passtime 3&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="53" name="商店" tags="location" position="350,725" size="100,100">&lt;&lt;location &quot;商店&quot;&gt;&gt;
-&lt;&lt;include &quot;试衣间&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="54" name="Event" tags="eventloop nosave" position="475,725" size="100,100">&lt;div id=&quot;eventsituation&quot;&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="53" name="怡安小区公园 links" tags="" position="350,725" size="100,100">&lt;div class=&quot;links&quot; title=&quot;移动时间：3分钟&quot;&gt;&lt;&lt;link &quot;・ 小区大门&quot; &quot;怡安小区&quot;&gt;&gt;&lt;&lt;passtime 3&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="54" name="商店" tags="location" position="475,725" size="100,100">&lt;&lt;location &quot;商店&quot;&gt;&gt;
+&lt;&lt;include &quot;试衣间&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="55" name="Event" tags="eventloop nosave" position="600,725" size="100,100">&lt;div id=&quot;eventsituation&quot;&gt;
 &lt;&lt;CallEvent&gt;&gt;
 &lt;/div&gt;
 
@@ -17528,7 +17144,7 @@ required:false,
 
 &lt;div id=&quot;eventeffect&quot;&gt;
 &lt;&lt;CallEventEffect&gt;&gt;
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="55" name="EventSystem" tags="widget" position="600,725" size="100,100">/* 再现ERA口上系统的TRYCALL体系 主 */
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="56" name="EventSystem" tags="widget" position="725,725" size="100,100">/* 再现ERA口上系统的TRYCALL体系 主 */
 &lt;&lt;widget &quot;CallEvent&quot;&gt;&gt;
 &lt;&lt;if setEvent() isnot false&gt;&gt;
     &lt;&lt;set _passagename to setEvent()&gt;&gt;
@@ -17612,10 +17228,10 @@ required:false,
 
 &lt;&lt;/if&gt;&gt;
 
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="56" name="主线 开幕：EventFirst" tags="" position="725,725" size="100,100">&lt;&lt;set $count to 0&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="57" name="主线 开幕：EventFirst" tags="" position="850,725" size="100,100">&lt;&lt;set $count to 0&gt;&gt;
 &lt;&lt;set $Eflag.nonext to true&gt;&gt;
 &lt;&lt;set $eventnext to 0&gt;&gt;
-&lt;&lt;bookmark &quot;主线开幕_初次&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="57" name="主线 开幕-初次" tags="" position="850,725" size="100,100">&lt;&lt;Opening $count&gt;&gt;</tw-passagedata><tw-passagedata pid="58" name="主线 开幕-初次：E" tags="" position="975,725" size="100,100">&lt;&lt;if $count lt 8&gt;&gt;
+&lt;&lt;bookmark &quot;主线开幕_初次&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="58" name="主线 开幕-初次" tags="" position="975,725" size="100,100">&lt;&lt;Opening $count&gt;&gt;</tw-passagedata><tw-passagedata pid="59" name="主线 开幕-初次：E" tags="" position="1100,725" size="100,100">&lt;&lt;if $count lt 8&gt;&gt;
 &lt;&lt;addclass &quot;#eventsituation&quot; &quot;weirdtext&quot;&gt;&gt;
 &lt;&lt;silently&gt;&gt;&lt;&lt;script&gt;&gt;
 //requires jQuery because I am lazy.
@@ -17624,7 +17240,7 @@ $(document).ready(function(){
 });
 &lt;&lt;/script&gt;&gt;
 &lt;&lt;/silently&gt;&gt;
-&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="59" name="主线 开幕-初次：W" tags="widget" position="1100,725" size="100,100">&lt;&lt;widget &quot;Opening&quot;&gt;&gt;
+&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="60" name="主线 开幕-初次：W" tags="widget" position="1225,725" size="100,100">&lt;&lt;widget &quot;Opening&quot;&gt;&gt;
 
 &lt;&lt;switch $args[0]&gt;&gt;
 &lt;&lt;case 0&gt;&gt;
@@ -17738,7 +17354,7 @@ $(document).ready(function(){
 
 &lt;&lt;/switch&gt;&gt;
 
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="60" name="主线 开幕-初次：S" tags="" position="1225,725" size="100,100">&lt;&lt;switch $count&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="61" name="主线 开幕-初次：S" tags="" position="100,850" size="100,100">&lt;&lt;switch $count&gt;&gt;
 &lt;&lt;case 0&gt;&gt;
 	&lt;&lt;set _text to Lang(&quot;睁开眼睛&quot;,&quot;Open The Eyes&quot;)&gt;&gt;
 	&lt;div class=&quot;Wselect&quot;&gt;&lt;&lt;link _text&gt;&gt;&lt;&lt;set $count to 1&gt;&gt;&lt;&lt;Revent&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
@@ -17781,7 +17397,7 @@ $(document).ready(function(){
 	&lt;&lt;set _text to Lang(&quot;继续&quot;,&quot;Next&quot;)&gt;&gt;
 	&lt;div @class=&quot;($count &gt;= 8 ? &#39;Eselect&#39; : &#39;Wselect&#39; )&quot;&gt;&lt;&lt;link _text&gt;&gt;&lt;&lt;set $count to $eventnext&gt;&gt;&lt;&lt;Revent&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
 
-&lt;&lt;/switch&gt;&gt;</tw-passagedata><tw-passagedata pid="61" name="主线 开幕-初次-穿越版" tags="" position="100,850" size="100,100">&lt;&lt;Opening2 $count&gt;&gt;</tw-passagedata><tw-passagedata pid="62" name="主线 开幕-初次-穿越版：W" tags="widget" position="225,850" size="100,100">&lt;&lt;widget &quot;Opening2&quot;&gt;&gt;
+&lt;&lt;/switch&gt;&gt;</tw-passagedata><tw-passagedata pid="62" name="主线 开幕-初次-穿越版" tags="" position="225,850" size="100,100">&lt;&lt;Opening2 $count&gt;&gt;</tw-passagedata><tw-passagedata pid="63" name="主线 开幕-初次-穿越版：W" tags="widget" position="350,850" size="100,100">&lt;&lt;widget &quot;Opening2&quot;&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
 &lt;&lt;switch $count&gt;&gt;
 &lt;&lt;case 0&gt;&gt;
@@ -17903,7 +17519,7 @@ $(document).ready(function(){
 &lt;&lt;/switch&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
 
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="63" name="主线 开幕-初次-穿越版：S" tags="" position="350,850" size="100,100">&lt;&lt;switch $count&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="64" name="主线 开幕-初次-穿越版：S" tags="" position="475,850" size="100,100">&lt;&lt;switch $count&gt;&gt;
 &lt;&lt;case 1&gt;&gt;
 &lt;&lt;set _text to Lang(&quot;拿起手机&quot;,&quot;Pick up the phone&quot;)&gt;&gt;
 &lt;div class=&quot;Eselect&quot;&gt;&lt;&lt;link _text&gt;&gt;&lt;&lt;set $count to 2&gt;&gt;&lt;&lt;Revent&gt;&gt;&lt;&lt;passtime 2&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
@@ -17951,7 +17567,7 @@ $(document).ready(function(){
 &lt;&lt;set _text to Lang(&quot;继续&quot;,&quot;Next&quot;)&gt;&gt;
 &lt;div class=&quot;Eselect&quot;&gt;&lt;&lt;link _text&gt;&gt;&lt;&lt;set $count to $eventnext&gt;&gt;&lt;&lt;Revent&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
 
-&lt;&lt;/switch&gt;&gt;</tw-passagedata><tw-passagedata pid="64" name="主线 开幕-轮回" tags="" position="475,850" size="100,100">&lt;&lt;bookmark &quot;主线开幕_轮回&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="65" name="PC 主线-开幕-房间描述" tags="nobr" position="600,850" size="100,100">&lt;&lt;lang 
+&lt;&lt;/switch&gt;&gt;</tw-passagedata><tw-passagedata pid="65" name="主线 开幕-轮回" tags="" position="600,850" size="100,100">&lt;&lt;bookmark &quot;主线开幕_轮回&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="66" name="PC 主线-开幕-房间描述" tags="nobr" position="725,850" size="100,100">&lt;&lt;lang 
 &quot;一睁开眼，首先看到的是茂绿的窗外，响亮的蝉鸣宣告着当前的季节。窗户旁摆放着一张大书桌，上面摆放着&lt;&lt;if $PC.type is 2&gt;&gt;一个宽屏大液显&lt;&lt;elseif $PC.type is 1&gt;&gt;新帝HQ24数位屏和数位板&lt;&lt;else&gt;&gt;一个电脑屏幕&lt;&lt;/if&gt;&gt;，书桌旁的小桌子上则是电脑主机。在靠近书桌的墙边，则整齐地摆放着两个书架，书架上是&lt;&lt;switch $PC.type&gt;&gt;&lt;&lt;case 1&gt;&gt;各种漫画和小说还有塑料小人&lt;&lt;case 2&gt;&gt;各种各样的书籍&lt;&lt;case 3&gt;&gt;各种修仙小说和漫画&lt;&lt;/switch&gt;&gt;，墙上则&lt;&lt;switch $PC.type&gt;&gt;&lt;&lt;case 1&gt;&gt;挂着一些远古生物的挂画和各种游戏海报&lt;&lt;case 2&gt;&gt;挂着一些漂亮的装饰画&lt;&lt;case 3&gt;&gt;挂着一个黑白两色的八卦阵和一些仙侠作品的海报&lt;&lt;/switch&gt;&gt;&quot;
 
 &quot;Across from the bed is the window, and outside the window is the loud sound of cicadas announcing the current season. Right next to the window sits a large desk with a computer with two screens, two bookshelves lined up side by side with various books and comics and some anime figurines, and posters of superheroes on the wall&quot;

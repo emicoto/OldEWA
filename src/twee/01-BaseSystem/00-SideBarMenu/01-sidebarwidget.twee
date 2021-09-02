@@ -1,5 +1,9 @@
 ﻿:: SidebarWidget [widget]
 
+<<widget "showmoney">>
+<div class="points"><<printmoney $points>>P</div><span class="slice"> | </span><div class="money"><<printmoney $money>><<icon "moneyicon">></div>
+<</widget>>
+
 <<widget "showtitle">>
     <div align="center">
         <img src="image/banner.png">
@@ -64,5 +68,23 @@
     
 <</widget>>
 
-
+<<widget "sidebar_stats">>
+<<if $statshidden is true>>
+    <<button "▲">>
+    <<set $statshidden to false>>
+    <<replace "#sidebar_stats">><<sidebar_stats>><</replace>>
+    <</button>>
+    <div id="playerstats" class="hide">
+    <<playerstatus>>
+    </div>
+<<else>>
+    <<button "▼">>
+    <<set $statshidden to true>>
+    <<replace "#sidebar_stats">><<sidebar_stats>><</replace>>
+    <</button>>
+    <div id="playerstats">
+    <<playerstatus>>
+    </div>
+<</if>>
+<</widget>>
 

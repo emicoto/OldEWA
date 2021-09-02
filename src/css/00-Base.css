@@ -242,7 +242,7 @@ input[type=range]:focus {
   font-family: 'Times New Roman', "MS PGothic";
   position: fixed;
   top:0px;
-  right:10px;
+  left:55px;
 }
 
 .VolumeSlider, .VolumeSlider::-webkit-slider-runnable-track {

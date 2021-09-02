@@ -1,0 +1,69 @@
+﻿:: CombatUIWidget [widget]
+
+<<widget "CB_playerside">>
+<div id="characard">
+    <div class="face"><<portrait>></div>
+    <div class="CC_name">玩家</div>
+    <div class="CC_statsbar">
+        <div id="showHP">
+        <div class="metername">HP</div><<RPGbar $PC.rpg.HP "#FF755F">>
+        <div class="showHP"><<print $PC.rpg.HP[0]+"/"+$PC.rpg.HP[1]>></div>
+        </div>
+
+        <div id="showMP">
+        <div class="metername">MP</div><<RPGbar $PC.rpg.MP "#98B5FF">>
+        <div class="showMP"><<print $PC.rpg.MP[0]+"/"+$PC.rpg.MP[1]>></div>
+        </div>
+
+        <div id="showSP">
+        <div class="metername">SP</div><<RPGbar $PC.rpg.SP "#FFC8F5">>
+        <div class="showSP"><<print $PC.rpg.SP[0]+"/"+$PC.rpg.SP[1]>></div>
+        </div>
+    </div>
+    <div class="CC_state"></div>
+</div>
+
+<div id="characard">
+    <div class="face"><<portrait>></div>
+    <div class="CC_name">宠物</div>
+    <div class="CC_statsbar">
+        <div id="showHP">
+        <div class="metername">HP</div><<RPGbar $pet.HP "#FF755F">>
+        <div class="showHP"><<print $pet.HP[0]+"/"+$pet.HP[1]>></div>
+        </div>
+
+        <div id="showMP">
+        <div class="metername">MP</div><<RPGbar $pet.MP "#98B5FF">>
+        <div class="showMP"><<print $pet.MP[0]+"/"+$pet.MP[1]>></div>
+        </div>
+
+        <div id="showSP">
+        <div class="metername">SP</div><<RPGbar $pet.SP "#FFC8F5">>
+        <div class="showSP"><<print $pet.SP[0]+"/"+$pet.SP[1]>></div>
+        </div>
+    </div>
+    <div class="CC_state"></div>
+</div>
+
+<div id="characard">
+    <div class="face"><<portrait>></div>
+    <div class="CC_name">队友</div>
+    <div class="CC_statsbar">
+        <div id="showHP">
+        <div class="metername">HP</div><<RPGbar $PC.rpg.HP "#FF755F">>
+        <div class="showHP"><<print $PC.rpg.HP[0]+"/"+$PC.rpg.HP[1]>></div>
+        </div>
+
+        <div id="showMP">
+        <div class="metername">MP</div><<RPGbar $PC.rpg.MP "#98B5FF">>
+        <div class="showMP"><<print $PC.rpg.MP[0]+"/"+$PC.rpg.MP[1]>></div>
+        </div>
+
+        <div id="showSP">
+        <div class="metername">SP</div><<RPGbar $PC.rpg.SP "#FFC8F5">>
+        <div class="showSP"><<print $PC.rpg.SP[0]+"/"+$PC.rpg.SP[1]>></div>
+        </div>
+    </div>
+    <div class="CC_state"></div>
+</div>
+<</widget>>

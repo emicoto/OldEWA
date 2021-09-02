@@ -23,7 +23,7 @@
 <div id="portrait">
 
 <<if $render is "canvas">>
-    <div class="P_Layer flipx">
+    <div class="portrait flipx">
     <<twinescript>>
     output.appendChild(Avatar.getPortrait())
     <</twinescript>>

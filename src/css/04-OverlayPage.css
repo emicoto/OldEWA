@@ -16,7 +16,8 @@
     overflow-y: scroll;
     z-index: 1000;
     max-width: 1000px;
-  user-select: none;
+    user-select: none;
+    transition: all 0.75s;
 }
   
 .customOverlay[data-overlay="canvasLayers"],

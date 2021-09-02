@@ -1,5 +1,4 @@
-﻿
-/* 通用 */
+﻿/* 通用 */
 
 function weirdeffect(){
 	
@@ -63,3 +62,13 @@ function movebutton() {
 }
 window.movebutton = movebutton
 
+function delay(id,text) {
+    if(typeof(text)=="string"){
+        $('#'+id).append("<span class='delay'>"+text+"<br></span>")
+    }else if(Array.isArray(text)){
+        $( "#"+id ).append( "<span class='h"+i+" hidden'>"+text[i]+"<br></span>");
+        setTimeout(() => {$("#combat_message .h"+i).removeClass('hidden').addClass('delay')}, (500*i))
+    }
+}
+F.delay = delay
+DefineMacroS("delay",delay)

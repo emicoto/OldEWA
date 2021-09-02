@@ -15,6 +15,14 @@
     position: absolute;
 }
 
+.portrait {
+    width: 160px;
+    width: 160px;
+    top: -15px;
+    left: -12px;
+    position: absolute;
+}
+
 #portrait {
     width: 120px;
     height: 120px;
@@ -25,13 +33,6 @@
     border-radius: 100%;
     margin: 5px;
 }
-
-.P_Layer {
-    top: -15px;
-    left: 0px;
-    position: absolute;
-}
-
 
 /* 商店相关 */
 

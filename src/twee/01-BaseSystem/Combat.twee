@@ -67,78 +67,21 @@
 
 <div id="playerside">
 /* 玩家侧任务卡 */
-<div id="characard">
-    <div class="face"><<portrait>></div>
-    <div class="CC_name">玩家</div>
-    <div class="CC_statsbar">
-        <div id="showHP">
-        <div class="metername">HP</div><<RPGbar $PC.rpg.HP "#FF755F">>
-        <div class="showHP"><<print $PC.rpg.HP[0]+"/"+$PC.rpg.HP[1]>></div>
-        </div>
-
-        <div id="showMP">
-        <div class="metername">MP</div><<RPGbar $PC.rpg.MP "#98B5FF">>
-        <div class="showMP"><<print $PC.rpg.MP[0]+"/"+$PC.rpg.MP[1]>></div>
-        </div>
-
-        <div id="showSP">
-        <div class="metername">SP</div><<RPGbar $PC.rpg.SP "#FFC8F5">>
-        <div class="showSP"><<print $PC.rpg.SP[0]+"/"+$PC.rpg.SP[1]>></div>
-        </div>
-    </div>
-    <div class="CC_state"></div>
-</div>
-
-<div id="characard">
-    <div class="face"><<portrait>></div>
-    <div class="CC_name">宠物</div>
-    <div class="CC_statsbar">
-        <div id="showHP">
-        <div class="metername">HP</div><<RPGbar $pet.HP "#FF755F">>
-        <div class="showHP"><<print $pet.HP[0]+"/"+$pet.HP[1]>></div>
-        </div>
-
-        <div id="showMP">
-        <div class="metername">MP</div><<RPGbar $pet.MP "#98B5FF">>
-        <div class="showMP"><<print $pet.MP[0]+"/"+$pet.MP[1]>></div>
-        </div>
-
-        <div id="showSP">
-        <div class="metername">SP</div><<RPGbar $pet.SP "#FFC8F5">>
-        <div class="showSP"><<print $pet.SP[0]+"/"+$pet.SP[1]>></div>
-        </div>
-    </div>
-    <div class="CC_state"></div>
-</div>
-
-<div id="characard">
-    <div class="face"><<portrait>></div>
-    <div class="CC_name">队友</div>
-    <div class="CC_statsbar">
-        <div id="showHP">
-        <div class="metername">HP</div><<RPGbar $PC.rpg.HP "#FF755F">>
-        <div class="showHP"><<print $PC.rpg.HP[0]+"/"+$PC.rpg.HP[1]>></div>
-        </div>
-
-        <div id="showMP">
-        <div class="metername">MP</div><<RPGbar $PC.rpg.MP "#98B5FF">>
-        <div class="showMP"><<print $PC.rpg.MP[0]+"/"+$PC.rpg.MP[1]>></div>
-        </div>
-
-        <div id="showSP">
-        <div class="metername">SP</div><<RPGbar $PC.rpg.SP "#FFC8F5">>
-        <div class="showSP"><<print $PC.rpg.SP[0]+"/"+$PC.rpg.SP[1]>></div>
-        </div>
-    </div>
-    <div class="CC_state"></div>
-</div>
+<<CB_playerside>>
 /*end */
 </div>
 
 /*  */
 <div id="command_container">
     <div id="combat_command">
-        <<link "攻击">><<append "#combat_message" t8n>>你攻击了敌人A。<br><</append>><<run msg_end.scrollIntoView()>><</link>>
+        <<link "攻击">>
+        <<run 
+            wait(["你攻击了敌人A。","敌人A受到你的攻击损失了1点HP。","但你很快遭遇了反攻，被撕下一层衣服。"
+            ]);
+            >>
+        <<set $PC.rpg.HP[0] -= 5>>
+        <<replace "#playerside">><<CB_playerside>><</replace>>
+        <</link>>
         <<link "防御">><</link>>
         <<link "技能">><</link>>
         <<link "挑逗">><</link>>
@@ -150,3 +93,12 @@
 </div>
 
 </div>
+
+<script>
+function wait(text) {
+    for(let i=0;i<text.length;i++){
+        $( "#combat_message" ).append( "<span class='h"+i+" hidden'>"+text[i]+"<br></span>");
+        setTimeout(() => {$("#combat_message .h"+i).removeClass('hidden').addClass('delay');msg_end.scrollIntoView() }, (500*i))
+    }
+}
+</script>

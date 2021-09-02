@@ -32,7 +32,7 @@ function isObject(props) {
 }
 var Avatar;
 (function(Avatar2) {
-  const AVATARPATH = "image/avatar";
+  const AVATARPATH = "./image/avatar";
   const __resolve = (mainpath, ...paths) => path.resolve(mainpath, ...paths);
   const cache = {};
   function CanvasModels(name, width, height) {
@@ -87,8 +87,8 @@ var Avatar;
     };
   }
   new CanvasModels("Avatar", 180, 260);
-  new CanvasModels("Portrait", 120, 120);
-  new CanvasModels("Emoji", 120, 120);
+  new CanvasModels("Portrait", 160, 160);
+  new CanvasModels("Emoji", 160, 160);
   Renderer.CanvasModels["Shop"] = {
     name: "Avatar",
     width: 166,
@@ -160,739 +160,34 @@ var Avatar;
       }
     });
   }
-  function Portraitlayer(ID, dx = -25) {
-    let layerID = 0;
-    setLayer(ID, "kemoback_wing", {
+  function Avatarlayer(ID, option = null) {
+    const defalutOpt = {
       width: 180,
       height: 260,
-      z: layerID++,
-      dx,
-      showfn(options2) {
-        return !!options2.kemoback.wing;
-      },
-      srcfn(options2) {
-        return options2.kemoback.wing ? __resolve(AVATARPATH, `kemoback/${options2.kemoback.wing.src}.png`) : options2.dummy;
-      },
-      blendModefn(options2) {
-        if (options2.kemoback.wing) {
-          if (!options2.kemoback.wing.fixcolor) {
-            return BLENDMODE.MULTIPLY;
-          }
-        }
-      },
-      blendfn(options2) {
-        if (options2.kemoback.wing) {
-          if (!options2.kemoback.wing.fixcolor) {
-            return options2.kemoback.wing.color;
-          }
-        }
-      }
-    });
-    setLayer(ID, "kemoback_tail", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      dx,
-      showfn(options2) {
-        return !!options2.kemoback.tail;
-      },
-      srcfn(options2) {
-        return options2.kemoback.tail ? __resolve(AVATARPATH, `kemoback/${options2.kemoback.tail.src}.png`) : options2.dummy;
-      },
-      blendModefn(options2) {
-        if (options2.kemoback.tail) {
-          if (!options2.kemoback.tail.fixcolor) {
-            return BLENDMODE.MULTIPLY;
-          }
-        }
-      },
-      blendfn(options2) {
-        if (options2.kemoback.tail) {
-          if (!options2.kemoback.tail.fixcolor) {
-            return options2.kemoback.tail.color;
-          }
-        }
-      }
-    });
-    setLayer(ID, "back", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      dx,
-      showfn(options2) {
-        return !!options2.back;
-      },
-      srcfn(options2) {
-        return options2.back ? __resolve(AVATARPATH, `back/${options2.back.src}.png`) : options2.dummy;
-      },
-      blendModefn(options2) {
-        if (options2.back) {
-          if (!options2.back.fixcolor) {
-            return BLENDMODE.MULTIPLY;
-          }
-        }
-      },
-      blendfn(options2) {
-        if (options2.back) {
-          if (!options2.back.fixcolor) {
-            return options2.back.color;
-          }
-        }
-      }
-    });
-    setLayer(ID, "hairback", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      dx,
-      showfn(options2) {
-        return !!options2.hairback;
-      },
-      srcfn(options2) {
-        if (isObject(options2.hairback)) {
-          return options2.hairback ? __resolve(AVATARPATH, `hairback/${options2.hairback.src}.png`) : options2.dummy;
-        }
-        return options2.hairback ? __resolve(AVATARPATH, `hairback/${options2.hairback}.png`) : options2.dummy;
-      },
-      blendModefn(options2) {
-        if (isObject(options2.hairback)) {
-          if (!options2.hairback.fixcolor) {
-            return BLENDMODE.MULTIPLY;
-          }
-        }
-      },
-      blendfn(options2) {
-        if (isObject(options2.hairback)) {
-          if (!options2.hairback.fixcolor) {
-            return options2.hairback.color[0];
-          }
-        }
-      }
-    });
-    setLayer(ID, "body", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      showfn(options2) {
-        return !!options2.body;
-      },
-      srcfn(options2) {
-        if (isObject(options2.body)) {
-          return options2.body ? __resolve(AVATARPATH, `body/${options2.body.src}.png`) : options2.dummy;
-        }
-        return options2.body ? __resolve(AVATARPATH, `body/${options2.body}.png`) : options2.dummy;
-      }
-    });
-    setLayer(ID, "body_msk", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      showfn(options2) {
-        return isObject(options2.body) ? options2.body.src.includes("furry") : false;
-      },
-      srcfn(options2) {
-        if (isObject(options2.body)) {
-          return options2.body.src.includes("furry") ? __resolve(AVATARPATH, `body/${options2.body.src}.png`) : options2.dummy;
-        }
-      },
-      blendModefn(options2) {
-        if (isObject(options2.body)) {
-          if (!options2.body.fixcolor) {
-            return BLENDMODE.MULTIPLY;
-          }
-        }
-      },
-      blendfn(options2) {
-        if (isObject(options2.body)) {
-          if (!options2.body.fixcolor) {
-            return options2.body.color;
-          }
-        }
-      },
-      masksrcfn(options2) {
-        if (isObject(options2.body)) {
-          if (options2.body.src.includes("furry")) {
-            return __resolve(AVATARPATH, `body/furry/mask.png`);
-          }
-        }
-      }
-    });
-    setLayer(ID, "nipple", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      dx,
-      showfn(options2) {
-        return !!options2.nipple;
-      },
-      srcfn(options2) {
-        return options2.nipple ? __resolve(AVATARPATH, `${options2.nipple}.png`) : options2.dummy;
-      }
-    });
-    setLayer(ID, "hand", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      dx,
-      showfn(options2) {
-        return !!options2.hand;
-      },
-      srcfn(options2) {
-        if (isObject(options2.hand)) {
-          return options2.hand ? __resolve(AVATARPATH, `hand/${options2.hand.src}.png`) : options2.dummy;
-        }
-        return options2.hand ? __resolve(AVATARPATH, `hand/${options2.hand}.png`) : options2.dummy;
-      },
-      blendModefn(options2) {
-        if (isObject(options2.hand)) {
-          if (!options2.hand.fixcolor) {
-            return BLENDMODE.MULTIPLY;
-          }
-        }
-      },
-      blendfn(options2) {
-        if (isObject(options2.hand)) {
-          if (!options2.hand.fixcolor) {
-            return options2.hand.color;
-          }
-        }
-      }
-    });
-    setLayer(ID, "inner_up", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      dx,
-      showfn(options2) {
-        return !!options2.inner_up;
-      },
-      srcfn(options2) {
-        if (isObject(options2.inner_up)) {
-          return options2.inner_up ? __resolve(AVATARPATH, `inner_up/${options2.inner_up.src}.png`) : options2.dummy;
-        }
-        return options2.inner_up ? __resolve(AVATARPATH, `inner_up/${options2.inner_up}.png`) : options2.dummy;
-      },
-      blendModefn(options2) {
-        if (isObject(options2.inner_up)) {
-          if (!options2.inner_up.fixcolor) {
-            return BLENDMODE.MULTIPLY;
-          }
-        }
-      },
-      blendfn(options2) {
-        if (isObject(options2.inner_up)) {
-          if (!options2.inner_up.fixcolor) {
-            return options2.inner_up.color;
-          }
-        }
-      }
-    });
-    setLayer(ID, "inner_up_acc", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      dx,
-      showfn(options2) {
-        if (isObject(options2.inner_up)) {
-          return !!options2.inner_up.acc;
-        }
-        return false;
-      },
-      srcfn(options2) {
-        if (isObject(options2.inner_up)) {
-          return options2.inner_up.acc ? __resolve(AVATARPATH, `inner_up/${options2.inner_up.acc}.png`) : options2.dummy;
-        }
-        return options2.dummy;
-      }
-    });
-    setLayer(ID, "top", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      dx,
-      showfn(options2) {
-        return !!options2.top;
-      },
-      srcfn(options2) {
-        if (isObject(options2.top)) {
-          return options2.top ? __resolve(AVATARPATH, `top/${options2.top.src}.png`) : options2.dummy;
-        }
-        return options2.top ? __resolve(AVATARPATH, `top/${options2.top}.png`) : options2.dummy;
-      },
-      blendModefn(options2) {
-        if (isObject(options2.top)) {
-          if (!options2.top.fixcolor) {
-            return BLENDMODE.MULTIPLY;
-          }
-        }
-      },
-      blendfn(options2) {
-        if (isObject(options2.top)) {
-          if (!options2.top.fixcolor) {
-            return options2.top.color;
-          }
-        }
-      }
-    });
-    setLayer(ID, "top_acc", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      dx,
-      showfn(options2) {
-        if (isObject(options2.top)) {
-          return !!options2.top.acc;
-        }
-        return false;
-      },
-      srcfn(options2) {
-        if (isObject(options2.top)) {
-          return options2.top.acc ? __resolve(AVATARPATH, `top/${options2.top.acc}.png`) : options2.dummy;
-        }
-        return options2.dummy;
-      }
-    });
-    setLayer(ID, "outter", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      dx,
-      showfn(options2) {
-        return !!options2.inner_up;
-      },
-      srcfn(options2) {
-        if (isObject(options2.outter)) {
-          return options2.outter ? __resolve(AVATARPATH, `outter/${options2.outter.src}.png`) : options2.dummy;
-        }
-        return options2.outter ? __resolve(AVATARPATH, `outter/${options2.outter}.png`) : options2.dummy;
-      },
-      blendModefn(options2) {
-        if (isObject(options2.outter)) {
-          if (!options2.outter.fixcolor) {
-            return BLENDMODE.MULTIPLY;
-          }
-        }
-      },
-      blendfn(options2) {
-        if (isObject(options2.outter)) {
-          if (!options2.outter.fixcolor) {
-            return options2.outter.color;
-          }
-        }
-      }
-    });
-    setLayer(ID, "outter_acc", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      dx,
-      showfn(options2) {
-        if (isObject(options2.outter)) {
-          return !!options2.outter.acc;
-        }
-        return false;
-      },
-      srcfn(options2) {
-        if (isObject(options2.outter)) {
-          return options2.outter.acc ? __resolve(AVATARPATH, `top/${options2.outter.acc}.png`) : options2.dummy;
-        }
-        return options2.dummy;
-      }
-    });
-    setLayer(ID, "mouth", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      dx,
-      showfn(options2) {
-        return !!options2.mouth;
-      },
-      srcfn(options2) {
-        if (isObject(options2.mouth)) {
-          return options2.mouth ? __resolve(AVATARPATH, `mouth/${options2.mouth.src}.png`) : options2.dummy;
-        }
-        return options2.mouth ? __resolve(AVATARPATH, `mouth/${options2.mouth}.png`) : options2.dummy;
-      },
-      blendModefn(options2) {
-        if (isObject(options2.mouth)) {
-          if (!options2.mouth.fixcolor) {
-            return BLENDMODE.MULTIPLY;
-          }
-        }
-      },
-      blendfn(options2) {
-        if (isObject(options2.mouth)) {
-          if (!options2.mouth.fixcolor) {
-            return options2.mouth.color;
-          }
-        }
-      }
-    });
-    setLayer(ID, "eyes", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      dx,
-      showfn(options2) {
-        return !!options2.eyes;
-      },
-      srcfn(options2) {
-        if (isObject(options2.eyes)) {
-          return options2.eyes ? __resolve(AVATARPATH, `eyes/${options2.eyes.src}.png`) : options2.dummy;
-        }
-        return options2.eyes ? __resolve(AVATARPATH, `eyes/${options2.eyes}.png`) : options2.dummy;
-      },
-      blendModefn(options2) {
-        if (isObject(options2.eyes)) {
-          if (!options2.eyes.fixcolor) {
-            return BLENDMODE.MULTIPLY;
-          }
-        }
-      },
-      blendfn(options2) {
-        if (isObject(options2.eyes)) {
-          if (!options2.eyes.fixcolor) {
-            return options2.eyes.color;
-          }
-        }
-      },
-      animationfn(options2) {
-        return "eyes";
-      }
-    });
-    setLayer(ID, "emoadd_tear", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      dx,
-      showfn(options2) {
-        return !!options2.emoadd.tear;
-      },
-      srcfn(options2) {
-        return options2.emoadd.tear ? __resolve(AVATARPATH, `emoadd/tear.png`) : options2.dummy;
-      }
-    });
-    setLayer(ID, "emoadd_shy", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      dx,
-      showfn(options2) {
-        return !!options2.emoadd.shy;
-      },
-      srcfn(options2) {
-        return options2.emoadd.shy ? __resolve(AVATARPATH, `emoadd/shy.png`) : options2.dummy;
-      }
-    });
-    setLayer(ID, "emoadd_red", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      dx,
-      showfn(options2) {
-        return !!options2.emoadd.red;
-      },
-      srcfn(options2) {
-        return options2.emoadd.red ? __resolve(AVATARPATH, `emoadd/red.png`) : options2.dummy;
-      }
-    });
-    setLayer(ID, "emoadd_hurt", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      dx,
-      showfn(options2) {
-        return !!options2.emoadd.hurt;
-      },
-      srcfn(options2) {
-        return options2.emoadd.hurt ? __resolve(AVATARPATH, `emoadd/hurt.png`) : options2.dummy;
-      }
-    });
-    setLayer(ID, "face", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      dx,
-      showfn(options2) {
-        return !!options2.face;
-      },
-      srcfn(options2) {
-        if (isObject(options2.face)) {
-          return options2.face ? __resolve(AVATARPATH, `face/${options2.face.src}.png`) : options2.dummy;
-        }
-        return options2.face ? __resolve(AVATARPATH, `face/${options2.face}.png`) : options2.dummy;
-      },
-      blendModefn(options2) {
-        if (isObject(options2.face)) {
-          if (!options2.face.fixcolor) {
-            return BLENDMODE.MULTIPLY;
-          }
-        }
-      },
-      blendfn(options2) {
-        if (isObject(options2.face)) {
-          if (!options2.face.fixcolor) {
-            return options2.face.color;
-          }
-        }
-      }
-    });
-    setLayer(ID, "neck", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      dx,
-      showfn(options2) {
-        return !!options2.neck;
-      },
-      srcfn(options2) {
-        if (isObject(options2.neck)) {
-          return options2.neck ? __resolve(AVATARPATH, `neck/${options2.neck.src}.png`) : options2.dummy;
-        }
-        return options2.neck ? __resolve(AVATARPATH, `neck/${options2.neck}.png`) : options2.dummy;
-      },
-      blendModefn(options2) {
-        if (isObject(options2.neck)) {
-          if (!options2.neck.fixcolor) {
-            return BLENDMODE.MULTIPLY;
-          }
-        }
-      },
-      blendfn(options2) {
-        if (isObject(options2.neck)) {
-          if (!options2.neck.fixcolor) {
-            return options2.neck.color;
-          }
-        }
-      }
-    });
-    setLayer(ID, "hairfront", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      dx,
-      showfn(options2) {
-        return !!options2.hairfront;
-      },
-      srcfn(options2) {
-        if (isObject(options2.hairfront)) {
-          return options2.hairfront ? __resolve(AVATARPATH, `hairfront/${options2.hairfront.src}.png`) : options2.dummy;
-        }
-        return options2.hairfront ? __resolve(AVATARPATH, `hairfront/${options2.hairfront}.png`) : options2.dummy;
-      },
-      blendModefn(options2) {
-        if (isObject(options2.hairfront)) {
-          if (!options2.hairfront.fixcolor) {
-            return BLENDMODE.MULTIPLY;
-          }
-        }
-      },
-      blendfn(options2) {
-        if (isObject(options2.hairfront)) {
-          if (!options2.hairfront.fixcolor) {
-            return options2.hairfront.color[0];
-          }
-        }
-      }
-    });
-    setLayer(ID, "eyebrow", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      dx,
-      showfn(options2) {
-        return !!options2.eyebrow;
-      },
-      srcfn(options2) {
-        if (isObject(options2.eyebrow)) {
-          return options2.eyebrow ? __resolve(AVATARPATH, `eyebrow/${options2.eyebrow.src}.png`) : options2.dummy;
-        }
-        return options2.eyebrow ? __resolve(AVATARPATH, `eyebrow/${options2.eyebrow}.png`) : options2.dummy;
-      },
-      blendModefn(options2) {
-        if (isObject(options2.eyebrow)) {
-          if (!options2.eyebrow.fixcolor) {
-            return BLENDMODE.MULTIPLY;
-          }
-        }
-      },
-      blendfn(options2) {
-        if (isObject(options2.eyebrow)) {
-          if (!options2.eyebrow.fixcolor) {
-            return options2.eyebrow.color;
-          }
-        }
-      }
-    });
-    setLayer(ID, "kemofront_mimi", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      dx,
-      showfn(options2) {
-        return !!options2.kemofront.mimi;
-      },
-      srcfn(options2) {
-        if (isObject(options2.kemofront.mimi)) {
-          return options2.kemofront.mimi ? __resolve(AVATARPATH, `kemofront/${options2.kemofront.mimi.src}.png`) : options2.dummy;
-        }
-        return options2.kemofront.mimi ? __resolve(AVATARPATH, `kemofront/${options2.kemofront.mimi}.png`) : options2.dummy;
-      },
-      blendModefn(options2) {
-        if (isObject(options2.kemofront.mimi)) {
-          if (!options2.kemofront.mimi.fixcolor) {
-            return BLENDMODE.MULTIPLY;
-          }
-        }
-      },
-      blendfn(options2) {
-        if (isObject(options2.kemofront.mimi)) {
-          if (!options2.kemofront.mimi.fixcolor) {
-            return options2.kemofront.mimi.color;
-          }
-        }
-      }
-    });
-    setLayer(ID, "kemofront_horn", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      dx,
-      showfn(options2) {
-        return !!options2.kemofront.horn;
-      },
-      srcfn(options2) {
-        if (isObject(options2.kemofront.horn)) {
-          return options2.kemofront.horn ? __resolve(AVATARPATH, `kemofront/${options2.kemofront.horn.src}.png`) : options2.dummy;
-        }
-        return options2.kemofront.horn ? __resolve(AVATARPATH, `kemofront/${options2.kemofront.horn}.png`) : options2.dummy;
-      },
-      blendModefn(options2) {
-        if (isObject(options2.kemofront.horn)) {
-          if (!options2.kemofront.horn.fixcolor) {
-            return BLENDMODE.MULTIPLY;
-          }
-        }
-      },
-      blendfn(options2) {
-        if (isObject(options2.kemofront.horn)) {
-          if (!options2.kemofront.horn.fixcolor) {
-            return options2.kemofront.horn.color;
-          }
-        }
-      }
-    });
-    setLayer(ID, "hat", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      dx,
-      showfn(options2) {
-        return !!options2.hat;
-      },
-      srcfn(options2) {
-        if (isObject(options2.hat)) {
-          return options2.hat ? __resolve(AVATARPATH, `hat/${options2.hat.src}.png`) : options2.dummy;
-        }
-        return options2.hat ? __resolve(AVATARPATH, `hat/${options2.hat}.png`) : options2.dummy;
-      },
-      blendModefn(options2) {
-        if (isObject(options2.hat)) {
-          if (!options2.hat.fixcolor) {
-            return BLENDMODE.MULTIPLY;
-          }
-        }
-      },
-      blendfn(options2) {
-        if (isObject(options2.hat)) {
-          if (!options2.hat.fixcolor) {
-            return options2.hat.color;
-          }
-        }
-      }
-    });
-    setLayer(ID, "addon_face", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      dx,
-      showfn(options2) {
-        return !!options2.addon.face;
-      },
-      srcfn(options2) {
-        return options2.addon.face ? __resolve(AVATARPATH, `addon/face.png`) : options2.dummy;
-      }
-    });
-    setLayer(ID, "addon_hair", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      dx,
-      showfn(options2) {
-        return !!options2.addon.hair;
-      },
-      srcfn(options2) {
-        return options2.addon.hair ? __resolve(AVATARPATH, `addon/hair.png`) : options2.dummy;
-      }
-    });
-    setLayer(ID, "addon_mouth", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      dx,
-      showfn(options2) {
-        return !!options2.addon.mouth;
-      },
-      srcfn(options2) {
-        return options2.addon.mouth ? __resolve(AVATARPATH, `addon/mouth.png`) : options2.dummy;
-      }
-    });
-    setLayer(ID, "frame", {
-      width: 180,
-      height: 260,
-      z: layerID++,
-      dx,
-      showfn(options2) {
-        return !!options2.frame;
-      },
-      srcfn(options2) {
-        if (isObject(options2.frame)) {
-          return options2.frame ? __resolve(AVATARPATH, `frame/${options2.frame.src}.png`) : options2.dummy;
-        }
-        return options2.frame ? __resolve(AVATARPATH, `frame/${options2.frame}.png`) : options2.dummy;
-      },
-      blendModefn(options2) {
-        if (isObject(options2.frame)) {
-          if (!options2.frame.fixcolor) {
-            return BLENDMODE.MULTIPLY;
-          }
-        }
-      },
-      blendfn(options2) {
-        if (isObject(options2.frame)) {
-          if (!options2.frame.fixcolor) {
-            return options2.frame.color;
-          }
-        }
-      }
-    });
-  }
-  function Avatarlayer(ID) {
+      dy: 0,
+      dx: 0,
+      show: true
+    };
+    const opt = option ? option : defalutOpt;
     let layerID = 0;
     setLayer(ID, "background", {
-      width: 180,
-      height: 260,
+      width: opt.width ? opt.width : defalutOpt.width,
+      height: opt.height ? opt.height : defalutOpt.height,
+      dx: opt.dx ? opt.dx : defalutOpt.dx,
+      dy: opt.dy ? opt.dy : defalutOpt.dy,
       z: layerID++,
       showfn(options2) {
-        return !!options2.background;
+        return opt.show ? !!options2.background : opt.show;
       },
       srcfn(options2) {
         return options2.background ? __resolve(AVATARPATH, `background/${options2.background}.png`) : options2.dummy;
       }
     });
     setLayer(ID, "kemoback_wing", {
-      width: 180,
-      height: 260,
+      width: opt.width ? opt.width : defalutOpt.width,
+      height: opt.height ? opt.height : defalutOpt.height,
+      dx: opt.dx ? opt.dx : defalutOpt.dx,
+      dy: opt.dy ? opt.dy : defalutOpt.dy,
       z: layerID++,
       showfn(options2) {
         return !!options2.kemoback.wing;
@@ -916,8 +211,10 @@ var Avatar;
       }
     });
     setLayer(ID, "kemoback_tail", {
-      width: 180,
-      height: 260,
+      width: opt.width ? opt.width : defalutOpt.width,
+      height: opt.height ? opt.height : defalutOpt.height,
+      dx: opt.dx ? opt.dx : defalutOpt.dx,
+      dy: opt.dy ? opt.dy : defalutOpt.dy,
       z: layerID++,
       showfn(options2) {
         return !!options2.kemoback.tail;
@@ -941,8 +238,10 @@ var Avatar;
       }
     });
     setLayer(ID, "back", {
-      width: 180,
-      height: 260,
+      width: opt.width ? opt.width : defalutOpt.width,
+      height: opt.height ? opt.height : defalutOpt.height,
+      dx: opt.dx ? opt.dx : defalutOpt.dx,
+      dy: opt.dy ? opt.dy : defalutOpt.dy,
       z: layerID++,
       showfn(options2) {
         return !!options2.back;
@@ -966,8 +265,10 @@ var Avatar;
       }
     });
     setLayer(ID, "hairback", {
-      width: 180,
-      height: 260,
+      width: opt.width ? opt.width : defalutOpt.width,
+      height: opt.height ? opt.height : defalutOpt.height,
+      dx: opt.dx ? opt.dx : defalutOpt.dx,
+      dy: opt.dy ? opt.dy : defalutOpt.dy,
       z: layerID++,
       showfn(options2) {
         return !!options2.hairback;
@@ -994,8 +295,10 @@ var Avatar;
       }
     });
     setLayer(ID, "body", {
-      width: 180,
-      height: 260,
+      width: opt.width ? opt.width : defalutOpt.width,
+      height: opt.height ? opt.height : defalutOpt.height,
+      dx: opt.dx ? opt.dx : defalutOpt.dx,
+      dy: opt.dy ? opt.dy : defalutOpt.dy,
       z: layerID++,
       showfn(options2) {
         return !!options2.body;
@@ -1008,8 +311,10 @@ var Avatar;
       }
     });
     setLayer(ID, "body_msk", {
-      width: 180,
-      height: 260,
+      width: opt.width ? opt.width : defalutOpt.width,
+      height: opt.height ? opt.height : defalutOpt.height,
+      dx: opt.dx ? opt.dx : defalutOpt.dx,
+      dy: opt.dy ? opt.dy : defalutOpt.dy,
       z: layerID++,
       showfn(options2) {
         return isObject(options2.body) ? options2.body.src.includes("furry") : false;
@@ -1042,8 +347,10 @@ var Avatar;
       }
     });
     setLayer(ID, "plus", {
-      width: 180,
-      height: 260,
+      width: opt.width ? opt.width : defalutOpt.width,
+      height: opt.height ? opt.height : defalutOpt.height,
+      dx: opt.dx ? opt.dx : defalutOpt.dx,
+      dy: opt.dy ? opt.dy : defalutOpt.dy,
       z: layerID++,
       showfn(options2) {
         return !!options2.plus;
@@ -1053,8 +360,10 @@ var Avatar;
       }
     });
     setLayer(ID, "nipple", {
-      width: 180,
-      height: 260,
+      width: opt.width ? opt.width : defalutOpt.width,
+      height: opt.height ? opt.height : defalutOpt.height,
+      dx: opt.dx ? opt.dx : defalutOpt.dx,
+      dy: opt.dy ? opt.dy : defalutOpt.dy,
       z: layerID++,
       showfn(options2) {
         return !!options2.nipple;
@@ -1064,8 +373,10 @@ var Avatar;
       }
     });
     setLayer(ID, "dick", {
-      width: 180,
-      height: 260,
+      width: opt.width ? opt.width : defalutOpt.width,
+      height: opt.height ? opt.height : defalutOpt.height,
+      dx: opt.dx ? opt.dx : defalutOpt.dx,
+      dy: opt.dy ? opt.dy : defalutOpt.dy,
       z: layerID++,
       show: true,
       srcfn(options2) {
@@ -1073,8 +384,10 @@ var Avatar;
       }
     });
     setLayer(ID, "penis", {
-      width: 180,
-      height: 260,
+      width: opt.width ? opt.width : defalutOpt.width,
+      height: opt.height ? opt.height : defalutOpt.height,
+      dx: opt.dx ? opt.dx : defalutOpt.dx,
+      dy: opt.dy ? opt.dy : defalutOpt.dy,
       z: layerID++,
       showfn(options2) {
         return !!options2.penis;
@@ -1084,8 +397,10 @@ var Avatar;
       }
     });
     setLayer(ID, "legs", {
-      width: 180,
-      height: 260,
+      width: opt.width ? opt.width : defalutOpt.width,
+      height: opt.height ? opt.height : defalutOpt.height,
+      dx: opt.dx ? opt.dx : defalutOpt.dx,
+      dy: opt.dy ? opt.dy : defalutOpt.dy,
       z: layerID++,
       showfn(options2) {
         return !!options2.legs;
@@ -1112,8 +427,10 @@ var Avatar;
       }
     });
     setLayer(ID, "legs_acc", {
-      width: 180,
-      height: 260,
+      width: opt.width ? opt.width : defalutOpt.width,
+      height: opt.height ? opt.height : defalutOpt.height,
+      dx: opt.dx ? opt.dx : defalutOpt.dx,
+      dy: opt.dy ? opt.dy : defalutOpt.dy,
       z: layerID++,
       showfn(options2) {
         if (isObject(options2.legs)) {
@@ -1129,8 +446,10 @@ var Avatar;
       }
     });
     setLayer(ID, "shoes", {
-      width: 180,
-      height: 260,
+      width: opt.width ? opt.width : defalutOpt.width,
+      height: opt.height ? opt.height : defalutOpt.height,
+      dx: opt.dx ? opt.dx : defalutOpt.dx,
+      dy: opt.dy ? opt.dy : defalutOpt.dy,
       z: layerID++,
       showfn(options2) {
         return !!options2.shoes;
@@ -1157,8 +476,10 @@ var Avatar;
       }
     });
     setLayer(ID, "inner_bt", {
-      width: 180,
-      height: 260,
+      width: opt.width ? opt.width : defalutOpt.width,
+      height: opt.height ? opt.height : defalutOpt.height,
+      dx: opt.dx ? opt.dx : defalutOpt.dx,
+      dy: opt.dy ? opt.dy : defalutOpt.dy,
       z: layerID++,
       showfn(options2) {
         return !!options2.inner_bt;
@@ -1185,8 +506,10 @@ var Avatar;
       }
     });
     setLayer(ID, "inner_bt_acc", {
-      width: 180,
-      height: 260,
+      width: opt.width ? opt.width : defalutOpt.width,
+      height: opt.height ? opt.height : defalutOpt.height,
+      dx: opt.dx ? opt.dx : defalutOpt.dx,
+      dy: opt.dy ? opt.dy : defalutOpt.dy,
       z: layerID++,
       showfn(options2) {
         if (isObject(options2.inner_bt)) {
@@ -1202,8 +525,10 @@ var Avatar;
       }
     });
     setLayer(ID, "bottom", {
-      width: 180,
-      height: 260,
+      width: opt.width ? opt.width : defalutOpt.width,
+      height: opt.height ? opt.height : defalutOpt.height,
+      dx: opt.dx ? opt.dx : defalutOpt.dx,
+      dy: opt.dy ? opt.dy : defalutOpt.dy,
       z: layerID++,
       showfn(options2) {
         return !!options2.bottom;
@@ -1230,8 +555,10 @@ var Avatar;
       }
     });
     setLayer(ID, "bottom_acc", {
-      width: 180,
-      height: 260,
+      width: opt.width ? opt.width : defalutOpt.width,
+      height: opt.height ? opt.height : defalutOpt.height,
+      dx: opt.dx ? opt.dx : defalutOpt.dx,
+      dy: opt.dy ? opt.dy : defalutOpt.dy,
       z: layerID++,
       showfn(options2) {
         if (isObject(options2.bottom)) {
@@ -1247,8 +574,10 @@ var Avatar;
       }
     });
     setLayer(ID, "hand", {
-      width: 180,
-      height: 260,
+      width: opt.width ? opt.width : defalutOpt.width,
+      height: opt.height ? opt.height : defalutOpt.height,
+      dx: opt.dx ? opt.dx : defalutOpt.dx,
+      dy: opt.dy ? opt.dy : defalutOpt.dy,
       z: layerID++,
       showfn(options2) {
         return !!options2.hand;
@@ -1275,8 +604,10 @@ var Avatar;
       }
     });
     setLayer(ID, "inner_up", {
-      width: 180,
-      height: 260,
+      width: opt.width ? opt.width : defalutOpt.width,
+      height: opt.height ? opt.height : defalutOpt.height,
+      dx: opt.dx ? opt.dx : defalutOpt.dx,
+      dy: opt.dy ? opt.dy : defalutOpt.dy,
       z: layerID++,
       showfn(options2) {
         return !!options2.inner_up;
@@ -1303,8 +634,10 @@ var Avatar;
       }
     });
     setLayer(ID, "inner_up_acc", {
-      width: 180,
-      height: 260,
+      width: opt.width ? opt.width : defalutOpt.width,
+      height: opt.height ? opt.height : defalutOpt.height,
+      dx: opt.dx ? opt.dx : defalutOpt.dx,
+      dy: opt.dy ? opt.dy : defalutOpt.dy,
       z: layerID++,
       showfn(options2) {
         if (isObject(options2.inner_up)) {
@@ -1320,8 +653,10 @@ var Avatar;
       }
     });
     setLayer(ID, "top", {
-      width: 180,
-      height: 260,
+      width: opt.width ? opt.width : defalutOpt.width,
+      height: opt.height ? opt.height : defalutOpt.height,
+      dx: opt.dx ? opt.dx : defalutOpt.dx,
+      dy: opt.dy ? opt.dy : defalutOpt.dy,
       z: layerID++,
       showfn(options2) {
         return !!options2.top;
@@ -1348,8 +683,10 @@ var Avatar;
       }
     });
     setLayer(ID, "top_acc", {
-      width: 180,
-      height: 260,
+      width: opt.width ? opt.width : defalutOpt.width,
+      height: opt.height ? opt.height : defalutOpt.height,
+      dx: opt.dx ? opt.dx : defalutOpt.dx,
+      dy: opt.dy ? opt.dy : defalutOpt.dy,
       z: layerID++,
       showfn(options2) {
         if (isObject(options2.top)) {
@@ -1365,8 +702,10 @@ var Avatar;
       }
     });
     setLayer(ID, "outter", {
-      width: 180,
-      height: 260,
+      width: opt.width ? opt.width : defalutOpt.width,
+      height: opt.height ? opt.height : defalutOpt.height,
+      dx: opt.dx ? opt.dx : defalutOpt.dx,
+      dy: opt.dy ? opt.dy : defalutOpt.dy,
       z: layerID++,
       showfn(options2) {
         return !!options2.inner_up;
@@ -1393,8 +732,10 @@ var Avatar;
       }
     });
     setLayer(ID, "outter_acc", {
-      width: 180,
-      height: 260,
+      width: opt.width ? opt.width : defalutOpt.width,
+      height: opt.height ? opt.height : defalutOpt.height,
+      dx: opt.dx ? opt.dx : defalutOpt.dx,
+      dy: opt.dy ? opt.dy : defalutOpt.dy,
       z: layerID++,
       showfn(options2) {
         if (isObject(options2.outter)) {
@@ -1410,8 +751,10 @@ var Avatar;
       }
     });
     setLayer(ID, "mouth", {
-      width: 180,
-      height: 260,
+      width: opt.width ? opt.width : defalutOpt.width,
+      height: opt.height ? opt.height : defalutOpt.height,
+      dx: opt.dx ? opt.dx : defalutOpt.dx,
+      dy: opt.dy ? opt.dy : defalutOpt.dy,
       z: layerID++,
       showfn(options2) {
         return !!options2.mouth;
@@ -1438,8 +781,10 @@ var Avatar;
       }
     });
     setLayer(ID, "eyes", {
-      width: 180,
-      height: 260,
+      width: opt.width ? opt.width : defalutOpt.width,
+      height: opt.height ? opt.height : defalutOpt.height,
+      dx: opt.dx ? opt.dx : defalutOpt.dx,
+      dy: opt.dy ? opt.dy : defalutOpt.dy,
       z: layerID++,
       showfn(options2) {
         return !!options2.eyes;
@@ -1469,8 +814,10 @@ var Avatar;
       }
     });
     setLayer(ID, "emoadd_tear", {
-      width: 180,
-      height: 260,
+      width: opt.width ? opt.width : defalutOpt.width,
+      height: opt.height ? opt.height : defalutOpt.height,
+      dx: opt.dx ? opt.dx : defalutOpt.dx,
+      dy: opt.dy ? opt.dy : defalutOpt.dy,
       z: layerID++,
       showfn(options2) {
         return !!options2.emoadd.tear;
@@ -1480,8 +827,10 @@ var Avatar;
       }
     });
     setLayer(ID, "emoadd_shy", {
-      width: 180,
-      height: 260,
+      width: opt.width ? opt.width : defalutOpt.width,
+      height: opt.height ? opt.height : defalutOpt.height,
+      dx: opt.dx ? opt.dx : defalutOpt.dx,
+      dy: opt.dy ? opt.dy : defalutOpt.dy,
       z: layerID++,
       showfn(options2) {
         return !!options2.emoadd.shy;
@@ -1491,8 +840,10 @@ var Avatar;
       }
     });
     setLayer(ID, "emoadd_red", {
-      width: 180,
-      height: 260,
+      width: opt.width ? opt.width : defalutOpt.width,
+      height: opt.height ? opt.height : defalutOpt.height,
+      dx: opt.dx ? opt.dx : defalutOpt.dx,
+      dy: opt.dy ? opt.dy : defalutOpt.dy,
       z: layerID++,
       showfn(options2) {
         return !!options2.emoadd.red;
@@ -1502,8 +853,10 @@ var Avatar;
       }
     });
     setLayer(ID, "emoadd_hurt", {
-      width: 180,
-      height: 260,
+      width: opt.width ? opt.width : defalutOpt.width,
+      height: opt.height ? opt.height : defalutOpt.height,
+      dx: opt.dx ? opt.dx : defalutOpt.dx,
+      dy: opt.dy ? opt.dy : defalutOpt.dy,
       z: layerID++,
       showfn(options2) {
         return !!options2.emoadd.hurt;
@@ -1513,8 +866,10 @@ var Avatar;
       }
     });
     setLayer(ID, "face", {
-      width: 180,
-      height: 260,
+      width: opt.width ? opt.width : defalutOpt.width,
+      height: opt.height ? opt.height : defalutOpt.height,
+      dx: opt.dx ? opt.dx : defalutOpt.dx,
+      dy: opt.dy ? opt.dy : defalutOpt.dy,
       z: layerID++,
       showfn(options2) {
         return !!options2.face;
@@ -1541,8 +896,10 @@ var Avatar;
       }
     });
     setLayer(ID, "neck", {
-      width: 180,
-      height: 260,
+      width: opt.width ? opt.width : defalutOpt.width,
+      height: opt.height ? opt.height : defalutOpt.height,
+      dx: opt.dx ? opt.dx : defalutOpt.dx,
+      dy: opt.dy ? opt.dy : defalutOpt.dy,
       z: layerID++,
       showfn(options2) {
         return !!options2.neck;
@@ -1569,8 +926,10 @@ var Avatar;
       }
     });
     setLayer(ID, "neck_acc", {
-      width: 180,
-      height: 260,
+      width: opt.width ? opt.width : defalutOpt.width,
+      height: opt.height ? opt.height : defalutOpt.height,
+      dx: opt.dx ? opt.dx : defalutOpt.dx,
+      dy: opt.dy ? opt.dy : defalutOpt.dy,
       z: layerID++,
       showfn(options2) {
         if (isObject(options2.neck)) {
@@ -1586,8 +945,10 @@ var Avatar;
       }
     });
     setLayer(ID, "hairfront", {
-      width: 180,
-      height: 260,
+      width: opt.width ? opt.width : defalutOpt.width,
+      height: opt.height ? opt.height : defalutOpt.height,
+      dx: opt.dx ? opt.dx : defalutOpt.dx,
+      dy: opt.dy ? opt.dy : defalutOpt.dy,
       z: layerID++,
       showfn(options2) {
         return !!options2.hairfront;
@@ -1614,8 +975,10 @@ var Avatar;
       }
     });
     setLayer(ID, "hairfront_msk", {
-      width: 180,
-      height: 260,
+      width: opt.width ? opt.width : defalutOpt.width,
+      height: opt.height ? opt.height : defalutOpt.height,
+      dx: opt.dx ? opt.dx : defalutOpt.dx,
+      dy: opt.dy ? opt.dy : defalutOpt.dy,
       z: layerID++,
       showfn(options2) {
         return !!options2.hairfront;
@@ -1652,8 +1015,10 @@ var Avatar;
       }
     });
     setLayer(ID, "eyebrow", {
-      width: 180,
-      height: 260,
+      width: opt.width ? opt.width : defalutOpt.width,
+      height: opt.height ? opt.height : defalutOpt.height,
+      dx: opt.dx ? opt.dx : defalutOpt.dx,
+      dy: opt.dy ? opt.dy : defalutOpt.dy,
       z: layerID++,
       showfn(options2) {
         return !!options2.eyebrow;
@@ -1680,8 +1045,10 @@ var Avatar;
       }
     });
     setLayer(ID, "kemofront_mimi", {
-      width: 180,
-      height: 260,
+      width: opt.width ? opt.width : defalutOpt.width,
+      height: opt.height ? opt.height : defalutOpt.height,
+      dx: opt.dx ? opt.dx : defalutOpt.dx,
+      dy: opt.dy ? opt.dy : defalutOpt.dy,
       z: layerID++,
       showfn(options2) {
         return !!options2.kemofront.mimi;
@@ -1708,8 +1075,10 @@ var Avatar;
       }
     });
     setLayer(ID, "kemofront_horn", {
-      width: 180,
-      height: 260,
+      width: opt.width ? opt.width : defalutOpt.width,
+      height: opt.height ? opt.height : defalutOpt.height,
+      dx: opt.dx ? opt.dx : defalutOpt.dx,
+      dy: opt.dy ? opt.dy : defalutOpt.dy,
       z: layerID++,
       showfn(options2) {
         return !!options2.kemofront.horn;
@@ -1736,8 +1105,10 @@ var Avatar;
       }
     });
     setLayer(ID, "hat", {
-      width: 180,
-      height: 260,
+      width: opt.width ? opt.width : defalutOpt.width,
+      height: opt.height ? opt.height : defalutOpt.height,
+      dx: opt.dx ? opt.dx : defalutOpt.dx,
+      dy: opt.dy ? opt.dy : defalutOpt.dy,
       z: layerID++,
       showfn(options2) {
         return !!options2.hat;
@@ -1764,8 +1135,10 @@ var Avatar;
       }
     });
     setLayer(ID, "addon_body", {
-      width: 180,
-      height: 260,
+      width: opt.width ? opt.width : defalutOpt.width,
+      height: opt.height ? opt.height : defalutOpt.height,
+      dx: opt.dx ? opt.dx : defalutOpt.dx,
+      dy: opt.dy ? opt.dy : defalutOpt.dy,
       z: layerID++,
       showfn(options2) {
         return !!options2.addon.body;
@@ -1775,8 +1148,10 @@ var Avatar;
       }
     });
     setLayer(ID, "addon_bottom", {
-      width: 180,
-      height: 260,
+      width: opt.width ? opt.width : defalutOpt.width,
+      height: opt.height ? opt.height : defalutOpt.height,
+      dx: opt.dx ? opt.dx : defalutOpt.dx,
+      dy: opt.dy ? opt.dy : defalutOpt.dy,
       z: layerID++,
       showfn(options2) {
         return !!options2.addon.bottom;
@@ -1786,8 +1161,10 @@ var Avatar;
       }
     });
     setLayer(ID, "addon_face", {
-      width: 180,
-      height: 260,
+      width: opt.width ? opt.width : defalutOpt.width,
+      height: opt.height ? opt.height : defalutOpt.height,
+      dx: opt.dx ? opt.dx : defalutOpt.dx,
+      dy: opt.dy ? opt.dy : defalutOpt.dy,
       z: layerID++,
       showfn(options2) {
         return !!options2.addon.face;
@@ -1797,8 +1174,10 @@ var Avatar;
       }
     });
     setLayer(ID, "addon_hair", {
-      width: 180,
-      height: 260,
+      width: opt.width ? opt.width : defalutOpt.width,
+      height: opt.height ? opt.height : defalutOpt.height,
+      dx: opt.dx ? opt.dx : defalutOpt.dx,
+      dy: opt.dy ? opt.dy : defalutOpt.dy,
       z: layerID++,
       showfn(options2) {
         return !!options2.addon.hair;
@@ -1808,8 +1187,10 @@ var Avatar;
       }
     });
     setLayer(ID, "addon_mouth", {
-      width: 180,
-      height: 260,
+      width: opt.width ? opt.width : defalutOpt.width,
+      height: opt.height ? opt.height : defalutOpt.height,
+      dx: opt.dx ? opt.dx : defalutOpt.dx,
+      dy: opt.dy ? opt.dy : defalutOpt.dy,
       z: layerID++,
       showfn(options2) {
         return !!options2.addon.mouth;
@@ -1819,8 +1200,10 @@ var Avatar;
       }
     });
     setLayer(ID, "addon_penis", {
-      width: 180,
-      height: 260,
+      width: opt.width ? opt.width : defalutOpt.width,
+      height: opt.height ? opt.height : defalutOpt.height,
+      dx: opt.dx ? opt.dx : defalutOpt.dx,
+      dy: opt.dy ? opt.dy : defalutOpt.dy,
       z: layerID++,
       showfn(options2) {
         return !!options2.addon.penis;
@@ -1830,8 +1213,10 @@ var Avatar;
       }
     });
     setLayer(ID, "frame", {
-      width: 180,
-      height: 260,
+      width: opt.width ? opt.width : defalutOpt.width,
+      height: opt.height ? opt.height : defalutOpt.height,
+      dx: opt.dx ? opt.dx : defalutOpt.dx,
+      dy: opt.dy ? opt.dy : defalutOpt.dy,
       z: layerID++,
       showfn(options2) {
         return !!options2.frame;
@@ -1859,8 +1244,8 @@ var Avatar;
     });
   }
   new Avatarlayer("Avatar");
-  new Portraitlayer("Portrait");
-  new Portraitlayer("Emoji");
+  new Avatarlayer("Portrait", { show: false });
+  new Avatarlayer("Emoji", { show: false });
   new Shoplayer("Shop");
   function animation(options2, props = {}) {
     if (!options2.seconds) {
@@ -1967,7 +1352,8 @@ var Avatar;
       ],
       CMHairstyle: [
         "natural",
-        "straight"
+        "straight",
+        "curly"
       ],
       CMEyeColor: [
         "black",
