@@ -285,8 +285,8 @@
                     "性瘾" : 0
                 }>>
         <<case 2>>
-            <<set $PC.title to "小爱豆">>
-            <<set $pctitle.小爱豆 to true>>
+            <<set $PC.title to "爱抖露">>
+            <<set $pctitle.爱抖露 to true>>
             <<set $PC.lewd to {
                 "纯洁" : 900,
                 "露出" : 50,
@@ -539,7 +539,7 @@
         <<set $PC.produce.精液 to [0,0]>>
     <</if>>
 
-    <<if $PC.trait.泌乳体质 is 1>>
+    <<if $PC.trait.泌乳体质 is true>>
         <<set $PC.produce.乳汁 to [($PC.breast*20),($PC.breast*20)]>>
         <<set $PFlag.lactation to true>>
         <<set $PFlag.lactatecd to 60>>

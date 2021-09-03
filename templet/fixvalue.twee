@@ -35,10 +35,8 @@
     <<set $PC.base.压力[1] to 1000>>
     <<set $PC.base.快感[1] to 1000>>
 
-    <<set $PC.base.压力[1] to 1000>>
     <<set $PC.base.疼痛[1] to 1000>>
     <<set $PC.base.抑郁[1] to 1000>>
-
     <<set $PC.base.耻辱[1] to 1000>>
     <<set $PC.base.恐惧[1] to 1000>>
 

@@ -120,10 +120,10 @@
         shop : "all",
         
         tuckinable: false,        tuckin : false, 
-        acc : "whiteline",
-        patterns: ["blackline","tealine","whiteline","yellowline","greenline"],
+        acc : "line",
+        patterns: ["line","dot","star"],
         fixacc  : false,
-        subcolor : "#6C84C5",
+        subcolor : "#787878",
     },
 ]>>
 <</widget>>

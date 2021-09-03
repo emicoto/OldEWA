@@ -195,32 +195,34 @@ namespace Avatar {
 			z: layerID++,
 			show: true,
 			srcfn(options) {
-				// if (isObject(options.dress)) {
-				// 		return options.dress ? __resolve(AVATARPATH,V.showcase.layers,`${options.acc.src}.png`) :options.dummy
-				// }
-				// return options.acc ? __resolve(AVATARPATH,V.showcase.layers,`${options.acc}.png`) :options.dummy
+				if (isObject(options.dress) && !options.dress.fixacc) {
+					return options.dress ? __resolve(AVATARPATH, `${options.dress.src}.png`) : options.dummy
+				}
 				return options.acc ? __resolve(AVATARPATH, `${options.acc}.png`) : options.dummy
 			},
-			// desaturatefn(options){
-			// 	if (isObject(options.acc)) {
+			blendModefn(options) {
+				if (isObject(options.dress)) {
+					if (!options.dress.fixacc) {
+						return BLENDMODE.MULTIPLY
+					}
+				}
 
-			// 			return !options.acc.fixcolor
-			// 	}
-			// },
-			// blendModefn(options){
-			// 	if (isObject(options.acc)) {
-			// 			if (!options.acc.fixcolor) {
-			// 				return  BLENDMODE.MULTIPLY
-			// 			}
-			// 	}
-			// },
-			// blendfn(options){
-			// 	if (isObject(options.acc)) {
-			// 			if (!options.acc.fixcolor) {
-			// 				return  options.acc.color
-			// 			}
-			// 	}
-			// }
+			},
+			blendfn(options) {
+				if (isObject(options.dress)) {
+
+					if (!options.dress.fixacc) {
+						return options.dress.subcolor
+					}
+				}
+			},
+			masksrcfn(options) {
+				if (isObject(options.dress)) {
+					if (!options.dress.fixacc) {
+						return __resolve(AVATARPATH, `${options.acc}.png`)
+					}
+				}
+			}
 		})
 
 	}
@@ -528,10 +530,34 @@ namespace Avatar {
 			},
 			srcfn(options) {
 				if (isObject(options.legs)) {
+					if(!options.legs.fixacc){
+						return options.legs ? __resolve(AVATARPATH, `legs/${options.legs.src}.png`) : options.dummy
+					}
 					return options.legs.acc ? __resolve(AVATARPATH, `legs/${options.legs.acc}.png`) : options.dummy
 				}
 				return options.dummy
 			},
+			blendModefn(options){
+				if (isObject(options.legs)) {
+						if (!options.legs.fixacc) {
+							return  BLENDMODE.MULTIPLY
+						}
+				}
+			},
+			blendfn(options){
+				if (isObject(options.legs)) {
+						if (!options.legs.fixacc) {
+							return  options.legs.subcolor
+						}
+				}
+			},
+			masksrcfn(options) {
+				if (isObject(options.legs)) {
+					if (!options.legs.fixacc) {
+						return __resolve(AVATARPATH, `legs/${options.legs.acc}.png`)
+					}
+				}
+			}
 		})
 		setLayer(ID, "shoes", {
 			width: opt.width ? opt.width : defalutOpt.width,
@@ -611,10 +637,34 @@ namespace Avatar {
 			},
 			srcfn(options) {
 				if (isObject(options.inner_bt)) {
+					if(!options.inner_bt.fixacc){
+						return options.inner_bt ? __resolve(AVATARPATH, `inner_bt/${options.inner_bt.src}.png`) : options.dummy
+					}
 					return options.inner_bt.acc ? __resolve(AVATARPATH, `inner_bt/${options.inner_bt.acc}.png`) : options.dummy
 				}
 				return options.dummy
 			},
+			blendModefn(options){
+				if (isObject(options.inner_bt)) {
+						if (!options.inner_bt.fixacc) {
+							return  BLENDMODE.MULTIPLY
+						}
+				}
+			},
+			blendfn(options){
+				if (isObject(options.inner_bt)) {
+						if (!options.inner_bt.fixacc) {
+							return  options.inner_bt.subcolor
+						}
+				}
+			},
+			masksrcfn(options) {
+				if (isObject(options.inner_bt)) {
+					if (!options.inner_bt.fixacc) {
+						return __resolve(AVATARPATH, `inner_bt/${options.inner_bt.acc}.png`)
+					}
+				}
+			}
 		})
 		setLayer(ID, "bottom", {
 			width: opt.width ? opt.width : defalutOpt.width,
@@ -665,10 +715,34 @@ namespace Avatar {
 			},
 			srcfn(options) {
 				if (isObject(options.bottom)) {
+					if(!options.bottom.fixacc){
+						return options.bottom ? __resolve(AVATARPATH, `bottom/${options.bottom.src}.png`) : options.dummy
+					}
 					return options.bottom.acc ? __resolve(AVATARPATH, `bottom/${options.bottom.acc}.png`) : options.dummy
 				}
 				return options.dummy
 			},
+			blendModefn(options){
+				if (isObject(options.bottom)) {
+						if (!options.bottom.fixacc) {
+							return  BLENDMODE.MULTIPLY
+						}
+				}
+			},
+			blendfn(options){
+				if (isObject(options.bottom)) {
+						if (!options.bottom.fixacc) {
+							return  options.bottom.subcolor
+						}
+				}
+			},
+			masksrcfn(options) {
+				if (isObject(options.bottom)) {
+					if (!options.bottom.fixacc) {
+						return __resolve(AVATARPATH, `bottom/${options.bottom.acc}.png`)
+					}
+				}
+			}
 		})
 		setLayer(ID, "hand", {
 			width: opt.width ? opt.width : defalutOpt.width,
@@ -752,10 +826,34 @@ namespace Avatar {
 			},
 			srcfn(options) {
 				if (isObject(options.inner_up)) {
+					if(!options.inner_up.fixacc){
+						return options.inner_up ? __resolve(AVATARPATH, `inner_up/${options.inner_up.src}.png`) : options.dummy
+					}
 					return options.inner_up.acc ? __resolve(AVATARPATH, `inner_up/${options.inner_up.acc}.png`) : options.dummy
 				}
 				return options.dummy
 			},
+			blendModefn(options){
+				if (isObject(options.inner_up)) {
+						if (!options.inner_up.fixacc) {
+							return  BLENDMODE.MULTIPLY
+						}
+				}
+			},
+			blendfn(options){
+				if (isObject(options.inner_up)) {
+						if (!options.inner_up.fixacc) {
+							return  options.inner_up.subcolor
+						}
+				}
+			},
+			masksrcfn(options) {
+				if (isObject(options.inner_up)) {
+					if (!options.inner_up.fixacc) {
+						return __resolve(AVATARPATH, `inner_up/${options.inner_up.acc}.png`)
+					}
+				}
+			}
 		})
 		setLayer(ID, "top", {
 			width: opt.width ? opt.width : defalutOpt.width,
@@ -804,10 +902,34 @@ namespace Avatar {
 			},
 			srcfn(options) {
 				if (isObject(options.top)) {
+					if(!options.top.fixacc){
+						return options.top ? __resolve(AVATARPATH, `top/${options.top.src}.png`) : options.dummy
+					}
 					return options.top.acc ? __resolve(AVATARPATH, `top/${options.top.acc}.png`) : options.dummy
 				}
 				return options.dummy
 			},
+			blendModefn(options){
+				if (isObject(options.top)) {
+						if (!options.top.fixacc) {
+							return  BLENDMODE.MULTIPLY
+						}
+				}
+			},
+			blendfn(options){
+				if (isObject(options.top)) {
+						if (!options.top.fixacc) {
+							return  options.top.subcolor
+						}
+				}
+			},
+			masksrcfn(options) {
+				if (isObject(options.top)) {
+					if (!options.top.fixacc) {
+						return __resolve(AVATARPATH, `top/${options.top.acc}.png`)
+					}
+				}
+			}
 		})
 		setLayer(ID, "outter", {
 			width: opt.width ? opt.width : defalutOpt.width,
@@ -857,10 +979,34 @@ namespace Avatar {
 			},
 			srcfn(options) {
 				if (isObject(options.outter)) {
+					if(!options.outter.fixacc){
+						return options.outter ? __resolve(AVATARPATH, `outter/${options.outter.src}.png`) : options.dummy
+					}
 					return options.outter.acc ? __resolve(AVATARPATH, `outter/${options.outter.acc}.png`) : options.dummy
 				}
 				return options.dummy
 			},
+			blendModefn(options){
+				if (isObject(options.outter)) {
+						if (!options.outter.fixacc) {
+							return  BLENDMODE.MULTIPLY
+						}
+				}
+			},
+			blendfn(options){
+				if (isObject(options.outter)) {
+						if (!options.outter.fixacc) {
+							return  options.outter.subcolor
+						}
+				}
+			},
+			masksrcfn(options) {
+				if (isObject(options.outter)) {
+					if (!options.outter.fixacc) {
+						return __resolve(AVATARPATH, `outter/${options.outter.acc}.png`)
+					}
+				}
+			}
 		})
 		setLayer(ID, "mouth", {
 			width: opt.width ? opt.width : defalutOpt.width,
@@ -1074,10 +1220,34 @@ namespace Avatar {
 			},
 			srcfn(options) {
 				if (isObject(options.neck)) {
-					return options.neck.acc ? __resolve(AVATARPATH, `outter/${options.neck.acc}.png`) : options.dummy
+					if(!options.neck.fixacc){
+						return options.neck ? __resolve(AVATARPATH, `neck/${options.neck.src}.png`) : options.dummy
+					}
+					return options.neck.acc ? __resolve(AVATARPATH, `neck/${options.neck.acc}.png`) : options.dummy
 				}
 				return options.dummy
 			},
+			blendModefn(options){
+				if (isObject(options.neck)) {
+						if (!options.neck.fixacc) {
+							return  BLENDMODE.MULTIPLY
+						}
+				}
+			},
+			blendfn(options){
+				if (isObject(options.neck)) {
+						if (!options.neck.fixacc) {
+							return  options.neck.subcolor
+						}
+				}
+			},
+			masksrcfn(options) {
+				if (isObject(options.neck)) {
+					if (!options.neck.fixacc) {
+						return __resolve(AVATARPATH, `neck/${options.neck.acc}.png`)
+					}
+				}
+			}
 		})
 		setLayer(ID, "hairfront", {
 			width: opt.width ? opt.width : defalutOpt.width,
@@ -1176,19 +1346,13 @@ namespace Avatar {
 			},
 			blendModefn(options) {
 				if (isObject(options.eyebrow)) {
-					if (!options.eyebrow.fixcolor) {
 						return BLENDMODE.MULTIPLY
-					}
 				}
 
 			},
 			blendfn(options) {
 				if (isObject(options.eyebrow)) {
-
-					if (!options.eyebrow.fixcolor) {
-
-						return options.eyebrow.color
-					}
+						return "#936653"
 				}
 			}
 		})
@@ -1399,23 +1563,6 @@ namespace Avatar {
 					return options.frame ? __resolve(AVATARPATH, `frame/${options.frame.src}.png`) : options.dummy
 				}
 				return options.frame ? __resolve(AVATARPATH, `frame/${options.frame}.png`) : options.dummy
-			},
-			blendModefn(options) {
-				if (isObject(options.frame)) {
-					if (!options.frame.fixcolor) {
-						return BLENDMODE.MULTIPLY
-					}
-				}
-
-			},
-			blendfn(options) {
-				if (isObject(options.frame)) {
-
-					if (!options.frame.fixcolor) {
-
-						return options.frame.color
-					}
-				}
 			}
 		})
 
@@ -1633,25 +1780,28 @@ namespace Avatar {
 	export function getPortrait() {
 		return PORTRAITCANVAS.canvas
 	}
-	export function setShop(colors, mode = "base") {
+	export function setShop(colors, mode) {
 		const group = ["outter", "top", "inner_up"]
-
+	const _resolve = (...args)=>args.join("/")
 		const opt = shopoptions
 		const showcase = V.showcase
 		const isbeast = group.includes(showcase.layer) && showcase.hasDif.breast
 		const fixcolor = showcase.fixcolor
-		const color = colors ? colors : showcase.color
-		let src = fixcolor ? __resolve(showcase.layer, showcase.index, `${color}${isbeast ? "_1" : ""}`) : __resolve(showcase.layer, showcase.index, `basic${isbeast ? "_1" : ""}`)
+		const color = !(mode === "base") ? showcase.color  : colors ? colors : showcase.color
+		let src = fixcolor ? _resolve(showcase.layer, showcase.index, `${color}${isbeast ? "_1" : ""}`) : _resolve(showcase.layer, showcase.index, `basic${isbeast ? "_1" : ""}`)
 
 		// console.log(src,SHOPMODEL);
+		let fixacc = showcase.fixacc
+		let subcolor =  mode === "acc" ? colors  : showcase.subcolor
 
 
-
-		opt["acc"] = showcase.acc ? __resolve(showcase.layer, showcase.index, showcase.acc) : null
+		opt["acc"] = showcase.acc ? _resolve(showcase.layer, showcase.index, showcase.acc) : null
 		opt["dress"] = {
 			fixcolor,
 			color,
-			src
+			src,
+			fixacc,
+subcolor
 		}
 		// console.log(opt,SHOPMODEL);
 		SHOPMODEL.redraw()

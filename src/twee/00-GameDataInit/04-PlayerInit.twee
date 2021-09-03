@@ -6,16 +6,25 @@
 
 <!-- 角色数据 -->
 <<set $PC to {
-    attitude: 1, /* 态度，影响玩家角色进行性行为时的反应描述和数据补正 */ 
+    info:{},
+    level:1,        /*精神力等级，影响魔力上限，满级10？*/
+    type:1,         /*角色模组ID，影响角色文本*/
+    attitude: 1,    /* 态度，影响玩家角色进行性行为时的反应描述和数据补正 */ 
+    title: "菜鸟勇者",
     gender:"m",
-    breast: 1, hips: 2, body: 1, eyes: 1,
-    beauty: 1600, title: "菜鸟勇者", hot: 21, cold:21,
+    eyes: 1, body: 1, breast: 1, hips: 2, beauty: 1600, 
+    trait:{}, state:{}, 
+    base:{}, hot: 21, cold:21,
+    rpg:{}, equip:{},
+    abl:{}, school:{}, eskl:{}, lewd:{},
+    genital:{}, sens:{}, stretch:{}, produce:{}, bottom:{}, wet:{},
+    vaginity:{}, mark:{}, rec:{}, exp:{},
 }>>
 
 <<set $PC.info to {
     name  : "魔女",   tag : "伪娘",    race : "人类",
     major  : "文艺创作",
-    hairlenf: 120,      hairlen : 120,
+    hairlen : 120,  hairlenf: 120,
     haircolor  : "aqua",   hairstyle : "natural", /* 不做修饰时的发型，只有自然、卷发、顺直三种，只能在美容店修改*/
     eyecolor  : "aqua",
     skin  : "white",
@@ -34,12 +43,6 @@
 <<set $shortinfo to " | 勇敢的少年想创造奇迹。">>
 <<set $custominfo to "">>
 
-<!-- 角色模组ID，影响角色文本 -->
-<<set $PC.type to 1>>
-
-<!-- 精神力等级，影响魔力上限，满级10？ -->
-<<set $PC.level to 1>>
-
 <<set $PC.base to {
     饮食 : [1000,1000],   健康 : [1000,1000],     魔力 : [0,100],
     体力 : [500,500],     理智 : [500,500],
@@ -48,7 +51,7 @@
     欲望 : [0,1000],      快感 : [0,1000],
     
     压力 : [0,1000],      疼痛 : [0,1000],  抑郁 : [0,1000],
-    恐惧 : [0,1000],      耻辱 : [0,1000], 
+    恐惧 : [0,1000],      耻辱 : [0,1000],
 
     快M  : [0,1000],  快B  : [0,1000],  快C  : [0,1000],
     快V  : [0,1000],  快U  : [0,1000],  快A  : [0,1000],
@@ -140,7 +143,16 @@
 
 <!-- 液体 -->
 <<set $PC.produce to { "精液" : [100,100], "乳汁" : [100,100],}>>
-<<set $PC.wet to {V:0, A:0, U:0}>>  /* 湿润/润滑度 */
+
+  /* 下体的现状 */
+<<set $PC.bottom to {
+    V:{slm:0,cum:0,goo:0,lub:0},
+    A:{slm:0,cum:0,goo:0,lub:0},
+    U:{slm:0,cum:0,goo:0,lub:0},
+}>>
+/* 湿润度 */
+<<set $PC.wet to {V:0,A:0,U:0}>>
+
 
 <!-- PC的素质 -->
 <<set $PC.trait to {}>>
@@ -168,7 +180,7 @@ $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌}
 }>>
 
 <!-- 记录 -->
-<<set $PC.sexrec to {
+<<set $PC.rec to {
     "高潮"  : { "c":0,   "t":0   },  /* 当前事件中的次数/数量，今天总数，累计总数 c=current,t=today,a=alltime*/
     "射精"  : { "c":0,   "t":0   },    "喷乳"  : { "c":0,   "t":0   },
     "A高潮" : { "c":0,   "t":0   },    "M高潮" : { "c":0,   "t":0   },
@@ -197,9 +209,9 @@ $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌}
 
 /* 现有衣服等装备 */
 <<set $Equip to {
-	neck    : null,     hat  : null,	    face : null,
-	outter  : null,	    top  : null,        hand : null,
-    bottom  : null,     inner_up : null,    inner_bt: null,
+	hat     : null,     neck    : null,	    face : null,
+	outter  : null,	    top     : null,     inner_up: null,
+    hand    : null,     bottom  : null,     inner_bt: null,
     shoes   : null,     legs   : null,
     back    : null,
     hairfront : "natural",    hairback  : "straight",
@@ -218,6 +230,7 @@ $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌}
 <<dressup "bottom" 1>>
 <<dressup "shoes" 1>>
 <<dressup "legs" 1>>
+<<set $Equip.top.uid = 1, $Equip.inner_bt.uid = 1, $Equip.bottom.uid = 1, $Equip.shoes.uid = 1, $Equip.legs.uid = 1>>
 
 <<set $PFace to {
     name    : "正常",

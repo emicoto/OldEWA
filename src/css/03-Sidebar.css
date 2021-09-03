@@ -5,6 +5,7 @@
     letter-spacing: 1px;
     font-family: "Times New Roman", 筑紫黑体;
 }
+
 #ui-bar hr {
     border-color: #ccc;
 }
@@ -385,7 +386,7 @@ body #story-caption #storyCaptionDiv {
     border-radius: 0px 100px 100px 0px;
     bottom:5%;
     box-shadow: 0px 0px 5px rgba(109, 109, 100, 0.5);
-    transition: all 0.6s;
+    transition: all 1s;
     overflow: hidden;
     display: inline-block;
 }

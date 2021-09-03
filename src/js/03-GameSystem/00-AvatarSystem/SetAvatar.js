@@ -120,9 +120,9 @@ function stAvatar() {
     V.avatar.addon.body = setAvatar("addon.body",V.PFlag.bukkake.body)
     V.avatar.addon.face = setAvatar("addon.face",V.PFlag.bukkake.face)
     V.avatar.addon.hair = setAvatar("addon.hair",V.PFlag.bukkake.hair)
-    V.avatar.addon.face = setAvatar("addon.face",(V.PC.sexrec.饮精.c > 100))
-    V.avatar.addon.bottom = setAvatar("addon.bottom", (V.PC.sexrec.肛内射 + V.PC.sexrec.内射.c > 200 && V.PFlag.bottom <= 1))
-    V.avatar.addon.penis = setAvatar("addon.penis",(V.PC.sexrec.射精.c > 10 && V.PFlag.bottom <= 1))
+    V.avatar.addon.face = setAvatar("addon.face",(V.PC.rec.饮精.c > 100))
+    V.avatar.addon.bottom = setAvatar("addon.bottom", (V.PC.rec.肛内射 + V.PC.rec.内射.c > 200 && V.PFlag.bottom <= 1))
+    V.avatar.addon.penis = setAvatar("addon.penis",(V.PC.rec.射精.c > 10 && V.PFlag.bottom <= 1))
 
     /* 设置身上的服装 */
     const layers = ["outter","top","bottom","inner_up","inner_bt","neck","hat","face","hand","legs","shoes","back"]
@@ -134,12 +134,8 @@ function stAvatar() {
             V.avatar[n] = setAvatar(n,{
                 fixcolor: V.Equip[n].fixcolor, color: V.Equip[n].color,
                 src: setAPath(V.Equip[n]), acc: ( V.Equip[n].acc !=null ? V.Equip[n].index + "/"+ V.Equip[n].acc : null),
+                fixacc : V.Equip[n].fixacc, subcolor: V.Equip[n].subcolor,
             })
-
-            if(V.Equip[n].fixacc){
-                V.avatar[n].fixacc = true
-                V.avatar[n].subcolor = V.avatar[n].subcolor
-            }
             
             if(V.Equip[n].tuckinable==true){
                 V.avatar[n].tuckin = setAvatar(`${n}.tuckin`,V.Equip.tuckin)
@@ -320,3 +316,4 @@ function stAvatar() {
 }
 
 window.stAvatar = stAvatar
+F.stAvatar = stAvatar

@@ -118,7 +118,7 @@ required:false,
 <<if $showcase.fixacc is false>>
 <script>
 var myPicker2 = new JSColor('#customColor2', {format:'hex',value:'#000000',onInput:"setColors(this.toHEXString(),null,true,'acc')",
-onChange:"setColors(this.toHEXString(),'自定义')",
+onChange:"setColors(this.toHEXString(),'自定义',null,'acc')",
 required:false, 
 	palette:'#000000 #FFFFFF #636363 #FF0000 #00FF00 #0000FF', 
 	hideOnPaletteClick:true, backgroundColor:'#ddd', 

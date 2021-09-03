@@ -57,16 +57,10 @@
 
 
 <div class="GoNaked">
-<<link "一键全脱" $passage>>
-<<set $TEquip to clone($Equip)>>
-<<run strip("hat"); strip("outter"); strip("top"); strip("bottom");
-    strip("inner_up"); strip("inner_bt"); strip("legs"); strip("shoes"); strip("face");
-    strip("neck"); strip("hand"); strip("back");
-    setreveal();stAvatar()>>
-<</link>>
+<<link "一键全脱">><<gonaked "closet">><</link>>
 </div>
 <div class="redress">
-<<link "衣服复位">><<redress>><</link>>
+<<link "衣服复位">><<redress "closet">><</link>>
 </div>
 <div class="SaveOutFit">
 <<link "保存搭配">><</link>>

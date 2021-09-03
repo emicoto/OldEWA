@@ -1,4 +1,5 @@
-﻿/* 属性集算 */
+﻿
+/* 属性集算 */
 function setreveal(){
     const isReveal=w=>V.Equip[w] ?V.Equip[w].reveal :0;
     const tops =[isReveal("outter"),isReveal("top"),isReveal("inner_up"),]
@@ -11,6 +12,7 @@ function setreveal(){
     V.PFlag.bottom=!bottoms[0]?0: bottoms[0]
 }
 window.setreveal = setreveal
+F.setreveal = setreveal
 
 function allureBuff() {
     const isAllure = w => V.Equip[w] ? V.Equip[w].beauty : 0;
@@ -27,6 +29,7 @@ function allureBuff() {
 }
 
 window.allureBuff = allureBuff
+F.allureBuff = allureBuff
 
 function defBuff() {
     const isDef = w => V.Equip[w] ? V.Equip[w].defence : 0;
@@ -41,6 +44,7 @@ function defBuff() {
 }
 
 window.defBuff = defBuff
+F.defBuff = defBuff
 
 function warmth() {
     const isHot = w => V.Equip[w] ? V.Equip[w].hot : 0;
@@ -58,6 +62,7 @@ function warmth() {
 }
 
 window.warmth = warmth
+F.warmth = warmth
 
 /* 商店处理 */
 
@@ -91,18 +96,19 @@ function setPatterns(arg) {
 window.setPatterns = setPatterns
 
 function setColors(arg,name,change = false, mode="base") {
-    if (change) {
-        Avatar.setShop(arg)
-        setShowCaseUID()
-        return
-    }
-    if(mode=="base"){
+    if (mode == "base") {
         V.showcase.color = arg
         V.showcase.colorname = name
     }
-    if(mode=="acc"){
+    if (mode == "acc") {
         V.showcase.subcolor = arg
     }
+    if (change) {
+        Avatar.setShop(arg, mode)
+        setShowCaseUID()
+        return
+    }
+    
     setShowCaseUID()
     Avatar.setShop()
     /*new Wikifier(null,"<<replace '#showcase'>><<ShowManequin>><</replace>>")*/
@@ -141,16 +147,8 @@ function BuyOutFit(args) {
 
         let group = Object.keys(V.tryon)
 
-        for (let i=0; i < group.length;i++){
-            if (V.tryon[group[i]]){
-                let buystuff = clone(V.tryon[group[i]])
-                let layer = buystuff.layer
-                V.closet[layer].push(buystuff)
-            }
-        }
-
         for (let i=0; i < group.length; i++){
-            if ( V.TEquip[group[i]] && V.TEquip[group[i]].uid != V.Equip[group[i]].uid){
+            if (V.tryon[group[i]]){
                 let leftstuff = clone(V.TEquip[group[i]])
                 let layer = leftstuff.layer
                 V.closet[layer].push(leftstuff)
@@ -213,6 +211,7 @@ function strip(arg) {
     stAvatar()
 }
 window.strip = strip
+F.strip = strip
 
 
 function dressOn(args, arg) {
@@ -272,7 +271,7 @@ function dressOn(args, arg) {
 
     const group = ["face","neck","hand","back"]
     let id = args
-    if(group.includes(args)) id = accesory
+    if(group.includes(args)) id = "accesory"
     new Wikifier(null,"<<replace '#"+id+"'>><<showcloset '"+id+"'>><</replace>>")
     setreveal()
 
@@ -283,4 +282,75 @@ function dressOn(args, arg) {
 }
 
 window.dressOn = dressOn
+F.dressOn = dressOn
 
+function gonaked(mode){
+    V.TEquip = clone(V.Equip)
+
+    const group=["hat","outter","top","bottom","inner_up","inner_bt","legs","shoes","face","neck","hand","back"]
+
+
+
+    if (mode=="closet"){
+        for(let i=0; i< group.length; i++){
+            strip(group[i])
+        }
+
+    }
+    else if(mode=="H" || !mode){
+        let layer = ["outter","top","bottom","inner_up","inner_bt","shoes","legs"]
+        for(let i=0; i<layer.length;i++){
+            V.Equip[group[i]] = null
+        }
+    }
+    else if (mode=="debug"){
+        for(let i=0; i<group.length; i++){
+            V.Equip[group[i]] = null
+        }
+    }
+
+    FixValue()
+    stAvatar()
+
+    if(V.harddebug==true)console.log(V.Equip,V.TEquip);
+    return ""
+}
+
+F.gonaked = gonaked
+DefineMacroS("gonaked",gonaked)
+
+function redress(mode){
+
+    if(mode=="closet"){
+
+        const index = Object.keys(V.closet)
+
+        for(let i=0; i<index.length;i++){
+
+            let n = index[i]
+
+            if(V.TEquip[n]){
+
+                //寻找衣柜里和暂存记录里 UID一致的衣服
+                if(V.closet[n].length > 0){
+                    for(let c=0;c<V.closet[n].length;c++){
+                        
+                        if(V.closet[n][c].uid==V.TEquip[n].uid) dressOn(n,c);//穿上!
+                    }
+                }
+            }
+        }
+    }
+
+    V.Equip = clone(V.TEquip)
+    FixValue()
+    stAvatar()
+    
+    let index = Object.keys(V.TEquip)
+    for(let i=0;i<index.length;i++){
+        V.TEquip[i] = null
+    }
+
+}
+F.redress = redress
+DefineMacroS("redress",redress)

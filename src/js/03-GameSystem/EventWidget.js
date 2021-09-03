@@ -100,7 +100,7 @@ function kojo(pc,uid,type,name,branch=null,phrase=null){
 /* 最少关键词必须有 pc uid type name
   例：PC, 1, 主线, 事件名
   最后组合
-  PC-1 主线 开幕-房间描述-1
+  PC-1 主线-开幕-房间描述-1
 */
   var kojoname
   

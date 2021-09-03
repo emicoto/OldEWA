@@ -42,11 +42,11 @@
 ♥<u> <b> 累积</b> </u><br>
 <div style="width:90%;margin-left:10px;margin-top:5px">
 至今为止<<you>>总共:<br>
-<b>· </b>沐浴了<<print $PC.sexrec.浴精.a>>ml的精液<br>
-<b>· </b>饮下了<<print $PC.sexrec.饮精.a>>ml的精液<br>
-<<if $PC.genital.阴茎 isnot null>><b>· </b>射出了<<print $PC.sexrec.射精.a>>ml的种子<br><</if>>
-<<if $PC.genital.子宫 isnot null>><b>· </b>子宫内被灌注了<<print $PC.sexrec.内射.a>>ml的精子<br><</if>>
-<b>· </b>肠道内被灌注了<<print $PC.sexrec.肛内射.a>>ml的精子<br>
+<b>· </b>沐浴了<<print $PC.rec.浴精.a>>ml的精液<br>
+<b>· </b>饮下了<<print $PC.rec.饮精.a>>ml的精液<br>
+<<if $PC.genital.阴茎 isnot null>><b>· </b>射出了<<print $PC.rec.射精.a>>ml的种子<br><</if>>
+<<if $PC.genital.子宫 isnot null>><b>· </b>子宫内被灌注了<<print $PC.rec.内射.a>>ml的精子<br><</if>>
+<b>· </b>肠道内被灌注了<<print $PC.rec.肛内射.a>>ml的精子<br>
 </div>
 
 </div>

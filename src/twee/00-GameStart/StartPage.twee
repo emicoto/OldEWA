@@ -130,7 +130,7 @@ $(document).on(':passagerender', function (ev) {
 </div>
 
 <div class="Eselect">
-<<link "跳过开头" "你的家 单身公寓">><<playlist "mainloop" shuffle play>><</link>>
+<<link "跳过开头" "你的家 单身公寓">><<playlist "mainloop" shuffle play loop>><</link>>
 </div>
 
 <div class="Eselect">

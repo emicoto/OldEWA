@@ -6,18 +6,21 @@
 
 
 <<widget "meterbar">>
-    <<if $args[0]>>
-        <<set _percent to $args[0]>>
-    <<else>>
-        <<set _percent to 100>>
-    <</if>>
-        <<set _percent2 to (100-_percent) >>
-    <<if $args[1]>>
-        <<set _color to $args[1]>>
-    <<else>>
-        <<set _color to "#bbb">>
-    <</if>>
-    <<print '<div id="meter" class="metercon"><div class="bar" style="width:'+_percent+'%;background-color:'+_color+'"></div></div>'>>
+<<silently>>
+<<if $args[0]>>
+    <<set _percent to $args[0]>>
+<<else>>
+    <<set _percent to 100>>
+<</if>>
+    <<set _percent2 to (100-_percent) >>
+<<if $args[1]>>
+    <<set _color to $args[1]>>
+<<else>>
+    <<set _color to "#bbb">>
+<</if>>
+<</silently>>
+
+<<print '<div id="meter" class="metercon"><div class="bar" style="width:'+_percent+'%;background-color:'+_color+'"></div></div>'>>
 <</widget>>
 
 
@@ -35,7 +38,7 @@
 <<silently>>
     <<repeat 1s>>
         <<set $gametime to $gametime + 1>>
-        <<replace #timer>><<print $gametime>><</replace>>
+        <<replace "#timer">><<print $gametime>><</replace>>
     <</repeat>>
 <</silently>>
 <</widget>>
@@ -52,24 +55,26 @@
 
 
 <<widget "setchara">>
-    <<if $args[0] is "player">>
-        <<set $currentchara to {
-            名字 : $PC.info.name,
-            性别 : $PC.info.tag,
-            genital : $PC.genital,
-            gender: $PC.gender,
-        }>>
-    <<elseif $args[0] is "pet">>
-        <<set $currentchara to {
-            名字: $pet.name,
-            gender: $pet.gender,
-            genital: $pet.genital,
-            genitype: $pet.genitype,
-            special: $pet.special,
-        }>>
-    <<else>>
-        <<set $currentchara to $NPC[$args[0]]>>
-    <</if>>
+<<silently>>
+<<if $args[0] is "player">>
+    <<set $currentchara to {
+        名字 : $PC.info.name,
+        性别 : $PC.info.tag,
+        genital : $PC.genital,
+        gender: $PC.gender,
+    }>>
+<<elseif $args[0] is "pet">>
+    <<set $currentchara to {
+        名字: $pet.name,
+        gender: $pet.gender,
+        genital: $pet.genital,
+        genitype: $pet.genitype,
+        special: $pet.special,
+    }>>
+<<else>>
+    <<set $currentchara to $NPC[$args[0]]>>
+<</if>>
+<</silently>>
 <</widget>>
 
 
@@ -77,22 +82,23 @@
 /*  EXAMPLE: <<HoverTxt 200 "text">>  */
 /*  EXAMPLE: <<HoverTxt 300 `someFunction()`>>  */
 <<widget "HoverTxt">>
-	<<if !Number.isInteger($args[0])>>
-		<<set _width = 200>>  /* Default to a width of 200 if an invalid width is passed. */
-	<<else>>
-		<<set _width = $args[0]>>
-	<</if>>
-	<<set _left = Math.trunc(_width / 2) - 11>>
-	<<if ndef _HoverTxtCount>>
-		<<set _HoverTxtCount = 1>>
-	<<else>>
-		<<set _HoverTxtCount += 1>>
-	<</if>>
-	<a class="hoverTxt" style="text-decoration: none;"><img class="hoverIco" src="image/icon/NoteIcon.png">
-		<span @id="'hoverTxt' + _HoverTxtCount" class="hoverBox" @style="'left: -' + _left + 'px; width: ' + _width + 'px;'">
-			<<print $args[1]>>
-		</span>
-	</a>
+<<if !Number.isInteger($args[0])>>
+    <<set _width = 200>>  /* Default to a width of 200 if an invalid width is passed. */
+<<else>>
+    <<set _width = $args[0]>>
+<</if>>
+<<set _left = Math.trunc(_width / 2) - 11>>
+<<if ndef _HoverTxtCount>>
+    <<set _HoverTxtCount = 1>>
+<<else>>
+    <<set _HoverTxtCount += 1>>
+<</if>>
+
+<a class="hoverTxt" style="text-decoration: none;"><img class="hoverIco" src="image/icon/NoteIcon.png">
+    <span @id="'hoverTxt' + _HoverTxtCount" class="hoverBox" @style="'left: -' + _left + 'px; width: ' + _width + 'px;'">
+        <<print $args[1]>>
+    </span>
+</a>
 <</widget>>
 
 <<widget "icon">>
@@ -157,29 +163,6 @@
 <</widget>>
 
 /*<<dressup category id color pattern>>*/
-
-
-<<widget "gonaked">>
-    <<set $TEquip to clone($Equip)>>
-
-    <<set $Equip.outter to null>>
-    <<set $Equip.top to null>>
-    <<set $Equip.bottom to null>>
-    <<set $Equip.inner_up to null>>
-    <<set $Equip.inner_bt to null>>
-    <<set $Equip.shoes to null>>
-    <<set $Equip.legs to null>>
-    <<set $Equip.hand to null>>
-    <<fixvalue>>
-    <<run stAvatar()>>
-<</widget>>
-
-<<widget "redress">>
-    <<set $Equip to clone($TEquip)>>
-    <<fixvalue>>
-    <<run stAvatar()>>
-<</widget>>
-
 
 <<widget "navi">>
 <div id="links" class="hidden">

@@ -112,10 +112,10 @@
         category: "下衣", layer : "bottom", slot : "bottom", 
         shop : "all", 
         
-        acc : "blackline",
-        patterns: ["blackline","tealine","whiteline","yellowline","greenline"],
-        fixacc  : true,
-        subcolor : null,
+        acc : "line",
+        patterns: ["line","dot","star"],
+        fixacc  : false,
+        subcolor : ["#787878"],
     },
 ]>>
 <</widget>>

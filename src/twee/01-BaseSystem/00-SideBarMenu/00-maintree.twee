@@ -106,9 +106,9 @@ MENU
 			
 			<<replace "#notice">><<notification>><</replace>>
 			<<replace "#show_money">><<showmoney>><</replace>>
-		<</if>>
 		<<if $statshidden is false>>
 			<<replace "#sidebar_stats">><<sidebar_stats>><</replace>>
+		<</if>>			
 		<</if>>
 	<</repeat>>
 

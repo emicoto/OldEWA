@@ -60,3 +60,17 @@ window.draw = function(array){
 	var  a = array.length
 	return array[random(0,a)]
 }
+
+window.sum = function( obj ) {
+  var sum = 0;
+  for( var el in obj ) {
+    if( obj.hasOwnProperty( el ) ) {
+      sum += parseFloat( obj[el] );
+    }
+  }
+  return sum;
+}
+
+window.findkey = function(data,value, compare = (a, b) => a === b) {
+  return Object.keys(data).find(k => compare(data[k], value))
+}

@@ -1,0 +1,44 @@
+:: StoryInterface
+	<div id="init-screen"></div>
+	<div id="ui-overlay" class="ui-close"></div>
+	<div id="ui-dialog" tabindex="0" role="dialog" aria-labelledby="ui-dialog-title">
+		<div id="ui-dialog-titlebar">
+			<h1 id="ui-dialog-title"></h1>
+			<button id="ui-dialog-close" class="ui-close" tabindex="0" aria-label=""></button>
+		</div>
+		<div id="ui-dialog-body"></div>
+	</div>
+	<div id="ui-bar">
+		<div id="ui-bar-tray">
+			<button id="ui-bar-toggle" tabindex="0" title="" aria-label=""></button>
+			<div id="ui-bar-history">
+				<button id="history-backward" tabindex="0" title="" aria-label=""></button>
+				<button id="history-jumpto" tabindex="0" title="" aria-label=""></button>
+				<button id="history-forward" tabindex="0" title="" aria-label=""></button>
+			</div>
+		</div>
+		<div id="ui-bar-body">
+			<header id="title" role="banner">
+				<div id="story-banner" data-passage="StoryBanner"></div>
+				<h1 id="story-title" data-passage="StoryTitle"></h1>
+				<div id="story-subtitle" data-passage="StorySubtitle"></div>
+			</header>
+			<div id="story-caption" data-passage="StoryCaption"></div>
+			<nav id="menu" role="navigation">
+				<ul id="menu-story"><ul>
+				<ul id="menu-core">
+					<li id="menu-item-saves"><a tabindex="0"></a></li>
+					<li id="menu-item-settings"><a tabindex="0"></a></li>
+					<li id="menu-item-restart"><a tabindex="0"></a></li>
+					<li id="menu-item-share"><a tabindex="0"></a></li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+	<div id="story" role="main">
+		<div id="passages">
+			<div class="passage " id="" data-passage="">
+				<!-- The active (present) passage content -->
+			</div>
+		</div>
+	</div>

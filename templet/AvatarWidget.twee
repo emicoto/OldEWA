@@ -28,19 +28,19 @@
     <<set $avatar.addon.hair to setAvatar("addon.hair",false)>>
 <</if>>
 
-<<if ($PC.sexrec.饮精.c gt 100)>>
+<<if ($PC.rec.饮精.c gt 100)>>
     <<set $avatar.addon.face to setAvatar("addon.face",true)>>
 <<else>>
     <<set $avatar.addon.face to setAvatar("addon.face",false)>>
 <</if>>
 
-<<if ($PC.sexrec.肛内射.c + $PC.sexrec.内射.c) gt 200 and $PFlag.bottom lte 1>>
+<<if ($PC.rec.肛内射.c + $PC.rec.内射.c) gt 200 and $PFlag.bottom lte 1>>
     <<set $avatar.addon.bottom to setAvatar("addon.bottom",true)>>
 <<else>>
     <<set $avatar.addon.bottom to setAvatar("addon.bottom",false)>>
 <</if>>
 
-<<if ($PC.sexrec.射精.c gt 10) and $PFlag.bottom lte 1>>
+<<if ($PC.rec.射精.c gt 10) and $PFlag.bottom lte 1>>
     <<set $avatar.addon.penis to setAvatar("addon.penis",true)>>
 <<else>>
     <<set $avatar.addon.penis to setAvatar("addon.penis",false)>>

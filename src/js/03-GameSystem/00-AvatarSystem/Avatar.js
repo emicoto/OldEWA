@@ -156,7 +156,31 @@ var Avatar;
       z: layerID++,
       show: true,
       srcfn(options2) {
+        if (isObject(options2.dress) && !options2.dress.fixacc) {
+          return options2.dress ? __resolve(AVATARPATH, `${options2.dress.src}.png`) : options2.dummy;
+        }
         return options2.acc ? __resolve(AVATARPATH, `${options2.acc}.png`) : options2.dummy;
+      },
+      blendModefn(options2) {
+        if (isObject(options2.dress)) {
+          if (!options2.dress.fixacc) {
+            return BLENDMODE.MULTIPLY;
+          }
+        }
+      },
+      blendfn(options2) {
+        if (isObject(options2.dress)) {
+          if (!options2.dress.fixacc) {
+            return options2.dress.subcolor;
+          }
+        }
+      },
+      masksrcfn(options2) {
+        if (isObject(options2.dress)) {
+          if (!options2.dress.fixacc) {
+            return __resolve(AVATARPATH, `${options2.acc}.png`);
+          }
+        }
       }
     });
   }
@@ -440,9 +464,33 @@ var Avatar;
       },
       srcfn(options2) {
         if (isObject(options2.legs)) {
+          if (!options2.legs.fixacc) {
+            return options2.legs ? __resolve(AVATARPATH, `legs/${options2.legs.src}.png`) : options2.dummy;
+          }
           return options2.legs.acc ? __resolve(AVATARPATH, `legs/${options2.legs.acc}.png`) : options2.dummy;
         }
         return options2.dummy;
+      },
+      blendModefn(options2) {
+        if (isObject(options2.legs)) {
+          if (!options2.legs.fixacc) {
+            return BLENDMODE.MULTIPLY;
+          }
+        }
+      },
+      blendfn(options2) {
+        if (isObject(options2.legs)) {
+          if (!options2.legs.fixacc) {
+            return options2.legs.subcolor;
+          }
+        }
+      },
+      masksrcfn(options2) {
+        if (isObject(options2.legs)) {
+          if (!options2.legs.fixacc) {
+            return __resolve(AVATARPATH, `legs/${options2.legs.acc}.png`);
+          }
+        }
       }
     });
     setLayer(ID, "shoes", {
@@ -519,9 +567,33 @@ var Avatar;
       },
       srcfn(options2) {
         if (isObject(options2.inner_bt)) {
+          if (!options2.inner_bt.fixacc) {
+            return options2.inner_bt ? __resolve(AVATARPATH, `inner_bt/${options2.inner_bt.src}.png`) : options2.dummy;
+          }
           return options2.inner_bt.acc ? __resolve(AVATARPATH, `inner_bt/${options2.inner_bt.acc}.png`) : options2.dummy;
         }
         return options2.dummy;
+      },
+      blendModefn(options2) {
+        if (isObject(options2.inner_bt)) {
+          if (!options2.inner_bt.fixacc) {
+            return BLENDMODE.MULTIPLY;
+          }
+        }
+      },
+      blendfn(options2) {
+        if (isObject(options2.inner_bt)) {
+          if (!options2.inner_bt.fixacc) {
+            return options2.inner_bt.subcolor;
+          }
+        }
+      },
+      masksrcfn(options2) {
+        if (isObject(options2.inner_bt)) {
+          if (!options2.inner_bt.fixacc) {
+            return __resolve(AVATARPATH, `inner_bt/${options2.inner_bt.acc}.png`);
+          }
+        }
       }
     });
     setLayer(ID, "bottom", {
@@ -568,9 +640,33 @@ var Avatar;
       },
       srcfn(options2) {
         if (isObject(options2.bottom)) {
+          if (!options2.bottom.fixacc) {
+            return options2.bottom ? __resolve(AVATARPATH, `bottom/${options2.bottom.src}.png`) : options2.dummy;
+          }
           return options2.bottom.acc ? __resolve(AVATARPATH, `bottom/${options2.bottom.acc}.png`) : options2.dummy;
         }
         return options2.dummy;
+      },
+      blendModefn(options2) {
+        if (isObject(options2.bottom)) {
+          if (!options2.bottom.fixacc) {
+            return BLENDMODE.MULTIPLY;
+          }
+        }
+      },
+      blendfn(options2) {
+        if (isObject(options2.bottom)) {
+          if (!options2.bottom.fixacc) {
+            return options2.bottom.subcolor;
+          }
+        }
+      },
+      masksrcfn(options2) {
+        if (isObject(options2.bottom)) {
+          if (!options2.bottom.fixacc) {
+            return __resolve(AVATARPATH, `bottom/${options2.bottom.acc}.png`);
+          }
+        }
       }
     });
     setLayer(ID, "hand", {
@@ -647,9 +743,33 @@ var Avatar;
       },
       srcfn(options2) {
         if (isObject(options2.inner_up)) {
+          if (!options2.inner_up.fixacc) {
+            return options2.inner_up ? __resolve(AVATARPATH, `inner_up/${options2.inner_up.src}.png`) : options2.dummy;
+          }
           return options2.inner_up.acc ? __resolve(AVATARPATH, `inner_up/${options2.inner_up.acc}.png`) : options2.dummy;
         }
         return options2.dummy;
+      },
+      blendModefn(options2) {
+        if (isObject(options2.inner_up)) {
+          if (!options2.inner_up.fixacc) {
+            return BLENDMODE.MULTIPLY;
+          }
+        }
+      },
+      blendfn(options2) {
+        if (isObject(options2.inner_up)) {
+          if (!options2.inner_up.fixacc) {
+            return options2.inner_up.subcolor;
+          }
+        }
+      },
+      masksrcfn(options2) {
+        if (isObject(options2.inner_up)) {
+          if (!options2.inner_up.fixacc) {
+            return __resolve(AVATARPATH, `inner_up/${options2.inner_up.acc}.png`);
+          }
+        }
       }
     });
     setLayer(ID, "top", {
@@ -696,9 +816,33 @@ var Avatar;
       },
       srcfn(options2) {
         if (isObject(options2.top)) {
+          if (!options2.top.fixacc) {
+            return options2.top ? __resolve(AVATARPATH, `top/${options2.top.src}.png`) : options2.dummy;
+          }
           return options2.top.acc ? __resolve(AVATARPATH, `top/${options2.top.acc}.png`) : options2.dummy;
         }
         return options2.dummy;
+      },
+      blendModefn(options2) {
+        if (isObject(options2.top)) {
+          if (!options2.top.fixacc) {
+            return BLENDMODE.MULTIPLY;
+          }
+        }
+      },
+      blendfn(options2) {
+        if (isObject(options2.top)) {
+          if (!options2.top.fixacc) {
+            return options2.top.subcolor;
+          }
+        }
+      },
+      masksrcfn(options2) {
+        if (isObject(options2.top)) {
+          if (!options2.top.fixacc) {
+            return __resolve(AVATARPATH, `top/${options2.top.acc}.png`);
+          }
+        }
       }
     });
     setLayer(ID, "outter", {
@@ -745,9 +889,33 @@ var Avatar;
       },
       srcfn(options2) {
         if (isObject(options2.outter)) {
+          if (!options2.outter.fixacc) {
+            return options2.outter ? __resolve(AVATARPATH, `outter/${options2.outter.src}.png`) : options2.dummy;
+          }
           return options2.outter.acc ? __resolve(AVATARPATH, `outter/${options2.outter.acc}.png`) : options2.dummy;
         }
         return options2.dummy;
+      },
+      blendModefn(options2) {
+        if (isObject(options2.outter)) {
+          if (!options2.outter.fixacc) {
+            return BLENDMODE.MULTIPLY;
+          }
+        }
+      },
+      blendfn(options2) {
+        if (isObject(options2.outter)) {
+          if (!options2.outter.fixacc) {
+            return options2.outter.subcolor;
+          }
+        }
+      },
+      masksrcfn(options2) {
+        if (isObject(options2.outter)) {
+          if (!options2.outter.fixacc) {
+            return __resolve(AVATARPATH, `outter/${options2.outter.acc}.png`);
+          }
+        }
       }
     });
     setLayer(ID, "mouth", {
@@ -939,9 +1107,33 @@ var Avatar;
       },
       srcfn(options2) {
         if (isObject(options2.neck)) {
-          return options2.neck.acc ? __resolve(AVATARPATH, `outter/${options2.neck.acc}.png`) : options2.dummy;
+          if (!options2.neck.fixacc) {
+            return options2.neck ? __resolve(AVATARPATH, `neck/${options2.neck.src}.png`) : options2.dummy;
+          }
+          return options2.neck.acc ? __resolve(AVATARPATH, `neck/${options2.neck.acc}.png`) : options2.dummy;
         }
         return options2.dummy;
+      },
+      blendModefn(options2) {
+        if (isObject(options2.neck)) {
+          if (!options2.neck.fixacc) {
+            return BLENDMODE.MULTIPLY;
+          }
+        }
+      },
+      blendfn(options2) {
+        if (isObject(options2.neck)) {
+          if (!options2.neck.fixacc) {
+            return options2.neck.subcolor;
+          }
+        }
+      },
+      masksrcfn(options2) {
+        if (isObject(options2.neck)) {
+          if (!options2.neck.fixacc) {
+            return __resolve(AVATARPATH, `neck/${options2.neck.acc}.png`);
+          }
+        }
       }
     });
     setLayer(ID, "hairfront", {
@@ -1031,16 +1223,12 @@ var Avatar;
       },
       blendModefn(options2) {
         if (isObject(options2.eyebrow)) {
-          if (!options2.eyebrow.fixcolor) {
-            return BLENDMODE.MULTIPLY;
-          }
+          return BLENDMODE.MULTIPLY;
         }
       },
       blendfn(options2) {
         if (isObject(options2.eyebrow)) {
-          if (!options2.eyebrow.fixcolor) {
-            return options2.eyebrow.color;
-          }
+          return "#936653";
         }
       }
     });
@@ -1226,20 +1414,6 @@ var Avatar;
           return options2.frame ? __resolve(AVATARPATH, `frame/${options2.frame.src}.png`) : options2.dummy;
         }
         return options2.frame ? __resolve(AVATARPATH, `frame/${options2.frame}.png`) : options2.dummy;
-      },
-      blendModefn(options2) {
-        if (isObject(options2.frame)) {
-          if (!options2.frame.fixcolor) {
-            return BLENDMODE.MULTIPLY;
-          }
-        }
-      },
-      blendfn(options2) {
-        if (isObject(options2.frame)) {
-          if (!options2.frame.fixcolor) {
-            return options2.frame.color;
-          }
-        }
       }
     });
   }
@@ -1429,19 +1603,24 @@ var Avatar;
     return PORTRAITCANVAS.canvas;
   }
   Avatar2.getPortrait = getPortrait;
-  function setShop(colors, mode = "base") {
+  function setShop(colors, mode) {
     const group = ["outter", "top", "inner_up"];
+    const _resolve = (...args) => args.join("/");
     const opt = Avatar2.shopoptions;
     const showcase = V.showcase;
     const isbeast = group.includes(showcase.layer) && showcase.hasDif.breast;
     const fixcolor = showcase.fixcolor;
-    const color = colors ? colors : showcase.color;
-    let src = fixcolor ? __resolve(showcase.layer, showcase.index, `${color}${isbeast ? "_1" : ""}`) : __resolve(showcase.layer, showcase.index, `basic${isbeast ? "_1" : ""}`);
-    opt["acc"] = showcase.acc ? __resolve(showcase.layer, showcase.index, showcase.acc) : null;
+    const color = !(mode === "base") ? showcase.color : colors ? colors : showcase.color;
+    let src = fixcolor ? _resolve(showcase.layer, showcase.index, `${color}${isbeast ? "_1" : ""}`) : _resolve(showcase.layer, showcase.index, `basic${isbeast ? "_1" : ""}`);
+    let fixacc = showcase.fixacc;
+    let subcolor = mode === "acc" ? colors : showcase.subcolor;
+    opt["acc"] = showcase.acc ? _resolve(showcase.layer, showcase.index, showcase.acc) : null;
     opt["dress"] = {
       fixcolor,
       color,
-      src
+      src,
+      fixacc,
+      subcolor
     };
     Avatar2.SHOPMODEL.redraw();
   }
