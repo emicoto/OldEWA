@@ -1,4 +1,14 @@
-﻿
+﻿window.fixStuckAnimations = function() {
+	let scrollX = window.scrollX;
+	let scrollY = window.scrollY;
+	let imgs = $('#story').add($('#ui-bar'));
+	imgs.toggleClass('hidden');
+	window.setTimeout(() => {
+		imgs.toggleClass('hidden');
+		window.scroll(scrollX, scrollY);
+	}, 5);
+}
+
 /* 属性集算 */
 function setreveal(){
     const isReveal=w=>V.Equip[w] ?V.Equip[w].reveal :0;

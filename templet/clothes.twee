@@ -2,24 +2,30 @@
 
 <<set sample to {
     {
-        id: 0,
-        index : "indexname",    name : "名称",     gender : "n",/* 服装的性别倾向，n=无/中性, f=女性 m=男性 */
-        text : "说明",   
-        tag  : [], /* 物品的属性 */
-        hasDif : {breast:false, pregnant:false}, /* 差分支持情况 */
+        id: 0, uid: 0, //目录id, 绝对id
+        index : "naked",    name : "裸",     gender : "n",
+        text : "无",   
+        name_en:"", //英文
+        text_en:"", 
+        tag  : ["裸露"],  //属性
+        hasImg : false,  //是否支持图片显示
+        hasDif : {breast:false, pregnant:false}, //是否支持差分显示
 
-        cost : 0,        reveal : 0,        hot : 0, cold : 0, 
-        durable : 0,        maxdurable : 0,     beauty: 0, /* 魅力加成 */
-        fixcolor: false;    color: null,    /* fixcolor=颜色固定无法用canvas更改，color=物品目前所显示的颜色 */
-        colors : null,
+        cost : 0, /*价格 */       reveal : 0, /*裸露度 */       hot : 0, cold : 0, /* 温度抵御力,直接在21上加减. 耐热就+1,不耐热-1. 耐冷-1,不耐冷+1 */
+        durable : 0,     maxdurable : 0, /* 耐久度 */    beauty: 0,  /*魅力补正,乘算值 1=100%*/    defence: 0, /* 防御力补正 直接+1 */
+
+        fixcolor: true, /* 是否固有色 */   color:null, /* 衣服颜色,固有色填图片名,不是则填颜色代码#FFFFFF */  colorname: null, /* 颜色在游戏面板里显示的名称 */
+        colors : [], /* 固有色时,实装的颜色差分 */
         
-        category: null, layer : "top", /* 在商店里的分类和图层 */
-        shop : null,    /* 什么店能买。all=所有，offlineshop=实体店限定, onlineshop=网购限定, 特定店直接写店名 */
+        category: "上衣/连衣裙", layer : "top",
+        shop : null,  /* 可以买到的商店. all=所有, online=只能在线购买, offline=只能在实体店购买, adult=只有成人商店有售,special=只有特殊商店有售, 特定商店名=只有这个商店(passage)有售 */
         
-        slot : "tops", /* tops=只占上身位置，bottoms=只占下身位置，onepiece=全身装 */
-        tuckinable: false,        tuckin : false, /* 是否能塞进下身衣服里 */
-        acc : null,     /* 物品所显示的花纹图案 */
-        patterns: []    /* 图案文件名列表 */
+        slot : "top",  /* 占用的位置, onepiece=上下身连衣裙, wholebody=全身装, overall=工作吊带裤, 其他情况直接填对应的layer名 */
+        tuckinable: false,        tuckin : false,  /* 上衣限定,能否塞入裤子/裙子下.能就会对调上衣和裤子的图层,两图层间还有内衣(上)和手(手袜/手套) emmmm...内衣不影响但问题是手部...长袖的时候可能会bug,得跟着调整呀! */
+        acc : null,
+        patterns: [],
+        fixacc  : true,
+        subcolor : null,
     },
     /*上衣外套模板 */
      {
@@ -34,7 +40,7 @@
         fixcolor: false;    color:null,  colorname: null,
         colors : [],
         
-        category: "category",     layer : "top",      slot : "tops",
+        category: "category",     layer : "top",      slot : "top",
         shop : "all", 
 
         tuckinable: false,        tuckin : false,
@@ -53,7 +59,7 @@
         fixcolor: false;    color:null,  colorname: null,
         colors : [],
         
-        category: "category",     layer : "top",      slot : "tops",
+        category: "category",     layer : "top",      slot : "top",
         shop : "all", 
 
         acc : null,

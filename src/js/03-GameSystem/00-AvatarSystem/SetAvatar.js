@@ -309,7 +309,17 @@ function stAvatar() {
         V.avatar.tatoos = setAvatar("tatoos",null)
     }
 
-    V.avatar.background = setAvatar("background",imglocation())
+    V.avatar.background = setAvatar("background",imglocation(),true)
+
+    if(V.avatar.top && V.avatar.top.tuckin){
+        let layer = clone(Avatar.AVATARMODEL.layers)
+
+        Avatar.AVATARMODEL.layers.top_acc.z = layer.hand.z
+        Avatar.AVATARMODEL.layers.top.z = layer.bottom_acc.z
+        Avatar.AVATARMODEL.layers.hand.z = layer.bottom.z
+        Avatar.AVATARMODEL.layers.bottom_acc.z = layer.top_acc.z
+        Avatar.AVATARMODEL.layers.bottom.z = layer.top.z 
+    }
 
     if(V.harddebug)console.log("log",V.avatar);
     return ""

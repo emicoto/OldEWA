@@ -20,7 +20,7 @@
         category: "上衣/连衣裙", layer : "top",
         shop : null, 
         
-        slot : "tops", 
+        slot : "top", 
         tuckinable: false,        tuckin : false, 
         acc : null,
         patterns: [],
@@ -45,7 +45,7 @@
         category: "上衣", layer : "top",
         shop : "all",
         
-        slot : "tops", 
+        slot : "top", 
         tuckinable: true,        tuckin : false, 
         acc : "slime",
         patterns: ["slime","heart"],
@@ -70,7 +70,7 @@
         category: "上衣", layer : "top",
         shop : "all",
         
-        slot : "tops", 
+        slot : "top", 
         tuckinable: true,        tuckin : false, 
         acc : null,
         patterns: [],

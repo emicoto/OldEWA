@@ -11398,6 +11398,16 @@ window.setAvatar = (key, options, updates) => Avatar.setAvatar(key, options, upd
 window["avatarEmoji"] = (FACE, option) => Avatar.avatarEmoji(FACE, option);
 window["RandomNPCEmoji"] = (FACE, option) => Avatar.RandomNPCEmoji(FACE, option);
 /* twine-user-script #28: "AvatarWidget.js" */
+window.fixStuckAnimations = function() {
+	let scrollX = window.scrollX;
+	let scrollY = window.scrollY;
+	let imgs = $('#story').add($('#ui-bar'));
+	imgs.toggleClass('hidden');
+	window.setTimeout(() => {
+		imgs.toggleClass('hidden');
+		window.scroll(scrollX, scrollY);
+	}, 5);
+}
 
 /* 属性集算 */
 function setreveal(){
@@ -12066,7 +12076,17 @@ function stAvatar() {
         V.avatar.tatoos = setAvatar("tatoos",null)
     }
 
-    V.avatar.background = setAvatar("background",imglocation())
+    V.avatar.background = setAvatar("background",imglocation(),true)
+
+    if(V.avatar.top && V.avatar.top.tuckin){
+        let layer = clone(Avatar.AVATARMODEL.layers)
+
+        Avatar.AVATARMODEL.layers.top_acc.z = layer.hand.z
+        Avatar.AVATARMODEL.layers.top.z = layer.bottom_acc.z
+        Avatar.AVATARMODEL.layers.hand.z = layer.bottom.z
+        Avatar.AVATARMODEL.layers.bottom_acc.z = layer.top_acc.z
+        Avatar.AVATARMODEL.layers.bottom.z = layer.top.z 
+    }
 
     if(V.harddebug)console.log("log",V.avatar);
     return ""
@@ -13382,7 +13402,7 @@ DefineMacroS("delay",delay)
         category: &quot;上衣/连衣裙&quot;, layer : &quot;top&quot;,
         shop : null, 
         
-        slot : &quot;tops&quot;, 
+        slot : &quot;top&quot;, 
         tuckinable: false,        tuckin : false, 
         acc : null,
         patterns: [],
@@ -13407,7 +13427,7 @@ DefineMacroS("delay",delay)
         category: &quot;上衣&quot;, layer : &quot;top&quot;,
         shop : &quot;all&quot;,
         
-        slot : &quot;tops&quot;, 
+        slot : &quot;top&quot;, 
         tuckinable: true,        tuckin : false, 
         acc : &quot;slime&quot;,
         patterns: [&quot;slime&quot;,&quot;heart&quot;],
@@ -13432,7 +13452,7 @@ DefineMacroS("delay",delay)
         category: &quot;上衣&quot;, layer : &quot;top&quot;,
         shop : &quot;all&quot;,
         
-        slot : &quot;tops&quot;, 
+        slot : &quot;top&quot;, 
         tuckinable: true,        tuckin : false, 
         acc : null,
         patterns: [],

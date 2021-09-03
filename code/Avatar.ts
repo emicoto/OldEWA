@@ -38,6 +38,14 @@ namespace Avatar {
 	const AVATARPATH = "./image/avatar"
 	const __resolve = (mainpath, ...paths) => path.resolve(mainpath, ...paths)
 	const cache = { }
+	const layers = [
+		"backgound","kemoback_wing","kemoback_tail","back","hairback","body","body_msk","plus","nipple","dick","penis","legs","legs_acc","shoes","inner_bt","inner_bt_acc","bottom","bottom_acc","hand","inner_up","inner_up_acc","top","top_acc","outter","outter_acc","mouth","eyes","emoadd_tear","emoadd_shy","emoadd_red","emoadd_hurt","face","neck","neck_acc","hairfront","hairfront_msk","eyebrow","kemofront_mimi","kemofront_horn","hat","addon_body","addon_bottom","addon_penis","addon_mouth","addon_face","addon_hair","frame"
+	]
+	const zindex = {}
+	for(let i=0; i<layers.length; i++){
+		let n = layers[i]
+		zindex[n] = i
+	}
 	interface layersOption {
 		show?: boolean,
 		src?: string,
@@ -237,6 +245,7 @@ namespace Avatar {
 		}
 		const opt = option ? option : defalutOpt
 		let layerID = 0
+
 		setLayer(ID, "background", {
 			width: opt.width ? opt.width : defalutOpt.width,
 			height: opt.height ? opt.height : defalutOpt.height,
