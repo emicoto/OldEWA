@@ -176,7 +176,7 @@ $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌}
     top      : 9,     bottom   : 4, 
     bukkake   : { body:false, face:false, hair:false, },
     pregnant: { type:null, seed:null, phrase:null, date:null, }, /* 怀孕flag type:A怀孕还是正常怀孕 seed：孩子种类, father:父亲, phrase：阶段 date:预产期 */
-    kemoform : null,
+    trueform : null,
 }>>
 
 <!-- 记录 -->

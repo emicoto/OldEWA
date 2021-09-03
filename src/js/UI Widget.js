@@ -65,7 +65,7 @@ window.movebutton = movebutton
 function delay(id,text) {
     if(typeof(text)=="string"){
         $('#'+id).append("<span class='delay'>"+text+"<br></span>")
-    }else if(Array.isArray(text)){
+    }else if(Array.isArray(text)==true){
         $( "#"+id ).append( "<span class='h"+i+" hidden'>"+text[i]+"<br></span>");
         setTimeout(() => {$("#combat_message .h"+i).removeClass('hidden').addClass('delay')}, (500*i))
     }

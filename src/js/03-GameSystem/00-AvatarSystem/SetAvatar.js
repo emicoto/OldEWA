@@ -104,7 +104,9 @@ window.imglocation = imglocation
 
 function isFurry(){
     const group = ["兽族","羽族"]
-    if ((V.PFlag.kemoform == true ||  V.charamaking == true) && group.includes(V.PC.info.race)) return "furry/"
+    if ((V.PFlag.trueform == true ||  V.charamaking == true) && group.includes(V.PC.info.race)) return "furry/"
+    else if ((V.PFlag.trueform == true || V.charamaking == true) && V.PC.info.race=="灵族") return "gold/"
+    else if (((V.PFlag.trueform == true || V.charamaking == true) && V.PC.info.race=="夜族")) return "yoru/"
     else return V.PC.info.skin+"/"
 }
 
@@ -137,8 +139,10 @@ function stAvatar() {
                 fixacc : V.Equip[n].fixacc, subcolor: V.Equip[n].subcolor,
             })
             
-            if(V.Equip[n].tuckinable==true){
-                V.avatar[n].tuckin = setAvatar(`${n}.tuckin`,V.Equip.tuckin)
+            if( n=="top" && V.Equip.top.tuckinable==true){
+                V.avatar.top.tuckin = V.Equip.top.tuckin
+                Avatar.options.top.tuckin = V.Equip.top.tuckin
+                Avatar.setAvatar("top.tuckin",V.Equip.top.tuckin,true);
             }    
         }
         else if(V.Equip[n] != null && V.Equip[n].hasImg==false){
@@ -197,14 +201,30 @@ function stAvatar() {
 
 
     /*兽耳兽角兽尾部分, 还未实装。 */
-    if((V.PFlag.kemoform == true || V.charamaking == true)){
+    if((V.PFlag.trueform == true || V.charamaking == true)){
+        if(V.PC.info.race == "兽族"){
+            V.avatar.kemofront.mimi = setAvatar("kemofront.mimi",{
+                fixcolor: false, color: haircolor[0],
+                src: "cat",
+            })
+
+            V.avatar.kemoback.tail = setAvatar("kemoback.tail",{
+                fixcolor:false, color:haircolor[0],
+                src:"cat", 
+            })
+        }
+        else{
+            V.avatar.kemofront.mimi = setAvatar("kemofront.mimi",null)
+            V.avatar.kemoback.tail = setAvatar("kemoback.tail",null)
+        }
         /* let kemotype = V.PC.info.kemotype
         
         if(V.PC.trait.兽耳 == true){
             V.avatar.kemofront.mimi = setAvatar("kemofront.mimi",{
                 fixcolor: A.kemo[kemotype].mimi.fixcolor,
                 color: (A.kemo[kemotype].mimi.fixcolor==true? null: haircolor[0]),
-                src= `${kemotype}/${FixMimi(A.kemo[kemotype].mimi)}`,
+                src: `${kemotype}/${FixMimi(A.kemo[kemotype].mimi)}`,
+                msk: `${kemotype}/${FixMimi(A.kemo[kemotype].mimi)}`,
             })
         }
 
@@ -218,7 +238,8 @@ function stAvatar() {
             V.avatar.kemoback.tail = setAvatar("kemoback.tail",{
                 fixcolor: A.kemo[kemotype].tail.fixcolor,
                 color: (A.kemo[kemotype].tail.fixcolor==true? null: haircolor[0]),
-                src= `${kemotype}/${FixTail(A.kemo[kemotype].tail)}`,
+                src: `${kemotype}/${FixTail(A.kemo[kemotype].tail)}`,
+                msk: `${kemotype}/${FixMimi(A.kemo[kemotype].mimi)}`,
             })
         }
 
@@ -261,12 +282,17 @@ function stAvatar() {
 
     
     const kemorace = ["羽族","兽族"]
-    if((V.PFlag.kemoform == true ||  V.charamaking == true)&& kemorace.includes(V.PC.info.race)){
+    if((V.PFlag.trueform == true || V.charamaking == true)&& kemorace.includes(V.PC.info.race)){
         V.avatar.body = setAvatar("body",{
             src:"furry/body_"+breastsize()+isPregnant(), color: haircolor[0],
         },true)
 
-    }else{
+    }else if ((V.PFlag.trueform == true || V.charamaking == true) && V.PC.info.race == "灵族"){
+        V.avatar.body = setAvatar("body", "gold/body_"+breastsize()+isPregnant(),true)
+    }else if ((V.PFlag.trueform == true || V.charamaking == true) && V.PC.info.race == "夜族"){
+        V.avatar.body = setAvatar("body", "yoru/body_"+breastsize()+isPregnant(),true)
+    }
+    else{
         V.avatar.body = setAvatar("body", V.PC.info.skin+"/body_"+breastsize()+isPregnant(),true)
     }
 
@@ -310,16 +336,6 @@ function stAvatar() {
     }
 
     V.avatar.background = setAvatar("background",imglocation(),true)
-
-    if(V.avatar.top && V.avatar.top.tuckin){
-        let layer = clone(Avatar.AVATARMODEL.layers)
-
-        Avatar.AVATARMODEL.layers.top_acc.z = layer.hand.z
-        Avatar.AVATARMODEL.layers.top.z = layer.bottom_acc.z
-        Avatar.AVATARMODEL.layers.hand.z = layer.bottom.z
-        Avatar.AVATARMODEL.layers.bottom_acc.z = layer.top_acc.z
-        Avatar.AVATARMODEL.layers.bottom.z = layer.top.z 
-    }
 
     if(V.harddebug)console.log("log",V.avatar);
     return ""

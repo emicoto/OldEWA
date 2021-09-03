@@ -9755,6 +9755,60 @@ var Avatar;
   const AVATARPATH = "./image/avatar";
   const __resolve = (mainpath, ...paths) => path.resolve(mainpath, ...paths);
   const cache = {};
+  const layers = [
+    "background",
+    "kemoback_wing",
+    "kemoback_tail",
+    "kemoback_tail_msk",
+    "back",
+    "hairback",
+    "body",
+    "body_msk",
+    "plus",
+    "nipple",
+    "dick",
+    "penis",
+    "legs",
+    "legs_acc",
+    "shoes",
+    "inner_bt",
+    "inner_bt_acc",
+    "bottom",
+    "bottom_acc",
+    "hand",
+    "inner_up",
+    "inner_up_acc",
+    "top",
+    "top_acc",
+    "outter",
+    "outter_acc",
+    "mouth",
+    "eyes",
+    "emoadd_tear",
+    "emoadd_shy",
+    "emoadd_red",
+    "emoadd_hurt",
+    "face",
+    "neck",
+    "neck_acc",
+    ,
+    "kemofront_mimi",
+    "kemofront_mimi_msk",
+    "kemofront_horn",
+    "hairfront",
+    "hairfront_msk",
+    "eyebrow",
+    "hat",
+    "addon_body",
+    "addon_bottom",
+    "addon_penis",
+    "addon_mouth",
+    "addon_face",
+    "addon_hair",
+    "frame"
+  ];
+  const zindex = {};
+  layers.map((v, i) => zindex[v] = i);
   function CanvasModels(name, width, height) {
     Renderer.CanvasModels[name] = {
       name,
@@ -9765,7 +9819,9 @@ var Avatar;
         return [];
       },
       defaultOptions() {
+        console.log(zindex);
         return {
+          zindex,
           frame: null,
           addon: { body: false, bottom: false, face: false, hair: false, mouth: false, penis: false },
           neck: null,
@@ -9830,7 +9886,21 @@ var Avatar;
     layers: {}
   };
   function setLayer(id, name, options2) {
-    Renderer.CanvasModels[id].layers[name] = options2;
+    const opt = options2;
+    const tuckin = {
+      top_acc: "hand",
+      top: "bottom_acc",
+      hand: "bottom",
+      bottom_acc: "top_acc",
+      bottom: "top"
+    };
+    const shop = ["manekin", "dress", "acc"];
+    if (!Object.keys(tuckin).includes(name)) {
+      if (!shop.includes(name)) {
+        opt["z"] = zindex[name];
+      }
+    }
+    Renderer.CanvasModels[id].layers[name] = opt;
   }
   Avatar2.setLayer = setLayer;
   function Shoplayer(ID) {
@@ -9913,13 +9983,18 @@ var Avatar;
       show: true
     };
     const opt = option ? option : defalutOpt;
-    let layerID = 0;
+    const tuckin = {
+      top_acc: "hand",
+      top: "bottom_acc",
+      hand: "bottom",
+      bottom_acc: "top_acc",
+      bottom: "top"
+    };
     setLayer(ID, "background", {
       width: opt.width ? opt.width : defalutOpt.width,
       height: opt.height ? opt.height : defalutOpt.height,
       dx: opt.dx ? opt.dx : defalutOpt.dx,
       dy: opt.dy ? opt.dy : defalutOpt.dy,
-      z: layerID++,
       showfn(options2) {
         return opt.show ? !!options2.background : opt.show;
       },
@@ -9932,7 +10007,6 @@ var Avatar;
       height: opt.height ? opt.height : defalutOpt.height,
       dx: opt.dx ? opt.dx : defalutOpt.dx,
       dy: opt.dy ? opt.dy : defalutOpt.dy,
-      z: layerID++,
       showfn(options2) {
         return !!options2.kemoback.wing;
       },
@@ -9959,7 +10033,6 @@ var Avatar;
       height: opt.height ? opt.height : defalutOpt.height,
       dx: opt.dx ? opt.dx : defalutOpt.dx,
       dy: opt.dy ? opt.dy : defalutOpt.dy,
-      z: layerID++,
       showfn(options2) {
         return !!options2.kemoback.tail;
       },
@@ -9981,12 +10054,42 @@ var Avatar;
         }
       }
     });
+    setLayer(ID, "kemoback_tail_msk", {
+      width: opt.width ? opt.width : defalutOpt.width,
+      height: opt.height ? opt.height : defalutOpt.height,
+      dx: opt.dx ? opt.dx : defalutOpt.dx,
+      dy: opt.dy ? opt.dy : defalutOpt.dy,
+      showfn(options2) {
+        return !!options2.kemoback.tail;
+      },
+      srcfn(options2) {
+        return options2.kemoback.tail ? __resolve(AVATARPATH, `kemoback/${options2.kemoback.tail.src}.png`) : options2.dummy;
+      },
+      blendModefn(options2) {
+        if (options2.kemoback.tail) {
+          if (!options2.kemoback.tail.fixcolor) {
+            return BLENDMODE.MULTIPLY;
+          }
+        }
+      },
+      blendfn(options2) {
+        if (options2.kemoback.tail) {
+          if (!options2.kemoback.tail.fixcolor) {
+            return options2.kemoback.tail.color;
+          }
+        }
+      },
+      masksrcfn(options2) {
+        if (options2.kemoback.tail) {
+          return __resolve(AVATARPATH, `kemoback/${options2.kemoback.tail.src}_msk.png`);
+        }
+      }
+    });
     setLayer(ID, "back", {
       width: opt.width ? opt.width : defalutOpt.width,
       height: opt.height ? opt.height : defalutOpt.height,
       dx: opt.dx ? opt.dx : defalutOpt.dx,
       dy: opt.dy ? opt.dy : defalutOpt.dy,
-      z: layerID++,
       showfn(options2) {
         return !!options2.back;
       },
@@ -10013,7 +10116,6 @@ var Avatar;
       height: opt.height ? opt.height : defalutOpt.height,
       dx: opt.dx ? opt.dx : defalutOpt.dx,
       dy: opt.dy ? opt.dy : defalutOpt.dy,
-      z: layerID++,
       showfn(options2) {
         return !!options2.hairback;
       },
@@ -10043,7 +10145,6 @@ var Avatar;
       height: opt.height ? opt.height : defalutOpt.height,
       dx: opt.dx ? opt.dx : defalutOpt.dx,
       dy: opt.dy ? opt.dy : defalutOpt.dy,
-      z: layerID++,
       showfn(options2) {
         return !!options2.body;
       },
@@ -10059,7 +10160,6 @@ var Avatar;
       height: opt.height ? opt.height : defalutOpt.height,
       dx: opt.dx ? opt.dx : defalutOpt.dx,
       dy: opt.dy ? opt.dy : defalutOpt.dy,
-      z: layerID++,
       showfn(options2) {
         return isObject(options2.body) ? options2.body.src.includes("furry") : false;
       },
@@ -10095,7 +10195,6 @@ var Avatar;
       height: opt.height ? opt.height : defalutOpt.height,
       dx: opt.dx ? opt.dx : defalutOpt.dx,
       dy: opt.dy ? opt.dy : defalutOpt.dy,
-      z: layerID++,
       showfn(options2) {
         return !!options2.plus;
       },
@@ -10108,7 +10207,6 @@ var Avatar;
       height: opt.height ? opt.height : defalutOpt.height,
       dx: opt.dx ? opt.dx : defalutOpt.dx,
       dy: opt.dy ? opt.dy : defalutOpt.dy,
-      z: layerID++,
       showfn(options2) {
         return !!options2.nipple;
       },
@@ -10121,7 +10219,6 @@ var Avatar;
       height: opt.height ? opt.height : defalutOpt.height,
       dx: opt.dx ? opt.dx : defalutOpt.dx,
       dy: opt.dy ? opt.dy : defalutOpt.dy,
-      z: layerID++,
       show: true,
       srcfn(options2) {
         return options2.dick ? __resolve(AVATARPATH, `body/${options2.dick}.png`) : options2.dummy;
@@ -10132,7 +10229,6 @@ var Avatar;
       height: opt.height ? opt.height : defalutOpt.height,
       dx: opt.dx ? opt.dx : defalutOpt.dx,
       dy: opt.dy ? opt.dy : defalutOpt.dy,
-      z: layerID++,
       showfn(options2) {
         return !!options2.penis;
       },
@@ -10145,7 +10241,6 @@ var Avatar;
       height: opt.height ? opt.height : defalutOpt.height,
       dx: opt.dx ? opt.dx : defalutOpt.dx,
       dy: opt.dy ? opt.dy : defalutOpt.dy,
-      z: layerID++,
       showfn(options2) {
         return !!options2.legs;
       },
@@ -10175,7 +10270,6 @@ var Avatar;
       height: opt.height ? opt.height : defalutOpt.height,
       dx: opt.dx ? opt.dx : defalutOpt.dx,
       dy: opt.dy ? opt.dy : defalutOpt.dy,
-      z: layerID++,
       showfn(options2) {
         if (isObject(options2.legs)) {
           return !!options2.legs.acc;
@@ -10218,7 +10312,6 @@ var Avatar;
       height: opt.height ? opt.height : defalutOpt.height,
       dx: opt.dx ? opt.dx : defalutOpt.dx,
       dy: opt.dy ? opt.dy : defalutOpt.dy,
-      z: layerID++,
       showfn(options2) {
         return !!options2.shoes;
       },
@@ -10248,7 +10341,6 @@ var Avatar;
       height: opt.height ? opt.height : defalutOpt.height,
       dx: opt.dx ? opt.dx : defalutOpt.dx,
       dy: opt.dy ? opt.dy : defalutOpt.dy,
-      z: layerID++,
       showfn(options2) {
         return !!options2.inner_bt;
       },
@@ -10278,7 +10370,6 @@ var Avatar;
       height: opt.height ? opt.height : defalutOpt.height,
       dx: opt.dx ? opt.dx : defalutOpt.dx,
       dy: opt.dy ? opt.dy : defalutOpt.dy,
-      z: layerID++,
       showfn(options2) {
         if (isObject(options2.inner_bt)) {
           return !!options2.inner_bt.acc;
@@ -10321,7 +10412,9 @@ var Avatar;
       height: opt.height ? opt.height : defalutOpt.height,
       dx: opt.dx ? opt.dx : defalutOpt.dx,
       dy: opt.dy ? opt.dy : defalutOpt.dy,
-      z: layerID++,
+      zfn(options2) {
+        return options2.top.tuckin ? zindex[tuckin["bottom"]] : zindex["bottom"];
+      },
       showfn(options2) {
         return !!options2.bottom;
       },
@@ -10351,7 +10444,9 @@ var Avatar;
       height: opt.height ? opt.height : defalutOpt.height,
       dx: opt.dx ? opt.dx : defalutOpt.dx,
       dy: opt.dy ? opt.dy : defalutOpt.dy,
-      z: layerID++,
+      zfn(options2) {
+        return options2.top.tuckin ? zindex[tuckin["bottom_acc"]] : zindex["bottom_acc"];
+      },
       showfn(options2) {
         if (isObject(options2.bottom)) {
           return !!options2.bottom.acc;
@@ -10394,7 +10489,9 @@ var Avatar;
       height: opt.height ? opt.height : defalutOpt.height,
       dx: opt.dx ? opt.dx : defalutOpt.dx,
       dy: opt.dy ? opt.dy : defalutOpt.dy,
-      z: layerID++,
+      zfn(options2) {
+        return options2.top.tuckin ? zindex[tuckin["hand"]] : zindex["hand"];
+      },
       showfn(options2) {
         return !!options2.hand;
       },
@@ -10424,7 +10521,6 @@ var Avatar;
       height: opt.height ? opt.height : defalutOpt.height,
       dx: opt.dx ? opt.dx : defalutOpt.dx,
       dy: opt.dy ? opt.dy : defalutOpt.dy,
-      z: layerID++,
       showfn(options2) {
         return !!options2.inner_up;
       },
@@ -10454,7 +10550,6 @@ var Avatar;
       height: opt.height ? opt.height : defalutOpt.height,
       dx: opt.dx ? opt.dx : defalutOpt.dx,
       dy: opt.dy ? opt.dy : defalutOpt.dy,
-      z: layerID++,
       showfn(options2) {
         if (isObject(options2.inner_up)) {
           return !!options2.inner_up.acc;
@@ -10497,7 +10592,9 @@ var Avatar;
       height: opt.height ? opt.height : defalutOpt.height,
       dx: opt.dx ? opt.dx : defalutOpt.dx,
       dy: opt.dy ? opt.dy : defalutOpt.dy,
-      z: layerID++,
+      zfn(options2) {
+        return options2.top.tuckin ? zindex[tuckin["top"]] : zindex["top"];
+      },
       showfn(options2) {
         return !!options2.top;
       },
@@ -10527,7 +10624,9 @@ var Avatar;
       height: opt.height ? opt.height : defalutOpt.height,
       dx: opt.dx ? opt.dx : defalutOpt.dx,
       dy: opt.dy ? opt.dy : defalutOpt.dy,
-      z: layerID++,
+      zfn(options2) {
+        return options2.top.tuckin ? zindex[tuckin["top_acc"]] : zindex["top_acc"];
+      },
       showfn(options2) {
         if (isObject(options2.top)) {
           return !!options2.top.acc;
@@ -10570,7 +10669,6 @@ var Avatar;
       height: opt.height ? opt.height : defalutOpt.height,
       dx: opt.dx ? opt.dx : defalutOpt.dx,
       dy: opt.dy ? opt.dy : defalutOpt.dy,
-      z: layerID++,
       showfn(options2) {
         return !!options2.inner_up;
       },
@@ -10600,7 +10698,6 @@ var Avatar;
       height: opt.height ? opt.height : defalutOpt.height,
       dx: opt.dx ? opt.dx : defalutOpt.dx,
       dy: opt.dy ? opt.dy : defalutOpt.dy,
-      z: layerID++,
       showfn(options2) {
         if (isObject(options2.outter)) {
           return !!options2.outter.acc;
@@ -10643,7 +10740,6 @@ var Avatar;
       height: opt.height ? opt.height : defalutOpt.height,
       dx: opt.dx ? opt.dx : defalutOpt.dx,
       dy: opt.dy ? opt.dy : defalutOpt.dy,
-      z: layerID++,
       showfn(options2) {
         return !!options2.mouth;
       },
@@ -10673,7 +10769,6 @@ var Avatar;
       height: opt.height ? opt.height : defalutOpt.height,
       dx: opt.dx ? opt.dx : defalutOpt.dx,
       dy: opt.dy ? opt.dy : defalutOpt.dy,
-      z: layerID++,
       showfn(options2) {
         return !!options2.eyes;
       },
@@ -10706,7 +10801,6 @@ var Avatar;
       height: opt.height ? opt.height : defalutOpt.height,
       dx: opt.dx ? opt.dx : defalutOpt.dx,
       dy: opt.dy ? opt.dy : defalutOpt.dy,
-      z: layerID++,
       showfn(options2) {
         return !!options2.emoadd.tear;
       },
@@ -10719,7 +10813,6 @@ var Avatar;
       height: opt.height ? opt.height : defalutOpt.height,
       dx: opt.dx ? opt.dx : defalutOpt.dx,
       dy: opt.dy ? opt.dy : defalutOpt.dy,
-      z: layerID++,
       showfn(options2) {
         return !!options2.emoadd.shy;
       },
@@ -10732,7 +10825,6 @@ var Avatar;
       height: opt.height ? opt.height : defalutOpt.height,
       dx: opt.dx ? opt.dx : defalutOpt.dx,
       dy: opt.dy ? opt.dy : defalutOpt.dy,
-      z: layerID++,
       showfn(options2) {
         return !!options2.emoadd.red;
       },
@@ -10745,7 +10837,6 @@ var Avatar;
       height: opt.height ? opt.height : defalutOpt.height,
       dx: opt.dx ? opt.dx : defalutOpt.dx,
       dy: opt.dy ? opt.dy : defalutOpt.dy,
-      z: layerID++,
       showfn(options2) {
         return !!options2.emoadd.hurt;
       },
@@ -10758,7 +10849,6 @@ var Avatar;
       height: opt.height ? opt.height : defalutOpt.height,
       dx: opt.dx ? opt.dx : defalutOpt.dx,
       dy: opt.dy ? opt.dy : defalutOpt.dy,
-      z: layerID++,
       showfn(options2) {
         return !!options2.face;
       },
@@ -10788,7 +10878,6 @@ var Avatar;
       height: opt.height ? opt.height : defalutOpt.height,
       dx: opt.dx ? opt.dx : defalutOpt.dx,
       dy: opt.dy ? opt.dy : defalutOpt.dy,
-      z: layerID++,
       showfn(options2) {
         return !!options2.neck;
       },
@@ -10818,7 +10907,6 @@ var Avatar;
       height: opt.height ? opt.height : defalutOpt.height,
       dx: opt.dx ? opt.dx : defalutOpt.dx,
       dy: opt.dy ? opt.dy : defalutOpt.dy,
-      z: layerID++,
       showfn(options2) {
         if (isObject(options2.neck)) {
           return !!options2.neck.acc;
@@ -10861,7 +10949,6 @@ var Avatar;
       height: opt.height ? opt.height : defalutOpt.height,
       dx: opt.dx ? opt.dx : defalutOpt.dx,
       dy: opt.dy ? opt.dy : defalutOpt.dy,
-      z: layerID++,
       showfn(options2) {
         return !!options2.hairfront;
       },
@@ -10891,7 +10978,6 @@ var Avatar;
       height: opt.height ? opt.height : defalutOpt.height,
       dx: opt.dx ? opt.dx : defalutOpt.dx,
       dy: opt.dy ? opt.dy : defalutOpt.dy,
-      z: layerID++,
       showfn(options2) {
         return !!options2.hairfront;
       },
@@ -10931,7 +11017,6 @@ var Avatar;
       height: opt.height ? opt.height : defalutOpt.height,
       dx: opt.dx ? opt.dx : defalutOpt.dx,
       dy: opt.dy ? opt.dy : defalutOpt.dy,
-      z: layerID++,
       showfn(options2) {
         return !!options2.eyebrow;
       },
@@ -10957,7 +11042,6 @@ var Avatar;
       height: opt.height ? opt.height : defalutOpt.height,
       dx: opt.dx ? opt.dx : defalutOpt.dx,
       dy: opt.dy ? opt.dy : defalutOpt.dy,
-      z: layerID++,
       showfn(options2) {
         return !!options2.kemofront.mimi;
       },
@@ -10982,12 +11066,42 @@ var Avatar;
         }
       }
     });
+    setLayer(ID, "kemofront_mimi_msk", {
+      width: opt.width ? opt.width : defalutOpt.width,
+      height: opt.height ? opt.height : defalutOpt.height,
+      dx: opt.dx ? opt.dx : defalutOpt.dx,
+      dy: opt.dy ? opt.dy : defalutOpt.dy,
+      showfn(options2) {
+        return !!options2.kemofront.mimi;
+      },
+      srcfn(options2) {
+        return options2.kemofront.mimi ? __resolve(AVATARPATH, `kemofront/${options2.kemofront.mimi.src}.png`) : options2.dummy;
+      },
+      blendModefn(options2) {
+        if (options2.kemofront.mimi) {
+          if (!options2.kemofront.mimi.fixcolor) {
+            return BLENDMODE.MULTIPLY;
+          }
+        }
+      },
+      blendfn(options2) {
+        if (options2.kemofront.mimi) {
+          if (!options2.kemofront.mimi.fixcolor) {
+            return options2.kemofront.mimi.color;
+          }
+        }
+      },
+      masksrcfn(options2) {
+        if (options2.kemofront.mimi) {
+          return __resolve(AVATARPATH, `kemofront/${options2.kemofront.mimi.src}_msk.png`);
+        }
+      }
+    });
     setLayer(ID, "kemofront_horn", {
       width: opt.width ? opt.width : defalutOpt.width,
       height: opt.height ? opt.height : defalutOpt.height,
       dx: opt.dx ? opt.dx : defalutOpt.dx,
       dy: opt.dy ? opt.dy : defalutOpt.dy,
-      z: layerID++,
       showfn(options2) {
         return !!options2.kemofront.horn;
       },
@@ -11017,7 +11131,6 @@ var Avatar;
       height: opt.height ? opt.height : defalutOpt.height,
       dx: opt.dx ? opt.dx : defalutOpt.dx,
       dy: opt.dy ? opt.dy : defalutOpt.dy,
-      z: layerID++,
       showfn(options2) {
         return !!options2.hat;
       },
@@ -11047,7 +11160,6 @@ var Avatar;
       height: opt.height ? opt.height : defalutOpt.height,
       dx: opt.dx ? opt.dx : defalutOpt.dx,
       dy: opt.dy ? opt.dy : defalutOpt.dy,
-      z: layerID++,
       showfn(options2) {
         return !!options2.addon.body;
       },
@@ -11060,7 +11172,6 @@ var Avatar;
       height: opt.height ? opt.height : defalutOpt.height,
       dx: opt.dx ? opt.dx : defalutOpt.dx,
       dy: opt.dy ? opt.dy : defalutOpt.dy,
-      z: layerID++,
       showfn(options2) {
         return !!options2.addon.bottom;
       },
@@ -11073,7 +11184,6 @@ var Avatar;
       height: opt.height ? opt.height : defalutOpt.height,
       dx: opt.dx ? opt.dx : defalutOpt.dx,
       dy: opt.dy ? opt.dy : defalutOpt.dy,
-      z: layerID++,
       showfn(options2) {
         return !!options2.addon.face;
       },
@@ -11086,7 +11196,6 @@ var Avatar;
       height: opt.height ? opt.height : defalutOpt.height,
       dx: opt.dx ? opt.dx : defalutOpt.dx,
       dy: opt.dy ? opt.dy : defalutOpt.dy,
-      z: layerID++,
       showfn(options2) {
         return !!options2.addon.hair;
       },
@@ -11099,7 +11208,6 @@ var Avatar;
       height: opt.height ? opt.height : defalutOpt.height,
       dx: opt.dx ? opt.dx : defalutOpt.dx,
       dy: opt.dy ? opt.dy : defalutOpt.dy,
-      z: layerID++,
       showfn(options2) {
         return !!options2.addon.mouth;
       },
@@ -11112,7 +11220,6 @@ var Avatar;
       height: opt.height ? opt.height : defalutOpt.height,
       dx: opt.dx ? opt.dx : defalutOpt.dx,
       dy: opt.dy ? opt.dy : defalutOpt.dy,
-      z: layerID++,
       showfn(options2) {
         return !!options2.addon.penis;
       },
@@ -11125,7 +11232,6 @@ var Avatar;
       height: opt.height ? opt.height : defalutOpt.height,
       dx: opt.dx ? opt.dx : defalutOpt.dx,
       dy: opt.dy ? opt.dy : defalutOpt.dy,
-      z: layerID++,
       showfn(options2) {
         return !!options2.frame;
       },
@@ -11871,7 +11977,9 @@ window.imglocation = imglocation
 
 function isFurry(){
     const group = ["兽族","羽族"]
-    if ((V.PFlag.kemoform == true ||  V.charamaking == true) && group.includes(V.PC.info.race)) return "furry/"
+    if ((V.PFlag.trueform == true ||  V.charamaking == true) && group.includes(V.PC.info.race)) return "furry/"
+    else if ((V.PFlag.trueform == true || V.charamaking == true) && V.PC.info.race=="灵族") return "gold/"
+    else if (((V.PFlag.trueform == true || V.charamaking == true) && V.PC.info.race=="夜族")) return "yoru/"
     else return V.PC.info.skin+"/"
 }
 
@@ -11904,8 +12012,10 @@ function stAvatar() {
                 fixacc : V.Equip[n].fixacc, subcolor: V.Equip[n].subcolor,
             })
             
-            if(V.Equip[n].tuckinable==true){
-                V.avatar[n].tuckin = setAvatar(`${n}.tuckin`,V.Equip.tuckin)
+            if( n=="top" && V.Equip.top.tuckinable==true){
+                V.avatar.top.tuckin = V.Equip.top.tuckin
+                Avatar.options.top.tuckin = V.Equip.top.tuckin
+                Avatar.setAvatar("top.tuckin",V.Equip.top.tuckin,true);
             }    
         }
         else if(V.Equip[n] != null && V.Equip[n].hasImg==false){
@@ -11964,14 +12074,30 @@ function stAvatar() {
 
 
     /*兽耳兽角兽尾部分, 还未实装。 */
-    if((V.PFlag.kemoform == true || V.charamaking == true)){
+    if((V.PFlag.trueform == true || V.charamaking == true)){
+        if(V.PC.info.race == "兽族"){
+            V.avatar.kemofront.mimi = setAvatar("kemofront.mimi",{
+                fixcolor: false, color: haircolor[0],
+                src: "cat",
+            })
+
+            V.avatar.kemoback.tail = setAvatar("kemoback.tail",{
+                fixcolor:false, color:haircolor[0],
+                src:"cat", 
+            })
+        }
+        else{
+            V.avatar.kemofront.mimi = setAvatar("kemofront.mimi",null)
+            V.avatar.kemoback.tail = setAvatar("kemoback.tail",null)
+        }
         /* let kemotype = V.PC.info.kemotype
         
         if(V.PC.trait.兽耳 == true){
             V.avatar.kemofront.mimi = setAvatar("kemofront.mimi",{
                 fixcolor: A.kemo[kemotype].mimi.fixcolor,
                 color: (A.kemo[kemotype].mimi.fixcolor==true? null: haircolor[0]),
-                src= `${kemotype}/${FixMimi(A.kemo[kemotype].mimi)}`,
+                src: `${kemotype}/${FixMimi(A.kemo[kemotype].mimi)}`,
+                msk: `${kemotype}/${FixMimi(A.kemo[kemotype].mimi)}`,
             })
         }
 
@@ -11985,7 +12111,8 @@ function stAvatar() {
             V.avatar.kemoback.tail = setAvatar("kemoback.tail",{
                 fixcolor: A.kemo[kemotype].tail.fixcolor,
                 color: (A.kemo[kemotype].tail.fixcolor==true? null: haircolor[0]),
-                src= `${kemotype}/${FixTail(A.kemo[kemotype].tail)}`,
+                src: `${kemotype}/${FixTail(A.kemo[kemotype].tail)}`,
+                msk: `${kemotype}/${FixMimi(A.kemo[kemotype].mimi)}`,
             })
         }
 
@@ -12028,12 +12155,17 @@ function stAvatar() {
 
     
     const kemorace = ["羽族","兽族"]
-    if((V.PFlag.kemoform == true ||  V.charamaking == true)&& kemorace.includes(V.PC.info.race)){
+    if((V.PFlag.trueform == true || V.charamaking == true)&& kemorace.includes(V.PC.info.race)){
         V.avatar.body = setAvatar("body",{
             src:"furry/body_"+breastsize()+isPregnant(), color: haircolor[0],
         },true)
 
-    }else{
+    }else if ((V.PFlag.trueform == true || V.charamaking == true) && V.PC.info.race == "灵族"){
+        V.avatar.body = setAvatar("body", "gold/body_"+breastsize()+isPregnant(),true)
+    }else if ((V.PFlag.trueform == true || V.charamaking == true) && V.PC.info.race == "夜族"){
+        V.avatar.body = setAvatar("body", "yoru/body_"+breastsize()+isPregnant(),true)
+    }
+    else{
         V.avatar.body = setAvatar("body", V.PC.info.skin+"/body_"+breastsize()+isPregnant(),true)
     }
 
@@ -12077,16 +12209,6 @@ function stAvatar() {
     }
 
     V.avatar.background = setAvatar("background",imglocation(),true)
-
-    if(V.avatar.top && V.avatar.top.tuckin){
-        let layer = clone(Avatar.AVATARMODEL.layers)
-
-        Avatar.AVATARMODEL.layers.top_acc.z = layer.hand.z
-        Avatar.AVATARMODEL.layers.top.z = layer.bottom_acc.z
-        Avatar.AVATARMODEL.layers.hand.z = layer.bottom.z
-        Avatar.AVATARMODEL.layers.bottom_acc.z = layer.top_acc.z
-        Avatar.AVATARMODEL.layers.bottom.z = layer.top.z 
-    }
 
     if(V.harddebug)console.log("log",V.avatar);
     return ""
@@ -13060,7 +13182,7 @@ window.movebutton = movebutton
 function delay(id,text) {
     if(typeof(text)=="string"){
         $('#'+id).append("<span class='delay'>"+text+"<br></span>")
-    }else if(Array.isArray(text)){
+    }else if(Array.isArray(text)==true){
         $( "#"+id ).append( "<span class='h"+i+" hidden'>"+text[i]+"<br></span>");
         setTimeout(() => {$("#combat_message .h"+i).removeClass('hidden').addClass('delay')}, (500*i))
     }
@@ -14612,7 +14734,7 @@ $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌}
     top      : 9,     bottom   : 4, 
     bukkake   : { body:false, face:false, hair:false, },
     pregnant: { type:null, seed:null, phrase:null, date:null, }, /* 怀孕flag type:A怀孕还是正常怀孕 seed：孩子种类, father:父亲, phrase：阶段 date:预产期 */
-    kemoform : null,
+    trueform : null,
 }&gt;&gt;
 
 &lt;!-- 记录 --&gt;
