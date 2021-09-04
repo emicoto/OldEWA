@@ -1,4 +1,5 @@
 ﻿:: Event [eventloop nosave]
+<<mode "event">>
 
 <div id="eventsituation">
 <<CallEvent>>

@@ -479,6 +479,7 @@
                 genitype: "史莱姆",
                 special: ["液态"],
                 state: {},
+                active:false,flag:{},
             }>>
         <<case 2>>
             <<set $follower to (1000+random(500,5000))>>
@@ -491,6 +492,7 @@
                 genitype: "狼阴茎",
                 special: ["变身"],
                 state: {},
+                active:false,flag:{},
             }>>
         <<case 3>>
             <<set $follower to (100+random(100,2000))>>
@@ -503,6 +505,7 @@
                 genitype: "幽灵触手",
                 special: ["再生"],
                 state: {},
+                active:false,flag:{},
             }>>
     <</switch>>
     <<if $PC.info.race is "兽族">>

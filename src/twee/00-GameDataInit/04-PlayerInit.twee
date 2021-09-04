@@ -223,7 +223,17 @@ $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌}
 }>>
 
 <!-- 临时备份 -->
-<<set $TEquip to {}>>
+<<set $TEquip to {
+    hat     : null,     neck    : null,	    face : null,
+	outter  : null,	    top     : null,     inner_up: null,
+    hand    : null,     bottom  : null,     inner_bt: null,
+    shoes   : null,     legs   : null,
+    back    : null,
+    hairfront : "natural",    hairback  : "straight",
+    emote     : "正常",
+    vagina : null, penis: null, ureth: null, anal: null,
+    nipple : null,
+}>>
 
 <<dressup "top" 1 "#F14660" "红">>
 <<dressup "inner_bt" 1>>

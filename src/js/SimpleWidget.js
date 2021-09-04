@@ -1,5 +1,4 @@
-﻿
-function printmoney(num) {
+﻿function printmoney(num) {
     return num && num.toString()
         .replace(/\d+/, function(s){
              return s.replace(/(\d)(?=(\d{3})+$)/g, '$1,')
@@ -50,3 +49,23 @@ window.hairlenth = function(num){
     else if(num>= 800) return 4;
     else return 1;
 }
+
+function timebetween(a,b){
+    return between(V.date.time,a*60,b*60)
+}
+F.timebetween = timebetween
+DefineMacroS("inTime", timebetween)
+
+window.randomtext = function(a){
+    if(typeof(a)=="string")return a;
+    else{
+        let i = random(0,a.length)
+        return a[i]
+    }
+}
+
+function REP(){
+    V.REP = random(0,100)
+}
+F.REP = REP
+DefineMacroS("setREP",REP)

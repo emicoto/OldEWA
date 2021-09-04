@@ -52,88 +52,10 @@
 
 <<set D.explist to ["战败","攻击","被攻击","诱惑","射精","高潮","M高潮","B高潮","C高潮","U高潮","V高潮","A高潮","多重高潮","自慰","口交","性交","肛交","喷乳","被猥琐","被眠奸","被迷奸","被强奸","被轮奸","被兽奸","被触手奸","兽交","触手","史莱姆","怀孕","A怀孕","分娩","尿道开发","阴道扩张","肛门扩张","产卵","寄生","监禁","SM"]>>
 
-<<set D.placedata to {
-    单身公寓 : {
-        place:"单身公寓", side:"室内", 
-        tag:["家","煮食","休息","沐浴","衣柜","电脑","WIFI"], 
-        chara:[], 
-        bus:false, subway:false, car:false, bike:false,
-        homebutton: false,
-        img:"singleapartment",
-        },
-
-    怡安小区 : {
-        place:"怡安小区", side:"室外", 
-        tag:["交通中心","WIFI",],
-        chara:[], 
-        bus:true, subway:true, car:true, bike:true,
-        homebutton: true,
-        img:"neiborhood",
-        },
-
-    怡安小区公园 : {
-        place:"怡安小区公园", side:"室外", 
-        tag:["公园","散步","绿意","藏身点","广场舞","WIFI"],
-        chara:[], 
-        bus:false, subway:false, car:false, bike:true,
-        homebutton: true,
-        img:"neiborhood",
-        },
-    
-    试衣间 : {
-        place:"试衣间", side:"室内", 
-        tag:["服装店"],
-        chara:[], 
-        bus:false, subway:false, car:false, bike:false,
-        homebutton: false,
-        img:"tryon",
-    }
-}>>
-
-<<set D.itemlist to {
-    foods:{
-        汉堡包:{
-            name:"汉堡包", type:"食物", category:"food",
-            thumb:null, price:6, num:0,
-            shop:"快餐",
-            name_en:"Hamburger",
-            text:"只要是快餐店就一定会有卖的汉堡包。毕竟是最便宜的汉堡，份量不怎么的，味道也很一般。",
-            text_en:"The burger that definitely will be sold in all kind of fast food restaurant. Because it's the cheapest burger, so you can't expect its volumn and taste.",
-            effect(){
-                V.PC.base.饮食[0] += 200;
-                return V.PC.base.饮食;
-            },
-        },
-    },
-    medicine:{},
-    sextoy:{},
-    weapon:{},
-    accesory:{},
-    important:{
-        魔力方块:{
-            name:"魔力方块", type:"重要", category:"important",
-            thumb:null, effect:"剧情", value:0, price:0, num:0,
-            shop:null,
-            name_en:"M-Cube",
-            text:"不知道有什么用的含有魔力的方块。往方块注入魔力的话，似乎能测试出自己的魔力类型。",
-            text_en:"A cube can contain mana but not way to use it. You may test your own mana type if you put mana into the cube. ",
-        },
-    }, 
-    material:{},
-    other:{
-        通用物品:{
-            name:"通用物品", type:"其他", category:"other",
-            thumb:null, effect:"无", value:0, price:1,num:0, 
-            shop:null,
-            name_en:"Common Material",
-            text:"一个万能的通用物品。虽然万能，却又什么都做不到。当玩家尝试获取某个不存在的物品是才会产生的物质。只能用来合成。",
-            text_en:"A common material for everything. Although it's universal but it can't do anything. It only will happen When player try to get an item doesn't exist.",
-        },
-    },
-}>>
-
-
+<<InitPlaceData>>
+<<InitItemData>>
 <<InitAvatar>>
+
 
 <</widget>>
 
@@ -161,6 +83,19 @@
     encount : 0,
     event : 0,
     date : 0,
+}>>
+
+<<set D.petsheet to {
+    name:"pet", type:1, level:1,
+    HP:[100,100], SP:[100,100], MP:[100,100],
+    ATK:5, DEF:5, MATK:5, MDEF:5, SPD:5,
+    好感:10, 忠诚:10, 欲望:10, 支配:0,
+    gender:"m", genital: {"阴茎":16, "子宫":null},
+    genitype: "",
+    special: [],
+    stats: {},
+    active:false,
+    flag:{},
 }>>
 
 <</widget>>

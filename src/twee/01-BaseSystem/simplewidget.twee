@@ -77,6 +77,22 @@
 <</silently>>
 <</widget>>
 
+<<widget "mode">>
+<<silently>>
+    <<if $args[0]>>
+        <<set $displaymode to $args[0]>>
+    <<else>>
+        <<run alert("错误: UI模式设置缺乏参数")>>
+    <</if>>
+<</silently>>
+<</widget>>
+
+<<widget "resetplaylist">>
+    <<if setup.mainloop.isPlaying() is false>>
+    <<masteraudio stop>>
+    <<playlist "mainloop" shuffle play loop>>
+    <</if>>
+<</widget>>
 
 /*  HoverTxt : Show notepad icon shows some wikified text in a window of width X pixels above an icon when it's hovered over.  */
 /*  EXAMPLE: <<HoverTxt 200 "text">>  */

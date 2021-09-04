@@ -310,7 +310,7 @@ Game.Manager = new Manager({
 		<div id="init-lacking">Your browser lacks required capabilities. Please upgrade it or switch to another to continue.</div>
 		<div id="init-loading"><div>Loading&hellip;</div></div>
 	</div>
-	<!-- UUID://731DEBA3-F846-4AA9-97C0-8137F28469AC// --><tw-storydata name="失樂園物語" startnode="20" creator="Tweego" creator-version="2.1.1+81d1d71" ifid="731DEBA3-F846-4AA9-97C0-8137F28469AC" zoom="1" format="SugarCube" format-version="2.33.4" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">/* twine-user-stylesheet #1: "00-font.css" */
+	<!-- UUID://731DEBA3-F846-4AA9-97C0-8137F28469AC// --><tw-storydata name="失樂園物語" startnode="22" creator="Tweego" creator-version="2.1.1+81d1d71" ifid="731DEBA3-F846-4AA9-97C0-8137F28469AC" zoom="1" format="SugarCube" format-version="2.33.4" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">/* twine-user-stylesheet #1: "00-font.css" */
 @font-face{
 font-family : "黄婷婷"; /*18*/
 src : url("CSS/FZSJ-SNH48HTTJW.otf");
@@ -1679,6 +1679,7 @@ body #story-caption #storyCaptionDiv {
     width: 90%;
 }
 /* twine-user-stylesheet #7: "05-Element.css" */
+/* StartPage and Charamaking */
 #startpage input {
     max-width: 100px;
     max-height: 20px;
@@ -1770,12 +1771,7 @@ body #story-caption #storyCaptionDiv {
     font-family: Georgia, 新综艺B;
 }
 
-.description {
-    margin-left: 10px;
-    font-size: 14px;
-    color:gray;
-}
-
+/* Event */
 #eventsituation {
     max-width: 800px;
     width: 100%;
@@ -1831,6 +1827,8 @@ body #story-caption #storyCaptionDiv {
     text-shadow:0 0 2px rgb(180, 166, 36);
     border: none;
 }
+
+/* Navigator */
 
 #navi {
     width: 200px;
@@ -1894,6 +1892,31 @@ body #story-caption #storyCaptionDiv {
     position: relative;
     border-bottom: 1px dashed #ccc;
     padding-left: 20px;
+}
+
+/* general elements*/
+.description {
+    margin-left: 10px;
+    font-size: 14px;
+    color:gray;
+}
+
+.appen-eventsituation {
+    max-width: 800px;
+    width: 100%;    
+    margin: 0px auto;
+    display: block;
+    font-size: 24px;
+    font-family:珍珠体, Georgia;
+    text-align: center;
+    letter-spacing: 2px;
+	line-height: 40px;
+    transition: all 0.75s;
+}
+
+.append-normal {
+    margin:2px;
+    margin-left:10px;
 }
 /* twine-user-stylesheet #8: "06-Effect.css" */
 
@@ -12539,10 +12562,41 @@ function FixValue() {
 window.FixValue = FixValue
 F.FixValue = FixValue
 DefineMacroS("fixvalue",FixValue)
-/* twine-user-script #32: "location.js" */
+/* twine-user-script #32: "Location.js" */
+/* 地点互动和事件相关 */
+/* 总之先粗略地做一下... 符合条件的就显示出来 */
+F.getsituation = function(location, series, key){
+    const data = D.placedata[location].situation    
+    let text = {
+        before:[], after:[], content:[],
+    }
+
+    if(data && data.length > 0){
+        for(let i=0; i < data.length; i++ ){
+           if(data[i].condition()){
+               let result = "<<include '"+data[i].condition()+"'>>"
+
+               text[data[i].display].push(result);
+               
+               if(V.harddebug)console.log(data[i].condition());
+        }
+    }}
+    if(text.before.length + text.content.length + text.after.length > 0){
+        let result = (text.before.length > 0 ? text.before.join(" ") : "") + ( text.content.length > 0 ? text.content.join(" ") : "") + ( text.after.length > 0 ? text.after.join(" ") : "")
+
+        return result
+    }
+}
+
+F.getInteraction = function(location, tags, key){
+    const data = D.placedata[location]
+    
+}
+
 function setLocation(args) {
     if (typeof(args)=="string" && args.length > 0){
         V.location = args
+        F.REP() /* 设置事件随机概率 RandomEventRate */
 
         if(D.placedata[args]){
             V.local = D.placedata[args]
@@ -12564,7 +12618,8 @@ function setLocation(args) {
 
 window.setLocation = setLocation
 DefineMacroS("location",setLocation)
-/* twine-user-script #33: "timeprocess.js" */
+
+/* twine-user-script #33: "TimeProcess.js" */
 
 function gettimezone(h) {
 	switch(true){
@@ -13048,7 +13103,6 @@ window.rankcolor = function(num){
     }
 }
 /* twine-user-script #36: "SimpleWidget.js" */
-
 function printmoney(num) {
     return num && num.toString()
         .replace(/\d+/, function(s){
@@ -13100,6 +13154,26 @@ window.hairlenth = function(num){
     else if(num>= 800) return 4;
     else return 1;
 }
+
+function timebetween(a,b){
+    return between(V.date.time,a*60,b*60)
+}
+F.timebetween = timebetween
+DefineMacroS("inTime", timebetween)
+
+window.randomtext = function(a){
+    if(typeof(a)=="string")return a;
+    else{
+        let i = random(0,a.length)
+        return a[i]
+    }
+}
+
+function REP(){
+    V.REP = random(0,100)
+}
+F.REP = REP
+DefineMacroS("setREP",REP)
 /* twine-user-script #37: "UI Widget.js" */
 /* 通用 */
 
@@ -14075,7 +14149,162 @@ DefineMacroS("delay",delay)
 
 &lt;&lt;run A.facelist = Object.keys(A.emote)&gt;&gt;
 
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="8" name="StoryInit" tags="" position="975,100" size="100,100">&lt;!-- 快速检索法 luatable[&quot;indexname&quot;] = $test.名字 ; $test.历史 
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="8" name="ItemData" tags="widget" position="975,100" size="100,100">&lt;&lt;widget &quot;InitItemData&quot;&gt;&gt;
+
+&lt;&lt;set D.itemlist to {
+    foods:{}, medicine:{}, tool:{}, collection:{}, homekea:{},
+    weapon:{}, accesory:{}, material:{}, adults:{}, other:{},
+    important:{}, 
+}&gt;&gt;
+
+&lt;&lt;set D.itemlist.foods to {
+    汉堡包:{
+        name:&quot;汉堡包&quot;, type:&quot;食物&quot;, category:&quot;food&quot;,
+        thumb:null, price:6, num:0,
+        shop:&quot;快餐&quot;,
+        name_en:&quot;Hamburger&quot;,
+        text:&quot;只要是快餐店就一定会有卖的汉堡包。毕竟是最便宜的汉堡，份量不怎么的，味道也很一般。&quot;,
+        text_en:&quot;The burger that definitely will be sold in all kind of fast food restaurant. Because it&#39;s the cheapest burger, so you can&#39;t expect its volumn and taste.&quot;,
+        effect(){
+            V.PC.base.饮食[0] += 200;
+            return V.PC.base.饮食;
+        },
+    },
+}&gt;&gt;
+&lt;&lt;set D.itemlist.important to {
+    魔力方块:{
+            name:&quot;魔力方块&quot;, type:&quot;重要&quot;, category:&quot;important&quot;,
+            thumb:null, effect:&quot;剧情&quot;, value:0, price:0, num:0,
+            shop:null,
+            name_en:&quot;M-Cube&quot;,
+            text:&quot;不知道有什么用的含有魔力的方块。往方块注入魔力的话，似乎能测试出自己的魔力类型。&quot;,
+            text_en:&quot;A cube can contain mana but not way to use it. You may test your own mana type if you put mana into the cube. &quot;,
+    },
+}&gt;&gt;
+
+&lt;&lt;set D.itemlist.other to {
+    通用物品:{
+        name:&quot;通用物品&quot;, type:&quot;其他&quot;, category:&quot;other&quot;,
+        thumb:null, effect:&quot;无&quot;, value:0, price:1,num:0, 
+        shop:null,
+        name_en:&quot;Common Material&quot;,
+        text:&quot;一个万能的通用物品。虽然万能，却又什么都做不到。当玩家尝试获取某个不存在的物品是才会产生的物质。只能用来合成。&quot;,
+        text_en:&quot;A common material for everything. Although it&#39;s universal but it can&#39;t do anything. It only will happen When player try to get an item doesn&#39;t exist.&quot;,
+    },    
+}&gt;&gt;
+
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="9" name="LocationData" tags="widget" position="1100,100" size="100,100">&lt;&lt;widget &quot;InitPlaceData&quot;&gt;&gt;
+ &lt;&lt;set D.placedata to {
+    单身公寓 : {
+        place:&quot;单身公寓&quot;, side:&quot;室内&quot;,
+        tag:[&quot;家&quot;,&quot;煮食&quot;,&quot;休息&quot;,&quot;沐浴&quot;,&quot;衣柜&quot;,&quot;电脑&quot;,&quot;WIFI&quot;], 
+        chara:[], 
+        bus:false, subway:false, car:false, bike:false,
+        homebutton: false,
+        img:&quot;singleapartment&quot;,
+        description(){
+            return &quot;一个60平方米左右的单身公寓。简约现代风的装修，巨大的落地窗，还有一个阳台，两个人住也相当舒适的公寓。&quot;
+            /* 根据条件变更描述 */
+        },
+        situation:[
+            {id:0, series:&quot;城市生活&quot;, phrase: 5, display:&quot;content&quot;,
+             condition(){
+                 if(V.days &lt;= 7) return &quot;城市生活_1&quot;;
+                 else if(V.days &lt;= 14) return &quot;城市生活_2&quot;;
+                 else if(V.days &lt;= 28) return &quot;城市生活_3&quot;;
+                 else if(V.chaos &lt; 20) return &quot;城市生活_4&quot;;
+                 else return &quot;城市生活_5&quot;;
+             }},
+            {id:1, series:&quot;有宠物的日子&quot;, phrase: 5, display:&quot;before&quot;,
+             condition(){
+                 if(V.pet.active) return &quot;宠物的日常_1&quot;;
+             }},              
+        ]},
+
+    怡安小区 : {
+        place:&quot;怡安小区&quot;, side:&quot;室外&quot;, 
+        tag:[&quot;交通中心&quot;,&quot;WIFI&quot;,],
+        chara:[], 
+        bus:true, subway:true, car:true, bike:true,
+        homebutton: true,
+        img:&quot;neiborhood&quot;,
+        description(){
+            if(V.chaos &lt; 15) return &quot;位于景南市南兴区的一个住宅小区。&lt;br&gt;现代化设计的公寓高楼林立在住宅园区内，道路两侧种满了花草树木。小区中央有个公园，时不时有人散布经过。&lt;br&gt;从小区大门往大道走，就能到达嘉庆广场和地铁站。小区门口的巴士站也能通向景南市各区。交通十分方便。&lt;br&gt;&quot;;
+            else return &quot;位于景南市南兴区的一个住宅小区。&lt;br&gt;现代化设计的公寓高楼林立在住宅园区内，道路两侧种满了花草树木。小区中央有个公园，但已经没人在外散步。&lt;br&gt;从小区大门往大道走，就能到达嘉庆广场和地铁站。小区门口的巴士站也能通向景南市各区。交通十分方便。&lt;br&gt;&quot;;
+        },
+        situation:[
+
+        ]},
+
+    怡安小区公园 : {
+        place:&quot;小区公园&quot;, side:&quot;室外&quot;, 
+        tag:[&quot;公园&quot;,&quot;散步&quot;,&quot;绿意&quot;,&quot;藏身点&quot;,&quot;广场舞&quot;,&quot;WIFI&quot;],
+        chara:[], 
+        bus:false, subway:false, car:false, bike:true,
+        homebutton: true,
+        img:&quot;neiborhood&quot;,
+        description(){
+            if(V.chaos &lt; 15) return &quot;绿意盎然，四周都种着花草树木。最吸引人的是南面一侧的用假山搭造的山泉景。&lt;br&gt;公园中央有个宽敞的小广场，偶尔会有大妈们在这里跳舞。&lt;br&gt;西面有儿童玩耍的设施。时不时能听到孩子们的欢声笑语。&lt;br&gt;&quot;;
+            else return &quot;绿意盎然，四周都种着花草树木。最吸引人的是南面一侧的用假山搭造的山泉景。&lt;br&gt;公园中央有个宽敞的小广场，现在只有心大的年轻人会在这里活动。&lt;br&gt;&quot;;
+        },
+        situation:[]
+    },
+    嘉庆广场 : {
+        place:&quot;嘉庆广场&quot;, side:&quot;室内&quot;,
+        tag:[&quot;交通中心&quot;,&quot;大商业广场&quot;,&quot;活动场所&quot;],
+        chara:[],
+        bus:true, subway:true, car:true, bike:true,
+        homebutton: false,
+        img:&quot;yiansquare&quot;,
+        description(){
+            if(V.chaos &lt; 15) return &quot;位于怡安小区东面的一个中型商业广场。&lt;br&gt;广场主体面积占地近12万平方米，周围都种着树木，同时路边都有适合乘凉休息的桌椅和小亭。&lt;br&gt;最引人瞩目的是，并排在南面入口广场两侧的、树龄上百的木棉花树，每到花期会引来不少人聚集，广场上也会摆满小摊，让人一边享受美食一边观赏花景。&lt;br&gt;&quot;;
+        },
+        situation:[
+            {id:0, series:&quot;商场的日常风景&quot;, phrase:3, display:&quot;before&quot;,
+             condition(){
+                 if(V.chaos &lt; 15) return &quot;商场的日常风景_1&quot;;
+             }},
+
+            {id:1, series:&quot;商场闲逛&quot;, phrase:3, display:&quot;content&quot;,
+             condition(){
+                 if(V.chaos &lt; 15) return &quot;商场闲逛_1&quot;;
+             }},
+        ],
+    },
+    AW服装店 : {
+        place:&quot;A&amp;W&quot;, side:&quot;室内&quot;,
+        tag:[&quot;服装店&quot;,&quot;试衣间&quot;],
+        chara:[],
+        bus:false, subway:false, car:false, bike:false,
+        homebutton:false,
+        img:null,
+        description(){
+            return &quot;知名日常品牌A&amp;W的卖场。形形色色的商品让人眼花缭乱。&quot;
+        },
+        situation:[],
+    },
+    汉堡王  : {
+        place:&quot;汉堡王&quot;, side:&quot;室内&quot;,
+        tag:[&quot;快餐&quot;],
+        chara:[],
+        bus:false, subway:false, car:false, bike:false,
+        homebutton:false,
+        img:null,
+        description(){
+            return &quot;知名连锁快餐店汉堡王。就是卖各种汉堡的地方。&quot;
+        },
+        situation:[],
+    },
+    试衣间 : {
+        place:&quot;试衣间&quot;, side:&quot;室内&quot;, 
+        tag:[&quot;试衣间&quot;],
+        chara:[], 
+        bus:false, subway:false, car:false, bike:false,
+        homebutton: false,
+        img:&quot;tryon&quot;,
+    },
+}&gt;&gt;   
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="10" name="StoryInit" tags="" position="1225,100" size="100,100">&lt;!-- 快速检索法 luatable[&quot;indexname&quot;] = $test.名字 ; $test.历史 
      var=[0,1,2,3] , luatable[0] = $var[0]  --&gt;
 &lt;!-- 首先初始化资料库 --&gt;
 &lt;&lt;InitDataBase&gt;&gt;
@@ -14149,7 +14378,7 @@ DefineMacroS("delay",delay)
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;if $saveId is undefined&gt;&gt;
 	&lt;&lt;set $saveId to random(10000, 99999)&gt;&gt;
-&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="9" name="Widgets variablesStatic" tags="widget" position="1100,100" size="100,100">&lt;&lt;widget &quot;InitDataBase&quot;&gt;&gt;
+&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="11" name="Widgets variablesStatic" tags="widget" position="100,225" size="100,100">&lt;&lt;widget &quot;InitDataBase&quot;&gt;&gt;
 
 /* 加载语言库 */
 &lt;&lt;SetupLanguage&gt;&gt;
@@ -14201,88 +14430,10 @@ DefineMacroS("delay",delay)
 
 &lt;&lt;set D.explist to [&quot;战败&quot;,&quot;攻击&quot;,&quot;被攻击&quot;,&quot;诱惑&quot;,&quot;射精&quot;,&quot;高潮&quot;,&quot;M高潮&quot;,&quot;B高潮&quot;,&quot;C高潮&quot;,&quot;U高潮&quot;,&quot;V高潮&quot;,&quot;A高潮&quot;,&quot;多重高潮&quot;,&quot;自慰&quot;,&quot;口交&quot;,&quot;性交&quot;,&quot;肛交&quot;,&quot;喷乳&quot;,&quot;被猥琐&quot;,&quot;被眠奸&quot;,&quot;被迷奸&quot;,&quot;被强奸&quot;,&quot;被轮奸&quot;,&quot;被兽奸&quot;,&quot;被触手奸&quot;,&quot;兽交&quot;,&quot;触手&quot;,&quot;史莱姆&quot;,&quot;怀孕&quot;,&quot;A怀孕&quot;,&quot;分娩&quot;,&quot;尿道开发&quot;,&quot;阴道扩张&quot;,&quot;肛门扩张&quot;,&quot;产卵&quot;,&quot;寄生&quot;,&quot;监禁&quot;,&quot;SM&quot;]&gt;&gt;
 
-&lt;&lt;set D.placedata to {
-    单身公寓 : {
-        place:&quot;单身公寓&quot;, side:&quot;室内&quot;, 
-        tag:[&quot;家&quot;,&quot;煮食&quot;,&quot;休息&quot;,&quot;沐浴&quot;,&quot;衣柜&quot;,&quot;电脑&quot;,&quot;WIFI&quot;], 
-        chara:[], 
-        bus:false, subway:false, car:false, bike:false,
-        homebutton: false,
-        img:&quot;singleapartment&quot;,
-        },
-
-    怡安小区 : {
-        place:&quot;怡安小区&quot;, side:&quot;室外&quot;, 
-        tag:[&quot;交通中心&quot;,&quot;WIFI&quot;,],
-        chara:[], 
-        bus:true, subway:true, car:true, bike:true,
-        homebutton: true,
-        img:&quot;neiborhood&quot;,
-        },
-
-    怡安小区公园 : {
-        place:&quot;怡安小区公园&quot;, side:&quot;室外&quot;, 
-        tag:[&quot;公园&quot;,&quot;散步&quot;,&quot;绿意&quot;,&quot;藏身点&quot;,&quot;广场舞&quot;,&quot;WIFI&quot;],
-        chara:[], 
-        bus:false, subway:false, car:false, bike:true,
-        homebutton: true,
-        img:&quot;neiborhood&quot;,
-        },
-    
-    试衣间 : {
-        place:&quot;试衣间&quot;, side:&quot;室内&quot;, 
-        tag:[&quot;服装店&quot;],
-        chara:[], 
-        bus:false, subway:false, car:false, bike:false,
-        homebutton: false,
-        img:&quot;tryon&quot;,
-    }
-}&gt;&gt;
-
-&lt;&lt;set D.itemlist to {
-    foods:{
-        汉堡包:{
-            name:&quot;汉堡包&quot;, type:&quot;食物&quot;, category:&quot;food&quot;,
-            thumb:null, price:6, num:0,
-            shop:&quot;快餐&quot;,
-            name_en:&quot;Hamburger&quot;,
-            text:&quot;只要是快餐店就一定会有卖的汉堡包。毕竟是最便宜的汉堡，份量不怎么的，味道也很一般。&quot;,
-            text_en:&quot;The burger that definitely will be sold in all kind of fast food restaurant. Because it&#39;s the cheapest burger, so you can&#39;t expect its volumn and taste.&quot;,
-            effect(){
-                V.PC.base.饮食[0] += 200;
-                return V.PC.base.饮食;
-            },
-        },
-    },
-    medicine:{},
-    sextoy:{},
-    weapon:{},
-    accesory:{},
-    important:{
-        魔力方块:{
-            name:&quot;魔力方块&quot;, type:&quot;重要&quot;, category:&quot;important&quot;,
-            thumb:null, effect:&quot;剧情&quot;, value:0, price:0, num:0,
-            shop:null,
-            name_en:&quot;M-Cube&quot;,
-            text:&quot;不知道有什么用的含有魔力的方块。往方块注入魔力的话，似乎能测试出自己的魔力类型。&quot;,
-            text_en:&quot;A cube can contain mana but not way to use it. You may test your own mana type if you put mana into the cube. &quot;,
-        },
-    }, 
-    material:{},
-    other:{
-        通用物品:{
-            name:&quot;通用物品&quot;, type:&quot;其他&quot;, category:&quot;other&quot;,
-            thumb:null, effect:&quot;无&quot;, value:0, price:1,num:0, 
-            shop:null,
-            name_en:&quot;Common Material&quot;,
-            text:&quot;一个万能的通用物品。虽然万能，却又什么都做不到。当玩家尝试获取某个不存在的物品是才会产生的物质。只能用来合成。&quot;,
-            text_en:&quot;A common material for everything. Although it&#39;s universal but it can&#39;t do anything. It only will happen When player try to get an item doesn&#39;t exist.&quot;,
-        },
-    },
-}&gt;&gt;
-
-
+&lt;&lt;InitPlaceData&gt;&gt;
+&lt;&lt;InitItemData&gt;&gt;
 &lt;&lt;InitAvatar&gt;&gt;
+
 
 &lt;&lt;/widget&gt;&gt;
 
@@ -14312,6 +14463,19 @@ DefineMacroS("delay",delay)
     date : 0,
 }&gt;&gt;
 
+&lt;&lt;set D.petsheet to {
+    name:&quot;pet&quot;, type:1, level:1,
+    HP:[100,100], SP:[100,100], MP:[100,100],
+    ATK:5, DEF:5, MATK:5, MDEF:5, SPD:5,
+    好感:10, 忠诚:10, 欲望:10, 支配:0,
+    gender:&quot;m&quot;, genital: {&quot;阴茎&quot;:16, &quot;子宫&quot;:null},
+    genitype: &quot;&quot;,
+    special: [],
+    stats: {},
+    active:false,
+    flag:{},
+}&gt;&gt;
+
 &lt;&lt;/widget&gt;&gt;
 
 &lt;&lt;widget &quot;InitBGM&quot;&gt;&gt;
@@ -14338,7 +14502,7 @@ DefineMacroS("delay",delay)
 &lt;&lt;cacheaudio &quot;获得成就&quot; &quot;sound/rising.mp3&quot;&gt;&gt;
 
 
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="10" name="LanguageDictionaryr" tags="widget" position="1225,100" size="100,100">&lt;&lt;widget &quot;SetupLanguage&quot;&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="12" name="LanguageDictionaryr" tags="widget" position="225,225" size="100,100">&lt;&lt;widget &quot;SetupLanguage&quot;&gt;&gt;
 &lt;&lt;set setup.L to {}&gt;&gt;
 &lt;&lt;set setup.L.CN to {
         肤色:{
@@ -14412,7 +14576,7 @@ DefineMacroS("delay",delay)
         },
 }&gt;&gt;
 
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="11" name="InitGameData" tags="widget" position="100,225" size="100,100">&lt;&lt;widget &quot;InitGameData&quot;&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="13" name="InitGameData" tags="widget" position="350,225" size="100,100">&lt;&lt;widget &quot;InitGameData&quot;&gt;&gt;
 
 &lt;!-- 初始化游戏数据 --&gt;
 &lt;&lt;set $gametime to {pass:0, hour:0, min:0, sec:0, day:0}&gt;&gt;
@@ -14516,6 +14680,8 @@ DefineMacroS("delay",delay)
     genitype: &quot;史莱姆&quot;,
     special: [&quot;液态&quot;],
     stats: {},
+    active:false,
+    flag:{},
 }&gt;&gt;
 /*type:1=史莱姆 2=魔狼 3=恶魔 4=触手 */
 
@@ -14551,7 +14717,7 @@ DefineMacroS("delay",delay)
   例 PCKOJO 1 与史莱姆玩耍 高潮 0 CN
   */
 
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="12" name="InitPlayerChara" tags="widget" position="225,225" size="100,100">&lt;&lt;widget &quot;InitPlayerData&quot;&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="14" name="InitPlayerChara" tags="widget" position="475,225" size="100,100">&lt;&lt;widget &quot;InitPlayerData&quot;&gt;&gt;
 &lt;!-- 角色创建 --&gt;
 &lt;&lt;set $starttrait to 0&gt;&gt;
 
@@ -14774,7 +14940,17 @@ $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌}
 }&gt;&gt;
 
 &lt;!-- 临时备份 --&gt;
-&lt;&lt;set $TEquip to {}&gt;&gt;
+&lt;&lt;set $TEquip to {
+    hat     : null,     neck    : null,	    face : null,
+	outter  : null,	    top     : null,     inner_up: null,
+    hand    : null,     bottom  : null,     inner_bt: null,
+    shoes   : null,     legs   : null,
+    back    : null,
+    hairfront : &quot;natural&quot;,    hairback  : &quot;straight&quot;,
+    emote     : &quot;正常&quot;,
+    vagina : null, penis: null, ureth: null, anal: null,
+    nipple : null,
+}&gt;&gt;
 
 &lt;&lt;dressup &quot;top&quot; 1 &quot;#F14660&quot; &quot;红&quot;&gt;&gt;
 &lt;&lt;dressup &quot;inner_bt&quot; 1&gt;&gt;
@@ -14790,7 +14966,7 @@ $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌}
     red     : false,    hurt    : false,
 }&gt;&gt;
 
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="13" name="EventList" tags="widget" position="350,225" size="100,100">&lt;&lt;widget &quot;registerEventList&quot;&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="15" name="EventList" tags="widget" position="600,225" size="100,100">&lt;&lt;widget &quot;registerEventList&quot;&gt;&gt;
 
 &lt;&lt;set D.event to {
     主线:[],
@@ -14816,7 +14992,7 @@ $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌}
     {id:0, type:&quot;角色-凌寻&quot;, name:&quot;初遇&quot;, branch:[&quot;开头&quot;,&quot;英雄救美-成功&quot;,&quot;英雄救美-失败&quot;,&quot;结尾&quot;], phrase:0},
 ]&gt;&gt;
 
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="14" name="快速开始" tags="widget" position="475,225" size="100,100">&lt;&lt;widget &quot;QuickStart&quot;&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="16" name="快速开始" tags="widget" position="725,225" size="100,100">&lt;&lt;widget &quot;QuickStart&quot;&gt;&gt;
 &lt;div style=&quot;margin-left:16px;font-size:14px&quot;&gt;∵ &lt;&lt;lang &quot;预设人物卡&quot; &quot;Preset&quot;&gt;&gt;：
 &lt;select id=&quot;preset&quot; name=&quot;preset&quot; onchange=&quot;V.preset = this.value; showcharainfo()&quot;&gt;
 	&lt;option value=&quot;魔女&quot; selected&gt;魔女&lt;/option&gt;
@@ -14839,7 +15015,7 @@ $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌}
 &lt;&lt;default&gt;&gt;大家的魔女&lt;br&gt; 是个伪娘。既然是魔（法少）女，那当然擅长魔法。&lt;br&gt;以上都是大嘘。只是个一个二次元爱好者，喜欢玩游戏，会画点画，玩COSPLAY，搞搞女装直播的样子。
 &lt;&lt;/switch&gt;&gt;
 
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="15" name="创建人物" tags="widget" position="600,225" size="100,100">&lt;&lt;widget &quot;CharaMaking&quot;&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="17" name="创建人物" tags="widget" position="850,225" size="100,100">&lt;&lt;widget &quot;CharaMaking&quot;&gt;&gt;
 &lt;&lt;set $charamaking to true&gt;&gt;
 &lt;&lt;if $PC.trait.泌乳体质 is undefined&gt;&gt;
     &lt;&lt;set $PC.trait.泌乳体质 to false&gt;&gt;
@@ -14905,7 +15081,7 @@ $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌}
 &lt;&lt;/silently&gt;&gt;
 &lt;!-- Event --&gt;
 
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="16" name="创建人物组件" tags="widget" position="725,225" size="100,100">&lt;&lt;widget &quot;CMBoy&quot;&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="18" name="创建人物组件" tags="widget" position="975,225" size="100,100">&lt;&lt;widget &quot;CMBoy&quot;&gt;&gt;
 　阴茎大小　&lt;&lt;CMPsize&gt;&gt;&lt;br&gt;
 　阴茎感度　&lt;&lt;CMPenis&gt;&gt;&lt;br&gt;
 &lt;&lt;/widget&gt;&gt;
@@ -15384,6 +15560,7 @@ $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌}
                 genitype: &quot;史莱姆&quot;,
                 special: [&quot;液态&quot;],
                 state: {},
+                active:false,flag:{},
             }&gt;&gt;
         &lt;&lt;case 2&gt;&gt;
             &lt;&lt;set $follower to (1000+random(500,5000))&gt;&gt;
@@ -15396,6 +15573,7 @@ $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌}
                 genitype: &quot;狼阴茎&quot;,
                 special: [&quot;变身&quot;],
                 state: {},
+                active:false,flag:{},
             }&gt;&gt;
         &lt;&lt;case 3&gt;&gt;
             &lt;&lt;set $follower to (100+random(100,2000))&gt;&gt;
@@ -15408,6 +15586,7 @@ $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌}
                 genitype: &quot;幽灵触手&quot;,
                 special: [&quot;再生&quot;],
                 state: {},
+                active:false,flag:{},
             }&gt;&gt;
     &lt;&lt;/switch&gt;&gt;
     &lt;&lt;if $PC.info.race is &quot;兽族&quot;&gt;&gt;
@@ -15459,7 +15638,7 @@ $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌}
         &lt;&lt;setface &quot;正常&quot;&gt;&gt;
     &lt;&lt;/if&gt;&gt;
 
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="17" name="游戏设定" tags="widget" position="850,225" size="100,100">&lt;&lt;widget &quot;GameSetting&quot;&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="19" name="游戏设定" tags="widget" position="1100,225" size="100,100">&lt;&lt;widget &quot;GameSetting&quot;&gt;&gt;
 &lt;div id=&quot;GameSetting&quot;&gt;
 　&lt;&lt;lang &quot;游戏视角&quot; &quot;Persons&quot;&gt;&gt;： &lt;label&gt;&lt;&lt;radiobutton &quot;$persons&quot; 1 autocheck&gt;&gt; &lt;&lt;lang &quot;第一人称&quot; &quot;First: I&quot;&gt;&gt;&lt;/label&gt;　|　&lt;label&gt;&lt;&lt;radiobutton &quot;$persons&quot; 2 autocheck&gt;&gt;&lt;&lt;lang &quot;第二人称&quot; &quot;Second: You&quot;&gt;&gt;&lt;/label&gt;　|　&lt;label&gt;&lt;&lt;radiobutton &quot;$persons&quot; 3 autocheck&gt;&gt;&lt;&lt;lang &quot;第三人称(默认)&quot; &quot;Third: Call Name(defalt)&quot;&gt;&gt;&lt;/label&gt;
 &lt;&lt;lang &quot; &quot; &quot;※Not full support on English&quot;&gt;&gt;&lt;br&gt;
@@ -15474,7 +15653,7 @@ $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌}
 
 　&lt;&lt;link &quot;&gt; 改变语言/Comfirm Language&quot; &quot;Start&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;
 &lt;/div&gt;
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="18" name="StoryBanner" tags="" position="975,225" size="100,100">&lt;img src=&quot;image/banner.png&quot;&gt;</tw-passagedata><tw-passagedata pid="19" name="StorySubtitle" tags="" position="1100,225" size="100,100">Elysion World Adventure</tw-passagedata><tw-passagedata pid="20" name="Start" tags="nosave" position="1225,225" size="100,100">&lt;&lt;audio &quot;标题&quot; volume 0.5 play loop&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="20" name="StoryBanner" tags="" position="1225,225" size="100,100">&lt;img src=&quot;image/banner.png&quot;&gt;</tw-passagedata><tw-passagedata pid="21" name="StorySubtitle" tags="" position="100,350" size="100,100">Elysion World Adventure</tw-passagedata><tw-passagedata pid="22" name="Start" tags="nosave" position="225,350" size="100,100">&lt;&lt;audio &quot;标题&quot; volume 0.5 play loop&gt;&gt;
 &lt;div id=&quot;startpage&quot;&gt;
 &lt;span class=&quot;intro&quot;&gt;
 &lt;&lt;lang 
@@ -15539,7 +15718,7 @@ $(document).on(&#39;:passagerender&#39;, function (ev) {
 });
 &lt;&lt;/script&gt;&gt;
 
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="21" name="初始设定" tags="" position="100,350" size="100,100">&lt;&lt;set $activepage to &quot;QuickStart&quot;&gt;&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="23" name="初始设定" tags="" position="350,350" size="100,100">&lt;&lt;set $activepage to &quot;QuickStart&quot;&gt;&gt;
 
 &lt;div id=&quot;StartingPageMenu&quot;&gt;
 	&lt;&lt;set _text to Lang(&quot;快速开始&quot;,&quot;QuickStart&quot;)&gt;&gt;
@@ -15565,7 +15744,7 @@ $(document).on(&#39;:passagerender&#39;, function (ev) {
 &lt;/div&gt;
 
 &lt;br&gt;
-&lt;&lt;dashline&gt;&gt;</tw-passagedata><tw-passagedata pid="22" name="开始" tags="" position="225,350" size="100,100">&lt;&lt;masteraudio stop&gt;&gt;
+&lt;&lt;dashline&gt;&gt;</tw-passagedata><tw-passagedata pid="24" name="开始" tags="" position="475,350" size="100,100">&lt;&lt;masteraudio stop&gt;&gt;
 
 
 &lt;div id=&quot;eventsituation&quot;&gt;
@@ -15594,7 +15773,7 @@ $(document).on(&#39;:passagerender&#39;, function (ev) {
 [[回到开头|Start]]
 &lt;/div&gt;
 
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="23" name="Upgrade Waiting Room" tags="" position="350,350" size="100,100">欢迎来到失乐园物语（Elysion Wolrd Adventure） &lt;&lt;print StartConfig.version&gt;&gt;。 游戏升级中，请稍后。&lt;br&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="25" name="Upgrade Waiting Room" tags="" position="600,350" size="100,100">欢迎来到失乐园物语（Elysion Wolrd Adventure） &lt;&lt;print StartConfig.version&gt;&gt;。 游戏升级中，请稍后。&lt;br&gt;
 
 &lt;&lt;silently&gt;&gt;
 &lt;&lt;variablesVersionUpdate&gt;&gt;
@@ -15602,7 +15781,518 @@ $(document).on(&#39;:passagerender&#39;, function (ev) {
 
 升级完毕。&lt;br&gt;
 
-[[继续|$navigation.stack.last()][$navigation.stack.pop()]]</tw-passagedata><tw-passagedata pid="24" name="StoryCaption" tags="" position="475,350" size="100,100">&lt;div @class=&quot;(Errors.log.length==0?&#39;hidden&#39;:&#39;&#39;) + &#39; error-reporter-btn&#39;&quot; onclick=&quot;Errors.Reporter.toggle()&quot;&gt;&lt;/div&gt;
+[[继续|$navigation.stack.last()][$navigation.stack.pop()]]</tw-passagedata><tw-passagedata pid="26" name="试衣间" tags="" position="725,350" size="100,100">&lt;&lt;if $temp.tryoncomeback is undefined&gt;&gt;
+    &lt;&lt;EnterTryRoom&gt;&gt;
+&lt;&lt;else&gt;&gt;
+    &lt;&lt;set $temp to {}&gt;&gt;
+    &lt;&lt;set $location to &quot;试衣间&quot;&gt;&gt;
+&lt;&lt;/if&gt;&gt;
+
+&lt;div id=&quot;append-text&quot; class=&quot;append-normal&quot;&gt;&lt;span id=&quot;action-text2&quot;&gt;&lt;/span&gt;&lt;/div&gt;
+
+&lt;&lt;if $shoptype.includes(&quot;offline&quot;)&gt;&gt;
+&lt;div id=&quot;show_container&quot;&gt;
+    &lt;&lt;if $showcase isnot null&gt;&gt;&lt;&lt;ShowCase&gt;&gt;&lt;&lt;/if&gt;&gt;  
+&lt;/div&gt;
+&lt;&lt;/if&gt;&gt;
+
+&lt;div id=&quot;ShopList&quot;&gt;
+  &lt;ul&gt;
+    &lt;li class=&quot;category&quot;&gt;&lt;a href=&quot;#hat&quot;&gt;头饰&lt;/a&gt;&lt;/li&gt;
+    &lt;li class=&quot;category&quot;&gt;&lt;a href=&quot;#outter&quot;&gt;外套&lt;/a&gt;&lt;/li&gt;
+    &lt;li class=&quot;category&quot;&gt;&lt;a href=&quot;#top&quot;&gt;上装&lt;/a&gt;&lt;/li&gt;
+    &lt;li class=&quot;category&quot;&gt;&lt;a href=&quot;#bottom&quot;&gt;下装&lt;/a&gt;&lt;/li&gt;
+    &lt;li class=&quot;category&quot;&gt;&lt;a href=&quot;#inner_up&quot;&gt;内衣&lt;/a&gt;&lt;/li&gt;
+    &lt;li class=&quot;category&quot;&gt;&lt;a href=&quot;#inner_bt&quot;&gt;内裤&lt;/a&gt;&lt;/li&gt;
+    &lt;li class=&quot;category&quot;&gt;&lt;a href=&quot;#legs&quot;&gt;袜子&lt;/a&gt;&lt;/li&gt;
+    &lt;li class=&quot;category&quot;&gt;&lt;a href=&quot;#shoes&quot;&gt;鞋子&lt;/a&gt;&lt;/li&gt;
+    &lt;li class=&quot;category&quot;&gt;&lt;a href=&quot;#accesory&quot;&gt;饰品&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+    
+    &lt;div id=&quot;hat&quot;&gt;
+        &lt;&lt;ShowAShopItems &quot;hat&quot;&gt;&gt;
+    &lt;/div&gt;
+
+    &lt;div id=&quot;outter&quot;&gt;
+        &lt;&lt;ShowAShopItems &quot;outter&quot;&gt;&gt;
+    &lt;/div&gt;
+
+    &lt;div id=&quot;top&quot;&gt;
+        &lt;&lt;ShowAShopItems &quot;top&quot;&gt;&gt;
+    &lt;/div&gt;
+
+    &lt;div id=&quot;bottom&quot;&gt;
+        &lt;&lt;ShowAShopItems &quot;bottom&quot;&gt;&gt;
+    &lt;/div&gt;
+
+    &lt;div id=&quot;inner_up&quot;&gt;
+        &lt;&lt;ShowAShopItems &quot;inner_up&quot;&gt;&gt;
+    &lt;/div&gt;
+
+    &lt;div id=&quot;inner_bt&quot;&gt;
+        &lt;&lt;ShowAShopItems &quot;inner_bt&quot;&gt;&gt;
+    &lt;/div&gt;
+
+    &lt;div id=&quot;legs&quot;&gt;
+        &lt;&lt;ShowAShopItems &quot;legs&quot;&gt;&gt;
+    &lt;/div&gt;
+
+    &lt;div id=&quot;shoes&quot;&gt;
+        &lt;&lt;ShowAShopItems &quot;shoes&quot;&gt;&gt;
+    &lt;/div&gt;
+
+    &lt;div id=&quot;accesory&quot;&gt;
+        &lt;&lt;ShowAShopItems &quot;face&quot;&gt;&gt;
+        &lt;&lt;ShowAShopItems &quot;neck&quot;&gt;&gt;
+        &lt;&lt;ShowAShopItems &quot;hand&quot;&gt;&gt;
+        &lt;&lt;ShowAShopItems &quot;back&quot;&gt;&gt;
+    &lt;/div&gt;
+
+&lt;/div&gt;
+
+
+&lt;br&gt;&lt;br&gt;
+
+&lt;div class=&quot;showinner&quot;&gt;
+&lt;&lt;link &quot;只看内衣&quot;&gt;&gt;&lt;&lt;showinner&gt;&gt;&lt;&lt;/link&gt;&gt;
+&lt;/div&gt;
+&lt;div class=&quot;redress&quot;&gt;
+&lt;&lt;link &quot;衣服复位&quot;&gt;&gt;&lt;&lt;redress&gt;&gt;&lt;&lt;resettryon&gt;&gt;&lt;&lt;leavecheck&gt;&gt;&lt;&lt;/link&gt;&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;buybutton&quot;&gt;
+&lt;&lt;link &quot;购买&quot;&gt;&gt;&lt;&lt;run BuyOutFit(&quot;select&quot;)&gt;&gt;&lt;&lt;leavecheck&gt;&gt;&lt;&lt;/link&gt;&gt;
+&lt;/div&gt;
+
+&lt;&lt;if $shoptype.includes(&quot;offline&quot;)&gt;&gt;
+&lt;div class=&quot;trybutton&quot;&gt;
+&lt;&lt;link &quot;试穿&quot;&gt;&gt;&lt;&lt;tryon $showcase.layer&gt;&gt;&lt;&lt;leavecheck&gt;&gt;&lt;&lt;/link&gt;&gt;
+&lt;/div&gt;
+
+&lt;div id=&quot;buyall&quot;&gt;
+&lt;&lt;if tryoncheck() is true&gt;&gt;
+&lt;&lt;link &quot;购买身上的衣服&quot;&gt;&gt;&lt;&lt;run BuyOutFit(&quot;tryon&quot;)&gt;&gt;&lt;&lt;leavecheck&gt;&gt;&lt;&lt;/link&gt;&gt;
+&lt;&lt;/if&gt;&gt;
+&lt;/div&gt;
+
+&lt;&lt;/if&gt;&gt;
+
+&lt;div id=&quot;leave&quot; class=&quot;backbutton&quot;&gt;
+    &lt;&lt;if tryoncheck() is true&gt;&gt;
+        &lt;&lt;link &quot;离开&quot; &quot;试衣偷窥：触发&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;
+    &lt;&lt;else&gt;&gt;
+        &lt;&lt;link &quot;离开&quot; &quot;嘉庆广场&quot;&gt;&gt;&lt;&lt;resettryon&gt;&gt;&lt;&lt;/link&gt;&gt;
+    &lt;&lt;/if&gt;&gt;
+&lt;/div&gt;
+
+&lt;div id=&quot;shopoverlay&quot;&gt;&lt;/div&gt;
+
+
+
+&lt;&lt;silently&gt;&gt;
+/* 自动刷新等待JS读取结束 */
+&lt;&lt;set _timer to 10&gt;&gt;
+&lt;&lt;repeat 0.3s&gt;&gt;
+    &lt;&lt;script&gt;&gt;
+        $( function() {
+            $( &quot;#ShopList&quot; ).tabs();
+        } );
+    &lt;&lt;/script&gt;&gt;
+    &lt;&lt;set _timer to _timer -1&gt;&gt;
+    &lt;&lt;if _timer lte 0&gt;&gt;&lt;&lt;stop&gt;&gt;&lt;&lt;/if&gt;&gt;
+&lt;&lt;/repeat&gt;&gt;
+
+&lt;&lt;/silently&gt;&gt;
+
+&lt;&lt;widget &quot;leavecheck&quot;&gt;&gt;
+&lt;&lt;replace &quot;#leave&quot;&gt;&gt;
+&lt;&lt;if tryoncheck() is true&gt;&gt;
+    &lt;&lt;link &quot;离开&quot; &quot;试衣偷窥：触发&quot;&gt;&gt;&lt;&lt;set $eventexit to [$passage,&quot;嘉庆广场&quot;]&gt;&gt;&lt;&lt;/link&gt;&gt;
+&lt;&lt;else&gt;&gt;
+    &lt;&lt;link &quot;离开&quot; &quot;怡安小区&quot;&gt;&gt;&lt;&lt;resettryon&gt;&gt;&lt;&lt;/link&gt;&gt;
+&lt;&lt;/if&gt;&gt;
+&lt;&lt;/replace&gt;&gt;
+
+&lt;&lt;replace &quot;#buyall&quot;&gt;&gt;
+&lt;&lt;if tryoncheck() is true&gt;&gt;
+&lt;&lt;link &quot;购买身上的衣服&quot;&gt;&gt;&lt;&lt;run BuyOutFit(&quot;tryon&quot;)&gt;&gt;&lt;&lt;leavecheck&gt;&gt;&lt;&lt;/link&gt;&gt;
+&lt;&lt;/if&gt;&gt;
+&lt;&lt;/replace&gt;&gt;
+&lt;&lt;/widget&gt;&gt;
+
+&lt;&lt;widget &quot;resettryon&quot;&gt;&gt;
+    &lt;&lt;set $tryon to {neck: null, hand: null, face: null,hat: null, outter: null, top: null,bottom: null,inner_up: null, inner_bt: null,shoes: null, legs: null,}&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="27" name="试衣偷窥：触发" tags="" position="850,350" size="100,100">&lt;&lt;mode &quot;event&quot;&gt;&gt;
+&lt;&lt;you&gt;&gt;还穿着商店里的衣服，确定就这么离开商店吗？&lt;br&gt;
+&lt;br&gt;
+&lt;&lt;link &quot;不买，就这么离开&quot; &quot;试衣偷窥：不买&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
+&lt;&lt;link &quot;还是回去付钱吧&quot; $eventexit[0]&gt;&gt;&lt;&lt;set $temp.tryoncomeback to true&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;</tw-passagedata><tw-passagedata pid="28" name="试衣偷窥：不买" tags="" position="975,350" size="100,100">&lt;&lt;set _luck to random(1,100)&gt;&gt;
+
+&lt;&lt;you&gt;&gt;打算就这么穿着衣服走……&lt;br&gt;
+
+&lt;&lt;timed 1s&gt;&gt;
+    &lt;div class=&quot;delay&quot;&gt;
+        &lt;&lt;if _luck lte 6&gt;&gt;
+            幸运的是，警报器没有响起来。故障了吗？ 总之&lt;&lt;you&gt;&gt;成功穿着商店的衣服跑了。
+            &lt;&lt;link &quot;离开&quot; $eventexit[1]&gt;&gt;&lt;&lt;/link&gt;&gt;
+        &lt;&lt;else&gt;&gt;
+            才到门口就触发警报器了，你被捉了起来……
+            (事件未完成……)
+            &lt;&lt;link &quot;离开&quot; $eventexit[0]&gt;&gt;&lt;&lt;set $temp.tryoncomeback to true&gt;&gt;&lt;&lt;/link&gt;&gt;
+        &lt;&lt;/if&gt;&gt;
+    &lt;/div&gt;
+&lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="29" name="服装店-工具" tags="widget" position="1100,350" size="100,100">&lt;&lt;widget &quot;EnterTryRoom&quot;&gt;&gt;
+/* 把身上衣服暂存在TEquip里 */
+&lt;&lt;set $TEquip to clone($Equip)&gt;&gt;
+
+/* 清理身上外在液体 */
+&lt;&lt;set $PFlag.bukkake.body to false&gt;&gt;
+&lt;&lt;set $PFlag.bukkake.face to false&gt;&gt;
+&lt;&lt;set $PFlag.bukkake.hair to false&gt;&gt;
+
+&lt;&lt;set $location to &quot;试衣间&quot;&gt;&gt;
+&lt;&lt;SetAvatar&gt;&gt;
+
+&lt;&lt;/widget&gt;&gt;
+
+
+&lt;&lt;widget &quot;ShowManequin&quot;&gt;&gt;
+    &lt;div class=&quot;manequin&quot;&gt;
+        &lt;&lt;twinescript&gt;&gt;
+        output.appendChild(Avatar.getShop())
+        &lt;&lt;/twinescript&gt;&gt;
+    &lt;/div&gt;
+&lt;&lt;/widget&gt;&gt;
+
+&lt;&lt;widget &quot;ShowCase&quot;&gt;&gt;
+
+    &lt;div class=&quot;followleft&quot;&gt;
+        &lt;div id=&quot;showcase&quot;&gt;
+            &lt;&lt;if $showcase isnot null&gt;&gt;&lt;&lt;ShowManequin&gt;&gt;&lt;&lt;/if&gt;&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;div class=&quot;followright&quot;&gt;
+    
+    &lt;div id=&quot;item_info&quot;&gt;
+        &lt;div id=&quot;description&quot;&gt;
+        &lt;&lt;print Lang($showcase.text,$showcase.text_en)&gt;&gt;&lt;br&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;warmth&quot;&gt;适应温度：&lt;&lt;print ($fix.cold+$showcase.cold)&gt;&gt;C～&lt;&lt;print ($fix.hot+$showcase.hot)&gt;&gt;C&lt;/div&gt;
+
+        &lt;div id=&quot;outfit_trait&quot;&gt;
+            &lt;div class=&quot;of_title&quot;&gt;属性：&lt;/div&gt;
+            &lt;div class=&quot;of_traitlist&quot;&gt;
+                &lt;li&gt;日常 - 适合平时穿戴&lt;/li&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+
+    &lt;/div&gt;
+    
+    &lt;div id=&quot;option_containter&quot;&gt;
+        &lt;&lt;if $showcase.fixacc is false or $showcase.patterns.length gt 0&gt;&gt;
+            &lt;&lt;if $showcase.patterns.length gt 0&gt;&gt;
+                可选花样: &lt;br&gt;
+                &lt;div id=&quot;pattern_option&quot;&gt;
+                    &lt;&lt;for _i to 0; _i lt $showcase.patterns.length; _i++&gt;&gt;
+                        &lt;&lt;set _name to $showcase.patterns[_i]&gt;&gt;
+                        &lt;&lt;print &quot;&lt;&lt;button _name&gt;&gt;&lt;&lt;run setPatterns(&#39;&quot;+_name+&quot;&#39;)&gt;&gt;&lt;&lt;/button&gt;&gt;&quot;&gt;&gt;
+                    &lt;&lt;/for&gt;&gt;          
+                &lt;/div&gt;
+            &lt;&lt;/if&gt;&gt;
+
+            &lt;&lt;if $showcase.fixacc is false&gt;&gt;
+                花样颜色：&lt;br&gt;
+                &lt;div id=&quot;color_plate&quot;&gt;
+                     &lt;&lt;for _i to 0; _i lt A.colorlist.length; _i ++&gt;&gt;
+                        &lt;div class=&quot;color_plate&quot; @style=&quot;&#39;background-color:&#39;+ A.colorlist[_i].code&quot;&gt;
+                        &lt;&lt;set _name to A.colorlist[_i].name&gt;&gt;
+                        &lt;&lt;print &quot;&lt;&lt;button _name&gt;&gt;&lt;&lt;run setColors(A.colorlist[&quot;+_i+&quot;].code,A.colorlist[&quot;+_i+&quot;].name,false,&#39;acc&#39;)&gt;&gt;&lt;&lt;/button&gt;&gt;&quot;&gt;&gt;
+                        &lt;/div&gt;
+                    &lt;&lt;/for&gt;&gt;
+                    &lt;div&gt;&lt;button id=&quot;customColor2&quot;&gt;自定义颜色&lt;/button&gt;&lt;/div&gt;        
+                &lt;/div&gt;
+            &lt;&lt;/if&gt;&gt;
+            
+        &lt;&lt;/if&gt;&gt;
+
+        &lt;&lt;if $showcase.fixcolor is false or $showcase.colors.length gt 0&gt;&gt;
+            可选颜色：&lt;br&gt;
+            &lt;div id=&quot;color_plate&quot;&gt;
+                &lt;&lt;if $showcase.fixcolor is false&gt;&gt;
+                    &lt;&lt;for _i to 0; _i lt A.colorlist.length; _i ++&gt;&gt;
+                        &lt;div class=&quot;color_plate&quot; @style=&quot;&#39;background-color:&#39;+ A.colorlist[_i].code&quot;&gt;
+                        &lt;&lt;set _name to A.colorlist[_i].name&gt;&gt;
+                        &lt;&lt;print &quot;&lt;&lt;button _name&gt;&gt;&lt;&lt;run setColors(A.colorlist[&quot;+_i+&quot;].code,A.colorlist[&quot;+_i+&quot;].name)&gt;&gt;&lt;&lt;/button&gt;&gt;&quot;&gt;&gt;
+                        &lt;/div&gt;
+                    &lt;&lt;/for&gt;&gt;
+                    &lt;div&gt;&lt;button id=&quot;customColor&quot;&gt;自定义颜色&lt;/button&gt;&lt;/div&gt;
+                &lt;&lt;else&gt;&gt;
+                    &lt;&lt;for _i to 0; _i lt $showcase.colors.length; _i++&gt;&gt;
+                        &lt;&lt;set _code to A.colors[$showcase.colors[_i]].code&gt;&gt;
+                        &lt;&lt;set _name to A.colors[$showcase.colors[_i]].name&gt;&gt;
+                        &lt;div class=&quot;color_plate&quot; @style=&quot;&#39;background-color:&#39;+_code&quot;&gt;
+                        &lt;&lt;print &quot;&lt;&lt;button _name&gt;&gt;&lt;&lt;run setColors($showcase.colors[&quot;+_i+&quot;],A.colors[$showcase.colors[&quot;+_i+&quot;]].name)&gt;&gt;&lt;&lt;/button&gt;&gt;&quot;&gt;&gt;
+                        &lt;/div&gt;
+                    &lt;&lt;/for&gt;&gt;
+                &lt;&lt;/if&gt;&gt;
+            &lt;/div&gt;
+        &lt;&lt;/if&gt;&gt;
+    &lt;/div&gt;
+
+    &lt;/div&gt;
+
+&lt;&lt;if $showcase.fixcolor is false&gt;&gt;
+&lt;script&gt;
+var myPicker = new JSColor(&#39;#customColor&#39;, {format:&#39;hex&#39;,value:&#39;#000000&#39;,onInput:&quot;setColors(this.toHEXString(),null,true)&quot;,
+onChange:&quot;setColors(this.toHEXString(),&#39;自定义&#39;)&quot;,
+required:false, 
+	palette:&#39;#000000 #FFFFFF #636363 #FF0000 #00FF00 #0000FF&#39;, 
+	hideOnPaletteClick:true, backgroundColor:&#39;#ddd&#39;, 
+	borderColor:&#39;rgba(0,0,0,1)&#39;, borderRadius:10, width:200, 
+	closeButton:true, closeText:&#39;关闭&#39;, sliderSize:20, 
+	shadowColor:&#39;rgba(255,121,247,0.2)&#39;
+});
+&lt;/script&gt;
+&lt;&lt;/if&gt;&gt;
+
+&lt;&lt;if $showcase.fixacc is false&gt;&gt;
+&lt;script&gt;
+var myPicker2 = new JSColor(&#39;#customColor2&#39;, {format:&#39;hex&#39;,value:&#39;#000000&#39;,onInput:&quot;setColors(this.toHEXString(),null,true,&#39;acc&#39;)&quot;,
+onChange:&quot;setColors(this.toHEXString(),&#39;自定义&#39;,null,&#39;acc&#39;)&quot;,
+required:false, 
+	palette:&#39;#000000 #FFFFFF #636363 #FF0000 #00FF00 #0000FF&#39;, 
+	hideOnPaletteClick:true, backgroundColor:&#39;#ddd&#39;, 
+	borderColor:&#39;rgba(0,0,0,1)&#39;, borderRadius:10, width:200, 
+	closeButton:true, closeText:&#39;关闭&#39;, sliderSize:20, 
+	shadowColor:&#39;rgba(255,121,247,0.2)&#39;
+});
+&lt;/script&gt;
+&lt;&lt;/if&gt;&gt;
+
+
+&lt;&lt;/widget&gt;&gt;
+
+&lt;&lt;widget &quot;ShowAShopItems&quot;&gt;&gt;
+
+&lt;&lt;set _catgr to $args[0]&gt;&gt;
+&lt;&lt;set _placeholder to &quot;image/avatar/thumb.png&quot;&gt;&gt;
+
+&lt;&lt;for _i to 0; _i lt Avatars[_catgr].length; _i ++&gt;&gt;
+    &lt;&lt;if Avatars[_catgr][_i].shop is null or $shoptype.includes(Avatars[_catgr][_i].shop) is false&gt;&gt;
+        &lt;&lt;continue&gt;&gt;
+    &lt;&lt;else&gt;&gt;
+        &lt;&lt;if Avatars[_catgr][_i].hasImg is true&gt;&gt;
+            &lt;&lt;set _img to &quot;image/avatar/&quot;+_catgr+&quot;/&quot;+Avatars[_catgr][_i].index + &quot;/thumb.png&quot;&gt;&gt;
+        &lt;&lt;else&gt;&gt;
+            &lt;&lt;set _img to _placeholder&gt;&gt;
+        &lt;&lt;/if&gt;&gt;
+        &lt;&lt;capture _catgr _i&gt;&gt;
+        &lt;div id=&quot;show_items&quot;&gt;
+            &lt;div class=&quot;itemthumb&quot;&gt;
+            &lt;&lt;print &quot;&lt;&lt;link [img[_img]]&gt;&gt;&lt;&lt;run setShowCase(A[&#39;&quot;+_catgr+&quot;&#39;][&quot;+_i+&quot;]); Avatar.setShop()&gt;&gt;&lt;&lt;/link&gt;&gt;&quot;&gt;&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;itemname&quot;&gt;
+            &lt;&lt;print Avatars[_catgr][_i].name&gt;&gt;
+            &lt;/div&gt;
+
+            &lt;div class=&quot;itemprice&quot;&gt;
+            &lt;&lt;print Avatars[_catgr][_i].cost&gt;&gt;￥
+            &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;&lt;/capture&gt;&gt;
+
+    &lt;&lt;/if&gt;&gt;
+&lt;&lt;/for&gt;&gt;
+
+&lt;&lt;/widget&gt;&gt;
+
+&lt;&lt;widget &quot;tryon&quot;&gt;&gt;
+&lt;&lt;set _layer to $args[0]&gt;&gt;
+&lt;&lt;set $Equip[_layer] to clone($showcase)&gt;&gt;
+&lt;&lt;set $tryon[_layer] to clone($showcase)&gt;&gt;
+
+&lt;&lt;switch _layer&gt;&gt;
+    &lt;&lt;case &quot;top&quot;&gt;&gt;
+        &lt;&lt;if $showcase.slot is &quot;onepiece&quot;&gt;&gt;
+            &lt;&lt;set $Equip.bottom to null&gt;&gt;
+        &lt;&lt;/if&gt;&gt;
+    &lt;&lt;case &quot;bottom&quot;&gt;&gt;
+        &lt;&lt;if $Equip.top.slot is &quot;onepiece&quot;&gt;&gt;
+            &lt;&lt;set $Equip.top to null&gt;&gt;
+        &lt;&lt;/if&gt;&gt;
+    &lt;&lt;case &quot;inner_up&quot;&gt;&gt;
+        &lt;&lt;if $showcase.slot is &quot;onepiece&quot;&gt;&gt;
+            &lt;&lt;set $Equip.inner_bt to null&gt;&gt;
+        &lt;&lt;elseif $showcase.slot is &quot;fullbody&quot;&gt;&gt;
+            &lt;&lt;set $Equip.inner_bt to null&gt;&gt;
+            &lt;&lt;set $Equip.top to null&gt;&gt;
+            &lt;&lt;set $Equip.bottom to null&gt;&gt;
+        &lt;&lt;/if&gt;&gt;
+&lt;&lt;/switch&gt;&gt;
+&lt;&lt;SetAvatar&gt;&gt;
+&lt;&lt;/widget&gt;&gt;
+
+&lt;&lt;widget &quot;showinner&quot;&gt;&gt;
+    &lt;&lt;set $Equip.outter to null&gt;&gt;
+    &lt;&lt;set $Equip.top to null&gt;&gt;
+    &lt;&lt;set $Equip.bottom to null&gt;&gt;
+    &lt;&lt;SetAvatar&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="30" name="AvatarSetup" tags="widget" position="1225,350" size="100,100">&lt;&lt;widget &quot;SetAvatar&quot;&gt;&gt;
+
+&lt;&lt;silently&gt;&gt;
+&lt;&lt;run stAvatar()&gt;&gt;
+&lt;&lt;/silently&gt;&gt;
+
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="31" name="ShowAvatar" tags="widget" position="100,475" size="100,100">&lt;&lt;widget &quot;avatar&quot;&gt;&gt;
+&lt;&lt;if $render is &quot;canvas&quot;&gt;&gt;
+    &lt;&lt;twinescript&gt;&gt;
+    output.appendChild(Avatar.getCanvas())
+    &lt;&lt;/twinescript&gt;&gt;
+&lt;&lt;/if&gt;&gt;
+
+&lt;&lt;/widget&gt;&gt;
+
+&lt;&lt;widget &quot;portrait&quot;&gt;&gt;
+&lt;div id=&quot;portrait&quot;&gt;
+
+&lt;&lt;if $render is &quot;canvas&quot;&gt;&gt;
+    &lt;div class=&quot;portrait flipx&quot;&gt;
+    &lt;&lt;twinescript&gt;&gt;
+    output.appendChild(Avatar.getPortrait())
+    &lt;&lt;/twinescript&gt;&gt;
+    &lt;/div&gt;
+&lt;&lt;/if&gt;&gt;
+
+&lt;/div&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="32" name="衣柜" tags="" position="225,475" size="100,100">&lt;div id=&quot;action-text2&quot;&gt;&lt;&lt;you&gt;&gt;打开了衣柜。&lt;/div&gt;
+
+&lt;div id=&quot;ClosetList&quot;&gt;
+  &lt;ul&gt;
+    &lt;li class=&quot;category&quot;&gt;&lt;a href=&quot;#hat&quot;&gt;头饰&lt;/a&gt;&lt;/li&gt;
+    &lt;li class=&quot;category&quot;&gt;&lt;a href=&quot;#outter&quot;&gt;外套&lt;/a&gt;&lt;/li&gt;
+    &lt;li class=&quot;category&quot;&gt;&lt;a href=&quot;#top&quot;&gt;上装&lt;/a&gt;&lt;/li&gt;
+    &lt;li class=&quot;category&quot;&gt;&lt;a href=&quot;#bottom&quot;&gt;下装&lt;/a&gt;&lt;/li&gt;
+    &lt;li class=&quot;category&quot;&gt;&lt;a href=&quot;#inner_up&quot;&gt;内衣&lt;/a&gt;&lt;/li&gt;
+    &lt;li class=&quot;category&quot;&gt;&lt;a href=&quot;#inner_bt&quot;&gt;内裤&lt;/a&gt;&lt;/li&gt;
+    &lt;li class=&quot;category&quot;&gt;&lt;a href=&quot;#legs&quot;&gt;袜子&lt;/a&gt;&lt;/li&gt;
+    &lt;li class=&quot;category&quot;&gt;&lt;a href=&quot;#shoes&quot;&gt;鞋子&lt;/a&gt;&lt;/li&gt;
+    &lt;li class=&quot;category&quot;&gt;&lt;a href=&quot;#accesory&quot;&gt;饰品&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+    
+    &lt;div id=&quot;hat&quot;&gt;
+        &lt;&lt;showcloset &quot;hat&quot;&gt;&gt;
+    &lt;/div&gt;
+
+    &lt;div id=&quot;outter&quot;&gt;
+        &lt;&lt;showcloset &quot;outter&quot;&gt;&gt;
+    &lt;/div&gt;
+
+    &lt;div id=&quot;top&quot;&gt;
+    &lt;&lt;showcloset &quot;top&quot;&gt;&gt;
+    &lt;/div&gt;
+
+    &lt;div id=&quot;bottom&quot;&gt;
+    &lt;&lt;showcloset &quot;bottom&quot;&gt;&gt;
+    &lt;/div&gt;
+
+    &lt;div id=&quot;inner_up&quot;&gt;
+     &lt;&lt;showcloset &quot;inner_up&quot;&gt;&gt;
+    &lt;/div&gt;
+
+    &lt;div id=&quot;inner_bt&quot;&gt;
+     &lt;&lt;showcloset &quot;inner_bt&quot;&gt;&gt;
+    &lt;/div&gt;
+
+    &lt;div id=&quot;legs&quot;&gt;
+        &lt;&lt;showcloset &quot;legs&quot;&gt;&gt;
+    &lt;/div&gt;
+
+    &lt;div id=&quot;shoes&quot;&gt;
+        &lt;&lt;showcloset &quot;shoes&quot;&gt;&gt;
+    &lt;/div&gt;
+
+    &lt;div id=&quot;accesory&quot;&gt;
+        &lt;&lt;showcloset &quot;face&quot;&gt;&gt;
+        &lt;&lt;showcloset &quot;neck&quot;&gt;&gt;
+        &lt;&lt;showcloset &quot;hand&quot;&gt;&gt;
+        &lt;&lt;showcloset &quot;back&quot;&gt;&gt;
+    &lt;/div&gt;
+
+&lt;/div&gt;
+
+
+&lt;div class=&quot;GoNaked&quot;&gt;
+&lt;&lt;link &quot;一键全脱&quot;&gt;&gt;&lt;&lt;gonaked &quot;closet&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;
+&lt;/div&gt;
+&lt;div class=&quot;redress&quot;&gt;
+&lt;&lt;link &quot;衣服复位&quot;&gt;&gt;&lt;&lt;redress &quot;closet&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;
+&lt;/div&gt;
+&lt;div class=&quot;SaveOutFit&quot;&gt;
+&lt;&lt;link &quot;保存搭配&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;
+&lt;/div&gt;
+&lt;div class=&quot;backbutton&quot;&gt;
+&lt;&lt;link &quot;合上衣柜&quot; &quot;你的家 单身公寓&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
+&lt;/div&gt;
+
+
+&lt;&lt;silently&gt;&gt;
+/* 自动刷新等待JS读取结束 */
+&lt;&lt;set _timer to 10&gt;&gt;
+&lt;&lt;repeat 0.3s&gt;&gt;
+    &lt;&lt;script&gt;&gt;
+        $( function() {
+            $( &quot;#ClosetList&quot; ).tabs();
+        } );
+    &lt;&lt;/script&gt;&gt;
+    &lt;&lt;set _timer to _timer -1&gt;&gt;
+    &lt;&lt;if _timer lte 0&gt;&gt;&lt;&lt;stop&gt;&gt;&lt;&lt;/if&gt;&gt;
+&lt;&lt;/repeat&gt;&gt;
+&lt;&lt;/silently&gt;&gt;</tw-passagedata><tw-passagedata pid="33" name="Closet-Widget" tags="widget" position="350,475" size="100,100">&lt;&lt;widget &quot;showcloset&quot;&gt;&gt;
+&lt;&lt;set _catgr to $args[0]&gt;&gt;
+&lt;&lt;set _catgrname to A.categoryname&gt;&gt;
+&lt;&lt;set _nakeimg to &quot;image/avatar/&quot;+_catgr+&quot;/thumb.png&quot;&gt;&gt;
+&lt;&lt;set _placeholder to &quot;image/avatar/thumb.png&quot;&gt;&gt;
+
+&lt;div id=&quot;W_showitems&quot;&gt;
+    &lt;div class=&quot;itemthumb&quot;&gt;&lt;&lt;print &quot;&lt;&lt;link [img[_nakeimg]] &gt;&gt;&lt;&lt;run strip(&#39;&quot;+_catgr+&quot;&#39;)&gt;&gt;&lt;&lt;fixvalue&gt;&gt;&lt;&lt;/link&gt;&gt;&quot;&gt;&gt;&lt;/div&gt;
+    &lt;div class=&quot;W_itemname&quot;&gt;脱掉&lt;&lt;print _catgrname[$args[0]]&gt;&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;&lt;if $closet[_catgr].length gte 1&gt;&gt;
+    &lt;&lt;for _i to 0; _i lt $closet[_catgr].length; _i ++&gt;&gt;
+        &lt;&lt;if $closet[_catgr][_i].hasImg is true&gt;&gt;
+            &lt;&lt;set _img to &quot;image/avatar/&quot;+_catgr+&quot;/&quot;+$closet[_catgr][_i].index + &quot;/thumb.png&quot;&gt;&gt;
+        &lt;&lt;else&gt;&gt;
+            &lt;&lt;set _img to _placeholder&gt;&gt;
+        &lt;&lt;/if&gt;&gt;
+        &lt;&lt;set _code to $closet[_catgr][_i].color&gt;&gt;
+        &lt;&lt;set _name to $closet[_catgr][_i].colorname&gt;&gt;
+        &lt;div id=&quot;W_showitems&quot;&gt;
+            &lt;div class=&quot;itemthumb&quot;&gt;&lt;&lt;print &quot;&lt;&lt;link [img[_img]]&gt;&gt;&lt;&lt;run dressOn(&#39;&quot;+_catgr+&quot;&#39;,&quot;+_i+&quot;)&gt;&gt;&lt;&lt;fixvalue&gt;&gt;&lt;&lt;/link&gt;&gt;&quot;&gt;&gt;&lt;/div&gt;
+            &lt;div class=&quot;W_color&quot; @style=&quot;&#39;background-color:&#39;+_code&quot;&gt;&lt;&lt;print _name&gt;&gt;&lt;/div&gt;
+            &lt;&lt;if $closet[_catgr][_i].acc isnot null&gt;&gt;
+                &lt;div class=&quot;W_pattern&quot;&gt;&lt;&lt;print $closet[_catgr][_i].acc&gt;&gt;&lt;/div&gt;
+            &lt;&lt;/if&gt;&gt;
+            &lt;div class=&quot;W_itemname&quot;&gt;&lt;&lt;print $closet[_catgr][_i].name&gt;&gt;&lt;/div&gt;
+            &lt;div class=&quot;itemdurab&quot;&gt;
+            耐久：&lt;&lt;print $closet[_catgr][_i].durable&gt;&gt;/&lt;&lt;print $closet[_catgr][_i].maxdurable&gt;&gt;
+            &lt;/div&gt;
+
+            &lt;div class=&quot;itemdegree&quot;&gt;
+            &lt;span style=&quot;color:blue&quot;&gt;&lt;&lt;if $closet[_catgr][_i].cold gt 0&gt;&gt;+&lt;&lt;/if&gt;&gt;&lt;&lt;print $closet[_catgr][_i].cold&gt;&gt;C&lt;/span&gt;
+                | 
+            &lt;span style=&quot;color:red&quot;&gt;&lt;&lt;if $closet[_catgr][_i].hot gt 0&gt;&gt;+&lt;&lt;/if&gt;&gt;&lt;&lt;print $closet[_catgr][_i].hot&gt;&gt;C&lt;/span&gt;
+            &lt;/div&gt;
+
+            &lt;div class=&quot;itembuff&quot;&gt;
+            &lt;&lt;if $closet[_catgr][_i].defence gt 0&gt;&gt;&lt;span style=&quot;color:brown&quot;&gt;Def+&lt;/span&gt;&lt;&lt;/if&gt;&gt;
+            &lt;&lt;if $closet[_catgr][_i].beauty gt 0&gt;&gt;&lt;span style=&quot;color:deeppink&quot;&gt;Allure+&lt;/span&gt;&lt;&lt;/if&gt;&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;&lt;/for&gt;&gt;
+&lt;&lt;/if&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="34" name="StoryCaption" tags="" position="475,475" size="100,100">&lt;div @class=&quot;(Errors.log.length==0?&#39;hidden&#39;:&#39;&#39;) + &#39; error-reporter-btn&#39;&quot; onclick=&quot;Errors.Reporter.toggle()&quot;&gt;&lt;/div&gt;
 
 &lt;&lt;set $statshidden to false&gt;&gt;
 &lt;&lt;if $anounce.flag is true&gt;&gt;
@@ -15717,7 +16407,7 @@ MENU
 &lt;&lt;set $anounce to {flag:false, text:&quot;&quot;, type:&quot;弹出通知&quot;}&gt;&gt;
 &lt;&lt;setchara &quot;player&quot;&gt;&gt;
 /* 处理顺序的最后尾  */
-&lt;&lt;/silently&gt;&gt;</tw-passagedata><tw-passagedata pid="25" name="SidebarWidget" tags="widget" position="600,350" size="100,100">&lt;&lt;widget &quot;showmoney&quot;&gt;&gt;
+&lt;&lt;/silently&gt;&gt;</tw-passagedata><tw-passagedata pid="35" name="SidebarWidget" tags="widget" position="600,475" size="100,100">&lt;&lt;widget &quot;showmoney&quot;&gt;&gt;
 &lt;div class=&quot;points&quot;&gt;&lt;&lt;printmoney $points&gt;&gt;P&lt;/div&gt;&lt;span class=&quot;slice&quot;&gt; | &lt;/span&gt;&lt;div class=&quot;money&quot;&gt;&lt;&lt;printmoney $money&gt;&gt;&lt;&lt;icon &quot;moneyicon&quot;&gt;&gt;&lt;/div&gt;
 &lt;&lt;/widget&gt;&gt;
 
@@ -15803,7 +16493,7 @@ MENU
     &lt;&lt;playerstatus&gt;&gt;
     &lt;/div&gt;
 &lt;&lt;/if&gt;&gt;
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="26" name="Options" tags="widget" position="725,350" size="100,100">&lt;&lt;widget &quot;options&quot;&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="36" name="Options" tags="widget" position="725,475" size="100,100">&lt;&lt;widget &quot;options&quot;&gt;&gt;
  制作中……&lt;br&gt;
 &lt;&lt;/widget&gt;&gt;
 
@@ -16096,7 +16786,7 @@ MENU
 	&lt;&lt;replace #saveList&gt;&gt;
 		&lt;&lt;deleteWarning $args[0]&gt;&gt;
 	&lt;&lt;/replace&gt;&gt;
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="27" name="overlayReplace" tags="widget" position="850,350" size="100,100">&lt;&lt;widget &quot;overlayReplace&quot;&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="37" name="overlayReplace" tags="widget" position="850,475" size="100,100">&lt;&lt;widget &quot;overlayReplace&quot;&gt;&gt;
 	&lt;&lt;if $args[0]&gt;&gt;
 		&lt;&lt;if $currentOverlay isnot $args[0]&gt;&gt;
 			&lt;&lt;set $currentOverlay to $args[0]&gt;&gt;
@@ -16191,7 +16881,7 @@ MENU
 &lt;/div&gt;
 
 &lt;br&gt;&lt;br&gt;
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="28" name="Profile Detail" tags="widget" position="975,350" size="100,100">&lt;&lt;widget &quot;statistics&quot;&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="38" name="Profile Detail" tags="widget" position="975,475" size="100,100">&lt;&lt;widget &quot;statistics&quot;&gt;&gt;
 
 &lt;&lt;/widget&gt;&gt;
 
@@ -16242,7 +16932,7 @@ MENU
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="29" name="Profile" tags="widget" position="1100,350" size="100,100">&lt;&lt;widget &quot;profile&quot;&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="39" name="Profile" tags="widget" position="1100,475" size="100,100">&lt;&lt;widget &quot;profile&quot;&gt;&gt;
 &lt;div id=&quot;profile&quot;&gt;
 
 &lt;&lt;set _like to random(($PC.beauty/100),($PC.beauty/10))&gt;&gt;
@@ -16313,7 +17003,7 @@ MENU
 
 &lt;/div&gt;
 
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="30" name="Profile Secret" tags="widget" position="1225,350" size="100,100">&lt;&lt;widget &quot;secretfile&quot;&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="40" name="Profile Secret" tags="widget" position="1225,475" size="100,100">&lt;&lt;widget &quot;secretfile&quot;&gt;&gt;
 &lt;div id=&quot;profile&quot;&gt;
 ♥&lt;u&gt; &lt;b&gt;性感状态&lt;/b&gt; &lt;/u&gt;&lt;br&gt;
 &lt;div id=&quot;statusdisplay&quot;&gt;
@@ -16378,7 +17068,7 @@ Total &lt;&lt;print $PC.rec.高潮.t&gt;&gt;&lt;br&gt;
 
 &lt;&lt;dashline&gt;&gt;
 &lt;/div&gt;
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="31" name="Profile-widget" tags="widget" position="100,475" size="100,100">&lt;&lt;widget &quot;changeinfo&quot;&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="41" name="Profile-widget" tags="widget" position="100,600" size="100,100">&lt;&lt;widget &quot;changeinfo&quot;&gt;&gt;
 &lt;&lt;if _infochange is true&gt;&gt;
     一名&lt;&lt;print $PC.info.tag&gt;&gt;&lt;&lt;print $PC.title&gt;&gt;&lt;&lt;textbox &quot;$shortinfo&quot; $shortinfo&gt;&gt; &lt;&lt;link &quot;保存修改&quot;&gt;&gt;&lt;&lt;set _infochange to false&gt;&gt;&lt;&lt;replace #shortinfo&gt;&gt;&lt;&lt;changeinfo&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
 &lt;&lt;else&gt;&gt;
@@ -16509,7 +17199,7 @@ Total &lt;&lt;print $PC.rec.高潮.t&gt;&gt;&lt;br&gt;
 &lt;&lt;else&gt;&gt;
     &lt;div class=&quot;error-view&quot;&gt;error: no args&lt;/div&gt;
 &lt;&lt;/if&gt;&gt;
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="32" name="SideMenuPage" tags="widget" position="225,475" size="100,100">&lt;&lt;widget &quot;items&quot;&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="42" name="SideMenuPage" tags="widget" position="225,600" size="100,100">&lt;&lt;widget &quot;items&quot;&gt;&gt;
 
 &lt;&lt;/widget&gt;&gt;
 
@@ -16527,161 +17217,8 @@ Total &lt;&lt;print $PC.rec.高潮.t&gt;&gt;&lt;br&gt;
 
 &lt;&lt;widget &quot;achivement&quot;&gt;&gt;
 
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="33" name="AvatarSetup" tags="widget" position="350,475" size="100,100">&lt;&lt;widget &quot;SetAvatar&quot;&gt;&gt;
-
-&lt;&lt;silently&gt;&gt;
-&lt;&lt;run stAvatar()&gt;&gt;
-&lt;&lt;/silently&gt;&gt;
-
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="34" name="ShowAvatar" tags="widget" position="475,475" size="100,100">&lt;&lt;widget &quot;avatar&quot;&gt;&gt;
-&lt;&lt;if $render is &quot;canvas&quot;&gt;&gt;
-    &lt;&lt;twinescript&gt;&gt;
-    output.appendChild(Avatar.getCanvas())
-    &lt;&lt;/twinescript&gt;&gt;
-&lt;&lt;/if&gt;&gt;
-
-&lt;&lt;/widget&gt;&gt;
-
-&lt;&lt;widget &quot;portrait&quot;&gt;&gt;
-&lt;div id=&quot;portrait&quot;&gt;
-
-&lt;&lt;if $render is &quot;canvas&quot;&gt;&gt;
-    &lt;div class=&quot;portrait flipx&quot;&gt;
-    &lt;&lt;twinescript&gt;&gt;
-    output.appendChild(Avatar.getPortrait())
-    &lt;&lt;/twinescript&gt;&gt;
-    &lt;/div&gt;
-&lt;&lt;/if&gt;&gt;
-
-&lt;/div&gt;
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="35" name="衣柜" tags="" position="600,475" size="100,100">&lt;div id=&quot;action-text2&quot;&gt;&lt;&lt;you&gt;&gt;打开了衣柜。&lt;/div&gt;
-
-&lt;div id=&quot;ClosetList&quot;&gt;
-  &lt;ul&gt;
-    &lt;li class=&quot;category&quot;&gt;&lt;a href=&quot;#hat&quot;&gt;头饰&lt;/a&gt;&lt;/li&gt;
-    &lt;li class=&quot;category&quot;&gt;&lt;a href=&quot;#outter&quot;&gt;外套&lt;/a&gt;&lt;/li&gt;
-    &lt;li class=&quot;category&quot;&gt;&lt;a href=&quot;#top&quot;&gt;上装&lt;/a&gt;&lt;/li&gt;
-    &lt;li class=&quot;category&quot;&gt;&lt;a href=&quot;#bottom&quot;&gt;下装&lt;/a&gt;&lt;/li&gt;
-    &lt;li class=&quot;category&quot;&gt;&lt;a href=&quot;#inner_up&quot;&gt;内衣&lt;/a&gt;&lt;/li&gt;
-    &lt;li class=&quot;category&quot;&gt;&lt;a href=&quot;#inner_bt&quot;&gt;内裤&lt;/a&gt;&lt;/li&gt;
-    &lt;li class=&quot;category&quot;&gt;&lt;a href=&quot;#legs&quot;&gt;袜子&lt;/a&gt;&lt;/li&gt;
-    &lt;li class=&quot;category&quot;&gt;&lt;a href=&quot;#shoes&quot;&gt;鞋子&lt;/a&gt;&lt;/li&gt;
-    &lt;li class=&quot;category&quot;&gt;&lt;a href=&quot;#accesory&quot;&gt;饰品&lt;/a&gt;&lt;/li&gt;
-  &lt;/ul&gt;
-    
-    &lt;div id=&quot;hat&quot;&gt;
-        &lt;&lt;showcloset &quot;hat&quot;&gt;&gt;
-    &lt;/div&gt;
-
-    &lt;div id=&quot;outter&quot;&gt;
-        &lt;&lt;showcloset &quot;outter&quot;&gt;&gt;
-    &lt;/div&gt;
-
-    &lt;div id=&quot;top&quot;&gt;
-    &lt;&lt;showcloset &quot;top&quot;&gt;&gt;
-    &lt;/div&gt;
-
-    &lt;div id=&quot;bottom&quot;&gt;
-    &lt;&lt;showcloset &quot;bottom&quot;&gt;&gt;
-    &lt;/div&gt;
-
-    &lt;div id=&quot;inner_up&quot;&gt;
-     &lt;&lt;showcloset &quot;inner_up&quot;&gt;&gt;
-    &lt;/div&gt;
-
-    &lt;div id=&quot;inner_bt&quot;&gt;
-     &lt;&lt;showcloset &quot;inner_bt&quot;&gt;&gt;
-    &lt;/div&gt;
-
-    &lt;div id=&quot;legs&quot;&gt;
-        &lt;&lt;showcloset &quot;legs&quot;&gt;&gt;
-    &lt;/div&gt;
-
-    &lt;div id=&quot;shoes&quot;&gt;
-        &lt;&lt;showcloset &quot;shoes&quot;&gt;&gt;
-    &lt;/div&gt;
-
-    &lt;div id=&quot;accesory&quot;&gt;
-        &lt;&lt;showcloset &quot;face&quot;&gt;&gt;
-        &lt;&lt;showcloset &quot;neck&quot;&gt;&gt;
-        &lt;&lt;showcloset &quot;hand&quot;&gt;&gt;
-        &lt;&lt;showcloset &quot;back&quot;&gt;&gt;
-    &lt;/div&gt;
-
-&lt;/div&gt;
-
-
-&lt;div class=&quot;GoNaked&quot;&gt;
-&lt;&lt;link &quot;一键全脱&quot;&gt;&gt;&lt;&lt;gonaked &quot;closet&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;
-&lt;/div&gt;
-&lt;div class=&quot;redress&quot;&gt;
-&lt;&lt;link &quot;衣服复位&quot;&gt;&gt;&lt;&lt;redress &quot;closet&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;
-&lt;/div&gt;
-&lt;div class=&quot;SaveOutFit&quot;&gt;
-&lt;&lt;link &quot;保存搭配&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;
-&lt;/div&gt;
-&lt;div class=&quot;backbutton&quot;&gt;
-&lt;&lt;link &quot;合上衣柜&quot; &quot;你的家 单身公寓&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
-&lt;/div&gt;
-
-
-&lt;&lt;silently&gt;&gt;
-/* 自动刷新等待JS读取结束 */
-&lt;&lt;set _timer to 10&gt;&gt;
-&lt;&lt;repeat 0.3s&gt;&gt;
-    &lt;&lt;script&gt;&gt;
-        $( function() {
-            $( &quot;#ClosetList&quot; ).tabs();
-        } );
-    &lt;&lt;/script&gt;&gt;
-    &lt;&lt;set _timer to _timer -1&gt;&gt;
-    &lt;&lt;if _timer lte 0&gt;&gt;&lt;&lt;stop&gt;&gt;&lt;&lt;/if&gt;&gt;
-&lt;&lt;/repeat&gt;&gt;
-&lt;&lt;/silently&gt;&gt;</tw-passagedata><tw-passagedata pid="36" name="Closet-Widget" tags="widget" position="725,475" size="100,100">&lt;&lt;widget &quot;showcloset&quot;&gt;&gt;
-&lt;&lt;set _catgr to $args[0]&gt;&gt;
-&lt;&lt;set _catgrname to A.categoryname&gt;&gt;
-&lt;&lt;set _nakeimg to &quot;image/avatar/&quot;+_catgr+&quot;/thumb.png&quot;&gt;&gt;
-&lt;&lt;set _placeholder to &quot;image/avatar/thumb.png&quot;&gt;&gt;
-
-&lt;div id=&quot;W_showitems&quot;&gt;
-    &lt;div class=&quot;itemthumb&quot;&gt;&lt;&lt;print &quot;&lt;&lt;link [img[_nakeimg]] &gt;&gt;&lt;&lt;run strip(&#39;&quot;+_catgr+&quot;&#39;)&gt;&gt;&lt;&lt;fixvalue&gt;&gt;&lt;&lt;/link&gt;&gt;&quot;&gt;&gt;&lt;/div&gt;
-    &lt;div class=&quot;W_itemname&quot;&gt;脱掉&lt;&lt;print _catgrname[$args[0]]&gt;&gt;&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;&lt;if $closet[_catgr].length gte 1&gt;&gt;
-    &lt;&lt;for _i to 0; _i lt $closet[_catgr].length; _i ++&gt;&gt;
-        &lt;&lt;if $closet[_catgr][_i].hasImg is true&gt;&gt;
-            &lt;&lt;set _img to &quot;image/avatar/&quot;+_catgr+&quot;/&quot;+$closet[_catgr][_i].index + &quot;/thumb.png&quot;&gt;&gt;
-        &lt;&lt;else&gt;&gt;
-            &lt;&lt;set _img to _placeholder&gt;&gt;
-        &lt;&lt;/if&gt;&gt;
-        &lt;&lt;set _code to $closet[_catgr][_i].color&gt;&gt;
-        &lt;&lt;set _name to $closet[_catgr][_i].colorname&gt;&gt;
-        &lt;div id=&quot;W_showitems&quot;&gt;
-            &lt;div class=&quot;itemthumb&quot;&gt;&lt;&lt;print &quot;&lt;&lt;link [img[_img]]&gt;&gt;&lt;&lt;run dressOn(&#39;&quot;+_catgr+&quot;&#39;,&quot;+_i+&quot;)&gt;&gt;&lt;&lt;fixvalue&gt;&gt;&lt;&lt;/link&gt;&gt;&quot;&gt;&gt;&lt;/div&gt;
-            &lt;div class=&quot;W_color&quot; @style=&quot;&#39;background-color:&#39;+_code&quot;&gt;&lt;&lt;print _name&gt;&gt;&lt;/div&gt;
-            &lt;&lt;if $closet[_catgr][_i].acc isnot null&gt;&gt;
-                &lt;div class=&quot;W_pattern&quot;&gt;&lt;&lt;print $closet[_catgr][_i].acc&gt;&gt;&lt;/div&gt;
-            &lt;&lt;/if&gt;&gt;
-            &lt;div class=&quot;W_itemname&quot;&gt;&lt;&lt;print $closet[_catgr][_i].name&gt;&gt;&lt;/div&gt;
-            &lt;div class=&quot;itemdurab&quot;&gt;
-            耐久：&lt;&lt;print $closet[_catgr][_i].durable&gt;&gt;/&lt;&lt;print $closet[_catgr][_i].maxdurable&gt;&gt;
-            &lt;/div&gt;
-
-            &lt;div class=&quot;itemdegree&quot;&gt;
-            &lt;span style=&quot;color:blue&quot;&gt;&lt;&lt;if $closet[_catgr][_i].cold gt 0&gt;&gt;+&lt;&lt;/if&gt;&gt;&lt;&lt;print $closet[_catgr][_i].cold&gt;&gt;C&lt;/span&gt;
-                | 
-            &lt;span style=&quot;color:red&quot;&gt;&lt;&lt;if $closet[_catgr][_i].hot gt 0&gt;&gt;+&lt;&lt;/if&gt;&gt;&lt;&lt;print $closet[_catgr][_i].hot&gt;&gt;C&lt;/span&gt;
-            &lt;/div&gt;
-
-            &lt;div class=&quot;itembuff&quot;&gt;
-            &lt;&lt;if $closet[_catgr][_i].defence gt 0&gt;&gt;&lt;span style=&quot;color:brown&quot;&gt;Def+&lt;/span&gt;&lt;&lt;/if&gt;&gt;
-            &lt;&lt;if $closet[_catgr][_i].beauty gt 0&gt;&gt;&lt;span style=&quot;color:deeppink&quot;&gt;Allure+&lt;/span&gt;&lt;&lt;/if&gt;&gt;
-            &lt;/div&gt;
-        &lt;/div&gt;
-    &lt;&lt;/for&gt;&gt;
-&lt;&lt;/if&gt;&gt;
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="37" name="Combat" tags="core combat loop" position="850,475" size="100,100">&lt;div id=&quot;combat&quot;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="43" name="Combat" tags="core combat loop" position="350,600" size="100,100">&lt;&lt;mode &quot;combat&quot;&gt;&gt;
+&lt;div id=&quot;combat&quot;&gt;
 
 &lt;div id=&quot;enemyside&quot;&gt;
 /* 显示敌人信息 */
@@ -16782,7 +17319,7 @@ function wait(text) {
         setTimeout(() =&gt; {$(&quot;#combat_message .h&quot;+i).removeClass(&#39;hidden&#39;).addClass(&#39;delay&#39;);msg_end.scrollIntoView() }, (500*i))
     }
 }
-&lt;/script&gt;</tw-passagedata><tw-passagedata pid="38" name="TimeProcess" tags="widget" position="975,475" size="100,100">&lt;&lt;widget &quot;TimeEffect&quot;&gt;&gt;
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="44" name="TimeProcess" tags="widget" position="475,600" size="100,100">&lt;&lt;widget &quot;TimeEffect&quot;&gt;&gt;
 &lt;&lt;timeprocess&gt;&gt;
 
 /* 每日结束时的处理 */
@@ -16793,7 +17330,7 @@ function wait(text) {
 &lt;&lt;set $daychange to false&gt;&gt;
 &lt;&lt;/if&gt;&gt;
     
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="39" name="CombatUIWidget" tags="widget" position="1100,475" size="100,100">&lt;&lt;widget &quot;CB_playerside&quot;&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="45" name="CombatUIWidget" tags="widget" position="600,600" size="100,100">&lt;&lt;widget &quot;CB_playerside&quot;&gt;&gt;
 &lt;div id=&quot;characard&quot;&gt;
     &lt;div class=&quot;face&quot;&gt;&lt;&lt;portrait&gt;&gt;&lt;/div&gt;
     &lt;div class=&quot;CC_name&quot;&gt;玩家&lt;/div&gt;
@@ -16859,7 +17396,7 @@ function wait(text) {
     &lt;/div&gt;
     &lt;div class=&quot;CC_state&quot;&gt;&lt;/div&gt;
 &lt;/div&gt;
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="40" name="PassageHeader" tags="" position="1225,475" size="100,100">&lt;&lt;set $passage to passage()&gt;&gt;&lt;&lt;set $tags to tags($passage)&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="46" name="PassageHeader" tags="" position="725,600" size="100,100">&lt;&lt;set $passage to passage()&gt;&gt;&lt;&lt;set $tags to tags($passage)&gt;&gt;
 /* 时间经过处理 */
 &lt;&lt;fixvalue&gt;&gt;&lt;&lt;TimeEffect&gt;&gt;
 /* 其他通用预处理 */
@@ -16869,14 +17406,15 @@ function wait(text) {
 
 /* 通知弹出框 */
 &lt;div id=&quot;action-popup&quot; class=&quot;hide&quot;&gt;&lt;span id=&quot;action-text&quot;&gt;&lt;/span&gt;&lt;/div&gt;
-&lt;div id=&quot;append-top&quot;&gt;&lt;span id=&quot;append-text-top&quot;&gt;你站不稳了。&lt;/span&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="41" name="PassageFooter" tags="" position="100,600" size="100,100">&lt;div id=&quot;gameVersionDisplay&quot;&gt;EWA ver&lt;&lt;print StartConfig.version&gt;&gt;&lt;/div&gt;
+&lt;div id=&quot;hd-append-top&quot;&gt;&lt;/div&gt;
+&lt;div id=&quot;hd-append-text&quot; class=&quot;append-normal&quot;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="47" name="PassageFooter" tags="" position="850,600" size="100,100">&lt;div id=&quot;gameVersionDisplay&quot;&gt;EWA ver&lt;&lt;print StartConfig.version&gt;&gt;&lt;/div&gt;
 
 
 /* 事件的各种数值变化后续处理 */
 
 
 /* AVATAR设定的更新检测 ，一个页面显示完毕之后重新调整左边栏的表情变化 */
-&lt;&lt;SetAvatar&gt;&gt;</tw-passagedata><tw-passagedata pid="42" name="Widget" tags="widget" position="225,600" size="100,100">&lt;&lt;widget &quot;dashline&quot;&gt;&gt;
+&lt;&lt;SetAvatar&gt;&gt;</tw-passagedata><tw-passagedata pid="48" name="Widget" tags="widget" position="975,600" size="100,100">&lt;&lt;widget &quot;dashline&quot;&gt;&gt;
     &lt;div class=&quot;dashline&quot;&gt;&lt;/div&gt;
 &lt;&lt;/widget&gt;&gt;
 
@@ -16953,6 +17491,22 @@ function wait(text) {
 &lt;&lt;/silently&gt;&gt;
 &lt;&lt;/widget&gt;&gt;
 
+&lt;&lt;widget &quot;mode&quot;&gt;&gt;
+&lt;&lt;silently&gt;&gt;
+    &lt;&lt;if $args[0]&gt;&gt;
+        &lt;&lt;set $displaymode to $args[0]&gt;&gt;
+    &lt;&lt;else&gt;&gt;
+        &lt;&lt;run alert(&quot;错误: UI模式设置缺乏参数&quot;)&gt;&gt;
+    &lt;&lt;/if&gt;&gt;
+&lt;&lt;/silently&gt;&gt;
+&lt;&lt;/widget&gt;&gt;
+
+&lt;&lt;widget &quot;resetplaylist&quot;&gt;&gt;
+    &lt;&lt;if setup.mainloop.isPlaying() is false&gt;&gt;
+    &lt;&lt;masteraudio stop&gt;&gt;
+    &lt;&lt;playlist &quot;mainloop&quot; shuffle play loop&gt;&gt;
+    &lt;&lt;/if&gt;&gt;
+&lt;&lt;/widget&gt;&gt;
 
 /*  HoverTxt : Show notepad icon shows some wikified text in a window of width X pixels above an icon when it&#39;s hovered over.  */
 /*  EXAMPLE: &lt;&lt;HoverTxt 200 &quot;text&quot;&gt;&gt;  */
@@ -17082,384 +17636,16 @@ function wait(text) {
     &lt;&lt;set _percent to percent(_num[0],_num[1])&gt;&gt;
     &lt;&lt;set _color to $args[1]&gt;&gt;
     &lt;&lt;meterbar _percent _color&gt;&gt;
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="43" name="试衣间" tags="" position="350,600" size="100,100">&lt;span class=&quot;title&quot;&gt;服装店&lt;/span&gt;&lt;br&gt;
-&lt;div class=&quot;lbox&quot;&gt;
-商场里的服装店。商品琳琅满目，什么都有。&lt;br&gt;
-&lt;/div&gt;
-&lt;&lt;set $shoptype to [&quot;all&quot;,&quot;offline&quot;]&gt;&gt;
-
-&lt;&lt;if $temp.tryoncomeback is undefined&gt;&gt;
-    &lt;&lt;EnterTryRoom&gt;&gt;
-&lt;&lt;else&gt;&gt;
-    &lt;&lt;set $temp to {}&gt;&gt;
-    &lt;&lt;set $location to &quot;试衣间&quot;&gt;&gt;
-&lt;&lt;/if&gt;&gt;
-
-&lt;div id=&quot;action-text2&quot;&gt;&lt;/div&gt;
-
-
-&lt;&lt;if $shoptype.includes(&quot;offline&quot;)&gt;&gt;
-&lt;div id=&quot;show_container&quot;&gt;
-    &lt;&lt;if $showcase isnot null&gt;&gt;&lt;&lt;ShowCase&gt;&gt;&lt;&lt;/if&gt;&gt;  
-&lt;/div&gt;
-&lt;&lt;/if&gt;&gt;
-
-&lt;div id=&quot;ShopList&quot;&gt;
-  &lt;ul&gt;
-    &lt;li class=&quot;category&quot;&gt;&lt;a href=&quot;#hat&quot;&gt;头饰&lt;/a&gt;&lt;/li&gt;
-    &lt;li class=&quot;category&quot;&gt;&lt;a href=&quot;#outter&quot;&gt;外套&lt;/a&gt;&lt;/li&gt;
-    &lt;li class=&quot;category&quot;&gt;&lt;a href=&quot;#top&quot;&gt;上装&lt;/a&gt;&lt;/li&gt;
-    &lt;li class=&quot;category&quot;&gt;&lt;a href=&quot;#bottom&quot;&gt;下装&lt;/a&gt;&lt;/li&gt;
-    &lt;li class=&quot;category&quot;&gt;&lt;a href=&quot;#inner_up&quot;&gt;内衣&lt;/a&gt;&lt;/li&gt;
-    &lt;li class=&quot;category&quot;&gt;&lt;a href=&quot;#inner_bt&quot;&gt;内裤&lt;/a&gt;&lt;/li&gt;
-    &lt;li class=&quot;category&quot;&gt;&lt;a href=&quot;#legs&quot;&gt;袜子&lt;/a&gt;&lt;/li&gt;
-    &lt;li class=&quot;category&quot;&gt;&lt;a href=&quot;#shoes&quot;&gt;鞋子&lt;/a&gt;&lt;/li&gt;
-    &lt;li class=&quot;category&quot;&gt;&lt;a href=&quot;#accesory&quot;&gt;饰品&lt;/a&gt;&lt;/li&gt;
-  &lt;/ul&gt;
-    
-    &lt;div id=&quot;hat&quot;&gt;
-        &lt;&lt;ShowAShopItems &quot;hat&quot;&gt;&gt;
-    &lt;/div&gt;
-
-    &lt;div id=&quot;outter&quot;&gt;
-        &lt;&lt;ShowAShopItems &quot;outter&quot;&gt;&gt;
-    &lt;/div&gt;
-
-    &lt;div id=&quot;top&quot;&gt;
-        &lt;&lt;ShowAShopItems &quot;top&quot;&gt;&gt;
-    &lt;/div&gt;
-
-    &lt;div id=&quot;bottom&quot;&gt;
-        &lt;&lt;ShowAShopItems &quot;bottom&quot;&gt;&gt;
-    &lt;/div&gt;
-
-    &lt;div id=&quot;inner_up&quot;&gt;
-        &lt;&lt;ShowAShopItems &quot;inner_up&quot;&gt;&gt;
-    &lt;/div&gt;
-
-    &lt;div id=&quot;inner_bt&quot;&gt;
-        &lt;&lt;ShowAShopItems &quot;inner_bt&quot;&gt;&gt;
-    &lt;/div&gt;
-
-    &lt;div id=&quot;legs&quot;&gt;
-        &lt;&lt;ShowAShopItems &quot;legs&quot;&gt;&gt;
-    &lt;/div&gt;
-
-    &lt;div id=&quot;shoes&quot;&gt;
-        &lt;&lt;ShowAShopItems &quot;shoes&quot;&gt;&gt;
-    &lt;/div&gt;
-
-    &lt;div id=&quot;accesory&quot;&gt;
-        &lt;&lt;ShowAShopItems &quot;face&quot;&gt;&gt;
-        &lt;&lt;ShowAShopItems &quot;neck&quot;&gt;&gt;
-        &lt;&lt;ShowAShopItems &quot;hand&quot;&gt;&gt;
-        &lt;&lt;ShowAShopItems &quot;back&quot;&gt;&gt;
-    &lt;/div&gt;
-
-&lt;/div&gt;
-
-
-&lt;br&gt;&lt;br&gt;
-
-&lt;div class=&quot;showinner&quot;&gt;
-&lt;&lt;link &quot;只看内衣&quot;&gt;&gt;&lt;&lt;showinner&gt;&gt;&lt;&lt;/link&gt;&gt;
-&lt;/div&gt;
-&lt;div class=&quot;redress&quot;&gt;
-&lt;&lt;link &quot;衣服复位&quot;&gt;&gt;&lt;&lt;redress&gt;&gt;&lt;&lt;resettryon&gt;&gt;&lt;&lt;leavecheck&gt;&gt;&lt;&lt;/link&gt;&gt;
-&lt;/div&gt;
-
-&lt;div class=&quot;buybutton&quot;&gt;
-&lt;&lt;link &quot;购买&quot;&gt;&gt;&lt;&lt;run BuyOutFit(&quot;select&quot;)&gt;&gt;&lt;&lt;leavecheck&gt;&gt;&lt;&lt;/link&gt;&gt;
-&lt;/div&gt;
-
-&lt;&lt;if $shoptype.includes(&quot;offline&quot;)&gt;&gt;
-&lt;div class=&quot;trybutton&quot;&gt;
-&lt;&lt;link &quot;试穿&quot;&gt;&gt;&lt;&lt;tryon $showcase.layer&gt;&gt;&lt;&lt;leavecheck&gt;&gt;&lt;&lt;/link&gt;&gt;
-&lt;/div&gt;
-
-&lt;div id=&quot;buyall&quot;&gt;
-&lt;&lt;if tryoncheck() is true&gt;&gt;
-&lt;&lt;link &quot;购买身上的衣服&quot;&gt;&gt;&lt;&lt;run BuyOutFit(&quot;tryon&quot;)&gt;&gt;&lt;&lt;leavecheck&gt;&gt;&lt;&lt;/link&gt;&gt;
-&lt;&lt;/if&gt;&gt;
-&lt;/div&gt;
-
-&lt;&lt;/if&gt;&gt;
-
-&lt;div id=&quot;leave&quot; class=&quot;backbutton&quot;&gt;
-    &lt;&lt;if tryoncheck() is true&gt;&gt;
-        &lt;&lt;link &quot;离开&quot; &quot;试衣偷窥：触发&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;
-    &lt;&lt;else&gt;&gt;
-        &lt;&lt;link &quot;离开&quot; &quot;怡安小区&quot;&gt;&gt;&lt;&lt;resettryon&gt;&gt;&lt;&lt;/link&gt;&gt;
-    &lt;&lt;/if&gt;&gt;
-&lt;/div&gt;
-
-&lt;div id=&quot;shopoverlay&quot;&gt;&lt;/div&gt;
-
-
-
-&lt;&lt;silently&gt;&gt;
-/* 自动刷新等待JS读取结束 */
-&lt;&lt;set _timer to 10&gt;&gt;
-&lt;&lt;repeat 0.3s&gt;&gt;
-    &lt;&lt;script&gt;&gt;
-        $( function() {
-            $( &quot;#ShopList&quot; ).tabs();
-        } );
-    &lt;&lt;/script&gt;&gt;
-    &lt;&lt;set _timer to _timer -1&gt;&gt;
-    &lt;&lt;if _timer lte 0&gt;&gt;&lt;&lt;stop&gt;&gt;&lt;&lt;/if&gt;&gt;
-&lt;&lt;/repeat&gt;&gt;
-
-&lt;&lt;/silently&gt;&gt;
-
-&lt;&lt;widget &quot;leavecheck&quot;&gt;&gt;
-&lt;&lt;replace &quot;#leave&quot;&gt;&gt;
-&lt;&lt;if tryoncheck() is true&gt;&gt;
-    &lt;&lt;link &quot;离开&quot; &quot;试衣偷窥：触发&quot;&gt;&gt;&lt;&lt;set $eventexit to [$passage,&quot;怡安小区&quot;]&gt;&gt;&lt;&lt;/link&gt;&gt;
-&lt;&lt;else&gt;&gt;
-    &lt;&lt;link &quot;离开&quot; &quot;怡安小区&quot;&gt;&gt;&lt;&lt;resettryon&gt;&gt;&lt;&lt;/link&gt;&gt;
-&lt;&lt;/if&gt;&gt;
-&lt;&lt;/replace&gt;&gt;
-
-&lt;&lt;replace &quot;#buyall&quot;&gt;&gt;
-&lt;&lt;if tryoncheck() is true&gt;&gt;
-&lt;&lt;link &quot;购买身上的衣服&quot;&gt;&gt;&lt;&lt;run BuyOutFit(&quot;tryon&quot;)&gt;&gt;&lt;&lt;leavecheck&gt;&gt;&lt;&lt;/link&gt;&gt;
-&lt;&lt;/if&gt;&gt;
-&lt;&lt;/replace&gt;&gt;
-&lt;&lt;/widget&gt;&gt;
-
-&lt;&lt;widget &quot;resettryon&quot;&gt;&gt;
-    &lt;&lt;set $tryon to {neck: null, hand: null, face: null,hat: null, outter: null, top: null,bottom: null,inner_up: null, inner_bt: null,shoes: null, legs: null,}&gt;&gt;
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="44" name="试衣偷窥：触发" tags="" position="475,600" size="100,100">&lt;&lt;you&gt;&gt;还穿着商店里的衣服，确定就这么离开商店吗？&lt;br&gt;
-&lt;br&gt;
-&lt;&lt;link &quot;不买，就这么离开&quot; &quot;试衣偷窥：不买&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
-&lt;&lt;link &quot;还是回去付钱吧&quot; $eventexit[0]&gt;&gt;&lt;&lt;set $temp.tryoncomeback to true&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;</tw-passagedata><tw-passagedata pid="45" name="试衣偷窥：不买" tags="" position="600,600" size="100,100">&lt;&lt;set _luck to random(1,100)&gt;&gt;
-
-&lt;&lt;you&gt;&gt;打算就这么穿着衣服走……&lt;br&gt;
-
-&lt;&lt;timed 1s&gt;&gt;
-    &lt;div class=&quot;delay&quot;&gt;
-        &lt;&lt;if _luck lte 6&gt;&gt;
-            幸运的是，警报器没有响起来。故障了吗？ 总之&lt;&lt;you&gt;&gt;成功穿着商店的衣服跑了。
-            &lt;&lt;link &quot;离开&quot; $eventexit[1]&gt;&gt;&lt;&lt;/link&gt;&gt;
-        &lt;&lt;else&gt;&gt;
-            才到门口就触发警报器了，你被捉了起来……
-            (事件未完成……)
-            &lt;&lt;link &quot;离开&quot; $eventexit[0]&gt;&gt;&lt;&lt;set $temp.tryoncomeback to true&gt;&gt;&lt;&lt;/link&gt;&gt;
-        &lt;&lt;/if&gt;&gt;
-    &lt;/div&gt;
-&lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="46" name="服装店-工具" tags="widget" position="725,600" size="100,100">&lt;&lt;widget &quot;EnterTryRoom&quot;&gt;&gt;
-/* 把身上衣服暂存在TEquip里 */
-&lt;&lt;set $TEquip to clone($Equip)&gt;&gt;
-
-/* 清理身上外在液体 */
-&lt;&lt;set $PFlag.bukkake.body to false&gt;&gt;
-&lt;&lt;set $PFlag.bukkake.face to false&gt;&gt;
-&lt;&lt;set $PFlag.bukkake.hair to false&gt;&gt;
-
-&lt;&lt;set $location to &quot;试衣间&quot;&gt;&gt;
-&lt;&lt;SetAvatar&gt;&gt;
-
-&lt;&lt;/widget&gt;&gt;
-
-
-&lt;&lt;widget &quot;ShowManequin&quot;&gt;&gt;
-    &lt;div class=&quot;manequin&quot;&gt;
-        &lt;&lt;twinescript&gt;&gt;
-        output.appendChild(Avatar.getShop())
-        &lt;&lt;/twinescript&gt;&gt;
-    &lt;/div&gt;
-&lt;&lt;/widget&gt;&gt;
-
-&lt;&lt;widget &quot;ShowCase&quot;&gt;&gt;
-
-    &lt;div class=&quot;followleft&quot;&gt;
-        &lt;div id=&quot;showcase&quot;&gt;
-            &lt;&lt;if $showcase isnot null&gt;&gt;&lt;&lt;ShowManequin&gt;&gt;&lt;&lt;/if&gt;&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-
-    &lt;div class=&quot;followright&quot;&gt;
-    
-    &lt;div id=&quot;item_info&quot;&gt;
-        &lt;div id=&quot;description&quot;&gt;
-        &lt;&lt;print Lang($showcase.text,$showcase.text_en)&gt;&gt;&lt;br&gt;
-        &lt;/div&gt;
-        &lt;div class=&quot;warmth&quot;&gt;适应温度：&lt;&lt;print ($fix.cold+$showcase.cold)&gt;&gt;C～&lt;&lt;print ($fix.hot+$showcase.hot)&gt;&gt;C&lt;/div&gt;
-
-        &lt;div id=&quot;outfit_trait&quot;&gt;
-            &lt;div class=&quot;of_title&quot;&gt;属性：&lt;/div&gt;
-            &lt;div class=&quot;of_traitlist&quot;&gt;
-                &lt;li&gt;日常 - 适合平时穿戴&lt;/li&gt;
-            &lt;/div&gt;
-        &lt;/div&gt;
-
-    &lt;/div&gt;
-    
-    &lt;div id=&quot;option_containter&quot;&gt;
-        &lt;&lt;if $showcase.fixacc is false or $showcase.patterns.length gt 0&gt;&gt;
-            &lt;&lt;if $showcase.patterns.length gt 0&gt;&gt;
-                可选花样: &lt;br&gt;
-                &lt;div id=&quot;pattern_option&quot;&gt;
-                    &lt;&lt;for _i to 0; _i lt $showcase.patterns.length; _i++&gt;&gt;
-                        &lt;&lt;set _name to $showcase.patterns[_i]&gt;&gt;
-                        &lt;&lt;print &quot;&lt;&lt;button _name&gt;&gt;&lt;&lt;run setPatterns(&#39;&quot;+_name+&quot;&#39;)&gt;&gt;&lt;&lt;/button&gt;&gt;&quot;&gt;&gt;
-                    &lt;&lt;/for&gt;&gt;          
-                &lt;/div&gt;
-            &lt;&lt;/if&gt;&gt;
-
-            &lt;&lt;if $showcase.fixacc is false&gt;&gt;
-                花样颜色：&lt;br&gt;
-                &lt;div id=&quot;color_plate&quot;&gt;
-                     &lt;&lt;for _i to 0; _i lt A.colorlist.length; _i ++&gt;&gt;
-                        &lt;div class=&quot;color_plate&quot; @style=&quot;&#39;background-color:&#39;+ A.colorlist[_i].code&quot;&gt;
-                        &lt;&lt;set _name to A.colorlist[_i].name&gt;&gt;
-                        &lt;&lt;print &quot;&lt;&lt;button _name&gt;&gt;&lt;&lt;run setColors(A.colorlist[&quot;+_i+&quot;].code,A.colorlist[&quot;+_i+&quot;].name,false,&#39;acc&#39;)&gt;&gt;&lt;&lt;/button&gt;&gt;&quot;&gt;&gt;
-                        &lt;/div&gt;
-                    &lt;&lt;/for&gt;&gt;
-                    &lt;div&gt;&lt;button id=&quot;customColor2&quot;&gt;自定义颜色&lt;/button&gt;&lt;/div&gt;        
-                &lt;/div&gt;
-            &lt;&lt;/if&gt;&gt;
-            
-        &lt;&lt;/if&gt;&gt;
-
-        &lt;&lt;if $showcase.fixcolor is false or $showcase.colors.length gt 0&gt;&gt;
-            可选颜色：&lt;br&gt;
-            &lt;div id=&quot;color_plate&quot;&gt;
-                &lt;&lt;if $showcase.fixcolor is false&gt;&gt;
-                    &lt;&lt;for _i to 0; _i lt A.colorlist.length; _i ++&gt;&gt;
-                        &lt;div class=&quot;color_plate&quot; @style=&quot;&#39;background-color:&#39;+ A.colorlist[_i].code&quot;&gt;
-                        &lt;&lt;set _name to A.colorlist[_i].name&gt;&gt;
-                        &lt;&lt;print &quot;&lt;&lt;button _name&gt;&gt;&lt;&lt;run setColors(A.colorlist[&quot;+_i+&quot;].code,A.colorlist[&quot;+_i+&quot;].name)&gt;&gt;&lt;&lt;/button&gt;&gt;&quot;&gt;&gt;
-                        &lt;/div&gt;
-                    &lt;&lt;/for&gt;&gt;
-                    &lt;div&gt;&lt;button id=&quot;customColor&quot;&gt;自定义颜色&lt;/button&gt;&lt;/div&gt;
-                &lt;&lt;else&gt;&gt;
-                    &lt;&lt;for _i to 0; _i lt $showcase.colors.length; _i++&gt;&gt;
-                        &lt;&lt;set _code to A.colors[$showcase.colors[_i]].code&gt;&gt;
-                        &lt;&lt;set _name to A.colors[$showcase.colors[_i]].name&gt;&gt;
-                        &lt;div class=&quot;color_plate&quot; @style=&quot;&#39;background-color:&#39;+_code&quot;&gt;
-                        &lt;&lt;print &quot;&lt;&lt;button _name&gt;&gt;&lt;&lt;run setColors($showcase.colors[&quot;+_i+&quot;],A.colors[$showcase.colors[&quot;+_i+&quot;]].name)&gt;&gt;&lt;&lt;/button&gt;&gt;&quot;&gt;&gt;
-                        &lt;/div&gt;
-                    &lt;&lt;/for&gt;&gt;
-                &lt;&lt;/if&gt;&gt;
-            &lt;/div&gt;
-        &lt;&lt;/if&gt;&gt;
-    &lt;/div&gt;
-
-    &lt;/div&gt;
-
-&lt;&lt;if $showcase.fixcolor is false&gt;&gt;
-&lt;script&gt;
-var myPicker = new JSColor(&#39;#customColor&#39;, {format:&#39;hex&#39;,value:&#39;#000000&#39;,onInput:&quot;setColors(this.toHEXString(),null,true)&quot;,
-onChange:&quot;setColors(this.toHEXString(),&#39;自定义&#39;)&quot;,
-required:false, 
-	palette:&#39;#000000 #FFFFFF #636363 #FF0000 #00FF00 #0000FF&#39;, 
-	hideOnPaletteClick:true, backgroundColor:&#39;#ddd&#39;, 
-	borderColor:&#39;rgba(0,0,0,1)&#39;, borderRadius:10, width:200, 
-	closeButton:true, closeText:&#39;关闭&#39;, sliderSize:20, 
-	shadowColor:&#39;rgba(255,121,247,0.2)&#39;
-});
-&lt;/script&gt;
-&lt;&lt;/if&gt;&gt;
-
-&lt;&lt;if $showcase.fixacc is false&gt;&gt;
-&lt;script&gt;
-var myPicker2 = new JSColor(&#39;#customColor2&#39;, {format:&#39;hex&#39;,value:&#39;#000000&#39;,onInput:&quot;setColors(this.toHEXString(),null,true,&#39;acc&#39;)&quot;,
-onChange:&quot;setColors(this.toHEXString(),&#39;自定义&#39;,null,&#39;acc&#39;)&quot;,
-required:false, 
-	palette:&#39;#000000 #FFFFFF #636363 #FF0000 #00FF00 #0000FF&#39;, 
-	hideOnPaletteClick:true, backgroundColor:&#39;#ddd&#39;, 
-	borderColor:&#39;rgba(0,0,0,1)&#39;, borderRadius:10, width:200, 
-	closeButton:true, closeText:&#39;关闭&#39;, sliderSize:20, 
-	shadowColor:&#39;rgba(255,121,247,0.2)&#39;
-});
-&lt;/script&gt;
-&lt;&lt;/if&gt;&gt;
-
-
-&lt;&lt;/widget&gt;&gt;
-
-&lt;&lt;widget &quot;ShowAShopItems&quot;&gt;&gt;
-
-&lt;&lt;set _catgr to $args[0]&gt;&gt;
-&lt;&lt;set _placeholder to &quot;image/avatar/thumb.png&quot;&gt;&gt;
-
-&lt;&lt;for _i to 0; _i lt Avatars[_catgr].length; _i ++&gt;&gt;
-    &lt;&lt;if Avatars[_catgr][_i].shop is null or $shoptype.includes(Avatars[_catgr][_i].shop) is false&gt;&gt;
-        &lt;&lt;continue&gt;&gt;
-    &lt;&lt;else&gt;&gt;
-        &lt;&lt;if Avatars[_catgr][_i].hasImg is true&gt;&gt;
-            &lt;&lt;set _img to &quot;image/avatar/&quot;+_catgr+&quot;/&quot;+Avatars[_catgr][_i].index + &quot;/thumb.png&quot;&gt;&gt;
-        &lt;&lt;else&gt;&gt;
-            &lt;&lt;set _img to _placeholder&gt;&gt;
-        &lt;&lt;/if&gt;&gt;
-        &lt;&lt;capture _catgr _i&gt;&gt;
-        &lt;div id=&quot;show_items&quot;&gt;
-            &lt;div class=&quot;itemthumb&quot;&gt;
-            &lt;&lt;print &quot;&lt;&lt;link [img[_img]]&gt;&gt;&lt;&lt;run setShowCase(A[&#39;&quot;+_catgr+&quot;&#39;][&quot;+_i+&quot;]); Avatar.setShop()&gt;&gt;&lt;&lt;/link&gt;&gt;&quot;&gt;&gt;
-            &lt;/div&gt;
-            &lt;div class=&quot;itemname&quot;&gt;
-            &lt;&lt;print Avatars[_catgr][_i].name&gt;&gt;
-            &lt;/div&gt;
-
-            &lt;div class=&quot;itemprice&quot;&gt;
-            &lt;&lt;print Avatars[_catgr][_i].cost&gt;&gt;￥
-            &lt;/div&gt;
-        &lt;/div&gt;
-        &lt;&lt;/capture&gt;&gt;
-
-    &lt;&lt;/if&gt;&gt;
-&lt;&lt;/for&gt;&gt;
-
-&lt;&lt;/widget&gt;&gt;
-
-&lt;&lt;widget &quot;tryon&quot;&gt;&gt;
-&lt;&lt;set _layer to $args[0]&gt;&gt;
-&lt;&lt;set $Equip[_layer] to clone($showcase)&gt;&gt;
-&lt;&lt;set $tryon[_layer] to clone($showcase)&gt;&gt;
-
-&lt;&lt;switch _layer&gt;&gt;
-    &lt;&lt;case &quot;top&quot;&gt;&gt;
-        &lt;&lt;if $showcase.slot is &quot;onepiece&quot;&gt;&gt;
-            &lt;&lt;set $Equip.bottom to null&gt;&gt;
-        &lt;&lt;/if&gt;&gt;
-    &lt;&lt;case &quot;bottom&quot;&gt;&gt;
-        &lt;&lt;if $Equip.top.slot is &quot;onepiece&quot;&gt;&gt;
-            &lt;&lt;set $Equip.top to null&gt;&gt;
-        &lt;&lt;/if&gt;&gt;
-    &lt;&lt;case &quot;inner_up&quot;&gt;&gt;
-        &lt;&lt;if $showcase.slot is &quot;onepiece&quot;&gt;&gt;
-            &lt;&lt;set $Equip.inner_bt to null&gt;&gt;
-        &lt;&lt;elseif $showcase.slot is &quot;fullbody&quot;&gt;&gt;
-            &lt;&lt;set $Equip.inner_bt to null&gt;&gt;
-            &lt;&lt;set $Equip.top to null&gt;&gt;
-            &lt;&lt;set $Equip.bottom to null&gt;&gt;
-        &lt;&lt;/if&gt;&gt;
-&lt;&lt;/switch&gt;&gt;
-&lt;&lt;SetAvatar&gt;&gt;
-&lt;&lt;/widget&gt;&gt;
-
-&lt;&lt;widget &quot;showinner&quot;&gt;&gt;
-    &lt;&lt;set $Equip.outter to null&gt;&gt;
-    &lt;&lt;set $Equip.top to null&gt;&gt;
-    &lt;&lt;set $Equip.bottom to null&gt;&gt;
-    &lt;&lt;SetAvatar&gt;&gt;
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="47" name="你的家 单身公寓" tags="location" position="850,600" size="100,100">&lt;&lt;location &quot;单身公寓&quot;&gt;&gt;
-&lt;&lt;if setup.mainloop.isPlaying() is false&gt;&gt;
-&lt;&lt;masteraudio stop&gt;&gt;
-&lt;&lt;playlist &quot;mainloop&quot; shuffle play loop&gt;&gt;
-&lt;&lt;/if&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="49" name="你的家 单身公寓" tags="location" position="1100,600" size="100,100">&lt;&lt;location &quot;单身公寓&quot;&gt;&gt;&lt;&lt;mode &quot;location&quot;&gt;&gt;
+&lt;&lt;resetplaylist&gt;&gt;
 
 &lt;span class=&quot;title&quot;&gt;&lt;&lt;print $PC.info.name&gt;&gt;家&lt;/span&gt;&lt;br&gt;
-&lt;div class=&quot;lbox&quot;&gt;
-一个60平方米左右的单身公寓。简约现代风的装修，巨大的落地窗，还有一个阳台，两个人住也相当舒适的公寓。&lt;br&gt;
+&lt;div class=&quot;lbox&quot;&gt;&lt;&lt;=D.placedata.单身公寓.description()&gt;&gt;&lt;br&gt;
 &lt;/div&gt;
 &lt;br&gt;
 
-
-&lt;div id=&quot;append-text&quot;&gt;测试看看&lt;/div&gt;
-&lt;div id=&quot;situation&quot; class=&quot;situation&quot;&gt;&lt;&lt;include &quot;城市生活_1&quot;&gt;&gt;&lt;/div&gt;
+&lt;div id=&quot;append-text&quot; class=&quot;append-normal&quot;&gt;&lt;/div&gt;
+&lt;div id=&quot;situation&quot; class=&quot;situation&quot;&gt;&lt;&lt;=F.getsituation(&quot;单身公寓&quot;)&gt;&gt;&lt;/div&gt;
 
 
 &lt;br&gt;
@@ -17484,21 +17670,42 @@ required:false,
 自慰
 使用道具
 和宠物（床伴？）聊天
-学习 */</tw-passagedata><tw-passagedata pid="48" name="城市生活_1" tags="" position="975,600" size="100,100">&lt;&lt;you&gt;&gt;最近离开父母家，独立出来自己住了。一切才刚开始各种不习惯……&lt;br&gt;
-幸好，有小宠物史莱姆相伴……嗯，要不要跟宠物做点什么呢……？&lt;br&gt;</tw-passagedata><tw-passagedata pid="49" name="怡安小区" tags="location" position="1100,600" size="100,100">&lt;&lt;location &quot;怡安小区&quot;&gt;&gt;
+学习 */</tw-passagedata><tw-passagedata pid="50" name="城市生活_1" tags="" position="1225,600" size="100,100">&lt;&lt;you&gt;&gt;最近离开父母家，独立出来自己住了。一切才刚开始各种不习惯……&lt;br&gt;
+&lt;&lt;if F.timebetween(6,8)&gt;&gt;
+一大早就起来了,要做点什么好呢……？&lt;br&gt;
+&lt;&lt;elseif F.timebetween(8,11)&gt;&gt;
+&lt;&lt;you&gt;&gt;躺在懒人沙发上茫无目的地玩着手机……&lt;br&gt;
+&lt;&lt;elseif F.timebetween(11,12)&gt;&gt;
+中午了，肚子也饿起来了，要吃点什么好呢……？&lt;br&gt;
+&lt;&lt;elseif F.timebetween(13,18)&gt;&gt;
+&lt;&lt;you&gt;&gt;坐在电脑前一边转着笔一边思考着接下来要做什么……&lt;br&gt;
+&lt;&lt;elseif F.timebetween(18,19)&gt;&gt;
+晚餐时间了，到底是下厨好呢还是叫外卖呢……？&lt;br&gt;
+&lt;&lt;elseif F.timebetween(19,23)&gt;&gt;
+到晚上了，该放学的早放学了，该下班的也下班了。网络迎来了高峰期……&lt;br&gt;
+嗨起来！&lt;br&gt;
+&lt;&lt;else&gt;&gt;
+很晚了，得睡觉了……&lt;br&gt;
+&lt;&lt;/if&gt;&gt;
+&lt;br&gt;</tw-passagedata><tw-passagedata pid="51" name="宠物的日常_1" tags="" position="100,725" size="100,100">最近多了个小家伙跟在身边, 虽然有点粘人但还是挺治愈的。&lt;br&gt;
+嗯……要跟宠物&lt;&lt;print $pet.name&gt;&gt;做点什么好呢？&lt;br&gt;
+&lt;br&gt;</tw-passagedata><tw-passagedata pid="52" name="怡安小区" tags="location" position="225,725" size="100,100">&lt;&lt;location &quot;怡安小区&quot;&gt;&gt;&lt;&lt;mode &quot;location&quot;&gt;&gt;
+
 &lt;span class=&quot;title&quot;&gt;怡安小区&lt;/span&gt;&lt;br&gt;
 &lt;div class=&quot;lbox&quot;&gt;
-位于景南市南兴区的一个住宅小区。&lt;br&gt;
-现代化设计的公寓高楼林立在住宅园区内，道路两侧种满了花草树木。小区中央有个公园，时不时有人散布经过。&lt;br&gt;
-从小区大门往大道走，就能到达宜兴广场和地铁站。小区门口的巴士站也能通向景南市各区。交通十分方便。&lt;br&gt;
+&lt;&lt;=D.placedata.怡安小区.description()&gt;&gt;
 &lt;/div&gt;
 &lt;br&gt;
+
+&lt;div id=&quot;append-text&quot; class=&quot;append-normal&quot;&gt;&lt;/div&gt;
 &lt;div class=&quot;situation&quot;&gt;
 &lt;&lt;you&gt;&gt;站在公寓门前，在手机上查看景南市的地图，思考着接下来去哪里。&lt;br&gt;
 &lt;/div&gt;
 
+&lt;br&gt;
 &lt;div class=&quot;tolink&quot;&gt;
 /* 可以进行的互动 */
+&lt;&lt;link &quot;去公园散步　3m&quot; &quot;怡安小区公园&quot;&gt;&gt;&lt;&lt;passtime 3&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
 &lt;/div&gt;
 
 &lt;div id=&quot;navi&quot; class=&quot;navi_unable&quot;&gt;
@@ -17506,30 +17713,77 @@ required:false,
 &lt;/div&gt;
 
 /* 景南市。一个位于周唐南方大省柳洲省的一级大城市。&lt;br&gt;
-有山有水，面朝大海，四季分明，是个风景优美的旅游城市。&lt;br&gt; */</tw-passagedata><tw-passagedata pid="50" name="怡安小区 links" tags="links" position="1225,600" size="100,100">&lt;div class=&quot;links&quot; title=&quot;移动时间：3分钟&quot;&gt;&lt;&lt;link &quot;・ 小区公园&quot; &quot;怡安小区公园&quot;&gt;&gt;&lt;&lt;passtime 3&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
-&lt;div class=&quot;links&quot; title=&quot;移动时间：12分钟&quot;&gt;&lt;&lt;link &quot;・ 宜兴广场&quot; &quot;商店&quot;&gt;&gt;&lt;&lt;passtime 12&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
+有山有水，面朝大海，四季分明，是个风景优美的旅游城市。&lt;br&gt; */</tw-passagedata><tw-passagedata pid="53" name="怡安小区 links" tags="links" position="350,725" size="100,100">&lt;div class=&quot;links&quot; title=&quot;移动时间：12分钟&quot;&gt;&lt;&lt;link &quot;・ 嘉庆广场&quot; &quot;嘉庆广场&quot;&gt;&gt;&lt;&lt;passtime 12&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
 &lt;div class=&quot;links&quot; title=&quot;移动时间：5分钟&quot;&gt;&lt;&lt;link &quot;・ 巴士站&quot; $passage&gt;&gt;&lt;&lt;passtime 5&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
-&lt;div class=&quot;links&quot; title=&quot;移动时间：10分钟&quot;&gt;&lt;&lt;link &quot;・ 地铁站&quot; $passage&gt;&gt;&lt;&lt;passtime 10&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="51" name="怡安小区公园" tags="location" position="100,725" size="100,100">&lt;&lt;location &quot;怡安小区公园&quot;&gt;&gt;
+&lt;div class=&quot;links&quot; title=&quot;移动时间：10分钟&quot;&gt;&lt;&lt;link &quot;・ 地铁站&quot; $passage&gt;&gt;&lt;&lt;passtime 10&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="54" name="怡安小区公园" tags="location" position="475,725" size="100,100">&lt;&lt;location &quot;怡安小区公园&quot;&gt;&gt;&lt;&lt;mode &quot;location&quot;&gt;&gt;
+
 &lt;span class=&quot;title&quot;&gt;怡安小区 - 公园&lt;/span&gt;&lt;br&gt;
 &lt;div class=&quot;lbox&quot;&gt;
-绿意盎然，四周都种着花草树木。最吸引人的是南面一侧的用假山搭造的山泉景。&lt;br&gt;
-公园中央有个宽敞的小广场，偶尔会有大妈们在这里跳舞。&lt;br&gt;
-西面有儿童玩耍的设施。时不时能听到孩子们的欢声笑语。&lt;br&gt;
+&lt;&lt;=D.placedata.怡安小区公园.description()&gt;&gt;
 &lt;/div&gt;
 &lt;br&gt;
 
+&lt;div id=&quot;append-text&quot; class=&quot;append-normal&quot;&gt;&lt;/div&gt;
 &lt;div class=&quot;situation&quot;&gt;
 &lt;&lt;you&gt;&gt;坐在公园的长椅上，悠闲地看着天上的云朵，偶然会被飞过的小鸟吸引目光。&lt;br&gt;
 &lt;/div&gt;
 
+&lt;br&gt;
 &lt;div class=&quot;tolink&quot;&gt;
 
 &lt;/div&gt;
 
 &lt;div id=&quot;navi&quot; class=&quot;navi_unable&quot;&gt;
     &lt;&lt;navi&gt;&gt;
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="52" name="怡安小区公园 links" tags="" position="225,725" size="100,100">&lt;div class=&quot;links&quot; title=&quot;移动时间：3分钟&quot;&gt;&lt;&lt;link &quot;・ 小区大门&quot; &quot;怡安小区&quot;&gt;&gt;&lt;&lt;passtime 3&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="53" name="商店" tags="location" position="350,725" size="100,100">&lt;&lt;location &quot;商店&quot;&gt;&gt;
-&lt;&lt;include &quot;试衣间&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="54" name="Event" tags="eventloop nosave" position="475,725" size="100,100">&lt;div id=&quot;eventsituation&quot;&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="55" name="怡安小区公园 links" tags="" position="600,725" size="100,100">&lt;div class=&quot;links&quot; title=&quot;移动时间：3分钟&quot;&gt;&lt;&lt;link &quot;・ 小区大门&quot; &quot;怡安小区&quot;&gt;&gt;&lt;&lt;passtime 3&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
+&lt;div class=&quot;links&quot; title=&quot;移动时间：15分钟&quot;&gt;&lt;&lt;link &quot;・ 嘉庆广场&quot; &quot;嘉庆广场&quot;&gt;&gt;&lt;&lt;passtime 15&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="56" name="嘉庆广场" tags="location" position="725,725" size="100,100">&lt;&lt;location &quot;嘉庆广场&quot;&gt;&gt;&lt;&lt;mode &quot;location&quot;&gt;&gt;
+&lt;span class=&quot;title&quot;&gt;嘉庆广场&lt;/span&gt;&lt;br&gt;
+&lt;div class=&quot;lbox&quot;&gt;
+&lt;&lt;=D.placedata.嘉庆广场.description()&gt;&gt;
+&lt;/div&gt;
+&lt;br&gt;
+
+&lt;div id=&quot;append-text&quot; class=&quot;append-normal&quot;&gt;&lt;/div&gt;
+&lt;div class=&quot;situation&quot;&gt;&lt;&lt;=F.getsituation(&quot;嘉庆广场&quot;)&gt;&gt;&lt;/div&gt;
+
+&lt;br&gt;
+&lt;div class=&quot;tolink&quot;&gt;
+&lt;&lt;link &quot;打发时间 　 10m&quot; $passage&gt;&gt;&lt;&lt;passtime 10&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;&lt;br&gt;
+&lt;&lt;link &quot;逛服装店　　5m&quot; &quot;商店&quot;&gt;&gt;&lt;&lt;passtime 5&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
+&lt;&lt;link &quot;汉堡王　　　5m&quot; $passage&gt;&gt;&lt;&lt;passtime 5&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
+&lt;/div&gt;
+
+&lt;div id=&quot;navi&quot; class=&quot;navi_unable&quot;&gt;
+    &lt;&lt;navi&gt;&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="57" name="嘉庆广场 links" tags="" position="850,725" size="100,100">&lt;div class=&quot;links&quot; title=&quot;移动时间：15分钟&quot;&gt;&lt;&lt;link &quot;・ 怡安小区&quot; &quot;怡安小区&quot;&gt;&gt;&lt;&lt;passtime 15&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
+&lt;div class=&quot;links&quot; title=&quot;移动时间：2分钟&quot;&gt;&lt;&lt;link &quot;・ 地铁站&quot;&gt;&gt;&lt;&lt;passtime 2&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
+&lt;div class=&quot;links&quot; title=&quot;移动时间：1分钟&quot;&gt;&lt;&lt;link &quot;・ 巴士站&quot;&gt;&gt;&lt;&lt;passtime 1&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="58" name="商场的日常风景_1" tags="" position="975,725" size="100,100">&lt;&lt;if F.timebetween(8.5,10)&gt;&gt;
+明明距离商场开门的时间还很早，但已经有人陆陆续续聚集在入口广场上了。
+&lt;&lt;elseif F.timebetween(10,18)&gt;&gt;
+营业中的嘉庆广场，无论是广场外部还是商场内部，人来人往，十分热闹。
+&lt;&lt;elseif F.timebetween(18,20)&gt;&gt;
+已经到晚饭时间了，商场内的餐厅传来了美味的香气。比起白天，人已经少了很多，但依然热闹。
+&lt;&lt;elseif F.timebetween(20,21)&gt;&gt;
+临近关闭时间了，但稀稀拉拉的依然有不少人在商场内部闲逛。广场上倒是多了些许移动小吃摊，给下班的人提供热量。
+&lt;&lt;else&gt;&gt;
+商场建筑黑漆漆的，已经完全关闭。但广场上依然亮着点点灯光，夜晚的喷水广场在点点灯光下，十分好看。
+&lt;&lt;/if&gt;&gt;
+&lt;br&gt;</tw-passagedata><tw-passagedata pid="59" name="商场闲逛_1" tags="" position="1100,725" size="100,100">&lt;&lt;=randomtext([
+&quot;&lt;&lt;you&gt;&gt;坐在南面入口广场一侧的椅子上，仰头看着绿茵茵的木棉树，偶尔会发现在树枝中跳窜的小麻雀。&quot;,
+&quot;&lt;&lt;you&gt;&gt;走在广场上，观察着来来往往的人群，目光时不时被在路边派发传单的布偶人吸引。&quot;,
+&quot;&lt;&lt;you&gt;&gt;拿起手机，以商场为背景，给自己拍了张新的照片。&quot;,
+&quot;&lt;&lt;you&gt;&gt;站在广场角落的报亭前，随手拿起一份报纸看了眼今天的新闻。&quot;,
+])&gt;&gt;</tw-passagedata><tw-passagedata pid="60" name="商店" tags="location" position="1225,725" size="100,100">&lt;&lt;location &quot;商店&quot;&gt;&gt;&lt;&lt;mode &quot;location&quot;&gt;&gt;
+
+&lt;span class=&quot;title&quot;&gt;服装店&lt;/span&gt;&lt;br&gt;
+&lt;div class=&quot;lbox&quot;&gt;
+商场里的服装店。商品琳琅满目，什么都有。&lt;br&gt;
+&lt;/div&gt;
+&lt;&lt;set $shoptype to [&quot;all&quot;,&quot;offline&quot;]&gt;&gt;
+
+&lt;&lt;include &quot;试衣间&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="61" name="Event" tags="eventloop nosave" position="100,850" size="100,100">&lt;&lt;mode &quot;event&quot;&gt;&gt;
+
+&lt;div id=&quot;eventsituation&quot;&gt;
 &lt;&lt;CallEvent&gt;&gt;
 &lt;/div&gt;
 
@@ -17546,7 +17800,7 @@ required:false,
 
 &lt;div id=&quot;eventeffect&quot;&gt;
 &lt;&lt;CallEventEffect&gt;&gt;
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="55" name="EventSystem" tags="widget" position="600,725" size="100,100">/* 再现ERA口上系统的TRYCALL体系 主 */
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="62" name="EventSystem" tags="widget" position="225,850" size="100,100">/* 再现ERA口上系统的TRYCALL体系 主 */
 &lt;&lt;widget &quot;CallEvent&quot;&gt;&gt;
 &lt;&lt;if setEvent() isnot false&gt;&gt;
     &lt;&lt;set _passagename to setEvent()&gt;&gt;
@@ -17630,10 +17884,10 @@ required:false,
 
 &lt;&lt;/if&gt;&gt;
 
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="56" name="主线 开幕：EventFirst" tags="" position="725,725" size="100,100">&lt;&lt;set $count to 0&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="63" name="主线 开幕：EventFirst" tags="" position="350,850" size="100,100">&lt;&lt;set $count to 0&gt;&gt;
 &lt;&lt;set $Eflag.nonext to true&gt;&gt;
 &lt;&lt;set $eventnext to 0&gt;&gt;
-&lt;&lt;bookmark &quot;主线开幕_初次&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="57" name="主线 开幕-初次" tags="" position="850,725" size="100,100">&lt;&lt;Opening $count&gt;&gt;</tw-passagedata><tw-passagedata pid="58" name="主线 开幕-初次：E" tags="" position="975,725" size="100,100">&lt;&lt;if $count lt 8&gt;&gt;
+&lt;&lt;bookmark &quot;主线开幕_初次&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="64" name="主线 开幕-初次" tags="" position="475,850" size="100,100">&lt;&lt;Opening $count&gt;&gt;</tw-passagedata><tw-passagedata pid="65" name="主线 开幕-初次：E" tags="" position="600,850" size="100,100">&lt;&lt;if $count lt 8&gt;&gt;
 &lt;&lt;addclass &quot;#eventsituation&quot; &quot;weirdtext&quot;&gt;&gt;
 &lt;&lt;silently&gt;&gt;&lt;&lt;script&gt;&gt;
 //requires jQuery because I am lazy.
@@ -17642,7 +17896,7 @@ $(document).ready(function(){
 });
 &lt;&lt;/script&gt;&gt;
 &lt;&lt;/silently&gt;&gt;
-&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="59" name="主线 开幕-初次：W" tags="widget" position="1100,725" size="100,100">&lt;&lt;widget &quot;Opening&quot;&gt;&gt;
+&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="66" name="主线 开幕-初次：W" tags="widget" position="725,850" size="100,100">&lt;&lt;widget &quot;Opening&quot;&gt;&gt;
 
 &lt;&lt;switch $args[0]&gt;&gt;
 &lt;&lt;case 0&gt;&gt;
@@ -17756,7 +18010,7 @@ $(document).ready(function(){
 
 &lt;&lt;/switch&gt;&gt;
 
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="60" name="主线 开幕-初次：S" tags="" position="1225,725" size="100,100">&lt;&lt;switch $count&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="67" name="主线 开幕-初次：S" tags="" position="850,850" size="100,100">&lt;&lt;switch $count&gt;&gt;
 &lt;&lt;case 0&gt;&gt;
 	&lt;&lt;set _text to Lang(&quot;睁开眼睛&quot;,&quot;Open The Eyes&quot;)&gt;&gt;
 	&lt;div class=&quot;Wselect&quot;&gt;&lt;&lt;link _text&gt;&gt;&lt;&lt;set $count to 1&gt;&gt;&lt;&lt;Revent&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
@@ -17799,7 +18053,7 @@ $(document).ready(function(){
 	&lt;&lt;set _text to Lang(&quot;继续&quot;,&quot;Next&quot;)&gt;&gt;
 	&lt;div @class=&quot;($count &gt;= 8 ? &#39;Eselect&#39; : &#39;Wselect&#39; )&quot;&gt;&lt;&lt;link _text&gt;&gt;&lt;&lt;set $count to $eventnext&gt;&gt;&lt;&lt;Revent&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
 
-&lt;&lt;/switch&gt;&gt;</tw-passagedata><tw-passagedata pid="61" name="主线 开幕-初次-穿越版" tags="" position="100,850" size="100,100">&lt;&lt;Opening2 $count&gt;&gt;</tw-passagedata><tw-passagedata pid="62" name="主线 开幕-初次-穿越版：W" tags="widget" position="225,850" size="100,100">&lt;&lt;widget &quot;Opening2&quot;&gt;&gt;
+&lt;&lt;/switch&gt;&gt;</tw-passagedata><tw-passagedata pid="68" name="主线 开幕-初次-穿越版" tags="" position="975,850" size="100,100">&lt;&lt;Opening2 $count&gt;&gt;</tw-passagedata><tw-passagedata pid="69" name="主线 开幕-初次-穿越版：W" tags="widget" position="1100,850" size="100,100">&lt;&lt;widget &quot;Opening2&quot;&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
 &lt;&lt;switch $count&gt;&gt;
 &lt;&lt;case 0&gt;&gt;
@@ -17921,7 +18175,7 @@ $(document).ready(function(){
 &lt;&lt;/switch&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
 
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="63" name="主线 开幕-初次-穿越版：S" tags="" position="350,850" size="100,100">&lt;&lt;switch $count&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="70" name="主线 开幕-初次-穿越版：S" tags="" position="1225,850" size="100,100">&lt;&lt;switch $count&gt;&gt;
 &lt;&lt;case 1&gt;&gt;
 &lt;&lt;set _text to Lang(&quot;拿起手机&quot;,&quot;Pick up the phone&quot;)&gt;&gt;
 &lt;div class=&quot;Eselect&quot;&gt;&lt;&lt;link _text&gt;&gt;&lt;&lt;set $count to 2&gt;&gt;&lt;&lt;Revent&gt;&gt;&lt;&lt;passtime 2&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
@@ -17969,7 +18223,7 @@ $(document).ready(function(){
 &lt;&lt;set _text to Lang(&quot;继续&quot;,&quot;Next&quot;)&gt;&gt;
 &lt;div class=&quot;Eselect&quot;&gt;&lt;&lt;link _text&gt;&gt;&lt;&lt;set $count to $eventnext&gt;&gt;&lt;&lt;Revent&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
 
-&lt;&lt;/switch&gt;&gt;</tw-passagedata><tw-passagedata pid="64" name="主线 开幕-轮回" tags="" position="475,850" size="100,100">&lt;&lt;bookmark &quot;主线开幕_轮回&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="65" name="PC 主线-开幕-房间描述" tags="nobr" position="600,850" size="100,100">&lt;&lt;lang 
+&lt;&lt;/switch&gt;&gt;</tw-passagedata><tw-passagedata pid="71" name="主线 开幕-轮回" tags="" position="100,975" size="100,100">&lt;&lt;bookmark &quot;主线开幕_轮回&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="72" name="PC 主线-开幕-房间描述" tags="nobr" position="225,975" size="100,100">&lt;&lt;lang 
 &quot;一睁开眼，首先看到的是茂绿的窗外，响亮的蝉鸣宣告着当前的季节。窗户旁摆放着一张大书桌，上面摆放着&lt;&lt;if $PC.type is 2&gt;&gt;一个宽屏大液显&lt;&lt;elseif $PC.type is 1&gt;&gt;新帝HQ24数位屏和数位板&lt;&lt;else&gt;&gt;一个电脑屏幕&lt;&lt;/if&gt;&gt;，书桌旁的小桌子上则是电脑主机。在靠近书桌的墙边，则整齐地摆放着两个书架，书架上是&lt;&lt;switch $PC.type&gt;&gt;&lt;&lt;case 1&gt;&gt;各种漫画和小说还有塑料小人&lt;&lt;case 2&gt;&gt;各种各样的书籍&lt;&lt;case 3&gt;&gt;各种修仙小说和漫画&lt;&lt;/switch&gt;&gt;，墙上则&lt;&lt;switch $PC.type&gt;&gt;&lt;&lt;case 1&gt;&gt;挂着一些远古生物的挂画和各种游戏海报&lt;&lt;case 2&gt;&gt;挂着一些漂亮的装饰画&lt;&lt;case 3&gt;&gt;挂着一个黑白两色的八卦阵和一些仙侠作品的海报&lt;&lt;/switch&gt;&gt;&quot;
 
 &quot;Across from the bed is the window, and outside the window is the loud sound of cicadas announcing the current season. Right next to the window sits a large desk with a computer with two screens, two bookshelves lined up side by side with various books and comics and some anime figurines, and posters of superheroes on the wall&quot;

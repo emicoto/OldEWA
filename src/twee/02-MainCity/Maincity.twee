@@ -1,18 +1,21 @@
 ﻿:: 怡安小区 [location]
-<<location "怡安小区">>
+<<location "怡安小区">><<mode "location">>
+
 <span class="title">怡安小区</span><br>
 <div class="lbox">
-位于景南市南兴区的一个住宅小区。<br>
-现代化设计的公寓高楼林立在住宅园区内，道路两侧种满了花草树木。小区中央有个公园，时不时有人散布经过。<br>
-从小区大门往大道走，就能到达宜兴广场和地铁站。小区门口的巴士站也能通向景南市各区。交通十分方便。<br>
+<<=D.placedata.怡安小区.description()>>
 </div>
 <br>
+
+<div id="append-text" class="append-normal"></div>
 <div class="situation">
 <<you>>站在公寓门前，在手机上查看景南市的地图，思考着接下来去哪里。<br>
 </div>
 
+<br>
 <div class="tolink">
 /* 可以进行的互动 */
+<<link "去公园散步　3m" "怡安小区公园">><<passtime 3>><</link>><br>
 </div>
 
 <div id="navi" class="navi_unable">
@@ -23,26 +26,26 @@
 有山有水，面朝大海，四季分明，是个风景优美的旅游城市。<br> */
 
 :: 怡安小区 links [links]
-<div class="links" title="移动时间：3分钟"><<link "・ 小区公园" "怡安小区公园">><<passtime 3>><</link>></div>
-<div class="links" title="移动时间：12分钟"><<link "・ 宜兴广场" "商店">><<passtime 12>><</link>></div>
+<div class="links" title="移动时间：12分钟"><<link "・ 嘉庆广场" "嘉庆广场">><<passtime 12>><</link>></div>
 <div class="links" title="移动时间：5分钟"><<link "・ 巴士站" $passage>><<passtime 5>><</link>></div>
 <div class="links" title="移动时间：10分钟"><<link "・ 地铁站" $passage>><<passtime 10>><</link>></div>
 
 
 :: 怡安小区公园 [location]
-<<location "怡安小区公园">>
+<<location "怡安小区公园">><<mode "location">>
+
 <span class="title">怡安小区 - 公园</span><br>
 <div class="lbox">
-绿意盎然，四周都种着花草树木。最吸引人的是南面一侧的用假山搭造的山泉景。<br>
-公园中央有个宽敞的小广场，偶尔会有大妈们在这里跳舞。<br>
-西面有儿童玩耍的设施。时不时能听到孩子们的欢声笑语。<br>
+<<=D.placedata.怡安小区公园.description()>>
 </div>
 <br>
 
+<div id="append-text" class="append-normal"></div>
 <div class="situation">
 <<you>>坐在公园的长椅上，悠闲地看着天上的云朵，偶然会被飞过的小鸟吸引目光。<br>
 </div>
 
+<br>
 <div class="tolink">
 
 </div>
@@ -53,8 +56,65 @@
 
 :: 怡安小区公园 links
 <div class="links" title="移动时间：3分钟"><<link "・ 小区大门" "怡安小区">><<passtime 3>><</link>></div>
+<div class="links" title="移动时间：15分钟"><<link "・ 嘉庆广场" "嘉庆广场">><<passtime 15>><</link>></div>
 
+
+:: 嘉庆广场 [location]
+<<location "嘉庆广场">><<mode "location">>
+<span class="title">嘉庆广场</span><br>
+<div class="lbox">
+<<=D.placedata.嘉庆广场.description()>>
+</div>
+<br>
+
+<div id="append-text" class="append-normal"></div>
+<div class="situation"><<=F.getsituation("嘉庆广场")>></div>
+
+<br>
+<div class="tolink">
+<<link "打发时间 　 10m" $passage>><<passtime 10>><</link>><br><br>
+<<link "逛服装店　　5m" "商店">><<passtime 5>><</link>><br>
+<<link "汉堡王　　　5m" $passage>><<passtime 5>><</link>><br>
+</div>
+
+<div id="navi" class="navi_unable">
+    <<navi>>
+</div>
+
+:: 嘉庆广场 links
+<div class="links" title="移动时间：15分钟"><<link "・ 怡安小区" "怡安小区">><<passtime 15>><</link>></div>
+<div class="links" title="移动时间：2分钟"><<link "・ 地铁站">><<passtime 2>><</link>></div>
+<div class="links" title="移动时间：1分钟"><<link "・ 巴士站">><<passtime 1>><</link>></div>
+
+:: 商场的日常风景_1
+<<if F.timebetween(8.5,10)>>
+明明距离商场开门的时间还很早，但已经有人陆陆续续聚集在入口广场上了。
+<<elseif F.timebetween(10,18)>>
+营业中的嘉庆广场，无论是广场外部还是商场内部，人来人往，十分热闹。
+<<elseif F.timebetween(18,20)>>
+已经到晚饭时间了，商场内的餐厅传来了美味的香气。比起白天，人已经少了很多，但依然热闹。
+<<elseif F.timebetween(20,21)>>
+临近关闭时间了，但稀稀拉拉的依然有不少人在商场内部闲逛。广场上倒是多了些许移动小吃摊，给下班的人提供热量。
+<<else>>
+商场建筑黑漆漆的，已经完全关闭。但广场上依然亮着点点灯光，夜晚的喷水广场在点点灯光下，十分好看。
+<</if>>
+<br>
+
+:: 商场闲逛_1
+<<=randomtext([
+"<<you>>坐在南面入口广场一侧的椅子上，仰头看着绿茵茵的木棉树，偶尔会发现在树枝中跳窜的小麻雀。",
+"<<you>>走在广场上，观察着来来往往的人群，目光时不时被在路边派发传单的布偶人吸引。",
+"<<you>>拿起手机，以商场为背景，给自己拍了张新的照片。",
+"<<you>>站在广场角落的报亭前，随手拿起一份报纸看了眼今天的新闻。",
+])>>
 
 :: 商店 [location]
-<<location "商店">>
+<<location "商店">><<mode "location">>
+
+<span class="title">服装店</span><br>
+<div class="lbox">
+商场里的服装店。商品琳琅满目，什么都有。<br>
+</div>
+<<set $shoptype to ["all","offline"]>>
+
 <<include "试衣间">>

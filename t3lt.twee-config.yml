@@ -362,3 +362,11 @@ sugarcube-2:
       name: showmoney
     sidebar_stats:
       name: sidebar_stats
+    InitPlaceData:
+      name: InitPlaceData
+    InitItemData:
+      name: InitItemData
+    mode:
+      name: mode
+    resetplaylist:
+      name: resetplaylist

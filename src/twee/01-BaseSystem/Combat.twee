@@ -1,5 +1,5 @@
 ﻿:: Combat [core combat loop]
-
+<<mode "combat">>
 <div id="combat">
 
 <div id="enemyside">

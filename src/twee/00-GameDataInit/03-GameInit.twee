@@ -103,6 +103,8 @@
     genitype: "史莱姆",
     special: ["液态"],
     stats: {},
+    active:false,
+    flag:{},
 }>>
 /*type:1=史莱姆 2=魔狼 3=恶魔 4=触手 */
 

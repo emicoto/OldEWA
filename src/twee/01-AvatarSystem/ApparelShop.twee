@@ -1,9 +1,4 @@
 ﻿:: 试衣间
-<span class="title">服装店</span><br>
-<div class="lbox">
-商场里的服装店。商品琳琅满目，什么都有。<br>
-</div>
-<<set $shoptype to ["all","offline"]>>
 
 <<if $temp.tryoncomeback is undefined>>
     <<EnterTryRoom>>
@@ -12,8 +7,7 @@
     <<set $location to "试衣间">>
 <</if>>
 
-<div id="action-text2"></div>
-
+<div id="append-text" class="append-normal"><span id="action-text2"></span></div>
 
 <<if $shoptype.includes("offline")>>
 <div id="show_container">
@@ -106,7 +100,7 @@
     <<if tryoncheck() is true>>
         <<link "离开" "试衣偷窥：触发">><</link>>
     <<else>>
-        <<link "离开" "怡安小区">><<resettryon>><</link>>
+        <<link "离开" "嘉庆广场">><<resettryon>><</link>>
     <</if>>
 </div>
 
@@ -132,7 +126,7 @@
 <<widget "leavecheck">>
 <<replace "#leave">>
 <<if tryoncheck() is true>>
-    <<link "离开" "试衣偷窥：触发">><<set $eventexit to [$passage,"怡安小区"]>><</link>>
+    <<link "离开" "试衣偷窥：触发">><<set $eventexit to [$passage,"嘉庆广场"]>><</link>>
 <<else>>
     <<link "离开" "怡安小区">><<resettryon>><</link>>
 <</if>>
@@ -150,7 +144,7 @@
 <</widget>>
 
 :: 试衣偷窥：触发
-
+<<mode "event">>
 <<you>>还穿着商店里的衣服，确定就这么离开商店吗？<br>
 <br>
 <<link "不买，就这么离开" "试衣偷窥：不买">><</link>><br>

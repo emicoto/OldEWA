@@ -1,4 +1,5 @@
-﻿#startpage input {
+﻿/* StartPage and Charamaking */
+#startpage input {
     max-width: 100px;
     max-height: 20px;
     font-size: 15px;
@@ -89,12 +90,7 @@
     font-family: Georgia, 新综艺B;
 }
 
-.description {
-    margin-left: 10px;
-    font-size: 14px;
-    color:gray;
-}
-
+/* Event */
 #eventsituation {
     max-width: 800px;
     width: 100%;
@@ -150,6 +146,8 @@
     text-shadow:0 0 2px rgb(180, 166, 36);
     border: none;
 }
+
+/* Navigator */
 
 #navi {
     width: 200px;
@@ -213,4 +211,29 @@
     position: relative;
     border-bottom: 1px dashed #ccc;
     padding-left: 20px;
+}
+
+/* general elements*/
+.description {
+    margin-left: 10px;
+    font-size: 14px;
+    color:gray;
+}
+
+.appen-eventsituation {
+    max-width: 800px;
+    width: 100%;    
+    margin: 0px auto;
+    display: block;
+    font-size: 24px;
+    font-family:珍珠体, Georgia;
+    text-align: center;
+    letter-spacing: 2px;
+	line-height: 40px;
+    transition: all 0.75s;
+}
+
+.append-normal {
+    margin:2px;
+    margin-left:10px;
 }

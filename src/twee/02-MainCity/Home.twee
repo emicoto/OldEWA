@@ -1,19 +1,14 @@
 ﻿:: 你的家 单身公寓 [location]
-<<location "单身公寓">>
-<<if setup.mainloop.isPlaying() is false>>
-<<masteraudio stop>>
-<<playlist "mainloop" shuffle play loop>>
-<</if>>
+<<location "单身公寓">><<mode "location">>
+<<resetplaylist>>
 
 <span class="title"><<print $PC.info.name>>家</span><br>
-<div class="lbox">
-一个60平方米左右的单身公寓。简约现代风的装修，巨大的落地窗，还有一个阳台，两个人住也相当舒适的公寓。<br>
+<div class="lbox"><<=D.placedata.单身公寓.description()>><br>
 </div>
 <br>
 
-
-<div id="append-text">测试看看</div>
-<div id="situation" class="situation"><<include "城市生活_1">></div>
+<div id="append-text" class="append-normal"></div>
+<div id="situation" class="situation"><<=F.getsituation("单身公寓")>></div>
 
 
 <br>
@@ -41,6 +36,26 @@
 学习 */
 
 :: 城市生活_1
-
 <<you>>最近离开父母家，独立出来自己住了。一切才刚开始各种不习惯……<br>
-幸好，有小宠物史莱姆相伴……嗯，要不要跟宠物做点什么呢……？<br>
+<<if F.timebetween(6,8)>>
+一大早就起来了,要做点什么好呢……？<br>
+<<elseif F.timebetween(8,11)>>
+<<you>>躺在懒人沙发上茫无目的地玩着手机……<br>
+<<elseif F.timebetween(11,12)>>
+中午了，肚子也饿起来了，要吃点什么好呢……？<br>
+<<elseif F.timebetween(13,18)>>
+<<you>>坐在电脑前一边转着笔一边思考着接下来要做什么……<br>
+<<elseif F.timebetween(18,19)>>
+晚餐时间了，到底是下厨好呢还是叫外卖呢……？<br>
+<<elseif F.timebetween(19,23)>>
+到晚上了，该放学的早放学了，该下班的也下班了。网络迎来了高峰期……<br>
+嗨起来！<br>
+<<else>>
+很晚了，得睡觉了……<br>
+<</if>>
+<br>
+
+:: 宠物的日常_1
+最近多了个小家伙跟在身边, 虽然有点粘人但还是挺治愈的。<br>
+嗯……要跟宠物<<print $pet.name>>做点什么好呢？<br>
+<br>
