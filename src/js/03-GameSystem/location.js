@@ -31,7 +31,7 @@ F.getInteraction = function(location, tags, key){
 function setLocation(args) {
     if (typeof(args)=="string" && args.length > 0){
         V.location = args
-        F.REP() /* 设置事件随机概率 RandomEventRate */
+        F.RER() /* 设置事件随机概率 RandomEventRate */
 
         if(D.placedata[args]){
             V.local = D.placedata[args]

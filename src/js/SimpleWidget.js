@@ -50,11 +50,10 @@ window.hairlenth = function(num){
     else return 1;
 }
 
-function timebetween(a,b){
+function inTime(a,b){
     return between(V.date.time,a*60,b*60)
 }
-F.timebetween = timebetween
-DefineMacroS("inTime", timebetween)
+F.inTime = inTime
 
 window.randomtext = function(a){
     if(typeof(a)=="string")return a;
@@ -64,8 +63,9 @@ window.randomtext = function(a){
     }
 }
 
-function REP(){
-    V.REP = random(0,100)
+/*RandomEventRate*/
+function RER(){
+    V.RER = random(0,100)
 }
-F.REP = REP
-DefineMacroS("setREP",REP)
+F.RER = RER
+DefineMacroS("setRER",RER)

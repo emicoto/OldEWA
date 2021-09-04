@@ -35,17 +35,17 @@
 
 :: 城市生活_1
 <<you>>最近离开父母家，独立出来自己住了。一切才刚开始各种不习惯……<br>
-<<if F.timebetween(6,8)>>
+<<if F.inTime(6,8)>>
 一大早就起来了,要做点什么好呢……？<br>
-<<elseif F.timebetween(8,11)>>
+<<elseif F.inTime(8,11)>>
 <<you>>躺在懒人沙发上茫无目的地玩着手机……<br>
-<<elseif F.timebetween(11,12)>>
+<<elseif F.inTime(11,12)>>
 中午了，肚子也饿起来了，要吃点什么好呢……？<br>
-<<elseif F.timebetween(13,18)>>
+<<elseif F.inTime(13,18)>>
 <<you>>坐在电脑前一边转着笔一边思考着接下来要做什么……<br>
-<<elseif F.timebetween(18,19)>>
+<<elseif F.inTime(18,19)>>
 晚餐时间了，到底是下厨好呢还是叫外卖呢……？<br>
-<<elseif F.timebetween(19,23)>>
+<<elseif F.inTime(19,23)>>
 到晚上了，该放学的早放学了，该下班的也下班了。网络迎来了高峰期……<br>
 嗨起来！<br>
 <<else>>
