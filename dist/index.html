@@ -303,6 +303,7 @@ Game.Manager = new Manager({
 <script src="lib/clickLove.js"></script>
 <script src="CSS/jquery-ui.js"></script>
 <script src="lib/jscolor.js"></script>
+<script src="lib/draganddrop.js"></script>
 </head>
 <body>
 	<div id="init-screen">
@@ -729,6 +730,15 @@ hr {
   background-color: #ddd;
   border-color: #111;
   cursor: pointer;
+}
+
+.handle {
+  min-width: 200px;
+  width: max-content;
+  min-height: 30px;
+  height: fit-content;
+  padding: 0px 20px;
+  cursor: move;
 }
 
 #icon {
@@ -1399,10 +1409,6 @@ body #story-caption #storyCaptionDiv {
     max-width: unset;
 }
 
-.customOverlayTitle {
-    cursor: move;
-}
-
 @media screen and (max-width: 840px) {
   .customOverlay{
     position: absolute;
@@ -1473,7 +1479,6 @@ body #story-caption #storyCaptionDiv {
     top:5px;
     left:5px;
     float: left;
-    cursor: move;
 }
   
 #overlaytitle li {
@@ -1485,11 +1490,15 @@ body #story-caption #storyCaptionDiv {
     margin-left: 10px;
     color: rgb(151, 141, 1);
 }
-#overlaytitle li::before {
+#overlaytitle .handle li ::before {
     content: "♢";
+    font-size: 24px;
+    margin: 2px;
 }
-#overlaytitle li::after {
+#overlaytitle .handle li ::after {
     content: "♢";
+    font-size: 24px;
+    margin: 2px;
 }
 #overlaytitle button{
     float: right;
@@ -12771,6 +12780,11 @@ Macro.add('time', {
 	}
 });
 
+window.dcmulti = function(){
+	let t = V.date.time - V.wakeuptime
+	if(t/60 > 4){}
+}
+
 function passtime(arg,mode){
 	V.date.time += arg
 }
@@ -16379,22 +16393,10 @@ required:false,
 
 &lt;&lt;silently&gt;&gt;
 /* 自动刷新等待JS读取结束 */
-&lt;&lt;set _timer to 10&gt;&gt;
-	&lt;&lt;repeat 0.3s&gt;&gt;
-		&lt;&lt;script&gt;&gt;
-			dragElement(document.getElementById(&quot;customOverlay&quot;))
-			function dragElement(event) {
-				var dragID = &quot;#customOverlay&quot;
-				$(dragID).draggable();	}
-			
-			dragElement1(document.getElementById(&quot;ui-dialog&quot;))
-			function dragElement1(event) {
-				var dragID = &quot;#ui-dialog&quot;
-				$(dragID).draggable();	}
-		&lt;&lt;/script&gt;&gt;
-		&lt;&lt;set _timer to _timer -1&gt;&gt;
-		&lt;&lt;if _timer is 0&gt;&gt;&lt;&lt;stop&gt;&gt;&lt;&lt;/if&gt;&gt;
-	&lt;&lt;/repeat&gt;&gt;
+&lt;&lt;script&gt;&gt;
+	$(&#39;#customOverlay&#39;).draggable({handle: &#39;.handle&#39;});
+	$(&#39;#ui-dialog&#39;).draggable();
+&lt;&lt;/script&gt;&gt;
 
 /* 动态化部分 */
 	&lt;&lt;repeat 0.5s&gt;&gt;
@@ -16904,8 +16906,9 @@ required:false,
 		&lt;&lt;/if&gt;&gt;
 	&lt;&lt;/if&gt;&gt;
 
+&lt;div class=&quot;handle&quot;&gt;
 &lt;&lt;if $args[0]&gt;&gt;&lt;li&gt;&lt;&lt;link $args[0]&gt;&gt;&lt;&lt;addclass &quot;#customOverlay&quot; &quot;hidden&quot;&gt;&gt;&lt;&lt;set $currentOverlay to null&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/li&gt;&lt;&lt;else&gt;&gt;&lt;&lt;/if&gt;&gt;
-
+&lt;/div&gt;
 &lt;&lt;dashline&gt;&gt;
 
 &lt;/div&gt;

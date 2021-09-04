@@ -145,6 +145,15 @@ hr {
   cursor: pointer;
 }
 
+.handle {
+  min-width: 200px;
+  width: max-content;
+  min-height: 30px;
+  height: fit-content;
+  padding: 0px 20px;
+  cursor: move;
+}
+
 #icon {
   position: static;
   vertical-align: text-top;

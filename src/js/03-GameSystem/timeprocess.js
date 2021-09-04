@@ -125,6 +125,11 @@ Macro.add('time', {
 	}
 });
 
+window.dcmulti = function(){
+	let t = V.date.time - V.wakeuptime
+	if(t/60 > 4){}
+}
+
 function passtime(arg,mode){
 	V.date.time += arg
 }

@@ -52,22 +52,10 @@
 
 <<silently>>
 /* 自动刷新等待JS读取结束 */
-<<set _timer to 10>>
-	<<repeat 0.3s>>
-		<<script>>
-			dragElement(document.getElementById("customOverlay"))
-			function dragElement(event) {
-				var dragID = "#customOverlay"
-				$(dragID).draggable();	}
-			
-			dragElement1(document.getElementById("ui-dialog"))
-			function dragElement1(event) {
-				var dragID = "#ui-dialog"
-				$(dragID).draggable();	}
-		<</script>>
-		<<set _timer to _timer -1>>
-		<<if _timer is 0>><<stop>><</if>>
-	<</repeat>>
+<<script>>
+	$('#customOverlay').draggable({handle: '.handle'});
+	$('#ui-dialog').draggable();
+<</script>>
 
 /* 动态化部分 */
 	<<repeat 0.5s>>
