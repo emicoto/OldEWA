@@ -36,7 +36,7 @@
 <</widget>>
 
 <<widget "CMRace">>
-    <<set _optionlist to {"适应力":"人类","兽耳":"兽族","魔纹尖耳":"灵族","羽翼":"羽族","蓝肤尖牙":"夜族"}>>
+    <<set _optionlist to {"适应力":"人类","兽耳":"兽族","魔纹":"灵族","羽翼":"羽族","蓝肤":"夜族"}>>
     <<listbox "$PC.info.race" autoselect>>
 	<<optionsfrom _optionlist>>
     <</listbox>>
@@ -431,7 +431,7 @@
 <</widget>>
 
 <<widget "GSApply">>
-    <<set $charamaking to false>>
+
     <<set $PC.beauty to 1600>>
     <<set $fix.beauty to 1600>>
 

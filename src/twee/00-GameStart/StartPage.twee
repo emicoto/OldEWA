@@ -52,7 +52,7 @@ Elysion World Adventure
 <div class="delayed">
 <span style="line-height:40px;font-size:13px;padding:0px;margin:0px">　
 <<set _text to Lang("＞ 开始游戏","＞ Game Start")>>
-<<link [[_text|开始]]>><<GSApply>><<set $intro to false>><</link>></span><br>
+<<link [[_text|开始]]>><<GSApply>><<set $intro to false>><<set $charamaking to false>><</link>></span><br>
 
 <<include "初始设定">>
 </div>
@@ -113,7 +113,6 @@ $(document).on(':passagerender', function (ev) {
 
 :: 开始
 <<masteraudio stop>>
-
 
 <div id="eventsituation">
 <<you>>准备好了吗？<br>

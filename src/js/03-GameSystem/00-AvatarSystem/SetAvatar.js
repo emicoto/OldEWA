@@ -199,23 +199,28 @@ function stAvatar() {
     })
 
 
-    /*兽耳兽角兽尾部分, 还未实装。 */
-    if((V.PFlag.trueform == true || V.charamaking == true)){
+    /*兽耳兽角兽尾部分, 每个部位都要分开来设置……还未完全实装。 */
+    if((V.PFlag.trueform == true || V.charamaking == true || V.PFlag.showkemomimi == true)){
         if(V.PC.info.race == "兽族"){
             V.avatar.kemofront.mimi = setAvatar("kemofront.mimi",{
                 fixcolor: false, color: haircolor[0],
                 src: "cat",
             })
+        }
+     }else{
+        V.avatar.kemofront.mimi = setAvatar("kemofront.mimi",null)
+    }
 
+    if((V.PFlag.trueform == true || V.charamaking == true || V.PFlag.showkemotail == true)){
+        if(V.PC.info.race == "兽族"){
             V.avatar.kemoback.tail = setAvatar("kemoback.tail",{
                 fixcolor:false, color:haircolor[0],
                 src:"cat", 
             })
         }
-        else{
-            V.avatar.kemofront.mimi = setAvatar("kemofront.mimi",null)
-            V.avatar.kemoback.tail = setAvatar("kemoback.tail",null)
-        }
+     }else{
+        V.avatar.kemoback.tail = setAvatar("kemoback.tail",null)
+    }
         /* let kemotype = V.PC.info.kemotype
         
         if(V.PC.trait.兽耳 == true){
@@ -250,7 +255,7 @@ function stAvatar() {
             })
         }
         */
-    }
+
 
     /*乳头、小丁丁等特殊装备 */
     V.avatar.penis = setAvatar("penis",(V.Equip.penis ? V.Equip.penis.png : null),true)
@@ -280,8 +285,7 @@ function stAvatar() {
     }
 
     
-    const kemorace = ["羽族","兽族"]
-    if((V.PFlag.trueform == true || V.charamaking == true)&& kemorace.includes(V.PC.info.race)){
+    if((V.PFlag.trueform == true || V.charamaking == true)&& V.PC.info.race == "兽族"){
         V.avatar.body = setAvatar("body",{
             src:"furry/body_"+breastsize()+isPregnant(), color: haircolor[0],
         },true)
