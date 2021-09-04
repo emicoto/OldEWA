@@ -1,0 +1,18 @@
+{
+	"twee3LanguageTools.storyformat.current": "sugarcube-2",
+	"twee3LanguageTools.passage.list": true,
+	"twee3LanguageTools.passage.group": "File",
+	"search.exclude" : {
+		"/.vscode":true,
+		"/code": true,
+		"/devTools":true,
+		"/jquery-ui-1.12.1":true,
+		"/node_modules":true,
+		"/tweetest":true,
+		"/dist":true,
+		"/modules":true,
+		"/Material":true,
+		"/templet":true,
+		"/Scripts":true,
+	},
+}
