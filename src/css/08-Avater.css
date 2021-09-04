@@ -28,7 +28,7 @@
     height: 120px;
     border: 1px solid #ddd;
     position: relative;
-    overflow: clip;
+    overflow: hidden;
     float: left;
     border-radius: 100%;
     margin: 5px;
@@ -58,9 +58,9 @@
 #showcase {
     width: 100px;
     height: 240px;
-    overflow: clip;
+    overflow: hidden;
     position: absolute;
-    bottom: 0px
+    bottom: 0px;
 }
 
 .manequin {
