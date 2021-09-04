@@ -158,7 +158,7 @@ function BuyOutFit(args) {
         let group = Object.keys(V.tryon)
 
         for (let i=0; i < group.length; i++){
-            if (V.tryon[group[i]]){
+            if (V.tryon[group[i]] && V.TEquip[group[i]]){
                 let leftstuff = clone(V.TEquip[group[i]])
                 let layer = leftstuff.layer
                 V.closet[layer].push(leftstuff)

@@ -34,10 +34,8 @@
     margin: 5px;
 }
 
-.portrait canvas{
-    border: 1px solid #ddd;
+#portrait canvas{
     overflow: hidden;
-    border-radius: 100%;
 }
 
 /* 商店相关 */
