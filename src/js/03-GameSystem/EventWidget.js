@@ -151,6 +151,7 @@ function getitem(catgr, item, num=1) {
         }else{
             V.items[catgr][item] = {
                 name: D.itemlist[catgr][item].name,
+                name_en: D.itemlist[catgr][item].name_en,
                 type: D.itemlist[catgr][item].type,
                 category: D.itemlist[catgr][item].category,                
                 thumb: D.itemlist[catgr][item].thumb,
@@ -167,6 +168,7 @@ function getitem(catgr, item, num=1) {
         }else{
             V.items.other.通用物品 = {
                 name : "通用物品",
+                name_en:"Common Material",
                 type : "其他",
                 category:"other",
                 thumb : null,
@@ -179,7 +181,7 @@ function getitem(catgr, item, num=1) {
     V.anounce.flag = true
     V.anounce.text = "获得了《"+cname+"》x "+num
     if(V.lang == "EN"){
-        V.anounce.text = "got《"+D.itemlist[catgr][item].en_name+"》 x "+num
+        V.anounce.text = "got《"+ename+"》 x "+num
     }
     return V.items
 }
