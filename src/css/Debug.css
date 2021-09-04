@@ -1,3 +1,33 @@
+    /* Debug view styling */
+html:not([data-debug-view]) #debug-view-toggle {
+    color: #111;
+    border-color: #ccc;
+}
+
+html:not([data-debug-view]) #debug-view-toggle:hover {
+    background-color: #eee;
+    border-color: #111;
+}
+
+html[data-debug-view] #debug-view-toggle {
+    background-color: #9e9;
+    border-color: #7c7;
+}
+
+html[data-debug-view] #debug-view-toggle:hover {
+    background-color: #7c7;
+    border-color: #5a5;
+}
+
+html[data-debug-view] .debug {
+    background-color: #dc9;
+}
+
+html[data-debug-view] .debug.hidden,
+html[data-debug-view] .debug.hidden .debug {
+    background-color: #bbb;
+}
+
   /* Debug bar styling */
   #debug-bar,
   #debug-bar-toggle,
@@ -50,10 +80,6 @@
 	height: 256px;
 	width: 120px;
 	position: relative;
-}
-
-.left {
-	float: left;
 }
 
 .error-view {

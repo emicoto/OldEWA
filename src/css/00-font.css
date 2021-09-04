@@ -1,0 +1,88 @@
+﻿@font-face{
+font-family : "黄婷婷"; /*18*/
+src : url("CSS/FZSJ-SNH48HTTJW.otf");
+}
+
+@font-face{
+font-family: "稚艺简体"; /*14+b*/
+src: url("CSS/FZZHYJW.woff") format('woff'),
+     url("CSS/FZZHYJW.woff2") format('woff2');
+font-weight: normal;
+font-style: normal;
+font-display: swap;
+}
+
+@font-face{
+font-family: "筑紫古典";
+src: url("CSS/FZFWZhuZGDSMCJW.otf");
+}
+
+@font-face{
+font-family: "珍珠体"; 
+src: url("CSS/FZFWZZTJW.otf");
+}
+
+@font-face{
+font-family: "筑紫A圆";
+src: url("CSS/FZFWZhuZiAYuanJWL.otf");
+}
+
+@font-face{
+font-family: "筑紫黑体";
+src: url("CSS/FZFWZhuZiHeiR.otf");
+}
+
+@font-face{
+  font-family: "筑紫标题";
+  src: url("CSS/FZFWZhuZiABiaoTMCJW.otf");
+  }
+
+@font-face{
+  font-family: "正保黑体";
+  src: url("CSS/FZBaoHTJW.otf");
+  }
+
+@font-face{
+  font-family: "正保黑体L";
+  src: url("CSS/FZBaoHTJW_Xi.otf");
+  }
+
+@font-face{
+  font-family: "新综艺";
+  src: url("CSS/FZXinZYHJW_L.otf");
+  }
+
+@font-face{
+  font-family: "新综艺B";
+  src: url("CSS/FZXinZYHJW_M.otf");
+  }
+
+@font-face{
+font-family: "欢乐体";
+src: url("CSS/FZFWHuanLTJW.otf");
+}
+
+@font-face{
+  font-family: "轻吟体";
+  src: url("CSS/FZFWQingYinTiJWL.otf");
+  }
+
+@font-face{
+  font-family: "轻吟体M";
+  src: url("CSS/FZFWQingYinTiJWM.otf");
+  }
+
+/*
+google font: 
+font-family: 'Dancing Script', cursive;
+font-family: 'Kaisei HarunoUmi', serif;
+font-family: 'Kiwi Maru', serif;
+font-family: 'Ma Shan Zheng', cursive;
+font-family: 'Noto Sans SC', sans-serif;
+font-family: 'Noto Serif SC', serif;
+font-family: 'Raleway', sans-serif;
+font-family: 'Shippori Mincho B1', serif;
+font-family: 'ZCOOL KuaiLe', cursive;
+font-family: 'ZCOOL QingKe HuangYou', cursive;
+font-family: 'ZCOOL XiaoWei', serif;
+*/

@@ -10,11 +10,13 @@
 一个60平方米左右的单身公寓。简约现代风的装修，巨大的落地窗，还有一个阳台，两个人住也相当舒适的公寓。<br>
 </div>
 <br>
-<div class="situation">
-<<include "城市生活_1">>
-</div>
-<br>
 
+
+<div id="append-text">测试看看</div>
+<div id="situation" class="situation"><<include "城市生活_1">></div>
+
+
+<br>
 <div class="tolink">
 <<link "打开衣柜　 1m" "衣柜">><<passtime 1>><<set $TEquip to clone($Equip)>><</link>><br>
 <br>

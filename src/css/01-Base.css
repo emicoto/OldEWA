@@ -1,77 +1,4 @@
-﻿@font-face{
-font-family : "黄婷婷"; /*18*/
-src : url("CSS/FZSJ-SNH48HTTJW.otf");
-}
-
-@font-face{
-font-family: "稚艺简体"; /*14+b*/
-src: url("CSS/FZZHYJW.woff") format('woff'),
-     url("CSS/FZZHYJW.woff2") format('woff2');
-font-weight: normal;
-font-style: normal;
-font-display: swap;
-}
-
-@font-face{
-font-family: "筑紫古典";
-src: url("CSS/FZFWZhuZGDSMCJW.otf");
-}
-
-@font-face{
-font-family: "珍珠体"; 
-src: url("CSS/FZFWZZTJW.otf");
-}
-
-@font-face{
-font-family: "筑紫A圆";
-src: url("CSS/FZFWZhuZiAYuanJWL.otf");
-}
-
-@font-face{
-font-family: "筑紫黑体";
-src: url("CSS/FZFWZhuZiHeiR.otf");
-}
-
-@font-face{
-  font-family: "筑紫标题";
-  src: url("CSS/FZFWZhuZiABiaoTMCJW.otf");
-  }
-
-@font-face{
-  font-family: "正保黑体";
-  src: url("CSS/FZBaoHTJW.otf");
-  }
-
-@font-face{
-  font-family: "正保黑体L";
-  src: url("CSS/FZBaoHTJW_Xi.otf");
-  }
-
-@font-face{
-  font-family: "新综艺";
-  src: url("CSS/FZXinZYHJW_L.otf");
-  }
-
-@font-face{
-  font-family: "新综艺B";
-  src: url("CSS/FZXinZYHJW_M.otf");
-  }
-
-@font-face{
-font-family: "欢乐体";
-src: url("CSS/FZFWHuanLTJW.otf");
-}
-
-@font-face{
-  font-family: "轻吟体";
-  src: url("CSS/FZFWQingYinTiJWL.otf");
-  }
-
-@font-face{
-  font-family: "轻吟体M";
-  src: url("CSS/FZFWQingYinTiJWM.otf");
-  }
-
+﻿
 html {
     /* Vertical colour gradient */
   background-image: linear-gradient(
@@ -98,7 +25,7 @@ body {
     /* Remove default styles */
     background-color: transparent;
     margin: -1% 0 0 0;
-    font-family: "Times New Roman", Georgia, 轻吟体M;
+    font-family: "Raleway", Georgia, "轻吟体M";
     /* Used to center the box */
     text-align: left;
     color: #707556;
@@ -181,48 +108,6 @@ body {
   cursor: pointer;
 }
 
-#widget button {
-  background-color: #eee;
-    border-color: #ccc;
-  width: fit-content;
-}
-
-#widget button:hover {
-  background-color: #ddd;
-    border-color: rgb(126, 122, 108);
-  cursor: pointer;
-}
-
-  /* Debug view styling */
-html:not([data-debug-view]) #debug-view-toggle {
-    color: #111;
-    border-color: #ccc;
-}
-
-html:not([data-debug-view]) #debug-view-toggle:hover {
-    background-color: #eee;
-    border-color: #111;
-}
-
-html[data-debug-view] #debug-view-toggle {
-    background-color: #9e9;
-    border-color: #7c7;
-}
-
-html[data-debug-view] #debug-view-toggle:hover {
-    background-color: #7c7;
-    border-color: #5a5;
-}
-
-html[data-debug-view] .debug {
-    background-color: #dc9;
-}
-
-html[data-debug-view] .debug.hidden,
-html[data-debug-view] .debug.hidden .debug {
-    background-color: #bbb;
-}
-
 label {
 	cursor: pointer;
 }
@@ -282,4 +167,14 @@ input[type=range]:focus {
 
 input[type=range]:focus::-webkit-slider-runnable-track {
   background: #d1d1d1;
+}
+
+*::-webkit-scrollbar-thumb{
+	background-color: rgb(220, 220, 220);
+}
+
+*::-webkit-scrollbar{
+	background-color: #eee;
+	width: 3px;
+    height: 3px;
 }

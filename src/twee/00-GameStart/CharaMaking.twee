@@ -10,7 +10,7 @@
 </select>
 </div>
 
-<div id="charainfo" style="margin-left:30px;font-size:16px;color:gray;font-family:筑紫A圆"><<charainfo>></div><br>
+<div id="charainfo"><<charainfo>></div><br>
 
 <</widget>>
 

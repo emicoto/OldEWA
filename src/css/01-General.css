@@ -29,7 +29,7 @@ input, select, textarea {
     color: #111;
     border-color: #ccc;
     max-width:200px;
-    font-family:"Times New Roman", 正保黑体L ;
+    font-family:"Times New Roman", "Noto Serif SC" ;
 }
 
 input:not(:disabled):focus, select:not(:disabled):focus, textarea:not(:disabled):focus,
@@ -124,6 +124,15 @@ hr {
   text-transform: lowercase;
 }
 
+.gray {
+    text-shadow: 1px 1px 0px rgba(187, 187, 187, 0.5),-2px -2px 0px #eee,;
+    color:#ccc;
+}
+
+.graytext {
+    color: #444;
+}
+
 .macro-button {
   background-color: #eee;
   border-color: #ccc;
@@ -139,6 +148,11 @@ hr {
 #icon {
   position: static;
   vertical-align: text-top;
+}
+
+
+.left {
+	float: left;
 }
 
 .followleft {
@@ -169,10 +183,8 @@ hr {
 .title {
   font-size: 32px;
   font-family: "筑紫古典";
-  color:#474000;
   letter-spacing: 5px;
   margin-left: -10px;
-  text-shadow: #fff 2px 2px;
 }
 
 .lbox {

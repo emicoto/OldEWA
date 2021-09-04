@@ -76,23 +76,6 @@
     border-color: rgb(204, 203, 190);
 }
 
-#menu {
-    display: none;
-}
-
-#menu ul {
-    border-color: #ccc;
-}
-#menu li:not(:first-child) {
-    border-top-color: #ccc;
-}
-#menu li a {
-    color: #111;
-}
-#menu li a:hover {
-    background-color: #ddd;
-    border-color: #111;
-}
 
 #versioninfo ,#story-title {
     position:relative;
@@ -102,7 +85,7 @@
 #story-title {
     font-size: 40px;
     line-height: 45px;
-    font-family: "筑紫古典";
+    font-family: "Kaisei HarunoUmi";
     color:#7F6E00;
     font-style: normal;
 }
@@ -110,11 +93,10 @@
 #story-subtitle {
     font-size: 12px;
     font-family: Georgia;
-    color:#b4b07f;
-    letter-spacing: 2px;
-    margin-top: -8px;
-    font-weight: 500;
     font-style: italic;
+    color:#B4B07F;
+    letter-spacing: 2px;
+    margin-top: -6px;
 }
 
 #gameVersionDisplay {
@@ -122,11 +104,12 @@
     left: 2px;
     bottom: 2px;
     font-size: 8px;
-    color: #aaa;
+    color: rgb(177, 179, 160);
     z-index: 1000;
 }
 
 body #story-caption #storyCaptionDiv {
+	/* 232 px: img size, 1.32 em: stats line height, 4px: stats borders */
 	position: fixed;
 	top: 150px;
 	left: 10px;
@@ -134,7 +117,9 @@ body #story-caption #storyCaptionDiv {
 	width: 268px;
 	padding-right: 2px;
 	padding-bottom: 12px;
+	overflow: scroll;
 	overflow-y: scroll;
+	overflow-wrap: anywhere;
 	scrollbar-color: #ddd #ccc;
     scrollbar-width: thin;
 }
@@ -148,6 +133,13 @@ body #story-caption #storyCaptionDiv {
 #story-caption {
 	-webkit-backface-visibility: hidden;
 	backface-visibility: hidden;
+}
+
+#story-caption .error-reporter-btn {
+	position: absolute;
+	right: 16px;
+	top: 48px;
+	z-index: 999;
 }
 
 #showtimes {
@@ -301,8 +293,6 @@ body #story-caption #storyCaptionDiv {
 }
 
 #menu_container .menu {
-    min-width: 20px;
-    max-width: 20px;
     width: 20px;
     height: 100%;
     float: right;

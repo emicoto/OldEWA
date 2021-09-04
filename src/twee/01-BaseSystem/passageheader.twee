@@ -9,7 +9,8 @@
 
 /* 通知弹出框 */
 <div id="action-popup" class="hide"><span id="action-text"></span></div>
-<div id="append-text_top" class="hide"><span id="append-text"></span></div>
+<div id="append-top"><span id="append-text-top">你站不稳了。</span></div>
+
 
 :: PassageFooter
 <div id="gameVersionDisplay">EWA ver<<print StartConfig.version>></div>

@@ -1,0 +1,139 @@
+﻿/* Default dialog styling */
+#ui-overlay {
+    background-color: rgba(157, 178, 179, 0.5);
+}
+
+#ui-dialog {
+    width: fit-content;
+    min-width: 250px;
+    max-width: 600px;
+    height: fit-content;
+    min-height: 100px;
+    max-height: 600px;
+    overflow-y: scroll;
+    border: 2px solid #eee;
+    background-color: rgb(245, 245, 245);
+    border-radius: 10px;
+    margin-top: 10%;
+    box-shadow: 0px 12px 16px rgba(84, 77, 88, 0.5);
+}
+
+#ui-dialog-titlebar {
+    background-color: transparent;
+    padding: 5px auto;
+    cursor: move;
+}
+
+#ui-dialog-titlebar h1 {
+    background-color: transparent;
+    padding: 5px auto;
+    margin: 5px;
+    font-family: 珍珠体, Georgia;
+    font-size: 18px;
+}
+
+#ui-dialog-close{
+    background-color: transparent;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top:2px;
+    right:5px;
+}
+#ui-dialog-close:hover {
+    background-color: rgb(195, 195, 195);
+    border-color: rgb(190, 190, 190);
+}
+#ui-dialog-body {
+    background-color: #fff;
+    border-color: #eee;
+    border-radius: 10px;
+}
+#ui-dialog-body hr {
+    background-color: #ccc;
+}
+
+#ui-dialog-body button {
+    background-color: transparent;
+    border: #ccc 1px solid;
+    width: fit-content;
+    min-width: 50px;
+    font-size: 14px;
+    letter-spacing: 1px;
+}
+
+#ui-dialog-body button:hover {
+    background-color: #eee;
+    border: rgb(185, 185, 185) 1px solid;
+    width: fit-content;
+    min-width: 50px;
+    font-size: 14px;
+    letter-spacing: 1px;
+    color:#746930;
+}
+
+#alert-ok {
+    position:absolute;
+    bottom:5px;
+    right:5px;
+}
+
+/* List-based dialog styling */
+#ui-dialog-body.list li:not(:first-child) {
+    border-top-color: #ccc;
+}
+#ui-dialog-body.list li a {
+    color: #111;
+}
+#ui-dialog-body.list li a:hover {
+    background-color: #ddd;
+    border-color: #111;
+}
+
+/* Saves dialog styling */
+#ui-dialog-body.saves > *:not(:first-child),
+#ui-dialog-body.saves tr:not(:first-child) {
+    border-top-color: #ccc;
+}
+#ui-dialog-body.saves .empty {
+    color: #777;
+}
+
+/* Settings dialog styling */
+#ui-dialog-body.settings button[id|="setting-control"] {
+    color: #111;
+    border-color: #ccc;
+}
+#ui-dialog-body.settings button[id|="setting-control"]:hover {
+    background-color: #ddd;
+    border-color: #111;
+}
+#ui-dialog-body.settings button[id|="setting-control"].enabled {
+    background-color: #9e9;
+    border-color: #7c7;
+}
+#ui-dialog-body.settings button[id|="setting-control"].enabled:hover {
+    background-color: #7c7;
+    border-color: #5a5;
+}
+
+
+#menu {
+    display: none;
+}
+
+#menu ul {
+    border-color: #ccc;
+}
+#menu li:not(:first-child) {
+    border-top-color: #ccc;
+}
+#menu li a {
+    color: #111;
+}
+#menu li a:hover {
+    background-color: #ddd;
+    border-color: #111;
+}

@@ -1,10 +1,12 @@
 <!-- 左侧边栏 -->
 :: StoryCaption
-<<set $statshidden to false>>
 <div @class="(Errors.log.length==0?'hidden':'') + ' error-reporter-btn'" onclick="Errors.Reporter.toggle()"></div>
+
+<<set $statshidden to false>>
 <<if $anounce.flag is true>>
 	<<anouncePopUP $anounce.text $anounce.type>>
 <</if>>
+
 <<timeprocess>>
 
 <div id="volume">
@@ -61,9 +63,7 @@ MENU
 </div>
 
 
-
-/* 框架的尾巴 */
-</div>
+</div>/* 框架的尾巴 */
 
 <!-- 隐藏元素 */ -->
 <<set $currentOverlay to null>>
@@ -103,7 +103,6 @@ MENU
 		<</if>>
 		<<if $intro isnot true>>
 			<<replace "#showtimes">><<timestats>><</replace>>
-			
 			<<replace "#notice">><<notification>><</replace>>
 			<<replace "#show_money">><<showmoney>><</replace>>
 		<<if $statshidden is false>>
