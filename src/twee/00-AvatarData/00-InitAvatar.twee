@@ -35,10 +35,11 @@
 
 <<set A.haircolor to {
     "black":["#4F4240","#CAA799"],      "darkbrown":["#765646","#EACFB2"],      "wine":["#9D5755","#EACFB2"] , 
-    "brown":["#A07856","#EACFB2"],      "milktea":["#D5AEA0","#FFEDEA"],        "blond":["#FFD87C","#FFFFFF"],
+    "brown":["#A07856","#EACFB2"],      "milktea":["#D5AEA0","#FFEDEA"],        "blond":["#FFE664","#FFFFFF"],
     "softblond":["#FFEEA9","#FFFFFF"],  "platinum":["#FFF1D5","#FFFFFF"],       "silver":["#EBF0F3","#FFFFFF"],
     "white":["#FFFFFF","#EAFDFF"],      "purple":["#C8B5F9","#FFF1FE"],         "green":["#CEF3A0","#FFFDDA"],
     "blue":["#6B97F6","#FFFFFF"],       "aqua":["#BADDFF","#FFFFFF"],           "pink":["#FFC0DA","#FFFDDA"],
+    "red" :["#ED5C4D","#FFD2E7"],       "orange":["#FFA63D","#FAFFCF"]
 }>>
 
 <<set A.colors to {

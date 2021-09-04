@@ -126,7 +126,7 @@ Macro.add('time', {
 });
 
 function passtime(arg,mode){
-
+	V.date.time += arg
 }
 
 function daychange(){

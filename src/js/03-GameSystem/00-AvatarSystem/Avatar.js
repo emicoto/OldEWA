@@ -318,20 +318,6 @@ var Avatar;
       },
       srcfn(options2) {
         return options2.kemoback.tail ? __resolve(AVATARPATH, `kemoback/${options2.kemoback.tail.src}.png`) : options2.dummy;
-      },
-      blendModefn(options2) {
-        if (options2.kemoback.tail) {
-          if (!options2.kemoback.tail.fixcolor) {
-            return BLENDMODE.MULTIPLY;
-          }
-        }
-      },
-      blendfn(options2) {
-        if (options2.kemoback.tail) {
-          if (!options2.kemoback.tail.fixcolor) {
-            return options2.kemoback.tail.color;
-          }
-        }
       }
     });
     setLayer(ID, "kemoback_tail_msk", {
@@ -1330,20 +1316,6 @@ var Avatar;
           return options2.kemofront.mimi ? __resolve(AVATARPATH, `kemofront/${options2.kemofront.mimi.src}.png`) : options2.dummy;
         }
         return options2.kemofront.mimi ? __resolve(AVATARPATH, `kemofront/${options2.kemofront.mimi}.png`) : options2.dummy;
-      },
-      blendModefn(options2) {
-        if (isObject(options2.kemofront.mimi)) {
-          if (!options2.kemofront.mimi.fixcolor) {
-            return BLENDMODE.MULTIPLY;
-          }
-        }
-      },
-      blendfn(options2) {
-        if (isObject(options2.kemofront.mimi)) {
-          if (!options2.kemofront.mimi.fixcolor) {
-            return options2.kemofront.mimi.color;
-          }
-        }
       }
     });
     setLayer(ID, "kemofront_mimi_msk", {

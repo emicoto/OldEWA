@@ -103,8 +103,7 @@ window.imglocation = imglocation
 
 
 function isFurry(){
-    const group = ["兽族","羽族"]
-    if ((V.PFlag.trueform == true ||  V.charamaking == true) && group.includes(V.PC.info.race)) return "furry/"
+    if ((V.PFlag.trueform == true ||  V.charamaking == true) && V.PC.info.race=="兽族") return "furry/"
     else if ((V.PFlag.trueform == true || V.charamaking == true) && V.PC.info.race=="灵族") return "gold/"
     else if (((V.PFlag.trueform == true || V.charamaking == true) && V.PC.info.race=="夜族")) return "yoru/"
     else return V.PC.info.skin+"/"

@@ -10038,20 +10038,6 @@ var Avatar;
       },
       srcfn(options2) {
         return options2.kemoback.tail ? __resolve(AVATARPATH, `kemoback/${options2.kemoback.tail.src}.png`) : options2.dummy;
-      },
-      blendModefn(options2) {
-        if (options2.kemoback.tail) {
-          if (!options2.kemoback.tail.fixcolor) {
-            return BLENDMODE.MULTIPLY;
-          }
-        }
-      },
-      blendfn(options2) {
-        if (options2.kemoback.tail) {
-          if (!options2.kemoback.tail.fixcolor) {
-            return options2.kemoback.tail.color;
-          }
-        }
       }
     });
     setLayer(ID, "kemoback_tail_msk", {
@@ -11050,20 +11036,6 @@ var Avatar;
           return options2.kemofront.mimi ? __resolve(AVATARPATH, `kemofront/${options2.kemofront.mimi.src}.png`) : options2.dummy;
         }
         return options2.kemofront.mimi ? __resolve(AVATARPATH, `kemofront/${options2.kemofront.mimi}.png`) : options2.dummy;
-      },
-      blendModefn(options2) {
-        if (isObject(options2.kemofront.mimi)) {
-          if (!options2.kemofront.mimi.fixcolor) {
-            return BLENDMODE.MULTIPLY;
-          }
-        }
-      },
-      blendfn(options2) {
-        if (isObject(options2.kemofront.mimi)) {
-          if (!options2.kemofront.mimi.fixcolor) {
-            return options2.kemofront.mimi.color;
-          }
-        }
       }
     });
     setLayer(ID, "kemofront_mimi_msk", {
@@ -11801,11 +11773,12 @@ window.dressOn = dressOn
 F.dressOn = dressOn
 
 function gonaked(mode){
-    V.TEquip = clone(V.Equip)
+
+    if((V.Equip.top && mode=="debug") || mode!="debug"){
+        V.TEquip = clone(V.Equip)
+    }
 
     const group=["hat","outter","top","bottom","inner_up","inner_bt","legs","shoes","face","neck","hand","back"]
-
-
 
     if (mode=="closet"){
         for(let i=0; i< group.length; i++){
@@ -11846,7 +11819,6 @@ function redress(mode){
             let n = index[i]
 
             if(V.TEquip[n]){
-
                 //寻找衣柜里和暂存记录里 UID一致的衣服
                 if(V.closet[n].length > 0){
                     for(let c=0;c<V.closet[n].length;c++){
@@ -12707,7 +12679,7 @@ Macro.add('time', {
 });
 
 function passtime(arg,mode){
-
+	V.date.time += arg
 }
 
 function daychange(){
@@ -13283,10 +13255,11 @@ DefineMacroS("delay",delay)
 
 &lt;&lt;set A.haircolor to {
     &quot;black&quot;:[&quot;#4F4240&quot;,&quot;#CAA799&quot;],      &quot;darkbrown&quot;:[&quot;#765646&quot;,&quot;#EACFB2&quot;],      &quot;wine&quot;:[&quot;#9D5755&quot;,&quot;#EACFB2&quot;] , 
-    &quot;brown&quot;:[&quot;#A07856&quot;,&quot;#EACFB2&quot;],      &quot;milktea&quot;:[&quot;#D5AEA0&quot;,&quot;#FFEDEA&quot;],        &quot;blond&quot;:[&quot;#FFD87C&quot;,&quot;#FFFFFF&quot;],
+    &quot;brown&quot;:[&quot;#A07856&quot;,&quot;#EACFB2&quot;],      &quot;milktea&quot;:[&quot;#D5AEA0&quot;,&quot;#FFEDEA&quot;],        &quot;blond&quot;:[&quot;#FFE664&quot;,&quot;#FFFFFF&quot;],
     &quot;softblond&quot;:[&quot;#FFEEA9&quot;,&quot;#FFFFFF&quot;],  &quot;platinum&quot;:[&quot;#FFF1D5&quot;,&quot;#FFFFFF&quot;],       &quot;silver&quot;:[&quot;#EBF0F3&quot;,&quot;#FFFFFF&quot;],
     &quot;white&quot;:[&quot;#FFFFFF&quot;,&quot;#EAFDFF&quot;],      &quot;purple&quot;:[&quot;#C8B5F9&quot;,&quot;#FFF1FE&quot;],         &quot;green&quot;:[&quot;#CEF3A0&quot;,&quot;#FFFDDA&quot;],
     &quot;blue&quot;:[&quot;#6B97F6&quot;,&quot;#FFFFFF&quot;],       &quot;aqua&quot;:[&quot;#BADDFF&quot;,&quot;#FFFFFF&quot;],           &quot;pink&quot;:[&quot;#FFC0DA&quot;,&quot;#FFFDDA&quot;],
+    &quot;red&quot; :[&quot;#ED5C4D&quot;,&quot;#FFD2E7&quot;],       &quot;orange&quot;:[&quot;#FFA63D&quot;,&quot;#FAFFCF&quot;]
 }&gt;&gt;
 
 &lt;&lt;set A.colors to {
@@ -14180,13 +14153,13 @@ DefineMacroS("delay",delay)
     阴茎 : {迷你:[0,6], 短小:[7,10], 普通:[11,15], 粗长:[16,18], 巨大:[19,24]},
 
     性别 : [&quot;伪娘&quot;,&quot;扶她&quot;,&quot;少年&quot;,&quot;少女&quot;],
-    种族 : [&quot;人类&quot;,&quot;兽族&quot;,&quot;灵族&quot;,&quot;羽族&quot;,&quot;夜族&quot;],
+    种族 : [&quot;人类&quot;,&quot;兽族&quot;,&quot;灵族&quot;,&quot;羽族&quot;,&quot;夜族&quot;,&quot;龙族&quot;],
     专长 : [&quot;文艺创作&quot;,&quot;物理科学&quot;,&quot;自然科学&quot;,&quot;生理科学&quot;,&quot;音乐表演&quot;,&quot;运动格斗&quot;],
     初期角色 : [&quot;魔法少女&quot;,&quot;爱抖露&quot;,&quot;修仙者&quot;],
     兽型 : [&quot;cat&quot;,&quot;dog&quot;,&quot;wolf&quot;,&quot;fox&quot;,&quot;deer&quot;,&quot;sheep&quot;,&quot;cow&quot;],
     
-    肤色 : [&quot;dark&quot;,&quot;black&quot;,&quot;mugi&quot;,&quot;health&quot;,&quot;white&quot;],
-    发色 : [&quot;black&quot;,&quot;darkbrown&quot;,&quot;wine&quot;,&quot;brown&quot;,&quot;milktea&quot;,&quot;blond&quot;,&quot;softblond&quot;,&quot;platinum&quot;,&quot;silver&quot;,&quot;white&quot;,&quot;purple&quot;,&quot;green&quot;,&quot;blue&quot;,&quot;aqua&quot;,&quot;pink&quot;],
+    肤色 : [&quot;dark&quot;,&quot;black&quot;,&quot;mugi&quot;,&quot;health&quot;,&quot;white&quot;,&quot;pale&quot;,&quot;gold&quot;,&quot;yoru&quot;,&quot;furry&quot;],
+    发色 : [&quot;black&quot;,&quot;darkbrown&quot;,&quot;wine&quot;,&quot;brown&quot;,&quot;milktea&quot;,&quot;blond&quot;,&quot;softblond&quot;,&quot;platinum&quot;,&quot;silver&quot;,&quot;white&quot;,&quot;purple&quot;,&quot;green&quot;,&quot;blue&quot;,&quot;aqua&quot;,&quot;pink&quot;,&quot;red&quot;,&quot;orange&quot;],
     瞳色 : [&quot;black&quot;,&quot;brown&quot;,&quot;emerald&quot;,&quot;green&quot;,&quot;blue&quot;,&quot;aqua&quot;,&quot;purple&quot;,&quot;white&quot;,&quot;amber&quot;,&quot;red&quot;,&quot;lightgreen&quot;,&quot;lightpurple&quot;],
 
     /* 特殊素质，部分可在游戏开始时选择，部分需要通过游戏达成 */
@@ -14357,6 +14330,8 @@ DefineMacroS("delay",delay)
         肤色:{
         &quot;dark&quot;   : &quot;棕色&quot;,  &quot;black&quot; : &quot;黝黑&quot;,   &quot;mugi&quot;  : &quot;麦色&quot;,
         &quot;health&quot; : &quot;健康&quot;,  &quot;white&quot; : &quot;白皙&quot;,   &quot;skin&quot;  : &quot;的肌肤&quot;,
+        &quot;pale&quot;   : &quot;苍白&quot;,  &quot;gold&quot;  : &quot;金色&quot;,   &quot;yoru&quot;  : &quot;淡蓝色&quot;,
+        &quot;furry&quot;  : &quot;毛茸茸&quot;
         }, 
         瞳色:{
             &quot;black&quot; : &quot;黑色&quot;,   &quot;brown&quot; : &quot;棕色&quot;,   &quot;emerald&quot;: &quot;碧绿色&quot;,
@@ -14371,6 +14346,7 @@ DefineMacroS("delay",delay)
             &quot;softblond&quot; :&quot;米黄色&quot;,  &quot;platinum&quot;  :&quot;白金色&quot;,  &quot;silver&quot;:&quot;银色&quot;,
             &quot;white&quot;     :&quot;纯白色&quot;,  &quot;purple&quot;    :&quot;紫色&quot;,    &quot;green&quot; :&quot;绿色&quot;,
             &quot;blue&quot;      :&quot;蓝色&quot;,    &quot;aqua&quot;      :&quot;水色&quot;,    &quot;pink&quot;  :&quot;粉色&quot;,
+            &quot;red&quot;       :&quot;红色&quot;,    &quot;orange&quot;    :&quot;橙色&quot;,
         },
         发型:{
             &quot;straight&quot;  :&quot;顺直的&quot;,   &quot;natural&quot;  :&quot;自然的&quot;,
@@ -14391,7 +14367,9 @@ DefineMacroS("delay",delay)
 &lt;&lt;set setup.L.EN to {
         肤色:{
         &quot;dark&quot;  : &quot;dark&quot;,           &quot;black&quot; : &quot;black&quot;,      &quot;mugi&quot; : &quot;wheatish&quot;,
-        &quot;health&quot;: &quot;healthy white&quot;,  &quot;white&quot; : &quot;pale white&quot;, &quot;skin&quot;  : &quot;skin&quot;, 
+        &quot;health&quot;: &quot;healthy white&quot;,  &quot;white&quot; : &quot;white&quot;,      &quot;skin&quot; : &quot;skin&quot;,
+        &quot;pale&quot;  : &quot;pale white&quot;,     &quot;gold&quot;  : &quot;gold&quot;,       &quot;yoru&quot; : &quot;light blue&quot;,
+        &quot;furry&quot; : &quot;furry&quot;,
         },
         瞳色:{
             &quot;eyes&quot;   : &quot;eyes&quot;,      &quot;black&quot; : &quot;black&quot;,      &quot;brown&quot;: &quot;brown&quot;,
@@ -14407,6 +14385,7 @@ DefineMacroS("delay",delay)
 
             &quot;silver&quot;:&quot;silver&quot;,  &quot;white&quot;:&quot;white&quot;,    &quot;purple&quot;:&quot;purple&quot;,  &quot;green&quot;:&quot;green&quot;,
             &quot;blue&quot;:&quot;blue&quot;,      &quot;aqua&quot;:&quot;aqua&quot;,      &quot;pink&quot;:&quot;pink&quot;,
+            &quot;red&quot; :&quot;red&quot;,    &quot;orange&quot; :&quot;orange&quot;,
         }, 
         发型:{
             &quot;straight&quot;  : &quot;straight&quot;,   &quot;natural&quot; : &quot;natural&quot;,
@@ -14853,7 +14832,7 @@ $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌}
 &lt;&lt;/if&gt;&gt;
 
 &lt;li&gt;角色名字： &lt;&lt;textbox &quot;$PC.info.name&quot; $PC.info.name&gt;&gt;　　∵ 人物背景：&lt;&lt;CMBackground&gt;&gt;&lt;/li&gt;
-&lt;li&gt;性别属性： &lt;&lt;CMGender&gt;&gt;　　　&lt;&lt;if $debug&gt;&gt;&lt;&lt;button 查看裸体&gt;&gt;&lt;&lt;gonaked &quot;debug&quot;&gt;&gt;&lt;&lt;/button&gt;&gt; &lt;&lt;button 穿上衣服&gt;&gt;&lt;&lt;redress&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;/li&gt;
+&lt;li&gt;性别属性： &lt;&lt;CMGender&gt;&gt;　　　&lt;&lt;button 查看裸体&gt;&gt;&lt;&lt;gonaked &quot;debug&quot;&gt;&gt;&lt;&lt;/button&gt;&gt; &lt;&lt;button 穿上衣服&gt;&gt;&lt;&lt;redress&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;/li&gt;
 &lt;li&gt;兴趣特长： &lt;&lt;CMMainclass&gt;&gt;　　　&lt;&lt;if $debug&gt;&gt;∵ 切换表情: &lt;&lt;CMEmote&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;/li&gt;
 &lt;li&gt;　性观念： &lt;&lt;CMChara&gt;&gt;&lt;/li&gt;
 
@@ -14862,7 +14841,7 @@ $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌}
 &lt;li&gt;外貌体征&lt;/li&gt;
 　体型　&lt;&lt;CMBodytype&gt;&gt;　　肤色　&lt;&lt;CMSkin&gt;&gt;　　特殊　&lt;&lt;CMRace&gt;&gt;&lt;br&gt;
 　发色　&lt;&lt;CMHairColor&gt;&gt;　　发长　&lt;&lt;CMHair&gt;&gt;　　发型　&lt;&lt;CMHairstyle&gt;&gt;&lt;br&gt;
-　眼型　&lt;&lt;CMEyetype&gt;&gt;　　&lt;span id=&quot;CMEyeoption&quot;&gt;瞳色　&lt;&lt;CMEyeColor&gt;&gt;&lt;/span&gt;&lt;span id=&quot;CMFurOption&quot;&gt;&lt;/span&gt;&lt;br&gt;
+　眼型　&lt;&lt;CMEyetype&gt;&gt;　　瞳色　&lt;&lt;CMEyeColor&gt;&gt;&lt;span id=&quot;CMFurOption&quot;&gt;&lt;/span&gt;&lt;br&gt;
 　罩杯　&lt;&lt;CMBreast&gt;&gt;　　臀型　&lt;&lt;CMButts&gt;&gt;　　&lt;label&gt;&lt;&lt;print &#39;&lt;&lt;checkbox &quot;$PC.trait.泌乳体质&quot; false true &#39; + ($PC.trait.泌乳体质 is true ? &quot;checked&quot; : &quot;&quot;) + &#39;&gt;&gt;&#39;&gt;&gt;泌乳体质？&lt;/label&gt;&lt;br&gt;
 &lt;&lt;dashline&gt;&gt;
 &lt;li&gt;感官特征&lt;/li&gt;
@@ -14889,11 +14868,6 @@ $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌}
     &lt;&lt;repeat 0.3s&gt;&gt;
         &lt;&lt;set $PC.info.hairlenf to $PC.info.hairlen&gt;&gt;
         &lt;&lt;if $activepage is &quot;CharaMaking&quot;&gt;&gt;
-            &lt;&lt;if $PC.info.race is &quot;夜族&quot;&gt;&gt;
-                &lt;&lt;set $PC.eye to &quot;银色&quot;&gt;&gt;&lt;&lt;replace #CMEyeoption&gt;&gt;瞳色　&lt;&lt;CMEyeColor&gt;&gt;&lt;&lt;/replace&gt;&gt;
-            &lt;&lt;elseif $PC.info.race is &quot;灵族&quot;&gt;&gt;
-                &lt;&lt;set $PC.eye to &quot;金色&quot;&gt;&gt;&lt;&lt;replace #CMEyeoption&gt;&gt;瞳色　&lt;&lt;CMEyeColor&gt;&gt;&lt;&lt;/replace&gt;&gt;
-            &lt;&lt;/if&gt;&gt;
             &lt;&lt;switch $PC.info.tag&gt;&gt;
                 &lt;&lt;case &quot;伪娘&quot;&gt;&gt;
                     &lt;&lt;replace #CMgenital&gt;&gt;&lt;&lt;CMBoy&gt;&gt;&lt;&lt;/replace&gt;&gt;
@@ -14953,7 +14927,7 @@ $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌}
 &lt;&lt;/widget&gt;&gt;
 
 &lt;&lt;widget &quot;CMRace&quot;&gt;&gt;
-    &lt;&lt;set _optionlist to {&quot;适应力&quot;:&quot;人类&quot;,&quot;兽耳&quot;:&quot;兽族&quot;,&quot;魔纹尖耳&quot;:&quot;灵族&quot;,&quot;羽翼&quot;:&quot;羽族&quot;,&quot;银瞳尖牙&quot;:&quot;夜族&quot;}&gt;&gt;
+    &lt;&lt;set _optionlist to {&quot;适应力&quot;:&quot;人类&quot;,&quot;兽耳&quot;:&quot;兽族&quot;,&quot;魔纹尖耳&quot;:&quot;灵族&quot;,&quot;羽翼&quot;:&quot;羽族&quot;,&quot;蓝肤尖牙&quot;:&quot;夜族&quot;}&gt;&gt;
     &lt;&lt;listbox &quot;$PC.info.race&quot; autoselect&gt;&gt;
 	&lt;&lt;optionsfrom _optionlist&gt;&gt;
     &lt;&lt;/listbox&gt;&gt;
@@ -14981,7 +14955,7 @@ $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌}
 &lt;&lt;/widget&gt;&gt;
 
 &lt;&lt;widget &quot;CMSkin&quot;&gt;&gt;
-    &lt;&lt;set _optionlist to {&quot;健康&quot;:&quot;health&quot;,&quot;白皙&quot;:&quot;white&quot;,&quot;麦色&quot;:&quot;mugi&quot;,&quot;棕色&quot;:&quot;dark&quot;,&quot;黝黑&quot;:&quot;black&quot;}&gt;&gt;
+    &lt;&lt;set _optionlist to {&quot;健康&quot;:&quot;health&quot;,&quot;白皙&quot;:&quot;white&quot;,&quot;麦色&quot;:&quot;mugi&quot;,&quot;棕色&quot;:&quot;dark&quot;,&quot;黝黑&quot;:&quot;black&quot;,&quot;苍白&quot;:&quot;pale&quot;}&gt;&gt;
     &lt;&lt;listbox &quot;$PC.info.skin&quot; autoselect&gt;&gt;
         &lt;&lt;optionsfrom _optionlist&gt;&gt;
     &lt;&lt;/listbox&gt;&gt;
@@ -15009,7 +14983,7 @@ $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌}
 &lt;&lt;/widget&gt;&gt;
 
 &lt;&lt;widget &quot;CMHairColor&quot;&gt;&gt;
-    &lt;&lt;set _optionlist to {&quot;黑色&quot;:&quot;black&quot;,&quot;深棕色&quot;:&quot;darkbrown&quot;,&quot;酒红色&quot;:&quot;wine&quot;,&quot;棕色&quot;:&quot;brown&quot;,&quot;奶茶色&quot;:&quot;milktea&quot;,&quot;金色&quot;:&quot;blond&quot;,&quot;米黄色&quot;:&quot;softblond&quot;,&quot;白金色&quot;:&quot;platinum&quot;,&quot;银色&quot;:&quot;silver&quot;,&quot;纯白色&quot;:&quot;white&quot;,&quot;紫色&quot;:&quot;purple&quot;,&quot;绿色&quot;:&quot;green&quot;,&quot;蓝色&quot;:&quot;blue&quot;,&quot;水色&quot;:&quot;aqua&quot;,&quot;粉色&quot;:&quot;pink&quot;}&gt;&gt;
+    &lt;&lt;set _optionlist to {&quot;黑色&quot;:&quot;black&quot;,&quot;深棕色&quot;:&quot;darkbrown&quot;,&quot;酒红色&quot;:&quot;wine&quot;,&quot;棕色&quot;:&quot;brown&quot;,&quot;奶茶色&quot;:&quot;milktea&quot;,&quot;金色&quot;:&quot;blond&quot;,&quot;米黄色&quot;:&quot;softblond&quot;,&quot;白金色&quot;:&quot;platinum&quot;,&quot;银色&quot;:&quot;silver&quot;,&quot;纯白色&quot;:&quot;white&quot;,&quot;紫色&quot;:&quot;purple&quot;,&quot;绿色&quot;:&quot;green&quot;,&quot;蓝色&quot;:&quot;blue&quot;,&quot;水色&quot;:&quot;aqua&quot;,&quot;粉色&quot;:&quot;pink&quot;,&quot;红色&quot;:&quot;red&quot;,&quot;橙色&quot;:&quot;orange&quot;}&gt;&gt;
     &lt;&lt;listbox &quot;$PC.info.haircolor&quot; autoselect&gt;&gt;
         &lt;&lt;optionsfrom _optionlist&gt;&gt;
     &lt;&lt;/listbox&gt;&gt;

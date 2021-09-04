@@ -6,6 +6,8 @@
         肤色:{
         "dark"   : "棕色",  "black" : "黝黑",   "mugi"  : "麦色",
         "health" : "健康",  "white" : "白皙",   "skin"  : "的肌肤",
+        "pale"   : "苍白",  "gold"  : "金色",   "yoru"  : "淡蓝色",
+        "furry"  : "毛茸茸"
         }, 
         瞳色:{
             "black" : "黑色",   "brown" : "棕色",   "emerald": "碧绿色",
@@ -20,6 +22,7 @@
             "softblond" :"米黄色",  "platinum"  :"白金色",  "silver":"银色",
             "white"     :"纯白色",  "purple"    :"紫色",    "green" :"绿色",
             "blue"      :"蓝色",    "aqua"      :"水色",    "pink"  :"粉色",
+            "red"       :"红色",    "orange"    :"橙色",
         },
         发型:{
             "straight"  :"顺直的",   "natural"  :"自然的",
@@ -40,7 +43,9 @@
 <<set setup.L.EN to {
         肤色:{
         "dark"  : "dark",           "black" : "black",      "mugi" : "wheatish",
-        "health": "healthy white",  "white" : "pale white", "skin"  : "skin", 
+        "health": "healthy white",  "white" : "white",      "skin" : "skin",
+        "pale"  : "pale white",     "gold"  : "gold",       "yoru" : "light blue",
+        "furry" : "furry",
         },
         瞳色:{
             "eyes"   : "eyes",      "black" : "black",      "brown": "brown",
@@ -56,6 +61,7 @@
 
             "silver":"silver",  "white":"white",    "purple":"purple",  "green":"green",
             "blue":"blue",      "aqua":"aqua",      "pink":"pink",
+            "red" :"red",    "orange" :"orange",
         }, 
         发型:{
             "straight"  : "straight",   "natural" : "natural",

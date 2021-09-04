@@ -322,20 +322,20 @@ function Avatarlayer(ID: string, option = null): void {
     srcfn(options) {
       return options.kemoback.tail ? __resolve(AVATARPATH, `kemoback/${options.kemoback.tail.src}.png`) : options.dummy
     },
-    blendModefn(options) {
-      if (options.kemoback.tail) {
-        if (!options.kemoback.tail.fixcolor) {
-          return BLENDMODE.MULTIPLY
-        }
-      }
-    },
-    blendfn(options) {
-      if (options.kemoback.tail) {
-        if (!options.kemoback.tail.fixcolor) {
-          return options.kemoback.tail.color
-        }
-      }
-    }
+    // blendModefn(options) {
+    //   if (options.kemoback.tail) {
+    //     if (!options.kemoback.tail.fixcolor) {
+    //       return BLENDMODE.MULTIPLY
+    //     }
+    //   }
+    // },
+    // blendfn(options) {
+    //   if (options.kemoback.tail) {
+    //     if (!options.kemoback.tail.fixcolor) {
+    //       return options.kemoback.tail.color
+    //     }
+    //   }
+    // }
   })
   setLayer(ID, "kemoback_tail_msk", {
     width: opt.width ? opt.width : defalutOpt.width,
@@ -1441,23 +1441,23 @@ function Avatarlayer(ID: string, option = null): void {
       }
       return options.kemofront.mimi ? __resolve(AVATARPATH, `kemofront/${options.kemofront.mimi}.png`) : options.dummy
     },
-    blendModefn(options) {
-      if (isObject(options.kemofront.mimi)) {
-        if (!options.kemofront.mimi.fixcolor) {
-          return BLENDMODE.MULTIPLY
-        }
-      }
+    // blendModefn(options) {
+    //   if (isObject(options.kemofront.mimi)) {
+    //     if (!options.kemofront.mimi.fixcolor) {
+    //       return BLENDMODE.MULTIPLY
+    //     }
+    //   }
 
-    },
-    blendfn(options) {
-      if (isObject(options.kemofront.mimi)) {
+    // },
+    // blendfn(options) {
+    //   if (isObject(options.kemofront.mimi)) {
 
-        if (!options.kemofront.mimi.fixcolor) {
+    //     if (!options.kemofront.mimi.fixcolor) {
 
-          return options.kemofront.mimi.color
-        }
-      }
-    }
+    //       return options.kemofront.mimi.color
+    //     }
+    //   }
+    // }
   })
   setLayer(ID, "kemofront_mimi_msk", {
     width: opt.width ? opt.width : defalutOpt.width,

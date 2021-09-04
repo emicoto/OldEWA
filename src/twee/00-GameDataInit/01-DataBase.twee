@@ -18,13 +18,13 @@
     阴茎 : {迷你:[0,6], 短小:[7,10], 普通:[11,15], 粗长:[16,18], 巨大:[19,24]},
 
     性别 : ["伪娘","扶她","少年","少女"],
-    种族 : ["人类","兽族","灵族","羽族","夜族"],
+    种族 : ["人类","兽族","灵族","羽族","夜族","龙族"],
     专长 : ["文艺创作","物理科学","自然科学","生理科学","音乐表演","运动格斗"],
     初期角色 : ["魔法少女","爱抖露","修仙者"],
     兽型 : ["cat","dog","wolf","fox","deer","sheep","cow"],
     
-    肤色 : ["dark","black","mugi","health","white"],
-    发色 : ["black","darkbrown","wine","brown","milktea","blond","softblond","platinum","silver","white","purple","green","blue","aqua","pink"],
+    肤色 : ["dark","black","mugi","health","white","pale","gold","yoru","furry"],
+    发色 : ["black","darkbrown","wine","brown","milktea","blond","softblond","platinum","silver","white","purple","green","blue","aqua","pink","red","orange"],
     瞳色 : ["black","brown","emerald","green","blue","aqua","purple","white","amber","red","lightgreen","lightpurple"],
 
     /* 特殊素质，部分可在游戏开始时选择，部分需要通过游戏达成 */

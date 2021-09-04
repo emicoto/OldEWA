@@ -295,11 +295,12 @@ window.dressOn = dressOn
 F.dressOn = dressOn
 
 function gonaked(mode){
-    V.TEquip = clone(V.Equip)
+
+    if((V.Equip.top && mode=="debug") || mode!="debug"){
+        V.TEquip = clone(V.Equip)
+    }
 
     const group=["hat","outter","top","bottom","inner_up","inner_bt","legs","shoes","face","neck","hand","back"]
-
-
 
     if (mode=="closet"){
         for(let i=0; i< group.length; i++){
@@ -340,7 +341,6 @@ function redress(mode){
             let n = index[i]
 
             if(V.TEquip[n]){
-
                 //寻找衣柜里和暂存记录里 UID一致的衣服
                 if(V.closet[n].length > 0){
                     for(let c=0;c<V.closet[n].length;c++){

@@ -34,7 +34,7 @@
 <</if>>
 
 <li>角色名字： <<textbox "$PC.info.name" $PC.info.name>>　　∵ 人物背景：<<CMBackground>></li>
-<li>性别属性： <<CMGender>>　　　<<if $debug>><<button 查看裸体>><<gonaked "debug">><</button>> <<button 穿上衣服>><<redress>><</button>><</if>></li>
+<li>性别属性： <<CMGender>>　　　<<button 查看裸体>><<gonaked "debug">><</button>> <<button 穿上衣服>><<redress>><</button>></li>
 <li>兴趣特长： <<CMMainclass>>　　　<<if $debug>>∵ 切换表情: <<CMEmote>><</if>></li>
 <li>　性观念： <<CMChara>></li>
 
@@ -43,7 +43,7 @@
 <li>外貌体征</li>
 　体型　<<CMBodytype>>　　肤色　<<CMSkin>>　　特殊　<<CMRace>><br>
 　发色　<<CMHairColor>>　　发长　<<CMHair>>　　发型　<<CMHairstyle>><br>
-　眼型　<<CMEyetype>>　　<span id="CMEyeoption">瞳色　<<CMEyeColor>></span><span id="CMFurOption"></span><br>
+　眼型　<<CMEyetype>>　　瞳色　<<CMEyeColor>><span id="CMFurOption"></span><br>
 　罩杯　<<CMBreast>>　　臀型　<<CMButts>>　　<label><<print '<<checkbox "$PC.trait.泌乳体质" false true ' + ($PC.trait.泌乳体质 is true ? "checked" : "") + '>>'>>泌乳体质？</label><br>
 <<dashline>>
 <li>感官特征</li>
@@ -70,11 +70,6 @@
     <<repeat 0.3s>>
         <<set $PC.info.hairlenf to $PC.info.hairlen>>
         <<if $activepage is "CharaMaking">>
-            <<if $PC.info.race is "夜族">>
-                <<set $PC.eye to "银色">><<replace #CMEyeoption>>瞳色　<<CMEyeColor>><</replace>>
-            <<elseif $PC.info.race is "灵族">>
-                <<set $PC.eye to "金色">><<replace #CMEyeoption>>瞳色　<<CMEyeColor>><</replace>>
-            <</if>>
             <<switch $PC.info.tag>>
                 <<case "伪娘">>
                     <<replace #CMgenital>><<CMBoy>><</replace>>
