@@ -22,6 +22,7 @@
 <<set $hardmode to 1>>
 <<set $render to "canvas">>
 <<set $movebutton to false>>
+<<set $menubutton to false>>
 <<set $anounce to {flag:false, text:"", type:"弹出通知"}>>
 
 <!-- 游戏各种flag初始化 -->

@@ -16,6 +16,13 @@
 <div id="gameVersionDisplay">EWA ver<<print StartConfig.version>></div>
 
 
+<!-- 隐藏元素 */ -->
+<<set $currentOverlay to null>>
+<div id="customOverlay" class="customOverlay hidden">
+	<div id="customOverlayTitle" class="fixedClose"></div>
+	<div id="customOverlayContent"></div>
+</div>
+
 /* 事件的各种数值变化后续处理 */
 
 

@@ -370,3 +370,5 @@ sugarcube-2:
       name: mode
     resetplaylist:
       name: resetplaylist
+    showmenu:
+      name: showmenu

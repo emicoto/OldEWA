@@ -88,3 +88,24 @@
 <</if>>
 <</widget>>
 
+<<widget "showmenu">>
+    <div id="menu_container" class="menu_hide" onclick="menubutton()">
+    <div class="menu">
+    <<link "MENU">><<run menubutton()>><</link>>
+    </div>
+    <<if $intro is false>>
+    <div class="splitbotton">
+    <<button PROFILE>><<overlayReplace "profile">><</button>>
+    <<button JOURNAL>><<overlayReplace "journal">><</button>>
+    <<button ITEMS>><<overlayReplace "items">><</button>>
+    <<button SOCIAL>><<overlayReplace "social">><</button>>
+    <<button DICTIONARY>><<overlayReplace "dictionary">><</button>>
+    <<button ACHIVEMENT>><<overlayReplace "achivement">><</button>>
+    </div>
+    <</if>>
+    <div class="splitbotton">
+    <<button SAVES>><<overlayReplace "saves">><</button>>
+    <<button OPTIONS>><<overlayReplace "options">><</button>>
+    </div>
+    </div>
+<</widget>>

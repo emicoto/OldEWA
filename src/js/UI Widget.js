@@ -43,24 +43,34 @@ function ShowPopUP() {
 }
 window.ShowPopUP = ShowPopUP
 
-
-function movebutton() {
+window.movebutton = function() {
     
     if (V.movebutton == false) {
-        new Wikifier(null,"<<replace '#movebutton'>><<link '▼ 移动'>><<run movebutton()>><</link>><</replace>>")
+        new Wikifier(null,"<<replace '#movebutton'>><<link '▽ 移动'>><<run movebutton()>><</link>><</replace>>")
         $('#navi').removeClass('navi_unable'); $('#navi').addClass('navi_active')
         $('#links').removeClass('hidden') 
         $('#links').addClass('movedown'); setTimeout(() => {$('#links').removeClass('movedown')},1500)
     }
     else {
-        new Wikifier(null,"<<replace '#movebutton'>><<link '▶ 移动'>><<run movebutton()>><</link>><</replace>>")
+        new Wikifier(null,"<<replace '#movebutton'>><<link '▷ 移动'>><<run movebutton()>><</link>><</replace>>")
         $('#navi').removeClass('navi_active'); $('#navi').addClass('navi_unable')
         $('#links').addClass('hidden') 
     }
 
    V.movebutton = !V.movebutton 
 }
-window.movebutton = movebutton
+
+window.menubutton = function(){
+    if(V.menubutton == false){
+        new Wikifier(null,"<<replace '#showmenu'>><<showmenu>><</replace>>")
+        $('#menu_container').removeClass('menu_hide'); $('#menu_container').addClass('menu_active')
+    }
+    else{
+        new Wikifier(null,"<<replace '#showmenu'>><<showmenu>><</replace>>")
+        $('#menu_container').removeClass('menu_active'); $('#menu_container').addClass('menu_hide')
+    }
+    V.menubutton = !V.menubutton
+}
 
 function delay(id,text) {
     if(typeof(text)=="string"){

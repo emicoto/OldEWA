@@ -201,7 +201,7 @@
 }
 
 .links:hover ::after {
-    content: " ◀";
+    content: " ◁";
 }
 
 .links {

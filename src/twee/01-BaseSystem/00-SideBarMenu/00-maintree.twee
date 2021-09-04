@@ -2,7 +2,10 @@
 :: StoryCaption
 <div @class="(Errors.log.length==0?'hidden':'') + ' error-reporter-btn'" onclick="Errors.Reporter.toggle()"></div>
 
+/* 左边栏 UI初始化 */
+<<set $menubutton to false>>
 <<set $statshidden to false>>
+
 <<if $anounce.flag is true>>
 	<<anouncePopUP $anounce.text $anounce.type>>
 <</if>>
@@ -42,42 +45,12 @@
 
 
 <!-- 菜单 -->
-<div id="menu_container" class="menu_hide">
-<div class="menu">
-MENU
-</div>
-<<if $intro is false>>
-<div class="splitbotton">
-<<button PROFILE>><<overlayReplace "profile">><</button>>
-<<button JOURNAL>><<overlayReplace "journal">><</button>>
-<<button ITEMS>><<overlayReplace "items">><</button>>
-<<button SOCIAL>><<overlayReplace "social">><</button>>
-<<button DICTIONARY>><<overlayReplace "dictionary">><</button>>
-<<button ACHIVEMENT>><<overlayReplace "achivement">><</button>>
-</div>
-<</if>>
-<div class="splitbotton">
-<<button SAVES>><<overlayReplace "saves">><</button>>
-<<button OPTIONS>><<overlayReplace "options">><</button>>
-</div>
-</div>
+<div id="showmenu"><<showmenu>></div>
 
 
 </div>/* 框架的尾巴 */
 
-<!-- 隐藏元素 */ -->
-<<set $currentOverlay to null>>
-
-
-<div id="customOverlay" class="customOverlay hidden">
-	<div id="customOverlayTitle" class="fixedClose"></div>
-	<div id="customOverlayContent"></div>
-</div>
-
-
-
 <<silently>>
-
 /* 自动刷新等待JS读取结束 */
 <<set _timer to 10>>
 	<<repeat 0.3s>>

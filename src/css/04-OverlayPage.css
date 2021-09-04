@@ -2,10 +2,10 @@
     display: block;
     position: absolute;
     top: 5%;
-    bottom: 5%;
     left: 5%;
-    right:5%;
     min-width: 600px;
+    width: 60%;
+    height: 80%;
     max-width: 1000px;
     max-height: 800px;
     border-radius: 10px;
@@ -15,32 +15,27 @@
     padding: 5px;
     overflow-y: scroll;
     z-index: 1000;
-    max-width: 1000px;
     user-select: none;
 }
-  
+
 .customOverlay[data-overlay="canvasLayers"],
 .customOverlay[data-overlay="canvasColours"],
 .customOverlay[data-overlay="canvasModel"] {
     max-width: unset;
 }
-  
-.customOverlay[data-overlay="profile"]{
-    min-width: 600px;
-    max-width: 1000px;
-    max-height: 800px;
-    border-radius: 10px;
-}
-
-.customOverlay[data-overlay="saves"]{
-    min-width: 600px;
-    max-width: 1000px;
-    max-height: 800px;
-    border-radius: 10px;
-}
 
 .customOverlayTitle {
     cursor: move;
+}
+
+@media screen and (max-width: 840px) {
+  .customOverlay{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 600px;
+    height: 600px;
+  }
 }
 
 .overlayMenu ul {

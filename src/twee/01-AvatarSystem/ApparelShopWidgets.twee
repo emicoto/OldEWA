@@ -8,7 +8,6 @@
 <<set $PFlag.bukkake.body to false>>
 <<set $PFlag.bukkake.face to false>>
 <<set $PFlag.bukkake.hair to false>>
-
 <<set $location to "试衣间">>
 <<SetAvatar>>
 
@@ -174,27 +173,28 @@ required:false,
 <<switch _layer>>
     <<case "top">>
         <<if $showcase.slot is "onepiece">>
-            <<set $Equip.bottom to null>>
+            <<set $Equip.bottom = null, $tryon.bottom = null>>
         <</if>>
     <<case "bottom">>
         <<if $Equip.top.slot is "onepiece">>
-            <<set $Equip.top to null>>
+            <<set $Equip.top = null,$tryon.top = null>>
         <</if>>
     <<case "inner_up">>
         <<if $showcase.slot is "onepiece">>
-            <<set $Equip.inner_bt to null>>
+            <<set $Equip.inner_bt = null, $tryon.inner_bt = null>>
         <<elseif $showcase.slot is "fullbody">>
-            <<set $Equip.inner_bt to null>>
-            <<set $Equip.top to null>>
-            <<set $Equip.bottom to null>>
+            <<set 
+             $Equip.inner_bt = null, $tryon.inner_bt = null,
+             $Equip.top = null, $tryon.top = null,
+             $Equip.bottom to null, $tryon.bottom =null>>
         <</if>>
 <</switch>>
 <<SetAvatar>>
 <</widget>>
 
 <<widget "showinner">>
-    <<set $Equip.outter to null>>
-    <<set $Equip.top to null>>
-    <<set $Equip.bottom to null>>
+    <<set $Equip.outter = null, $tryon.outter = null>>
+    <<set $Equip.top = null, $tryon.top = null>>
+    <<set $Equip.bottom = null, $tryon.bottom = null>>
     <<SetAvatar>>
 <</widget>>

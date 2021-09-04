@@ -189,7 +189,7 @@
 </div>
 
 <div id="movebutton">
-<<link "▶ 移动">><<run movebutton()>><</link>>
+<<link "▷ 移动">><<run movebutton()>><</link>>
 </div>
 <</widget>>
 
