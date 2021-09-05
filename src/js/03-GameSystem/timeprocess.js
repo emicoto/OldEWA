@@ -125,15 +125,42 @@ Macro.add('time', {
 	}
 });
 
-window.dcmulti = function(){
-	let t = V.date.time - V.wakeuptime
-	if(t/60 > 4){}
-}
-
-function passtime(arg,mode){
-	V.date.time += arg
+window.dailyMultiple = function(){
+	let t = V.passtime - V.wakeuptime
+	if(t/60 >= 4){
+		return Math.floor(Math.pow(1.1,(t/60 - 4))*1000)/1000
+	}
+	else return 1;
 }
 
 function daychange(){
+
+	V.daychange = false
 	return ""
 }
+
+function passtime(t,mode){
+	V.passtime += t  // 睡醒后的累计经过时间。只有进行睡眠休息时才会清除
+
+	/* 经过时间加到现在时间前的处理 */
+	let m = dailyMultiple()
+	let hungry = Math.floor((1.3*t*m)*100)/100
+	let sleepy = Math.floor((1.3*t*m)*100)/100
+
+
+	/* 天气变化  累计的时间满3个小时或者一次经过3小时以上就换个天气，然后清零。 没满就*/
+	if(V.timestock >= 180 || t >= 180){ weather(); V.timestock = 0;}
+	else V.timestock += t;
+
+
+	/* 把经过时间加到现在时间去 */
+	V.date.time += t
+	
+	/* 时间经过处理 */
+	timeprocess()
+
+	/* 日期变更时的处理 */
+	if(V.daychange)daychange();
+
+}
+

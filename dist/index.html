@@ -1245,6 +1245,7 @@ body #story-caption #storyCaptionDiv {
     text-align: center;
     vertical-align: middle;
     overflow-wrap: break-word;
+    cursor: pointer;
 }
 
 #menu_container .menu a:hover{
@@ -1961,7 +1962,7 @@ body #story-caption #storyCaptionDiv {
 
 /* 图片滤镜*/
 .sunset {
-  background-color:#EC9119;
+  background-color:#E26105;
   opacity:0.4;
   mix-blend-mode: hard-light;
 }
@@ -12291,27 +12292,6 @@ function stAvatar() {
         V.avatar.tatoos = setAvatar("tatoos",null)
     }
 
-    let background = {src: imglocation(),}
-
-    if(V.local?.side == "室外") background.outside = true;
-
-    if(between(V.date.time,1020,1140) && background.outside) {
-        background.color = "#D6981C"
-        document.getElementById('avatar-overlay').className = "Layer sunset"
-
-    }
-    else if ((between(V.date.time,1140,1440)||between(V.date.time,0,240)) && background.outside){
-         background.color = "#242C8A"
-        document.getElementById('avatar-overlay').className = "Layer night"
-    }
-    else{
-        background.color = null;
-        document.getElementById('avatar-overlay').className = "Layer"
-    }
-
-
-    V.avatar.background = setAvatar("background",background,true)
-
     if(V.harddebug)console.log("log",V.avatar);
     return ""
 }
@@ -12683,6 +12663,29 @@ F.getsituation = function(location, series, key){
     }
 }
 
+function setBG() {
+
+    let background = {src: imglocation(),}
+
+    if(V.local?.side == "室外") background.outside = true;
+
+    if(between(V.date.time,1020,1140) && background.outside) {
+        background.color = "#D6981C"
+        document.getElementById('avatar-overlay').className = "Layer sunset"
+
+    }
+    else if ((between(V.date.time,1140,1440)||between(V.date.time,0,240)) && background.outside){
+        background.color = "#242C8A"
+        document.getElementById('avatar-overlay').className = "Layer night"
+    }
+    else{
+        background.color = null;
+        document.getElementById('avatar-overlay').className = "Layer"
+    }
+    V.avatar.background = setAvatar("background",background,true)
+}
+F.setBG = setBG
+
 F.getInteraction = function(location, tags, key){
     const data = D.placedata[location]
     
@@ -12692,6 +12695,7 @@ function setLocation(args) {
     if (typeof(args)=="string" && args.length > 0){
         V.location = args
         F.RER() /* 设置事件随机概率 RandomEventRate */
+        setBG()
 
         if(D.placedata[args]){
             V.local = D.placedata[args]
@@ -12842,18 +12846,45 @@ Macro.add('time', {
 	}
 });
 
-window.dcmulti = function(){
-	let t = V.date.time - V.wakeuptime
-	if(t/60 > 4){}
-}
-
-function passtime(arg,mode){
-	V.date.time += arg
+window.dailyMultiple = function(){
+	let t = V.passtime - V.wakeuptime
+	if(t/60 >= 4){
+		return Math.floor(Math.pow(1.1,(t/60 - 4))*1000)/1000
+	}
+	else return 1;
 }
 
 function daychange(){
+
+	V.daychange = false
 	return ""
 }
+
+function passtime(t,mode){
+	V.passtime += t  // 睡醒后的累计经过时间。只有进行睡眠休息时才会清除
+
+	/* 经过时间加到现在时间前的处理 */
+	let m = dailyMultiple()
+	let hungry = Math.floor((1.3*t*m)*100)/100
+	let sleepy = Math.floor((1.3*t*m)*100)/100
+
+
+	/* 天气变化  累计的时间满3个小时或者一次经过3小时以上就换个天气，然后清零。 没满就*/
+	if(V.timestock >= 180 || t >= 180){ weather(); V.timestock = 0;}
+	else V.timestock += t;
+
+
+	/* 把经过时间加到现在时间去 */
+	V.date.time += t
+	
+	/* 时间经过处理 */
+	timeprocess()
+
+	/* 日期变更时的处理 */
+	if(V.daychange)daychange();
+
+}
+
 /* twine-user-script #35: "PlayerInfo.js" */
 /* 名字和称呼的处理 */
 function gsplit(m,f,p="chara"){
@@ -13324,13 +13355,13 @@ window.movebutton = function() {
     
     if (V.movebutton == false) {
         new Wikifier(null,"<<replace '#movebutton'>><<link '▽ 移动'>><<run movebutton()>><</link>><</replace>>")
-        $('#navi').removeClass('navi_unable'); $('#navi').addClass('navi_active')
+        $('#navi').addClass('navi_active'); $('#navi').removeClass('navi_unable')
         $('#links').removeClass('hidden') 
         $('#links').addClass('movedown'); setTimeout(() => {$('#links').removeClass('movedown')},1500)
     }
     else {
         new Wikifier(null,"<<replace '#movebutton'>><<link '▷ 移动'>><<run movebutton()>><</link>><</replace>>")
-        $('#navi').removeClass('navi_active'); $('#navi').addClass('navi_unable')
+        $('#navi').addClass('navi_unable'); $('#navi').removeClass('navi_active')
         $('#links').addClass('hidden') 
     }
 
@@ -13339,12 +13370,10 @@ window.movebutton = function() {
 
 window.menubutton = function(){
     if(V.menubutton == false){
-        new Wikifier(null,"<<replace '#showmenu'>><<showmenu>><</replace>>")
-         $('#menu_container').addClass('menu_active'); $('#menu_container').removeClass('menu_hide');
+         $('#menu_container').addClass('menu_active');setTimeout(() => {$('#menu_container').removeClass('menu_hide')},500);
     }
     else{
-        new Wikifier(null,"<<replace '#showmenu'>><<showmenu>><</replace>>")
-        $('#menu_container').addClass('menu_hide'); $('#menu_container').removeClass('menu_active'); 
+        $('#menu_container').addClass('menu_hide');setTimeout(() => {$('#menu_container').removeClass('menu_active')},500); 
     }
     V.menubutton = !V.menubutton
 }
@@ -14360,7 +14389,7 @@ DefineMacroS("delay",delay)
         situation:[]
     },
     嘉庆广场 : {
-        place:&quot;嘉庆广场&quot;, side:&quot;室内&quot;,
+        place:&quot;嘉庆广场&quot;, side:&quot;室外&quot;,
         tag:[&quot;交通中心&quot;,&quot;大商业广场&quot;,&quot;活动场所&quot;],
         chara:[],
         bus:true, subway:true, car:true, bike:true,
@@ -14696,12 +14725,13 @@ DefineMacroS("delay",delay)
 
 &lt;!-- 日期相关 --&gt;
 &lt;&lt;set $days = 1&gt;&gt;
-&lt;&lt;set $wakeuptime = 540&gt;&gt;
+&lt;&lt;set $wakeuptime = 540, $passtime = 540, $timestock = 0&gt;&gt;
+/* 不会因为时间进程而reset, 只有睡觉休息时才reset */
 
 &lt;&lt;set $date to {
-    &quot;year&quot; : 2024,    &quot;month&quot; : 7,    &quot;day&quot; : 1,    &quot;week&quot; : 1,
-    &quot;time&quot; : 540,    &quot;hour&quot; : 9,    &quot;min&quot; : 0,
-    &quot;zone&quot; : &quot;上午&quot;,    &quot;weekday&quot; : &quot;周一&quot;
+    year : 2024,    month : 7,    day : 1,    week : 1,
+    time : 540,    hour : 9,    min : 0,
+    zone : &quot;上午&quot;,    weekday : &quot;周一&quot;,
 }&gt;&gt;
 &lt;&lt;set $daychange to false&gt;&gt;
 
@@ -16477,7 +16507,9 @@ required:false,
 &lt;&lt;set $anounce to {flag:false, text:&quot;&quot;, type:&quot;弹出通知&quot;}&gt;&gt;
 &lt;&lt;setchara &quot;player&quot;&gt;&gt;
 /* 处理顺序的最后尾  */
-&lt;&lt;/silently&gt;&gt;</tw-passagedata><tw-passagedata pid="35" name="SidebarWidget" tags="widget" position="600,475" size="100,100">&lt;&lt;widget &quot;showmoney&quot;&gt;&gt;
+&lt;&lt;/silently&gt;&gt;
+
+&lt;&lt;run F.setBG()&gt;&gt;</tw-passagedata><tw-passagedata pid="35" name="SidebarWidget" tags="widget" position="600,475" size="100,100">&lt;&lt;widget &quot;showmoney&quot;&gt;&gt;
 &lt;div class=&quot;points&quot;&gt;&lt;&lt;printmoney $points&gt;&gt;P&lt;/div&gt;&lt;span class=&quot;slice&quot;&gt; | &lt;/span&gt;&lt;div class=&quot;money&quot;&gt;&lt;&lt;printmoney $money&gt;&gt;&lt;&lt;icon &quot;moneyicon&quot;&gt;&gt;&lt;/div&gt;
 &lt;&lt;/widget&gt;&gt;
 

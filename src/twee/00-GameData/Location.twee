@@ -56,7 +56,7 @@
         situation:[]
     },
     嘉庆广场 : {
-        place:"嘉庆广场", side:"室内",
+        place:"嘉庆广场", side:"室外",
         tag:["交通中心","大商业广场","活动场所"],
         chara:[],
         bus:true, subway:true, car:true, bike:true,

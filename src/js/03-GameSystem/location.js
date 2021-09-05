@@ -23,6 +23,29 @@ F.getsituation = function(location, series, key){
     }
 }
 
+function setBG() {
+
+    let background = {src: imglocation(),}
+
+    if(V.local?.side == "室外") background.outside = true;
+
+    if(between(V.date.time,1020,1140) && background.outside) {
+        background.color = "#D6981C"
+        document.getElementById('avatar-overlay').className = "Layer sunset"
+
+    }
+    else if ((between(V.date.time,1140,1440)||between(V.date.time,0,240)) && background.outside){
+        background.color = "#242C8A"
+        document.getElementById('avatar-overlay').className = "Layer night"
+    }
+    else{
+        background.color = null;
+        document.getElementById('avatar-overlay').className = "Layer"
+    }
+    V.avatar.background = setAvatar("background",background,true)
+}
+F.setBG = setBG
+
 F.getInteraction = function(location, tags, key){
     const data = D.placedata[location]
     
@@ -32,6 +55,7 @@ function setLocation(args) {
     if (typeof(args)=="string" && args.length > 0){
         V.location = args
         F.RER() /* 设置事件随机概率 RandomEventRate */
+        setBG()
 
         if(D.placedata[args]){
             V.local = D.placedata[args]

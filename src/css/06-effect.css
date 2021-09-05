@@ -38,7 +38,7 @@
 
 /* 图片滤镜*/
 .sunset {
-  background-color:#EC9119;
+  background-color:#E26105;
   opacity:0.4;
   mix-blend-mode: hard-light;
 }

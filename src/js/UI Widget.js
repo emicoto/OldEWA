@@ -47,13 +47,13 @@ window.movebutton = function() {
     
     if (V.movebutton == false) {
         new Wikifier(null,"<<replace '#movebutton'>><<link '▽ 移动'>><<run movebutton()>><</link>><</replace>>")
-        $('#navi').removeClass('navi_unable'); $('#navi').addClass('navi_active')
+        $('#navi').addClass('navi_active'); $('#navi').removeClass('navi_unable')
         $('#links').removeClass('hidden') 
         $('#links').addClass('movedown'); setTimeout(() => {$('#links').removeClass('movedown')},1500)
     }
     else {
         new Wikifier(null,"<<replace '#movebutton'>><<link '▷ 移动'>><<run movebutton()>><</link>><</replace>>")
-        $('#navi').removeClass('navi_active'); $('#navi').addClass('navi_unable')
+        $('#navi').addClass('navi_unable'); $('#navi').removeClass('navi_active')
         $('#links').addClass('hidden') 
     }
 
@@ -62,12 +62,10 @@ window.movebutton = function() {
 
 window.menubutton = function(){
     if(V.menubutton == false){
-        new Wikifier(null,"<<replace '#showmenu'>><<showmenu>><</replace>>")
-         $('#menu_container').addClass('menu_active'); $('#menu_container').removeClass('menu_hide');
+         $('#menu_container').addClass('menu_active');setTimeout(() => {$('#menu_container').removeClass('menu_hide')},500);
     }
     else{
-        new Wikifier(null,"<<replace '#showmenu'>><<showmenu>><</replace>>")
-        $('#menu_container').addClass('menu_hide'); $('#menu_container').removeClass('menu_active'); 
+        $('#menu_container').addClass('menu_hide');setTimeout(() => {$('#menu_container').removeClass('menu_active')},500); 
     }
     V.menubutton = !V.menubutton
 }
