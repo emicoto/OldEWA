@@ -144,9 +144,12 @@ function passtime(t,mode){
 
 	/* 经过时间加到现在时间前的处理 */
 	let m = dailyMultiple()
-	let hungry = Math.floor((1.3*t*m)*100)/100
-	let sleepy = Math.floor((1.3*t*m)*100)/100
-
+	let hungry = Math.floor((1.2*t*m)*1000)/1000
+	let sleepy = Math.floor((0.3*t*m)*1000)/1000
+	let tired  = Math.floor((0.6*t*m)*1000)/1000
+	let lostmana = 0.02*t
+	let desired = 0.01*t
+	
 
 	/* 天气变化  累计的时间满3个小时或者一次经过3小时以上就换个天气，然后清零。 没满就*/
 	if(V.timestock >= 180 || t >= 180){ weather(); V.timestock = 0;}
