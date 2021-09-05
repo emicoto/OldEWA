@@ -111,7 +111,7 @@
 body #story-caption #storyCaptionDiv {
 	/* 232 px: img size, 1.32 em: stats line height, 4px: stats borders */
 	position: fixed;
-	top: 170px;
+	top: 145px;
 	left: 10px;
 	height: calc(100% - 150px);
 	width: 268px;

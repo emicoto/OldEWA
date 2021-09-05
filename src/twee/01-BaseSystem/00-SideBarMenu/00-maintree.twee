@@ -19,6 +19,7 @@
 <div id="storyCaptionDiv">
 
 <!-- 游戏还没开始时 */ -->
+<div style="height:25px"></div>
 
 <!-- 显示小人 -->
 <div id="avatar"><<avatar>><div id="avatar-overlay" class="Layer"></div></div>
