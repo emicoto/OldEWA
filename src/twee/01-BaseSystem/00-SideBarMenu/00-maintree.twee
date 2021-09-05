@@ -53,12 +53,7 @@
 
 <<silently>>
 
-/* 自动刷新等待JS读取结束 */
-<<set _timer to 10>>
-<<run
-$('#customOverlay').draggable({handle: '.handle'});
-$('#ui-dialog').draggable();
->>
+
 
 /* 动态化部分 */
 	<<repeat 0.5s>>
@@ -90,3 +85,11 @@ $('#ui-dialog').draggable();
 <</silently>>
 
 <<run F.setBG()>>
+
+/* 自动刷新等待JS读取结束 */
+<<set _timer to 10>>
+<<repeat 0.3s>>
+<<run $('#customOverlay').draggable({handle: '.handle'});$('#ui-dialog').draggable();>>
+<<set _timer -= 1>>
+<<if _timer lte 0>><<stop>><</if>><</repeat>>
+

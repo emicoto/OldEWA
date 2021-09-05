@@ -229,6 +229,7 @@ body #story-caption #storyCaptionDiv {
 
 #menu_container {
     width: 320px;
+    min-height: 50px;
     z-index: 10000;
     background-color: rgba(255, 255, 255, 0.5);
     border: 2px solid #FFF;
@@ -320,26 +321,32 @@ body #story-caption #storyCaptionDiv {
     border: none;
 }
 
-
-#menu_container .splitbotton{
+#menu_container .bottonarea{
     width: calc(100% - 50px);
     float: left;
-    position: relative;
 }
 
-#menu_container .splitbotton button{
-    width: 120px;
-    max-width: 120px;
-    letter-spacing: 1px;
-    font-family: 新综艺;
-    font-size: 14px;
-    float: right;
-    margin: 2px;
-    background-color: transparent;
+#menu_container button{
+  width: 120px;
+  height: 30px;
+  border-radius: 5px;
+  border: #eee 1px;
+  float: right;
+  margin: 2px;
+  font-size: 14px;
+  font-family: 新综艺;
+  letter-spacing: 1px;
+  background: transparent;
+  transition: all 0.3s ease;
+  position: relative;
+  box-shadow:inset 2px 2px 1px 0px rgba(255,255,255,.5), 1px 1px 2px 0px rgba(0,0,0,.1);
+  outline: none;
 }
 
-#menu_container .splitbotton button:hover{
-    background-color: transparent;
+#menu_container button:hover, #menu_container button:focus{
+    color:#7F6E00;
+    border: #eee 1px;
+    box-shadow:inset 2px 2px 1px 0px rgba(73, 50, 0, 0.1), 1px 1px 2px 0px rgba(255, 248, 186, 0.2);
 }
 
 #sidebar_stats button{

@@ -3,10 +3,8 @@
     position: absolute;
     top: 5%;
     left: 5%;
-    min-width: 600px;
-    width: 60%;
     height: 80%;
-    max-width: 1000px;
+    width: 680px;
     max-height: 800px;
     border-radius: 10px;
     border: 2px rgb(194, 193, 181) solid;
@@ -29,8 +27,8 @@
     position: absolute;
     top: 0px;
     left: 0px;
-    width: 600px;
-    height: 600px;
+    width: 540px;
+    height: 540px;
   }
 }
 
@@ -219,6 +217,15 @@
 
 #sensationbar .bar {
     max-width:100px;
+}
+
+@media screen and (max-width: 840px) {
+  .metercon{
+    max-width:100px;
+  }
+  .bar{
+    max-width: 100px;
+  }
 }
 
 #skilldata {

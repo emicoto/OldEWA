@@ -1162,6 +1162,7 @@ body #story-caption #storyCaptionDiv {
 
 #menu_container {
     width: 320px;
+    min-height: 50px;
     z-index: 10000;
     background-color: rgba(255, 255, 255, 0.5);
     border: 2px solid #FFF;
@@ -1253,26 +1254,32 @@ body #story-caption #storyCaptionDiv {
     border: none;
 }
 
-
-#menu_container .splitbotton{
+#menu_container .bottonarea{
     width: calc(100% - 50px);
     float: left;
-    position: relative;
 }
 
-#menu_container .splitbotton button{
-    width: 120px;
-    max-width: 120px;
-    letter-spacing: 1px;
-    font-family: 新综艺;
-    font-size: 14px;
-    float: right;
-    margin: 2px;
-    background-color: transparent;
+#menu_container button{
+  width: 120px;
+  height: 30px;
+  border-radius: 5px;
+  border: #eee 1px;
+  float: right;
+  margin: 2px;
+  font-size: 14px;
+  font-family: 新综艺;
+  letter-spacing: 1px;
+  background: transparent;
+  transition: all 0.3s ease;
+  position: relative;
+  box-shadow:inset 2px 2px 1px 0px rgba(255,255,255,.5), 1px 1px 2px 0px rgba(0,0,0,.1);
+  outline: none;
 }
 
-#menu_container .splitbotton button:hover{
-    background-color: transparent;
+#menu_container button:hover, #menu_container button:focus{
+    color:#7F6E00;
+    border: #eee 1px;
+    box-shadow:inset 2px 2px 1px 0px rgba(73, 50, 0, 0.1), 1px 1px 2px 0px rgba(255, 248, 186, 0.2);
 }
 
 #sidebar_stats button{
@@ -1377,10 +1384,8 @@ body #story-caption #storyCaptionDiv {
     position: absolute;
     top: 5%;
     left: 5%;
-    min-width: 600px;
-    width: 60%;
     height: 80%;
-    max-width: 1000px;
+    width: 680px;
     max-height: 800px;
     border-radius: 10px;
     border: 2px rgb(194, 193, 181) solid;
@@ -1403,8 +1408,8 @@ body #story-caption #storyCaptionDiv {
     position: absolute;
     top: 0px;
     left: 0px;
-    width: 600px;
-    height: 600px;
+    width: 540px;
+    height: 540px;
   }
 }
 
@@ -1593,6 +1598,15 @@ body #story-caption #storyCaptionDiv {
 
 #sensationbar .bar {
     max-width:100px;
+}
+
+@media screen and (max-width: 840px) {
+  .metercon{
+    max-width:100px;
+  }
+  .bar{
+    max-width: 100px;
+  }
 }
 
 #skilldata {
@@ -13449,7 +13463,7 @@ window.gametime = function(a){
     if(time.hour>=24){time.day++;time.hour=0}
 
     V.gametime = time
-    return `D${time.day}.${time.hour}:${time.min}:${time.sec}`
+    return `${time.day}D.${time.hour}:${time.min}:${time.sec}`
 }
 /* twine-user-script #39: "UI Widget.js" */
 /* 通用 */
@@ -16672,12 +16686,7 @@ required:false,
 
 &lt;&lt;silently&gt;&gt;
 
-/* 自动刷新等待JS读取结束 */
-&lt;&lt;set _timer to 10&gt;&gt;
-&lt;&lt;run
-$(&#39;#customOverlay&#39;).draggable({handle: &#39;.handle&#39;});
-$(&#39;#ui-dialog&#39;).draggable();
-&gt;&gt;
+
 
 /* 动态化部分 */
 	&lt;&lt;repeat 0.5s&gt;&gt;
@@ -16708,7 +16717,14 @@ $(&#39;#ui-dialog&#39;).draggable();
 /* 处理顺序的最后尾  */
 &lt;&lt;/silently&gt;&gt;
 
-&lt;&lt;run F.setBG()&gt;&gt;</tw-passagedata><tw-passagedata pid="35" name="SidebarWidget" tags="widget" position="600,475" size="100,100">&lt;&lt;widget &quot;showmoney&quot;&gt;&gt;
+&lt;&lt;run F.setBG()&gt;&gt;
+
+/* 自动刷新等待JS读取结束 */
+&lt;&lt;set _timer to 10&gt;&gt;
+&lt;&lt;repeat 0.3s&gt;&gt;
+&lt;&lt;run $(&#39;#customOverlay&#39;).draggable({handle: &#39;.handle&#39;});$(&#39;#ui-dialog&#39;).draggable();&gt;&gt;
+&lt;&lt;set _timer -= 1&gt;&gt;
+&lt;&lt;if _timer lte 0&gt;&gt;&lt;&lt;stop&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/repeat&gt;&gt;</tw-passagedata><tw-passagedata pid="35" name="SidebarWidget" tags="widget" position="600,475" size="100,100">&lt;&lt;widget &quot;showmoney&quot;&gt;&gt;
 &lt;div class=&quot;points&quot;&gt;&lt;&lt;printmoney $PC.points&gt;&gt;P&lt;/div&gt;&lt;span class=&quot;slice&quot;&gt; | &lt;/span&gt;&lt;div class=&quot;money&quot;&gt;&lt;&lt;printmoney $PC.money&gt;&gt;&lt;&lt;icon &quot;moneyicon&quot;&gt;&gt;&lt;/div&gt;
 &lt;&lt;/widget&gt;&gt;
 
@@ -16800,7 +16816,7 @@ $(&#39;#ui-dialog&#39;).draggable();
     &lt;div id=&quot;menu_container&quot; class=&quot;menu_hide&quot; onclick=&quot;menubutton()&quot;&gt;
     &lt;div class=&quot;menu&quot;&gt;MENU&lt;/div&gt;
     &lt;&lt;if $intro is false&gt;&gt;
-    &lt;div class=&quot;splitbotton&quot;&gt;
+    &lt;div class=&quot;bottonarea&quot;&gt;
     &lt;&lt;button PROFILE&gt;&gt;&lt;&lt;overlayReplace &quot;profile&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
     &lt;&lt;button JOURNAL&gt;&gt;&lt;&lt;overlayReplace &quot;journal&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
     &lt;&lt;button ITEMS&gt;&gt;&lt;&lt;overlayReplace &quot;items&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
@@ -16809,7 +16825,7 @@ $(&#39;#ui-dialog&#39;).draggable();
     &lt;&lt;button ACHIVEMENT&gt;&gt;&lt;&lt;overlayReplace &quot;achivement&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
     &lt;/div&gt;
     &lt;&lt;/if&gt;&gt;
-    &lt;div class=&quot;splitbotton&quot;&gt;
+    &lt;div class=&quot;bottonarea&quot;&gt;
     &lt;&lt;button SAVES&gt;&gt;&lt;&lt;overlayReplace &quot;saves&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
     &lt;&lt;button OPTIONS&gt;&gt;&lt;&lt;overlayReplace &quot;options&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
     &lt;/div&gt;

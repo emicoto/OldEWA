@@ -79,5 +79,5 @@ window.gametime = function(a){
     if(time.hour>=24){time.day++;time.hour=0}
 
     V.gametime = time
-    return `D${time.day}.${time.hour}:${time.min}:${time.sec}`
+    return `${time.day}D.${time.hour}:${time.min}:${time.sec}`
 }
