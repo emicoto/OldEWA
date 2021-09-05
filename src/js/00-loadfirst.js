@@ -8,18 +8,6 @@
 setup.ImagePath = setup.Path + "image/";
 setup.SoundPath = setup.Path + "sound/";
 
-/* Load jQuery UI - Start */
-setup.JSLoaded = false;
-importStyles(setup.Path + "CSS/jquery-ui.css");
-importScripts(setup.Path + "CSS/jquery-ui.js")
-	.then(function() {
-		setup.JSLoaded = true;
-	}).catch(function(error) {
-		alert(error);
-	}
-);
-/* Load jQuery UI - End */
-
 window.ImgExist = function(url) {
     var img = new Image();
 	
