@@ -21,7 +21,7 @@
 <!-- 游戏还没开始时 */ -->
 
 <!-- 显示小人 -->
-<div id="avatar"><<avatar>></div>
+<div id="avatar"><<avatar>><div id="avatar-overlay" class="Layer"></div></div>
 
 <<if $intro is true>>
 	<<versioninfo>>
@@ -77,6 +77,5 @@
 <<setchara "player">>
 /* 处理顺序的最后尾  */
 <</silently>>
-
 
 

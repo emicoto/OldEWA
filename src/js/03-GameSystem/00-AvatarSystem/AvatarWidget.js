@@ -1,4 +1,5 @@
-﻿window.fixStuckAnimations = function() {
+﻿
+window.fixStuckAnimations = function() {
 	let scrollX = window.scrollX;
 	let scrollY = window.scrollY;
 	let imgs = $('#story').add($('#ui-bar'));
@@ -66,8 +67,8 @@ function warmth() {
         a[0] += isHot(items[i])
         a[1] += isCold(items[i])
     }
-    V.PC.hot = V.fix.hot + a[0]
-    V.PC.cold = V.fix.cold + a[1]
+    V.PC.info.hot = V.fix.hot + a[0]
+    V.PC.info.cold = V.fix.cold + a[1]
     return a
 }
 
@@ -210,8 +211,15 @@ function strip(arg) {
 
     const group = ["face","neck","hand","back"]
     let id = arg
-    if(group.includes(arg)) id = accesory
-    new Wikifier(null,"<<replace '#"+id+"'>><<showcloset '"+id+"'>><</replace>>")
+
+    if(group.includes(arg)){
+        new Wikifier(null,"<<replace '#accesory'>><<showcloset 'face'>><<showcloset 'neck'>><<showcloset 'hand'>><<showcloset 'back'>><</replace>>")
+    }
+    else{
+     new Wikifier(null,"<<replace '#"+id+"'>><<showcloset '"+id+"'>><</replace>>")   
+    }
+
+    
     setreveal()
 
     
@@ -281,8 +289,14 @@ function dressOn(args, arg) {
 
     const group = ["face","neck","hand","back"]
     let id = args
-    if(group.includes(args)) id = "accesory"
-    new Wikifier(null,"<<replace '#"+id+"'>><<showcloset '"+id+"'>><</replace>>")
+    
+    if(group.includes(arg)){
+        new Wikifier(null,"<<replace '#accesory'>><<showcloset 'face'>><<showcloset 'neck'>><<showcloset 'hand'>><<showcloset 'back'>><</replace>>")
+    }
+    else{
+     new Wikifier(null,"<<replace '#"+id+"'>><<showcloset '"+id+"'>><</replace>>")   
+    }
+
     setreveal()
 
     new Wikifier(null,"<<replace '#action-text'>>"+text+"<</replace>>")
@@ -334,22 +348,11 @@ function redress(mode){
 
     if(mode=="closet"){
 
-        const index = Object.keys(V.closet)
-
-        for(let i=0; i<index.length;i++){
-
-            let n = index[i]
-
-            if(V.TEquip[n]){
-                //寻找衣柜里和暂存记录里 UID一致的衣服
-                if(V.closet[n].length > 0){
-                    for(let c=0;c<V.closet[n].length;c++){
-                        
-                        if(V.closet[n][c].uid==V.TEquip[n].uid) dressOn(n,c);//穿上!
-                    }
-                }
-            }
-        }
+        Object.entries(V.closet).forEach(([index,value])=>{
+        if (V.TEquip[index] && (value.length > 0)) Object.entries(value).forEach(([___, arr], i) => {
+            if (arr.uid === V.TEquip[index].uid)  dressOn(index, i);
+        });
+        })
     }
 
     V.Equip = clone(V.TEquip)

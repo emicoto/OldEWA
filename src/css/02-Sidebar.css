@@ -96,7 +96,7 @@
     font-style: italic;
     color:#B4B07F;
     letter-spacing: 2px;
-    margin-top: -6px;
+    margin-top: -4px;
 }
 
 #gameVersionDisplay {
@@ -111,7 +111,7 @@
 body #story-caption #storyCaptionDiv {
 	/* 232 px: img size, 1.32 em: stats line height, 4px: stats borders */
 	position: fixed;
-	top: 150px;
+	top: 170px;
 	left: 10px;
 	height: calc(100% - 150px);
 	width: 268px;
@@ -146,7 +146,7 @@ body #story-caption #storyCaptionDiv {
     border-top: 2px solid #716617;
     border-bottom: 2px solid #716617;
     position: fixed;
-    top:150px;
+    top:145px;
     left:0px;
     overflow: hidden;
     width: 280px;
@@ -269,7 +269,7 @@ body #story-caption #storyCaptionDiv {
     height: 80px;
     font-size: 14px;
     line-height: 16px;
-    padding: 1% 20px 1% 0px;
+    padding: 1% 30px 1% 0px;
 }
 
 .menu_active {

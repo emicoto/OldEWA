@@ -6,15 +6,12 @@
 
 <!-- 角色数据 -->
 <<set $PC to {
-    info:{},
     level:1,        /*精神力等级，影响魔力上限，满级10？*/
     type:1,         /*角色模组ID，影响角色文本*/
     attitude: 1,    /* 态度，影响玩家角色进行性行为时的反应描述和数据补正 */ 
-    title: "菜鸟勇者",
-    gender:"m",
-    eyes: 1, body: 1, breast: 1, hips: 2, beauty: 1600, 
+    info:{},
     trait:{}, state:{}, 
-    base:{}, hot: 21, cold:21,
+    base:{}, 
     rpg:{}, equip:{},
     abl:{}, school:{}, eskl:{}, lewd:{},
     genital:{}, sens:{}, stretch:{}, produce:{}, bottom:{}, wet:{},
@@ -23,12 +20,14 @@
 
 <<set $PC.info to {
     name  : "魔女",   tag : "伪娘",    race : "人类",
-    major  : "文艺创作",
+    major  : "文艺创作", title: "菜鸟勇者", gender:"m",
+    eyes: 1, body: 1, breast: 1, hips: 2, beauty: 1600, 
     hairlen : 120,  hairlenf: 120,
     haircolor  : "aqua",   hairstyle : "natural", /* 不做修饰时的发型，只有自然、卷发、顺直三种，只能在美容店修改*/
     eyecolor  : "aqua",
     skin  : "white",
     kemotype: null,
+    hot: 21, cold:21,
 }>>
 
 <<set $PC.equip to {

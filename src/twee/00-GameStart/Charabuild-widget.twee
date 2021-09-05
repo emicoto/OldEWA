@@ -58,7 +58,7 @@
 
 <<widget "CMBodytype">>
     <<set _optionlist to {"普通":2,"高大":3,"娇小":1}>>
-    <<listbox "$PC.body" autoselect>>
+    <<listbox "$PC.info.body" autoselect>>
         <<optionsfrom _optionlist>>
     <</listbox>>
 <</widget>>
@@ -79,14 +79,14 @@
 
 <<widget "CMBreast">>
     <<set _optionlist to {"平坦":0,"微隆":1,"贫乳":2,"普乳":3,"巨乳":4,"魔乳":5}>>
-    <<listbox "$PC.breast" autoselect>>
+    <<listbox "$PC.info.breast" autoselect>>
         <<optionsfrom _optionlist>>
     <</listbox>>
 <</widget>>
 
 <<widget "CMButts">>
     <<set _optionlist to {"窄小":1,"普通":2,"圆润":3,"丰臀":4,"安产":5}>>
-    <<listbox "$PC.hips" autoselect>>
+    <<listbox "$PC.info.hips" autoselect>>
         <<optionsfrom _optionlist>>
     <</listbox>>
 <</widget>>
@@ -121,7 +121,7 @@
 
 <<widget "CMEyetype">>
     <<set _optionlist to {"普通":1,"吊眼":2}>>
-        <<listbox "$PC.eyes" autoselect>>
+        <<listbox "$PC.info.eyes" autoselect>>
         <<optionsfrom _optionlist>>
     <</listbox>>
 <</widget>>
@@ -191,9 +191,9 @@
             <<set $PC.info.race to "人类">>
             <<set $PC.info.major to "自然科学">>
             <<set $PC.attitude to 4>>
-            <<set $PC.breast to 1>>
-            <<set $PC.hips to 1>>
-            <<set $PC.body to 1>>
+            <<set $PC.info.breast to 1>>
+            <<set $PC.info.hips to 1>>
+            <<set $PC.info.body to 1>>
             <<set $PC.info.hairlen to 100>>
             <<set $PC.info.hairlenf to 100>>
             <<set $PC.info.hairstyle to "straight">>
@@ -211,9 +211,9 @@
             <<set $PC.info.race to "人类">>
             <<set $PC.info.major to "音乐表演">>
             <<set $PC.attitude to 1>>
-            <<set $PC.breast to 2>>
-            <<set $PC.hips to 2>>
-            <<set $PC.body to 1>>
+            <<set $PC.info.breast to 2>>
+            <<set $PC.info.hips to 2>>
+            <<set $PC.info.body to 1>>
             <<set $PC.info.hairlen to 250>>
             <<set $PC.info.hairlenf to 250>>
             <<set $PC.info.hairstyle to "straight">>
@@ -232,9 +232,9 @@
             <<set $PC.info.race to "兽族">>
             <<set $PC.info.major to "运动格斗">>
             <<set $PC.attitude to 1>>
-            <<set $PC.breast to 0>>
-            <<set $PC.hips to 1>>
-            <<set $PC.body to 1>>
+            <<set $PC.info.breast to 0>>
+            <<set $PC.info.hips to 1>>
+            <<set $PC.info.body to 1>>
             <<set $PC.info.hairlen to 120>> <<set $PC.info.hairlenf to 120>>
             <<set $PC.info.hairstyle to "straight">>
             <<set $PC.info.haircolor to "platinum">>
@@ -272,7 +272,7 @@
 
     <<switch $PC.type>>
         <<case 1>>
-            <<set $PC.title to "魔法少女">>
+            <<set $PC.info.title to "魔法少女">>
             <<set $pctitle.魔法少女 to true>>
             <<set $PC.lewd to {
                     "纯洁" : 800,
@@ -285,7 +285,7 @@
                     "性瘾" : 0
                 }>>
         <<case 2>>
-            <<set $PC.title to "爱抖露">>
+            <<set $PC.info.title to "爱抖露">>
             <<set $pctitle.爱抖露 to true>>
             <<set $PC.lewd to {
                 "纯洁" : 900,
@@ -298,8 +298,8 @@
                 "性瘾" : 0
             }>>
         <<case 3>>
-            <<set $PC.title to "小道童">>
-            <<set $pctitle.小道童 to true>>
+            <<set $PC.info.title to "道童">>
+            <<set $pctitle.道童 to true>>
             <<set $PC.lewd to {
                 "纯洁" : 1000,
                 "露出" : 0,
@@ -432,14 +432,14 @@
 
 <<widget "GSApply">>
 
-    <<set $PC.beauty to 1600>>
+    <<set $PC.info.beauty to 1600>>
     <<set $fix.beauty to 1600>>
 
     <<switch $PC.info.tag>>
         <<case "少年" "伪娘">>
-            <<set $PC.gender to "m">>
+            <<set $PC.info.gender to "m">>
         <<case "少女" "扶她">>
-            <<set $PC.gender to "f">>
+            <<set $PC.info.gender to "f">>
     <</switch>>
 
     <<switch $starttrait>>
@@ -543,7 +543,7 @@
     <</if>>
 
     <<if $PC.trait.泌乳体质 is true>>
-        <<set $PC.produce.乳汁 to [($PC.breast*20),($PC.breast*20)]>>
+        <<set $PC.produce.乳汁 to [($PC.info.breast*20),($PC.info.breast*20)]>>
         <<set $PFlag.lactation to true>>
         <<set $PFlag.lactatecd to 60>>
     <<else>>

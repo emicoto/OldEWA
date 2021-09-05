@@ -1,6 +1,7 @@
 const Csv = require("./Data/**/*.csv");
 const Json = require("./Data/**/*.json");
 const Yaml = require("./Data/**/*.yml");
+const js = require("./Data/**/*.js");
 class Manager {
   files = new Map();
   constructor(files) {
@@ -23,4 +24,5 @@ Game.Manager = new Manager({
   csv: Csv,
   json: Json,
   yaml: Yaml,
+  js: js,
 });

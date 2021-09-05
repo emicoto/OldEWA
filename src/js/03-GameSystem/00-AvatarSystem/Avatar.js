@@ -279,7 +279,19 @@ var Avatar;
         return opt.show ? !!options2.background : opt.show;
       },
       srcfn(options2) {
-        return options2.background ? __resolve(AVATARPATH, `background/${options2.background}.png`) : options2.dummy;
+        return options2.background ? __resolve(AVATARPATH, `background/${options2.background.src}.png`) : options2.dummy;
+      },
+      blendModefn(options2) {
+        var _a, _b;
+        if (((_a = options2.background) == null ? void 0 : _a.outside) && ((_b = options2.backgound) == null ? void 0 : _b.color)) {
+          return BLENDMODE.HARD_LIGHT;
+        }
+      },
+      blendfn(options2) {
+        var _a, _b;
+        if (((_a = options2.background) == null ? void 0 : _a.outside) && ((_b = options2.backgound) == null ? void 0 : _b.color)) {
+          return options2.backgound.color;
+        }
       }
     });
     setLayer(ID, "kemoback_wing", {
@@ -679,7 +691,10 @@ var Avatar;
       dx: opt.dx ? opt.dx : defalutOpt.dx,
       dy: opt.dy ? opt.dy : defalutOpt.dy,
       zfn(options2) {
-        return options2.top.tuckin ? zindex[tuckin["bottom"]] : zindex["bottom"];
+        if (isObject(options2.top)) {
+          return options2.top.tuckin ? zindex[tuckin["bottom"]] : zindex["bottom"];
+        }
+        return zindex["bottom"];
       },
       showfn(options2) {
         return !!options2.bottom;

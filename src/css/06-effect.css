@@ -35,6 +35,25 @@
   0% {opacity:0;}
   100% {opacity:1;}
 }
+
+/* 图片滤镜*/
+.sunset {
+  background-color:#EC9119;
+  opacity:0.4;
+  mix-blend-mode: hard-light;
+}
+
+.night {
+  background-color:#180E9C;
+  opacity:0.4;
+  mix-blend-mode: hard-light;
+}
+
+.reset {
+  background-color: transparent;
+  opacity: 0;
+  mix-blend-mode: normal;
+}
   
 /*水平翻转*/
   .flipx {

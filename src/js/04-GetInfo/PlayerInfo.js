@@ -1,7 +1,7 @@
 ﻿/* 名字和称呼的处理 */
 function gsplit(m,f,p="chara"){
   if (p=="player"){
-    if (V.PC.gender == "m" ) return m;
+    if (V.PC.info.gender == "m" ) return m;
     else return f;
   }else {
     if (V.currentchara.gender == "m" ) return m;
@@ -76,7 +76,7 @@ function Iam() {
     case 2:
       return "You are";
     default:
-      if (PC.gender == "m") return "He is";
+      if (V.PC.info.gender == "m") return "He is";
       else return "She is";
     }
 }
@@ -113,7 +113,7 @@ function mine(){
     case 2:
       return "yours";
     default:
-     if (PC.gender == "m") return "his";
+     if (V.PC.info.gender == "m") return "his";
       else return "hers";
     }
 }
@@ -175,7 +175,7 @@ DefineMacroS("hair",hair);
 
 /* 容貌描述 */
 function beauty(){
-  var num = V.PC.beauty
+  var num = V.PC.info.beauty
   const select = new SelectCase()
   select.add(0,100,"脸部被毁容，丑得惨绝人寰")
   select.add(101,200,"脸上有重大伤痕，显得很狰狞")
@@ -210,7 +210,7 @@ DefineMacroS("skin", skin);
 /*胸部 */
 
 function breast(){
-  switch(V.PC.breast){
+  switch(V.PC.info.breast){
     case 1:
       return "微微隆起的胸部"
     case 2:

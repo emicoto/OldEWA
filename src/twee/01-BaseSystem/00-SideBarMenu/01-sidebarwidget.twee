@@ -32,7 +32,7 @@
 
 <<widget "notification">>
     现在是暑假<br>
-    <<if $Equip.inner_up is null and $PC.breast gt 1>>
+    <<if $Equip.inner_up is null and $PC.info.breast gt 1>>
         <<pink-t "没有穿内衣。">>
     <</if>>
     <<if $Equip.inner_bt is null>>
@@ -90,9 +90,7 @@
 
 <<widget "showmenu">>
     <div id="menu_container" class="menu_hide" onclick="menubutton()">
-    <div class="menu">
-    <<link "MENU">><<run menubutton()>><</link>>
-    </div>
+    <div class="menu">MENU</div>
     <<if $intro is false>>
     <div class="splitbotton">
     <<button PROFILE>><<overlayReplace "profile">><</button>>

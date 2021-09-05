@@ -277,7 +277,17 @@ function Avatarlayer(ID: string, option = null): void {
       return opt.show ? !!options.background : opt.show
     },
     srcfn(options) {
-      return options.background ? __resolve(AVATARPATH, `background/${options.background}.png`) : options.dummy
+      return options.background ? __resolve(AVATARPATH, `background/${options.background.src}.png`) : options.dummy
+    },
+    blendModefn(options) {
+      if (options.background?.outside && options.backgound?.color) {
+          return BLENDMODE.HARD_LIGHT
+      }
+    },
+    blendfn(options) {
+      if (options.background?.outside && options.backgound?.color) {
+          return options.backgound.color
+      }
     }
   })
   setLayer(ID, "kemoback_wing", {
@@ -730,8 +740,11 @@ function Avatarlayer(ID: string, option = null): void {
     height: opt.height ? opt.height : defalutOpt.height,
     dx: opt.dx ? opt.dx : defalutOpt.dx,
     dy: opt.dy ? opt.dy : defalutOpt.dy,
-    zfn(options) {
-      return options.top.tuckin ? zindex[tuckin["bottom"]] : zindex["bottom"]
+    zfn(options) {  
+      if (isObject(options.top)) {
+        return options.top.tuckin ? zindex[tuckin["bottom"]] : zindex["bottom"]
+      }
+      return zindex["bottom"]
     },
     showfn(options) {
 

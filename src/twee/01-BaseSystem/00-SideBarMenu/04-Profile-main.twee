@@ -2,7 +2,7 @@
 <<widget "profile">>
 <div id="profile">
 
-<<set _like to random(($PC.beauty/100),($PC.beauty/10))>>
+<<set _like to random(($PC.info.beauty/100),($PC.info.beauty/10))>>
 <<set _infochange to false>>
 
 ＠<<print $PC.info.name>>　　关注　<<print $follow>>　　粉丝　<<print $follower>><br>

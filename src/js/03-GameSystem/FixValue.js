@@ -9,7 +9,7 @@
     V.fix.beauty = 1600
     V.PC.info.hairlen = Math.clamp(V.PC.info.hairlen,0,9999)
     V.PC.info.hairlenf = Math.clamp(V.PC.info.hairlenf,0,9999)
-    V.PC.beauty = Math.clamp(V.fix.beauty*allureBuff(),0,9999)
+    V.PC.info.beauty = Math.clamp(V.fix.beauty*allureBuff(),0,9999)
     T.warmth = warmth()
 
     /* BASE条修正 */
@@ -47,12 +47,12 @@
     }
 
     // 扩张的修正
-    V.PC.stretch.anal = parseFloat(Math.clamp(V.PC.stretch.anal,1,(12+(V.PC.body*2))).toFixed(2))
+    V.PC.stretch.anal = parseFloat(Math.clamp(V.PC.stretch.anal,1,(12+(V.PC.info.body*2))).toFixed(2))
 
     if(V.PC.info.tag == "少女") V.PC.stretch.ureth = Math.clamp(V.PC.stretch.ureth,0.5,6);
     else V.PC.stretch.ureth = parseFloat(Math.clamp(V.PC.stretch.ureth,0.2,(0.5+V.PC.genital.阴茎/10)).toFixed(2));
 
-    if(V.PC.genital.子宫) V.PC.stretch.vagina = parseFloat(Math.clamp(V.PC.stretch.vagina,1,(12+(V.PC.body*2))).toFixed(2));
+    if(V.PC.genital.子宫) V.PC.stretch.vagina = parseFloat(Math.clamp(V.PC.stretch.vagina,1,(12+(V.PC.info.body*2))).toFixed(2));
     else V.PC.stretch.vagina = null;
 
     // 液体分量的修正
@@ -62,7 +62,7 @@
     }
 
     if(V.PFlag.lactation){
-        V.PC.produce.乳汁[1] = Math.clamp(V.PC.produce.乳汁[1],V.PC.breast*10,V.PC.breast*40)
+        V.PC.produce.乳汁[1] = Math.clamp(V.PC.produce.乳汁[1],V.PC.info.breast*10,V.PC.info.breast*40)
         V.PC.produce.乳汁[0] = Math.clamp(V.PC.produce.乳汁[0],0,V.PC.produce.乳汁[1])
     }
 

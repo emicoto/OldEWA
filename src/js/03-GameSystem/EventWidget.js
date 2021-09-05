@@ -8,13 +8,13 @@
 
     var eventname
 
-    if (event.branch != null && event.phrase != null){
+    if (event.branch && event.phrase ){
         eventname = event.type + " " + event.name + "-"+ event.branch + "-" +  event.phrase
 
-    }else if (event.phrase == null && event.branch != null){
+    }else if (event.phrase == null && event.branch){
         eventname = event.type + " " + event.name + "-" + event.branch 
 
-    }else if (event.branch == null && event.phrase != null){
+    }else if (event.branch == null && event.phrase){
         eventname = event.type + " " + event.name + "-" + event.phrase
 
     }else{
@@ -104,13 +104,13 @@ function kojo(pc,uid,type,name,branch=null,phrase=null){
 */
   var kojoname
   
-  if(branch != null && phrase != null){
+  if(branch && phrase ){
       kojoname = `${pc}-${uid} ${type}-${name}-${branch}-${phrase}`
   }
-  else if (phrase != null){
+  else if (phrase ){
       kojoname = `${pc}-${uid} ${type}-${name}-${phrase}`
   }
-  else if (branch != null){
+  else if (branch ){
       kojoname = `${pc}-${uid} ${type}-${name}-${branch}`
   }else{
       kojoname = `${pc}-${uid} ${type}-${name}`

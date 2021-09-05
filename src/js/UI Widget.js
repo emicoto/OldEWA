@@ -63,11 +63,11 @@ window.movebutton = function() {
 window.menubutton = function(){
     if(V.menubutton == false){
         new Wikifier(null,"<<replace '#showmenu'>><<showmenu>><</replace>>")
-        $('#menu_container').removeClass('menu_hide'); $('#menu_container').addClass('menu_active')
+         $('#menu_container').addClass('menu_active'); $('#menu_container').removeClass('menu_hide');
     }
     else{
         new Wikifier(null,"<<replace '#showmenu'>><<showmenu>><</replace>>")
-        $('#menu_container').removeClass('menu_active'); $('#menu_container').addClass('menu_hide')
+        $('#menu_container').addClass('menu_hide'); $('#menu_container').removeClass('menu_active'); 
     }
     V.menubutton = !V.menubutton
 }

@@ -17,7 +17,7 @@ window.SetFace = SetFace
 DefineMacroS("setface",SetFace)
 
 window.breastsize = function() {
-  var size = V.PC.breast
+  var size = V.PC.info.breast
   if (between(size,0,1)){
     return 1;
   }
@@ -311,7 +311,7 @@ function stAvatar() {
     V.avatar.eyebrow = setAvatar("eyebrow", V.PFace.eyebrow, true)
     V.avatar.eyes = setAvatar("eyes",
         V.PC.info.eyecolor+"/"+V.PFace.eyes
-        + (eyegroup.includes(V.PFace.eyes) == true ? type[V.PC.eyes] :"")
+        + (eyegroup.includes(V.PFace.eyes) == true ? type[V.PC.info.eyes] :"")
         + (V.PFace.eyes.includes("full") == true && V.PFace.name == "正常" ? "_idle" : "")
         ,true
     )
@@ -338,7 +338,26 @@ function stAvatar() {
         V.avatar.tatoos = setAvatar("tatoos",null)
     }
 
-    V.avatar.background = setAvatar("background",imglocation(),true)
+    let background = {src: imglocation(),}
+
+    if(V.local?.side == "室外") background.outside = true;
+
+    if(between(V.date.time,1020,1140) && background.outside) {
+        background.color = "#D6981C"
+        document.getElementById('avatar-overlay').className = "Layer sunset"
+
+    }
+    else if ((between(V.date.time,1140,1440)||between(V.date.time,0,240)) && background.outside){
+         background.color = "#242C8A"
+        document.getElementById('avatar-overlay').className = "Layer night"
+    }
+    else{
+        background.color = null;
+        document.getElementById('avatar-overlay').className = "Layer"
+    }
+
+
+    V.avatar.background = setAvatar("background",background,true)
 
     if(V.harddebug)console.log("log",V.avatar);
     return ""

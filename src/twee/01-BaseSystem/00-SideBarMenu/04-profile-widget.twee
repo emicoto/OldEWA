@@ -2,9 +2,9 @@
 
 <<widget "changeinfo">>
 <<if _infochange is true>>
-    一名<<print $PC.info.tag>><<print $PC.title>><<textbox "$shortinfo" $shortinfo>> <<link "保存修改">><<set _infochange to false>><<replace #shortinfo>><<changeinfo>><</replace>><</link>><br>
+    一名<<print $PC.info.tag>><<print $PC.info.title>><<textbox "$shortinfo" $shortinfo>> <<link "保存修改">><<set _infochange to false>><<replace #shortinfo>><<changeinfo>><</replace>><</link>><br>
 <<else>>
-    一名<<print $PC.info.tag>><<print $PC.title>><<print $shortinfo>> <<link "修改简介">><<set _infochange to true>><<replace #shortinfo>><<changeinfo>><</replace>><</link>>
+    一名<<print $PC.info.tag>><<print $PC.info.title>><<print $shortinfo>> <<link "修改简介">><<set _infochange to true>><<replace #shortinfo>><<changeinfo>><</replace>><</link>>
 <</if>>
 <</widget>>
 
@@ -19,7 +19,7 @@
 <</widget>>
 
 <<widget "lookbody">>
-<<switch $PC.body>>
+<<switch $PC.info.body>>
     <<case 1>><<print "纤细娇小的身体">>
     <<case 2>><<print "普通身高和普通线条的身体">>
     <<case 3>><<print "高挑健美的身体">>
@@ -27,7 +27,7 @@
 <</widget>>
 
 <<widget "lookhips">>
-<<switch $PC.hips>>
+<<switch $PC.info.hips>>
     <<case 1>><<print "少年般的臀部线条">>
     <<case 2>><<print "少女般的臀部线条">>
     <<case 3>><<print "圆润的臀部线条">>

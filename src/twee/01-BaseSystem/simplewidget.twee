@@ -61,7 +61,7 @@
         名字 : $PC.info.name,
         性别 : $PC.info.tag,
         genital : $PC.genital,
-        gender: $PC.gender,
+        gender: $PC.info.gender,
     }>>
 <<elseif $args[0] is "pet">>
     <<set $currentchara to {
