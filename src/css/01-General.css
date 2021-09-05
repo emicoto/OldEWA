@@ -145,12 +145,13 @@ hr {
   cursor: pointer;
 }
 
-.handle {
+#handle {
   min-width: 200px;
-  width: max-content;
+  width: 80%;
   min-height: 30px;
   height: fit-content;
   padding: 0px 20px;
+  text-align: left;
   cursor: move;
 }
 

@@ -277,11 +277,11 @@ Game.Manager = new Manager({
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script&family=Kaisei+HarunoUmi&family=Kiwi+Maru:wght@300&family=Ma+Shan+Zheng&family=Noto+Sans+SC:wght@300&family=Noto+Serif+SC&family=Raleway:wght@300&family=Shippori+Mincho+B1&family=ZCOOL+KuaiLe&family=ZCOOL+QingKe+HuangYou&family=ZCOOL+XiaoWei&display=swap');
 </style>
+<script src="CSS/jquery-ui.js"></script>
 <script src="lib/path.min.js"></script>
 <script src="lib/clickLove.js"></script>
 <script src="lib/jscolor.js"></script>
 <script src="lib/draganddrop.js"></script>
-<script src="CSS/jquery-ui.js"></script>
 </head>
 <body>
 	<div id="init-screen">
@@ -710,12 +710,13 @@ hr {
   cursor: pointer;
 }
 
-.handle {
+#handle {
   min-width: 200px;
-  width: max-content;
+  width: 80%;
   min-height: 30px;
   height: fit-content;
   padding: 0px 20px;
+  text-align: left;
   cursor: move;
 }
 
@@ -1286,6 +1287,15 @@ body #story-caption #storyCaptionDiv {
     vertical-align:top;
     margin: 0px;
 }
+
+#showgametime {
+    position: fixed;
+    right: 2px;
+    top: 2px;
+    font-size: 8px;
+    color: rgb(177, 179, 160);
+    z-index: 1000;
+}
 /* twine-user-stylesheet #5: "03-Savelist.css" */
 #savesListContainer {
 	display: flex;
@@ -1469,12 +1479,12 @@ body #story-caption #storyCaptionDiv {
     margin-left: 10px;
     color: rgb(151, 141, 1);
 }
-#overlaytitle .handle li ::before {
+#overlaytitle #handle li ::before {
     content: "♢";
     font-size: 24px;
     margin: 2px;
 }
-#overlaytitle .handle li ::after {
+#overlaytitle #handle li ::after {
     content: "♢";
     font-size: 24px;
     margin: 2px;
@@ -4209,6 +4219,7 @@ function updatehistorycontrols(){
 }
 DefineMacro("updatehistorycontrols", updatehistorycontrols);
 /* twine-user-script #6: "1_statevars.js" */
+
 Object.defineProperties(window, {
 	V: {
 		get: function() {
@@ -4220,10 +4231,6 @@ Object.defineProperties(window, {
 		get: function() {
 			return State.temporary;
 		}
-	},
-
-	C: {
-		value: {}
 	},
 
 	S: {
@@ -4253,8 +4260,100 @@ Object.defineProperties(window, {
 		get: function (){
 			return Afunction
 		}
-	}
+	},
+	Flag : {
+		get:function(){
+			return State.variables.Flag
+		}
+	},
+	TFlag : {
+		get:function(){
+			return State.variables.TFlag
+		}
+	},
+	EFlag : {
+		get:function(){
+			return State.variables.TFlag
+		}
+	},
+	PFlag: {
+		get:function(){
+			return State.variables.PFlag
+		}
+	},
+	CFlag : {
+		get:function(){
+			return State.variables.CFlag
+		}
+	},	
+	PC : {
+		get:function(){
+			return State.variables.PC
+		}
+	},
+	npc : {
+		get:function(){
+			return State.variables.NPC
+		}
+	},
+	COM : {
+		get:function(){
+			return State.variables.command
+		}
+	},
+	ui : {
+		get:function(){
+			return State.variables.UI
+		}
+	},
+	conf : {
+		get:function(){
+			return State.variables.conf
+		}
+	},
+	closet :{
+		get:function(){
+			return State.variables.closet
+		}
+	},
+	items : {
+		get:function(){
+			return State.variables.items
+		}
+	},
+	pet : {
+		get:function(){
+			return State.variables.pet
+		}
+	},
+	Equip :{
+		get:function(){
+			return State.variables.Equip
+		}
+	},
+	FEquip:{
+		get:function(){
+			return State.variables.FEquip
+		}
+	},
+	source : {
+		get:function(){
+			return State.variables.source
+		}
+	},
 });
+
+EWA.V = {
+	Flag : Flag,
+	EFlag : EFlag,	TFlag : TFlag,
+	PFlag : PFlag,	CFlag : CFlag,
+	PC : PC,	npc : npc,
+	COM : COM,	UI : ui,
+	conf : conf,
+	closet: closet, items: items,
+	pet : pet, Equip : Equip, FEquip : FEquip,
+	source : source,
+}
 /* twine-user-script #7: "observable.js" */
 window.inDOM = function(node) {
 	return document.body.contains(node)
@@ -4740,10 +4839,8 @@ Config.saves.id = "EWA";
 /*LinkNumberify and images will enable or disable the feature completely*/
 /*debug will enable or disable the feature only for new games*/
 window.StartConfig = {
-	"debug": true,
-	"enableImages": true,
-	"enableLinkNumberify": false,
-	"version": "0.0.2",
+	"debug": false,
+	"version": "0.0.3",
 }
 
 Config.saves.autosave = ["bookmark", "autosave","eventend"];
@@ -11602,8 +11699,8 @@ function setreveal(){
     bottoms.sort((a,b)=>b-a)
     /*console.log("上衣:",tops)
     console.log("下衣:",bottoms)*/
-    V.PFlag.top = !tops[0]?0: tops[0]
-    V.PFlag.bottom=!bottoms[0]?0: bottoms[0]
+    PFlag.top = !tops[0]?0: tops[0]
+    PFlag.bottom=!bottoms[0]?0: bottoms[0]
 }
 window.setreveal = setreveal
 F.setreveal = setreveal
@@ -11617,7 +11714,7 @@ function allureBuff() {
             a = a+isAllure(items[i])
         }
 
-    if(V.PC.trait.倾国倾城 == true) a += 3;
+    if(PC.trait.倾国倾城 == true) a += 3;
 
     return 1+a
 }
@@ -11650,8 +11747,8 @@ function warmth() {
         a[0] += isHot(items[i])
         a[1] += isCold(items[i])
     }
-    V.PC.info.hot = V.fix.hot + a[0]
-    V.PC.info.cold = V.fix.cold + a[1]
+    PC.info.hot = V.fix.hot + a[0]
+    PC.info.cold = V.fix.cold + a[1]
     return a
 }
 
@@ -11724,8 +11821,8 @@ function BuyOutFit(args) {
     var layer = V.showcase.layer
     var text
 
-    if (args=="select" && V.money > V.showcase.cost) {
-        V.money = V.money - V.showcase.cost
+    if (args=="select" && PC.money > V.showcase.cost) {
+        PC.money = PC.money - V.showcase.cost
         let buystuff = clone(V.showcase)
         V.closet[layer].push(buystuff)
 
@@ -11736,8 +11833,8 @@ function BuyOutFit(args) {
 
         text = "你花费了"+V.showcase.cost+"元购买了"+V.showcase.name+"。"
     }
-    else if (args=="tryon" && V.money > tryoncost() ){
-        V.money = V.money - tryoncost()
+    else if (args=="tryon" && PC.money > tryoncost() ){
+        PC.money = PC.money - tryoncost()
 
         let group = Object.keys(V.tryon)
 
@@ -11920,7 +12017,7 @@ function gonaked(mode){
     FixValue()
     stAvatar()
 
-    if(V.harddebug==true)console.log(V.Equip,V.TEquip);
+    if(V.coredebug==true)console.log(V.Equip,V.TEquip);
     return ""
 }
 
@@ -11970,7 +12067,7 @@ window.SetFace = SetFace
 DefineMacroS("setface",SetFace)
 
 window.breastsize = function() {
-  var size = V.PC.info.breast
+  var size = PC.info.breast
   if (between(size,0,1)){
     return 1;
   }
@@ -11988,14 +12085,14 @@ window.breastDif = function(obj){
 }
 
 window.isPregnant = function() {
-    if(V.PC.state.怀孕 == true || V.PC.state.肠内受孕 == true) return "p";
+    if(PC.state.怀孕 == true || PC.state.肠内受孕 == true) return "p";
     else return ""
 }
 
 window.PregDif = function(obj) {
 
     if(typeof(obj)=="object" && obj && obj.hasDif && obj.hasDif.pregnant==true){
-        if(V.PC.state.怀孕 == true || V.PC.state.肠内受孕 == true) return "p";
+        if(PC.state.怀孕 == true || PC.state.肠内受孕 == true) return "p";
         else return ""
     }
     else return ""
@@ -12056,10 +12153,10 @@ window.imglocation = imglocation
 
 
 function isFurry(){
-    if ((V.PFlag.trueform == true ||  V.charamaking == true) && V.PC.info.race=="兽族") return "furry/"
-    else if ((V.PFlag.trueform == true || V.charamaking == true) && V.PC.info.race=="灵族") return "gold/"
-    else if (((V.PFlag.trueform == true || V.charamaking == true) && V.PC.info.race=="夜族")) return "yoru/"
-    else return V.PC.info.skin+"/"
+    if ((PFlag.trueform == true ||  Flag.charamaking == true) && PC.info.race=="兽族") return "furry/"
+    else if ((PFlag.trueform == true || Flag.charamaking == true) && PC.info.race=="灵族") return "gold/"
+    else if (((PFlag.trueform == true || Flag.charamaking == true) && PC.info.race=="夜族")) return "yoru/"
+    else return PC.info.skin+"/"
 }
 
 function isCaged(){
@@ -12071,12 +12168,12 @@ function isCaged(){
 function stAvatar() {
 
     /*浴精喷精喷奶冒汗气息一类 */
-    V.avatar.addon.body = setAvatar("addon.body",V.PFlag.bukkake.body)
-    V.avatar.addon.face = setAvatar("addon.face",V.PFlag.bukkake.face)
-    V.avatar.addon.hair = setAvatar("addon.hair",V.PFlag.bukkake.hair)
-    V.avatar.addon.face = setAvatar("addon.face",(V.PC.rec.饮精.c > 100))
-    V.avatar.addon.bottom = setAvatar("addon.bottom", (V.PC.rec.肛内射 + V.PC.rec.内射.c > 200 && V.PFlag.bottom <= 1))
-    V.avatar.addon.penis = setAvatar("addon.penis",(V.PC.rec.射精.c > 10 && V.PFlag.bottom <= 1))
+    V.avatar.addon.body = setAvatar("addon.body",PFlag.bukkake.body)
+    V.avatar.addon.face = setAvatar("addon.face",PFlag.bukkake.face)
+    V.avatar.addon.hair = setAvatar("addon.hair",PFlag.bukkake.hair)
+    V.avatar.addon.face = setAvatar("addon.face",(PC.rec.饮精.c > 100))
+    V.avatar.addon.bottom = setAvatar("addon.bottom", (PC.rec.肛内射 + PC.rec.内射.c > 200 && PFlag.bottom <= 1))
+    V.avatar.addon.penis = setAvatar("addon.penis",(PC.rec.射精.c > 10 && PFlag.bottom <= 1))
 
     /* 设置身上的服装 */
     const layers = ["outter","top","bottom","inner_up","inner_bt","neck","hat","face","hand","legs","shoes","back"]
@@ -12130,10 +12227,10 @@ function stAvatar() {
     /*头发部分*/
     const hairfront = A.hairfront[V.Equip.hairfront]
     const hairback = A.hairback[V.Equip.hairback]
-    const haircolor = A.haircolor[V.PC.info.haircolor]
+    const haircolor = A.haircolor[PC.info.haircolor]
     const fixhair = function(obj){
         if (typeof(obj)=="object" && obj){
-            if(obj.fixcolor == true) return V.PC.info.haircolor;
+            if(obj.fixcolor == true) return PC.info.haircolor;
             else return "basic";
             
         }else{
@@ -12143,18 +12240,18 @@ function stAvatar() {
 
     V.avatar.hairfront = setAvatar("hairfront",{
         fixcolor: hairfront.fixcolor, color: (hairfront.fixcolor==true? null : haircolor),
-        src: V.Equip.hairfront + "/" + fixhair(hairfront) + hasLength(hairfront,V.PC.info.hairlenf),
+        src: V.Equip.hairfront + "/" + fixhair(hairfront) + hasLength(hairfront,PC.info.hairlenf),
     })
 
     V.avatar.hairback = setAvatar("hairback",{
         fixcolor: hairback.fixcolor, color: (hairback.fixcolor==true? null : haircolor),
-        src: V.Equip.hairback + "/" + fixhair(hairback) + hasLength(hairback,V.PC.info.hairlen),
+        src: V.Equip.hairback + "/" + fixhair(hairback) + hasLength(hairback,PC.info.hairlen),
     })
 
 
     /*兽耳兽角兽尾部分, 每个部位都要分开来设置……还未完全实装。 */
-    if((V.PFlag.trueform == true || V.charamaking == true || V.PFlag.showkemomimi == true)){
-        if(V.PC.info.race == "兽族"){
+    if((PFlag.trueform == true || Flag.charamaking == true || PFlag.showmimi == true)){
+        if(PC.info.race == "兽族"){
             V.avatar.kemofront.mimi = setAvatar("kemofront.mimi",{
                 fixcolor: false, color: haircolor[0],
                 src: "cat",
@@ -12164,8 +12261,8 @@ function stAvatar() {
         V.avatar.kemofront.mimi = setAvatar("kemofront.mimi",null)
     }
 
-    if((V.PFlag.trueform == true || V.charamaking == true || V.PFlag.showkemotail == true)){
-        if(V.PC.info.race == "兽族"){
+    if((PFlag.trueform == true || Flag.charamaking == true || PFlag.showtail == true)){
+        if(PC.info.race == "兽族"){
             V.avatar.kemoback.tail = setAvatar("kemoback.tail",{
                 fixcolor:false, color:haircolor[0],
                 src:"cat", 
@@ -12174,9 +12271,9 @@ function stAvatar() {
      }else{
         V.avatar.kemoback.tail = setAvatar("kemoback.tail",null)
     }
-        /* let kemotype = V.PC.info.kemotype
+        /* let kemotype = PC.info.kemotype
         
-        if(V.PC.trait.兽耳 == true){
+        if(PC.trait.兽耳 == true){
             V.avatar.kemofront.mimi = setAvatar("kemofront.mimi",{
                 fixcolor: A.kemo[kemotype].mimi.fixcolor,
                 color: (A.kemo[kemotype].mimi.fixcolor==true? null: haircolor[0]),
@@ -12185,13 +12282,13 @@ function stAvatar() {
             })
         }
 
-        if(V.PC.trait.兽角==true){
+        if(PC.trait.兽角==true){
             V.avatar.kemofront.horn = setAvatar("kemofront.horn",
                 {src= `${kemotype}/horn`, acc= hornacc(kemotype)
             })
         }
 
-        if(V.PC.trait.兽尾==true){
+        if(PC.trait.兽尾==true){
             V.avatar.kemoback.tail = setAvatar("kemoback.tail",{
                 fixcolor: A.kemo[kemotype].tail.fixcolor,
                 color: (A.kemo[kemotype].tail.fixcolor==true? null: haircolor[0]),
@@ -12200,7 +12297,7 @@ function stAvatar() {
             })
         }
 
-        if(V.PC.race=="羽族"){
+        if(PC.race=="羽族"){
             V.avatar.kemoback.wing = setAvatar("kemoback.wing",{
                 fixcolor: A.kemo[kemotype].wing.fixcolor,
                 color: (A.kemo[kemotype].wing,fixcolor==true? null : haircolor),
@@ -12225,12 +12322,12 @@ function stAvatar() {
     }
 
     /* 小丁丁的显示 */
-    if(V.charamaking == true){
-        if(V.PC.info.tag != "少女")V.avatar.dick = setAvatar("dick", isFurry()+"penis"+isCaged(),true);
+    if(Flag.charamaking == true){
+        if(PC.info.tag != "少女")V.avatar.dick = setAvatar("dick", isFurry()+"penis"+isCaged(),true);
         else V.avatar.dick = setAvatar("dick", null,true);
 
     }else{
-        if(V.PFlag.bottom <= 1 && V.PC.genital.阴茎 > 3){
+        if(PFlag.bottom <= 1 && PC.genital.阴茎 > 3){
             V.avatar.dick = setAvatar("dick", isFurry()+"penis"+isCaged(),true)
         }else{
             V.avatar.dick = setAvatar("dick", null,true)
@@ -12238,22 +12335,22 @@ function stAvatar() {
     }
 
     
-    if((V.PFlag.trueform == true || V.charamaking == true)&& V.PC.info.race == "兽族"){
+    if((PFlag.trueform == true || Flag.charamaking == true)&& PC.info.race == "兽族"){
         V.avatar.body = setAvatar("body",{
             src:"furry/body_"+breastsize()+isPregnant(), color: haircolor[0],
         },true)
 
-    }else if ((V.PFlag.trueform == true || V.charamaking == true) && V.PC.info.race == "灵族"){
+    }else if ((PFlag.trueform == true || Flag.charamaking == true) && PC.info.race == "灵族"){
         V.avatar.body = setAvatar("body", "gold/body_"+breastsize()+isPregnant(),true)
-    }else if ((V.PFlag.trueform == true || V.charamaking == true) && V.PC.info.race == "夜族"){
+    }else if ((PFlag.trueform == true || Flag.charamaking == true) && PC.info.race == "夜族"){
         V.avatar.body = setAvatar("body", "yoru/body_"+breastsize()+isPregnant(),true)
     }
     else{
-        V.avatar.body = setAvatar("body", V.PC.info.skin+"/body_"+breastsize()+isPregnant(),true)
+        V.avatar.body = setAvatar("body", PC.info.skin+"/body_"+breastsize()+isPregnant(),true)
     }
 
     /* 设置表情 */
-    if (V.charamaking == true) SetFace(V.Equip.emote,1)
+    if (Flag.charamaking == true) SetFace(V.Equip.emote,1)
 
     const eyegroup = ["full","blink2","lookup3"]
     const type = [null,"a","b","c"]
@@ -12263,8 +12360,8 @@ function stAvatar() {
     /* 表情部分 */
     V.avatar.eyebrow = setAvatar("eyebrow", V.PFace.eyebrow, true)
     V.avatar.eyes = setAvatar("eyes",
-        V.PC.info.eyecolor+"/"+V.PFace.eyes
-        + (eyegroup.includes(V.PFace.eyes) == true ? type[V.PC.info.eyes] :"")
+        PC.info.eyecolor+"/"+V.PFace.eyes
+        + (eyegroup.includes(V.PFace.eyes) == true ? type[PC.info.eyes] :"")
         + (V.PFace.eyes.includes("full") == true && V.PFace.name == "正常" ? "_idle" : "")
         ,true
     )
@@ -12277,27 +12374,63 @@ function stAvatar() {
         V.avatar.emoadd[n] = setAvatar(`emoadd.${n}`, V.PFace[n], true)
     }
 
-    if(V.PC.base.快感[0] > V.PC.base.快感[1]/3 || V.PC.state.发情 == true || V.PC.base.酒精[0] > V.PC.base.酒精[1]/2 || V.PC.base.药物[0] > 20){
+    if(PC.base.快感[0] > PC.base.快感[1]/3 || PC.state.发情 == true || PC.base.酒精[0] > PC.base.酒精[1]/2 || PC.base.药物[0] > 20){
         V.avatar.emoadd.red = setAvatar("emoadd.red",true, true)
     }
 
     /* 淫纹 */
-    if(V.Pskin.腹部){
-        let path = "./image/avatar/body/"+V.Pskin.腹部.index+".png"
+    if(PC.skin.腹部){
+        let path = "./image/avatar/body/"+PC.skin.腹部.index+".png"
         if(ImgExist(path)){
-            V.avatar.tatoos = setAvatar("tatoos",V.Pskin.腹部.index)
+            V.avatar.tatoos = setAvatar("tatoos",PC.skin.腹部.index)
         }
     }else{
         V.avatar.tatoos = setAvatar("tatoos",null)
     }
 
-    if(V.harddebug)console.log("log",V.avatar);
+    if(V.coredebug)console.log("log",V.avatar);
     return ""
 }
 
 window.stAvatar = stAvatar
 F.stAvatar = stAvatar
-/* twine-user-script #31: "EventWidget.js" */
+/* twine-user-script #31: "CharaWidget.js" */
+function setChara(args){
+    if(args=="pc" || args=="player"){
+        V.CChara = {
+            name: PC.info.name,
+            gender: PC.info.gender,
+            genital: PC.genital,
+            genitype: PC.info.race+"阴茎",
+            base : PC.base,
+            source: source,
+            key : "PC"
+        }
+    }else if (args=="pet"){
+        V.CChara = {
+            name: pet.name,
+            gender: pet.gender,
+            genital: pet.genital,
+            genitype: pet.genitype,
+            base: pet.base,
+            source: pet.source,
+            key : "pet",
+        }
+    }else{
+        V.CChara = {
+            name: NPC[args].name,
+            gender: NPC[args].gender,
+            genital: NPC[args].genital,
+            genitype: NPC[args].genitype,
+            base: NPC[args].base,
+            source: NPC[args].source,
+            key : "NPC."+args,
+        }
+    }
+}
+F.setChara = setChara
+DefineMacroS("setchara",setChara)
+/* twine-user-script #32: "EventWidget.js" */
 function setEvent() {
     var event = V.event
     event.lang = V.lang
@@ -12503,32 +12636,32 @@ window.useitem = useitem
     print V.items[catgt][_keys[_i]].name
     useitem(catgr,_keys[_i])
 */
-/* twine-user-script #32: "FixValue.js" */
+/* twine-user-script #33: "FixValue.js" */
 function FixValue() {
 
-    V.money = Math.clamp(V.money, 0, 9999999999)
+    PC.money = Math.clamp(PC.money, 0, 9999999999)
 
     /* 固定数值的修正 */
 
-    V.fix.hot = parseFloat((26+(V.PC.abl.健身/200)).toFixed(2))
-    V.fix.cold = parseFloat((20-(V.PC.abl.健身/200)).toFixed(2))
+    V.fix.hot = parseFloat((26+(PC.abl.健身/200)).toFixed(2))
+    V.fix.cold = parseFloat((20-(PC.abl.健身/200)).toFixed(2))
     V.fix.beauty = 1600
-    V.PC.info.hairlen = Math.clamp(V.PC.info.hairlen,0,9999)
-    V.PC.info.hairlenf = Math.clamp(V.PC.info.hairlenf,0,9999)
-    V.PC.info.beauty = Math.clamp(V.fix.beauty*allureBuff(),0,9999)
+    PC.info.hairlen = Math.clamp(PC.info.hairlen,0,9999)
+    PC.info.hairlenf = Math.clamp(PC.info.hairlenf,0,9999)
+    PC.info.beauty = Math.clamp(V.fix.beauty*allureBuff(),0,9999)
     T.warmth = warmth()
 
     /* BASE条修正 */
-    V.PC.base.体力[1] =  Math.round(Math.clamp(500+(V.PC.abl.健身*(V.PC.level/5)),0,2500))
-    V.PC.base.体力[0] = Math.clamp(V.PC.base.体力[0],-100,V.PC.base.体力[1])
+    PC.base.体力[1] =  Math.round(Math.clamp(500+(PC.abl.健身*(PC.level/5)),0,2500))
+    PC.base.体力[0] = Math.clamp(PC.base.体力[0],-100,PC.base.体力[1])
 
-    V.PC.base.理智[1] =  Math.round(Math.clamp(500+(V.PC.abl.意志*(V.PC.level/5)),0,2500))  
-    V.PC.base.理智[0] = Math.clamp(V.PC.base.理智[0],0,V.PC.base.理智[1])
+    PC.base.理智[1] =  Math.round(Math.clamp(500+(PC.abl.意志*(PC.level/5)),0,2500))  
+    PC.base.理智[0] = Math.clamp(PC.base.理智[0],0,PC.base.理智[1])
 
-    V.PC.base.魔力[1] =  Math.round(Math.clamp(100+V.PC.level*(V.PC.abl.意志/8),100,1200)) 
-    V.PC.base.魔力[0] = Math.clamp(V.PC.base.魔力[0],0,V.PC.base.魔力[1])
+    PC.base.魔力[1] =  Math.round(Math.clamp(100+PC.level*(PC.abl.意志/8),100,1200)) 
+    PC.base.魔力[0] = Math.clamp(PC.base.魔力[0],0,PC.base.魔力[1])
 
-    let g = Object.keys(V.PC.base)
+    let g = Object.keys(PC.base)
 
     for(let i=0; i< g.length; i++){
         let n = g[i]
@@ -12537,66 +12670,66 @@ function FixValue() {
 
         //[current,max] 最大值固定 1000 并且把现在值固定在 0-max值内
         if(["饮食","健康","酒精","药物","抑郁","欲望"].includes(n)) {
-            V.PC.base[n][1] = 1000;
-            V.PC.base[n][0] = Math.clamp(V.PC.base[n][0],0,V.PC.base[n][1]);
+            PC.base[n][1] = 1000;
+            PC.base[n][0] = Math.clamp(PC.base[n][0],0,PC.base[n][1]);
         }
 
         // max值可成长到5000，且现在值可以突破最大值
         if(["压力","疼痛","恐惧","耻辱","快M", "快B", "快C", "快V", "快U", "快A"].includes(n)){
-            V.PC.base[n][1] = Math.round(Math.clamp(V.PC.base[n][1],1000,5000))
-            V.PC.base[n][0] = Math.max(V.PC.base[n][0],0)  //防止出现负数
+            PC.base[n][1] = Math.round(Math.clamp(PC.base[n][1],1000,5000))
+            PC.base[n][0] = Math.max(PC.base[n][0],0)  //防止出现负数
         }
         /* max值不可成长但现在值可突破最大值
         if([].includes(n)){
-            V.PC.base[n][1] = 1000
+            PC.base[n][1] = 1000
         }*/
     }
 
     // 扩张的修正
-    V.PC.stretch.anal = parseFloat(Math.clamp(V.PC.stretch.anal,1,(12+(V.PC.info.body*2))).toFixed(2))
+    PC.stretch.anal = parseFloat(Math.clamp(PC.stretch.anal,1,(12+(PC.info.body*2))).toFixed(2))
 
-    if(V.PC.info.tag == "少女") V.PC.stretch.ureth = Math.clamp(V.PC.stretch.ureth,0.5,6);
-    else V.PC.stretch.ureth = parseFloat(Math.clamp(V.PC.stretch.ureth,0.2,(0.5+V.PC.genital.阴茎/10)).toFixed(2));
+    if(PC.info.tag == "少女") PC.stretch.ureth = Math.clamp(PC.stretch.ureth,0.5,6);
+    else PC.stretch.ureth = parseFloat(Math.clamp(PC.stretch.ureth,0.2,(0.5+PC.genital.阴茎/10)).toFixed(2));
 
-    if(V.PC.genital.子宫) V.PC.stretch.vagina = parseFloat(Math.clamp(V.PC.stretch.vagina,1,(12+(V.PC.info.body*2))).toFixed(2));
-    else V.PC.stretch.vagina = null;
+    if(PC.genital.子宫) PC.stretch.vagina = parseFloat(Math.clamp(PC.stretch.vagina,1,(12+(PC.info.body*2))).toFixed(2));
+    else PC.stretch.vagina = null;
 
     // 液体分量的修正
-    if(V.PC.genital.阴茎){
-        V.PC.produce.精液[1] = Math.clamp(V.PC.produce.精液[1],V.PC.genital.阴茎*2.5,V.PC.genital.阴茎*10)
-        V.PC.produce.精液[0] = Math.clamp(V.PC.produce.精液[0],0,V.PC.produce.精液[1])
+    if(PC.genital.阴茎){
+        PC.produce.精液[1] = Math.clamp(PC.produce.精液[1],PC.genital.阴茎*2.5,PC.genital.阴茎*10)
+        PC.produce.精液[0] = Math.clamp(PC.produce.精液[0],0,PC.produce.精液[1])
     }
 
-    if(V.PFlag.lactation){
-        V.PC.produce.乳汁[1] = Math.clamp(V.PC.produce.乳汁[1],V.PC.info.breast*10,V.PC.info.breast*40)
-        V.PC.produce.乳汁[0] = Math.clamp(V.PC.produce.乳汁[0],0,V.PC.produce.乳汁[1])
+    if(PFlag.lactation){
+        PC.produce.乳汁[1] = Math.clamp(PC.produce.乳汁[1],PC.info.breast*10,PC.info.breast*40)
+        PC.produce.乳汁[0] = Math.clamp(PC.produce.乳汁[0],0,PC.produce.乳汁[1])
     }
 
     //体内液体的集算
-    const b = Object.keys(V.PC.wet)
+    const b = Object.keys(PC.wet)
     for(let i=0;i<b.length;i++){
         let n = b[i]
-        V.PC.wet[n] = sum(V.PC.bottom[n])
+        PC.wet[n] = sum(PC.bottom[n])
     }
     // RPG数值的修正
-    V.PC.rpg.HP[1] = Math.round(Math.clamp((V.PC.base.体力[1]/5+100),1,1000)) //HP=体力/5+健康/10
-    V.PC.rpg.HP[0] = Math.clamp(V.PC.rpg.HP[0],-1,V.PC.rpg.HP[1]) //战斗结束时按比例返回至体力和健康值
+    PC.rpg.HP[1] = Math.round(Math.clamp((PC.base.体力[1]/5+100),1,1000)) //HP=体力/5+健康/10
+    PC.rpg.HP[0] = Math.clamp(PC.rpg.HP[0],-1,PC.rpg.HP[1]) //战斗结束时按比例返回至体力和健康值
 
-    V.PC.rpg.MP[1] = V.PC.base.魔力
-    V.PC.rpg.MP[0] = V.PC.base.魔力
+    PC.rpg.MP[1] = PC.base.魔力
+    PC.rpg.MP[0] = PC.base.魔力
 
-    V.PC.rpg.SP[1] = Math.round(Math.clamp(V.PC.rpg.SP[1],50,50+V.PC.eskl.性耐性/5))
-    V.PC.rpg.SP[0] = Math.clamp(V.PC.rpg.SP[0],0,V.PC.rpg.SP[1])
+    PC.rpg.SP[1] = Math.round(Math.clamp(PC.rpg.SP[1],50,50+PC.eskl.性耐性/5))
+    PC.rpg.SP[0] = Math.clamp(PC.rpg.SP[0],0,PC.rpg.SP[1])
 
-    V.PC.rpg.ATK = parseFloat(Math.clamp((10+V.PC.abl.战技/10),1,500).toFixed(1))
-    V.PC.rpg.DEF = parseFloat(Math.clamp((10+V.PC.abl.健身/10)+defBuff(),1,500).toFixed(1))
-    V.PC.rpg.MATK = parseFloat(Math.clamp((10+(V.PC.abl.奥术/10*V.PC.school.自然/500)),1,500).toFixed(1))
-    V.PC.rpg.MDEF = parseFloat(Math.clamp((10+(V.PC.abl.异能/10*V.PC.school.物理/500)),1,500).toFixed(1))
-    V.PC.rpg.SPD = parseFloat(Math.clamp((10+(V.PC.abl.运动/10)),1,500).toFixed(1))
+    PC.rpg.ATK = parseFloat(Math.clamp((10+PC.abl.战技/10),1,500).toFixed(1))
+    PC.rpg.DEF = parseFloat(Math.clamp((10+PC.abl.健身/10)+defBuff(),1,500).toFixed(1))
+    PC.rpg.MATK = parseFloat(Math.clamp((10+(PC.abl.奥术/10*PC.school.自然/500)),1,500).toFixed(1))
+    PC.rpg.MDEF = parseFloat(Math.clamp((10+(PC.abl.异能/10*PC.school.物理/500)),1,500).toFixed(1))
+    PC.rpg.SPD = parseFloat(Math.clamp((10+(PC.abl.运动/10)),1,500).toFixed(1))
 
     /* 技能等级相关值修正 */
     const max = function(){
-        switch(V.hardmode){
+        switch(conf.hardmode){
             case 0.5: return 1000;
             case 1: return 1200;
             case 2: return 2400;
@@ -12604,39 +12737,39 @@ function FixValue() {
         }
     }
 
-    const school = Object.keys(V.PC.school) //学校
+    const school = Object.keys(PC.school) //学校
     for(let i=0; i< school.length; i++){
         let n = school[i]
-        V.PC.school[n] = Math.clamp(V.PC.school[n],0,1200)
+        PC.school[n] = Math.clamp(PC.school[n],0,1200)
     }
 
-    const abl = Object.keys(V.PC.abl) //技能
+    const abl = Object.keys(PC.abl) //技能
     for(let i=0; i<abl.length; i++){
         let n = abl[i]
-        V.PC.abl[n] = Math.clamp(V.PC.abl[n],0,max())
+        PC.abl[n] = Math.clamp(PC.abl[n],0,max())
     }
 
-    const eskl = Object.keys(V.PC.eskl) //性技
+    const eskl = Object.keys(PC.eskl) //性技
     for(let i=0; i<eskl.length; i++){
         let n = eskl[i]
-        V.PC.eskl[n] = Math.clamp(V.PC.eskl[n],0,1000)
+        PC.eskl[n] = Math.clamp(PC.eskl[n],0,1000)
     }
 
-    const lewd = Object.keys(V.PC.lewd) //变态度
+    const lewd = Object.keys(PC.lewd) //变态度
     for(let i=0; i<lewd.length; i++){
         let n = lewd[i]
-        V.PC.lewd[n] = Math.clamp(V.PC.lewd[n],-1000,1000)
+        PC.lewd[n] = Math.clamp(PC.lewd[n],-1000,1000)
     }
 
     setreveal()
 
-    if(V.harddebug==true)console.log(V.PC);
+    if(V.coredebug==true)console.log(pc);
     return ""
 }
 window.FixValue = FixValue
 F.FixValue = FixValue
 DefineMacroS("fixvalue",FixValue)
-/* twine-user-script #33: "Location.js" */
+/* twine-user-script #34: "Location.js" */
 /* 地点互动和事件相关 */
 /* 总之先粗略地做一下... 符合条件的就显示出来 */
 F.getsituation = function(location, series, key){
@@ -12652,7 +12785,7 @@ F.getsituation = function(location, series, key){
 
                text[data[i].display].push(result);
                
-               if(V.harddebug)console.log(data[i].condition());
+               if(V.coredebug)console.log(data[i].condition());
         }
     }}
     if(text.before.length + text.content.length + text.after.length > 0){
@@ -12668,12 +12801,12 @@ function setBG() {
 
     if(V.local?.side == "室外") background.outside = true;
 
-    if(between(V.date.time,1020,1140) && background.outside) {
+    if(between(V.day.time,1020,1140) && background.outside) {
         background.color = "#D6981C"
         document.getElementById('avatar-overlay').className = "Layer sunset"
 
     }
-    else if ((between(V.date.time,1140,1440)||between(V.date.time,0,240)) && background.outside){
+    else if ((between(V.day.time,1140,1440)||between(V.day.time,0,240)) && background.outside){
         background.color = "#242C8A"
         document.getElementById('avatar-overlay').className = "Layer night"
     }
@@ -12702,7 +12835,7 @@ function setLocation(args) {
             V.local = null
         }
 
-        V.movebutton = false
+        ui.movebutton = false
 
         if(V.local){
             if(V.local.tag.includes("家"))V.local.chara.push("player");
@@ -12717,7 +12850,7 @@ function setLocation(args) {
 window.setLocation = setLocation
 DefineMacroS("location",setLocation)
 
-/* twine-user-script #34: "TimeProcess.js" */
+/* twine-user-script #35: "TimeProcess.js" */
 
 function gettimezone(h) {
 	switch(true){
@@ -12742,11 +12875,11 @@ function gettimezone(h) {
 F.gettimezone = gettimezone
 
 function timeprocess() {
-	var time = V.date.time;
-	var day = V.date.day;
-	var week = V.date.week;
-	var month = V.date.month;
-	var year = V.date.year;
+	var time = V.day.time;
+	var day = V.day.day;
+	var week = V.day.week;
+	var month = V.day.month;
+	var year = V.day.year;
 	var min,hour,zone,weekday;
 
 
@@ -12764,7 +12897,7 @@ function timeprocess() {
 
 		week = week + Math.floor(hour/24);
 		hour = hour % 24;
-		V.daychange = true
+		Flag.daychange = true
 	};
 
 	zone = gettimezone(hour);
@@ -12807,17 +12940,17 @@ function timeprocess() {
 		month = Math.max(month%12,1);
 	};
 
-	V.date.time = time;
-	V.date.min = min;
-	V.date.hour = hour;
+	V.day.time = time;
+	V.day.min = min;
+	V.day.hour = hour;
 
-	V.date.zone = zone;
-	V.date.weekday = weekday;
+	V.day.zone = zone;
+	V.day.weekday = weekday;
 
-	V.date.day = day;
-	V.date.week = week;
-	V.date.month = month;
-	V.date.year = year;
+	V.day.day = day;
+	V.day.week = week;
+	V.day.month = month;
+	V.day.year = year;
 
 	return ""
 }
@@ -12827,7 +12960,7 @@ DefineMacroS("timeprocess",timeprocess)
 
 Macro.add('time', {
 	handler: function () {
-		var time = V.date.time;
+		var time = V.day.time;
 		var min, hour, zone;
 
 		if (time < 0) time = 0;
@@ -12839,14 +12972,14 @@ Macro.add('time', {
 
 		zone = gettimezone(hour)
 
-		V.date.min = min
-		V.date.hour = hour
-		V.date.zone = zone
+		V.day.min = min
+		V.day.hour = hour
+		V.day.zone = zone
 	}
 });
 
 window.dailyMultiple = function(){
-	let t = V.passtime - V.wakeuptime
+	let t = V.times.passed - V.times.wakeup
 	if(t/60 >= 4){
 		return Math.floor(Math.pow(1.1,(t/60 - 4))*1000)/1000
 	}
@@ -12855,12 +12988,12 @@ window.dailyMultiple = function(){
 
 function daychange(){
 
-	V.daychange = false
+	Flag.daychange = false
 	return ""
 }
 
 function passtime(t,mode){
-	V.passtime += t  // 睡醒后的累计经过时间。只有进行睡眠休息时才会清除
+	V.times.passed += t  // 睡醒后的累计经过时间。只有进行睡眠休息时才会清除
 
 	/* 经过时间加到现在时间前的处理 */
 	let m = dailyMultiple()
@@ -12869,32 +13002,31 @@ function passtime(t,mode){
 	let tired  = Math.floor((0.6*t*m)*1000)/1000
 	let lostmana = 0.02*t
 	let desired = 0.01*t
-	
+
 
 	/* 天气变化  累计的时间满3个小时或者一次经过3小时以上就换个天气，然后清零。 没满就*/
-	if(V.timestock >= 180 || t >= 180){ weather(); V.timestock = 0;}
-	else V.timestock += t;
+	if(V.times.stock >= 180 || t >= 180){ weather(); V.times.stock = 0;}
+	else V.times.stock += t;
 
 
 	/* 把经过时间加到现在时间去 */
-	V.date.time += t
+	V.day.time += t
 	
 	/* 时间经过处理 */
 	timeprocess()
 
 	/* 日期变更时的处理 */
-	if(V.daychange)daychange();
+	if(Flag.daychange)daychange();
 
 }
-
-/* twine-user-script #35: "PlayerInfo.js" */
+/* twine-user-script #36: "PlayerInfo.js" */
 /* 名字和称呼的处理 */
 function gsplit(m,f,p="chara"){
   if (p=="player"){
-    if (V.PC.info.gender == "m" ) return m;
+    if (PC.info.gender == "m" ) return m;
     else return f;
   }else {
-    if (V.currentchara.gender == "m" ) return m;
+    if (V.CChara.gender == "m" ) return m;
     else return f;
   }
 }
@@ -12902,8 +13034,8 @@ window.gsplit = gsplit
 DefineMacroS("gsplit", gsplit);
 /* 除了我，你他之外，其他都是英文限定。所以中文用you，英文用Im分开算了。英文描写玩家统一用I、me、my、mine */
 function you() {
-    var name = V.PC.info.name;
-    switch (V.persons){
+    var name = PC.info.name;
+    switch (conf.persons){
     case 1:
       return "我";
     case 2:
@@ -12915,8 +13047,8 @@ function you() {
 DefineMacroS("you", you);
 
 function I(key=null) {
-  var name = V.PC.info.name;
-  switch (V.persons){
+  var name = PC.info.name;
+  switch (conf.persons){
   case 1:
     return "I";    
   case 2:
@@ -12930,7 +13062,7 @@ function I(key=null) {
 DefineMacroS("I", I);
 
 function my(key=null) {
-  switch (V.persons){
+  switch (conf.persons){
   case 1:
     if(key!=null)return "My";
     else return "my";
@@ -12945,7 +13077,7 @@ function my(key=null) {
 DefineMacroS("my", my);
 
 function me(key=null) {
-  switch (V.persons){
+  switch (conf.persons){
   case 1:
     if(key!=null)return "Me";
     else return "me";
@@ -12960,20 +13092,20 @@ function me(key=null) {
 DefineMacroS("me", me);
 
 function Iam() {
-  switch (V.persons){
+  switch (conf.persons){
     case 1:
       return "I am";
     case 2:
       return "You are";
     default:
-      if (V.PC.info.gender == "m") return "He is";
+      if (PC.info.gender == "m") return "He is";
       else return "She is";
     }
 }
 DefineMacroS("Iam", Iam);
 
 function myself() {
-  switch (V.persons){
+  switch (conf.persons){
     case 1:
       return "myself";
     case 2:
@@ -12985,7 +13117,7 @@ function myself() {
 DefineMacroS("myself", myself);
 
 function am() {
-  switch (V.persons){
+  switch (conf.persons){
     case 1:
       return "am";
     case 2:
@@ -12997,19 +13129,19 @@ function am() {
 DefineMacroS("am", am);
 
 function mine(){
-  switch (V.persons){
+  switch (conf.persons){
     case 1:
       return "mine";
     case 2:
       return "yours";
     default:
-     if (V.PC.info.gender == "m") return "his";
+     if (PC.info.gender == "m") return "his";
       else return "hers";
     }
 }
 
 function he(key=null) {
-  var gender = V.currentchara.gender
+  var gender = V.CChara.gender
     if(gender=="m"){
       if(key!=null)return Lang("他","He");
       else return Lang("他","he");
@@ -13022,7 +13154,7 @@ DefineMacroS("he", he);
 
 
 function his(key=null) {
-  var gender = V.currentchara.gender
+  var gender = V.CChara.gender
     if(gender=="m"){
       if(key!=null)return Lang("他的","His");
       else return Lang("他的","his");
@@ -13034,7 +13166,7 @@ function his(key=null) {
 DefineMacroS("his", his);
 
 function him(key=null) {
-  var gender = V.currentchara.gender
+  var gender = V.CChara.gender
     if(gender=="m"){
       if(key!=null)return "Him";
       else return "him";
@@ -13049,7 +13181,7 @@ DefineMacroS("him", him);
 /* 头发 */
 function hair(){
   const select = new SelectCase();
-  var num = V.PC.info.hairlen
+  var num = PC.info.hairlen
   select.add(0, 49, "超短发");
   select.add(50, 99, "齐耳短发");
   select.add(100, 249, "及脖中发");
@@ -13058,14 +13190,14 @@ function hair(){
   select.add(800, 1200, "及腰长发");
   select.default = "超长长发";
   const hairlength = select.has(num);
-  return `${setup.L[V.lang]["发色"][V.PC.info.haircolor] + setup.L[V.lang]["发型"][V.PC.info.hairstyle] + hairlength}`;
+  return `${setup.L[V.lang]["发色"][PC.info.haircolor] + setup.L[V.lang]["发型"][PC.info.hairstyle] + hairlength}`;
 }
 
 DefineMacroS("hair",hair);
 
 /* 容貌描述 */
 function beauty(){
-  var num = V.PC.info.beauty
+  var num = PC.info.beauty
   const select = new SelectCase()
   select.add(0,100,"脸部被毁容，丑得惨绝人寰")
   select.add(101,200,"脸上有重大伤痕，显得很狰狞")
@@ -13087,20 +13219,20 @@ DefineMacroS("beauty", beauty);
 
 /* 眼睛 */
 function eye(){
-  return setup.L[V.lang]["瞳色"][V.PC.info.eyecolor] + setup.L[V.lang]["瞳色"]["eyes"]
+  return setup.L[V.lang]["瞳色"][PC.info.eyecolor] + setup.L[V.lang]["瞳色"]["eyes"]
 }
 DefineMacroS("eye", eye);
 
 /* 皮肤 */
 function skin(){
-  return setup.L[V.lang]["肤色"][V.PC.info.skin] + setup.L[V.lang]["肤色"]["skin"]
+  return setup.L[V.lang]["肤色"][PC.info.skin] + setup.L[V.lang]["肤色"]["skin"]
 }
 DefineMacroS("skin", skin);
 
 /*胸部 */
 
 function breast(){
-  switch(V.PC.info.breast){
+  switch(PC.info.breast){
     case 1:
       return "微微隆起的胸部"
     case 2:
@@ -13119,7 +13251,7 @@ DefineMacroS("breast", breast);
 
 /* 阴茎 */
 function penis(){
-  var size = V.PC.genital.阴茎
+  var size = PC.genital.阴茎
   var a = random(0,2)
   const text1 = ["惊人的","魔鬼般的","巨大无比的"]
   const text2 = ["可爱的","小孩一般的","短小"]
@@ -13149,7 +13281,7 @@ function it(){
 }
 DefineMacroS("it", it);
 
-/* twine-user-script #36: "SkillRank.js" */
+/* twine-user-script #37: "SkillRank.js" */
 function displayskillrank(num){
     const select = new SelectCase()
     select.add(0,100,"<span style='color:#839EC0;'><b>F</b></span>")
@@ -13235,7 +13367,7 @@ window.rankcolor = function(num){
         return "#D7A800";
     }
 }
-/* twine-user-script #37: "SimpleWidget.js" */
+/* twine-user-script #38: "SimpleWidget.js" */
 function printmoney(num) {
     return num && num.toString()
         .replace(/\d+/, function(s){
@@ -13250,8 +13382,8 @@ window.showcharainfo = function () {
 }
 
 window.basepercent = function(name) {
-    var min = V.PC.base[name][0]
-    var max = V.PC.base[name][1]
+    var min = PC.base[name][0]
+    var max = PC.base[name][1]
     return Math.clamp(Math.trunc(((min/max)*100)),1,100)
 };
 
@@ -13289,7 +13421,7 @@ window.hairlenth = function(num){
 }
 
 function inTime(a,b){
-    return between(V.date.time,a*60,b*60)
+    return between(V.day.time,a*60,b*60)
 }
 F.inTime = inTime
 
@@ -13307,7 +13439,19 @@ function RER(){
 }
 F.RER = RER
 DefineMacroS("setRER",RER)
-/* twine-user-script #38: "UI Widget.js" */
+
+window.gametime = function(a){
+    let time = V.gametime
+    time.sec++
+    
+    if(time.sec>=60){time.min++;time.sec=0;}
+    if(time.min>=60){time.hour++;time.min=0}
+    if(time.hour>=24){time.day++;time.hour=0}
+
+    V.gametime = time
+    return `D${time.day}.${time.hour}:${time.min}:${time.sec}`
+}
+/* twine-user-script #39: "UI Widget.js" */
 /* 通用 */
 
 function weirdeffect(){
@@ -13355,7 +13499,7 @@ window.ShowPopUP = ShowPopUP
 
 window.movebutton = function() {
     
-    if (V.movebutton == false) {
+    if (ui.movebutton == false) {
         new Wikifier(null,"<<replace '#movebutton'>><<link '▽ 移动'>><<run movebutton()>><</link>><</replace>>")
         $('#navi').addClass('navi_active'); $('#navi').removeClass('navi_unable')
         $('#links').removeClass('hidden') 
@@ -13367,17 +13511,17 @@ window.movebutton = function() {
         $('#links').addClass('hidden') 
     }
 
-   V.movebutton = !V.movebutton 
+   ui.movebutton = !ui.movebutton 
 }
 
 window.menubutton = function(){
-    if(V.menubutton == false){
+    if(ui.menubutton == false){
          $('#menu_container').addClass('menu_active');setTimeout(() => {$('#menu_container').removeClass('menu_hide')},500);
     }
     else{
         $('#menu_container').addClass('menu_hide');setTimeout(() => {$('#menu_container').removeClass('menu_active')},500); 
     }
-    V.menubutton = !V.menubutton
+    ui.menubutton = !ui.menubutton
 }
 
 function delay(id,text) {
@@ -13390,7 +13534,7 @@ function delay(id,text) {
 }
 F.delay = delay
 DefineMacroS("delay",delay)
-/* twine-user-script #39: "chs.min.js" */
+/* twine-user-script #40: "chs.min.js" */
 /*! chs.js – 简体中文, by: Liyro Pen. | Copyright © 2017 Thomas Michael Edwards <thomasmedwards@gmail.com>. All rights reserved. | Licensed under a BSD 2-clause "Simplified" License. */
 !(function () {
   (l10nStrings.identity = "游戏"),
@@ -14307,8 +14451,8 @@ DefineMacroS("delay",delay)
         text:&quot;只要是快餐店就一定会有卖的汉堡包。毕竟是最便宜的汉堡，份量不怎么的，味道也很一般。&quot;,
         text_en:&quot;The burger that definitely will be sold in all kind of fast food restaurant. Because it&#39;s the cheapest burger, so you can&#39;t expect its volumn and taste.&quot;,
         effect(){
-            V.PC.base.饮食[0] += 200;
-            return V.PC.base.饮食;
+            PC.base.饮食[0] += 200;
+            return PC.base.饮食;
         },
     },
 }&gt;&gt;
@@ -14445,12 +14589,9 @@ DefineMacroS("delay",delay)
         img:&quot;tryon&quot;,
     },
 }&gt;&gt;   
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="10" name="StoryInit" tags="" position="1225,100" size="100,100">&lt;!-- 快速检索法 luatable[&quot;indexname&quot;] = $test.名字 ; $test.历史 
-     var=[0,1,2,3] , luatable[0] = $var[0]  --&gt;
-&lt;!-- 首先初始化资料库 --&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="10" name="StoryInit" tags="" position="1225,100" size="100,100">&lt;!-- 首先初始化资料库 --&gt;
 &lt;&lt;InitDataBase&gt;&gt;
 &lt;&lt;InitBGM&gt;&gt;
-&lt;&lt;set $test to 0&gt;&gt;
 
 &lt;!-- DEBUG --&gt;
 &lt;&lt;if StartConfig.debug is true&gt;&gt;
@@ -14458,17 +14599,43 @@ DefineMacroS("delay",delay)
 &lt;&lt;else&gt;&gt;
 	&lt;&lt;set $debug to false&gt;&gt;
 &lt;&lt;/if&gt;&gt;
-&lt;&lt;set $harddebug to false&gt;&gt;
-&lt;&lt;set $charamaking to null&gt;&gt;
-&lt;!-- 游戏系统环境设定 --&gt;
-&lt;&lt;set $temp to {}&gt;&gt;
+
 &lt;&lt;set $lang to &quot;CN&quot;&gt;&gt;
-&lt;&lt;set $timelimit to true&gt;&gt;
-&lt;&lt;set $persons to 3&gt;&gt;
-&lt;&lt;set $hardmode to 1&gt;&gt;
-&lt;&lt;set $render to &quot;canvas&quot;&gt;&gt;
-&lt;&lt;set $movebutton to false&gt;&gt;
-&lt;&lt;set $menubutton to false&gt;&gt;
+&lt;&lt;set $coredebug to false&gt;&gt;
+&lt;&lt;set $charamaking to null&gt;&gt;
+
+&lt;!-- 游戏系统环境设定 --&gt;
+&lt;&lt;set $Flag to {}&gt;&gt; /* game flag */
+&lt;&lt;set $TFlag to {}&gt;&gt; /* Temp flag */
+&lt;&lt;set $PFlag to {}&gt;&gt; /* Player flag */
+&lt;&lt;set $CFlag to {}&gt;&gt; /* combat flag */
+&lt;&lt;if $PC is undefined&gt;&gt;&lt;&lt;set $PC to {}&gt;&gt;&lt;&lt;/if&gt;&gt;
+
+/* event flag事件系统相关变量 */
+&lt;&lt;set $EFlag to {
+	nonext   : true,    end      : false,
+    location : null,    chara    : null,
+}&gt;&gt;
+
+&lt;&lt;set $event to {
+    type : &quot;主线&quot;, name : &quot;开幕&quot;, branch : &quot;初次&quot; , phrase: null,
+}&gt;&gt; 
+&lt;&lt;set $eventexit to &quot;你的家 单身公寓&quot;&gt;&gt;
+&lt;&lt;set $count to 0&gt;&gt;      /* 通用计数变量。需要离开当前passage或重置的情况 */
+&lt;&lt;set $eventend to false&gt;&gt;
+&lt;&lt;set $eventnext to 0&gt;&gt;
+
+
+&lt;&lt;set $temp to {}&gt;&gt;
+
+&lt;&lt;set $conf to {
+	persons:3, timelimit:true, hardmode:1, 
+	render: &quot;canvas&quot;,
+}&gt;&gt;
+&lt;&lt;set $UI to {
+	movebutton:false, menubutton:false
+}&gt;&gt;
+
 &lt;&lt;set $anounce to {flag:false, text:&quot;&quot;, type:&quot;弹出通知&quot;}&gt;&gt;
 
 &lt;!-- 游戏各种flag初始化 --&gt;
@@ -14486,9 +14653,11 @@ DefineMacroS("delay",delay)
 	&lt;&lt;set $bookmark to {}&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 
+&lt;&lt;set $record to {}&gt;&gt; 
+
 &lt;!-- 已获得的头衔列表 --&gt;
-&lt;&lt;if $pctitle is undefined&gt;&gt;
-    &lt;&lt;set $pctitle to {}&gt;&gt;
+&lt;&lt;if $titles is undefined&gt;&gt;
+    &lt;&lt;set $titles to {}&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 
 &lt;!-- 成就 --&gt;
@@ -14504,7 +14673,7 @@ DefineMacroS("delay",delay)
 &lt;&lt;if $saveDetails is undefined&gt;&gt;
 	&lt;&lt;set $saveDetails to {
 		exported:{
-			days: clone($days),
+			days: clone($passdays),
 			count: 0,
 			dayCount: 0,
 		},
@@ -14580,7 +14749,23 @@ DefineMacroS("delay",delay)
 &lt;&lt;/widget&gt;&gt;
 
 &lt;&lt;widget &quot;InitNPCData&quot;&gt;&gt;
-/* $npc.charaname.index.sbindex */
+/* $nPC.charaname.index.sbindex */
+&lt;&lt;set D.NPCbase to {
+    渴望:[0,1000], 快感:[0,1000],
+    愤怒:[0,1000], 射精:[0,1000],
+    满意:[0,1000],
+    快M  : [0,1000],  快B  : [0,1000],  快C  : [0,1000],
+    快V  : [0,1000],  快U  : [0,1000],  快A  : [0,1000],
+}&gt;&gt;
+
+&lt;&lt;set D.NPCsource to {
+    渴望:0,     快感:0,
+    愤怒:0,     射精:0,
+    满意:0,
+    快M  : 0,  快B  : 0,  快C  : 0,
+    快V  : 0,  快U  : 0,  快A  : 0,
+}&gt;&gt;
+
 &lt;&lt;set D.NPCSheet to {
     CID : &quot;0&quot;,
     名字 : &quot;NPC&quot;,
@@ -14605,6 +14790,7 @@ DefineMacroS("delay",delay)
     date : 0,
 }&gt;&gt;
 
+/* SP作为防御方=性抵抗力，作为攻击方=精力 */
 &lt;&lt;set D.petsheet to {
     name:&quot;pet&quot;, type:1, level:1,
     HP:[100,100], SP:[100,100], MP:[100,100],
@@ -14613,6 +14799,8 @@ DefineMacroS("delay",delay)
     gender:&quot;m&quot;, genital: {&quot;阴茎&quot;:16, &quot;子宫&quot;:null},
     genitype: &quot;&quot;,
     special: [],
+    base:{},
+    source:{},    
     stats: {},
     active:false,
     flag:{},
@@ -14721,31 +14909,33 @@ DefineMacroS("delay",delay)
 &lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="13" name="InitGameData" tags="widget" position="350,225" size="100,100">&lt;&lt;widget &quot;InitGameData&quot;&gt;&gt;
 
 &lt;!-- 初始化游戏数据 --&gt;
-&lt;&lt;set $gametime to {pass:0, hour:0, min:0, sec:0, day:0}&gt;&gt;
+&lt;&lt;set $gametime to {hour:0, min:0, sec:0, day:0}&gt;&gt;
+
 &lt;&lt;set $intro to true&gt;&gt;
 &lt;&lt;set $tutorial to false&gt;&gt;
 
 &lt;!-- 日期相关 --&gt;
 &lt;&lt;set $days = 1&gt;&gt;
-&lt;&lt;set $wakeuptime = 540, $passtime = 540, $timestock = 0&gt;&gt;
+&lt;&lt;set $times to {
+    wakeup:540, passed:540, stock:0
+}&gt;&gt;
+
 /* 不会因为时间进程而reset, 只有睡觉休息时才reset */
 
-&lt;&lt;set $date to {
-    year : 2024,    month : 7,    day : 1,    week : 1,
-    time : 540,    hour : 9,    min : 0,
-    zone : &quot;上午&quot;,    weekday : &quot;周一&quot;,
+&lt;&lt;set $day to {
+    year : 2024,    month : 7,      day : 1,    week : 1,
+    time : 540,     hour : 9,       min : 0,
+    zone : &quot;上午&quot;,  weekday : &quot;周一&quot;,
+    season: &quot;夏&quot;,   weather:&quot;晴&quot;,
 }&gt;&gt;
-&lt;&lt;set $daychange to false&gt;&gt;
+&lt;&lt;run 
+    Flag.daychange = false;
+    Flag.actmode = &quot;自由&quot;;
+    Flag.chaos = 0;
+&gt;&gt;
 
-&lt;&lt;set $weather to &quot;晴&quot;&gt;&gt;
 &lt;&lt;set $local to {}&gt;&gt;
 &lt;&lt;set $location to &quot;单身公寓&quot;&gt;&gt;
-
-&lt;&lt;set $money to 5000&gt;&gt;
-&lt;&lt;set $points to 0&gt;&gt;
-&lt;&lt;set $follow = 1, $follower = 100&gt;&gt;
-
-&lt;&lt;set $actmode = &quot;自由&quot;, $chaos = 0&gt;&gt;
 
 &lt;!-- 各种名声 --&gt;
 &lt;&lt;set $fame to {
@@ -14822,43 +15012,22 @@ DefineMacroS("delay",delay)
     gender:&quot;m&quot;, genital: {&quot;阴茎&quot;:16, &quot;子宫&quot;:null},
     genitype: &quot;史莱姆&quot;,
     special: [&quot;液态&quot;],
+    base:{},
+    source:{},    
     stats: {},
     active:false,
     flag:{},
 }&gt;&gt;
 /*type:1=史莱姆 2=魔狼 3=恶魔 4=触手 */
 
-/* 玩家各种记录 */
-&lt;&lt;set $record to {}&gt;&gt; 
-
-/* 事件系统相关变量 */
-&lt;&lt;set $Eflag to {
-    nonext   : true,    end      : false,
-    location : null,    chara    : null,
+/* 战斗相关 */
+&lt;&lt;set $Enemy to [null,null,null,null,null]&gt;&gt;
+&lt;&lt;set $CFlag to {
+    turns: 0, /*current*/ actor: &quot;pc&quot;, target: &quot;enemy&quot;, action: &quot;attack&quot;,
+    waitlist:[
+        {actor:&quot;pc&quot;, target:&quot;enemy&quot;, action:&quot;item&quot;, com:0, id:0,  /* com是使用的技能id， id是使用的道具id */},
+    {},{},{},{},{},{},{}], /* 动作队列 */
 }&gt;&gt;
-
-&lt;&lt;set $Flag to {}&gt;&gt;
-
-/* 每次设定剧情时set要写好几次就麻烦，干脆试试用obj */
-&lt;&lt;set $event to {
-    type : &quot;主线&quot;, name : &quot;开幕&quot;, branch : &quot;初次&quot; , phrase: null,
-}&gt;&gt; 
-
-&lt;&lt;set $eventexit to &quot;你的家 单身公寓&quot;&gt;&gt;
-&lt;&lt;set $count to 0&gt;&gt;      /* 通用计数变量。需要离开当前passage或重置的情况 */
-&lt;&lt;set $eventend to false&gt;&gt;
-&lt;&lt;set $eventnext to 0&gt;&gt;
-
-/* 事件系列名
-    type name branch phrase lang
-    例： 主线 开头剧情 初次 0 CN / 主线 开头剧情 周回 0 CN
-    然后每个剧情开始前都处理一次对应的Eventfirst。
- */
- /*
-  口上名
-  PCKOJO typeid name branch phrase lang
-  例 PCKOJO 1 与史莱姆玩耍 高潮 0 CN
-  */
 
 &lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="14" name="InitPlayerChara" tags="widget" position="475,225" size="100,100">&lt;&lt;widget &quot;InitPlayerData&quot;&gt;&gt;
 &lt;!-- 角色创建 --&gt;
@@ -14877,6 +15046,10 @@ DefineMacroS("delay",delay)
     genital:{}, sens:{}, stretch:{}, produce:{}, bottom:{}, wet:{},
     vaginity:{}, mark:{}, rec:{}, exp:{},
 }&gt;&gt;
+&lt;&lt;run
+    PC.money = 5000;    PC.points = 0;
+    PC.follow = 1;    PC.follower = 100;
+    &gt;&gt;
 
 &lt;&lt;set $PC.info to {
     name  : &quot;魔女&quot;,   tag : &quot;伪娘&quot;,    race : &quot;人类&quot;,
@@ -14914,6 +15087,21 @@ DefineMacroS("delay",delay)
 
     快M  : [0,1000],  快B  : [0,1000],  快C  : [0,1000],
     快V  : [0,1000],  快U  : [0,1000],  快A  : [0,1000],
+}&gt;&gt;
+
+/* 记录进行处理前的增减量 */
+&lt;&lt;set $source to {
+    饮食 : 0,   健康 : 0,     魔力 : 0,
+    体力 : 0,   理智 : 0,
+    
+    酒精 : 0,      药物 : 0, 
+    欲望 : 0,      快感 : 0,
+    
+    压力 : 0,      疼痛 : 0,  抑郁 : 0,
+    恐惧 : 0,      耻辱 : 0,
+
+    快M  : 0,  快B  : 0,  快C  : 0,
+    快V  : 0,  快U  : 0,  快A  : 0,
 }&gt;&gt;
 
 &lt;!-- 身体感度，满值10 --&gt;
@@ -15035,7 +15223,7 @@ $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌}
     top      : 9,     bottom   : 4, 
     bukkake   : { body:false, face:false, hair:false, },
     pregnant: { type:null, seed:null, phrase:null, date:null, }, /* 怀孕flag type:A怀孕还是正常怀孕 seed：孩子种类, father:父亲, phrase：阶段 date:预产期 */
-    trueform : null,
+    trueform : null, showmimi:null, showtail:null, showwing:null, showhorn:null,
 }&gt;&gt;
 
 &lt;!-- 记录 --&gt;
@@ -15058,7 +15246,7 @@ $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌}
 }&gt;&gt;
 
 /* 纹身，layer有额头、脸颊（左右）、锁骨（左右）、胸（左右）、后脖根、手臂（左右）、后背、腰窝、 臀瓣（左右），大腿（左右）*/
-&lt;&lt;set $Pskin to {
+&lt;&lt;set $PC.skin to {
     &quot;额头&quot;:null,    &quot;脸颊&quot;:null,    &quot;锁骨&quot;:null,
     &quot;左胸&quot;:null,    &quot;右胸&quot;:null,    &quot;后脖根&quot;:null,
     &quot;左臂&quot;:null,    &quot;右臂&quot;:null,    &quot;腹部&quot;:null,
@@ -15199,7 +15387,7 @@ $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌}
 &lt;&lt;silently&gt;&gt;
     &lt;&lt;repeat 0.3s&gt;&gt;
         &lt;&lt;set $PC.info.hairlenf to $PC.info.hairlen&gt;&gt;
-        &lt;&lt;if $activepage is &quot;CharaMaking&quot;&gt;&gt;
+        &lt;&lt;if $UI.activepage is &quot;CharaMaking&quot;&gt;&gt;
             &lt;&lt;switch $PC.info.tag&gt;&gt;
                 &lt;&lt;case &quot;伪娘&quot;&gt;&gt;
                     &lt;&lt;replace #CMgenital&gt;&gt;&lt;&lt;CMBoy&gt;&gt;&lt;&lt;/replace&gt;&gt;
@@ -15265,7 +15453,7 @@ $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌}
     &lt;&lt;/listbox&gt;&gt;
     &lt;script&gt;
         $(&quot;#listbox-pcinforace&quot;).on(&quot;change&quot;,()=&gt;{
-            V.PC.info.race == &quot;兽族&quot; ? 
+            PC.info.race == &quot;兽族&quot; ? 
             new Wikifier(null,&quot;&lt;&lt;replace #CMFurOption&gt;&gt;　　原型　&lt;&lt;CMFurType&gt;&gt;&lt;&lt;/replace&gt;&gt;&quot;):
             new Wikifier(null,&quot;&lt;&lt;replace #CMFurOption&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;set $PC.info.kemotype to null&gt;&gt;&quot;)
         })
@@ -15496,7 +15684,7 @@ $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌}
     &lt;&lt;switch $PC.type&gt;&gt;
         &lt;&lt;case 1&gt;&gt;
             &lt;&lt;set $PC.info.title to &quot;魔法少女&quot;&gt;&gt;
-            &lt;&lt;set $pctitle.魔法少女 to true&gt;&gt;
+            &lt;&lt;set $titles.魔法少女 to true&gt;&gt;
             &lt;&lt;set $PC.lewd to {
                     &quot;纯洁&quot; : 800,
                     &quot;露出&quot; : 0,
@@ -15509,7 +15697,7 @@ $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌}
                 }&gt;&gt;
         &lt;&lt;case 2&gt;&gt;
             &lt;&lt;set $PC.info.title to &quot;爱抖露&quot;&gt;&gt;
-            &lt;&lt;set $pctitle.爱抖露 to true&gt;&gt;
+            &lt;&lt;set $titles.爱抖露 to true&gt;&gt;
             &lt;&lt;set $PC.lewd to {
                 &quot;纯洁&quot; : 900,
                 &quot;露出&quot; : 50,
@@ -15522,7 +15710,7 @@ $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌}
             }&gt;&gt;
         &lt;&lt;case 3&gt;&gt;
             &lt;&lt;set $PC.info.title to &quot;道童&quot;&gt;&gt;
-            &lt;&lt;set $pctitle.道童 to true&gt;&gt;
+            &lt;&lt;set $titles.道童 to true&gt;&gt;
             &lt;&lt;set $PC.lewd to {
                 &quot;纯洁&quot; : 1000,
                 &quot;露出&quot; : 0,
@@ -15692,7 +15880,7 @@ $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌}
     &lt;&lt;switch $PC.type&gt;&gt;
         &lt;&lt;case 1&gt;&gt;
             /* 宠物点数 HP/SP/MP 50=1点 总45点 */
-            &lt;&lt;set $follower to (500+random(100,5000))&gt;&gt;
+            &lt;&lt;set $PC.follower to (500+random(100,5000))&gt;&gt;
             &lt;&lt;set $pet to {
                 name:&quot;史莱姆&quot;, type:&quot;史莱姆&quot;, level:1, 
                 HP:[50,50], SP:[200,200], MP:[200,200],
@@ -15705,7 +15893,7 @@ $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌}
                 active:false,flag:{},
             }&gt;&gt;
         &lt;&lt;case 2&gt;&gt;
-            &lt;&lt;set $follower to (1000+random(500,5000))&gt;&gt;
+            &lt;&lt;set $PC.follower to (1000+random(500,5000))&gt;&gt;
             &lt;&lt;set $pet to {
                 name:&quot;魔狼&quot;, type:&quot;魔狼&quot;, level:1,
                 HP:[200,200], SP:[100,100], MP:[100,100],
@@ -15718,7 +15906,7 @@ $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌}
                 active:false,flag:{},
             }&gt;&gt;
         &lt;&lt;case 3&gt;&gt;
-            &lt;&lt;set $follower to (100+random(100,2000))&gt;&gt;
+            &lt;&lt;set $PC.follower to (100+random(100,2000))&gt;&gt;
             &lt;&lt;set $pet to {
                 name:&quot;灵虫&quot;, type:&quot;灵虫&quot;, level:1,
                 HP:[500,500], SP:[100,100], MP:[150,150],
@@ -15745,8 +15933,6 @@ $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌}
 
     &lt;&lt;if $PC.info.race isnot &quot;人类&quot;&gt;&gt;
         &lt;&lt;set $Flag.非人类 to true&gt;&gt;
-    &lt;&lt;else&gt;&gt;
-        &lt;&lt;set $Flag.非人类 to false&gt;&gt;
     &lt;&lt;/if&gt;&gt;
     
     &lt;&lt;switch $PC.info.tag&gt;&gt;
@@ -15782,13 +15968,13 @@ $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌}
 
 &lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="19" name="游戏设定" tags="widget" position="1100,225" size="100,100">&lt;&lt;widget &quot;GameSetting&quot;&gt;&gt;
 &lt;div id=&quot;GameSetting&quot;&gt;
-　&lt;&lt;lang &quot;游戏视角&quot; &quot;Persons&quot;&gt;&gt;： &lt;label&gt;&lt;&lt;radiobutton &quot;$persons&quot; 1 autocheck&gt;&gt; &lt;&lt;lang &quot;第一人称&quot; &quot;First: I&quot;&gt;&gt;&lt;/label&gt;　|　&lt;label&gt;&lt;&lt;radiobutton &quot;$persons&quot; 2 autocheck&gt;&gt;&lt;&lt;lang &quot;第二人称&quot; &quot;Second: You&quot;&gt;&gt;&lt;/label&gt;　|　&lt;label&gt;&lt;&lt;radiobutton &quot;$persons&quot; 3 autocheck&gt;&gt;&lt;&lt;lang &quot;第三人称(默认)&quot; &quot;Third: Call Name(defalt)&quot;&gt;&gt;&lt;/label&gt;
+　&lt;&lt;lang &quot;游戏视角&quot; &quot;Persons&quot;&gt;&gt;： &lt;label&gt;&lt;&lt;radiobutton &quot;$conf.persons&quot; 1 autocheck&gt;&gt; &lt;&lt;lang &quot;第一人称&quot; &quot;First: I&quot;&gt;&gt;&lt;/label&gt;　|　&lt;label&gt;&lt;&lt;radiobutton &quot;$conf.persons&quot; 2 autocheck&gt;&gt;&lt;&lt;lang &quot;第二人称&quot; &quot;Second: You&quot;&gt;&gt;&lt;/label&gt;　|　&lt;label&gt;&lt;&lt;radiobutton &quot;$conf.persons&quot; 3 autocheck&gt;&gt;&lt;&lt;lang &quot;第三人称(默认)&quot; &quot;Third: Call Name(defalt)&quot;&gt;&gt;&lt;/label&gt;
 &lt;&lt;lang &quot; &quot; &quot;※Not full support on English&quot;&gt;&gt;&lt;br&gt;
 
-　&lt;&lt;lang &quot;战斗难度&quot; &quot;Combat&quot;&gt;&gt;： &lt;label&gt;&lt;&lt;radiobutton &quot;$hardmode&quot; 0.5 autocheck&gt;&gt; &lt;&lt;lang &quot;简单&quot; &quot;EASY&quot;&gt;&gt;&lt;/label&gt;　|　&lt;label&gt;&lt;&lt;radiobutton &quot;$hardmode&quot; 1 autocheck&gt;&gt; &lt;&lt;lang &quot;普通&quot; &quot;NORMAL&quot;&gt;&gt;&lt;/label&gt;　|　&lt;label&gt;&lt;&lt;radiobutton &quot;$hardmode&quot; 2 autocheck&gt;&gt; &lt;&lt;lang &quot;困难&quot; &quot;HARD&quot;&gt;&gt;&lt;/label&gt;　|　&lt;label&gt;&lt;&lt;radiobutton &quot;$hardmode&quot; 5 autocheck&gt;&gt; &lt;&lt;lang &quot;噩梦&quot; &quot;NIGHTMARE&quot;&gt;&gt;&lt;/label&gt;　　
+　&lt;&lt;lang &quot;战斗难度&quot; &quot;Combat&quot;&gt;&gt;： &lt;label&gt;&lt;&lt;radiobutton &quot;$conf.hardmode&quot; 0.5 autocheck&gt;&gt; &lt;&lt;lang &quot;简单&quot; &quot;EASY&quot;&gt;&gt;&lt;/label&gt;　|　&lt;label&gt;&lt;&lt;radiobutton &quot;$conf.hardmode&quot; 1 autocheck&gt;&gt; &lt;&lt;lang &quot;普通&quot; &quot;NORMAL&quot;&gt;&gt;&lt;/label&gt;　|　&lt;label&gt;&lt;&lt;radiobutton &quot;$conf.hardmode&quot; 2 autocheck&gt;&gt; &lt;&lt;lang &quot;困难&quot; &quot;HARD&quot;&gt;&gt;&lt;/label&gt;　|　&lt;label&gt;&lt;&lt;radiobutton &quot;$conf.hardmode&quot; 5 autocheck&gt;&gt; &lt;&lt;lang &quot;噩梦&quot; &quot;NIGHTMARE&quot;&gt;&gt;&lt;/label&gt;　　
 ※&lt;&lt;lang &quot;简单模式下无法获得成就&quot; &quot;Achievements will not available in easy mode&quot;&gt;&gt;&lt;br&gt;
 
-　&lt;&lt;lang &quot;时间限制&quot; &quot;TimeLimit&quot;&gt;&gt;： &lt;label&gt;&lt;&lt;radiobutton &quot;$timelimit&quot; true autocheck&gt;&gt; &lt;&lt;lang &quot;有&quot; &quot;Yes&quot;&gt;&gt;&lt;/label&gt;　|　&lt;label&gt;&lt;&lt;radiobutton &quot;$timelimit&quot; false autocheck&gt;&gt; &lt;&lt;lang &quot;无&quot; &quot;No&quot;&gt;&gt;&lt;/label&gt;　　
+　&lt;&lt;lang &quot;时间限制&quot; &quot;TimeLimit&quot;&gt;&gt;： &lt;label&gt;&lt;&lt;radiobutton &quot;$conf.timelimit&quot; true autocheck&gt;&gt; &lt;&lt;lang &quot;有&quot; &quot;Yes&quot;&gt;&gt;&lt;/label&gt;　|　&lt;label&gt;&lt;&lt;radiobutton &quot;$conf.timelimit&quot; false autocheck&gt;&gt; &lt;&lt;lang &quot;无&quot; &quot;No&quot;&gt;&gt;&lt;/label&gt;　　
 ※&lt;&lt;lang &quot;无时间限制模式下无法获得成就&quot; &quot;Achievements will not available in no time limit mode&quot;&gt;&gt;&lt;br&gt;
 
 　&lt;&lt;lang &quot;使用语言&quot; &quot;Language&quot;&gt;&gt;： &lt;label&gt;&lt;&lt;radiobutton &quot;$lang&quot; &quot;EN&quot; autocheck&gt;&gt; English&lt;/label&gt;　|　&lt;label&gt;&lt;&lt;radiobutton &quot;$lang&quot; &quot;CN&quot; autocheck&gt;&gt; 中文&lt;/label&gt;　　&lt;&lt;lang &quot; &quot; &quot;※English support still WIP&quot;&gt;&gt;&lt;br&gt;
@@ -15860,22 +16046,22 @@ $(document).on(&#39;:passagerender&#39;, function (ev) {
 });
 &lt;&lt;/script&gt;&gt;
 
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="23" name="初始设定" tags="" position="350,350" size="100,100">&lt;&lt;set $activepage to &quot;QuickStart&quot;&gt;&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="23" name="初始设定" tags="" position="350,350" size="100,100">&lt;&lt;set $UI.activepage to &quot;QuickStart&quot;&gt;&gt;
 
 &lt;div id=&quot;StartingPageMenu&quot;&gt;
 	&lt;&lt;set _text to Lang(&quot;快速开始&quot;,&quot;QuickStart&quot;)&gt;&gt;
     &lt;&lt;button _text&gt;&gt;
-	&lt;&lt;replace #StartingPage&gt;&gt;&lt;&lt;set $activepage to &quot;QuickStart&quot;&gt;&gt;&lt;&lt;QuickStart&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;/button&gt;&gt;
+	&lt;&lt;replace #StartingPage&gt;&gt;&lt;&lt;set $UI.activepage to &quot;QuickStart&quot;&gt;&gt;&lt;&lt;QuickStart&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;/button&gt;&gt;
 
 	&lt;&lt;set _text to Lang(&quot;创建角色&quot;,&quot;CharaMaking&quot;)&gt;&gt;
-    &lt;&lt;button _text&gt;&gt;&lt;&lt;replace #StartingPage&gt;&gt;&lt;&lt;set $activepage to &quot;CharaMaking&quot;&gt;&gt;&lt;&lt;CharaMaking&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;/button&gt;&gt;
+    &lt;&lt;button _text&gt;&gt;&lt;&lt;replace #StartingPage&gt;&gt;&lt;&lt;set $UI.activepage to &quot;CharaMaking&quot;&gt;&gt;&lt;&lt;CharaMaking&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;/button&gt;&gt;
 
 	&lt;&lt;set _text to Lang(&quot;游戏设定&quot;,&quot;GameSetting&quot;)&gt;&gt;
-    &lt;&lt;button _text&gt;&gt;&lt;&lt;replace #StartingPage&gt;&gt;&lt;&lt;set $activepage to &quot;GameSetting&quot;&gt;&gt;&lt;&lt;GameSetting&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;/button&gt;&gt;
+    &lt;&lt;button _text&gt;&gt;&lt;&lt;replace #StartingPage&gt;&gt;&lt;&lt;set $UI.activepage to &quot;GameSetting&quot;&gt;&gt;&lt;&lt;GameSetting&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;/button&gt;&gt;
 
     &lt;&lt;if $achivement.scores gt 0&gt;&gt;
 	&lt;&lt;set _text to Lang(&quot;周回特典&quot;,&quot;Bonus&quot;)&gt;&gt;
-    &lt;&lt;button _text&gt;&gt;&lt;&lt;replace #StartingPage&gt;&gt;&lt;&lt;set $activepage to &quot;StartBonus&quot;&gt;&gt;&lt;&lt;StartBonus&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;&lt;/if&gt;&gt;
+    &lt;&lt;button _text&gt;&gt;&lt;&lt;replace #StartingPage&gt;&gt;&lt;&lt;set $UI.activepage to &quot;StartBonus&quot;&gt;&gt;&lt;&lt;StartBonus&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;&lt;/if&gt;&gt;
 
 &lt;/div&gt;
 
@@ -16286,7 +16472,7 @@ required:false,
 &lt;&lt;/silently&gt;&gt;
 
 &lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="31" name="ShowAvatar" tags="widget" position="100,475" size="100,100">&lt;&lt;widget &quot;avatar&quot;&gt;&gt;
-&lt;&lt;if $render is &quot;canvas&quot;&gt;&gt;
+&lt;&lt;if $conf.render is &quot;canvas&quot;&gt;&gt;
     &lt;&lt;twinescript&gt;&gt;
     output.appendChild(Avatar.getCanvas())
     &lt;&lt;/twinescript&gt;&gt;
@@ -16297,7 +16483,7 @@ required:false,
 &lt;&lt;widget &quot;portrait&quot;&gt;&gt;
 &lt;div id=&quot;portrait&quot;&gt;
 
-&lt;&lt;if $render is &quot;canvas&quot;&gt;&gt;
+&lt;&lt;if $conf.render is &quot;canvas&quot;&gt;&gt;
     &lt;div class=&quot;portrait flipx&quot;&gt;
     &lt;&lt;twinescript&gt;&gt;
     output.appendChild(Avatar.getPortrait())
@@ -16436,8 +16622,8 @@ required:false,
 &lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="34" name="StoryCaption" tags="" position="475,475" size="100,100">&lt;div @class=&quot;(Errors.log.length==0?&#39;hidden&#39;:&#39;&#39;) + &#39; error-reporter-btn&#39;&quot; onclick=&quot;Errors.Reporter.toggle()&quot;&gt;&lt;/div&gt;
 
 /* 左边栏 UI初始化 */
-&lt;&lt;set $menubutton to false&gt;&gt;
-&lt;&lt;set $statshidden to false&gt;&gt;
+&lt;&lt;set $UI.menubutton to false&gt;&gt;
+&lt;&lt;set $UI.statshidden to false&gt;&gt;
 
 &lt;&lt;if $anounce.flag is true&gt;&gt;
 	&lt;&lt;anouncePopUP $anounce.text $anounce.type&gt;&gt;
@@ -16476,43 +16662,54 @@ required:false,
 
 &lt;&lt;/if&gt;&gt;
 
+&lt;/div&gt;/* 框架的尾巴 */
 
 &lt;!-- 菜单 --&gt;
 &lt;div id=&quot;showmenu&quot;&gt;&lt;&lt;showmenu&gt;&gt;&lt;/div&gt;
+&lt;!-- 游戏时间 --&gt;
+&lt;div id=&quot;showgametime&quot;&gt;&lt;/div&gt;
 
-
-&lt;/div&gt;/* 框架的尾巴 */
 
 &lt;&lt;silently&gt;&gt;
+
 /* 自动刷新等待JS读取结束 */
-&lt;&lt;script&gt;&gt;
-	$(&#39;#customOverlay&#39;).draggable({handle: &#39;.handle&#39;});
-	$(&#39;#ui-dialog&#39;).draggable();
-&lt;&lt;/script&gt;&gt;
+&lt;&lt;set _timer to 10&gt;&gt;
+&lt;&lt;run
+$(&#39;#customOverlay&#39;).draggable({handle: &#39;.handle&#39;});
+$(&#39;#ui-dialog&#39;).draggable();
+&gt;&gt;
 
 /* 动态化部分 */
 	&lt;&lt;repeat 0.5s&gt;&gt;
-		&lt;&lt;if $render is &quot;image&quot;&gt;&gt;
+		&lt;&lt;if $conf.render is &quot;image&quot;&gt;&gt;
 			&lt;&lt;replace &quot;#avatar&quot;&gt;&gt;&lt;&lt;avatar&gt;&gt;&lt;&lt;/replace&gt;&gt;
 		&lt;&lt;/if&gt;&gt;
 		&lt;&lt;if $intro isnot true&gt;&gt;
 			&lt;&lt;replace &quot;#showtimes&quot;&gt;&gt;&lt;&lt;timestats&gt;&gt;&lt;&lt;/replace&gt;&gt;
 			&lt;&lt;replace &quot;#notice&quot;&gt;&gt;&lt;&lt;notification&gt;&gt;&lt;&lt;/replace&gt;&gt;
 			&lt;&lt;replace &quot;#show_money&quot;&gt;&gt;&lt;&lt;showmoney&gt;&gt;&lt;&lt;/replace&gt;&gt;
-		&lt;&lt;if $statshidden is false&gt;&gt;
+		&lt;&lt;if $UI.statshidden is false&gt;&gt;
 			&lt;&lt;replace &quot;#sidebar_stats&quot;&gt;&gt;&lt;&lt;sidebar_stats&gt;&gt;&lt;&lt;/replace&gt;&gt;
-		&lt;&lt;/if&gt;&gt;			
+		&lt;&lt;/if&gt;&gt;	
+
 		&lt;&lt;/if&gt;&gt;
 	&lt;&lt;/repeat&gt;&gt;
+
+&lt;&lt;if $intro isnot true&gt;&gt;
+&lt;&lt;repeat 1s&gt;&gt;
+	&lt;&lt;replace &quot;#showgametime&quot;&gt;&gt;&lt;&lt;=gametime()&gt;&gt;&lt;&lt;/replace&gt;&gt;
+&lt;&lt;/repeat&gt;&gt;
+&lt;&lt;/if&gt;&gt;
 
 /* 处理顺序的最后尾 */
 &lt;&lt;set $anounce to {flag:false, text:&quot;&quot;, type:&quot;弹出通知&quot;}&gt;&gt;
 &lt;&lt;setchara &quot;player&quot;&gt;&gt;
+
 /* 处理顺序的最后尾  */
 &lt;&lt;/silently&gt;&gt;
 
 &lt;&lt;run F.setBG()&gt;&gt;</tw-passagedata><tw-passagedata pid="35" name="SidebarWidget" tags="widget" position="600,475" size="100,100">&lt;&lt;widget &quot;showmoney&quot;&gt;&gt;
-&lt;div class=&quot;points&quot;&gt;&lt;&lt;printmoney $points&gt;&gt;P&lt;/div&gt;&lt;span class=&quot;slice&quot;&gt; | &lt;/span&gt;&lt;div class=&quot;money&quot;&gt;&lt;&lt;printmoney $money&gt;&gt;&lt;&lt;icon &quot;moneyicon&quot;&gt;&gt;&lt;/div&gt;
+&lt;div class=&quot;points&quot;&gt;&lt;&lt;printmoney $PC.points&gt;&gt;P&lt;/div&gt;&lt;span class=&quot;slice&quot;&gt; | &lt;/span&gt;&lt;div class=&quot;money&quot;&gt;&lt;&lt;printmoney $PC.money&gt;&gt;&lt;&lt;icon &quot;moneyicon&quot;&gt;&gt;&lt;/div&gt;
 &lt;&lt;/widget&gt;&gt;
 
 &lt;&lt;widget &quot;showtitle&quot;&gt;&gt;
@@ -16537,7 +16734,7 @@ required:false,
 
 &lt;&lt;widget &quot;timestats&quot;&gt;&gt;
 &lt;div class=&quot;InGameDate&quot;&gt;
-    &lt;span class=&quot;showtime&quot;&gt;&lt;&lt;print $date.year&gt;&gt;.&lt;&lt;if $date.month lt 10&gt;&gt;0&lt;&lt;/if&gt;&gt;&lt;&lt;print $date.month&gt;&gt;.&lt;&lt;if $date.day lt 10&gt;&gt;0&lt;&lt;/if&gt;&gt;&lt;&lt;print $date.day&gt;&gt; &lt;&lt;print $date.weekday&gt;&gt; &lt;&lt;if $date.hour lt 10&gt;&gt;0&lt;&lt;/if&gt;&gt;&lt;&lt;print $date.hour&gt;&gt;:&lt;&lt;if $date.min lt 10&gt;&gt;0&lt;&lt;/if&gt;&gt;&lt;&lt;print $date.min&gt;&gt; (&lt;&lt;print $date.zone&gt;&gt;)&lt;/span&gt;&lt;br&gt;
+    &lt;span class=&quot;showtime&quot;&gt;&lt;&lt;print $day.year&gt;&gt;.&lt;&lt;if $day.month lt 10&gt;&gt;0&lt;&lt;/if&gt;&gt;&lt;&lt;print $day.month&gt;&gt;.&lt;&lt;if $day.day lt 10&gt;&gt;0&lt;&lt;/if&gt;&gt;&lt;&lt;print $day.day&gt;&gt; &lt;&lt;print $day.weekday&gt;&gt; &lt;&lt;if $day.hour lt 10&gt;&gt;0&lt;&lt;/if&gt;&gt;&lt;&lt;print $day.hour&gt;&gt;:&lt;&lt;if $day.min lt 10&gt;&gt;0&lt;&lt;/if&gt;&gt;&lt;&lt;print $day.min&gt;&gt; (&lt;&lt;print $day.zone&gt;&gt;)&lt;/span&gt;&lt;br&gt;
 &lt;/div&gt;
 &lt;&lt;/widget&gt;&gt;
 
@@ -16580,9 +16777,9 @@ required:false,
 &lt;&lt;/widget&gt;&gt;
 
 &lt;&lt;widget &quot;sidebar_stats&quot;&gt;&gt;
-&lt;&lt;if $statshidden is true&gt;&gt;
+&lt;&lt;if $UI.statshidden is true&gt;&gt;
     &lt;&lt;button &quot;▲&quot;&gt;&gt;
-    &lt;&lt;set $statshidden to false&gt;&gt;
+    &lt;&lt;set $UI.statshidden to false&gt;&gt;
     &lt;&lt;replace &quot;#sidebar_stats&quot;&gt;&gt;&lt;&lt;sidebar_stats&gt;&gt;&lt;&lt;/replace&gt;&gt;
     &lt;&lt;/button&gt;&gt;
     &lt;div id=&quot;playerstats&quot; class=&quot;hide&quot;&gt;
@@ -16590,7 +16787,7 @@ required:false,
     &lt;/div&gt;
 &lt;&lt;else&gt;&gt;
     &lt;&lt;button &quot;▼&quot;&gt;&gt;
-    &lt;&lt;set $statshidden to true&gt;&gt;
+    &lt;&lt;set $UI.statshidden to true&gt;&gt;
     &lt;&lt;replace &quot;#sidebar_stats&quot;&gt;&gt;&lt;&lt;sidebar_stats&gt;&gt;&lt;&lt;/replace&gt;&gt;
     &lt;&lt;/button&gt;&gt;
     &lt;div id=&quot;playerstats&quot;&gt;
@@ -16998,7 +17195,7 @@ required:false,
 		&lt;&lt;/if&gt;&gt;
 	&lt;&lt;/if&gt;&gt;
 
-&lt;div class=&quot;handle&quot;&gt;
+&lt;div id=&quot;handle&quot; class=&quot;handle&quot;&gt;
 &lt;&lt;if $args[0]&gt;&gt;&lt;li&gt;&lt;&lt;link $args[0]&gt;&gt;&lt;&lt;addclass &quot;#customOverlay&quot; &quot;hidden&quot;&gt;&gt;&lt;&lt;set $currentOverlay to null&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/li&gt;&lt;&lt;else&gt;&gt;&lt;&lt;/if&gt;&gt;
 &lt;/div&gt;
 &lt;&lt;dashline&gt;&gt;
@@ -17063,7 +17260,7 @@ required:false,
 &lt;&lt;set _like to random(($PC.info.beauty/100),($PC.info.beauty/10))&gt;&gt;
 &lt;&lt;set _infochange to false&gt;&gt;
 
-＠&lt;&lt;print $PC.info.name&gt;&gt;　　关注　&lt;&lt;print $follow&gt;&gt;　　粉丝　&lt;&lt;print $follower&gt;&gt;&lt;br&gt;
+＠&lt;&lt;print $PC.info.name&gt;&gt;　　关注　&lt;&lt;print $PC.follow&gt;&gt;　　粉丝　&lt;&lt;print $PC.follower&gt;&gt;&lt;br&gt;
 &lt;span id=&quot;shortinfo&quot; class=&quot;selfinfo&quot;&gt;
     &lt;&lt;changeinfo&gt;&gt;
 &lt;/span&gt;
@@ -17599,30 +17796,6 @@ function wait(text) {
 
 &lt;&lt;/widget&gt;&gt;
 
-
-&lt;&lt;widget &quot;setchara&quot;&gt;&gt;
-&lt;&lt;silently&gt;&gt;
-&lt;&lt;if $args[0] is &quot;player&quot;&gt;&gt;
-    &lt;&lt;set $currentchara to {
-        名字 : $PC.info.name,
-        性别 : $PC.info.tag,
-        genital : $PC.genital,
-        gender: $PC.info.gender,
-    }&gt;&gt;
-&lt;&lt;elseif $args[0] is &quot;pet&quot;&gt;&gt;
-    &lt;&lt;set $currentchara to {
-        名字: $pet.name,
-        gender: $pet.gender,
-        genital: $pet.genital,
-        genitype: $pet.genitype,
-        special: $pet.special,
-    }&gt;&gt;
-&lt;&lt;else&gt;&gt;
-    &lt;&lt;set $currentchara to $NPC[$args[0]]&gt;&gt;
-&lt;&lt;/if&gt;&gt;
-&lt;&lt;/silently&gt;&gt;
-&lt;&lt;/widget&gt;&gt;
-
 &lt;&lt;widget &quot;mode&quot;&gt;&gt;
 &lt;&lt;silently&gt;&gt;
     &lt;&lt;if $args[0]&gt;&gt;
@@ -17673,7 +17846,7 @@ function wait(text) {
 &lt;&lt;/widget&gt;&gt;
 
 &lt;&lt;widget &quot;passtime&quot;&gt;&gt;
-&lt;&lt;set $date.time to $date.time+$args[0]&gt;&gt;
+&lt;&lt;set $day.time to $day.time+$args[0]&gt;&gt;
 &lt;&lt;/widget&gt;&gt;
 
 &lt;&lt;widget &quot;ApplyHairSet&quot;&gt;&gt;
@@ -18197,15 +18370,15 @@ $(document).ready(function(){
 
 &lt;&lt;case 2&gt;&gt;
 &lt;&lt;you&gt;&gt;拿起手机试着用自己的指纹解锁，然后成功了。看来这确实是&lt;&lt;you&gt;&gt;的手机，起码是这具身体主人的手机。&lt;br&gt;
-&lt;&lt;you&gt;&gt;打开通讯录，从电子名片中确认了自己现在的名字——&lt;&lt;print $PC.name&gt;&gt;，居然和&lt;&lt;you&gt;&gt;的名字一模一样。或许这里真的是自己居住的地方，只是记忆混乱了？
+&lt;&lt;you&gt;&gt;打开通讯录，从电子名片中确认了自己现在的名字——&lt;&lt;print $PC.info.name&gt;&gt;，居然和&lt;&lt;you&gt;&gt;的名字一模一样。或许这里真的是自己居住的地方，只是记忆混乱了？
 
 &lt;&lt;case 3&gt;&gt;
 &lt;&lt;bookmark &quot;主线开幕_初次_穿越版&quot;&gt;&gt;
 穿越重生这种事，在虚构作品中&lt;&lt;you&gt;&gt;看过不少，没想到也发生在自己身上了。&lt;&lt;you&gt;&gt;叹了口气，再次观察房间四处，试图寻找关于自己身份的线索。
 &lt;&lt;set $eflag to []&gt;&gt;
 &lt;&lt;set $count to 4&gt;&gt;
-&lt;&lt;case 4&gt;&gt;
 
+&lt;&lt;case 4&gt;&gt;
 &lt;&lt;if $eflag.length is 1&gt;&gt;
 &lt;&lt;switch $eflag[0]&gt;&gt;
 	&lt;&lt;case &quot;查看手机&quot;&gt;&gt;
@@ -18261,7 +18434,7 @@ $(document).ready(function(){
 	&lt;&lt;switch $temp.c&gt;&gt;
 	&lt;&lt;case 0&gt;&gt;
 		&lt;&lt;you&gt;&gt;启动电脑，登录了PP号（QQ？），大致了解了下自己的交友状态：原身似乎并不是个擅长社交的人，好友列表上只躺着一个名叫“灵”的人，头像是天空，资料空白一片，是男是女也不清楚。反而PP群加了不少，大多数是&lt;&lt;switch $PC.type&gt;&gt;&lt;&lt;case 1&gt;&gt;二次元相关群&lt;&lt;case 2&gt;&gt;偶像后援群&lt;&lt;case 3&gt;&gt;小说催更和跑团群&lt;&lt;/switch&gt;&gt;。
-		&lt;&lt;set $eventnext to 5&gt;&gt;
+		&lt;&lt;set $eventnext to 6&gt;&gt;
 		&lt;&lt;set $temp.c to 1&gt;&gt;
 		
 	&lt;&lt;case 1&gt;&gt;
@@ -18296,7 +18469,7 @@ $(document).ready(function(){
 
 /* 搜索房间完毕 */
 &lt;&lt;case 8&gt;&gt;
-在整个公寓中翻找过一遍后，&lt;&lt;you&gt;&gt;疲劳地躺在沙发上，吹着冷气休息。&lt;&lt;you&gt;&gt;大致捋了下关于自己的线索：原身的名字和&lt;&lt;you&gt;&gt;一样，都叫&lt;&lt;print $PC.name&gt;&gt;，是景南大学的&lt;&lt;switch $PC.type&gt;&gt;&lt;&lt;case 1&gt;&gt;电脑系&lt;&lt;case 2&gt;&gt;表演系&lt;&lt;case 3&gt;&gt;文学系&lt;&lt;/switch&gt;&gt;学生。现在所居住的城市，就叫景南市，是个坐山朝海被水环绕的大城市。老家距离大学挺远，所以是自己一个人住在这个怡安小区的单身公寓中。似乎没什么朋友，准确来说，是没有亲密的朋友。联络簿上的，除了父母都是泛泛之交。
+在整个公寓中翻找过一遍后，&lt;&lt;you&gt;&gt;疲劳地躺在沙发上，吹着冷气休息。&lt;&lt;you&gt;&gt;大致捋了下关于自己的线索：原身的名字和&lt;&lt;you&gt;&gt;一样，都叫&lt;&lt;print $PC.info.name&gt;&gt;，是景南大学的&lt;&lt;switch $PC.type&gt;&gt;&lt;&lt;case 1&gt;&gt;电脑系&lt;&lt;case 2&gt;&gt;表演系&lt;&lt;case 3&gt;&gt;文学系&lt;&lt;/switch&gt;&gt;学生。现在所居住的城市，就叫景南市，是个坐山朝海被水环绕的大城市。老家距离大学挺远，所以是自己一个人住在这个怡安小区的单身公寓中。似乎没什么朋友，准确来说，是没有亲密的朋友。联络簿上的，除了父母都是泛泛之交。
 &lt;&lt;set $eventnext to 9&gt;&gt;
 
 &lt;&lt;case 9&gt;&gt;
@@ -18315,7 +18488,7 @@ $(document).ready(function(){
 &lt;div class=&quot;Eselect&quot;&gt;&lt;&lt;link _text&gt;&gt;&lt;&lt;set $event.branch to &quot;初次&quot;&gt;&gt;&lt;&lt;set $count to 11&gt;&gt;&lt;&lt;set $Flag.穿越者 to false&gt;&gt;&lt;&lt;Revent&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
 
 &lt;&lt;set _text to Lang(&quot;或许是重生穿越&quot;,&quot;Maybe reborn to the younger &lt;&lt;me&gt;&gt;&quot;)&gt;&gt;
-&lt;div class=&quot;Eselect&quot;&gt;&lt;&lt;link _text&gt;&gt;&lt;&lt;set $count to 3&gt;&gt;&lt;&lt;anouncePopUP &quot;获得头衔《穿越者》&quot; &quot;获得成就&quot;&gt;&gt;&lt;&lt;set $Flag.穿越者 to true&gt;&gt;&lt;&lt;set $pctitle.穿越者 to true&gt;&gt;&lt;&lt;Revent&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
+&lt;div class=&quot;Eselect&quot;&gt;&lt;&lt;link _text&gt;&gt;&lt;&lt;set $count to 3&gt;&gt;&lt;&lt;anouncePopUP &quot;获得头衔《穿越者》&quot; &quot;获得成就&quot;&gt;&gt;&lt;&lt;set $Flag.穿越者 to true&gt;&gt;&lt;&lt;set $titles.穿越者 to true&gt;&gt;&lt;&lt;Revent&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
 
 &lt;&lt;case 4&gt;&gt;
 &lt;&lt;if $eflag.includes(&quot;查看手机&quot;) is false&gt;&gt;

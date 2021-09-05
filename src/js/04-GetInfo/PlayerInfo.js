@@ -1,10 +1,10 @@
 ﻿/* 名字和称呼的处理 */
 function gsplit(m,f,p="chara"){
   if (p=="player"){
-    if (V.PC.info.gender == "m" ) return m;
+    if (PC.info.gender == "m" ) return m;
     else return f;
   }else {
-    if (V.currentchara.gender == "m" ) return m;
+    if (V.CChara.gender == "m" ) return m;
     else return f;
   }
 }
@@ -12,8 +12,8 @@ window.gsplit = gsplit
 DefineMacroS("gsplit", gsplit);
 /* 除了我，你他之外，其他都是英文限定。所以中文用you，英文用Im分开算了。英文描写玩家统一用I、me、my、mine */
 function you() {
-    var name = V.PC.info.name;
-    switch (V.persons){
+    var name = PC.info.name;
+    switch (conf.persons){
     case 1:
       return "我";
     case 2:
@@ -25,8 +25,8 @@ function you() {
 DefineMacroS("you", you);
 
 function I(key=null) {
-  var name = V.PC.info.name;
-  switch (V.persons){
+  var name = PC.info.name;
+  switch (conf.persons){
   case 1:
     return "I";    
   case 2:
@@ -40,7 +40,7 @@ function I(key=null) {
 DefineMacroS("I", I);
 
 function my(key=null) {
-  switch (V.persons){
+  switch (conf.persons){
   case 1:
     if(key!=null)return "My";
     else return "my";
@@ -55,7 +55,7 @@ function my(key=null) {
 DefineMacroS("my", my);
 
 function me(key=null) {
-  switch (V.persons){
+  switch (conf.persons){
   case 1:
     if(key!=null)return "Me";
     else return "me";
@@ -70,20 +70,20 @@ function me(key=null) {
 DefineMacroS("me", me);
 
 function Iam() {
-  switch (V.persons){
+  switch (conf.persons){
     case 1:
       return "I am";
     case 2:
       return "You are";
     default:
-      if (V.PC.info.gender == "m") return "He is";
+      if (PC.info.gender == "m") return "He is";
       else return "She is";
     }
 }
 DefineMacroS("Iam", Iam);
 
 function myself() {
-  switch (V.persons){
+  switch (conf.persons){
     case 1:
       return "myself";
     case 2:
@@ -95,7 +95,7 @@ function myself() {
 DefineMacroS("myself", myself);
 
 function am() {
-  switch (V.persons){
+  switch (conf.persons){
     case 1:
       return "am";
     case 2:
@@ -107,19 +107,19 @@ function am() {
 DefineMacroS("am", am);
 
 function mine(){
-  switch (V.persons){
+  switch (conf.persons){
     case 1:
       return "mine";
     case 2:
       return "yours";
     default:
-     if (V.PC.info.gender == "m") return "his";
+     if (PC.info.gender == "m") return "his";
       else return "hers";
     }
 }
 
 function he(key=null) {
-  var gender = V.currentchara.gender
+  var gender = V.CChara.gender
     if(gender=="m"){
       if(key!=null)return Lang("他","He");
       else return Lang("他","he");
@@ -132,7 +132,7 @@ DefineMacroS("he", he);
 
 
 function his(key=null) {
-  var gender = V.currentchara.gender
+  var gender = V.CChara.gender
     if(gender=="m"){
       if(key!=null)return Lang("他的","His");
       else return Lang("他的","his");
@@ -144,7 +144,7 @@ function his(key=null) {
 DefineMacroS("his", his);
 
 function him(key=null) {
-  var gender = V.currentchara.gender
+  var gender = V.CChara.gender
     if(gender=="m"){
       if(key!=null)return "Him";
       else return "him";
@@ -159,7 +159,7 @@ DefineMacroS("him", him);
 /* 头发 */
 function hair(){
   const select = new SelectCase();
-  var num = V.PC.info.hairlen
+  var num = PC.info.hairlen
   select.add(0, 49, "超短发");
   select.add(50, 99, "齐耳短发");
   select.add(100, 249, "及脖中发");
@@ -168,14 +168,14 @@ function hair(){
   select.add(800, 1200, "及腰长发");
   select.default = "超长长发";
   const hairlength = select.has(num);
-  return `${setup.L[V.lang]["发色"][V.PC.info.haircolor] + setup.L[V.lang]["发型"][V.PC.info.hairstyle] + hairlength}`;
+  return `${setup.L[V.lang]["发色"][PC.info.haircolor] + setup.L[V.lang]["发型"][PC.info.hairstyle] + hairlength}`;
 }
 
 DefineMacroS("hair",hair);
 
 /* 容貌描述 */
 function beauty(){
-  var num = V.PC.info.beauty
+  var num = PC.info.beauty
   const select = new SelectCase()
   select.add(0,100,"脸部被毁容，丑得惨绝人寰")
   select.add(101,200,"脸上有重大伤痕，显得很狰狞")
@@ -197,20 +197,20 @@ DefineMacroS("beauty", beauty);
 
 /* 眼睛 */
 function eye(){
-  return setup.L[V.lang]["瞳色"][V.PC.info.eyecolor] + setup.L[V.lang]["瞳色"]["eyes"]
+  return setup.L[V.lang]["瞳色"][PC.info.eyecolor] + setup.L[V.lang]["瞳色"]["eyes"]
 }
 DefineMacroS("eye", eye);
 
 /* 皮肤 */
 function skin(){
-  return setup.L[V.lang]["肤色"][V.PC.info.skin] + setup.L[V.lang]["肤色"]["skin"]
+  return setup.L[V.lang]["肤色"][PC.info.skin] + setup.L[V.lang]["肤色"]["skin"]
 }
 DefineMacroS("skin", skin);
 
 /*胸部 */
 
 function breast(){
-  switch(V.PC.info.breast){
+  switch(PC.info.breast){
     case 1:
       return "微微隆起的胸部"
     case 2:
@@ -229,7 +229,7 @@ DefineMacroS("breast", breast);
 
 /* 阴茎 */
 function penis(){
-  var size = V.PC.genital.阴茎
+  var size = PC.genital.阴茎
   var a = random(0,2)
   const text1 = ["惊人的","魔鬼般的","巨大无比的"]
   const text2 = ["可爱的","小孩一般的","短小"]

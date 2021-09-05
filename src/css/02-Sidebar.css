@@ -354,3 +354,12 @@ body #story-caption #storyCaptionDiv {
     vertical-align:top;
     margin: 0px;
 }
+
+#showgametime {
+    position: fixed;
+    right: 2px;
+    top: 2px;
+    font-size: 8px;
+    color: rgb(177, 179, 160);
+    z-index: 1000;
+}

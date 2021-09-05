@@ -105,12 +105,12 @@
     margin-left: 10px;
     color: rgb(151, 141, 1);
 }
-#overlaytitle .handle li ::before {
+#overlaytitle #handle li ::before {
     content: "♢";
     font-size: 24px;
     margin: 2px;
 }
-#overlaytitle .handle li ::after {
+#overlaytitle #handle li ::after {
     content: "♢";
     font-size: 24px;
     margin: 2px;

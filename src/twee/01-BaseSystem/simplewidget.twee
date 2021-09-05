@@ -53,30 +53,6 @@
 
 <</widget>>
 
-
-<<widget "setchara">>
-<<silently>>
-<<if $args[0] is "player">>
-    <<set $currentchara to {
-        名字 : $PC.info.name,
-        性别 : $PC.info.tag,
-        genital : $PC.genital,
-        gender: $PC.info.gender,
-    }>>
-<<elseif $args[0] is "pet">>
-    <<set $currentchara to {
-        名字: $pet.name,
-        gender: $pet.gender,
-        genital: $pet.genital,
-        genitype: $pet.genitype,
-        special: $pet.special,
-    }>>
-<<else>>
-    <<set $currentchara to $NPC[$args[0]]>>
-<</if>>
-<</silently>>
-<</widget>>
-
 <<widget "mode">>
 <<silently>>
     <<if $args[0]>>
@@ -127,7 +103,7 @@
 <</widget>>
 
 <<widget "passtime">>
-<<set $date.time to $date.time+$args[0]>>
+<<set $day.time to $day.time+$args[0]>>
 <</widget>>
 
 <<widget "ApplyHairSet">>

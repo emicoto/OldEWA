@@ -45,7 +45,7 @@ window.ShowPopUP = ShowPopUP
 
 window.movebutton = function() {
     
-    if (V.movebutton == false) {
+    if (ui.movebutton == false) {
         new Wikifier(null,"<<replace '#movebutton'>><<link '▽ 移动'>><<run movebutton()>><</link>><</replace>>")
         $('#navi').addClass('navi_active'); $('#navi').removeClass('navi_unable')
         $('#links').removeClass('hidden') 
@@ -57,17 +57,17 @@ window.movebutton = function() {
         $('#links').addClass('hidden') 
     }
 
-   V.movebutton = !V.movebutton 
+   ui.movebutton = !ui.movebutton 
 }
 
 window.menubutton = function(){
-    if(V.menubutton == false){
+    if(ui.menubutton == false){
          $('#menu_container').addClass('menu_active');setTimeout(() => {$('#menu_container').removeClass('menu_hide')},500);
     }
     else{
         $('#menu_container').addClass('menu_hide');setTimeout(() => {$('#menu_container').removeClass('menu_active')},500); 
     }
-    V.menubutton = !V.menubutton
+    ui.menubutton = !ui.menubutton
 }
 
 function delay(id,text) {

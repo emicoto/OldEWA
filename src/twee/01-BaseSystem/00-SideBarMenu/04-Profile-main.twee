@@ -5,7 +5,7 @@
 <<set _like to random(($PC.info.beauty/100),($PC.info.beauty/10))>>
 <<set _infochange to false>>
 
-＠<<print $PC.info.name>>　　关注　<<print $follow>>　　粉丝　<<print $follower>><br>
+＠<<print $PC.info.name>>　　关注　<<print $PC.follow>>　　粉丝　<<print $PC.follower>><br>
 <span id="shortinfo" class="selfinfo">
     <<changeinfo>>
 </span>

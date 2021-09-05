@@ -17,6 +17,10 @@
     genital:{}, sens:{}, stretch:{}, produce:{}, bottom:{}, wet:{},
     vaginity:{}, mark:{}, rec:{}, exp:{},
 }>>
+<<run
+    PC.money = 5000;    PC.points = 0;
+    PC.follow = 1;    PC.follower = 100;
+    >>
 
 <<set $PC.info to {
     name  : "魔女",   tag : "伪娘",    race : "人类",
@@ -54,6 +58,21 @@
 
     快M  : [0,1000],  快B  : [0,1000],  快C  : [0,1000],
     快V  : [0,1000],  快U  : [0,1000],  快A  : [0,1000],
+}>>
+
+/* 记录进行处理前的增减量 */
+<<set $source to {
+    饮食 : 0,   健康 : 0,     魔力 : 0,
+    体力 : 0,   理智 : 0,
+    
+    酒精 : 0,      药物 : 0, 
+    欲望 : 0,      快感 : 0,
+    
+    压力 : 0,      疼痛 : 0,  抑郁 : 0,
+    恐惧 : 0,      耻辱 : 0,
+
+    快M  : 0,  快B  : 0,  快C  : 0,
+    快V  : 0,  快U  : 0,  快A  : 0,
 }>>
 
 <!-- 身体感度，满值10 -->
@@ -175,7 +194,7 @@ $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌}
     top      : 9,     bottom   : 4, 
     bukkake   : { body:false, face:false, hair:false, },
     pregnant: { type:null, seed:null, phrase:null, date:null, }, /* 怀孕flag type:A怀孕还是正常怀孕 seed：孩子种类, father:父亲, phrase：阶段 date:预产期 */
-    trueform : null,
+    trueform : null, showmimi:null, showtail:null, showwing:null, showhorn:null,
 }>>
 
 <!-- 记录 -->
@@ -198,7 +217,7 @@ $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌}
 }>>
 
 /* 纹身，layer有额头、脸颊（左右）、锁骨（左右）、胸（左右）、后脖根、手臂（左右）、后背、腰窝、 臀瓣（左右），大腿（左右）*/
-<<set $Pskin to {
+<<set $PC.skin to {
     "额头":null,    "脸颊":null,    "锁骨":null,
     "左胸":null,    "右胸":null,    "后脖根":null,
     "左臂":null,    "右臂":null,    "腹部":null,

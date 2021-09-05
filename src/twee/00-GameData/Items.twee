@@ -16,8 +16,8 @@
         text:"只要是快餐店就一定会有卖的汉堡包。毕竟是最便宜的汉堡，份量不怎么的，味道也很一般。",
         text_en:"The burger that definitely will be sold in all kind of fast food restaurant. Because it's the cheapest burger, so you can't expect its volumn and taste.",
         effect(){
-            V.PC.base.饮食[0] += 200;
-            return V.PC.base.饮食;
+            PC.base.饮食[0] += 200;
+            return PC.base.饮食;
         },
     },
 }>>

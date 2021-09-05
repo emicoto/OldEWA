@@ -22,11 +22,11 @@ function gettimezone(h) {
 F.gettimezone = gettimezone
 
 function timeprocess() {
-	var time = V.date.time;
-	var day = V.date.day;
-	var week = V.date.week;
-	var month = V.date.month;
-	var year = V.date.year;
+	var time = V.day.time;
+	var day = V.day.day;
+	var week = V.day.week;
+	var month = V.day.month;
+	var year = V.day.year;
 	var min,hour,zone,weekday;
 
 
@@ -44,7 +44,7 @@ function timeprocess() {
 
 		week = week + Math.floor(hour/24);
 		hour = hour % 24;
-		V.daychange = true
+		Flag.daychange = true
 	};
 
 	zone = gettimezone(hour);
@@ -87,17 +87,17 @@ function timeprocess() {
 		month = Math.max(month%12,1);
 	};
 
-	V.date.time = time;
-	V.date.min = min;
-	V.date.hour = hour;
+	V.day.time = time;
+	V.day.min = min;
+	V.day.hour = hour;
 
-	V.date.zone = zone;
-	V.date.weekday = weekday;
+	V.day.zone = zone;
+	V.day.weekday = weekday;
 
-	V.date.day = day;
-	V.date.week = week;
-	V.date.month = month;
-	V.date.year = year;
+	V.day.day = day;
+	V.day.week = week;
+	V.day.month = month;
+	V.day.year = year;
 
 	return ""
 }
@@ -107,7 +107,7 @@ DefineMacroS("timeprocess",timeprocess)
 
 Macro.add('time', {
 	handler: function () {
-		var time = V.date.time;
+		var time = V.day.time;
 		var min, hour, zone;
 
 		if (time < 0) time = 0;
@@ -119,14 +119,14 @@ Macro.add('time', {
 
 		zone = gettimezone(hour)
 
-		V.date.min = min
-		V.date.hour = hour
-		V.date.zone = zone
+		V.day.min = min
+		V.day.hour = hour
+		V.day.zone = zone
 	}
 });
 
 window.dailyMultiple = function(){
-	let t = V.passtime - V.wakeuptime
+	let t = V.times.passed - V.times.wakeup
 	if(t/60 >= 4){
 		return Math.floor(Math.pow(1.1,(t/60 - 4))*1000)/1000
 	}
@@ -135,12 +135,12 @@ window.dailyMultiple = function(){
 
 function daychange(){
 
-	V.daychange = false
+	Flag.daychange = false
 	return ""
 }
 
 function passtime(t,mode){
-	V.passtime += t  // 睡醒后的累计经过时间。只有进行睡眠休息时才会清除
+	V.times.passed += t  // 睡醒后的累计经过时间。只有进行睡眠休息时才会清除
 
 	/* 经过时间加到现在时间前的处理 */
 	let m = dailyMultiple()
@@ -149,21 +149,20 @@ function passtime(t,mode){
 	let tired  = Math.floor((0.6*t*m)*1000)/1000
 	let lostmana = 0.02*t
 	let desired = 0.01*t
-	
+
 
 	/* 天气变化  累计的时间满3个小时或者一次经过3小时以上就换个天气，然后清零。 没满就*/
-	if(V.timestock >= 180 || t >= 180){ weather(); V.timestock = 0;}
-	else V.timestock += t;
+	if(V.times.stock >= 180 || t >= 180){ weather(); V.times.stock = 0;}
+	else V.times.stock += t;
 
 
 	/* 把经过时间加到现在时间去 */
-	V.date.time += t
+	V.day.time += t
 	
 	/* 时间经过处理 */
 	timeprocess()
 
 	/* 日期变更时的处理 */
-	if(V.daychange)daychange();
+	if(Flag.daychange)daychange();
 
 }
-

@@ -11,7 +11,7 @@
 :: ShowAvatar [widget]
 
 <<widget "avatar">>
-<<if $render is "canvas">>
+<<if $conf.render is "canvas">>
     <<twinescript>>
     output.appendChild(Avatar.getCanvas())
     <</twinescript>>
@@ -22,7 +22,7 @@
 <<widget "portrait">>
 <div id="portrait">
 
-<<if $render is "canvas">>
+<<if $conf.render is "canvas">>
     <div class="portrait flipx">
     <<twinescript>>
     output.appendChild(Avatar.getPortrait())

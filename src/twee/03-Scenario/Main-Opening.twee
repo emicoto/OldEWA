@@ -207,15 +207,15 @@ $(document).ready(function(){
 
 <<case 2>>
 <<you>>拿起手机试着用自己的指纹解锁，然后成功了。看来这确实是<<you>>的手机，起码是这具身体主人的手机。<br>
-<<you>>打开通讯录，从电子名片中确认了自己现在的名字——<<print $PC.name>>，居然和<<you>>的名字一模一样。或许这里真的是自己居住的地方，只是记忆混乱了？
+<<you>>打开通讯录，从电子名片中确认了自己现在的名字——<<print $PC.info.name>>，居然和<<you>>的名字一模一样。或许这里真的是自己居住的地方，只是记忆混乱了？
 
 <<case 3>>
 <<bookmark "主线开幕_初次_穿越版">>
 穿越重生这种事，在虚构作品中<<you>>看过不少，没想到也发生在自己身上了。<<you>>叹了口气，再次观察房间四处，试图寻找关于自己身份的线索。
 <<set $eflag to []>>
 <<set $count to 4>>
-<<case 4>>
 
+<<case 4>>
 <<if $eflag.length is 1>>
 <<switch $eflag[0]>>
 	<<case "查看手机">>
@@ -271,7 +271,7 @@ $(document).ready(function(){
 	<<switch $temp.c>>
 	<<case 0>>
 		<<you>>启动电脑，登录了PP号（QQ？），大致了解了下自己的交友状态：原身似乎并不是个擅长社交的人，好友列表上只躺着一个名叫“灵”的人，头像是天空，资料空白一片，是男是女也不清楚。反而PP群加了不少，大多数是<<switch $PC.type>><<case 1>>二次元相关群<<case 2>>偶像后援群<<case 3>>小说催更和跑团群<</switch>>。
-		<<set $eventnext to 5>>
+		<<set $eventnext to 6>>
 		<<set $temp.c to 1>>
 		
 	<<case 1>>
@@ -306,7 +306,7 @@ $(document).ready(function(){
 
 /* 搜索房间完毕 */
 <<case 8>>
-在整个公寓中翻找过一遍后，<<you>>疲劳地躺在沙发上，吹着冷气休息。<<you>>大致捋了下关于自己的线索：原身的名字和<<you>>一样，都叫<<print $PC.name>>，是景南大学的<<switch $PC.type>><<case 1>>电脑系<<case 2>>表演系<<case 3>>文学系<</switch>>学生。现在所居住的城市，就叫景南市，是个坐山朝海被水环绕的大城市。老家距离大学挺远，所以是自己一个人住在这个怡安小区的单身公寓中。似乎没什么朋友，准确来说，是没有亲密的朋友。联络簿上的，除了父母都是泛泛之交。
+在整个公寓中翻找过一遍后，<<you>>疲劳地躺在沙发上，吹着冷气休息。<<you>>大致捋了下关于自己的线索：原身的名字和<<you>>一样，都叫<<print $PC.info.name>>，是景南大学的<<switch $PC.type>><<case 1>>电脑系<<case 2>>表演系<<case 3>>文学系<</switch>>学生。现在所居住的城市，就叫景南市，是个坐山朝海被水环绕的大城市。老家距离大学挺远，所以是自己一个人住在这个怡安小区的单身公寓中。似乎没什么朋友，准确来说，是没有亲密的朋友。联络簿上的，除了父母都是泛泛之交。
 <<set $eventnext to 9>>
 
 <<case 9>>
@@ -328,7 +328,7 @@ $(document).ready(function(){
 <div class="Eselect"><<link _text>><<set $event.branch to "初次">><<set $count to 11>><<set $Flag.穿越者 to false>><<Revent>><</link>></div>
 
 <<set _text to Lang("或许是重生穿越","Maybe reborn to the younger <<me>>")>>
-<div class="Eselect"><<link _text>><<set $count to 3>><<anouncePopUP "获得头衔《穿越者》" "获得成就">><<set $Flag.穿越者 to true>><<set $pctitle.穿越者 to true>><<Revent>><</link>></div>
+<div class="Eselect"><<link _text>><<set $count to 3>><<anouncePopUP "获得头衔《穿越者》" "获得成就">><<set $Flag.穿越者 to true>><<set $titles.穿越者 to true>><<Revent>><</link>></div>
 
 <<case 4>>
 <<if $eflag.includes("查看手机") is false>>

@@ -12,8 +12,8 @@ window.showcharainfo = function () {
 }
 
 window.basepercent = function(name) {
-    var min = V.PC.base[name][0]
-    var max = V.PC.base[name][1]
+    var min = PC.base[name][0]
+    var max = PC.base[name][1]
     return Math.clamp(Math.trunc(((min/max)*100)),1,100)
 };
 
@@ -51,7 +51,7 @@ window.hairlenth = function(num){
 }
 
 function inTime(a,b){
-    return between(V.date.time,a*60,b*60)
+    return between(V.day.time,a*60,b*60)
 }
 F.inTime = inTime
 
@@ -69,3 +69,15 @@ function RER(){
 }
 F.RER = RER
 DefineMacroS("setRER",RER)
+
+window.gametime = function(a){
+    let time = V.gametime
+    time.sec++
+    
+    if(time.sec>=60){time.min++;time.sec=0;}
+    if(time.min>=60){time.hour++;time.min=0}
+    if(time.hour>=24){time.day++;time.hour=0}
+
+    V.gametime = time
+    return `D${time.day}.${time.hour}:${time.min}:${time.sec}`
+}

@@ -42,7 +42,7 @@
     <</listbox>>
     <script>
         $("#listbox-pcinforace").on("change",()=>{
-            V.PC.info.race == "兽族" ? 
+            PC.info.race == "兽族" ? 
             new Wikifier(null,"<<replace #CMFurOption>>　　原型　<<CMFurType>><</replace>>"):
             new Wikifier(null,"<<replace #CMFurOption>><</replace>><<set $PC.info.kemotype to null>>")
         })
@@ -273,7 +273,7 @@
     <<switch $PC.type>>
         <<case 1>>
             <<set $PC.info.title to "魔法少女">>
-            <<set $pctitle.魔法少女 to true>>
+            <<set $titles.魔法少女 to true>>
             <<set $PC.lewd to {
                     "纯洁" : 800,
                     "露出" : 0,
@@ -286,7 +286,7 @@
                 }>>
         <<case 2>>
             <<set $PC.info.title to "爱抖露">>
-            <<set $pctitle.爱抖露 to true>>
+            <<set $titles.爱抖露 to true>>
             <<set $PC.lewd to {
                 "纯洁" : 900,
                 "露出" : 50,
@@ -299,7 +299,7 @@
             }>>
         <<case 3>>
             <<set $PC.info.title to "道童">>
-            <<set $pctitle.道童 to true>>
+            <<set $titles.道童 to true>>
             <<set $PC.lewd to {
                 "纯洁" : 1000,
                 "露出" : 0,
@@ -469,7 +469,7 @@
     <<switch $PC.type>>
         <<case 1>>
             /* 宠物点数 HP/SP/MP 50=1点 总45点 */
-            <<set $follower to (500+random(100,5000))>>
+            <<set $PC.follower to (500+random(100,5000))>>
             <<set $pet to {
                 name:"史莱姆", type:"史莱姆", level:1, 
                 HP:[50,50], SP:[200,200], MP:[200,200],
@@ -482,7 +482,7 @@
                 active:false,flag:{},
             }>>
         <<case 2>>
-            <<set $follower to (1000+random(500,5000))>>
+            <<set $PC.follower to (1000+random(500,5000))>>
             <<set $pet to {
                 name:"魔狼", type:"魔狼", level:1,
                 HP:[200,200], SP:[100,100], MP:[100,100],
@@ -495,7 +495,7 @@
                 active:false,flag:{},
             }>>
         <<case 3>>
-            <<set $follower to (100+random(100,2000))>>
+            <<set $PC.follower to (100+random(100,2000))>>
             <<set $pet to {
                 name:"灵虫", type:"灵虫", level:1,
                 HP:[500,500], SP:[100,100], MP:[150,150],
@@ -522,8 +522,6 @@
 
     <<if $PC.info.race isnot "人类">>
         <<set $Flag.非人类 to true>>
-    <<else>>
-        <<set $Flag.非人类 to false>>
     <</if>>
     
     <<switch $PC.info.tag>>

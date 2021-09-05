@@ -1,10 +1,8 @@
 :: StoryInit
-<!-- 快速检索法 luatable["indexname"] = $test.名字 ; $test.历史 
-     var=[0,1,2,3] , luatable[0] = $var[0]  -->
+
 <!-- 首先初始化资料库 -->
 <<InitDataBase>>
 <<InitBGM>>
-<<set $test to 0>>
 
 <!-- DEBUG -->
 <<if StartConfig.debug is true>>
@@ -12,17 +10,43 @@
 <<else>>
 	<<set $debug to false>>
 <</if>>
-<<set $harddebug to false>>
-<<set $charamaking to null>>
-<!-- 游戏系统环境设定 -->
-<<set $temp to {}>>
+
 <<set $lang to "CN">>
-<<set $timelimit to true>>
-<<set $persons to 3>>
-<<set $hardmode to 1>>
-<<set $render to "canvas">>
-<<set $movebutton to false>>
-<<set $menubutton to false>>
+<<set $coredebug to false>>
+<<set $charamaking to null>>
+
+<!-- 游戏系统环境设定 -->
+<<set $Flag to {}>> /* game flag */
+<<set $TFlag to {}>> /* Temp flag */
+<<set $PFlag to {}>> /* Player flag */
+<<set $CFlag to {}>> /* combat flag */
+<<if $PC is undefined>><<set $PC to {}>><</if>>
+
+/* event flag事件系统相关变量 */
+<<set $EFlag to {
+	nonext   : true,    end      : false,
+    location : null,    chara    : null,
+}>>
+
+<<set $event to {
+    type : "主线", name : "开幕", branch : "初次" , phrase: null,
+}>> 
+<<set $eventexit to "你的家 单身公寓">>
+<<set $count to 0>>      /* 通用计数变量。需要离开当前passage或重置的情况 */
+<<set $eventend to false>>
+<<set $eventnext to 0>>
+
+
+<<set $temp to {}>>
+
+<<set $conf to {
+	persons:3, timelimit:true, hardmode:1, 
+	render: "canvas",
+}>>
+<<set $UI to {
+	movebutton:false, menubutton:false
+}>>
+
 <<set $anounce to {flag:false, text:"", type:"弹出通知"}>>
 
 <!-- 游戏各种flag初始化 -->
@@ -40,9 +64,11 @@
 	<<set $bookmark to {}>>
 <</if>>
 
+<<set $record to {}>> 
+
 <!-- 已获得的头衔列表 -->
-<<if $pctitle is undefined>>
-    <<set $pctitle to {}>>
+<<if $titles is undefined>>
+    <<set $titles to {}>>
 <</if>>
 
 <!-- 成就 -->
@@ -58,7 +84,7 @@
 <<if $saveDetails is undefined>>
 	<<set $saveDetails to {
 		exported:{
-			days: clone($days),
+			days: clone($passdays),
 			count: 0,
 			dayCount: 0,
 		},

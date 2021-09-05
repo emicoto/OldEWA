@@ -17,7 +17,7 @@ window.SetFace = SetFace
 DefineMacroS("setface",SetFace)
 
 window.breastsize = function() {
-  var size = V.PC.info.breast
+  var size = PC.info.breast
   if (between(size,0,1)){
     return 1;
   }
@@ -35,14 +35,14 @@ window.breastDif = function(obj){
 }
 
 window.isPregnant = function() {
-    if(V.PC.state.怀孕 == true || V.PC.state.肠内受孕 == true) return "p";
+    if(PC.state.怀孕 == true || PC.state.肠内受孕 == true) return "p";
     else return ""
 }
 
 window.PregDif = function(obj) {
 
     if(typeof(obj)=="object" && obj && obj.hasDif && obj.hasDif.pregnant==true){
-        if(V.PC.state.怀孕 == true || V.PC.state.肠内受孕 == true) return "p";
+        if(PC.state.怀孕 == true || PC.state.肠内受孕 == true) return "p";
         else return ""
     }
     else return ""
@@ -103,10 +103,10 @@ window.imglocation = imglocation
 
 
 function isFurry(){
-    if ((V.PFlag.trueform == true ||  V.charamaking == true) && V.PC.info.race=="兽族") return "furry/"
-    else if ((V.PFlag.trueform == true || V.charamaking == true) && V.PC.info.race=="灵族") return "gold/"
-    else if (((V.PFlag.trueform == true || V.charamaking == true) && V.PC.info.race=="夜族")) return "yoru/"
-    else return V.PC.info.skin+"/"
+    if ((PFlag.trueform == true ||  Flag.charamaking == true) && PC.info.race=="兽族") return "furry/"
+    else if ((PFlag.trueform == true || Flag.charamaking == true) && PC.info.race=="灵族") return "gold/"
+    else if (((PFlag.trueform == true || Flag.charamaking == true) && PC.info.race=="夜族")) return "yoru/"
+    else return PC.info.skin+"/"
 }
 
 function isCaged(){
@@ -118,12 +118,12 @@ function isCaged(){
 function stAvatar() {
 
     /*浴精喷精喷奶冒汗气息一类 */
-    V.avatar.addon.body = setAvatar("addon.body",V.PFlag.bukkake.body)
-    V.avatar.addon.face = setAvatar("addon.face",V.PFlag.bukkake.face)
-    V.avatar.addon.hair = setAvatar("addon.hair",V.PFlag.bukkake.hair)
-    V.avatar.addon.face = setAvatar("addon.face",(V.PC.rec.饮精.c > 100))
-    V.avatar.addon.bottom = setAvatar("addon.bottom", (V.PC.rec.肛内射 + V.PC.rec.内射.c > 200 && V.PFlag.bottom <= 1))
-    V.avatar.addon.penis = setAvatar("addon.penis",(V.PC.rec.射精.c > 10 && V.PFlag.bottom <= 1))
+    V.avatar.addon.body = setAvatar("addon.body",PFlag.bukkake.body)
+    V.avatar.addon.face = setAvatar("addon.face",PFlag.bukkake.face)
+    V.avatar.addon.hair = setAvatar("addon.hair",PFlag.bukkake.hair)
+    V.avatar.addon.face = setAvatar("addon.face",(PC.rec.饮精.c > 100))
+    V.avatar.addon.bottom = setAvatar("addon.bottom", (PC.rec.肛内射 + PC.rec.内射.c > 200 && PFlag.bottom <= 1))
+    V.avatar.addon.penis = setAvatar("addon.penis",(PC.rec.射精.c > 10 && PFlag.bottom <= 1))
 
     /* 设置身上的服装 */
     const layers = ["outter","top","bottom","inner_up","inner_bt","neck","hat","face","hand","legs","shoes","back"]
@@ -177,10 +177,10 @@ function stAvatar() {
     /*头发部分*/
     const hairfront = A.hairfront[V.Equip.hairfront]
     const hairback = A.hairback[V.Equip.hairback]
-    const haircolor = A.haircolor[V.PC.info.haircolor]
+    const haircolor = A.haircolor[PC.info.haircolor]
     const fixhair = function(obj){
         if (typeof(obj)=="object" && obj){
-            if(obj.fixcolor == true) return V.PC.info.haircolor;
+            if(obj.fixcolor == true) return PC.info.haircolor;
             else return "basic";
             
         }else{
@@ -190,18 +190,18 @@ function stAvatar() {
 
     V.avatar.hairfront = setAvatar("hairfront",{
         fixcolor: hairfront.fixcolor, color: (hairfront.fixcolor==true? null : haircolor),
-        src: V.Equip.hairfront + "/" + fixhair(hairfront) + hasLength(hairfront,V.PC.info.hairlenf),
+        src: V.Equip.hairfront + "/" + fixhair(hairfront) + hasLength(hairfront,PC.info.hairlenf),
     })
 
     V.avatar.hairback = setAvatar("hairback",{
         fixcolor: hairback.fixcolor, color: (hairback.fixcolor==true? null : haircolor),
-        src: V.Equip.hairback + "/" + fixhair(hairback) + hasLength(hairback,V.PC.info.hairlen),
+        src: V.Equip.hairback + "/" + fixhair(hairback) + hasLength(hairback,PC.info.hairlen),
     })
 
 
     /*兽耳兽角兽尾部分, 每个部位都要分开来设置……还未完全实装。 */
-    if((V.PFlag.trueform == true || V.charamaking == true || V.PFlag.showkemomimi == true)){
-        if(V.PC.info.race == "兽族"){
+    if((PFlag.trueform == true || Flag.charamaking == true || PFlag.showmimi == true)){
+        if(PC.info.race == "兽族"){
             V.avatar.kemofront.mimi = setAvatar("kemofront.mimi",{
                 fixcolor: false, color: haircolor[0],
                 src: "cat",
@@ -211,8 +211,8 @@ function stAvatar() {
         V.avatar.kemofront.mimi = setAvatar("kemofront.mimi",null)
     }
 
-    if((V.PFlag.trueform == true || V.charamaking == true || V.PFlag.showkemotail == true)){
-        if(V.PC.info.race == "兽族"){
+    if((PFlag.trueform == true || Flag.charamaking == true || PFlag.showtail == true)){
+        if(PC.info.race == "兽族"){
             V.avatar.kemoback.tail = setAvatar("kemoback.tail",{
                 fixcolor:false, color:haircolor[0],
                 src:"cat", 
@@ -221,9 +221,9 @@ function stAvatar() {
      }else{
         V.avatar.kemoback.tail = setAvatar("kemoback.tail",null)
     }
-        /* let kemotype = V.PC.info.kemotype
+        /* let kemotype = PC.info.kemotype
         
-        if(V.PC.trait.兽耳 == true){
+        if(PC.trait.兽耳 == true){
             V.avatar.kemofront.mimi = setAvatar("kemofront.mimi",{
                 fixcolor: A.kemo[kemotype].mimi.fixcolor,
                 color: (A.kemo[kemotype].mimi.fixcolor==true? null: haircolor[0]),
@@ -232,13 +232,13 @@ function stAvatar() {
             })
         }
 
-        if(V.PC.trait.兽角==true){
+        if(PC.trait.兽角==true){
             V.avatar.kemofront.horn = setAvatar("kemofront.horn",
                 {src= `${kemotype}/horn`, acc= hornacc(kemotype)
             })
         }
 
-        if(V.PC.trait.兽尾==true){
+        if(PC.trait.兽尾==true){
             V.avatar.kemoback.tail = setAvatar("kemoback.tail",{
                 fixcolor: A.kemo[kemotype].tail.fixcolor,
                 color: (A.kemo[kemotype].tail.fixcolor==true? null: haircolor[0]),
@@ -247,7 +247,7 @@ function stAvatar() {
             })
         }
 
-        if(V.PC.race=="羽族"){
+        if(PC.race=="羽族"){
             V.avatar.kemoback.wing = setAvatar("kemoback.wing",{
                 fixcolor: A.kemo[kemotype].wing.fixcolor,
                 color: (A.kemo[kemotype].wing,fixcolor==true? null : haircolor),
@@ -272,12 +272,12 @@ function stAvatar() {
     }
 
     /* 小丁丁的显示 */
-    if(V.charamaking == true){
-        if(V.PC.info.tag != "少女")V.avatar.dick = setAvatar("dick", isFurry()+"penis"+isCaged(),true);
+    if(Flag.charamaking == true){
+        if(PC.info.tag != "少女")V.avatar.dick = setAvatar("dick", isFurry()+"penis"+isCaged(),true);
         else V.avatar.dick = setAvatar("dick", null,true);
 
     }else{
-        if(V.PFlag.bottom <= 1 && V.PC.genital.阴茎 > 3){
+        if(PFlag.bottom <= 1 && PC.genital.阴茎 > 3){
             V.avatar.dick = setAvatar("dick", isFurry()+"penis"+isCaged(),true)
         }else{
             V.avatar.dick = setAvatar("dick", null,true)
@@ -285,22 +285,22 @@ function stAvatar() {
     }
 
     
-    if((V.PFlag.trueform == true || V.charamaking == true)&& V.PC.info.race == "兽族"){
+    if((PFlag.trueform == true || Flag.charamaking == true)&& PC.info.race == "兽族"){
         V.avatar.body = setAvatar("body",{
             src:"furry/body_"+breastsize()+isPregnant(), color: haircolor[0],
         },true)
 
-    }else if ((V.PFlag.trueform == true || V.charamaking == true) && V.PC.info.race == "灵族"){
+    }else if ((PFlag.trueform == true || Flag.charamaking == true) && PC.info.race == "灵族"){
         V.avatar.body = setAvatar("body", "gold/body_"+breastsize()+isPregnant(),true)
-    }else if ((V.PFlag.trueform == true || V.charamaking == true) && V.PC.info.race == "夜族"){
+    }else if ((PFlag.trueform == true || Flag.charamaking == true) && PC.info.race == "夜族"){
         V.avatar.body = setAvatar("body", "yoru/body_"+breastsize()+isPregnant(),true)
     }
     else{
-        V.avatar.body = setAvatar("body", V.PC.info.skin+"/body_"+breastsize()+isPregnant(),true)
+        V.avatar.body = setAvatar("body", PC.info.skin+"/body_"+breastsize()+isPregnant(),true)
     }
 
     /* 设置表情 */
-    if (V.charamaking == true) SetFace(V.Equip.emote,1)
+    if (Flag.charamaking == true) SetFace(V.Equip.emote,1)
 
     const eyegroup = ["full","blink2","lookup3"]
     const type = [null,"a","b","c"]
@@ -310,8 +310,8 @@ function stAvatar() {
     /* 表情部分 */
     V.avatar.eyebrow = setAvatar("eyebrow", V.PFace.eyebrow, true)
     V.avatar.eyes = setAvatar("eyes",
-        V.PC.info.eyecolor+"/"+V.PFace.eyes
-        + (eyegroup.includes(V.PFace.eyes) == true ? type[V.PC.info.eyes] :"")
+        PC.info.eyecolor+"/"+V.PFace.eyes
+        + (eyegroup.includes(V.PFace.eyes) == true ? type[PC.info.eyes] :"")
         + (V.PFace.eyes.includes("full") == true && V.PFace.name == "正常" ? "_idle" : "")
         ,true
     )
@@ -324,21 +324,21 @@ function stAvatar() {
         V.avatar.emoadd[n] = setAvatar(`emoadd.${n}`, V.PFace[n], true)
     }
 
-    if(V.PC.base.快感[0] > V.PC.base.快感[1]/3 || V.PC.state.发情 == true || V.PC.base.酒精[0] > V.PC.base.酒精[1]/2 || V.PC.base.药物[0] > 20){
+    if(PC.base.快感[0] > PC.base.快感[1]/3 || PC.state.发情 == true || PC.base.酒精[0] > PC.base.酒精[1]/2 || PC.base.药物[0] > 20){
         V.avatar.emoadd.red = setAvatar("emoadd.red",true, true)
     }
 
     /* 淫纹 */
-    if(V.Pskin.腹部){
-        let path = "./image/avatar/body/"+V.Pskin.腹部.index+".png"
+    if(PC.skin.腹部){
+        let path = "./image/avatar/body/"+PC.skin.腹部.index+".png"
         if(ImgExist(path)){
-            V.avatar.tatoos = setAvatar("tatoos",V.Pskin.腹部.index)
+            V.avatar.tatoos = setAvatar("tatoos",PC.skin.腹部.index)
         }
     }else{
         V.avatar.tatoos = setAvatar("tatoos",null)
     }
 
-    if(V.harddebug)console.log("log",V.avatar);
+    if(V.coredebug)console.log("log",V.avatar);
     return ""
 }
 

@@ -2,31 +2,33 @@
 <<widget "InitGameData">>
 
 <!-- 初始化游戏数据 -->
-<<set $gametime to {pass:0, hour:0, min:0, sec:0, day:0}>>
+<<set $gametime to {hour:0, min:0, sec:0, day:0}>>
+
 <<set $intro to true>>
 <<set $tutorial to false>>
 
 <!-- 日期相关 -->
 <<set $days = 1>>
-<<set $wakeuptime = 540, $passtime = 540, $timestock = 0>>
+<<set $times to {
+    wakeup:540, passed:540, stock:0
+}>>
+
 /* 不会因为时间进程而reset, 只有睡觉休息时才reset */
 
-<<set $date to {
-    year : 2024,    month : 7,    day : 1,    week : 1,
-    time : 540,    hour : 9,    min : 0,
-    zone : "上午",    weekday : "周一",
+<<set $day to {
+    year : 2024,    month : 7,      day : 1,    week : 1,
+    time : 540,     hour : 9,       min : 0,
+    zone : "上午",  weekday : "周一",
+    season: "夏",   weather:"晴",
 }>>
-<<set $daychange to false>>
+<<run 
+    Flag.daychange = false;
+    Flag.actmode = "自由";
+    Flag.chaos = 0;
+>>
 
-<<set $weather to "晴">>
 <<set $local to {}>>
 <<set $location to "单身公寓">>
-
-<<set $money to 5000>>
-<<set $points to 0>>
-<<set $follow = 1, $follower = 100>>
-
-<<set $actmode = "自由", $chaos = 0>>
 
 <!-- 各种名声 -->
 <<set $fame to {
@@ -103,42 +105,21 @@
     gender:"m", genital: {"阴茎":16, "子宫":null},
     genitype: "史莱姆",
     special: ["液态"],
+    base:{},
+    source:{},    
     stats: {},
     active:false,
     flag:{},
 }>>
 /*type:1=史莱姆 2=魔狼 3=恶魔 4=触手 */
 
-/* 玩家各种记录 */
-<<set $record to {}>> 
-
-/* 事件系统相关变量 */
-<<set $Eflag to {
-    nonext   : true,    end      : false,
-    location : null,    chara    : null,
+/* 战斗相关 */
+<<set $Enemy to [null,null,null,null,null]>>
+<<set $CFlag to {
+    turns: 0, /*current*/ actor: "pc", target: "enemy", action: "attack",
+    waitlist:[
+        {actor:"pc", target:"enemy", action:"item", com:0, id:0,  /* com是使用的技能id， id是使用的道具id */},
+    {},{},{},{},{},{},{}], /* 动作队列 */
 }>>
-
-<<set $Flag to {}>>
-
-/* 每次设定剧情时set要写好几次就麻烦，干脆试试用obj */
-<<set $event to {
-    type : "主线", name : "开幕", branch : "初次" , phrase: null,
-}>> 
-
-<<set $eventexit to "你的家 单身公寓">>
-<<set $count to 0>>      /* 通用计数变量。需要离开当前passage或重置的情况 */
-<<set $eventend to false>>
-<<set $eventnext to 0>>
-
-/* 事件系列名
-    type name branch phrase lang
-    例： 主线 开头剧情 初次 0 CN / 主线 开头剧情 周回 0 CN
-    然后每个剧情开始前都处理一次对应的Eventfirst。
- */
- /*
-  口上名
-  PCKOJO typeid name branch phrase lang
-  例 PCKOJO 1 与史莱姆玩耍 高潮 0 CN
-  */
 
 <</widget>>

@@ -13,7 +13,7 @@ F.getsituation = function(location, series, key){
 
                text[data[i].display].push(result);
                
-               if(V.harddebug)console.log(data[i].condition());
+               if(V.coredebug)console.log(data[i].condition());
         }
     }}
     if(text.before.length + text.content.length + text.after.length > 0){
@@ -29,12 +29,12 @@ function setBG() {
 
     if(V.local?.side == "室外") background.outside = true;
 
-    if(between(V.date.time,1020,1140) && background.outside) {
+    if(between(V.day.time,1020,1140) && background.outside) {
         background.color = "#D6981C"
         document.getElementById('avatar-overlay').className = "Layer sunset"
 
     }
-    else if ((between(V.date.time,1140,1440)||between(V.date.time,0,240)) && background.outside){
+    else if ((between(V.day.time,1140,1440)||between(V.day.time,0,240)) && background.outside){
         background.color = "#242C8A"
         document.getElementById('avatar-overlay').className = "Layer night"
     }
@@ -63,7 +63,7 @@ function setLocation(args) {
             V.local = null
         }
 
-        V.movebutton = false
+        ui.movebutton = false
 
         if(V.local){
             if(V.local.tag.includes("家"))V.local.chara.push("player");

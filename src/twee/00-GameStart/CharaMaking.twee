@@ -69,7 +69,7 @@
 <<silently>>
     <<repeat 0.3s>>
         <<set $PC.info.hairlenf to $PC.info.hairlen>>
-        <<if $activepage is "CharaMaking">>
+        <<if $UI.activepage is "CharaMaking">>
             <<switch $PC.info.tag>>
                 <<case "伪娘">>
                     <<replace #CMgenital>><<CMBoy>><</replace>>

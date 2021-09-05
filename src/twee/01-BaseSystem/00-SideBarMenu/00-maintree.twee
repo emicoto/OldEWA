@@ -3,8 +3,8 @@
 <div @class="(Errors.log.length==0?'hidden':'') + ' error-reporter-btn'" onclick="Errors.Reporter.toggle()"></div>
 
 /* 左边栏 UI初始化 */
-<<set $menubutton to false>>
-<<set $statshidden to false>>
+<<set $UI.menubutton to false>>
+<<set $UI.statshidden to false>>
 
 <<if $anounce.flag is true>>
 	<<anouncePopUP $anounce.text $anounce.type>>
@@ -43,38 +43,49 @@
 
 <</if>>
 
+</div>/* 框架的尾巴 */
 
 <!-- 菜单 -->
 <div id="showmenu"><<showmenu>></div>
+<!-- 游戏时间 -->
+<div id="showgametime"></div>
 
-
-</div>/* 框架的尾巴 */
 
 <<silently>>
+
 /* 自动刷新等待JS读取结束 */
-<<script>>
-	$('#customOverlay').draggable({handle: '.handle'});
-	$('#ui-dialog').draggable();
-<</script>>
+<<set _timer to 10>>
+<<run
+$('#customOverlay').draggable({handle: '.handle'});
+$('#ui-dialog').draggable();
+>>
 
 /* 动态化部分 */
 	<<repeat 0.5s>>
-		<<if $render is "image">>
+		<<if $conf.render is "image">>
 			<<replace "#avatar">><<avatar>><</replace>>
 		<</if>>
 		<<if $intro isnot true>>
 			<<replace "#showtimes">><<timestats>><</replace>>
 			<<replace "#notice">><<notification>><</replace>>
 			<<replace "#show_money">><<showmoney>><</replace>>
-		<<if $statshidden is false>>
+		<<if $UI.statshidden is false>>
 			<<replace "#sidebar_stats">><<sidebar_stats>><</replace>>
-		<</if>>			
+		<</if>>	
+
 		<</if>>
 	<</repeat>>
+
+<<if $intro isnot true>>
+<<repeat 1s>>
+	<<replace "#showgametime">><<=gametime()>><</replace>>
+<</repeat>>
+<</if>>
 
 /* 处理顺序的最后尾 */
 <<set $anounce to {flag:false, text:"", type:"弹出通知"}>>
 <<setchara "player">>
+
 /* 处理顺序的最后尾  */
 <</silently>>
 

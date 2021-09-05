@@ -19,8 +19,8 @@ function setreveal(){
     bottoms.sort((a,b)=>b-a)
     /*console.log("上衣:",tops)
     console.log("下衣:",bottoms)*/
-    V.PFlag.top = !tops[0]?0: tops[0]
-    V.PFlag.bottom=!bottoms[0]?0: bottoms[0]
+    PFlag.top = !tops[0]?0: tops[0]
+    PFlag.bottom=!bottoms[0]?0: bottoms[0]
 }
 window.setreveal = setreveal
 F.setreveal = setreveal
@@ -34,7 +34,7 @@ function allureBuff() {
             a = a+isAllure(items[i])
         }
 
-    if(V.PC.trait.倾国倾城 == true) a += 3;
+    if(PC.trait.倾国倾城 == true) a += 3;
 
     return 1+a
 }
@@ -67,8 +67,8 @@ function warmth() {
         a[0] += isHot(items[i])
         a[1] += isCold(items[i])
     }
-    V.PC.info.hot = V.fix.hot + a[0]
-    V.PC.info.cold = V.fix.cold + a[1]
+    PC.info.hot = V.fix.hot + a[0]
+    PC.info.cold = V.fix.cold + a[1]
     return a
 }
 
@@ -141,8 +141,8 @@ function BuyOutFit(args) {
     var layer = V.showcase.layer
     var text
 
-    if (args=="select" && V.money > V.showcase.cost) {
-        V.money = V.money - V.showcase.cost
+    if (args=="select" && PC.money > V.showcase.cost) {
+        PC.money = PC.money - V.showcase.cost
         let buystuff = clone(V.showcase)
         V.closet[layer].push(buystuff)
 
@@ -153,8 +153,8 @@ function BuyOutFit(args) {
 
         text = "你花费了"+V.showcase.cost+"元购买了"+V.showcase.name+"。"
     }
-    else if (args=="tryon" && V.money > tryoncost() ){
-        V.money = V.money - tryoncost()
+    else if (args=="tryon" && PC.money > tryoncost() ){
+        PC.money = PC.money - tryoncost()
 
         let group = Object.keys(V.tryon)
 
@@ -337,7 +337,7 @@ function gonaked(mode){
     FixValue()
     stAvatar()
 
-    if(V.harddebug==true)console.log(V.Equip,V.TEquip);
+    if(V.coredebug==true)console.log(V.Equip,V.TEquip);
     return ""
 }
 

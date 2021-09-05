@@ -60,7 +60,23 @@
 <</widget>>
 
 <<widget "InitNPCData">>
-/* $npc.charaname.index.sbindex */
+/* $nPC.charaname.index.sbindex */
+<<set D.NPCbase to {
+    渴望:[0,1000], 快感:[0,1000],
+    愤怒:[0,1000], 射精:[0,1000],
+    满意:[0,1000],
+    快M  : [0,1000],  快B  : [0,1000],  快C  : [0,1000],
+    快V  : [0,1000],  快U  : [0,1000],  快A  : [0,1000],
+}>>
+
+<<set D.NPCsource to {
+    渴望:0,     快感:0,
+    愤怒:0,     射精:0,
+    满意:0,
+    快M  : 0,  快B  : 0,  快C  : 0,
+    快V  : 0,  快U  : 0,  快A  : 0,
+}>>
+
 <<set D.NPCSheet to {
     CID : "0",
     名字 : "NPC",
@@ -85,6 +101,7 @@
     date : 0,
 }>>
 
+/* SP作为防御方=性抵抗力，作为攻击方=精力 */
 <<set D.petsheet to {
     name:"pet", type:1, level:1,
     HP:[100,100], SP:[100,100], MP:[100,100],
@@ -93,6 +110,8 @@
     gender:"m", genital: {"阴茎":16, "子宫":null},
     genitype: "",
     special: [],
+    base:{},
+    source:{},    
     stats: {},
     active:false,
     flag:{},

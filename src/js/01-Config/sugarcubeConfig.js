@@ -23,10 +23,8 @@ Config.saves.id = "EWA";
 /*LinkNumberify and images will enable or disable the feature completely*/
 /*debug will enable or disable the feature only for new games*/
 window.StartConfig = {
-	"debug": true,
-	"enableImages": true,
-	"enableLinkNumberify": false,
-	"version": "0.0.2",
+	"debug": false,
+	"version": "0.0.3",
 }
 
 Config.saves.autosave = ["bookmark", "autosave","eventend"];
