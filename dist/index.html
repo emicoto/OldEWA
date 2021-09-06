@@ -199,15 +199,64 @@ font-family: 'ZCOOL XiaoWei', serif;
 */
 /* twine-user-stylesheet #2: "01-Base.css" */
 
+html {
+    /* Vertical colour gradient */
+  background-image: linear-gradient(
+    to bottom,
+    rgb(240, 240, 240) 30%,
+    rgb(190, 190, 190)
+  );
+  background-image: -webkit-linear-gradient(
+    top,
+    rgb(240, 240, 240) 30%,
+    rgb(190, 190, 190)
+  );
+    background-attachment: fixed;
+
+    /* Fallback colour */
+    background-color: #eee;
+
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    /* Remove default styles */
+    background-color: transparent;
+    margin: -1% 0 0 0;
+    font-family: "Raleway", Georgia, "轻吟体M";
+    /* Used to center the box */
+    text-align: left;
+    color: #707556;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    width: 100%;
+    height: 100%;
+}
 
 canvas {
   overflow: hidden;
 }
 
+#main {
+    width: 100%;
+    height: 100%;
+    border: rgba(255, 255, 255, 0) 1px solid;
+    background-image: url('./image/pattern.png');
+    background-repeat: repeat;
+    background-color:transparent;
+    z-index: -1000;
+}  
 
 #passages {
     float: left;
-
+    width: 80%;
+    height: 100%;
+    display: block;
 }
 
 .passage {
@@ -958,8 +1007,8 @@ body #story-caption #storyCaptionDiv {
     transition: all 1s;
     overflow: hidden;
     display: inline-block;
-    -webkit-backdrop-filter: drop-shadow(0px 0px 5px rgba(163, 153, 153, 0.2)) blur(2px);
-    backdrop-filter: drop-shadow(0px 0px 5px rgba(163, 153, 153, 0.2)) blur(2px); 
+    -webkit-backdrop-filter: blur(2px);
+    backdrop-filter: blur(2px); 
 
 }
 
@@ -1001,8 +1050,8 @@ body #story-caption #storyCaptionDiv {
     font-size: 16px;
     padding:10px 30px 10px 0px;
     height: fit-content;
-    -webkit-backdrop-filter: drop-shadow(0px 0px 5px rgba(163, 153, 153, 0.2)) blur(5px);
-    backdrop-filter: drop-shadow(0px 0px 5px rgba(163, 153, 153, 0.2)) blur(5px); 
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px); 
     box-shadow: 2px 2px 10px rgba(113, 116, 138, 0.2);
 }
 
@@ -1014,8 +1063,8 @@ body #story-caption #storyCaptionDiv {
     font-size: 16px;
     padding:10px 30px 10px 0px;
     height: fit-content;
-    -webkit-backdrop-filter: drop-shadow(0px 0px 5px rgba(163, 153, 153, 0.2)) blur(5px);
-    backdrop-filter: drop-shadow(0px 0px 5px rgba(163, 153, 153, 0.2)) blur(5px); 
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px); 
     box-shadow: 2px 2px 10px rgba(113, 116, 138, 0.2);
 }
 
@@ -1193,8 +1242,8 @@ body #story-caption #storyCaptionDiv {
     overflow-y: scroll;
     z-index: 1000;
     user-select: none;
-    -webkit-backdrop-filter: drop-shadow(0px 0px 5px rgba(163, 153, 153, 0.2)) blur(68px);
-    backdrop-filter: drop-shadow(0px 0px 5px rgba(163, 153, 153, 0.2)) blur(6px); 
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px); 
 }
 
 .customOverlay[data-overlay="canvasLayers"],
@@ -16049,43 +16098,70 @@ $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌}
 　&lt;&lt;link &quot;&gt; 改变语言/Comfirm Language&quot; &quot;Start&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;
 &lt;/div&gt;
 &lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="20" name="StoryBanner" tags="" position="1225,225" size="100,100">&lt;img src=&quot;image/banner.png&quot;&gt;</tw-passagedata><tw-passagedata pid="21" name="StorySubtitle" tags="" position="100,350" size="100,100">Elysion World Adventure</tw-passagedata><tw-passagedata pid="22" name="Start" tags="nosave" position="225,350" size="100,100">&lt;&lt;audio &quot;标题&quot; volume 0.5 play loop&gt;&gt;
-&lt;div class=&quot;container&quot;&gt;
-  &lt;div class=&quot;no-support&quot;&gt;
-    &lt;p&gt;Heads up: It doesn&#39;t look like your browser supports &lt;code&gt;backdrop-filter&lt;/code&gt;! Check &lt;a href=&quot;https://caniuse.com/#feat=css-backdrop-filter&quot;&gt;Can I use&lt;/a&gt; for current browser support. Maybe try opening this CodePen in a different browser that supports &lt;code&gt;backdrop-filter&lt;/code&gt;?&lt;/p&gt;
-  &lt;/div&gt;
-  &lt;div class=&quot;boxes&quot;&gt;
-    &lt;p&gt;Scroll → &lt;/p&gt;
-    &lt;div class=&quot;box none&quot;&gt;
-      &lt;h1&gt;backdrop-filter: none&lt;/h1&gt;
-    &lt;/div&gt;
-    &lt;div class=&quot;box grayscale&quot;&gt;
-      &lt;h1&gt;backdrop-filter: grayscale(1)&lt;/h1&gt;
-    &lt;/div&gt;
-    &lt;div class=&quot;box brightness&quot;&gt;
-      &lt;h1&gt;backdrop-filter: brightness(1.5)&lt;/h1&gt;
-    &lt;/div&gt;
-    &lt;div class=&quot;box blur&quot;&gt;
-      &lt;h1&gt;backdrop-filter: blur(5px)&lt;/h1&gt;
-    &lt;/div&gt;
-    &lt;div class=&quot;box contrast&quot;&gt;
-      &lt;h1&gt;backdrop-filter: contrast(.8)&lt;/h1&gt;
-    &lt;/div&gt;
-    &lt;div class=&quot;box invert&quot;&gt;
-      &lt;h1&gt;backdrop-filter: invert(.7)&lt;/h1&gt;
-    &lt;/div&gt;
-    &lt;div class=&quot;box opacity&quot;&gt;
-      &lt;h1&gt;backdrop-filter: opacity(.4)&lt;/h1&gt;
-    &lt;/div&gt;
-    &lt;div class=&quot;box sepia&quot;&gt;
-      &lt;h1&gt;backdrop-filter: sepia(.4)&lt;/h1&gt;
-    &lt;/div&gt;
-    &lt;div class=&quot;box saturate&quot;&gt;
-      &lt;h1&gt;backdrop-filter: saturate(1.8)&lt;/h1&gt;
-    &lt;/div&gt;
-    &lt;div class=&quot;box hue-rotate&quot;&gt;
-      &lt;h1&gt;backdrop-filter: hue-rotate(120deg)&lt;/h1&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
+&lt;div id=&quot;startpage&quot;&gt;
+&lt;span class=&quot;intro&quot;&gt;
+&lt;&lt;lang 
+	&quot;这是一个发生在名叫Elysion的星球的故事。&quot;
+	&quot;This is a story that happen on the planet called Elysion.&quot;
+&gt;&gt;
+&lt;br&gt;
+&lt;&lt;lang
+	&quot;Elysion是一个类似现代——2021年地球的世界，虽然表面上平平无奇，实际上隐藏着各种超自然存在。&quot;
+	&quot;Elysion is a world similar to our modern world 2021. Though it&#39;s seemingly uneventfl, but actually there are variety of supernatural beings hidden in the world.&quot;
+&gt;&gt;
+&lt;br&gt;
+&lt;&lt;lang
+	&quot;例如：超能力、幽灵、兽化人、魔鬼、修仙者等等。&quot;
+	&quot;Such as: the Superpowers, the Ghost, the Bestial human, the Demons, the Immortals, etc.&quot;
+&gt;&gt;
+&lt;br&gt;
+&lt;&lt;lang
+	&quot;你本来是平平无奇的一员，但某天一觉醒来你察觉到有什么不一样了……&quot;
+	&quot;You&#39;re the one of the ordinary, but one day when you wake up then noticed something was different...&quot;
+&gt;&gt;
+&lt;br&gt;
+&lt;&lt;lang
+	&quot;在这个不寻常的世界中，你要管理好自身、培养能力，适应新的世界新的秩序，并在日渐混乱的世界中活下去。&quot;
+	&quot;In this unusual world, you have to manage yourself, develop your abilities, adapt the new world, and survive in an increasingly chaotic world.&quot;
+&gt;&gt;
+&lt;br&gt;
+&lt;&lt;lang 
+	&quot;新的故事即将开始……&quot;
+	&quot;A new story is coming from you...&quot;
+&gt;&gt;
+&lt;br&gt;&lt;/span&gt;
+
+&lt;div class=&quot;delayed&quot;&gt;
+&lt;span style=&quot;line-height:40px;font-size:13px;padding:0px;margin:0px&quot;&gt;　
+&lt;&lt;set _text to Lang(&quot;＞ 开始游戏&quot;,&quot;＞ Game Start&quot;)&gt;&gt;
+&lt;&lt;link [[_text|开始]]&gt;&gt;&lt;&lt;GSApply&gt;&gt;&lt;&lt;set $intro to false&gt;&gt;&lt;&lt;set $charamaking to false&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/span&gt;&lt;br&gt;
+
+&lt;&lt;include &quot;初始设定&quot;&gt;&gt;
+&lt;/div&gt;
+&lt;&lt;link &quot;⇧⇧&quot;&gt;&gt;
+	&lt;&lt;script&gt;&gt;
+		document.body.scrollTop = 0;
+		document.documentElement.scrollTop = 0;
+	&lt;&lt;/script&gt;&gt;
+&lt;&lt;/link&gt;&gt;
+
+&lt;!-- 脚本 --&gt;
+&lt;&lt;script&gt;&gt;
+$(document).on(&#39;:passagerender&#39;, function (ev) {
+	// Find all elements containing the delayed class.
+	var elems = $(ev.content).find(&#39;.delayed&#39;);
+	// Appearance delay (in milliseconds) between each delayed text block.
+	var delay = 1500; // 1 second fade-in
+	if (elems.length &gt; 0) {
+		elems.each(function (i) {
+			$(this)
+				.delay(delay * (i + 1))
+				.fadeTo(delay, 1);
+		});
+	}
+});
+&lt;&lt;/script&gt;&gt;
+
 &lt;/div&gt;</tw-passagedata><tw-passagedata pid="23" name="初始设定" tags="" position="350,350" size="100,100">&lt;&lt;set $UI.activepage to &quot;QuickStart&quot;&gt;&gt;
 
 &lt;div id=&quot;StartingPageMenu&quot;&gt;
