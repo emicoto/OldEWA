@@ -10,7 +10,7 @@ function setV(props,condition,value){
   if (Object.is(V[props], condition)) {
     if (ISOBJ) {
       Object.keys(value).forEach((v)=>{
-        V[v] = value[v]
+        V[props][v] = value[v]
       })
     }
     if (!ISOBJ) {

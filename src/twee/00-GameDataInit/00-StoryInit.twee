@@ -19,14 +19,15 @@
 <<set $Flag to {}>> /* game flag */
 <<set $TFlag to {}>> /* Temp flag */
 <<set $PFlag to {}>> /* Player flag */
-<<set $CFlag to {}>> /* combat flag */
+<<set $BFlag to {}>> /* combat flag */
+<<set $CFlag to {}>> /* chara flag */
+<<set $Source to {}>> /* sources */
+<<set $TCSV to {}>> /* temp character current state variables */
+
 <<if $PC is undefined>><<set $PC to {}>><</if>>
 
 /* event flag事件系统相关变量 */
-<<set $EFlag to {
-	nonext   : true,    end      : false,
-    location : null,    chara    : null,
-}>>
+<<set $EFlag to {}>>
 
 <<set $event to {
     type : "主线", name : "开幕", branch : "初次" , phrase: null,
@@ -43,8 +44,10 @@
 	persons:3, timelimit:true, hardmode:1, 
 	render: "canvas",
 }>>
+
+/* 按钮演出类的切换开关 */
 <<set $UI to {
-	movebutton:false, menubutton:false
+	movebutton:false, menubutton:false, activepage:null, closetmode:"穿", nextbutton:false,
 }>>
 
 <<set $anounce to {flag:false, text:"", type:"弹出通知"}>>
@@ -54,6 +57,10 @@
 <<InitNPCData>>
 <<InitPlayerData>>
 <<setchara "player">>
+<<set $CFlag.pc to $PFlag>>
+<<set $Source.pc to $PC.source>>
+<<set $TCSV.pc to $PC.tcsv>>
+
 
 /* 各种记录 */
 <<set $log to {
@@ -101,3 +108,6 @@
 <<if $saveId is undefined>>
 	<<set $saveId to random(10000, 99999)>>
 <</if>>
+
+/* 镜像目录 */
+<<run setMirrorVariables()>>

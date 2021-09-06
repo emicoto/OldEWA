@@ -6,7 +6,7 @@
             genital: PC.genital,
             genitype: PC.info.race+"阴茎",
             base : PC.base,
-            source: source,
+            source: PC.source,
             key : "PC"
         }
     }else if (args=="pet"){

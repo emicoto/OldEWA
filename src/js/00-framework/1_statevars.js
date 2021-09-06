@@ -60,9 +60,9 @@ Object.defineProperties(window, {
 			return State.variables.PFlag
 		}
 	},
-	CFlag : {
+	BFlag : {
 		get:function(){
-			return State.variables.CFlag
+			return State.variables.BFlag
 		}
 	},	
 	PC : {
@@ -115,21 +115,39 @@ Object.defineProperties(window, {
 			return State.variables.FEquip
 		}
 	},
-	source : {
+	TEquip :{
 		get:function(){
-			return State.variables.source
+			return State.variables.TEquip
 		}
 	},
+	Source : {
+		get:function(){
+			return State.variables.Source
+		}
+	},
+	CFlag : {
+		get:function(){
+			return State.variables.CFlag
+		}
+	},
+	TCSV :{
+		get:function(){
+			return State.variables.TCSV
+		}
+	}
 });
 
-EWA.V = {
-	Flag : Flag,
-	EFlag : EFlag,	TFlag : TFlag,
-	PFlag : PFlag,	CFlag : CFlag,
-	PC : PC,	npc : npc,
-	COM : COM,	UI : ui,
-	conf : conf,
-	closet: closet, items: items,
-	pet : pet, Equip : Equip, FEquip : FEquip,
-	source : source,
+window.setMirrorVariables = function(){
+		
+	EWA.V = {
+		Flag : Flag,
+		EFlag : EFlag,	TFlag : TFlag, BFlag:BFlag,
+		PFlag : PFlag,	CFlag : CFlag,
+		PC : PC,	npc : npc,
+		COM : COM,	UI : ui,
+		conf : conf,
+		closet: closet, items: items,
+		pet : pet, Equip : Equip, FEquip : FEquip, TEquip:TEquip,
+		Source : Source, TCSV : TCSV,
+	}
 }

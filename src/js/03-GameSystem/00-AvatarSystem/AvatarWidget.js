@@ -12,7 +12,7 @@ window.fixStuckAnimations = function() {
 
 /* 属性集算 */
 function setreveal(){
-    const isReveal=w=>V.Equip[w] ?V.Equip[w].reveal :0;
+    const isReveal=w=>Equip[w] ?Equip[w].reveal :0;
     const tops =[isReveal("outter"),isReveal("top"),isReveal("inner_up"),]
     const bottoms=[isReveal("bottom"),isReveal("inner_bt")]
     tops.sort((a,b)=>b-a)
@@ -26,7 +26,7 @@ window.setreveal = setreveal
 F.setreveal = setreveal
 
 function allureBuff() {
-    const isAllure = w => V.Equip[w] ? V.Equip[w].beauty : 0;
+    const isAllure = w => Equip[w] ? Equip[w].beauty : 0;
     const items = ["hat","outter","top","bottom","inner_up","inner_bt","legs","shoes","neck","face","hand","back"]
 
     var a = 0
@@ -43,7 +43,7 @@ window.allureBuff = allureBuff
 F.allureBuff = allureBuff
 
 function defBuff() {
-    const isDef = w => V.Equip[w] ? V.Equip[w].defence : 0;
+    const isDef = w => Equip[w] ? Equip[w].defence : 0;
     const items = ["hat","outter","top","bottom","inner_up","inner_bt","legs","shoes","neck","face","hand","back"]
 
     var a = 0
@@ -58,8 +58,8 @@ window.defBuff = defBuff
 F.defBuff = defBuff
 
 function warmth() {
-    const isHot = w => V.Equip[w] ? V.Equip[w].hot : 0;
-    const isCold = w => V.Equip[w] ? V.Equip[w].cold : 0;
+    const isHot = w => Equip[w] ? Equip[w].hot : 0;
+    const isCold = w => Equip[w] ? Equip[w].cold : 0;
     const items = ["hat","outter","top","bottom","inner_up","inner_bt","legs","shoes","neck","face","hand","back"]
 
     var a = [0,0]
@@ -144,10 +144,10 @@ function BuyOutFit(args) {
     if (args=="select" && PC.money > V.showcase.cost) {
         PC.money = PC.money - V.showcase.cost
         let buystuff = clone(V.showcase)
-        V.closet[layer].push(buystuff)
+        closet[layer].push(buystuff)
 
         /* 如果买了就直接清除掉 */
-        if (V.tryon[layer] && V.tryon[layer].uid==V.Equip[layer].uid && V.tryon[layer].uid == V.showcase.uid){
+        if (V.tryon[layer] && V.tryon[layer].uid==Equip[layer].uid && V.tryon[layer].uid == V.showcase.uid){
         V.tryon[layer] = null;
         }
 
@@ -162,14 +162,14 @@ function BuyOutFit(args) {
             if (V.tryon[group[i]] && V.TEquip[group[i]]){
                 let leftstuff = clone(V.TEquip[group[i]])
                 let layer = leftstuff.layer
-                V.closet[layer].push(leftstuff)
+                closet[layer].push(leftstuff)
             }
         }
         
         text = "你花费了"+tryoncost()+"元购买了身上试穿的衣服。"
         
         V.tryon = {neck: null, hand: null, face: null,hat: null, outter: null, top: null,bottom: null,inner_up: null, inner_bt: null,shoes: null, legs: null,}
-        V.TEquip = clone(V.Equip)
+        V.TEquip = clone(Equip)
 
         
     }
@@ -199,12 +199,12 @@ window.tryoncheck = tryoncheck
 
 /* 衣柜处理 */
 function strip(arg) {
-    if (V.Equip[arg]) {
+    if (Equip[arg]) {
 
-        var text = "你脱下了"+V.Equip[arg].name;
+        var text = "你脱下了"+Equip[arg].name;
 
-        V.closet[arg].push(V.Equip[arg])
-        V.Equip[arg] = null
+        closet[arg].push(Equip[arg])
+        Equip[arg] = null
     }else{
         var text = "你打算脱下"+A.categoryname[arg]+"，但是你身上并没有穿任何"+A.categoryname[arg]+"。";
     }
@@ -231,60 +231,88 @@ function strip(arg) {
 window.strip = strip
 F.strip = strip
 
+window.closetAct = function(args,arg) {
+    if (UI.closetmode == "穿"){
+        dressOn(args,arg)
+    }
+    if (UI.closetmode == "扔"){
+        discardDress(args,arg)
+    }
+}
+
+function discardDress(args,arg){
+    let text = "你把"+closet[args][arg].name+"扔掉了。";
+    closet[args].deleteAt(arg)
+
+    const group = ["face","neck","hand","back"]
+    let id = args
+    
+    if(group.includes(arg)){
+        new Wikifier(null,"<<replace '#accesory'>><<showcloset 'face'>><<showcloset 'neck'>><<showcloset 'hand'>><<showcloset 'back'>><</replace>>")
+    }
+    else{
+     new Wikifier(null,"<<replace '#"+id+"'>><<showcloset '"+id+"'>><</replace>>")   
+    }
+
+    new Wikifier(null,"<<replace '#action-text'>>"+text+"<</replace>>")
+    new Wikifier(null,"<<replace '#action-text2'>>"+text+"<</replace>>")
+    ShowPopUP()
+}
+F.discardDress = discardDress
 
 function dressOn(args, arg) {
 
-    var text = "你穿上了"+V.closet[args][arg].name+"。";
+    var text = "你穿上了"+closet[args][arg].name+"。";
 
     /* 身上没有衣服，直接穿上 */
-    if ( V.Equip[args] == null){
-     V.Equip[args] = V.closet[args][arg]
-     V.closet[args].deleteAt(arg)
+    if ( Equip[args] == null){
+     Equip[args] = closet[args][arg]
+     closet[args].deleteAt(arg)
 
-    }else if(V.Equip[args].index.length > 0){
-        let obj = clone(V.Equip[args])
-        V.Equip[args] = V.closet[args][arg]
-        V.closet[args].deleteAt(arg)
-        V.closet[args].push(obj)
+    }else if(Equip[args].index.length > 0){
+        let obj = clone(Equip[args])
+        Equip[args] = closet[args][arg]
+        closet[args].deleteAt(arg)
+        closet[args].push(obj)
     }
 
-    if(args == "top"  && V.Equip.bottom && V.Equip.top.slot == "onepiece"){
-        let obj = clone(V.Equip.bottom)
-        V.closet.bottom.push(obj)
-        V.Equip.bottom = null
+    if(args == "top"  && Equip.bottom && Equip.top.slot == "onepiece"){
+        let obj = clone(Equip.bottom)
+        closet.bottom.push(obj)
+        Equip.bottom = null
         
-    }else if (args == "bottom" && V.Equip.top && V.Equip.top.slot == "onepiece"){
-        let obj = clone(V.Equip.top)
-        V.closet.top.push(obj)
-        V.Equip.top = null
+    }else if (args == "bottom" && Equip.top && Equip.top.slot == "onepiece"){
+        let obj = clone(Equip.top)
+        closet.top.push(obj)
+        Equip.top = null
 
-    }else if (args == "inner_up" && V.Equip.inner_bt && V.Equip.inner_up.slot == "onepiece"){
-        let obj = clone(V.Equip.inner_bt)
-        V.closet.inner_bt.push(obj)
-        V.Equip.inner_bt = null
+    }else if (args == "inner_up" && Equip.inner_bt && Equip.inner_up.slot == "onepiece"){
+        let obj = clone(Equip.inner_bt)
+        closet.inner_bt.push(obj)
+        Equip.inner_bt = null
 
-    }else if (args == "inner_up" && V.Equip.inner_up.slot == "fullbody"){
+    }else if (args == "inner_up" && Equip.inner_up.slot == "fullbody"){
 
-        if(V.Equip.inner_bt){
-            let obj = clone(V.Equip.inner_bt)
-            V.closet.inner_bt.push(obj)
-            V.Equip.inner_bt = null }
+        if(Equip.inner_bt){
+            let obj = clone(Equip.inner_bt)
+            closet.inner_bt.push(obj)
+            Equip.inner_bt = null }
 
-        if(V.Equip.top){
-            let obj = clone(V.Equip.top)
-            V.closet.top.push(obj)
-            V.Equip.top = null
+        if(Equip.top){
+            let obj = clone(Equip.top)
+            closet.top.push(obj)
+            Equip.top = null
         }
         
-        if(V.Equip.bottom){
-            let obj = clone(V.Equip.bottom)
-            V.closet.bottom.push(obj)
-            V.Equip.bottom = null
+        if(Equip.bottom){
+            let obj = clone(Equip.bottom)
+            closet.bottom.push(obj)
+            Equip.bottom = null
         }
     }
 
-    if(V.Equip[args].functional){
-        V.Equip[args].effect()
+    if(Equip[args].functional){
+        Equip[args].effect()
     }
 
     const group = ["face","neck","hand","back"]
@@ -310,8 +338,8 @@ F.dressOn = dressOn
 
 function gonaked(mode){
 
-    if((V.Equip.top && mode=="debug") || mode!="debug"){
-        V.TEquip = clone(V.Equip)
+    if((Equip.top && mode=="debug") || mode!="debug"){
+        V.TEquip = clone(Equip)
     }
 
     const group=["hat","outter","top","bottom","inner_up","inner_bt","legs","shoes","face","neck","hand","back"]
@@ -325,19 +353,19 @@ function gonaked(mode){
     else if(mode=="H" || !mode){
         let layer = ["outter","top","bottom","inner_up","inner_bt","shoes","legs"]
         for(let i=0; i<layer.length;i++){
-            V.Equip[group[i]] = null
+            Equip[group[i]] = null
         }
     }
     else if (mode=="debug"){
         for(let i=0; i<group.length; i++){
-            V.Equip[group[i]] = null
+            Equip[group[i]] = null
         }
     }
 
     FixValue()
     stAvatar()
 
-    if(V.coredebug==true)console.log(V.Equip,V.TEquip);
+    if(V.coredebug==true)console.log(Equip,V.TEquip);
     return ""
 }
 
@@ -348,14 +376,14 @@ function redress(mode){
 
     if(mode=="closet"){
 
-        Object.entries(V.closet).forEach(([index,value])=>{
+        Object.entries(closet).forEach(([index,value])=>{
         if (V.TEquip[index] && (value.length > 0)) Object.entries(value).forEach(([___, arr], i) => {
             if (arr.uid === V.TEquip[index].uid)  dressOn(index, i);
         });
         })
     }
 
-    V.Equip = clone(V.TEquip)
+    Equip = clone(V.TEquip)
     FixValue()
     stAvatar()
     
@@ -367,3 +395,13 @@ function redress(mode){
 }
 F.redress = redress
 DefineMacroS("redress",redress)
+
+function getClosetSlot(args){
+    if(args == "tryon"){
+        //遍历试穿部位的衣柜空位
+    }else{
+        //返回showcase.layer位置的衣柜空位
+        let layer = V.showcase.layer
+        return (closet.slot.level*closet.slot[layer]) - closet[layer].length
+    }
+}

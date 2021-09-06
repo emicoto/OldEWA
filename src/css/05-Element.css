@@ -186,10 +186,12 @@
     top: 39px;
     left: 25px;
     overflow-y: scroll;
-    background-color: rgb(245, 245, 245);
+    background-color: rgba(255, 255, 255, 0.5);
     position: absolute;
     padding-left: 5px;
-    border: 1px solid #ccc;
+    border: 1px solid #eee;
+    -webkit-backdrop-filter: drop-shadow(0px 0px 5px rgba(163, 153, 153, 0.2)) blur(5px);
+    backdrop-filter: drop-shadow(0px 0px 5px rgba(163, 153, 153, 0.2)) blur(5px); 
 }
 
 #links a {

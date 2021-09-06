@@ -158,9 +158,9 @@
             text:"一对设计简单的乳环。毕竟是便宜货，戴久了可能会有不适。",
 
             effect(min){
-                V.source.快B += 0.5*min;
-                V.source.疼痛 += 2*min;
-                return [V.FEquip.nipple,V.source.快B,V.source.疼痛]
+                Source.pc.快B += 0.5*min;
+                Source.pc.疼痛 += 2*min;
+                return [V.FEquip.nipple,Source.pc.快B,Source.pc.疼痛]
             },
         },
         乳环项链:{
@@ -172,9 +172,9 @@
             text:"色气的乳环项链。毕竟是便宜货，戴久了可能会有不适。",
 
             effect(min){
-                V.source.快B += 0.5*min;
-                V.source.疼痛 += 2*min;
-                return [V.FEquip.nipple,V.source.快B,V.source.疼痛]
+                Source.pc.快B += 0.5*min;
+                Source.pc.疼痛 += 2*min;
+                return [V.FEquip.nipple,Source.快B,Source.pc.疼痛]
             },
         },
         乳头跳蛋:{},

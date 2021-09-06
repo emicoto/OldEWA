@@ -1,6 +1,8 @@
 ﻿:: 衣柜
 <div id="action-text2"><<you>>打开了衣柜。</div>
-
+<div id="action-mode" class="graytext">
+动作： <label><<radiobutton "$UI.closetmode" "穿" autocheck>> <<lang "穿" "wear">></label> <label><<radiobutton "$UI.closetmode" "扔" autocheck>> <<lang "扔" "wear">></label>
+</div>
 <div id="ClosetList">
   <ul>
     <li class="category"><a href="#hat">头饰</a></li>
@@ -108,7 +110,8 @@
         <<set _code to $closet[_catgr][_i].color>>
         <<set _name to $closet[_catgr][_i].colorname>>
         <div id="W_showitems">
-            <div class="itemthumb"><<print "<<link [img[_img]]>><<run dressOn('"+_catgr+"',"+_i+")>><<fixvalue>><</link>>">></div>
+            <div class="itemthumb">
+            <<print "<<link [img[_img]]>><<run closetAct('"+_catgr+"',"+_i+")>><<fixvalue>><</link>>">></div>
             <div class="W_color" @style="'background-color:'+_code"><<print _name>></div>
             <<if $closet[_catgr][_i].acc isnot null>>
                 <div class="W_pattern"><<print $closet[_catgr][_i].acc>></div>

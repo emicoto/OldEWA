@@ -10,7 +10,7 @@
 </div>
 
 /* 出口区 */
-<<if $Eflag.nonext is false>>
+<<if $UI.nextbutton is true>>
 <div id="next" class="nextbutton">
 <<nextbutton>>
 </div>
@@ -29,7 +29,7 @@
     <<include _passagename>>
 <<else>>
  /* 都失败时显示代替事件或者返回标题画面 */
- <<set $Eflag.nonext to false>>
+ <<set $UI.nextbutton to true>>
  <<set $eventexit to "Start">>
  <<set $eventend to true>>
  <<print "所制定的事件关键词组合失败:"+$event.passage>>
@@ -47,7 +47,7 @@
     <<include _passagename>>
 <<else>>
  /* 都失败时显示NEXT按钮 */
- <<set $Eflag.nonext to false>>
+ <<set $UI.nextbutton to true>>
 
 <</if>>
 
@@ -98,7 +98,7 @@
 <<playlist "mainloop" shuffle play>>
 <<set $eventend to true>>
 <<set $eventexit to "你的家 单身公寓">>
-<<set $Eflag.nonext to false>>
+<<set $UI.nextbutton to true>>
 <<set $temp to {}>>
 <<set $eventnext to 0>>
 <<set $event to {}>>

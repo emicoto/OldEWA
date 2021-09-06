@@ -2,10 +2,10 @@
 
     if(A.facelist.includes(args)==true){
         V.PFace = A.emote[args]
-        V.Equip.emote = args
+        Equip.emote = args
     }else{
         V.PFace = A.emote.正常
-        V.Equip.emote = args
+        Equip.emote = args
     }
 
    if (!key){
@@ -110,7 +110,7 @@ function isFurry(){
 }
 
 function isCaged(){
-    if(V.Equip.inner_bt && V.Equip.inner_bt.index =="chastitycage") return "_d";
+    if(Equip.inner_bt && Equip.inner_bt.index =="chastitycage") return "_d";
     else return ""
 }
 
@@ -131,20 +131,20 @@ function stAvatar() {
     for(let i=0;i<layers.length;i++){
         let n = layers[i]
 
-        if(V.Equip[n] != null && V.Equip[n].hasImg==true){
+        if(Equip[n] != null && Equip[n].hasImg==true){
             V.avatar[n] = setAvatar(n,{
-                fixcolor: V.Equip[n].fixcolor, color: V.Equip[n].color,
-                src: setAPath(V.Equip[n]), acc: ( V.Equip[n].acc !=null ? V.Equip[n].index + "/"+ V.Equip[n].acc : null),
-                fixacc : V.Equip[n].fixacc, subcolor: V.Equip[n].subcolor,
+                fixcolor: Equip[n].fixcolor, color: Equip[n].color,
+                src: setAPath(Equip[n]), acc: ( Equip[n].acc !=null ? Equip[n].index + "/"+ Equip[n].acc : null),
+                fixacc : Equip[n].fixacc, subcolor: Equip[n].subcolor,
             })
             
-            if( n=="top" && V.Equip.top.tuckinable==true){
-                V.avatar.top.tuckin = V.Equip.top.tuckin
-                Avatar.options.top.tuckin = V.Equip.top.tuckin
-                Avatar.setAvatar("top.tuckin",V.Equip.top.tuckin,true);
+            if( n=="top" && Equip.top.tuckinable==true){
+                V.avatar.top.tuckin = Equip.top.tuckin
+                Avatar.options.top.tuckin = Equip.top.tuckin
+                Avatar.setAvatar("top.tuckin",Equip.top.tuckin,true);
             }    
         }
-        else if(V.Equip[n] != null && V.Equip[n].hasImg==false){
+        else if(Equip[n] != null && Equip[n].hasImg==false){
             if(n=="bottom"){
                 V.avatar[n] = setAvatar(n,{
                     fixcolor: false, color:"#445687", src:"shortpant/basic", acc:null
@@ -155,14 +155,14 @@ function stAvatar() {
                     fixcolor: false, color:"#FFFFFF", src:"boxer/basic", acc:null
                 })
             }
-            else if(n=="top" && V.Equip[n].slot != "onepiece"){
+            else if(n=="top" && Equip[n].slot != "onepiece"){
                 V.avatar[n] = setAvatar(n,{
-                    fixcolor: false, color:"#FFFFFF", src:`Tshirt/basic${breastDif(V.Equip[n])}${PregDif(V.Equip[n])}`, acc:null
+                    fixcolor: false, color:"#FFFFFF", src:`Tshirt/basic${breastDif(Equip[n])}${PregDif(Equip[n])}`, acc:null
                 })
             }
-            else if(n=="top"&& V.Equip[n].slot == "onepiece"){
+            else if(n=="top"&& Equip[n].slot == "onepiece"){
                 V.avatar[n] = setAvatar(n,{
-                    fixcolor: true, color:"white", src:`bwopiece/white${breastDif(V.Equip[n])}${PregDif(V.Equip[n])}`, acc:null
+                    fixcolor: true, color:"white", src:`bwopiece/white${breastDif(Equip[n])}${PregDif(Equip[n])}`, acc:null
                 })
             }
             else{
@@ -175,8 +175,8 @@ function stAvatar() {
     }
 
     /*头发部分*/
-    const hairfront = A.hairfront[V.Equip.hairfront]
-    const hairback = A.hairback[V.Equip.hairback]
+    const hairfront = A.hairfront[Equip.hairfront]
+    const hairback = A.hairback[Equip.hairback]
     const haircolor = A.haircolor[PC.info.haircolor]
     const fixhair = function(obj){
         if (typeof(obj)=="object" && obj){
@@ -190,12 +190,12 @@ function stAvatar() {
 
     V.avatar.hairfront = setAvatar("hairfront",{
         fixcolor: hairfront.fixcolor, color: (hairfront.fixcolor==true? null : haircolor),
-        src: V.Equip.hairfront + "/" + fixhair(hairfront) + hasLength(hairfront,PC.info.hairlenf),
+        src: Equip.hairfront + "/" + fixhair(hairfront) + hasLength(hairfront,PC.info.hairlenf),
     })
 
     V.avatar.hairback = setAvatar("hairback",{
         fixcolor: hairback.fixcolor, color: (hairback.fixcolor==true? null : haircolor),
-        src: V.Equip.hairback + "/" + fixhair(hairback) + hasLength(hairback,PC.info.hairlen),
+        src: Equip.hairback + "/" + fixhair(hairback) + hasLength(hairback,PC.info.hairlen),
     })
 
 
@@ -258,14 +258,14 @@ function stAvatar() {
 
 
     /*乳头、小丁丁等特殊装备 */
-    V.avatar.penis = setAvatar("penis",(V.Equip.penis ? V.Equip.penis.png : null),true)
-    V.avatar.nipple = setAvatar("nipple",(V.Equip.nipple ? V.Equip.nipple.png+breastDif(V.Equip.nipple) : null),true)
+    V.avatar.penis = setAvatar("penis",(Equip.penis ? Equip.penis.png : null),true)
+    V.avatar.nipple = setAvatar("nipple",(Equip.nipple ? Equip.nipple.png+breastDif(Equip.nipple) : null),true)
     
-    if (V.Equip.vagina || V.Equip.anal){
+    if (Equip.vagina || Equip.anal){
         let img
 
-        if(V.Equip.vagina.png) img = V.Equip.vagina.png;
-        else if(V.Equip.anal.png) img = V.Equip.anal.png;
+        if(Equip.vagina.png) img = Equip.vagina.png;
+        else if(Equip.anal.png) img = Equip.anal.png;
         else img = null;
 
         V.avatar.plus = setAvatar("plus",img,true)
@@ -300,7 +300,7 @@ function stAvatar() {
     }
 
     /* 设置表情 */
-    if (Flag.charamaking == true) SetFace(V.Equip.emote,1)
+    if (Flag.charamaking == true) SetFace(Equip.emote,1)
 
     const eyegroup = ["full","blink2","lookup3"]
     const type = [null,"a","b","c"]

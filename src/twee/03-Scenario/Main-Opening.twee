@@ -1,6 +1,6 @@
 ﻿:: 主线 开幕：EventFirst
 <<set $count to 0>>
-<<set $Eflag.nonext to true>>
+<<set $UI.nextbutton to false>>
 <<set $eventnext to 0>>
 <<bookmark "主线开幕_初次">>
 

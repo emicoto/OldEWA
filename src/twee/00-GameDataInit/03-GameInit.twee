@@ -89,6 +89,11 @@
 
     hat : [],    face : [],    neck : [],
     hand : [],    back : [],
+    slot:{
+        level:1,
+        outter:5, top:10, bottom:10, inner_up: 10, inner_bt: 10,
+        shoes:10, legs:10, hat:5, face:5, neck:5, hand:5, back:5,
+    }
 }>>
 
 <<set $closet.top[0] to clone(A.top[4])>>
@@ -115,7 +120,7 @@
 
 /* 战斗相关 */
 <<set $Enemy to [null,null,null,null,null]>>
-<<set $CFlag to {
+<<set $BFlag to {
     turns: 0, /*current*/ actor: "pc", target: "enemy", action: "attack",
     waitlist:[
         {actor:"pc", target:"enemy", action:"item", com:0, id:0,  /* com是使用的技能id， id是使用的道具id */},
