@@ -169,8 +169,7 @@ function BuyOutFit(args) {
         text = "你花费了"+tryoncost()+"元购买了身上试穿的衣服。"
         
         V.tryon = {neck: null, hand: null, face: null,hat: null, outter: null, top: null,bottom: null,inner_up: null, inner_bt: null,shoes: null, legs: null,}
-        V.TEquip = clone(Equip)
-
+        V.TEquip = clone(V.Equip)
         
     }
     else{
@@ -270,7 +269,7 @@ function dressOn(args, arg) {
      closet[args].deleteAt(arg)
 
     }else if(Equip[args].index.length > 0){
-        let obj = clone(Equip[args])
+        let obj = clone(V.Equip[args])
         Equip[args] = closet[args][arg]
         closet[args].deleteAt(arg)
         closet[args].push(obj)
@@ -339,7 +338,7 @@ F.dressOn = dressOn
 function gonaked(mode){
 
     if((Equip.top && mode=="debug") || mode!="debug"){
-        V.TEquip = clone(Equip)
+        V.TEquip = clone(V.Equip)
     }
 
     const group=["hat","outter","top","bottom","inner_up","inner_bt","legs","shoes","face","neck","hand","back"]

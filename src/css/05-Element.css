@@ -159,11 +159,11 @@
     height: 30px;
     background-color: #fff;
     border-radius: 25px 0% 0% 25px;
+    transition: all 0.75s ease-in-out; 
 }
 
 #navi:hover {
     right: -2px;
-    transition: all 0.75s;
 }
 
 .navi_unable {
@@ -172,6 +172,7 @@
 
 .navi_active {
     right: -2px;
+
 }
 
 #movebutton {

@@ -10,13 +10,13 @@
     <<changeinfo>>
 </span>
 <<dashline>>
-<li> 一张自拍照 </li>
+<li class="textborder"> 一张自拍照 </li>
 <div class="photoinfo">
 <p style="font-size:13px;color:olive;margin:0px;">照片中的<<you>>有着一头<<hair>>，<<eye>>，<<skin>>，<<beauty>>。<<lookbody>>，单薄的衬衫下是<<breast>>，从衣服轮廓线中可看出<<lookhips>>。<<looktatoos>></p>
 <p style="font-size:11px;color:gray;text-align:right;margin:3px;">照片下面，一共有 <span style="color:deeppink"><<print _like>></span> 个赞。</p>
 </div>
 <<dashline>>
-<li> 现在状态 </li>
+<li class="textborder"> 现在状态 </li>
 <div id="statusdisplay">
    <<showbasebar "饮食" "#FFA327">>　<<showbasebar "健康" "#BBFA5F">>　<<showbasebar "体力" "#FEDF45">><br>
    <<showbasebar "理智" "#A7C2FF">>　<<showbasebar "魔力" "#C2A5FF">>　<<showbasebar "欲望" "#FF7377">><br>
@@ -25,7 +25,7 @@
 </div>
 
 <<dashline>>
-<li> 学生档案 </li>
+<li class="textborder"> 学生档案 </li>
 <div id="skilldata">
 <<showskilldata "school" "文学">>　<<showskilldata "school" "数学">>　<<showskilldata "school" "物理">>　<<showskilldata "school" "生理">>
 <br><br>
@@ -34,7 +34,7 @@
 </div>
 
 <<dashline>>
-<li> 能力档案 </li>
+<li class="textborder"> 能力档案 </li>
 <div id="rpgstatus">
 · 等级：<<print $PC.level>>　《<<print $PC.info.race>>》<br>
 · HP　<<print $PC.rpg.HP[0]>> / <<print $PC.rpg.HP[1]>>　　· MP　<<print $PC.rpg.MP[0]>> / <<print $PC.rpg.MP[1]>> 　　· SP　<<print $PC.rpg.SP[0]>> / <<print $PC.rpg.SP[1]>><br>
@@ -43,7 +43,7 @@
 </div>
 
 <<dashline>>
-<li> 技能档案 </li>
+<li class="textborder"> 技能档案 </li>
 <div id="skilldata">
 <<showskilldata "abl" "异能">>　<<showskilldata "abl" "奥术">>　<<showskilldata "abl" "战技">>　<<showskilldata "abl" "健身">>
 <br><br>
@@ -52,7 +52,7 @@
 </div>
 
 <<dashline>>
-<li> 宠物资料 </li>
+<li class="textborder"> 宠物资料 </li>
 <div id="rpgstatus">
 · 名字：<<print $pet.name>>　　 品种：<<print $pet.type>>　　 等级：<<print $pet.level>><br>
 · HP　<<print $pet.HP[0]>> / <<print $pet.HP[1]>>　　· MP　<<print $pet.MP[0]>> / <<print $pet.MP[1]>> 　　· SP　<<print $pet.SP[0]>> / <<print $pet.SP[1]>><br>

@@ -10,13 +10,17 @@
 <div id="append-text" class="append-normal"></div>
 <div id="situation" class="situation"><<=F.getsituation("单身公寓")>></div>
 
-<<link "弹出窗口测试">>
-<<run Dialog.setup("Character Sheet");Dialog.wiki(Story.get("城市生活_1").processText());Dialog.open();>>
-<</link>>
+
 
 <br>
 <div class="tolink">
+<<link "弹出窗口测试">>
+<<run Dialog.setup("Character Sheet");Dialog.wiki(Story.get("城市生活_1").processText());Dialog.open();>>
+<</link>>
+<br><br>
+
 <<link "打开衣柜　 1m" "衣柜">><<passtime 1>><<set $TEquip to clone($Equip)>><</link>><br>
+
 <br>
 <<link "健身　　 　30m" $passage>><<passtime 30>><</link>>　　<<link "打游戏 　　30m" $passage>><<passtime 30>><</link>><br>
 <<link "洗澡　 　　30m" $passage>><<passtime 30>><</link>>　　<<link "和宠物玩耍 60m" $passage>><<passtime 60>><</link>><br>

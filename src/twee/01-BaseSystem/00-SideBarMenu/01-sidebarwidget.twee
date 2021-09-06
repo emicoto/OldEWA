@@ -89,7 +89,7 @@
 <</widget>>
 
 <<widget "showmenu">>
-    <div id="menu_container" class="menu_hide" onclick="menubutton()">
+    <div id="menu_container" class="glassbutton menu_hide" onclick="menubutton()">
     <div class="menu">MENU</div>
     <<if $intro is false>>
     <div class="bottonarea">

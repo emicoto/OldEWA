@@ -151,3 +151,5 @@ window.setMirrorVariables = function(){
 		Source : Source, TCSV : TCSV,
 	}
 }
+
+/* 备注：不能直接 TEquip = Equip这样，会出错！ */

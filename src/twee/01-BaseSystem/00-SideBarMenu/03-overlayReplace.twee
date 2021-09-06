@@ -58,7 +58,7 @@
 <</widget>>
 
 <<widget "OverlayTitle">>
-<div id="overlaytitle"> 
+<div id="overlaytitle" class="glassbutton"> 
 
 	<div id="closebutton">
 	<<button X>>
@@ -89,7 +89,7 @@
 	<</if>>
 
 <div id="handle" class="handle">
-<<if $args[0]>><li><<link $args[0]>><<addclass "#customOverlay" "hidden">><<set $currentOverlay to null>><</link>></li><<else>><</if>>
+<<if $args[0]>><li class="textborder"><<link $args[0]>><<addclass "#customOverlay" "hidden">><<set $currentOverlay to null>><</link>></li><<else>><</if>>
 </div>
 <<dashline>>
 

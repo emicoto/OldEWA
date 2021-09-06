@@ -412,9 +412,6 @@ body {
     /* Used to center the box */
     text-align: left;
     color: #707556;
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
     width: 100%;
     height: 100%;
 }
@@ -575,7 +572,7 @@ input[type=range]:focus::-webkit-slider-runnable-track {
 *::-webkit-scrollbar{
 	background-color: #eee;
 	width: 3px;
-    height: 3px;
+  height: 3px;
 }
 /* twine-user-stylesheet #3: "01-General.css" */
 /* Links */
@@ -598,7 +595,7 @@ span.link-disabled {
   
 button {
 	color: #111;
-  font-family: "Times New Roman", 新综艺;
+  font-family: 新综艺;
 }
 
 li {
@@ -606,6 +603,7 @@ li {
 }
 
 input, select, textarea {
+    background-color: rgba(255, 255, 255, 0.5);
     color: #111;
     border-color: #ccc;
     max-width:200px;
@@ -616,6 +614,7 @@ input:not(:disabled):focus, select:not(:disabled):focus, textarea:not(:disabled)
 input:not(:disabled):hover, select:not(:disabled):hover, textarea:not(:disabled):hover {
     background-color: white;
     border-color: rgb(88, 94, 43);
+    transition: all 0.6s;
 }
 
 input[type="text"] {
@@ -639,7 +638,6 @@ input[type="text"]:hover {
   height:1px;
   border-bottom: 1px rgba(71, 67, 49, 0.2) dashed;
   position: relative;
-  display: inline-block;
 }
 
 .splitline {
@@ -647,7 +645,6 @@ input[type="text"]:hover {
   width: 1px;
   border-right: 1px rgba(71, 67, 49, 0.2) dashed;
   position: relative;
-  display: inline-block;
 }
 
 .metername { 
@@ -907,7 +904,7 @@ background-color: white;
 }
 
 @media screen and (max-width:1200px){
-  #action-popup{right:4%}
+  #action-popup{right:5%}
 }
 
 @media screen and (max-width:960px){
@@ -923,8 +920,8 @@ background-color: white;
 }
 
 #action-text2 {
-display: table;
-background-color: #eee;
+  display: table;
+  background-color: #eee;
   border-radius: 3px;
   transition: all 1.25s;
 }
@@ -1192,7 +1189,7 @@ body #story-caption #storyCaptionDiv {
     position: fixed;
     border-radius: 0px 100px 100px 0px;
     bottom:5%;
-    transition: all 1s;
+    transition: all 0.75s ease-in-out;
     overflow: hidden;
     display: inline-block;
     -webkit-backdrop-filter: blur(2px);
@@ -1297,11 +1294,7 @@ body #story-caption #storyCaptionDiv {
   font-size: 14px;
   font-family: 新综艺;
   letter-spacing: 1px;
-  background: transparent;
-  transition: all 0.3s ease;
   position: relative;
-  box-shadow:inset 2px 2px 1px 0px rgba(255,255,255,.5), 1px 1px 2px 0px rgba(0,0,0,.1);
-  outline: none;
 }
 
 #menu_container button:hover, #menu_container button:focus{
@@ -1540,8 +1533,11 @@ body #story-caption #storyCaptionDiv {
     width: fit-content;
     min-width: 24px;
     height: 24px;
-    border: 1px #ccc solid;
-    letter-spacing: 1px;
+    background: transparent;
+}
+
+#overlaytitle button:hover, #overlaytitle button:focus{
+    background-color:rgba(255, 255, 255, 0.25);
 }
 
 #customOverlay {
@@ -1552,21 +1548,11 @@ body #story-caption #storyCaptionDiv {
     width: fit-content;
     font-size: 12px;
     height: 24px;
-    border-radius: 3px;
-    transition: all 0.3s;    
     padding-bottom: 2px;
-    border: #eee 1px;
-    background-color: rgba(255, 255, 255, 0.3);
-    color:rgb(31, 31, 48);
-    box-shadow:inset 2px 2px 1px 0px rgba(255,255,255,.5), 1px 1px 2px 0px rgba(0,0,0,.1);
-    outline: none;
-  }
+}
   
 #customOverlay button:hover {
     background-color: rgba(255, 255, 255, 0.5);
-    color:rgb(184, 168, 23);
-    border: #eee 1px;
-    box-shadow:inset 2px 2px 1px 0px rgba(73, 50, 0, 0.1), 1px 1px 2px 0px rgba(255, 248, 186, 0.2);
 }
 
 #customOverlayContent {
@@ -1584,7 +1570,7 @@ body #story-caption #storyCaptionDiv {
 }
 
 #profile {
-    margin-left: 10px;
+    padding:0px 10px;
     font-size: 14px;
     float: left;
 }
@@ -1612,6 +1598,7 @@ body #story-caption #storyCaptionDiv {
 }
 
 #profile .dashline {
+    margin-left: -5px;
     margin-top: 5px;
     margin-bottom: 8px;
     border-bottom: 1px solid rgba(56, 54, 49, 0.1);
@@ -1659,7 +1646,7 @@ body #story-caption #storyCaptionDiv {
     align-items: center;
 }
 
-#skilldata .classdata {
+.classdata {
     float:left;
     width: 100px;
     height: 30px;
@@ -1670,8 +1657,8 @@ body #story-caption #storyCaptionDiv {
     z-index: 0;
 }
 
-#skilldata .classdata:hover{
-    background-color: rgba(245, 245, 245);
+.classdata:hover{
+    background-color: rgba(245, 245, 245, 0.75);
 }
 
 #skilldata .metercon {
@@ -1911,11 +1898,11 @@ body #story-caption #storyCaptionDiv {
     height: 30px;
     background-color: #fff;
     border-radius: 25px 0% 0% 25px;
+    transition: all 0.75s ease-in-out; 
 }
 
 #navi:hover {
     right: -2px;
-    transition: all 0.75s;
 }
 
 .navi_unable {
@@ -1924,6 +1911,7 @@ body #story-caption #storyCaptionDiv {
 
 .navi_active {
     right: -2px;
+
 }
 
 #movebutton {
@@ -1991,7 +1979,7 @@ body #story-caption #storyCaptionDiv {
     margin:2px;
     margin-left:10px;
 }
-/* twine-user-stylesheet #8: "06-Effect.css" */
+/* twine-user-stylesheet #8: "06-EffectAnimetion.css" */
 
 .delayed {
     opacity: 0;
@@ -2521,24 +2509,24 @@ body #story-caption #storyCaptionDiv {
 
 /*These classes are added to each letter/span using JS so they animate*/
 .weffect1{
-	animation: zoom 6s linear infinite;
-	-webkit-animation: zoom 6s linear infinite;
+	animation: mix 6s linear infinite;
+	-webkit-animation: mix 6s linear infinite;
 }
 .weffect2{
 	animation: mix 5s linear infinite;
 	-webkit-animation: mix 5s linear infinite;
 }
 .weffect3{
-	animation: mix2 3s linear infinite;
-	-webkit-animation: mix2 3s linear infinite;	
+	animation: mix 3s linear infinite;
+	-webkit-animation: mix 3s linear infinite;	
 }
 .weffect4{
-	animation: rot 5s linear infinite;
-	-webkit-animation: rot 5s linear infinite;
+	animation: mix 5s linear infinite;
+	-webkit-animation: mix 5s linear infinite;
 }
 .weffect5{
-	animation: fade2 4s linear infinite;
-	-webkit-animation: fade2 4s linear infinite;
+	animation: mix 4s linear infinite;
+	-webkit-animation: mix 4s linear infinite;
 }
 
 
@@ -3659,7 +3647,104 @@ html[data-debug-view] .debug.hidden .debug {
     background-color: #ddd;
     border-color: #111;
 }
-/* twine-user-stylesheet #14: "Error.css" */
+/* twine-user-stylesheet #14: "ElementEffect.css" */
+.none {
+  -webkit-backdrop-filter: none;
+          backdrop-filter: none;
+}
+
+.grayscale {
+  -webkit-backdrop-filter: grayscale(1);
+          backdrop-filter: grayscale(1);
+}
+
+.brightness {
+  -webkit-backdrop-filter: brightness(1.5);
+          backdrop-filter: brightness(1.5);
+}
+
+.blur {
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
+}
+
+.contrast {
+  -webkit-backdrop-filter: contrast(1.2);
+          backdrop-filter: contrast(1.2);
+}
+
+.drop-shadow {
+  -webkit-backdrop-filter: drop-shadow(0px 0px 5px rgba(163, 153, 153, 0.2));
+          backdrop-filter: drop-shadow(0px 0px 5px rgba(163, 153, 153, 0.2));
+}
+
+.drop-shadow-overlay {
+  -webkit-backdrop-filter: drop-shadow(0px 0px 5px rgba(142, 238, 255, 0.1));
+          backdrop-filter: drop-shadow(0px 0px 5px rgba(142, 238, 255, 0.1));
+}
+
+.invert {
+  -webkit-backdrop-filter: invert(0.7);
+          backdrop-filter: invert(0.7);
+}
+
+.opacity {
+  -webkit-backdrop-filter: opacity(0.4);
+          backdrop-filter: opacity(0.4);
+}
+
+.sepia {
+  -webkit-backdrop-filter: sepia(0.4);
+          backdrop-filter: sepia(0.4);
+}
+
+.saturate {
+  -webkit-backdrop-filter: saturate(1.8);
+          backdrop-filter: saturate(1.8);
+}
+
+.hue-rotate {
+  -webkit-backdrop-filter: hue-rotate(120deg);
+          backdrop-filter: hue-rotate(120deg);
+}
+
+.roundbutton button{
+    transition: all 0.3s ease-in-out;
+    background-color: rgba(250, 250, 250);
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    color: rgb(76, 77, 63);
+}
+
+.roundbutton button:hover{
+    background-color: rgb(231, 231, 231);
+    border: 1px solid rgb(51, 51, 51);
+    color: rgb(0, 0, 0);
+}
+
+.glassbtn, .glassbutton button {
+  font-family: 新综艺;
+  letter-spacing: 1px;
+  color: #000;
+  border: #eee 1px;  
+  border-radius: 5px;
+  background: transparent;
+  transition: all 0.3s ease;
+  box-shadow:inset 2px 2px 1px 0px rgba(255,255,255,.5), 1px 1px 2px 0px rgba(0,0,0,.1);
+  outline: none;
+}
+
+.glassbtn:hover, .glassbtn:focus, .glassbutton button:hover, .glassbutton button:focus {
+  background: transparent;
+  color:#b89f11;
+  border: #eee 1px;
+  box-shadow:inset 2px 2px 1px 0px rgba(73, 50, 0, 0.1), 1px 1px 2px 0px rgba(255, 248, 186, 0.2);
+}
+
+.textborder {
+    text-shadow: -1px -1px 0px rgba(255, 255, 255, 0.5), 1px 1px 0px rgba(255, 255, 255, 0.5), -1px 1px 0px rgba(255, 255, 255, 0.5), 1px -1px 0px rgba(255, 255, 255, 0.5);
+}
+/* twine-user-stylesheet #15: "Error.css" */
 #error-reporter-container {
 	display: block;
 }
@@ -3719,66 +3804,7 @@ html[data-debug-view] .debug.hidden .debug {
 	flex-basis: 0;
 }
 
-/* twine-user-stylesheet #15: "test.css" */
-.none {
-  -webkit-backdrop-filter: none;
-          backdrop-filter: none;
-}
-
-.grayscale {
-  -webkit-backdrop-filter: grayscale(1);
-          backdrop-filter: grayscale(1);
-}
-
-.brightness {
-  -webkit-backdrop-filter: brightness(1.5);
-          backdrop-filter: brightness(1.5);
-}
-
-.blur {
-  -webkit-backdrop-filter: blur(10px);
-          backdrop-filter: blur(10px);
-}
-
-.contrast {
-  -webkit-backdrop-filter: contrast(1.2);
-          backdrop-filter: contrast(1.2);
-}
-
-.drop-shadow {
-  -webkit-backdrop-filter: drop-shadow(0px 0px 5px rgba(163, 153, 153, 0.2));
-          backdrop-filter: drop-shadow(0px 0px 5px rgba(163, 153, 153, 0.2));
-}
-
-.drop-shadow-overlay {
-  -webkit-backdrop-filter: drop-shadow(0px 0px 5px rgba(142, 238, 255, 0.1));
-          backdrop-filter: drop-shadow(0px 0px 5px rgba(142, 238, 255, 0.1));
-}
-
-.invert {
-  -webkit-backdrop-filter: invert(0.7);
-          backdrop-filter: invert(0.7);
-}
-
-.opacity {
-  -webkit-backdrop-filter: opacity(0.4);
-          backdrop-filter: opacity(0.4);
-}
-
-.sepia {
-  -webkit-backdrop-filter: sepia(0.4);
-          backdrop-filter: sepia(0.4);
-}
-
-.saturate {
-  -webkit-backdrop-filter: saturate(1.8);
-          backdrop-filter: saturate(1.8);
-}
-
-.hue-rotate {
-  -webkit-backdrop-filter: hue-rotate(120deg);
-          backdrop-filter: hue-rotate(120deg);
-}</style><script role="script" id="twine-user-script" type="text/twine-javascript">/* twine-user-script #1: "namespace.js" */
+</style><script role="script" id="twine-user-script" type="text/twine-javascript">/* twine-user-script #1: "namespace.js" */
 /**
  * As part of my various refactors, I ended up introducing a bunch of
  * global namespace-esk variables.
@@ -4504,6 +4530,8 @@ window.setMirrorVariables = function(){
 		Source : Source, TCSV : TCSV,
 	}
 }
+
+/* 备注：不能直接 TEquip = Equip这样，会出错！ */
 /* twine-user-script #7: "observable.js" */
 window.inDOM = function(node) {
 	return document.body.contains(node)
@@ -11987,8 +12015,7 @@ function BuyOutFit(args) {
         text = "你花费了"+tryoncost()+"元购买了身上试穿的衣服。"
         
         V.tryon = {neck: null, hand: null, face: null,hat: null, outter: null, top: null,bottom: null,inner_up: null, inner_bt: null,shoes: null, legs: null,}
-        V.TEquip = clone(Equip)
-
+        V.TEquip = clone(V.Equip)
         
     }
     else{
@@ -12088,7 +12115,7 @@ function dressOn(args, arg) {
      closet[args].deleteAt(arg)
 
     }else if(Equip[args].index.length > 0){
-        let obj = clone(Equip[args])
+        let obj = clone(V.Equip[args])
         Equip[args] = closet[args][arg]
         closet[args].deleteAt(arg)
         closet[args].push(obj)
@@ -12157,7 +12184,7 @@ F.dressOn = dressOn
 function gonaked(mode){
 
     if((Equip.top && mode=="debug") || mode!="debug"){
-        V.TEquip = clone(Equip)
+        V.TEquip = clone(V.Equip)
     }
 
     const group=["hat","outter","top","bottom","inner_up","inner_bt","legs","shoes","face","neck","hand","back"]
@@ -13160,6 +13187,10 @@ window.dailyMultiple = function(){
 		return Math.floor(Math.pow(1.1,(t/60 - 4))*1000)/1000
 	}
 	else return 1;
+}
+
+window.sanityMultiple = function(){
+	let san = PC.base.理智
 }
 
 function daychange(){
@@ -17024,7 +17055,7 @@ required:false,
 &lt;&lt;/widget&gt;&gt;
 
 &lt;&lt;widget &quot;showmenu&quot;&gt;&gt;
-    &lt;div id=&quot;menu_container&quot; class=&quot;menu_hide&quot; onclick=&quot;menubutton()&quot;&gt;
+    &lt;div id=&quot;menu_container&quot; class=&quot;glassbutton menu_hide&quot; onclick=&quot;menubutton()&quot;&gt;
     &lt;div class=&quot;menu&quot;&gt;MENU&lt;/div&gt;
     &lt;&lt;if $intro is false&gt;&gt;
     &lt;div class=&quot;bottonarea&quot;&gt;
@@ -17392,7 +17423,7 @@ required:false,
 &lt;&lt;/widget&gt;&gt;
 
 &lt;&lt;widget &quot;OverlayTitle&quot;&gt;&gt;
-&lt;div id=&quot;overlaytitle&quot;&gt; 
+&lt;div id=&quot;overlaytitle&quot; class=&quot;glassbutton&quot;&gt; 
 
 	&lt;div id=&quot;closebutton&quot;&gt;
 	&lt;&lt;button X&gt;&gt;
@@ -17423,7 +17454,7 @@ required:false,
 	&lt;&lt;/if&gt;&gt;
 
 &lt;div id=&quot;handle&quot; class=&quot;handle&quot;&gt;
-&lt;&lt;if $args[0]&gt;&gt;&lt;li&gt;&lt;&lt;link $args[0]&gt;&gt;&lt;&lt;addclass &quot;#customOverlay&quot; &quot;hidden&quot;&gt;&gt;&lt;&lt;set $currentOverlay to null&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/li&gt;&lt;&lt;else&gt;&gt;&lt;&lt;/if&gt;&gt;
+&lt;&lt;if $args[0]&gt;&gt;&lt;li class=&quot;textborder&quot;&gt;&lt;&lt;link $args[0]&gt;&gt;&lt;&lt;addclass &quot;#customOverlay&quot; &quot;hidden&quot;&gt;&gt;&lt;&lt;set $currentOverlay to null&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/li&gt;&lt;&lt;else&gt;&gt;&lt;&lt;/if&gt;&gt;
 &lt;/div&gt;
 &lt;&lt;dashline&gt;&gt;
 
@@ -17492,13 +17523,13 @@ required:false,
     &lt;&lt;changeinfo&gt;&gt;
 &lt;/span&gt;
 &lt;&lt;dashline&gt;&gt;
-&lt;li&gt; 一张自拍照 &lt;/li&gt;
+&lt;li class=&quot;textborder&quot;&gt; 一张自拍照 &lt;/li&gt;
 &lt;div class=&quot;photoinfo&quot;&gt;
 &lt;p style=&quot;font-size:13px;color:olive;margin:0px;&quot;&gt;照片中的&lt;&lt;you&gt;&gt;有着一头&lt;&lt;hair&gt;&gt;，&lt;&lt;eye&gt;&gt;，&lt;&lt;skin&gt;&gt;，&lt;&lt;beauty&gt;&gt;。&lt;&lt;lookbody&gt;&gt;，单薄的衬衫下是&lt;&lt;breast&gt;&gt;，从衣服轮廓线中可看出&lt;&lt;lookhips&gt;&gt;。&lt;&lt;looktatoos&gt;&gt;&lt;/p&gt;
 &lt;p style=&quot;font-size:11px;color:gray;text-align:right;margin:3px;&quot;&gt;照片下面，一共有 &lt;span style=&quot;color:deeppink&quot;&gt;&lt;&lt;print _like&gt;&gt;&lt;/span&gt; 个赞。&lt;/p&gt;
 &lt;/div&gt;
 &lt;&lt;dashline&gt;&gt;
-&lt;li&gt; 现在状态 &lt;/li&gt;
+&lt;li class=&quot;textborder&quot;&gt; 现在状态 &lt;/li&gt;
 &lt;div id=&quot;statusdisplay&quot;&gt;
    &lt;&lt;showbasebar &quot;饮食&quot; &quot;#FFA327&quot;&gt;&gt;　&lt;&lt;showbasebar &quot;健康&quot; &quot;#BBFA5F&quot;&gt;&gt;　&lt;&lt;showbasebar &quot;体力&quot; &quot;#FEDF45&quot;&gt;&gt;&lt;br&gt;
    &lt;&lt;showbasebar &quot;理智&quot; &quot;#A7C2FF&quot;&gt;&gt;　&lt;&lt;showbasebar &quot;魔力&quot; &quot;#C2A5FF&quot;&gt;&gt;　&lt;&lt;showbasebar &quot;欲望&quot; &quot;#FF7377&quot;&gt;&gt;&lt;br&gt;
@@ -17507,7 +17538,7 @@ required:false,
 &lt;/div&gt;
 
 &lt;&lt;dashline&gt;&gt;
-&lt;li&gt; 学生档案 &lt;/li&gt;
+&lt;li class=&quot;textborder&quot;&gt; 学生档案 &lt;/li&gt;
 &lt;div id=&quot;skilldata&quot;&gt;
 &lt;&lt;showskilldata &quot;school&quot; &quot;文学&quot;&gt;&gt;　&lt;&lt;showskilldata &quot;school&quot; &quot;数学&quot;&gt;&gt;　&lt;&lt;showskilldata &quot;school&quot; &quot;物理&quot;&gt;&gt;　&lt;&lt;showskilldata &quot;school&quot; &quot;生理&quot;&gt;&gt;
 &lt;br&gt;&lt;br&gt;
@@ -17516,7 +17547,7 @@ required:false,
 &lt;/div&gt;
 
 &lt;&lt;dashline&gt;&gt;
-&lt;li&gt; 能力档案 &lt;/li&gt;
+&lt;li class=&quot;textborder&quot;&gt; 能力档案 &lt;/li&gt;
 &lt;div id=&quot;rpgstatus&quot;&gt;
 · 等级：&lt;&lt;print $PC.level&gt;&gt;　《&lt;&lt;print $PC.info.race&gt;&gt;》&lt;br&gt;
 · HP　&lt;&lt;print $PC.rpg.HP[0]&gt;&gt; / &lt;&lt;print $PC.rpg.HP[1]&gt;&gt;　　· MP　&lt;&lt;print $PC.rpg.MP[0]&gt;&gt; / &lt;&lt;print $PC.rpg.MP[1]&gt;&gt; 　　· SP　&lt;&lt;print $PC.rpg.SP[0]&gt;&gt; / &lt;&lt;print $PC.rpg.SP[1]&gt;&gt;&lt;br&gt;
@@ -17525,7 +17556,7 @@ required:false,
 &lt;/div&gt;
 
 &lt;&lt;dashline&gt;&gt;
-&lt;li&gt; 技能档案 &lt;/li&gt;
+&lt;li class=&quot;textborder&quot;&gt; 技能档案 &lt;/li&gt;
 &lt;div id=&quot;skilldata&quot;&gt;
 &lt;&lt;showskilldata &quot;abl&quot; &quot;异能&quot;&gt;&gt;　&lt;&lt;showskilldata &quot;abl&quot; &quot;奥术&quot;&gt;&gt;　&lt;&lt;showskilldata &quot;abl&quot; &quot;战技&quot;&gt;&gt;　&lt;&lt;showskilldata &quot;abl&quot; &quot;健身&quot;&gt;&gt;
 &lt;br&gt;&lt;br&gt;
@@ -17534,7 +17565,7 @@ required:false,
 &lt;/div&gt;
 
 &lt;&lt;dashline&gt;&gt;
-&lt;li&gt; 宠物资料 &lt;/li&gt;
+&lt;li class=&quot;textborder&quot;&gt; 宠物资料 &lt;/li&gt;
 &lt;div id=&quot;rpgstatus&quot;&gt;
 · 名字：&lt;&lt;print $pet.name&gt;&gt;　　 品种：&lt;&lt;print $pet.type&gt;&gt;　　 等级：&lt;&lt;print $pet.level&gt;&gt;&lt;br&gt;
 · HP　&lt;&lt;print $pet.HP[0]&gt;&gt; / &lt;&lt;print $pet.HP[1]&gt;&gt;　　· MP　&lt;&lt;print $pet.MP[0]&gt;&gt; / &lt;&lt;print $pet.MP[1]&gt;&gt; 　　· SP　&lt;&lt;print $pet.SP[0]&gt;&gt; / &lt;&lt;print $pet.SP[1]&gt;&gt;&lt;br&gt;
@@ -18179,13 +18210,17 @@ function wait(text) {
 &lt;div id=&quot;append-text&quot; class=&quot;append-normal&quot;&gt;&lt;/div&gt;
 &lt;div id=&quot;situation&quot; class=&quot;situation&quot;&gt;&lt;&lt;=F.getsituation(&quot;单身公寓&quot;)&gt;&gt;&lt;/div&gt;
 
-&lt;&lt;link &quot;弹出窗口测试&quot;&gt;&gt;
-&lt;&lt;run Dialog.setup(&quot;Character Sheet&quot;);Dialog.wiki(Story.get(&quot;城市生活_1&quot;).processText());Dialog.open();&gt;&gt;
-&lt;&lt;/link&gt;&gt;
+
 
 &lt;br&gt;
 &lt;div class=&quot;tolink&quot;&gt;
+&lt;&lt;link &quot;弹出窗口测试&quot;&gt;&gt;
+&lt;&lt;run Dialog.setup(&quot;Character Sheet&quot;);Dialog.wiki(Story.get(&quot;城市生活_1&quot;).processText());Dialog.open();&gt;&gt;
+&lt;&lt;/link&gt;&gt;
+&lt;br&gt;&lt;br&gt;
+
 &lt;&lt;link &quot;打开衣柜　 1m&quot; &quot;衣柜&quot;&gt;&gt;&lt;&lt;passtime 1&gt;&gt;&lt;&lt;set $TEquip to clone($Equip)&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
+
 &lt;br&gt;
 &lt;&lt;link &quot;健身　　 　30m&quot; $passage&gt;&gt;&lt;&lt;passtime 30&gt;&gt;&lt;&lt;/link&gt;&gt;　　&lt;&lt;link &quot;打游戏 　　30m&quot; $passage&gt;&gt;&lt;&lt;passtime 30&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
 &lt;&lt;link &quot;洗澡　 　　30m&quot; $passage&gt;&gt;&lt;&lt;passtime 30&gt;&gt;&lt;&lt;/link&gt;&gt;　　&lt;&lt;link &quot;和宠物玩耍 60m&quot; $passage&gt;&gt;&lt;&lt;passtime 60&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;

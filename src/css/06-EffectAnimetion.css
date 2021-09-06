@@ -527,24 +527,24 @@
 
 /*These classes are added to each letter/span using JS so they animate*/
 .weffect1{
-	animation: zoom 6s linear infinite;
-	-webkit-animation: zoom 6s linear infinite;
+	animation: mix 6s linear infinite;
+	-webkit-animation: mix 6s linear infinite;
 }
 .weffect2{
 	animation: mix 5s linear infinite;
 	-webkit-animation: mix 5s linear infinite;
 }
 .weffect3{
-	animation: mix2 3s linear infinite;
-	-webkit-animation: mix2 3s linear infinite;	
+	animation: mix 3s linear infinite;
+	-webkit-animation: mix 3s linear infinite;	
 }
 .weffect4{
-	animation: rot 5s linear infinite;
-	-webkit-animation: rot 5s linear infinite;
+	animation: mix 5s linear infinite;
+	-webkit-animation: mix 5s linear infinite;
 }
 .weffect5{
-	animation: fade2 4s linear infinite;
-	-webkit-animation: fade2 4s linear infinite;
+	animation: mix 4s linear infinite;
+	-webkit-animation: mix 4s linear infinite;
 }
 
 

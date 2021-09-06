@@ -237,7 +237,7 @@ body #story-caption #storyCaptionDiv {
     position: fixed;
     border-radius: 0px 100px 100px 0px;
     bottom:5%;
-    transition: all 1s;
+    transition: all 0.75s ease-in-out;
     overflow: hidden;
     display: inline-block;
     -webkit-backdrop-filter: blur(2px);
@@ -342,11 +342,7 @@ body #story-caption #storyCaptionDiv {
   font-size: 14px;
   font-family: 新综艺;
   letter-spacing: 1px;
-  background: transparent;
-  transition: all 0.3s ease;
   position: relative;
-  box-shadow:inset 2px 2px 1px 0px rgba(255,255,255,.5), 1px 1px 2px 0px rgba(0,0,0,.1);
-  outline: none;
 }
 
 #menu_container button:hover, #menu_container button:focus{

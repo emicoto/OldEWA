@@ -133,6 +133,10 @@ window.dailyMultiple = function(){
 	else return 1;
 }
 
+window.sanityMultiple = function(){
+	let san = PC.base.理智
+}
+
 function daychange(){
 
 	Flag.daychange = false

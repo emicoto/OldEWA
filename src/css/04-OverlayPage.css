@@ -124,8 +124,11 @@
     width: fit-content;
     min-width: 24px;
     height: 24px;
-    border: 1px #ccc solid;
-    letter-spacing: 1px;
+    background: transparent;
+}
+
+#overlaytitle button:hover, #overlaytitle button:focus{
+    background-color:rgba(255, 255, 255, 0.25);
 }
 
 #customOverlay {
@@ -136,21 +139,11 @@
     width: fit-content;
     font-size: 12px;
     height: 24px;
-    border-radius: 3px;
-    transition: all 0.3s;    
     padding-bottom: 2px;
-    border: #eee 1px;
-    background-color: rgba(255, 255, 255, 0.3);
-    color:rgb(31, 31, 48);
-    box-shadow:inset 2px 2px 1px 0px rgba(255,255,255,.5), 1px 1px 2px 0px rgba(0,0,0,.1);
-    outline: none;
-  }
+}
   
 #customOverlay button:hover {
     background-color: rgba(255, 255, 255, 0.5);
-    color:rgb(184, 168, 23);
-    border: #eee 1px;
-    box-shadow:inset 2px 2px 1px 0px rgba(73, 50, 0, 0.1), 1px 1px 2px 0px rgba(255, 248, 186, 0.2);
 }
 
 #customOverlayContent {
@@ -168,7 +161,7 @@
 }
 
 #profile {
-    margin-left: 10px;
+    padding:0px 10px;
     font-size: 14px;
     float: left;
 }
@@ -196,6 +189,7 @@
 }
 
 #profile .dashline {
+    margin-left: -5px;
     margin-top: 5px;
     margin-bottom: 8px;
     border-bottom: 1px solid rgba(56, 54, 49, 0.1);
@@ -243,7 +237,7 @@
     align-items: center;
 }
 
-#skilldata .classdata {
+.classdata {
     float:left;
     width: 100px;
     height: 30px;
@@ -254,8 +248,8 @@
     z-index: 0;
 }
 
-#skilldata .classdata:hover{
-    background-color: rgba(245, 245, 245);
+.classdata:hover{
+    background-color: rgba(245, 245, 245, 0.75);
 }
 
 #skilldata .metercon {
