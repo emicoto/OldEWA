@@ -24,8 +24,8 @@
 }
 
 .drop-shadow {
-  -webkit-backdrop-filter: drop-shadow(4px 4px 10px blue);
-          backdrop-filter: drop-shadow(4px 4px 10px blue);
+  -webkit-backdrop-filter: drop-shadow(0px 0px 5px rgba(163, 153, 153, 0.2));
+          backdrop-filter: drop-shadow(0px 0px 5px rgba(163, 153, 153, 0.2));
 }
 
 .invert {
