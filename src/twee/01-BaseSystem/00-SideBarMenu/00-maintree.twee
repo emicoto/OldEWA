@@ -90,7 +90,7 @@
 /* 自动刷新等待JS读取结束 */
 <<set _timer to 10>>
 <<repeat 0.3s>>
-<<run $('#customOverlay').draggable({handle: '.handle'});$('#ui-dialog').draggable();>>
+<<run $('#customOverlay').draggable({handle: '.handle'});$('#ui-dialog').draggable({handle: '.handle'});>>
 <<set _timer -= 1>>
 <<if _timer lte 0>><<stop>><</if>><</repeat>>
 

@@ -57,11 +57,18 @@ input[type="text"]:hover {
 .dashline {
   width:auto;
   height:1px;
-  border-bottom: 1px rgb(184, 182, 173) dashed;
+  border-bottom: 1px rgba(71, 67, 49, 0.2) dashed;
   position: relative;
-  display: block;
+  display: inline-block;
 }
 
+.splitline {
+  height: auto;
+  width: 1px;
+  border-right: 1px rgba(71, 67, 49, 0.2) dashed;
+  position: relative;
+  display: inline-block;
+}
 
 .metername { 
   width:40px; 

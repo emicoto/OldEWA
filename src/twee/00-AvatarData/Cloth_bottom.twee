@@ -115,7 +115,7 @@
         acc : "line",
         patterns: ["line","dot","star"],
         fixacc  : false,
-        subcolor : ["#787878"],
+        subcolor : "#787878",
     },
 ]>>
 <</widget>>

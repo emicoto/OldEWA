@@ -7,8 +7,9 @@
     width: 680px;
     max-height: 800px;
     border-radius: 20px 5px 5px 20px;
-    border: 3px solid rgba(255, 255, 255, 0.8);
+    border: 3px solid rgba(255, 255, 255, 0);
     background-color: rgba(255, 255, 255, 0.3);
+    box-shadow: -2px -2px 1px rgba(255, 255, 255, 0.75), 2px 2px 1px rgba(120, 120, 120, 0.3), -5px 20px 20px rgba(40, 40, 40, 0.3);
     text-align: left;
     padding: 5px;
     overflow-y: scroll;
@@ -197,7 +198,7 @@
 #profile .dashline {
     margin-top: 5px;
     margin-bottom: 8px;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid rgba(56, 54, 49, 0.1);
 }
 
 #profile .metername{

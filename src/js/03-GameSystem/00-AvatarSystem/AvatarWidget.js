@@ -232,10 +232,10 @@ window.strip = strip
 F.strip = strip
 
 window.closetAct = function(args,arg) {
-    if (UI.closetmode == "穿"){
+    if (ui.closetmode == "穿"){
         dressOn(args,arg)
     }
-    if (UI.closetmode == "扔"){
+    if (ui.closetmode == "扔"){
         discardDress(args,arg)
     }
 }
