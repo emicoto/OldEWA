@@ -383,7 +383,7 @@ function redress(mode){
         })
     }
 
-    Equip = clone(V.TEquip)
+    V.Equip = clone(V.TEquip)
     FixValue()
     stAvatar()
     

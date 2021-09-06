@@ -28,7 +28,7 @@
 
 :: 创建人物 [widget]
 <<widget "CharaMaking">>
-<<set $charamaking to true>>
+<<set $Flag.charamaking to true>>
 <<if $PC.trait.泌乳体质 is undefined>>
     <<set $PC.trait.泌乳体质 to false>>
 <</if>>

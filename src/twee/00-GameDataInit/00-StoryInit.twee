@@ -13,7 +13,6 @@
 
 <<set $lang to "CN">>
 <<set $coredebug to false>>
-<<set $charamaking to null>>
 
 <!-- 游戏系统环境设定 -->
 <<set $Flag to {}>> /* game flag */
@@ -36,7 +35,7 @@
 <<set $count to 0>>      /* 通用计数变量。需要离开当前passage或重置的情况 */
 <<set $eventend to false>>
 <<set $eventnext to 0>>
-
+<<set $Flag.charamaking to null>>
 
 <<set $temp to {}>>
 

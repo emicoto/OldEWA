@@ -91,187 +91,6 @@ var saveAs=saveAs||navigator.msSaveBlob&&navigator.msSaveBlob.bind(navigator)||f
 <style id="style-ui" type="text/css">#ui-dialog-body.settings [id|=setting-body]>div:first-child{display:table;width:100%}#ui-dialog-body.settings [id|=setting-label]{display:table-cell;padding:.4em 2em .4em 0}#ui-dialog-body.settings [id|=setting-label]+div{display:table-cell;min-width:8em;text-align:right;vertical-align:middle;white-space:nowrap}#ui-dialog-body.list{padding:0}#ui-dialog-body.list ul{margin:0;padding:0;list-style:none;border:1px solid transparent}#ui-dialog-body.list li{margin:0}#ui-dialog-body.list li:not(:first-child){border-top:1px solid #444}#ui-dialog-body.list li a{display:block;padding:.25em .75em;border:1px solid transparent;color:#eee;text-decoration:none}#ui-dialog-body.list li a:hover{background-color:#333;border-color:#eee}#ui-dialog-body.saves{padding:0 0 1px}#ui-dialog-body.saves>:not(:first-child){border-top:1px solid #444}#ui-dialog-body.saves table{border-spacing:0;width:100%}#ui-dialog-body.saves tr:not(:first-child){border-top:1px solid #444}#ui-dialog-body.saves td{padding:.33em .33em}#ui-dialog-body.saves td:first-child{min-width:1.5em;text-align:center}#ui-dialog-body.saves td:nth-child(3){line-height:1.2}#ui-dialog-body.saves td:last-child{text-align:right}#ui-dialog-body.saves .empty{color:#999;speak:none;text-align:center;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}#ui-dialog-body.saves .datestamp{font-size:75%;margin-left:1em}#ui-dialog-body.saves ul.buttons li{padding:.4em}#ui-dialog-body.saves ul.buttons>li+li>button{margin-left:.2em}#ui-dialog-body.saves ul.buttons li:last-child{float:right}#ui-dialog-body.settings div[id|=header-body]{margin:1em 0}#ui-dialog-body.settings div[id|=header-body]:first-child{margin-top:0}#ui-dialog-body.settings div[id|=header-body]:not(:first-child){border-top:1px solid #444;padding-top:1em}#ui-dialog-body.settings div[id|=header-body]>*{margin:0}#ui-dialog-body.settings h2[id|=header-heading]{font-size:1.375em}#ui-dialog-body.settings p[id|=header-desc],#ui-dialog-body.settings p[id|=setting-desc]{font-size:87.5%;margin:0 0 0 .5em}#ui-dialog-body.settings div[id|=setting-body]+div[id|=setting-body]{margin:1em 0}#ui-dialog-body.settings [id|=setting-control]{white-space:nowrap}#ui-dialog-body.settings button[id|=setting-control]{color:#eee;background-color:transparent;border:1px solid #444;padding:.4em}#ui-dialog-body.settings button[id|=setting-control]:hover{background-color:#333;border-color:#eee}#ui-dialog-body.settings button[id|=setting-control].enabled{background-color:#282;border-color:#4a4}#ui-dialog-body.settings button[id|=setting-control].enabled:hover{background-color:#4a4;border-color:#6c6}#ui-dialog-body.settings input[type=range][id|=setting-control]{max-width:35vw}#ui-dialog-body.list a,#ui-dialog-body.settings span[id|=setting-input]{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}#ui-dialog-body.saves button[id=saves-clear]:before,#ui-dialog-body.saves button[id=saves-export]:before,#ui-dialog-body.saves button[id=saves-import]:before,#ui-dialog-body.settings button[id|=setting-control].enabled:after,#ui-dialog-body.settings button[id|=setting-control]:after{font-family:tme-fa-icons;font-style:normal;font-weight:400;font-variant:normal;text-transform:none;line-height:1;speak:none}#ui-dialog-body.saves button[id=saves-export]:before{content:"\e829\00a0"}#ui-dialog-body.saves button[id=saves-import]:before{content:"\e82a\00a0"}#ui-dialog-body.saves button[id=saves-clear]:before{content:"\e827\00a0"}#ui-dialog-body.settings button[id|=setting-control]:after{content:"\00a0\00a0\e830"}#ui-dialog-body.settings button[id|=setting-control].enabled:after{content:"\00a0\00a0\e831"}</style>
 <style id="style-ui-bar" type="text/css">#story{margin-left:20em;-webkit-transition:margin-left .2s ease-in;-o-transition:margin-left .2s ease-in;transition:margin-left .2s ease-in}#ui-bar.stowed~#story{margin-left:4.5em}@media screen and (max-width:1136px){#story{margin-left:19em}#ui-bar.stowed~#story{margin-left:3.5em}}@media screen and (max-width:768px){#story{margin-left:3.5em}}#ui-bar{position:fixed;z-index:50;top:0;left:0;width:17.5em;height:100%;margin:0;padding:0;-webkit-transition:left .2s ease-in;-o-transition:left .2s ease-in;transition:left .2s ease-in}#ui-bar.stowed{left:-15.5em}#ui-bar-tray{position:absolute;top:.2em;left:0;right:0}#ui-bar-body{height:90%;height:calc(100% - 2.5em);margin:2.5em 0;padding:0 1.5em}#ui-bar.stowed #ui-bar-body,#ui-bar.stowed #ui-bar-history{visibility:hidden;-webkit-transition:visibility .2s step-end;-o-transition:visibility .2s step-end;transition:visibility .2s step-end}#ui-bar{background-color:#222;border-right:1px solid #444;text-align:center}#ui-bar a{text-decoration:none}#ui-bar hr{border-color:#444}#ui-bar-history [id|=history],#ui-bar-toggle{font-size:1.2em;line-height:inherit;color:#eee;background-color:transparent;border:1px solid #444}#ui-bar-toggle{display:block;position:absolute;top:0;right:0;border-right:none;padding:.3em .45em .25em}#ui-bar.stowed #ui-bar-toggle{padding:.3em .35em .25em .55em}#ui-bar-toggle:hover{background-color:#444;border-color:#eee}#ui-bar-history{margin:0 auto}#ui-bar-history [id|=history]{padding:.2em .45em .35em}#ui-bar-history #history-jumpto{padding:.2em .665em .35em}#ui-bar-history [id|=history]:not(:first-child){margin-left:1.2em}#ui-bar-history [id|=history]:hover{background-color:#444;border-color:#eee}#ui-bar-history [id|=history]:disabled{color:#444;background-color:transparent;border-color:#444}#ui-bar-body{line-height:1.5;overflow:auto}#ui-bar-body>:not(:first-child){margin-top:2em}#story-title{margin:0;font-size:162.5%}#story-author{margin-top:2em;font-weight:700}#menu ul{margin:1em 0 0;padding:0;list-style:none;border:1px solid #444}#menu ul:empty{display:none}#menu li{margin:0}#menu li:not(:first-child){border-top:1px solid #444}#menu li a{display:block;padding:.25em .75em;border:1px solid transparent;color:#eee;text-transform:uppercase}#menu li a:hover{background-color:#444;border-color:#eee}#menu a,#ui-bar-history [id|=history],#ui-bar-toggle{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}#menu-core li[id|=menu-item] a:before,#ui-bar-history [id|=history],#ui-bar-toggle:before{font-family:tme-fa-icons;font-style:normal;font-weight:400;font-variant:normal;text-transform:none;line-height:1;speak:none}#ui-bar-toggle:before{content:"\e81d"}#ui-bar.stowed #ui-bar-toggle:before{content:"\e81e"}#menu-item-saves a:before{content:"\e82b\00a0"}#menu-item-settings a:before{content:"\e82d\00a0"}#menu-item-restart a:before{content:"\e82c\00a0"}#menu-item-share a:before{content:"\e82f\00a0"}</style>
 <style id="style-ui-debug" type="text/css">#debug-bar{background-color:#222;border-left:1px solid #444;border-top:1px solid #444;bottom:0;margin:0;max-height:75%;padding:.5em;position:fixed;right:0;z-index:99900}#debug-bar>div:not([id])+div{margin-top:.5em}#debug-bar>div>label{margin-right:.5em}#debug-bar>div>input[type=text]{min-width:10px}#debug-bar>div>select{width:15em}#debug-bar-toggle{color:#eee;background-color:#222;border:1px solid #444;height:101%;height:calc(100% + 1px);left:-2em;left:calc(-2em - 1px);position:absolute;top:-1px;width:2em}#debug-bar-toggle:hover{background-color:#333;border-color:#eee}#debug-bar-hint{bottom:.175em;font-size:4.5em;opacity:.33;pointer-events:none;position:fixed;right:.6em;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;white-space:nowrap}#debug-bar-watch{background-color:#222;border-left:1px solid #444;border-top:1px solid #444;bottom:102%;bottom:calc(100% + 1px);font-size:.9em;left:-1px;max-height:650%;max-height:65vh;position:absolute;overflow-x:hidden;overflow-y:scroll;right:0;z-index:99800}#debug-bar-watch[hidden]{display:none}#debug-bar-watch div{color:#999;font-style:italic;margin:1em auto;text-align:center}#debug-bar-watch table{width:100%}#debug-bar-watch tr:nth-child(2n){background-color:rgba(127,127,127,.15)}#debug-bar-watch td{padding:.2em 0}#debug-bar-watch td:first-child+td{padding:.2em .3em .2em .1em}#debug-bar-watch .watch-delete{background-color:transparent;border:none;color:#c00}#debug-bar-watch-all,#debug-bar-watch-none{margin-left:.5em}#debug-bar-views-toggle,#debug-bar-watch-toggle{color:#eee;background-color:transparent;border:1px solid #444;margin-right:1em;padding:.4em}#debug-bar-views-toggle:hover,#debug-bar-watch-toggle:hover{background-color:#333;border-color:#eee}#debug-bar-watch:not([hidden])~div #debug-bar-watch-toggle,html[data-debug-view] #debug-bar-views-toggle{background-color:#282;border-color:#4a4}#debug-bar-watch:not([hidden])~div #debug-bar-watch-toggle:hover,html[data-debug-view] #debug-bar-views-toggle:hover{background-color:#4a4;border-color:#6c6}#debug-bar-hint:after,#debug-bar-toggle:before,#debug-bar-views-toggle:after,#debug-bar-watch .watch-delete:before,#debug-bar-watch-add:before,#debug-bar-watch-all:before,#debug-bar-watch-none:before,#debug-bar-watch-toggle:after{font-family:tme-fa-icons;font-style:normal;font-weight:400;font-variant:normal;text-transform:none;line-height:1;speak:none}#debug-bar-toggle:before{content:"\e838"}#debug-bar-hint:after{content:"\e838\202f\e822"}#debug-bar-watch .watch-delete:before{content:"\e804"}#debug-bar-watch-add:before{content:"\e805"}#debug-bar-watch-all:before{content:"\e83a"}#debug-bar-watch-none:before{content:"\e827"}#debug-bar-views-toggle:after,#debug-bar-watch-toggle:after{content:"\00a0\00a0\e830"}#debug-bar-watch:not([hidden])~div #debug-bar-watch-toggle:after,html[data-debug-view] #debug-bar-views-toggle:after{content:"\00a0\00a0\e831"}html[data-debug-view] .debug{padding:.25em;background-color:#234}html[data-debug-view] .debug[title]{cursor:help}html[data-debug-view] .debug.block{display:inline-block;vertical-align:middle}html[data-debug-view] .debug.invalid{text-decoration:line-through}html[data-debug-view] .debug.hidden,html[data-debug-view] .debug.hidden .debug{background-color:#555}html:not([data-debug-view]) .debug.hidden{display:none}html[data-debug-view] .debug[data-name][data-type].nonvoid:after,html[data-debug-view] .debug[data-name][data-type]:before{background-color:rgba(0,0,0,.25);font-family:monospace,monospace;white-space:pre}html[data-debug-view] .debug[data-name][data-type]:before{content:attr(data-name)}html[data-debug-view] .debug[data-name][data-type|=macro]:before{content:"<<" attr(data-name) ">>"}html[data-debug-view] .debug[data-name][data-type|=macro].nonvoid:after{content:"<</" attr(data-name) ">>"}html[data-debug-view] .debug[data-name][data-type|=html]:before{content:"<" attr(data-name) ">"}html[data-debug-view] .debug[data-name][data-type|=html].nonvoid:after{content:"</" attr(data-name) ">"}html[data-debug-view] .debug[data-name][data-type]:not(:empty):before{margin-right:.25em}html[data-debug-view] .debug[data-name][data-type].nonvoid:not(:empty):after{margin-left:.25em}html[data-debug-view] .debug[data-name][data-type|=special],html[data-debug-view] .debug[data-name][data-type|=special]:before{display:block}</style>
-<script id="script-module-Game" type="text/javascript">// Code/Game.js
-var Game = {
-  Data: {
-    Player: {},
-    Npc: {}
-  },
-  Character: {},
-  Utils: {},
-  Mods: {}
-};
-console.log(Game);</script>
-<script id="script-module-Manager" type="text/javascript">var __defProp = Object.defineProperty;
-var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
-var __markAsModule = (target) => __defProp(target, "__esModule", { value: true });
-var __esm = (fn, res) => function __init() {
-  return fn && (res = (0, fn[Object.keys(fn)[0]])(fn = 0)), res;
-};
-var __export = (target, all) => {
-  __markAsModule(target);
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __publicField = (obj, key, value) => {
-  __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
-  return value;
-};
-
-// dsv:H:\_EWA\Code\Data\csv\test.csv
-var test_exports = {};
-__export(test_exports, {
-  default: () => test_default
-});
-var test_default;
-var init_test = __esm({
-  "dsv:H:\\_EWA\\Code\\Data\\csv\\test.csv"() {
-    test_default = [
-      {
-        "编号": "0",
-        "名字": "鸽子",
-        "设置": ""
-      },
-      {
-        "编号": "1",
-        "名字": "狐狸",
-        "设置": "true"
-      }
-    ];
-  }
-});
-
-// import-glob:./Data/**/*.csv
-var __exports = {};
-__export(__exports, {
-  default: () => __default,
-  filenames: () => filenames
-});
-var modules, __default, filenames;
-var init__ = __esm({
-  "import-glob:./Data/**/*.csv"() {
-    init_test();
-    modules = [test_exports];
-    __default = modules;
-    filenames = ["./Data/csv/test.csv"];
-  }
-});
-
-// Code/Data/JSON/CHARACTER.json
-var CHARACTER_exports = {};
-__export(CHARACTER_exports, {
-  default: () => CHARACTER_default
-});
-var CHARACTER_default;
-var init_CHARACTER = __esm({
-  "Code/Data/JSON/CHARACTER.json"() {
-    CHARACTER_default = [
-      {
-        CID: "1",
-        名字: "黎渊",
-        性别: "男",
-        genital: { 阴茎: 16, 子宫: -1 },
-        vaginity: { 初吻: "自己的姐姐", 童贞: 1, 处女: -1, A处女: 1 },
-        好感: 0,
-        信赖: 0,
-        欲望: 0,
-        支配: 10,
-        items: {},
-        type: 3
-      }
-    ];
-  }
-});
-
-// import-glob:./Data/**/*.json
-var __exports2 = {};
-__export(__exports2, {
-  default: () => __default2,
-  filenames: () => filenames2
-});
-var modules2, __default2, filenames2;
-var init__2 = __esm({
-  "import-glob:./Data/**/*.json"() {
-    init_CHARACTER();
-    modules2 = [CHARACTER_exports];
-    __default2 = modules2;
-    filenames2 = ["./Data/JSON/CHARACTER.json"];
-  }
-});
-
-// yaml:H:\_EWA\Code\Data\YAML\test.yml
-var test_exports2 = {};
-__export(test_exports2, {
-  default: () => test_default2,
-  名字: () => 名字
-});
-var 名字, test_default2;
-var init_test2 = __esm({
-  "yaml:H:\\_EWA\\Code\\Data\\YAML\\test.yml"() {
-    名字 = "鸽子";
-    test_default2 = { 名字 };
-  }
-});
-
-// import-glob:./Data/**/*.yml
-var __exports3 = {};
-__export(__exports3, {
-  default: () => __default3,
-  filenames: () => filenames3
-});
-var modules3, __default3, filenames3;
-var init__3 = __esm({
-  "import-glob:./Data/**/*.yml"() {
-    init_test2();
-    modules3 = [test_exports2];
-    __default3 = modules3;
-    filenames3 = ["./Data/YAML/test.yml"];
-  }
-});
-
-// import-glob:./Data/**/*.js
-var __exports4 = {};
-__export(__exports4, {
-  default: () => __default4,
-  filenames: () => filenames4
-});
-var modules4, __default4, filenames4;
-var init__4 = __esm({
-  "import-glob:./Data/**/*.js"() {
-    modules4 = [];
-    __default4 = modules4;
-    filenames4 = [];
-  }
-});
-
-// Code/Manager.js
-var Csv = (init__(), __exports);
-var Json = (init__2(), __exports2);
-var Yaml = (init__3(), __exports3);
-var js = (init__4(), __exports4);
-var Manager = class {
-  constructor(files) {
-    __publicField(this, "files", new Map());
-    const File = (file) => {
-      const obj = {};
-      file.filenames.map((v, i) => {
-        const filename = v.split("/").slice(2).join("/");
-        obj[filename] = file.default[i].default;
-      });
-      return obj;
-    };
-    Object.keys(files).map((v) => this.files.set(v, File(files[v])));
-  }
-  getFile(key, filename) {
-    return this.files.get(key)[filename];
-  }
-};
-Game.Manager = new Manager({
-  csv: Csv,
-  json: Json,
-  yaml: Yaml,
-  js
-});</script>
 <link type="image/png" rel="icon" sizes="24x24" href="icon.png" />
 <link rel="stylesheet" href="CSS/jquery-ui.css">
 <style>
@@ -12188,7 +12007,7 @@ function redress(mode){
         })
     }
 
-    Equip = clone(V.TEquip)
+    V.Equip = clone(V.TEquip)
     FixValue()
     stAvatar()
     
@@ -12413,24 +12232,24 @@ function stAvatar() {
 
 
     /*兽耳兽角兽尾部分, 每个部位都要分开来设置……还未完全实装。 */
-    if((PFlag.trueform == true || Flag.charamaking == true || PFlag.showmimi == true)){
-        if(PC.info.race == "兽族"){
-            V.avatar.kemofront.mimi = setAvatar("kemofront.mimi",{
-                fixcolor: false, color: haircolor[0],
-                src: "cat",
-            })
-        }
+    if((PFlag.trueform == true || Flag.charamaking == true || PFlag.showmimi == true) && PC.info.race == "兽族"){
+ 
+        V.avatar.kemofront.mimi = setAvatar("kemofront.mimi",{
+            fixcolor: false, color: haircolor[0],
+            src: "cat",
+        })
+
      }else{
         V.avatar.kemofront.mimi = setAvatar("kemofront.mimi",null)
     }
 
-    if((PFlag.trueform == true || Flag.charamaking == true || PFlag.showtail == true)){
-        if(PC.info.race == "兽族"){
-            V.avatar.kemoback.tail = setAvatar("kemoback.tail",{
-                fixcolor:false, color:haircolor[0],
-                src:"cat", 
-            })
-        }
+    if((PFlag.trueform == true || Flag.charamaking == true || PFlag.showtail == true) && PC.info.race == "兽族"){
+
+        V.avatar.kemoback.tail = setAvatar("kemoback.tail",{
+            fixcolor:false, color:haircolor[0],
+            src:"cat", 
+        })
+
      }else{
         V.avatar.kemoback.tail = setAvatar("kemoback.tail",null)
     }
@@ -14794,7 +14613,6 @@ DefineMacroS("delay",delay)
 
 &lt;&lt;set $lang to &quot;CN&quot;&gt;&gt;
 &lt;&lt;set $coredebug to false&gt;&gt;
-&lt;&lt;set $charamaking to null&gt;&gt;
 
 &lt;!-- 游戏系统环境设定 --&gt;
 &lt;&lt;set $Flag to {}&gt;&gt; /* game flag */
@@ -14817,7 +14635,7 @@ DefineMacroS("delay",delay)
 &lt;&lt;set $count to 0&gt;&gt;      /* 通用计数变量。需要离开当前passage或重置的情况 */
 &lt;&lt;set $eventend to false&gt;&gt;
 &lt;&lt;set $eventnext to 0&gt;&gt;
-
+&lt;&lt;set $Flag.charamaking to null&gt;&gt;
 
 &lt;&lt;set $temp to {}&gt;&gt;
 
@@ -15555,7 +15373,7 @@ $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌}
 &lt;&lt;/switch&gt;&gt;
 
 &lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="17" name="创建人物" tags="widget" position="850,225" size="100,100">&lt;&lt;widget &quot;CharaMaking&quot;&gt;&gt;
-&lt;&lt;set $charamaking to true&gt;&gt;
+&lt;&lt;set $Flag.charamaking to true&gt;&gt;
 &lt;&lt;if $PC.trait.泌乳体质 is undefined&gt;&gt;
     &lt;&lt;set $PC.trait.泌乳体质 to false&gt;&gt;
 &lt;&lt;/if&gt;&gt;
@@ -16227,7 +16045,7 @@ $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌}
 &lt;div class=&quot;delayed&quot;&gt;
 &lt;span style=&quot;line-height:40px;font-size:13px;padding:0px;margin:0px&quot;&gt;　
 &lt;&lt;set _text to Lang(&quot;＞ 开始游戏&quot;,&quot;＞ Game Start&quot;)&gt;&gt;
-&lt;&lt;link [[_text|开始]]&gt;&gt;&lt;&lt;GSApply&gt;&gt;&lt;&lt;set $intro to false&gt;&gt;&lt;&lt;set $charamaking to false&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/span&gt;&lt;br&gt;
+&lt;&lt;link [[_text|开始]]&gt;&gt;&lt;&lt;GSApply&gt;&gt;&lt;&lt;set $intro to false&gt;&gt;&lt;&lt;set $Flag.charamaking to false&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/span&gt;&lt;br&gt;
 
 &lt;&lt;include &quot;初始设定&quot;&gt;&gt;
 &lt;/div&gt;

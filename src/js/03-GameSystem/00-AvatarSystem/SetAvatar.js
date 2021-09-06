@@ -200,24 +200,24 @@ function stAvatar() {
 
 
     /*兽耳兽角兽尾部分, 每个部位都要分开来设置……还未完全实装。 */
-    if((PFlag.trueform == true || Flag.charamaking == true || PFlag.showmimi == true)){
-        if(PC.info.race == "兽族"){
-            V.avatar.kemofront.mimi = setAvatar("kemofront.mimi",{
-                fixcolor: false, color: haircolor[0],
-                src: "cat",
-            })
-        }
+    if((PFlag.trueform == true || Flag.charamaking == true || PFlag.showmimi == true) && PC.info.race == "兽族"){
+ 
+        V.avatar.kemofront.mimi = setAvatar("kemofront.mimi",{
+            fixcolor: false, color: haircolor[0],
+            src: "cat",
+        })
+
      }else{
         V.avatar.kemofront.mimi = setAvatar("kemofront.mimi",null)
     }
 
-    if((PFlag.trueform == true || Flag.charamaking == true || PFlag.showtail == true)){
-        if(PC.info.race == "兽族"){
-            V.avatar.kemoback.tail = setAvatar("kemoback.tail",{
-                fixcolor:false, color:haircolor[0],
-                src:"cat", 
-            })
-        }
+    if((PFlag.trueform == true || Flag.charamaking == true || PFlag.showtail == true) && PC.info.race == "兽族"){
+
+        V.avatar.kemoback.tail = setAvatar("kemoback.tail",{
+            fixcolor:false, color:haircolor[0],
+            src:"cat", 
+        })
+
      }else{
         V.avatar.kemoback.tail = setAvatar("kemoback.tail",null)
     }
