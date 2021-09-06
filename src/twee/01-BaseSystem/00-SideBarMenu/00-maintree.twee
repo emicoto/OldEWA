@@ -54,8 +54,6 @@
 
 <<silently>>
 
-
-
 /* 动态化部分 */
 	<<repeat 0.5s>>
 		<<if $conf.render is "image">>

@@ -527,24 +527,24 @@
 
 /*These classes are added to each letter/span using JS so they animate*/
 .weffect1{
-	animation: mix 6s linear infinite;
-	-webkit-animation: mix 6s linear infinite;
+	animation: zoom 6s linear infinite;
+	-webkit-animation: zoom 6s linear infinite;
 }
 .weffect2{
 	animation: mix 5s linear infinite;
 	-webkit-animation: mix 5s linear infinite;
 }
 .weffect3{
-	animation: mix 3s linear infinite;
-	-webkit-animation: mix 3s linear infinite;	
+	animation: mix2 3s linear infinite;
+	-webkit-animation: mix2 3s linear infinite;	
 }
 .weffect4{
-	animation: mix 5s linear infinite;
-	-webkit-animation: mix 5s linear infinite;
+	animation: rot 5s linear infinite;
+	-webkit-animation: rot 5s linear infinite;
 }
 .weffect5{
-	animation: mix 4s linear infinite;
-	-webkit-animation: mix 4s linear infinite;
+	animation: fade2 4s linear infinite;
+	-webkit-animation: fade2 4s linear infinite;
 }
 
 
@@ -554,7 +554,7 @@
 	0%{transform: scale(1);
     color:rgba(0,0,0,0);
     text-shadow:0 0 0px #444;}
-	50%{transform: scale(1.1);
+	50%{transform: scale(1.2);
     color:rgba(0,0,0,0);
     text-shadow:0 0 1px #444;}
 	100%{transform: scale(1);
@@ -565,7 +565,7 @@
 	0%{-webkit-transform: scale(1);
     color:rgba(0,0,0,0);
     text-shadow:0 0 0px #444;}
-	50%{-webkit-transform: scale(1.1);
+	50%{-webkit-transform: scale(1.2);
     color:rgba(0,0,0,0);
     text-shadow:0 0 1px #444;}
 	100%{-webkit-transform: scale(1);

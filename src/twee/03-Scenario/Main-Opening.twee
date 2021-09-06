@@ -6,20 +6,23 @@
 
 :: 主线 开幕-初次
 
-<<Opening $count>>
-
+<div id='opcontainer'>
+<div id="weirdtext"><<Opening $count>></div>
+</div>
 
 :: 主线 开幕-初次：E
 
 <<if $count lt 8>>
 <<addclass "#eventsituation" "weirdtext">>
-<<silently>><<script>>
+<<script>>
 //requires jQuery because I am lazy.
 $(document).ready(function(){
 	weirdeffect();
 });
 <</script>>
-<</silently>>
+<<else>>
+<<removeclass "#eventsituation" "weirdtext">>
+<<replace '#opcontainer'>><<Opening $count>><</replace>>
 <</if>>
 
 :: 主线 开幕-初次：W [widget]

@@ -2,7 +2,7 @@
 
 function weirdeffect(){
 	
-	var $passage = $('#eventsituation');
+	var $passage = $('#weirdtext');
 	var rawtxt = $passage.html();
 	var len = rawtxt.length;
 	var newtext = '';
