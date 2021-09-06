@@ -6,14 +6,16 @@
     height: 80%;
     width: 680px;
     max-height: 800px;
-    border-radius: 10px;
-    border: 2px rgb(194, 193, 181) solid;
-    background-color: rgba(238, 238, 238, 0.9);
+    border-radius: 20px 5px 5px 20px;
+    border: 3px solid rgba(255, 255, 255, 0.8);
+    background-color: rgba(255, 255, 255, 0.3);
     text-align: left;
     padding: 5px;
     overflow-y: scroll;
     z-index: 1000;
     user-select: none;
+    -webkit-backdrop-filter: drop-shadow(0px 0px 5px rgba(163, 153, 153, 0.2)) blur(68px);
+    backdrop-filter: drop-shadow(0px 0px 5px rgba(163, 153, 153, 0.2)) blur(6px); 
 }
 
 .customOverlay[data-overlay="canvasLayers"],
@@ -130,18 +132,26 @@
 }
 
 #customOverlay button {
-    background-color: #eee;
-    border-color: rgb(182, 174, 153);
     width: fit-content;
     font-size: 12px;
     height: 24px;
+    border-radius: 3px;
+    transition: all 0.3s;    
+    padding-bottom: 2px;
+    border: #eee 1px;
+    background-color: rgba(255, 255, 255, 0.3);
+    color:rgb(31, 31, 48);
+    box-shadow:inset 2px 2px 1px 0px rgba(255,255,255,.5), 1px 1px 2px 0px rgba(0,0,0,.1);
+    outline: none;
   }
   
 #customOverlay button:hover {
-    background-color: rgb(230, 228, 223);
-    border-color: rgb(173, 159, 106);
-    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.5);
+    color:rgb(184, 168, 23);
+    border: #eee 1px;
+    box-shadow:inset 2px 2px 1px 0px rgba(73, 50, 0, 0.1), 1px 1px 2px 0px rgba(255, 248, 186, 0.2);
 }
+
 #customOverlayContent {
     line-height: 20px;
     padding: 3px;

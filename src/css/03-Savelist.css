@@ -1,7 +1,11 @@
 ﻿#savesListContainer {
 	display: flex;
 	flex-direction: column;
-	border: 1px solid #999;
+	border:  1px solid rgba(68, 63, 36, 0.15);
+	border-bottom-width: 2px;
+	border-radius: 2px;
+	margin: 5px;
+	margin-top: 0px;
 }
 
 #savesListContainer .savesListRow {
@@ -9,7 +13,8 @@
 	flex-direction: row;
 	flex-wrap: nowrap;
 	align-items: center;
-	border: 1px solid #999;
+	border:  1px solid rgba(68, 63, 36, 0.1);
+	border-bottom: none;
 	padding: 4px;
 }
 
@@ -48,7 +53,8 @@
 }
 
 #savesListContainer .savesListRow .saveGroup .saveButton input {
-	margin: 3px 0;
+	margin: 1px;
+	border-radius: 2px;
 }
 
 #savesListContainer .savesListRow .saveGroup > .saveDetails {
@@ -71,4 +77,5 @@
 	display: flex;
 	justify-content: right;
 	margin: 0;
+	border-radius: 2px;
 }
