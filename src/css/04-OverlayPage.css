@@ -136,6 +136,7 @@
 }
 
 #customOverlay button {
+    background: transparent;
     width: fit-content;
     font-size: 12px;
     height: 24px;
@@ -148,7 +149,7 @@
 
 #customOverlayContent {
     line-height: 20px;
-    padding: 3px;
+    padding: 10px;
     font-size: 14px;
 }
 

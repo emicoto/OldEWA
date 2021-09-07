@@ -2,6 +2,8 @@
 :: StoryCaption
 <div @class="(Errors.log.length==0?'hidden':'') + ' error-reporter-btn'" onclick="Errors.Reporter.toggle()"></div>
 
+<<showtitle>>
+
 /* 左边栏 UI初始化 */
 <<set $UI.menubutton to false>>
 <<set $UI.statshidden to false>>

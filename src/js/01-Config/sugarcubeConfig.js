@@ -1,13 +1,13 @@
 Config.history.controls = true;
 
-Config.history.maxStates = 5;
+Config.history.maxStates = 2;
 
 State.prng.init()
 
 window.versionUpdateCheck = true;
 window.saveUpdateCheck = true;
 
-Config.saves.slots = 10;
+Config.saves.slots = 14;
 
 Config.saves.onLoad = function (save) {
 	window.versionUpdateCheck = true;

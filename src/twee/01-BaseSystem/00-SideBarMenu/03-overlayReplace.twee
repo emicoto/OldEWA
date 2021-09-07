@@ -2,9 +2,9 @@
 
 <<widget "overlayReplace">>
 	<<if $args[0]>>
-		<<if $currentOverlay isnot $args[0]>>
-			<<set $currentOverlay to $args[0]>>
-			<<run $(".customOverlay").attr("data-overlay",$currentOverlay)>>
+		<<if $UI.currentOverlay isnot $args[0]>>
+			<<set $UI.currentOverlay to $args[0]>>
+			<<run $(".customOverlay").attr("data-overlay",$UI.currentOverlay)>>
 			<<switch $args[0]>>
 			<<case "items">>
 				<<replace #customOverlayTitle>><<OverlayTitle "Items">><</replace>>
@@ -51,7 +51,7 @@
 			<<removeclass "#customOverlay" "hidden">>
 			<<run document.getElementById("customOverlay").scrollTop = 0>>
 		<<else>>
-			<<set $currentOverlay to null>>
+			<<set $UI.currentOverlay to null>>
 			<<addclass "#customOverlay" "hidden">>
 		<</if>>
 	<</if>>
@@ -63,14 +63,14 @@
 	<div id="closebutton">
 	<<button X>>
 		<<addclass "#customOverlay" "hidden">>
-		<<set $currentOverlay to null>>
+		<<set $UI.currentOverlay to null>>
 	<</button>>
 	</div>
 
 	<<if $args[0] is "Profile">>
 		<<button 详细数据>><<overlayReplace "detail">><</button>>
 		<<button 秘密情报>><<overlayReplace "secretfile">><</button>>
-		<<if $currentOverlay isnot "profile">>
+		<<if $UI.currentOverlay isnot "profile">>
 			<<button 基本情报>><<overlayReplace "profile">><</button>>
 		<</if>>
 	<</if>>
@@ -78,18 +78,18 @@
 	<<if $args[0] is "Saves">>
 		<<button "Export/Import Save">>
 			<<overlayReplace "optionsExportImport">>
-			<<set $currentOverlay to null>>
+			<<set $UI.currentOverlay to null>>
 		<</button>>
-		<<if $currentOverlay is "optionsExportImport">>
+		<<if $UI.currentOverlay is "optionsExportImport">>
 			<<button "Return to Options">>
 				<<overlayReplace "saves">>
-				<<set $currentOverlay to "saves">>
+				<<set $UI.currentOverlay to "saves">>
 			<</button>>
 		<</if>>
 	<</if>>
 
 <div id="handle" class="handle">
-<<if $args[0]>><li class="textborder"><<link $args[0]>><<addclass "#customOverlay" "hidden">><<set $currentOverlay to null>><</link>></li><<else>><</if>>
+<<if $args[0]>><li class="textborder"><<link $args[0]>><<addclass "#customOverlay" "hidden">><<set $UI.currentOverlay to null>><</link>></li><<else>><</if>>
 </div>
 <<dashline>>
 

@@ -1,0 +1,66 @@
+﻿:: SaveWidget [widget]
+
+<<widget "showSavedCard">>
+
+<<set _s to $args[1]>>
+<<if $temp.savedetail[_s] isnot null>>
+    <<run T.Saves = V.temp.savedetail[V.args[1]]>>
+    <<run T.data = T.Saves.metadata>>
+<<else>>
+
+<</if>>
+
+
+
+
+<<if $args[0] == "auto">>
+    <div id="savecard" class="glassinset">
+        <div id="cardcontent">
+            <div id="gametime">
+                <span id="sv-date">12月31日</span><br>
+                <span id="sv-time">09:00</span><br>
+                <span id="sv-year">2024年</span>
+            </div>
+            <div id="savename">
+                <span id="sv-name">田中都加特林</span><br>
+                <span id="sc-title">菜鸟新人勇者</span><br>	
+            </div>
+            <div id="sv-location">景南商业中心广场</div>
+            <div id="uid">uid:51234</div>
+            <div id="playedtime">123D 12:29:07</div>
+            <div id="savedtime">2021/9/6 下午9:05:11</div>
+            <div id="buttons">	
+                <input type="button" id="loadbutton" value="LOAD" onclick=""> 			
+                <input type="button" id="delbutton" value="DEL" onclick=""> 		
+            </div>
+        </div>
+    </div>
+<<else>>
+ <div id="savecard" class="glassinset">
+	<div id="cardcontent">
+		<div id="gametime">
+			<span id="sv-date">12月31日</span><br>
+			<span id="sv-time">09:00</span><br>
+			<span id="sv-year">2024年</span>
+		</div>
+		<div id="savename">
+			<span id="sv-name">田中都加特林</span><br>
+			<span id="sc-title">菜鸟新人勇者</span><br>	
+		</div>
+		<div id="sv-location">景南商业中心广场</div>
+		<div id="uid">uid:51234</div>
+		<div id="playedtime">123D 12:29:07</div>
+		<div id="savedtime">2021/9/6 下午9:05:11</div>
+		<div id="savelock">
+			<img id="icon" src="image/icon/locked.png">
+		</div>
+		<div id="buttons">
+			<input type="button" id="savebutton" value="SAVE" onclick=""> 			
+			<input type="button" id="loadbutton" value="LOAD" onclick=""> 			
+			<input type="button" id="delbutton" value="DEL" onclick=""> 		
+		</div>
+	</div>
+ </div>
+ <</if>>
+    
+<</widget>>

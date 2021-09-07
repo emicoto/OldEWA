@@ -372,3 +372,9 @@ sugarcube-2:
       name: resetplaylist
     showmenu:
       name: showmenu
+    showtitle:
+      name: showtitle
+    savePage1:
+      name: savePage1
+    savePage2:
+      name: savePage2

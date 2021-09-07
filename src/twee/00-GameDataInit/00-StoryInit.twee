@@ -1,5 +1,6 @@
 :: StoryInit
-
+/* 首次运行时初始化自动存档 */
+<<run initSaveData()>>
 <!-- 首先初始化资料库 -->
 <<InitDataBase>>
 <<InitBGM>>
@@ -43,10 +44,14 @@
 	persons:3, timelimit:true, hardmode:1, 
 	render: "canvas",
 }>>
+<<set $conf.saves to [
+	{locked:false},{locked:false},{locked:false},{locked:false},{locked:false},{locked:false},
+	{locked:false},{locked:false},{locked:false},{locked:false},{locked:false},{locked:false},
+]>>
 
 /* 按钮演出类的切换开关 */
 <<set $UI to {
-	movebutton:false, menubutton:false, activepage:null, closetmode:"穿", nextbutton:false,
+	movebutton:false, menubutton:false, activepage:null, closetmode:"穿", nextbutton:false, currentOverlay:null,
 }>>
 
 <<set $anounce to {flag:false, text:"", type:"弹出通知"}>>
@@ -90,7 +95,7 @@
 <<if $saveDetails is undefined>>
 	<<set $saveDetails to {
 		exported:{
-			days: clone($passdays),
+			days: clone($days),
 			count: 0,
 			dayCount: 0,
 		},

@@ -17,6 +17,10 @@
 <<link "弹出窗口测试">>
 <<run Dialog.setup("Character Sheet");Dialog.wiki(Story.get("城市生活_1").processText());Dialog.open();>>
 <</link>>
+<<link "存档测试">>
+<<run prepareSaveDetails()>>
+<<run Save.autosave.save(1, {name:PC.info.name, location:V.location, title:PC.info.tag+PC.info.title, days:V.days, date:V.day.month+'月'+V.day.day+'日'+V.day.year+'年', gametime:V.gametime})>>
+<</link>>
 <br><br>
 
 <<link "打开衣柜　 1m" "衣柜">><<passtime 1>><<set $TEquip to clone($Equip)>><</link>><br>

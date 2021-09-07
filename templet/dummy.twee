@@ -1,4 +1,8 @@
 ﻿:: 测试
+text = document.getElementById('situation').innerHTML
+"魔女最近离开父母家，独立出来自己住了。一切才刚开始各种不习惯……<br>\n\n魔女躺在懒人沙发上茫无目的地玩着手机……<br>\n\n<br>"
+document.getElementById('situation').innerHTML = "测试看看<br>"+text
+
 
 在js里用window.变量 宣言就可以直接用了哦！
 万万没想到汉字也可以！ 要用print来打印出来！

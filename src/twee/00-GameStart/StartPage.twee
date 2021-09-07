@@ -6,13 +6,11 @@
 }
 
 :: StoryTitle
-失樂園物語
+EWA
 
-:: StoryBanner
-<img src="image/banner.png">
+:: StoryDisplayTitle
+EWA v<<print StartConfig.version>>
 
-:: StorySubtitle
-Elysion World Adventure
 
 :: Start [nosave]
 <<audio "标题" volume 0.5 play loop>>

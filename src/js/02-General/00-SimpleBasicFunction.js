@@ -8,6 +8,14 @@ window.between = function(x, min, max){
 	return x >= min && x <= max;
 }
 
+window.swap = function(arr, a, b){
+    let c = arr[a]
+    let d = arr[b]
+    arr[b] = c;
+    arr[a] = d;
+    return arr
+}
+
 window.deck = function(){
 	var names = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
 	var suits = ['Hearts','Diamonds','Spades','Clubs'];

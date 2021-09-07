@@ -94,3 +94,7 @@
 .textborder {
     text-shadow: -1px -1px 0px rgba(255, 255, 255, 0.5), 1px 1px 0px rgba(255, 255, 255, 0.5), -1px 1px 0px rgba(255, 255, 255, 0.5), 1px -1px 0px rgba(255, 255, 255, 0.5);
 }
+
+.glassinset {
+  box-shadow: inset 1px 1px 0px rgba(68,63,36,0.3), 1px 1px 0px rgb(255,255,255,0.8);
+}

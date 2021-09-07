@@ -8,7 +8,7 @@
 <br>
 
 <div id="append-text" class="append-normal"></div>
-<div class="situation">
+<div id="situation" class="situation">
 <<you>>站在公寓门前，在手机上查看景南市的地图，思考着接下来去哪里。<br>
 </div>
 
@@ -42,7 +42,7 @@
 <br>
 
 <div id="append-text" class="append-normal"></div>
-<div class="situation">
+<div id="situation" class="situation">
 <<you>>坐在公园的长椅上，悠闲地看着天上的云朵，偶然会被飞过的小鸟吸引目光。<br>
 </div>
 
@@ -69,7 +69,7 @@
 <br>
 
 <div id="append-text" class="append-normal"></div>
-<div class="situation"><<=F.getsituation("嘉庆广场")>></div>
+<div id="situation" class="situation"><<=F.getsituation("嘉庆广场")>></div>
 
 <br>
 <div class="tolink">

@@ -5,9 +5,9 @@
 <</widget>>
 
 <<widget "showtitle">>
-    <div align="center">
-        <img src="image/banner.png">
-        <div id="story-title">失乐园物语</div>
+    <div id="showtitle" align="center">
+        <img id="story-banner" src="image/banner.png">
+        <div id="story-title">失樂園物語</div>
         <div id="story-subtitle">Elysion World Adventure</div>
     </div>
 <</widget>>

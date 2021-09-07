@@ -67,6 +67,7 @@ window.randomtext = function(a){
 /*RandomEventRate*/
 function RER(){
     V.RER = random(0,100)
+    return V.RER
 }
 F.RER = RER
 DefineMacroS("setRER",RER)

@@ -17,7 +17,7 @@
 
 
 <!-- 隐藏元素 */ -->
-<<set $currentOverlay to null>>
+<<set $UI.currentOverlay to null>>
 <div id="customOverlay" class="customOverlay hidden">
 	<div id="customOverlayTitle" class="fixedClose"></div>
 	<div id="customOverlayContent"></div>

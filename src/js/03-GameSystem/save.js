@@ -1,79 +1,25 @@
-window.prepareSaveDetails = function (forceRun){
-	if("ewaSaveDetails" in localStorage === false || forceRun === true){
-		var saveDetails = {autosave: null, slots:[null,null,null,null,null,null,null,null,null,null]}
-		var SugarCubeSaveDetails = Save.get();
-		if(SugarCubeSaveDetails.autosave != null){
-			saveDetails.autosave = {
-				title:SugarCubeSaveDetails.autosave.title,
-				date:SugarCubeSaveDetails.autosave.date,
-				metadata:SugarCubeSaveDetails.autosave.metadata
-			}
-			if(saveDetails.autosave.metadata === undefined){
-				saveDetails.autosave.metadata = {saveName:""};
-			}
-			if(saveDetails.autosave.metadata.saveName === undefined){
-				saveDetails.autosave.metadata.saveName = "";
-			}
-		}
-		for (var i=0; i<SugarCubeSaveDetails.slots.length;i++){
-			if(SugarCubeSaveDetails.slots[i] !== null){
-				saveDetails.slots[i] = {
-					title:SugarCubeSaveDetails.slots[i].title,
-					date:SugarCubeSaveDetails.slots[i].date,
-					metadata:SugarCubeSaveDetails.slots[i].metadata
-				};
-				if(saveDetails.slots[i].metadata === undefined){
-					saveDetails.slots[i].metadata = {saveName:"old save", saveId:0}
-				}
-				if(saveDetails.slots[i].metadata.saveName === undefined){
-					saveDetails.slots[i].metadata.saveName = "old save";
-				}
-			}else{
-				saveDetails.slots[i] = null;
-			}
-		}
 
-		localStorage.setItem("ewaSaveDetails" ,JSON.stringify(saveDetails));
-	}
-	return;
-}
-
-window.setSaveDetail = function (saveSlot, metadata, story){
-	var saveDetails = JSON.parse(localStorage.getItem("ewaSaveDetails"));
-	if(saveSlot === "autosave"){
-		saveDetails.autosave = {
-			title:SugarCube.Story.get(V.passage).description(),
-			date:Date.now(),
-			metadata:metadata
-		};
-	}else{
-		var slot = parseInt(saveSlot);
-		saveDetails.slots[slot] = {
-			title:SugarCube.Story.get(V.passage).description(),
-			date:Date.now(),
-			metadata:metadata
-		};
-	}
-	localStorage.setItem("ewaSaveDetails" ,JSON.stringify(saveDetails));
-}
 
 window.getSaveDetails = function (saveSlot){
-	if("ewaSaveDetails" in localStorage) return JSON.parse(localStorage.getItem("ewaSaveDetails"));
+	if("ewaSaveDetails" in localStorage){
+		let saves = JSON.parse(localStorage.getItem("ewaSaveDetails"))
+		if(saves) {T.saves = saves ;return saves;}
+		else {T.saves = returnSaveDetails(); return returnSaveDetails()}
+	}
 }
 
-window.deleteSaveDetails = function (saveSlot){
+window.deleteSaveDetails = function (type,slot){
 	var saveDetails = JSON.parse(localStorage.getItem("ewaSaveDetails"));
-	if(saveSlot === "autosave"){
-		saveDetails.autosave = null;
+	if(type === "autosave"){
+		saveDetails.autosave[slot] = null;
 	}else{
-		var slot = parseInt(saveSlot);
-		saveDetails.slots[slot] = null;
+		saveDetails.slots[slot-1] = null;
 	}
 	localStorage.setItem("ewaSaveDetails" ,JSON.stringify(saveDetails));
 }
 
 window.deleteAllSaveDetails = function (saveSlot){
-	var saveDetails = {autosave: null, slots:[null,null,null,null,null,null,null,null,null,null]};
+	var saveDetails = {autosave:[null,null,null,null],slots:[null,null,null,null,null,null,null,null,null,null]};
 	localStorage.setItem("ewaSaveDetails" ,JSON.stringify(saveDetails));
 }
 
@@ -85,29 +31,24 @@ window.resetSaveMenu = function () {
 	new Wikifier(null, '<<resetSaveMenu>>');
 }
 
-window.loadSave = function (saveSlot, confirm) {
-	if (V.confirmLoad === true && confirm === undefined) {
+window.loadSave = function (type, saveSlot , confirm) {
+	if (V.conf.checkLoad === true && confirm === undefined) {
 		new Wikifier(null, '<<loadConfirm ' + saveSlot + '>>');
 	} else {
-		if (saveSlot === "auto") {
-			Save.autosave.load();
-		} else {
-			Save.slots.load(saveSlot);
-		}
+		Save.slots.load(saveSlot);
 	}
 }
 
-window.save = function (saveSlot, confirm, saveId, saveName) {
+window.save = function (saveSlot, confirm, saveId, data) {
 	if (saveId == null) {
 		new Wikifier(null, '<<saveConfirm ' + saveSlot + '>>');
-	} else if ((V.confirmSave === true && confirm != true) || (V.saveId != saveId && saveId != null)) {
+	} else if ((V.conf.checkSave === true && confirm != true) || (V.saveId != saveId && saveId != null)) {
 		new Wikifier(null, '<<saveConfirm ' + saveSlot + '>>');
 	} else {
 		if (saveSlot != undefined) {
-			updateSavesCount();
-			Save.slots.save(saveSlot, null, { "saveId": saveId, "saveName": saveName });
-			setSaveDetail(saveSlot, { "saveId": saveId, "saveName": saveName })
-			V.currentOverlay = null;
+			Save.slots.save(saveSlot, null, data);
+			setSaveDetail("normal", saveSlot,  data)
+			V.UI.currentOverlay = null;
 			overlayShowHide("customOverlay");
 		}
 	}
@@ -123,7 +64,7 @@ window.deleteSave = function (saveSlot, confirm) {
 			deleteAllSaveDetails();
 		}
 	} else if (saveSlot === "auto") {
-		if (V.confirmDelete === true && confirm === undefined) {
+		if (V.conf.checkDel === true && confirm === undefined) {
 			new Wikifier(null, '<<deleteConfirm ' + saveSlot + '>>');
 			return;
 		} else {
@@ -131,7 +72,7 @@ window.deleteSave = function (saveSlot, confirm) {
 			deleteSaveDetails("autosave");
 		}
 	} else {
-		if (V.confirmDelete === true && confirm === undefined) {
+		if (V.conf.checkDel === true && confirm === undefined) {
 			new Wikifier(null, '<<deleteConfirm ' + saveSlot + '>>');
 			return;
 		} else {
@@ -273,80 +214,6 @@ var importSettingsData = function (data) {
 	if (result != null && result != undefined) {
 		//console.log("json",JSON.parse(result));
 		S = JSON.parse(result);
-		if (V.passage === "Start" && S.starting != undefined) {
-			S.starting = settingsConvert(false, "starting", S.starting)
-		}
-		if(S.general != undefined){
-			S.general = settingsConvert(false, "general", S.general)
-		}
-
-		if (V.passage === "Start" && S.starting != undefined) {
-			var listObject = settingsObjects("starting");
-			var listKey = Object.keys(listObject);
-			var namedObjects = ["player", "skinColor"];
-
-			for (var i = 0; i < listKey.length; i++) {
-				if (namedObjects.includes(listKey[i]) && S.starting[listKey[i]] != undefined) {
-					var itemKey = Object.keys(listObject[listKey[i]]);
-					for (var j = 0; j < itemKey.length; j++) {
-						if (V[listKey[i]][itemKey[j]] != undefined && S.starting[listKey[i]][itemKey[j]] != undefined) {
-							if (validateValue(listObject[listKey[i]][itemKey[j]], S.starting[listKey[i]][itemKey[j]])) {
-								V[listKey[i]][itemKey[j]] = S.starting[listKey[i]][itemKey[j]];
-							}
-						}
-					}
-				} else if (!namedObjects.includes(listKey[i])) {
-					if (V[listKey[i]] != undefined && S.starting[listKey[i]] != undefined) {
-						if (validateValue(listObject[listKey[i]], S.starting[listKey[i]])) {
-							V[listKey[i]] = S.starting[listKey[i]];
-						}
-					}
-				}
-			}
-		}
-
-		if (S.general != undefined) {
-			var listObject = settingsObjects("general");
-			var listKey = Object.keys(listObject);
-			var namedObjects = ["map", "skinColor", "shopDefaults"];
-
-			for (var i = 0; i < listKey.length; i++) {
-				if (namedObjects.includes(listKey[i]) && S.general[listKey[i]] != undefined) {
-					var itemKey = Object.keys(listObject[listKey[i]]);
-					for (var j = 0; j < itemKey.length; j++) {
-						if (V[listKey[i]][itemKey[j]] != undefined && S.general[listKey[i]][itemKey[j]] != undefined) {
-							if (validateValue(listObject[listKey[i]][itemKey[j]], S.general[listKey[i]][itemKey[j]])) {
-								V[listKey[i]][itemKey[j]] = S.general[listKey[i]][itemKey[j]];
-							}
-						}
-					}
-				} else if (!namedObjects.includes(listKey[i])) {
-					if (V[listKey[i]] != undefined && S.general[listKey[i]] != undefined) {
-						if (validateValue(listObject[listKey[i]], S.general[listKey[i]])) {
-							V[listKey[i]] = S.general[listKey[i]];
-						}
-					}
-				}
-			}
-		}
-
-		if (S.npc != undefined) {
-			var listObject = settingsObjects("npc");
-			var listKey = Object.keys(listObject);
-			for (var i = 0; i < V.NPCNameList.length; i++) {
-				if (S.npc[V.NPCNameList[i]] != undefined) {
-					for (var j = 0; j < listKey.length; j++) {
-						//Overwrite to allow for "none" default value in the start passage to allow for rng to decide
-						if (V.passage === "Start" && ["pronoun","gender"].includes(listKey[j]) && S.npc[V.NPCNameList[i]][listKey[j]] === "none"){
-							V.NPCName[i][listKey[j]] = S.npc[V.NPCNameList[i]][listKey[j]];
-						}
-						else if (validateValue(listObject[listKey[j]], S.npc[V.NPCNameList[i]][listKey[j]])) {
-							V.NPCName[i][listKey[j]] = S.npc[V.NPCNameList[i]][listKey[j]];
-						}
-					}
-				}
-			}
-		}
 	}
 }
 
