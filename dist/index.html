@@ -17204,7 +17204,7 @@ required:false,
 &lt;&lt;/widget&gt;&gt;
 
 &lt;&lt;widget &quot;saveList&quot;&gt;&gt;
-&lt;&lt;run saveOK(); V.temp.savedetail = getSaveDetails()&gt;&gt;
+&lt;&lt;run saveOK(); prepareSaveDetails(); V.temp.savedetail = getSaveDetails()&gt;&gt;
 &lt;&lt;run V.temp.localtime = new Date().getTime()&gt;&gt;
 
 &lt;div id=&quot;savePage&quot;&gt;

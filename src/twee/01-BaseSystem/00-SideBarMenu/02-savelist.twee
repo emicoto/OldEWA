@@ -5,7 +5,7 @@
 <</widget>>
 
 <<widget "saveList">>
-<<run saveOK(); V.temp.savedetail = getSaveDetails()>>
+<<run saveOK(); prepareSaveDetails(); V.temp.savedetail = getSaveDetails()>>
 <<run V.temp.localtime = new Date().getTime()>>
 
 <div id="savePage">
