@@ -7,13 +7,21 @@ window.initSaveData = function(forceRun){
         localStorage.setItem("ewaSaveDetails" ,JSON.stringify(saveDetails))
     }
     else if('ewaSaveDetails' in localStorage===true){
-        let save = JSON.parse(localStorage.getItem("ewaSaveDetails"))
+        let save = localStorage.getItem("ewaSaveDetails")
 
-        if(!save.autosave || save?.autosave?.length < 4 || save?.slots?.length < 12){
-            let newsaves = prepareSaveDetails()
+        if(save == "undefined"){
+            let saveDetails = {autosave:[null,null,null,null],slots:[null,null,null,null,null,null,null,null,null,null,null,null]}
+            localStorage.setItem("ewaSaveDetails" ,JSON.stringify(saveDetails))
+        }
+        else{
+            let save = JSON.parse(localStorage.getItem("ewaSaveDetails"))
 
-            localStorage.setItem("ewaSaveDetails" ,JSON.stringify(newsaves))
-            return newsaves
+            if(!save.autosave || save?.autosave?.length < 4 || save?.slots?.length < 12){
+                let newsaves = prepareSaveDetails()
+
+                localStorage.setItem("ewaSaveDetails" ,JSON.stringify(newsaves))
+                return newsaves
+            }
         }
         return save
     }
