@@ -12589,7 +12589,7 @@ window.initSaveData = function(forceRun){
     else if('ewaSaveDetails' in localStorage===true){
         let save = JSON.parse(localStorage.getItem("ewaSaveDetails"))
 
-        if(save.autosave == null || save.autosave.length < 4 || save.slots.length < 12){
+        if(!save.autosave || save?.autosave?.length < 4 || save?.slots?.length < 12){
             let newsaves = prepareSaveDetails()
 
             localStorage.setItem("ewaSaveDetails" ,JSON.stringify(newsaves))
@@ -17374,13 +17374,13 @@ required:false,
 
 &lt;&lt;widget &quot;loadConfirm&quot;&gt;&gt;
 	&lt;&lt;replace #saveList&gt;&gt;
-		&lt;&lt;loadWarning $args[0]&gt;&gt;
+		&lt;&lt;loadWarning $args[1] $args[0]&gt;&gt;
 	&lt;&lt;/replace&gt;&gt;
 &lt;&lt;/widget&gt;&gt;
 
 &lt;&lt;widget &quot;deleteConfirm&quot;&gt;&gt;
 	&lt;&lt;replace #saveList&gt;&gt;
-		&lt;&lt;deleteWarning $args[0]&gt;&gt;
+		&lt;&lt;deleteWarning $args[1] $args[0]&gt;&gt;
 	&lt;&lt;/replace&gt;&gt;
 &lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="37" name="overlayReplace" tags="widget" position="850,475" size="100,100">&lt;&lt;widget &quot;overlayReplace&quot;&gt;&gt;
 	&lt;&lt;if $args[0]&gt;&gt;

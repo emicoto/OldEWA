@@ -9,7 +9,7 @@ window.initSaveData = function(forceRun){
     else if('ewaSaveDetails' in localStorage===true){
         let save = JSON.parse(localStorage.getItem("ewaSaveDetails"))
 
-        if(save.autosave == null || save.autosave.length < 4 || save.slots.length < 12){
+        if(!save.autosave || save?.autosave?.length < 4 || save?.slots?.length < 12){
             let newsaves = prepareSaveDetails()
 
             localStorage.setItem("ewaSaveDetails" ,JSON.stringify(newsaves))
