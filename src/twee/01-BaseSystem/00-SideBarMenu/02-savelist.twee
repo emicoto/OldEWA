@@ -42,75 +42,48 @@
 <div id="s-pages" style="text-align: left;"><<link "< prev page">><<replace "#savePage">><<savePage1>><</replace>><</link>></div>
 <</widget>>
 
-<<widget "clearAllWarning">>
-<div class="saveBorder">
-	<h4><span class="red">Warning</span> - Are you sure you would like to delete all saves?</h4>
 
-	<input type="button" class="close saveMenuConfirm" value="Confirm Delete All" onclick="deleteSave('all', true)"/>
+<<widget "saveExportImport">>
+<h4>存档文件导入/导出</h4>
 
-	<input type="button" class="saveMenuButton saveMenuConfirm" value="Cancel" onclick="resetSaveMenu();"/>
-	<br>
-</div>
-<</widget>>
-
-<<widget "saveWarning">>
-<div class="saveBorder">
-	<<if _saveDetails.slots[$args[0]] isnot null>>
-		<<if _saveDetails.slots[$args[0]].metadata isnot undefined>>
-			<<if _saveDetails.slots[$args[0]].metadata.saveId isnot $saveId>>
-				<<set _showSaveId to true>>
-			<<else>>
-				<<set _showSaveId to false>>
-			<</if>>
-		<<else>>
-			<<set _showSaveId to "noId">>
-		<</if>>
-	<</if>>
-	<<if _saveDetails.slots[$args[0]] is null>>
-		<h4 class="red">Save on slot <<print ($args[0] is "auto"? "auto": $args[0] + 1)>></h4>
-		<<if _showSaveId is true>>
-		<span class="red">Save ID does not match, continue with overwrite?</span>
-		<br>
-		<</if>>
-		<<if _showSaveId is "noId">>
-		<span class="red">Save ID not found on older save, continue with overwrite?</span>
-		<br>
-		<</if>>
+<<if SugarCube.Browser.isMobile.any() is true>>
+	移动端并不支持文件的导出和导入。
+<<else>>
+	从文件中读取: <input id="saveImport" type="file" value="Load from file" onchange="importSave(this.files)">
+	<br><br>
+	<<if $passage is "Start" or $passage is "Start2">>
+		Please load a save before trying to export a save file.
 	<<else>>
-		<h4 class="red">Overwrite Save on slot <<print ($args[0] is "auto"? "auto": $args[0] + 1)>>?</h4>
-		<<if _showSaveId is true>>
-		<span class="red">Save ID does not match, continue with overwrite?</span>
-		<br>
-		<</if>>
-		<<if _showSaveId is "noId">>
-		<span class="red">Save ID not found on older save, continue with overwrite?</span>
-		<br>
-		<</if>>
-		Old Save: <<print _saveDetails.slots[$args[0]].title.slice(0,10)>>
-		<br>
-		<<print new Date(_saveDetails.slots[$args[0]].date).toLocaleString()>>
-		<br>
+		<<set _exportName to "'EWA-"+$saveId+"-"+$PC.info.name+"'">>
+		<input type="button" value="Save to file" @onclick="'updateExportDay();SugarCube.Save.export('+_exportName+')'">
 	<</if>>
-	<<if _saveDetails.slots[$args[0]].metadata isnot undefined>>
-		<<if _saveDetails.slots[$args[0]].metadata.saveName isnot undefined>>
-			Older Save Name: <<print _saveDetails.slots[$args[0]].metadata.saveName>>
-			<br>
-		<</if>>
-	<</if>>
-	<<if _showSaveId is true>>
-		Older Save ID: <<print _saveDetails.slots[$args[0]].metadata.saveId>>
-		<br><br>
-		<<if $saveName isnot undefined>>
-			Current Save Name: <<print $saveName>>
-			<br>
-		<</if>>
-		Current Save ID: <<print $saveId>>
-		<br>
-	<</if>>
-	<input type="button" class="saveMenuButton saveMenuConfirm" value="Save" @onclick="'save('+ $args[0] +', true,'+$saveId+', `'+$saveName+'`)'"/>
-	<input type="button" class="saveMenuButton saveMenuConfirm" value="Cancel" onclick="resetSaveMenu();"/>
+<</if>>
+
+<h4>Text Import/Export</h4>
+	This feature lets you transfer saves between devices when one or more does not allow access to save files, such as on Android.
 	<br>
-</div>
+	To save, click on "Get Save Data", then copy and paste the save data where required.
+	<br>
+	To load, paste in the save data then click "Load Save Data".
+	<br>
+	To transfer to and from Android, it is recommended to use email or a service such as pastebin. Please ensure that the start and the end of the save is exact to prevent issues.
+	<br>
+	Click on "Copy Text Area" to copy the current contents for you. The button name will change to "Copying Error" if your device or browser does not support it.
+	<br><br>
+	<textarea id="saveDataInput" rows="4" cols="40" onClick="if(V.disableAutoSelect == false)this.select();"></textarea>
+	<br>
+	<input type="button" value="Clear Text Box" onclick="clearTextBox('saveDataInput')"/>
+	<input type="button" value="Top of Text Box" onclick="topTextArea('saveDataInput')"/>
+	<input type="button" value="Bottom of Text Box" onclick="bottomTextArea('saveDataInput')"/>
+	<input type="button" value="Get Save Data" onclick="getSaveData()"/>
+	<input type="button" value="Load Save Data" onclick="loadSaveData()"/>
+	<input id="CopyTextArea" type="button" value="Copy Text Area" onclick="copySavedata('saveDataInput')">
+<br><br>
+<label>
+	<<print '<<checkbox "$disableAutoSelect" false true '+($disableAutoSelect is true? "checked":"")+'>>'>>
+	Disables auto select.
+</label>
+<br><br>
 <</widget>>
 
 <<widget "loadWarning">>
@@ -158,18 +131,6 @@
 <<widget "resetSaveMenu">>
 	<<replace #saveList>>
 		<<saveList>>
-	<</replace>>
-<</widget>>
-
-<<widget "clearSaveMenu">>
-	<<replace #saveList>>
-		<<clearAllWarning>>
-	<</replace>>
-<</widget>>
-
-<<widget "saveConfirm">>
-	<<replace #saveList>>
-		<<saveWarning $args[0]>>
 	<</replace>>
 <</widget>>
 

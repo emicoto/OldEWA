@@ -42,8 +42,9 @@
 
 <<set $conf to {
 	persons:3, timelimit:true, hardmode:1, 
-	render: "canvas",
+	render: "canvas", checkSave: true, checkLoad: false, checkDel: true,
 }>>
+
 <<set $conf.saves to [
 	{locked:false},{locked:false},{locked:false},{locked:false},{locked:false},{locked:false},
 	{locked:false},{locked:false},{locked:false},{locked:false},{locked:false},{locked:false},

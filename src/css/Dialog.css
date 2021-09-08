@@ -17,13 +17,14 @@
     height: fit-content;
     min-height: 100px;
     max-height: 600px;
-    overflow-y: scroll;
+    overflow: scroll;
+    overflow-wrap: anywhere;
     border: 2px solid rgba(255, 255, 255, 0);
     background-color: rgba(255, 255, 255, 0.5);
-    border-radius: 10px 3px 3px 10px;
+    border-radius: 10px;
     margin-top: 10%;
     box-shadow: -2px -2px 1px rgba(255, 255, 255, 0.75), 2px 2px 1px rgba(120, 120, 120, 0.3), 5px 30px 20px rgba(40, 40, 40, 0.3);
-    padding: 2px;
+    padding: 10px;
 }
 
 #ui-dialog-titlebar {
@@ -49,6 +50,7 @@
     position: absolute;
     top:2px;
     right:5px;
+    z-index: 100;
 }
 #ui-dialog-close:hover {
     background-color: rgb(255, 255, 255);
@@ -56,7 +58,8 @@
 }
 #ui-dialog-body {
     background-color: transparent;
-    border: none
+    border: none;
+    font-family:'Noto Sans SC';
 }
 #ui-dialog-body hr {
     background-color: #ccc;
@@ -84,10 +87,25 @@
     box-shadow: 0px 0px 3px rgba(182, 240, 255, 0.5);
 }
 
+#ui-dialog-body input[type="button"]{
+    background: transparent;
+    border-radius: 5px;
+    min-width: 50px;
+    max-height: 28px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+
 #alert-ok {
-    position:absolute;
-    bottom:5px;
-    right:5px;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+
+#alert-cancel {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
 }
 
 /* List-based dialog styling */

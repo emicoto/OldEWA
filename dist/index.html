@@ -717,7 +717,10 @@ hr {
 }
 
 .graytext {
-    color: rgb(128, 126, 111);
+  color: rgb(165 161 142);
+}
+.goldtext {
+    color: #b7a900;
 }
 
 .macro-button {
@@ -1433,7 +1436,6 @@ body #story-caption #storyCaptionDiv {
     position: absolute;
     font-size: 10px;
     font-family: 'Noto Sans SC';
-    color: #b7a900;
     left: 5px;
     bottom: 5px;
 }
@@ -1525,6 +1527,12 @@ body #story-caption #storyCaptionDiv {
 	font-size: 10px;
 	letter-spacing: 2px;
 	font-family: Georgia;
+}
+
+#saveDataInput {
+    min-width: 80%;
+    height: 120px;
+    resize: none;
 }
 /* twine-user-stylesheet #6: "04-OverlayPage.css" */
 .customOverlay {
@@ -1624,7 +1632,11 @@ body #story-caption #storyCaptionDiv {
     left:5px;
     float: left;
 }
-  
+
+#customOverlayTitle {
+    height: 40px;
+}
+
 #overlaytitle li {
     list-style:none;
     list-style-position: inside;
@@ -3638,13 +3650,14 @@ html[data-debug-view] .debug.hidden .debug {
     height: fit-content;
     min-height: 100px;
     max-height: 600px;
-    overflow-y: scroll;
+    overflow: scroll;
+    overflow-wrap: anywhere;
     border: 2px solid rgba(255, 255, 255, 0);
     background-color: rgba(255, 255, 255, 0.5);
-    border-radius: 10px 3px 3px 10px;
+    border-radius: 10px;
     margin-top: 10%;
     box-shadow: -2px -2px 1px rgba(255, 255, 255, 0.75), 2px 2px 1px rgba(120, 120, 120, 0.3), 5px 30px 20px rgba(40, 40, 40, 0.3);
-    padding: 2px;
+    padding: 10px;
 }
 
 #ui-dialog-titlebar {
@@ -3670,6 +3683,7 @@ html[data-debug-view] .debug.hidden .debug {
     position: absolute;
     top:2px;
     right:5px;
+    z-index: 100;
 }
 #ui-dialog-close:hover {
     background-color: rgb(255, 255, 255);
@@ -3677,7 +3691,8 @@ html[data-debug-view] .debug.hidden .debug {
 }
 #ui-dialog-body {
     background-color: transparent;
-    border: none
+    border: none;
+    font-family:'Noto Sans SC';
 }
 #ui-dialog-body hr {
     background-color: #ccc;
@@ -3705,10 +3720,25 @@ html[data-debug-view] .debug.hidden .debug {
     box-shadow: 0px 0px 3px rgba(182, 240, 255, 0.5);
 }
 
+#ui-dialog-body input[type="button"]{
+    background: transparent;
+    border-radius: 5px;
+    min-width: 50px;
+    max-height: 28px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+
 #alert-ok {
-    position:absolute;
-    bottom:5px;
-    right:5px;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+
+#alert-cancel {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
 }
 
 /* List-based dialog styling */
@@ -5368,6 +5398,12 @@ window.swap = function(arr, a, b){
     arr[a] = d;
     return arr
 }
+
+window.moveElement = function (arr, n) {
+  if(Math.abs(n)>arr.length) n = n%arr.length
+  return arr.slice(-n).concat(arr.slice(0,-n))
+}
+
 
 window.deck = function(){
 	var names = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
@@ -12770,7 +12806,7 @@ window.initSaveData = function(forceRun){
     else if('ewaSaveDetails' in localStorage===true){
         let save = localStorage.getItem("ewaSaveDetails")
 
-        if(save == "undefined"){
+        if(save == "undefined" || save == undefined){
             let saveDetails = {autosave:[null,null,null,null],slots:[null,null,null,null,null,null,null,null,null,null,null,null]}
             localStorage.setItem("ewaSaveDetails" ,JSON.stringify(saveDetails))
         }
@@ -12786,6 +12822,10 @@ window.initSaveData = function(forceRun){
         }
         return save
     }
+}
+
+window.initLocalStorage = function(){
+    localStorage.removeItem("ewaSaveDetails")
 }
 
 window.saveOK = function(slot){
@@ -12933,27 +12973,59 @@ window.setSaveDetail = function (type, slot, metadata, story ){
 }
 F.setSaveDetail = window.setSaveDetail
 
-window.SaveGame = function(slot, uid, metadata, check) {
+window.SaveGame = function(slot, uid=null, metadata, check) {
     if(!metadata){
         var metadata = setSaveMetaData()
     }
 
-    let fslot = slot - 4
+    console.log(uid, check)
 
         /* 覆盖时的确认检测，以及不是同一个角色的档案时的确认检测 */
-    if((V.conf.checkSave === true && check === true) || (V.saveId != uid && uid != null)) {
-        new Wikifier(null, '<<saveConfirm '+fslot+'>>') /* 确认时要读取一下 伪存档，把 伪slot id扔回去*/
+    if (uid != null && V.saveId != uid && check===true){
+        SaveAlert('UID',slot)
+    }        
+    else if ( V.conf.checkSave === true && check===true) {
+         SaveAlert('overwrite',slot)
     }
+
     else{
+
         if(slot > 0){
+            updateSavesCount()
+
             Save.slots.save(slot,null,metadata);
-            setSaveDetail("normal",slot, metadata)
-            resetSaveMenu()
+            setSaveDetail("normal",slot, metadata);
+            resetSaveMenu();
+
         }
     }
 
 }
 F.SaveGame = window.SaveGame
+
+window.SaveAlert = function(type, slot){
+    slot = parseInt(slot)
+
+    let a = getSaveDetails() 
+    let fslot = (slot-4)
+    let sdata = a.slots[fslot].metadata
+    let pslot = "N"+(fslot < 10? "0":"")+(fslot+1)
+
+    let text = (
+    `<span style='color:#EA0827;'><b>`
+    +(type=="UID"? `即将覆盖的${pslot}号存档与现在游玩的角色UID并不相同。`: `即将覆盖${pslot}号存档。`)+"</b></span><br>"
+    +"确定要覆盖？<br><br>"
+    +(type=="UID"? `现在的角色UID：${V.saveId}<br>${pslot}存档角色UID：${sdata.saveId}<br>` : "")
+    +`${pslot}存档角色：${sdata.saveName}<br>`
+    +"游戏内时间："+`${sdata.gamedate.year}年${sdata.gamedate.month}月${sdata.gamedate.day}日 ${sdata.gamedate.hour}时${sdata.gamedate.min}分<br>`
+    +"所在地点："+sdata.location+"<br><br><br>"
+    +`<input id='alert-ok' type='button' value='确定' onClick='SaveGame(${slot});SugarCube.Dialog.close()'>`
+    +`<input id='alert-cancel' type='button' value='取消' onClick='SugarCube.Dialog.close()'>`
+    )
+
+    Dialog.append(text)
+    Dialog.open()
+}
 
 window.LoadGame = function(type, slot, check) {
 
@@ -13029,7 +13101,7 @@ function showSavedCard(type,slot,obj){
             +`</div>`
 
             +`<div id="sv-location">${T.data.location}</div>`
-            +`<div id="uid">UID:${T.data.saveId}</div>`
+            +`<div id="uid" @class="(T.data.saveId == V.saveId ? 'goldtext' : 'graytext')">UID:${T.data.saveId}</div>`
             +`<div id="playedtime">${playedtime}</div>`
             +`<div id="savedtime">${savedtime}</div>`
 
@@ -13065,7 +13137,7 @@ function showSavedCard(type,slot,obj){
             +'</div>'
 
             +'<div id="sv-location"></div>'
-            +'<div id="uid">UID: - - - - -</div>'
+            +'<div id="uid" class="graytext">UID: - - - - -</div>'
             +'<div id="playedtime"></div>'
             +'<div id="savedtime">- - : - - : - -</div>'
 
@@ -15129,8 +15201,9 @@ DefineMacroS("delay",delay)
 
 &lt;&lt;set $conf to {
 	persons:3, timelimit:true, hardmode:1, 
-	render: &quot;canvas&quot;,
+	render: &quot;canvas&quot;, checkSave: true, checkLoad: false, checkDel: true,
 }&gt;&gt;
+
 &lt;&lt;set $conf.saves to [
 	{locked:false},{locked:false},{locked:false},{locked:false},{locked:false},{locked:false},
 	{locked:false},{locked:false},{locked:false},{locked:false},{locked:false},{locked:false},
@@ -17432,75 +17505,48 @@ required:false,
 &lt;div id=&quot;s-pages&quot; style=&quot;text-align: left;&quot;&gt;&lt;&lt;link &quot;&lt; prev page&quot;&gt;&gt;&lt;&lt;replace &quot;#savePage&quot;&gt;&gt;&lt;&lt;savePage1&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
 &lt;&lt;/widget&gt;&gt;
 
-&lt;&lt;widget &quot;clearAllWarning&quot;&gt;&gt;
-&lt;div class=&quot;saveBorder&quot;&gt;
-	&lt;h4&gt;&lt;span class=&quot;red&quot;&gt;Warning&lt;/span&gt; - Are you sure you would like to delete all saves?&lt;/h4&gt;
 
-	&lt;input type=&quot;button&quot; class=&quot;close saveMenuConfirm&quot; value=&quot;Confirm Delete All&quot; onclick=&quot;deleteSave(&#39;all&#39;, true)&quot;/&gt;
+&lt;&lt;widget &quot;saveExportImport&quot;&gt;&gt;
+&lt;h4&gt;存档文件导入/导出&lt;/h4&gt;
 
-	&lt;input type=&quot;button&quot; class=&quot;saveMenuButton saveMenuConfirm&quot; value=&quot;Cancel&quot; onclick=&quot;resetSaveMenu();&quot;/&gt;
-	&lt;br&gt;
-&lt;/div&gt;
-&lt;&lt;/widget&gt;&gt;
-
-&lt;&lt;widget &quot;saveWarning&quot;&gt;&gt;
-&lt;div class=&quot;saveBorder&quot;&gt;
-	&lt;&lt;if _saveDetails.slots[$args[0]] isnot null&gt;&gt;
-		&lt;&lt;if _saveDetails.slots[$args[0]].metadata isnot undefined&gt;&gt;
-			&lt;&lt;if _saveDetails.slots[$args[0]].metadata.saveId isnot $saveId&gt;&gt;
-				&lt;&lt;set _showSaveId to true&gt;&gt;
-			&lt;&lt;else&gt;&gt;
-				&lt;&lt;set _showSaveId to false&gt;&gt;
-			&lt;&lt;/if&gt;&gt;
-		&lt;&lt;else&gt;&gt;
-			&lt;&lt;set _showSaveId to &quot;noId&quot;&gt;&gt;
-		&lt;&lt;/if&gt;&gt;
-	&lt;&lt;/if&gt;&gt;
-	&lt;&lt;if _saveDetails.slots[$args[0]] is null&gt;&gt;
-		&lt;h4 class=&quot;red&quot;&gt;Save on slot &lt;&lt;print ($args[0] is &quot;auto&quot;? &quot;auto&quot;: $args[0] + 1)&gt;&gt;&lt;/h4&gt;
-		&lt;&lt;if _showSaveId is true&gt;&gt;
-		&lt;span class=&quot;red&quot;&gt;Save ID does not match, continue with overwrite?&lt;/span&gt;
-		&lt;br&gt;
-		&lt;&lt;/if&gt;&gt;
-		&lt;&lt;if _showSaveId is &quot;noId&quot;&gt;&gt;
-		&lt;span class=&quot;red&quot;&gt;Save ID not found on older save, continue with overwrite?&lt;/span&gt;
-		&lt;br&gt;
-		&lt;&lt;/if&gt;&gt;
+&lt;&lt;if SugarCube.Browser.isMobile.any() is true&gt;&gt;
+	移动端并不支持文件的导出和导入。
+&lt;&lt;else&gt;&gt;
+	从文件中读取: &lt;input id=&quot;saveImport&quot; type=&quot;file&quot; value=&quot;Load from file&quot; onchange=&quot;importSave(this.files)&quot;&gt;
+	&lt;br&gt;&lt;br&gt;
+	&lt;&lt;if $passage is &quot;Start&quot; or $passage is &quot;Start2&quot;&gt;&gt;
+		Please load a save before trying to export a save file.
 	&lt;&lt;else&gt;&gt;
-		&lt;h4 class=&quot;red&quot;&gt;Overwrite Save on slot &lt;&lt;print ($args[0] is &quot;auto&quot;? &quot;auto&quot;: $args[0] + 1)&gt;&gt;?&lt;/h4&gt;
-		&lt;&lt;if _showSaveId is true&gt;&gt;
-		&lt;span class=&quot;red&quot;&gt;Save ID does not match, continue with overwrite?&lt;/span&gt;
-		&lt;br&gt;
-		&lt;&lt;/if&gt;&gt;
-		&lt;&lt;if _showSaveId is &quot;noId&quot;&gt;&gt;
-		&lt;span class=&quot;red&quot;&gt;Save ID not found on older save, continue with overwrite?&lt;/span&gt;
-		&lt;br&gt;
-		&lt;&lt;/if&gt;&gt;
-		Old Save: &lt;&lt;print _saveDetails.slots[$args[0]].title.slice(0,10)&gt;&gt;
-		&lt;br&gt;
-		&lt;&lt;print new Date(_saveDetails.slots[$args[0]].date).toLocaleString()&gt;&gt;
-		&lt;br&gt;
+		&lt;&lt;set _exportName to &quot;&#39;EWA-&quot;+$saveId+&quot;-&quot;+$PC.info.name+&quot;&#39;&quot;&gt;&gt;
+		&lt;input type=&quot;button&quot; value=&quot;Save to file&quot; @onclick=&quot;&#39;updateExportDay();SugarCube.Save.export(&#39;+_exportName+&#39;)&#39;&quot;&gt;
 	&lt;&lt;/if&gt;&gt;
-	&lt;&lt;if _saveDetails.slots[$args[0]].metadata isnot undefined&gt;&gt;
-		&lt;&lt;if _saveDetails.slots[$args[0]].metadata.saveName isnot undefined&gt;&gt;
-			Older Save Name: &lt;&lt;print _saveDetails.slots[$args[0]].metadata.saveName&gt;&gt;
-			&lt;br&gt;
-		&lt;&lt;/if&gt;&gt;
-	&lt;&lt;/if&gt;&gt;
-	&lt;&lt;if _showSaveId is true&gt;&gt;
-		Older Save ID: &lt;&lt;print _saveDetails.slots[$args[0]].metadata.saveId&gt;&gt;
-		&lt;br&gt;&lt;br&gt;
-		&lt;&lt;if $saveName isnot undefined&gt;&gt;
-			Current Save Name: &lt;&lt;print $saveName&gt;&gt;
-			&lt;br&gt;
-		&lt;&lt;/if&gt;&gt;
-		Current Save ID: &lt;&lt;print $saveId&gt;&gt;
-		&lt;br&gt;
-	&lt;&lt;/if&gt;&gt;
-	&lt;input type=&quot;button&quot; class=&quot;saveMenuButton saveMenuConfirm&quot; value=&quot;Save&quot; @onclick=&quot;&#39;save(&#39;+ $args[0] +&#39;, true,&#39;+$saveId+&#39;, `&#39;+$saveName+&#39;`)&#39;&quot;/&gt;
-	&lt;input type=&quot;button&quot; class=&quot;saveMenuButton saveMenuConfirm&quot; value=&quot;Cancel&quot; onclick=&quot;resetSaveMenu();&quot;/&gt;
+&lt;&lt;/if&gt;&gt;
+
+&lt;h4&gt;Text Import/Export&lt;/h4&gt;
+	This feature lets you transfer saves between devices when one or more does not allow access to save files, such as on Android.
 	&lt;br&gt;
-&lt;/div&gt;
+	To save, click on &quot;Get Save Data&quot;, then copy and paste the save data where required.
+	&lt;br&gt;
+	To load, paste in the save data then click &quot;Load Save Data&quot;.
+	&lt;br&gt;
+	To transfer to and from Android, it is recommended to use email or a service such as pastebin. Please ensure that the start and the end of the save is exact to prevent issues.
+	&lt;br&gt;
+	Click on &quot;Copy Text Area&quot; to copy the current contents for you. The button name will change to &quot;Copying Error&quot; if your device or browser does not support it.
+	&lt;br&gt;&lt;br&gt;
+	&lt;textarea id=&quot;saveDataInput&quot; rows=&quot;4&quot; cols=&quot;40&quot; onClick=&quot;if(V.disableAutoSelect == false)this.select();&quot;&gt;&lt;/textarea&gt;
+	&lt;br&gt;
+	&lt;input type=&quot;button&quot; value=&quot;Clear Text Box&quot; onclick=&quot;clearTextBox(&#39;saveDataInput&#39;)&quot;/&gt;
+	&lt;input type=&quot;button&quot; value=&quot;Top of Text Box&quot; onclick=&quot;topTextArea(&#39;saveDataInput&#39;)&quot;/&gt;
+	&lt;input type=&quot;button&quot; value=&quot;Bottom of Text Box&quot; onclick=&quot;bottomTextArea(&#39;saveDataInput&#39;)&quot;/&gt;
+	&lt;input type=&quot;button&quot; value=&quot;Get Save Data&quot; onclick=&quot;getSaveData()&quot;/&gt;
+	&lt;input type=&quot;button&quot; value=&quot;Load Save Data&quot; onclick=&quot;loadSaveData()&quot;/&gt;
+	&lt;input id=&quot;CopyTextArea&quot; type=&quot;button&quot; value=&quot;Copy Text Area&quot; onclick=&quot;copySavedata(&#39;saveDataInput&#39;)&quot;&gt;
+&lt;br&gt;&lt;br&gt;
+&lt;label&gt;
+	&lt;&lt;print &#39;&lt;&lt;checkbox &quot;$disableAutoSelect&quot; false true &#39;+($disableAutoSelect is true? &quot;checked&quot;:&quot;&quot;)+&#39;&gt;&gt;&#39;&gt;&gt;
+	Disables auto select.
+&lt;/label&gt;
+&lt;br&gt;&lt;br&gt;
 &lt;&lt;/widget&gt;&gt;
 
 &lt;&lt;widget &quot;loadWarning&quot;&gt;&gt;
@@ -17548,18 +17594,6 @@ required:false,
 &lt;&lt;widget &quot;resetSaveMenu&quot;&gt;&gt;
 	&lt;&lt;replace #saveList&gt;&gt;
 		&lt;&lt;saveList&gt;&gt;
-	&lt;&lt;/replace&gt;&gt;
-&lt;&lt;/widget&gt;&gt;
-
-&lt;&lt;widget &quot;clearSaveMenu&quot;&gt;&gt;
-	&lt;&lt;replace #saveList&gt;&gt;
-		&lt;&lt;clearAllWarning&gt;&gt;
-	&lt;&lt;/replace&gt;&gt;
-&lt;&lt;/widget&gt;&gt;
-
-&lt;&lt;widget &quot;saveConfirm&quot;&gt;&gt;
-	&lt;&lt;replace #saveList&gt;&gt;
-		&lt;&lt;saveWarning $args[0]&gt;&gt;
 	&lt;&lt;/replace&gt;&gt;
 &lt;&lt;/widget&gt;&gt;
 
@@ -17616,10 +17650,11 @@ required:false,
 			&lt;&lt;case &quot;saves&quot;&gt;&gt;
 				&lt;&lt;replace #customOverlayTitle&gt;&gt;&lt;&lt;OverlayTitle &quot;Saves&quot;&gt;&gt;&lt;&lt;/replace&gt;&gt;
 				&lt;&lt;replace #customOverlayContent&gt;&gt;
-					&lt;div id=&quot;saveList&quot;&gt;
-						&lt;&lt;saveList&gt;&gt;
-					&lt;/div&gt;
+					&lt;div id=&quot;saveList&quot;&gt;&lt;&lt;saveList&gt;&gt;&lt;/div&gt;
 				&lt;&lt;/replace&gt;&gt;
+				&lt;&lt;case &quot;saveExportImport&quot;&gt;&gt;
+					&lt;&lt;replace #customOverlayTitle&gt;&gt;&lt;&lt;OverlayTitle &quot;Saves&quot;&gt;&gt;&lt;&lt;/replace&gt;&gt;
+					&lt;&lt;replace #customOverlayContent&gt;&gt;&lt;&lt;saveExportImport&gt;&gt;&lt;&lt;/replace&gt;&gt;
 			&lt;&lt;/switch&gt;&gt;
 			&lt;&lt;removeclass &quot;#customOverlay&quot; &quot;hidden&quot;&gt;&gt;
 			&lt;&lt;run document.getElementById(&quot;customOverlay&quot;).scrollTop = 0&gt;&gt;
@@ -17650,14 +17685,14 @@ required:false,
 
 	&lt;&lt;if $args[0] is &quot;Saves&quot;&gt;&gt;
 		&lt;&lt;button &quot;导出/导入存档&quot;&gt;&gt;
-			&lt;&lt;overlayReplace &quot;optionsExportImport&quot;&gt;&gt;
+			&lt;&lt;overlayReplace &quot;saveExportImport&quot;&gt;&gt;
 			&lt;&lt;set $UI.currentOverlay to null&gt;&gt;
 		&lt;&lt;/button&gt;&gt;
 		&lt;&lt;button &quot;存档选项&quot;&gt;&gt;
-			&lt;&lt;overlayReplace &quot;optionsExportImport&quot;&gt;&gt;
+			&lt;&lt;overlayReplace &quot;savesoption&quot;&gt;&gt;
 			&lt;&lt;set $UI.currentOverlay to null&gt;&gt;
 		&lt;&lt;/button&gt;&gt;
-		&lt;&lt;if $UI.currentOverlay is &quot;optionsExportImport&quot;&gt;&gt;
+		&lt;&lt;if $UI.currentOverlay isnot &quot;saves&quot;&gt;&gt;
 			&lt;&lt;button &quot;存档目录&quot;&gt;&gt;
 				&lt;&lt;overlayReplace &quot;saves&quot;&gt;&gt;
 				&lt;&lt;set $UI.currentOverlay to &quot;saves&quot;&gt;&gt;

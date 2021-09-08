@@ -31,7 +31,7 @@
             +`</div>`
 
             +`<div id="sv-location">${T.data.location}</div>`
-            +`<div id="uid">UID:${T.data.saveId}</div>`
+            +`<div id="uid" @class="(T.data.saveId == V.saveId ? 'goldtext' : 'graytext')">UID:${T.data.saveId}</div>`
             +`<div id="playedtime">${playedtime}</div>`
             +`<div id="savedtime">${savedtime}</div>`
 
@@ -67,7 +67,7 @@
             +'</div>'
 
             +'<div id="sv-location"></div>'
-            +'<div id="uid">UID: - - - - -</div>'
+            +'<div id="uid" class="graytext">UID: - - - - -</div>'
             +'<div id="playedtime"></div>'
             +'<div id="savedtime">- - : - - : - -</div>'
 
@@ -87,4 +87,34 @@
 F.showSavedCard = showSavedCard
 
 
+window.SaveAlert = function(type, slot){
+    slot = parseInt(slot)
 
+    let a = getSaveDetails() 
+    let fslot = (slot-4)
+    let sdata = a.slots[fslot].metadata
+    let pslot = "N"+(fslot < 10? "0":"")+(fslot+1)
+
+    let text = (
+    `<span style='color:#EA0827;'><b>`
+    +(type=="UID"? `即将覆盖的${pslot}号存档与现在游玩的角色UID并不相同。`: `即将覆盖${pslot}号存档。`)+"</b></span><br>"
+    +"确定要覆盖？<br><br>"
+    +(type=="UID"? `现在的角色UID：${V.saveId}<br>${pslot}存档角色UID：${sdata.saveId}<br>` : "")
+    +`${pslot}存档角色：${sdata.saveName}<br>`
+    +"游戏内时间："+`${sdata.gamedate.year}年${sdata.gamedate.month}月${sdata.gamedate.day}日 ${sdata.gamedate.hour}时${sdata.gamedate.min}分<br>`
+    +"所在地点："+sdata.location+"<br><br><br>"
+    +`<input id='alert-ok' type='button' value='确定' onClick='SaveGame(${slot});SugarCube.Dialog.close()'>`
+    +`<input id='alert-cancel' type='button' value='取消' onClick='SugarCube.Dialog.close()'>`
+    )
+
+    Dialog.append(text)
+    Dialog.open()
+}
+
+window.LoadAlert = function(type, slot){
+
+}
+
+window.DelAlert = function(type, slot){
+    
+}

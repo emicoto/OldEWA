@@ -43,10 +43,11 @@
 			<<case "saves">>
 				<<replace #customOverlayTitle>><<OverlayTitle "Saves">><</replace>>
 				<<replace #customOverlayContent>>
-					<div id="saveList">
-						<<saveList>>
-					</div>
+					<div id="saveList"><<saveList>></div>
 				<</replace>>
+				<<case "saveExportImport">>
+					<<replace #customOverlayTitle>><<OverlayTitle "Saves">><</replace>>
+					<<replace #customOverlayContent>><<saveExportImport>><</replace>>
 			<</switch>>
 			<<removeclass "#customOverlay" "hidden">>
 			<<run document.getElementById("customOverlay").scrollTop = 0>>
@@ -77,14 +78,14 @@
 
 	<<if $args[0] is "Saves">>
 		<<button "导出/导入存档">>
-			<<overlayReplace "optionsExportImport">>
+			<<overlayReplace "saveExportImport">>
 			<<set $UI.currentOverlay to null>>
 		<</button>>
 		<<button "存档选项">>
-			<<overlayReplace "optionsExportImport">>
+			<<overlayReplace "savesoption">>
 			<<set $UI.currentOverlay to null>>
 		<</button>>
-		<<if $UI.currentOverlay is "optionsExportImport">>
+		<<if $UI.currentOverlay isnot "saves">>
 			<<button "存档目录">>
 				<<overlayReplace "saves">>
 				<<set $UI.currentOverlay to "saves">>

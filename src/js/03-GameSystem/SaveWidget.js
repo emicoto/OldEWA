@@ -9,7 +9,7 @@ window.initSaveData = function(forceRun){
     else if('ewaSaveDetails' in localStorage===true){
         let save = localStorage.getItem("ewaSaveDetails")
 
-        if(save == "undefined"){
+        if(save == "undefined" || save == undefined){
             let saveDetails = {autosave:[null,null,null,null],slots:[null,null,null,null,null,null,null,null,null,null,null,null]}
             localStorage.setItem("ewaSaveDetails" ,JSON.stringify(saveDetails))
         }
@@ -25,6 +25,10 @@ window.initSaveData = function(forceRun){
         }
         return save
     }
+}
+
+window.initLocalStorage = function(){
+    localStorage.removeItem("ewaSaveDetails")
 }
 
 window.saveOK = function(slot){
@@ -128,17 +132,12 @@ window.AutoSave = function(metadata){
     if(i==3){
 
         let saves = JSON.parse(localStorage.getItem('EWA.saves'))
-        swap(saves.slots,3,0)
-        swap(saves.slots,0,1)
-        swap(saves.slots,1,2)
+        arrShift(saves.slots,1) /*0,1,2,3 > 3,0,1,2 */
 
         localStorage.setItem('EWA.saves',JSON.stringify(saves))
         Save.slots.save(0,SugarCube.Story.get(V.passage).title, metadata)
 
-        swap(saveDetails.autosave,3,0)
-        swap(saveDetails.autosave,0,1)
-        swap(saveDetails.autosave,1,2)
-
+        arrShift(saveDetails.autosave,1)
         saveDetails.autosave[0] = {
             title: SugarCube.Story.get(V.passage).title,
             date: Date.now(),
@@ -172,27 +171,36 @@ window.setSaveDetail = function (type, slot, metadata, story ){
 }
 F.setSaveDetail = window.setSaveDetail
 
-window.SaveGame = function(slot, uid, metadata, check) {
+window.SaveGame = function(slot, uid=null, metadata, check) {
     if(!metadata){
         var metadata = setSaveMetaData()
     }
 
-    let fslot = slot - 4
+    console.log(uid, check)
 
         /* 覆盖时的确认检测，以及不是同一个角色的档案时的确认检测 */
-    if((V.conf.checkSave === true && check === true) || (V.saveId != uid && uid != null)) {
-        new Wikifier(null, '<<saveConfirm '+fslot+'>>') /* 确认时要读取一下 伪存档，把 伪slot id扔回去*/
+    if (uid != null && V.saveId != uid && check===true){
+        SaveAlert('UID',slot)
+    }        
+    else if ( V.conf.checkSave === true && check===true) {
+         SaveAlert('overwrite',slot)
     }
+
     else{
+
         if(slot > 0){
+            updateSavesCount()
+
             Save.slots.save(slot,null,metadata);
-            setSaveDetail("normal",slot, metadata)
-            resetSaveMenu()
+            setSaveDetail("normal",slot, metadata);
+            resetSaveMenu();
+
         }
     }
 
 }
 F.SaveGame = window.SaveGame
+
 
 window.LoadGame = function(type, slot, check) {
 

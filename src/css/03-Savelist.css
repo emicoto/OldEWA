@@ -90,7 +90,6 @@
     position: absolute;
     font-size: 10px;
     font-family: 'Noto Sans SC';
-    color: #b7a900;
     left: 5px;
     bottom: 5px;
 }
@@ -182,4 +181,10 @@
 	font-size: 10px;
 	letter-spacing: 2px;
 	font-family: Georgia;
+}
+
+#saveDataInput {
+    min-width: 80%;
+    height: 120px;
+    resize: none;
 }

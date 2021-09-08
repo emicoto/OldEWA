@@ -16,6 +16,12 @@ window.swap = function(arr, a, b){
     return arr
 }
 
+window.arrShift = function (arr, n) {
+  if(Math.abs(n)>arr.length) n = n%arr.length
+  return arr.slice(-n).concat(arr.slice(0,-n))
+}
+
+
 window.deck = function(){
 	var names = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
 	var suits = ['Hearts','Diamonds','Spades','Clubs'];

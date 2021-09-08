@@ -95,7 +95,11 @@
     left:5px;
     float: left;
 }
-  
+
+#customOverlayTitle {
+    height: 40px;
+}
+
 #overlaytitle li {
     list-style:none;
     list-style-position: inside;

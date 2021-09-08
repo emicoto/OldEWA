@@ -137,7 +137,10 @@ hr {
 }
 
 .graytext {
-    color: rgb(128, 126, 111);
+  color: rgb(165 161 142);
+}
+.goldtext {
+    color: #b7a900;
 }
 
 .macro-button {
