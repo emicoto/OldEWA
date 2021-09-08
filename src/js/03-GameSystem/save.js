@@ -30,7 +30,6 @@ window.DeserializeGame = function (myGameState) { return Save.deserialize(myGame
 
 window.getSaveData = function () {
 	var input = document.getElementById("saveDataInput");
-	updateExportDay();
 	input.value = Save.serialize();
 }
 
@@ -81,41 +80,6 @@ window.copySavedata = function (id) {
 		var copyTextArea = document.getElementById("CopyTextArea");
 		copyTextArea.value = "Copying Error";
 		console.log('Unable to copy: ', err);
-	}
-}
-
-window.updateExportDay = function(){
-	if(V.saveDetails != undefined && SugarCube.State.history[0].variables.saveDetails != undefined){
-		V.saveDetails.exported.days = clone(V.days);
-		SugarCube.State.history[0].variables.saveDetails.exported.days = clone(SugarCube.State.history[0].variables.days);
-		V.saveDetails.exported.count++;
-		SugarCube.State.history[0].variables.saveDetails.exported.count++;
-		V.saveDetails.exported.dayCount++;
-		SugarCube.State.history[0].variables.saveDetails.exported.dayCount++;
-		var sessionJson = sessionStorage.getItem(SugarCube.Story.domId + ".state");
-		if(sessionJson != undefined){
-			var session = JSON.parse(sessionJson);
-			session.delta[0].variables.saveDetails.exported.days = clone(V.days);
-			session.delta[0].variables.saveDetails.exported.dayCount++;
-			session.delta[0].variables.saveDetails.exported.count++;
-			sessionStorage.setItem(SugarCube.Story.domId + ".state", JSON.stringify(session));
-		}
-	}
-}
-
-window.updateSavesCount = function(){
-	if(V.saveDetails != undefined && SugarCube.State.history[0].variables.saveDetails != undefined){
-		V.saveDetails.slot.count++;
-		SugarCube.State.history[0].variables.saveDetails.slot.count++;
-		V.saveDetails.slot.dayCount++;
-		SugarCube.State.history[0].variables.saveDetails.slot.dayCount++;
-		var sessionJson = sessionStorage.getItem(SugarCube.Story.domId + ".state");
-		if(sessionJson != undefined){
-			var session = JSON.parse(sessionJson);
-			session.delta[0].variables.saveDetails.slot.dayCount++;
-			session.delta[0].variables.saveDetails.slot.count++;
-			sessionStorage.setItem(SugarCube.Story.domId + ".state", JSON.stringify(session));
-		}
 	}
 }
 

@@ -112,9 +112,9 @@ window.SaveAlert = function(type, slot){
 }
 
 window.LoadAlert = function(type, slot){
-
+    slot = parseInt(slot)
 }
 
 window.DelAlert = function(type, slot){
-    
+    slot = parseInt(slot)
 }

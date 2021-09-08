@@ -189,8 +189,6 @@ window.SaveGame = function(slot, uid=null, metadata, check) {
     else{
 
         if(slot > 0){
-            updateSavesCount()
-
             Save.slots.save(slot,null,metadata);
             setSaveDetail("normal",slot, metadata);
             resetSaveMenu();

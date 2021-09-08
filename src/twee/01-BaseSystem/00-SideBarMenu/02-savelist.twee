@@ -55,7 +55,7 @@
 		Please load a save before trying to export a save file.
 	<<else>>
 		<<set _exportName to "'EWA-"+$saveId+"-"+$PC.info.name+"'">>
-		<input type="button" value="Save to file" @onclick="'updateExportDay();SugarCube.Save.export('+_exportName+')'">
+		<input type="button" value="Save to file" @onclick="'SugarCube.Save.export('+_exportName+')'">
 	<</if>>
 <</if>>
 
