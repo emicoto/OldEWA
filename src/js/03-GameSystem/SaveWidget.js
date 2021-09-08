@@ -13,7 +13,9 @@ window.initSaveData = function(forceRun){
             let newsaves = prepareSaveDetails()
 
             localStorage.setItem("ewaSaveDetails" ,JSON.stringify(newsaves))
+            return newsaves
         }
+        return save
     }
 }
 
