@@ -1,18 +1,6 @@
 ﻿:: SaveWidget [widget]
 
-<<widget "showSavedCard">>
-
-<<set _s to $args[1]>>
-<<if $temp.savedetail[_s] isnot null>>
-    <<run T.Saves = V.temp.savedetail[V.args[1]]>>
-    <<run T.data = T.Saves.metadata>>
-<<else>>
-
-<</if>>
-
-
-
-
+<<widget "showSavedCard_dummy">>
 <<if $args[0] == "auto">>
     <div id="savecard" class="glassinset">
         <div id="cardcontent">

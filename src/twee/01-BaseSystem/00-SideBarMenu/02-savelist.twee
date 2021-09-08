@@ -5,7 +5,7 @@
 <</widget>>
 
 <<widget "saveList">>
-<<run saveOK(); prepareSaveDetails(); V.temp.savedetail = getSaveDetails()>>
+<<run saveOK(); V.temp.savedetail = getSaveDetails()>>
 <<run V.temp.localtime = new Date().getTime()>>
 
 <div id="savePage">
@@ -17,7 +17,7 @@
 <<widget "savePage1">>
 <div id="autosave"> -- AUTO SAVE --</div>
 <<=F.showSavedCard('auto',0,V.temp.savedetail.autosave[0])>>
-<<=F.showSavedCard('auto',2,V.temp.savedetail.autosave[2])>>
+<<=F.showSavedCard('auto',1,V.temp.savedetail.autosave[1])>>
 <div id="saves"> -- SAVES LIST -- </div>
 <<=F.showSavedCard('normal',0,V.temp.savedetail.slots[0])>>
 <<=F.showSavedCard('normal',1,V.temp.savedetail.slots[1])>>
@@ -25,18 +25,20 @@
 <<=F.showSavedCard('normal',3,V.temp.savedetail.slots[3])>>
 <<=F.showSavedCard('normal',4,V.temp.savedetail.slots[4])>>
 <<=F.showSavedCard('normal',5,V.temp.savedetail.slots[5])>>
-<div id="s-pages" style="text-align: right;"><<link "> next page">><<replace "#savePage">><<savePage2>><</replace>><</link>></div>
+<div id="s-pages" style="text-align: right"><<link "> next page">><<replace "#savePage">><<savePage2>><</replace>><</link>></div>
 <</widget>>
 
 <<widget "savePage2">>
 <div id="autosave"> -- AUTO SAVE --</div>
-<<=F.showSavedCard('auto',1,V.temp.savedetail.autosave[1])>>
+<<=F.showSavedCard('auto',2,V.temp.savedetail.autosave[2])>>
 <<=F.showSavedCard('auto',3,V.temp.savedetail.autosave[3])>>
 <div id="saves"> -- SAVES LIST -- </div>
 <<=F.showSavedCard('normal',6,V.temp.savedetail.slots[6])>>
 <<=F.showSavedCard('normal',7,V.temp.savedetail.slots[7])>>
 <<=F.showSavedCard('normal',8,V.temp.savedetail.slots[8])>>
 <<=F.showSavedCard('normal',9,V.temp.savedetail.slots[9])>>
+<<=F.showSavedCard('normal',10,V.temp.savedetail.slots[10])>>
+<<=F.showSavedCard('normal',11,V.temp.savedetail.slots[11])>>
 <div id="s-pages" style="text-align: left;"><<link "< prev page">><<replace "#savePage">><<savePage1>><</replace>><</link>></div>
 <</widget>>
 
@@ -173,12 +175,12 @@
 
 <<widget "loadConfirm">>
 	<<replace #saveList>>
-		<<loadWarning $args[0]>>
+		<<loadWarning $args[1] $args[0]>>
 	<</replace>>
 <</widget>>
 
 <<widget "deleteConfirm">>
 	<<replace #saveList>>
-		<<deleteWarning $args[0]>>
+		<<deleteWarning $args[1] $args[0]>>
 	<</replace>>
 <</widget>>

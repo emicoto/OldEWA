@@ -8,79 +8,9 @@ window.getSaveDetails = function (saveSlot){
 	}
 }
 
-window.deleteSaveDetails = function (type,slot){
-	var saveDetails = JSON.parse(localStorage.getItem("ewaSaveDetails"));
-	if(type === "autosave"){
-		saveDetails.autosave[slot] = null;
-	}else{
-		saveDetails.slots[slot-1] = null;
-	}
-	localStorage.setItem("ewaSaveDetails" ,JSON.stringify(saveDetails));
-}
-
 window.deleteAllSaveDetails = function (saveSlot){
-	var saveDetails = {autosave:[null,null,null,null],slots:[null,null,null,null,null,null,null,null,null,null]};
+	var saveDetails = {autosave:[null,null,null,null],slots:[null,null,null,null,null,null,null,null,null,null,null,null]}
 	localStorage.setItem("ewaSaveDetails" ,JSON.stringify(saveDetails));
-}
-
-window.returnSaveDetails = function () {
-	return Save.get();
-}
-
-window.resetSaveMenu = function () {
-	new Wikifier(null, '<<resetSaveMenu>>');
-}
-
-window.loadSave = function (type, saveSlot , confirm) {
-	if (V.conf.checkLoad === true && confirm === undefined) {
-		new Wikifier(null, '<<loadConfirm ' + saveSlot + '>>');
-	} else {
-		Save.slots.load(saveSlot);
-	}
-}
-
-window.save = function (saveSlot, confirm, saveId, data) {
-	if (saveId == null) {
-		new Wikifier(null, '<<saveConfirm ' + saveSlot + '>>');
-	} else if ((V.conf.checkSave === true && confirm != true) || (V.saveId != saveId && saveId != null)) {
-		new Wikifier(null, '<<saveConfirm ' + saveSlot + '>>');
-	} else {
-		if (saveSlot != undefined) {
-			Save.slots.save(saveSlot, null, data);
-			setSaveDetail("normal", saveSlot,  data)
-			V.UI.currentOverlay = null;
-			overlayShowHide("customOverlay");
-		}
-	}
-}
-
-window.deleteSave = function (saveSlot, confirm) {
-	if (saveSlot === "all") {
-		if (confirm === undefined) {
-			new Wikifier(null, '<<clearSaveMenu>>');
-			return;
-		} else if (confirm === true) {
-			Save.clear();
-			deleteAllSaveDetails();
-		}
-	} else if (saveSlot === "auto") {
-		if (V.conf.checkDel === true && confirm === undefined) {
-			new Wikifier(null, '<<deleteConfirm ' + saveSlot + '>>');
-			return;
-		} else {
-			Save.autosave.delete();
-			deleteSaveDetails("autosave");
-		}
-	} else {
-		if (V.conf.checkDel === true && confirm === undefined) {
-			new Wikifier(null, '<<deleteConfirm ' + saveSlot + '>>');
-			return;
-		} else {
-			Save.slots.delete(saveSlot);
-			deleteSaveDetails(saveSlot)
-		}
-	}
-	new Wikifier(null, '<<resetSaveMenu>>');
 }
 
 window.importSave = function (saveFile) {
@@ -95,7 +25,8 @@ window.importSave = function (saveFile) {
 	reader.readAsText(saveFile[0]);
 }
 
-window.SerializeGame = function () { return Save.serialize(); }; window.DeserializeGame = function (myGameState) { return Save.deserialize(myGameState) };
+window.SerializeGame = function () { return Save.serialize(); }; 
+window.DeserializeGame = function (myGameState) { return Save.deserialize(myGameState) };
 
 window.getSaveData = function () {
 	var input = document.getElementById("saveDataInput");

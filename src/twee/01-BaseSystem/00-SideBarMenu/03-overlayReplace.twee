@@ -76,12 +76,16 @@
 	<</if>>
 
 	<<if $args[0] is "Saves">>
-		<<button "Export/Import Save">>
+		<<button "导出/导入存档">>
+			<<overlayReplace "optionsExportImport">>
+			<<set $UI.currentOverlay to null>>
+		<</button>>
+		<<button "存档选项">>
 			<<overlayReplace "optionsExportImport">>
 			<<set $UI.currentOverlay to null>>
 		<</button>>
 		<<if $UI.currentOverlay is "optionsExportImport">>
-			<<button "Return to Options">>
+			<<button "存档目录">>
 				<<overlayReplace "saves">>
 				<<set $UI.currentOverlay to "saves">>
 			<</button>>

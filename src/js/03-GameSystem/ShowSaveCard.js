@@ -31,7 +31,7 @@
             +`</div>`
 
             +`<div id="sv-location">${T.data.location}</div>`
-            +`<div id="uid">uid:${T.data.saveId}</div>`
+            +`<div id="uid">UID:${T.data.saveId}</div>`
             +`<div id="playedtime">${playedtime}</div>`
             +`<div id="savedtime">${savedtime}</div>`
 
@@ -40,9 +40,9 @@
             +`</div>`) : '')
 
             +`<div id="buttons">`
-                + ( type=="normal" ? `<input type="button" id="savebutton" value="SAVE" onclick="">` : "")
-                +`<input type="button" id="loadbutton" value="LOAD" onclick="">`
-                +`<input type="button" id="delbutton" value="DEL" onclick="">`
+                + ( type=="normal" ? (saveOK(slot) ? `<input type="button" id="savebutton" value="SAVE" onclick="SaveGame(${tslot},${T.data.saveId},null,true)">`: `<input type="button" id="savebutton" value="SAVE" disabled>`) : "")
+                +`<input type="button" id="loadbutton" value="LOAD" onclick="LoadGame('${type}',${tslot})">`
+                +(conf.saves[slot].locked == true ?`<input type="button" id="delbutton" value="DEL" disabled>` : `<input type="button" id="delbutton" value="DEL" onclick="deleteSave('${type}',${slot})">` )
             +`</div>`
             +`</div></div>`
         )
@@ -56,42 +56,35 @@
         let htmltext = (
             '<div id="savecard" class="glassinset"><div id="cardcontent">'
             +'<div id="gametime">'
-                +'<span id="sv-date"></span><br>'
+                +'<span id="sv-date">'+(type=="auto"? "A":"N")+(slot+1<10? '0':"")+(slot+1)+'</span><br>'
                 +'<span id="sv-time"></span><br>'
                 +'<span id="sv-year"></span>'
             +'</div>'
 
             +'<div id="savename">'
-                +'<span id="sv-name">NO-DATA</span><br>'
+                +'<span id="sv-name" style="color: rgb(125 106 37 / 48%);">NO-DATA</span><br>'
                 +'<span id="sc-title"></span><br>'
             +'</div>'
 
             +'<div id="sv-location"></div>'
-            +'<div id="uid">uid:000000</div>'
+            +'<div id="uid">UID: - - - - -</div>'
             +'<div id="playedtime"></div>'
-            +'<div id="savedtime">-:-:-</div>'
+            +'<div id="savedtime">- - : - - : - -</div>'
 
             +( type=="normal" ? (`<div id="savelock">`
                 + (conf.saves[slot].locked ? `<<link [img[image/icon/locked.png]]>><<run SaveUnlock(${slot})>><</link>>` : `<<link [img[image/icon/unlock.png]]>><<run SaveUnlock(${slot})>><</link>>`)
             +`</div>`) : '')
 
             +'<div id="buttons">'
-                + ( type=="normal" ? `<input type="button" id="savebutton" value="SAVE" onclick="">` : "")
-                +`<input type="button" id="loadbutton" value="LOAD" onclick="">`
-                +`<input type="button" id="delbutton" value="DEL" onclick="">`
+                + ( type=="normal" ? (saveOK(slot) ? `<input type="button" id="savebutton" value="SAVE" onclick="SaveGame(${tslot},null)">`: `<input type="button" id="savebutton" value="SAVE" disabled>`) : "")
+                +`<input type="button" id="loadbutton" value="LOAD" disabled>`
+                +`<input type="button" id="delbutton" value="DEL" disabled>`
              +'</div>'
             +'</div></div>')
         return htmltext
     }
 }
 F.showSavedCard = showSavedCard
-
-window.SaveUnlock = function(slot) {
-    conf.saves[slot].locked = !conf.saves[slot].locked
-
-}
-
-
 
 
 
