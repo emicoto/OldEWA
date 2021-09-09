@@ -1,8 +1,8 @@
 
 
 window.getSaveDetails = function (saveSlot){
-	if("ewaSaveDetails" in localStorage){
-		let saves = JSON.parse(localStorage.getItem("ewaSaveDetails"))
+	if("EWA-saveDetail" in localStorage){
+		let saves = JSON.parse(localStorage.getItem("EWA-saveDetail"))
 		if(saves) {T.saves = saves ;return saves;}
 		else {T.saves = returnSaveDetails(); return returnSaveDetails()}
 	}
@@ -10,7 +10,7 @@ window.getSaveDetails = function (saveSlot){
 
 window.deleteAllSaveDetails = function (saveSlot){
 	var saveDetails = {autosave:[null,null,null,null],slots:[null,null,null,null,null,null,null,null,null,null,null,null]}
-	localStorage.setItem("ewaSaveDetails" ,JSON.stringify(saveDetails));
+	localStorage.setItem("EWA-saveDetail" ,JSON.stringify(saveDetails));
 }
 
 window.importSave = function (saveFile) {

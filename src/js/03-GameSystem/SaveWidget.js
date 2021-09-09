@@ -1,24 +1,28 @@
 ﻿window.initSaveData = function(forceRun){
-    
-    if('ewaSaveDetails' in localStorage===false || forceRun === true){
+
+    if('ewaSaveDetails' in localStorage === true) {
+        localStorage.removeItem("ewaSaveDetails")
+        }
+
+    if('EWA-saveDetail' in localStorage===false || forceRun === true){
         let saveDetails = {autosave:[null,null,null,null],slots:[null,null,null,null,null,null,null,null,null,null,null,null]}
 
-        localStorage.setItem("ewaSaveDetails" ,JSON.stringify(saveDetails))
+        localStorage.setItem("EWA-saveDetail" ,JSON.stringify(saveDetails))
     }
-    else if('ewaSaveDetails' in localStorage===true){
-        let save = localStorage.getItem("ewaSaveDetails")
+    else if('EWA-saveDetail' in localStorage===true){
+        let save = localStorage.getItem("EWA-saveDetail")
 
         if(save == "undefined" || save == undefined){
             let saveDetails = {autosave:[null,null,null,null],slots:[null,null,null,null,null,null,null,null,null,null,null,null]}
-            localStorage.setItem("ewaSaveDetails" ,JSON.stringify(saveDetails))
+            localStorage.setItem("EWA-saveDetail" ,JSON.stringify(saveDetails))
         }
         else{
-            let save = JSON.parse(localStorage.getItem("ewaSaveDetails"))
+            let save = JSON.parse(localStorage.getItem("EWA-saveDetail"))
 
             if(!save.autosave || !Array.isArray(save.autosave) || save.autosave.length < 4 || save.slots.length < 12){
                 let newsaves = prepareSaveDetails()
 
-                localStorage.setItem("ewaSaveDetails" ,JSON.stringify(newsaves))
+                localStorage.setItem("EWA-saveDetail" ,JSON.stringify(newsaves))
                 return newsaves
             }
         }
@@ -27,7 +31,7 @@
 }
 
 window.initLocalStorage = function(){
-    localStorage.removeItem("ewaSaveDetails")
+    localStorage.removeItem("EWA-saveDetail")
 }
 
 window.saveOK = function(slot){
@@ -72,7 +76,7 @@ F.setSaveMetaData = setSaveMetaData
 
 /* 初期化or继承旧档案 */
 window.prepareSaveDetails = function (forceRun){
-	if("ewaSaveDetails" in localStorage === false || forceRun === true){
+	if("EWA-saveDetail" in localStorage === false || forceRun === true){
 		var saveDetails = {autosave:[],slots:[]}
 		var SCubeSave = Save.get();
 
@@ -101,14 +105,14 @@ window.prepareSaveDetails = function (forceRun){
 			}
 		}
 		
-		localStorage.setItem("ewaSaveDetails" ,JSON.stringify(saveDetails));
+		localStorage.setItem("EWA-saveDetail" ,JSON.stringify(saveDetails));
 	}
 	return saveDetails;
 }
 
 /* 自动保存，只会在 daychange和主线开启时执行 */
 window.AutoSave = function(metadata){
-    var saveDetails = JSON.parse(localStorage.getItem("ewaSaveDetails"))
+    var saveDetails = JSON.parse(localStorage.getItem("EWA-saveDetail"))
     if(!metadata){
       var metadata = setSaveMetaData()  
     }
@@ -123,7 +127,7 @@ window.AutoSave = function(metadata){
                 date: Date.now(),
                 metadata: metadata,
             };
-            localStorage.setItem('ewaSaveDetails', JSON.stringify(saveDetails));
+            localStorage.setItem('EWA-saveDetail', JSON.stringify(saveDetails));
             return saveDetails.autosave[i]
         }
     }
@@ -143,7 +147,7 @@ window.AutoSave = function(metadata){
             metadata: metadata,
         };
 
-        localStorage.setItem('ewaSaveDetails', JSON.stringify(saveDetails));
+        localStorage.setItem('EWA-saveDetail', JSON.stringify(saveDetails));
         return Save.slots.get(0), saveDetails.autosave[0]
     }
     
@@ -151,7 +155,7 @@ window.AutoSave = function(metadata){
 F.AutoSave = window.AutoSave
 
 window.setSaveDetail = function (type, slot, metadata, story ){
-	var saveDetails = JSON.parse(localStorage.getItem("ewaSaveDetails"));
+	var saveDetails = JSON.parse(localStorage.getItem("EWA-saveDetail"));
 	if(type === "autosave"){
 		saveDetails.autosave[slot] = {
 			title: SugarCube.Story.get(V.passage).title,
@@ -166,7 +170,7 @@ window.setSaveDetail = function (type, slot, metadata, story ){
 			metadata:metadata
 		};
 	}
-	localStorage.setItem("ewaSaveDetails" ,JSON.stringify(saveDetails));
+	localStorage.setItem("EWA-saveDetail" ,JSON.stringify(saveDetails));
 }
 F.setSaveDetail = window.setSaveDetail
 
@@ -229,11 +233,11 @@ window.deleteSave = function(type,slot,check){
 }
 
 window.deleteSaveDetails = function (type,slot){
-	var saveDetails = JSON.parse(localStorage.getItem("ewaSaveDetails"));
+	var saveDetails = JSON.parse(localStorage.getItem("EWA-saveDetail"));
 	if(type === "autosave"){
 		saveDetails.autosave[slot] = null;
 	}else{
 		saveDetails.slots[slot] = null;
 	}
-	localStorage.setItem("ewaSaveDetails" ,JSON.stringify(saveDetails));
+	localStorage.setItem("EWA-saveDetail" ,JSON.stringify(saveDetails));
 }
