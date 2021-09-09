@@ -16,11 +16,12 @@ function getRandomCloset() {
   __t.forEach(([name,value])=>{
     if (Array.isArray(value) && value.length) {
       console.log(value);
-      
-      cloth[name] = randomArray(value)
+      const _a = value.filter(v=>v)
+      cloth[name] = randomArray(_a)
     }
   })
   return cloth
 }
+
 
 window.getRandomCloset = getRandomCloset

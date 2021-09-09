@@ -377,7 +377,7 @@ function redress(mode){
 
         Object.entries(closet).forEach(([index,value])=>{
         if (V.TEquip[index] && (value.length > 0)) Object.entries(value).forEach(([___, arr], i) => {
-            if (arr.uid === V.TEquip[index].uid)  dressOn(index, i);
+            if (arr != null && arr.uid === V.TEquip[index].uid)  dressOn(index, i);
         });
         })
     }
