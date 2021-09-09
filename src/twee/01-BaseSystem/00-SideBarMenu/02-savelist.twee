@@ -58,8 +58,8 @@
 <h4><<=Lang("文本数据导入/导出","Text Import/Export")>></h4>
 	<<=Lang("你可以通过此功能将存档转换为文本数据，以方便存档数据在不同机种间的转移。","This feature lets you transfer saves between devices when one or more does not allow access to save files, such as on Android.")>><br>
 	<<=Lang("如果因机种问题复制失败，复制按钮将会变成“Copy Error”",'The button "Copy Text Area" will change to "Copying Error" if your device or browser does not support it.')>><br>
-	<br><br>
-	<textarea id="saveDataInput" rows="4" cols="40" onClick="if(conf.disableAutoSelect == false)this.select();"></textarea>
+	<br>
+	<textarea id="saveDataInput" rows="4" cols="40" onClick="if($disableAutoSelect == false)this.select();"></textarea>
 	<br>
 	<input type="button" value="清空" onclick="clearTextBox('saveDataInput')"/>
 	<input type="button" value="到开头处" onclick="topTextArea('saveDataInput')"/>
@@ -69,7 +69,7 @@
 	<input id="CopyTextArea" type="button" value="复制" onclick="copySavedata('saveDataInput')">
 <br><br>
 <label>
-	<<print '<<checkbox "conf.disableAutoSelect" false true '+(conf.disableAutoSelect is true? "checked":"")+'>>'>>
+	<<print '<<checkbox "$disableAutoSelect" false true '+($disableAutoSelect is true? "checked":"")+'>>'>>
 	<<=Lang("禁止自动选择。","Disables auto select.")>>
 </label>
 <br><br>

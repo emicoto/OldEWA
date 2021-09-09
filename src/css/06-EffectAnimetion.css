@@ -36,6 +36,8 @@
   100% {opacity:1;}
 }
 
+
+
 /* 图片滤镜*/
 .sunset {
   background-color:#E26105;
@@ -50,11 +52,36 @@
 }
 
 .reset {
-  background-color: transparent;
-  opacity: 0;
-  mix-blend-mode: normal;
+  background-color: transparent !important;
+  opacity: 0 !important;
+  mix-blend-mode: normal !important;
 }
-  
+
+@keyframes fadefilter {
+  0% {opacity:0;}
+  100% {opacity:0.4;}
+}
+
+@-moz-keyframes fadeIn {
+  0% {opacity:0;}
+  100% {opacity:0.4;}
+}
+
+@-webkit-keyframes fadeIn {
+  0% {opacity:0;}
+  100% {opacity:0.4;}
+}
+
+@-o-keyframes fadeIn {
+  0% {opacity:0;}
+  100% {opacity:0.4;}
+}
+
+@-ms-keyframes fadeIn {
+  0% {opacity:0;}
+  100% {opacity:0.4;}
+}
+
 /*水平翻转*/
   .flipx {
     -moz-transform:scaleX(-1);

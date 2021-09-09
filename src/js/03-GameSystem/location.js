@@ -10,12 +10,15 @@ F.getsituation = function(location, series, key){
         for(let i=0; i < data.length; i++ ){
            if(data[i].condition()){
                let result = "<<include '"+data[i].condition()+"'>>"
-
                text[data[i].display].push(result);
-               
-               if(V.coredebug)console.log(data[i].condition());
+            }
+
+        if(V.coredebug){
+            console.log(data[i].condition());
+            console.log(text)
         }
     }}
+
     if(text.before.length + text.content.length + text.after.length > 0){
         let result = (text.before.length > 0 ? text.before.join(" ") : "") + ( text.content.length > 0 ? text.content.join(" ") : "") + ( text.after.length > 0 ? text.after.join(" ") : "")
 
@@ -55,7 +58,6 @@ function setLocation(args) {
     if (typeof(args)=="string" && args.length > 0){
         V.location = args
         F.RER() /* 设置事件随机概率 RandomEventRate */
-        setBG()
 
         if(D.placedata[args]){
             V.local = D.placedata[args]

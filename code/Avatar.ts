@@ -280,14 +280,14 @@ function Avatarlayer(ID: string, option = null): void {
       return options.background ? __resolve(AVATARPATH, `background/${options.background.src}.png`) : options.dummy
     },
     blendModefn(options) {
-      if (options.background?.outside && options.backgound?.color) {
-          return BLENDMODE.HARD_LIGHT
-      }
+        if (options.background?.outside && options.backgound?.color) {
+            return BLENDMODE.HARD_LIGHT
+        }
     },
     blendfn(options) {
-      if (options.background?.outside && options.backgound?.color) {
-          return options.backgound.color
-      }
+        if (options.background?.outside && options.backgound?.color) {
+            return options.backgound.color
+        }
     }
   })
   setLayer(ID, "kemoback_wing", {

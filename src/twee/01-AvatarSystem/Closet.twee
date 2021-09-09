@@ -3,6 +3,7 @@
 <div id="action-mode" class="graytext">
 动作： <label><<radiobutton "$UI.closetmode" "穿" autocheck>> <<lang "穿" "wear">></label> <label><<radiobutton "$UI.closetmode" "扔" autocheck>> <<lang "扔" "wear">></label>
 </div>
+
 <div id="ClosetList">
   <ul>
     <li class="category"><a href="#hat">头饰</a></li>

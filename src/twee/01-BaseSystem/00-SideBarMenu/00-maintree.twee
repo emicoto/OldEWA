@@ -28,7 +28,6 @@
 
 <<if $intro is true>>
 	<<versioninfo>>
-
 <<else>>
 
 <!-- 游戏内日期和时钟 -->
@@ -84,7 +83,6 @@
 
 /* 处理顺序的最后尾  */
 <</silently>>
-
 <<run F.setBG()>>
 
 /* 自动刷新等待JS读取结束 */

@@ -59,8 +59,19 @@ F.inTime = inTime
 window.randomtext = function(a){
     if(typeof(a)=="string")return a;
     else{
-        let i = random(0,a.length)
+        let i = random(0,(a.length-1))
         return a[i]
+    }
+}
+
+window.condtext = function(arr){
+    if(Array.isArray(arr)){
+        for(let i=0;i<arr.length;i++){
+            if(arr[i][0]==true){
+                return arr[i][1]
+            }
+            if(arr[i][0]=="else") return arr[i][1]
+        }
     }
 }
 

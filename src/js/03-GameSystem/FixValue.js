@@ -124,7 +124,7 @@
 
     setreveal()
 
-    if(V.coredebug==true)console.log(pc);
+    if(V.coredebug==true)console.log(PC);
     return ""
 }
 window.FixValue = FixValue

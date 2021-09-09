@@ -10,21 +10,14 @@
 <div id="append-text" class="append-normal"></div>
 <div id="situation" class="situation"><<=F.getsituation("单身公寓")>></div>
 
-
-
 <br>
 <div class="tolink">
 <<link "弹出窗口测试">>
 <<run Dialog.setup("Character Sheet");Dialog.append("一个类似于我们现代地球2021年的世界，但在我们看不到的地方隐藏着超自然的存在--比如魔法、超能力、鬼魂、吸血鬼、人形动物等等。你醒来时发现自己身上有异常情况。你伸出双手，看到一双美丽、纤细的手，从骨节上看，你可以看出这是一双男性青少年的手。你从床上坐起来，抓了抓后脑勺，你发现你的头发长度比原来短了很多。当你的头脑完全清醒时，你想起了你记得的最后一幕：呼吸面罩罩在你的脸上，耳边传来医疗仪器的警报声--你可以肯定，原来的你已经死于一场大病。你站起来，看看你现在所在的地方，一个大约24平方米的房间，床的右侧有一个明亮的窗户，窗外盛开着美丽的樱花。除了一张一米五的大床足以让两个人睡觉外，还有一个书柜，上面摆满了各种日本漫画，书柜旁边有一张电脑桌，上面有两个大屏幕，桌上还有一个很酷的耳机。在电脑桌旁边的墙壁上，有一些超级英雄的海报。");Dialog.open();>>
 <</link>>
-<<link "存档测试">>
-<<run prepareSaveDetails()>>
-<<run Save.autosave.save(1, {name:PC.info.name, location:V.location, title:PC.info.tag+PC.info.title, days:V.days, date:V.day.month+'月'+V.day.day+'日'+V.day.year+'年', gametime:V.gametime})>>
-<</link>>
 <br><br>
 
 <<link "打开衣柜　 1m" "衣柜">><<passtime 1>><<set $TEquip to clone($Equip)>><</link>><br>
-
 <br>
 <<link "健身　　 　30m" $passage>><<passtime 30>><</link>>　　<<link "打游戏 　　30m" $passage>><<passtime 30>><</link>><br>
 <<link "洗澡　 　　30m" $passage>><<passtime 30>><</link>>　　<<link "和宠物玩耍 60m" $passage>><<passtime 60>><</link>><br>
@@ -44,24 +37,18 @@
 和宠物（床伴？）聊天
 学习 */
 
+
 :: 城市生活_1
 <<you>>最近离开父母家，独立出来自己住了。一切才刚开始各种不习惯……<br>
-<<if F.inTime(6,8)>>
-一大早就起来了,要做点什么好呢……？<br>
-<<elseif F.inTime(8,11)>>
-<<you>>躺在懒人沙发上茫无目的地玩着手机……<br>
-<<elseif F.inTime(11,12)>>
-中午了，肚子也饿起来了，要吃点什么好呢……？<br>
-<<elseif F.inTime(13,18)>>
-<<you>>坐在电脑前一边转着笔一边思考着接下来要做什么……<br>
-<<elseif F.inTime(18,19)>>
-晚餐时间了，到底是下厨好呢还是叫外卖呢……？<br>
-<<elseif F.inTime(19,23)>>
-到晚上了，该放学的早放学了，该下班的也下班了。网络迎来了高峰期……<br>
-嗨起来！<br>
-<<else>>
-很晚了，得睡觉了……<br>
-<</if>>
+<<=condtext([
+    [inTime(6,8),"一大早就起来了,要做点什么好呢……？"],
+    [inTime(8,11),"<<you>>躺在懒人沙发上茫无目的地玩着手机……"],
+    [inTime(11,12),"中午了，肚子也饿起来了，要吃点什么好呢……？"],
+    [inTime(13,18),"<<you>>坐在电脑前一边转着笔一边思考着接下来要做什么……"],
+    [inTime(18,19),"晚餐时间了，到底是下厨好呢还是叫外卖呢……？"],
+    [inTime(19,23),"到晚上了，该放学的早放学了，该下班的也下班了。网络迎来了高峰期……<br>嗨起来！"],
+    ["else","很晚了，得睡觉了……"]
+])>>
 <br>
 
 :: 宠物的日常_1
