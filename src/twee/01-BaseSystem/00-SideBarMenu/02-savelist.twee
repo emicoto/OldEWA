@@ -44,104 +44,39 @@
 
 
 <<widget "saveExportImport">>
-<h4>存档文件导入/导出</h4>
+<h4><<=Lang("存档文件导入/导出","SaveFiles Export/Import")>></h4>
 
-<<if SugarCube.Browser.isMobile.any() is true>>
-	移动端并不支持文件的导出和导入。
+<<=Lang("从文件中读取","Load from file")>>: <input id="saveImport" type="file" value="Load from file" onchange="importSave(this.files)">
+<br><br>
+<<if $passage is "Start" or $passage is "Start2">>
+	<<=Lang("请在导出前先保存一次。","Please load a save before trying to export a save file.")>>
 <<else>>
-	从文件中读取: <input id="saveImport" type="file" value="Load from file" onchange="importSave(this.files)">
-	<br><br>
-	<<if $passage is "Start" or $passage is "Start2">>
-		Please load a save before trying to export a save file.
-	<<else>>
-		<<set _exportName to "'EWA-"+$saveId+"-"+$PC.info.name+"'">>
-		<input type="button" value="Save to file" @onclick="'SugarCube.Save.export('+_exportName+')'">
-	<</if>>
+	<<set _exportName to "'EWA-"+$saveId+"-"+$PC.info.name+"'">>
+	<input type="button" value="Save to file" @onclick="'SugarCube.Save.export('+_exportName+')'">
 <</if>>
 
-<h4>Text Import/Export</h4>
-	This feature lets you transfer saves between devices when one or more does not allow access to save files, such as on Android.
-	<br>
-	To save, click on "Get Save Data", then copy and paste the save data where required.
-	<br>
-	To load, paste in the save data then click "Load Save Data".
-	<br>
-	To transfer to and from Android, it is recommended to use email or a service such as pastebin. Please ensure that the start and the end of the save is exact to prevent issues.
-	<br>
-	Click on "Copy Text Area" to copy the current contents for you. The button name will change to "Copying Error" if your device or browser does not support it.
+<h4><<=Lang("文本数据导入/导出","Text Import/Export")>></h4>
+	<<=Lang("你可以通过此功能将存档转换为文本数据，以方便存档数据在不同机种间的转移。","This feature lets you transfer saves between devices when one or more does not allow access to save files, such as on Android.")>><br>
+	<<=Lang("如果因机种问题复制失败，复制按钮将会变成“Copy Error”",'The button "Copy Text Area" will change to "Copying Error" if your device or browser does not support it.')>><br>
 	<br><br>
-	<textarea id="saveDataInput" rows="4" cols="40" onClick="if(V.disableAutoSelect == false)this.select();"></textarea>
+	<textarea id="saveDataInput" rows="4" cols="40" onClick="if(conf.disableAutoSelect == false)this.select();"></textarea>
 	<br>
-	<input type="button" value="Clear Text Box" onclick="clearTextBox('saveDataInput')"/>
-	<input type="button" value="Top of Text Box" onclick="topTextArea('saveDataInput')"/>
-	<input type="button" value="Bottom of Text Box" onclick="bottomTextArea('saveDataInput')"/>
-	<input type="button" value="Get Save Data" onclick="getSaveData()"/>
-	<input type="button" value="Load Save Data" onclick="loadSaveData()"/>
-	<input id="CopyTextArea" type="button" value="Copy Text Area" onclick="copySavedata('saveDataInput')">
+	<input type="button" value="清空" onclick="clearTextBox('saveDataInput')"/>
+	<input type="button" value="到开头处" onclick="topTextArea('saveDataInput')"/>
+	<input type="button" value="到最末尾" onclick="bottomTextArea('saveDataInput')"/>
+	<input type="button" value="获取存档" onclick="getSaveData()"/>
+	<input type="button" value="读取存档" onclick="loadSaveData()"/>
+	<input id="CopyTextArea" type="button" value="复制" onclick="copySavedata('saveDataInput')">
 <br><br>
 <label>
-	<<print '<<checkbox "$disableAutoSelect" false true '+($disableAutoSelect is true? "checked":"")+'>>'>>
-	Disables auto select.
+	<<print '<<checkbox "conf.disableAutoSelect" false true '+(conf.disableAutoSelect is true? "checked":"")+'>>'>>
+	<<=Lang("禁止自动选择。","Disables auto select.")>>
 </label>
 <br><br>
-<</widget>>
-
-<<widget "loadWarning">>
-<div class="saveBorder">
-	<h4 class="red">Load slot <<print ($args[0] is "auto"? "auto": $args[0] + 1)>></h4>
-	<<if $args[0] is "auto">>
-		<<print _saveDetails.autosave.title>>
-		<br>
-		<<print new Date(_saveDetails.autosave.date).toLocaleString()>>
-		<br>
-		<input type="button" class="saveMenuButton saveMenuConfirm" value="Load" onclick="loadSave('auto', true)"/>
-	<<else>>
-		<<print _saveDetails.slots[$args[0]].title>>
-		<br>
-		<<print new Date(_saveDetails.slots[$args[0]].date).toLocaleString()>>
-		<br>
-		<input type="button" class="saveMenuButton saveMenuConfirm" value="Load" @onclick="'loadSave('+ $args[0] +', true)'"/>
-	<</if>>
-	<input type="button" class="saveMenuButton saveMenuConfirm" value="Cancel" onclick="resetSaveMenu();"/>
-	<br>
-</div>
-<</widget>>
-
-<<widget "deleteWarning">>
-<div class="saveBorder">
-	<h4 class="red">Delete Save in slot <<print ($args[0] is "auto"? "auto": $args[0] + 1)>></h4>
-	<<if $args[0] is "auto">>
-		<<print _saveDetails.autosave.title>>
-		<br>
-		<<print new Date(_saveDetails.autosave.date).toLocaleString()>>
-		<br>
-		<input type="button" class="saveMenuButton" value="Delete Auto" onclick="deleteSave('auto', true)"/>
-	<<else>>
-		<<print _saveDetails.slots[$args[0]].title>>
-		<br>
-		<<print new Date(_saveDetails.slots[$args[0]].date).toLocaleString()>>
-		<br>
-		<input type="button" class="saveMenuButton" value="Delete" @onclick="'deleteSave('+ $args[0] +', true)'"/>
-	<</if>>
-	<input type="button" class="saveMenuButton saveMenuConfirm" value="Cancel" onclick="resetSaveMenu();"/>
-	<br>
-</div>
 <</widget>>
 
 <<widget "resetSaveMenu">>
 	<<replace #saveList>>
 		<<saveList>>
-	<</replace>>
-<</widget>>
-
-<<widget "loadConfirm">>
-	<<replace #saveList>>
-		<<loadWarning $args[1] $args[0]>>
-	<</replace>>
-<</widget>>
-
-<<widget "deleteConfirm">>
-	<<replace #saveList>>
-		<<deleteWarning $args[1] $args[0]>>
 	<</replace>>
 <</widget>>

@@ -12,7 +12,7 @@
     else if('EWA-saveDetail' in localStorage===true){
         let save = localStorage.getItem("EWA-saveDetail")
 
-        if(save == "undefined" || save == undefined){
+        if(save == "undefined" || save == undefined || typeof(save) != "object"){
             let saveDetails = {autosave:[null,null,null,null],slots:[null,null,null,null,null,null,null,null,null,null,null,null]}
             localStorage.setItem("EWA-saveDetail" ,JSON.stringify(saveDetails))
         }

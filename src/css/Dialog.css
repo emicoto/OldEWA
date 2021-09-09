@@ -60,6 +60,8 @@
     background-color: transparent;
     border: none;
     font-family:'Noto Sans SC';
+    height: fit-content;
+    max-height: 80%;
 }
 #ui-dialog-body hr {
     background-color: #ccc;

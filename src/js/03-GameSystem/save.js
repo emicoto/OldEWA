@@ -69,20 +69,6 @@ window.copySavedata = function (id) {
 	}
 }
 
-window.copySavedata = function (id) {
-	var saveData = document.getElementById(id);
-	saveData.focus();
-	saveData.select();
-
-	try {
-		var successful = document.execCommand('copy');
-	} catch (err) {
-		var copyTextArea = document.getElementById("CopyTextArea");
-		copyTextArea.value = "Copying Error";
-		console.log('Unable to copy: ', err);
-	}
-}
-
 window.importSettings = function (data, type) {
 	switch(type){
 		case "text":
