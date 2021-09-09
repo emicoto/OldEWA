@@ -6,7 +6,7 @@
     "frame","addon",
     "hat","kemofront","eyebrow","hairfront",
     "neck","face","emoadd","eyes","mouth",
-    "outter","top","inner_up","hand","bottom","inner_bt","shoes","legs",
+    "outter","over_up","inner_up","hand","over_bt","inner_bt","shoes","legs",
     "body","hairback","back","kemoback","background",
 ]>>
 
@@ -29,7 +29,7 @@
 ]>>
 
 <<set A.categoryname to {
-    hat:"帽子", outter:"外搭", top:"上衣", bottom:"下衣", inner_up:"内衣", inner_bt:"内裤", legs:"袜子",
+    hat:"帽子", outter:"外搭", over_up:"上衣", over_bt:"下衣", inner_up:"内衣", inner_bt:"内裤", legs:"袜子",
     shoes: "鞋子", neck:"颈饰", face:"脸饰", hand:"手饰", back:"背饰",
 }>>
 

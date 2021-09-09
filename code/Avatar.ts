@@ -39,7 +39,7 @@ namespace Avatar {
 	const __resolve = (mainpath, ...paths) => path.resolve(mainpath, ...paths)
 	const cache = { }
 	const layers = [
-		"background","kemoback_wing","kemoback_tail","kemoback_tail_msk","back","hairback","body","body_msk","plus","nipple","dick","penis","legs","legs_acc","shoes","inner_bt","inner_bt_acc","bottom","bottom_acc","hand","inner_up","inner_up_acc","top","top_acc","outter","outter_acc","mouth","eyes","emoadd_tear","emoadd_shy","emoadd_red","emoadd_hurt","face","neck","neck_acc",,"kemofront_mimi","kemofront_mimi_msk","kemofront_horn","hairfront","hairfront_msk","eyebrow","hat","addon_body","addon_bottom","addon_penis","addon_mouth","addon_face","addon_hair","frame"
+		"background","kemoback_wing","kemoback_tail","kemoback_tail_msk","back","hairback","body","body_msk","plus","nipple","dick","penis","legs","legs_acc","shoes","inner_bt","inner_bt_acc","over_bt","over_bt_acc","hand","inner_up","inner_up_acc","over_up","over_up_acc","outter","outter_acc","mouth","eyes","emoadd_tear","emoadd_shy","emoadd_red","emoadd_hurt","face","neck","neck_acc",,"kemofront_mimi","kemofront_mimi_msk","kemofront_horn","hairfront","hairfront_msk","eyebrow","hat","addon_body","addon_bottom","addon_penis","addon_mouth","addon_face","addon_hair","frame"
 	]
 	const zindex = {}
 	layers.map((v,i)=>zindex[v] = i)
@@ -96,11 +96,11 @@ namespace Avatar {
 				return {
 					zindex:zindex,
 					frame: null,
-					addon: { body: false, bottom: false, face: false, hair: false, mouth: false, penis: false },
+					addon: { body: false, over_bt: false, face: false, hair: false, mouth: false, penis: false },
 
 					neck: null, hand: null, face: null,
-					hat: null, outter: null, top: null,
-					bottom: null, inner_up: null, inner_bt: null,
+					hat: null, outter: null, over_up: null,
+					over_bt: null, inner_up: null, inner_bt: null,
 					shoes: null, legs: null,
 
 					emoadd: { tear: false, shy: false, red: false, hurt: false },
@@ -156,11 +156,11 @@ namespace Avatar {
 	export function setLayer(id: string, name: string, options: layersOption) {
 		const  opt = options
 		const tuckin = {
-			top_acc:"hand",
-      top:"bottom_acc",
-      hand:"bottom",
-      bottom_acc:"top_acc",
-      bottom:"top",
+			over_up_acc:"hand",
+      over_up:"over_bt_acc",
+      hand:"over_bt",
+      over_bt_acc:"over_up_acc",
+      over_bt:"over_up",
 		}
 			const shop = ["manekin","dress","acc"]
 		if (!Object.keys(tuckin).includes(name)) {
@@ -173,13 +173,6 @@ namespace Avatar {
 	}
 	function Shoplayer(ID: string): void {
 		let layerID = 0
-		// setLayer(ID, "background", {
-		// 	width: 166,
-		// 	height: 240,
-		// 	z: layerID++,
-
-		// 	src:__resolve(AVATARPATH, `manekin.png`)
-		// })
 		setLayer(ID, "manekin", {
 			width: 166,
 			height: 240,
@@ -261,11 +254,11 @@ function Avatarlayer(ID: string, option = null): void {
   }
   const opt = option ? option : defalutOpt
   const tuckin = {
-    top_acc: "hand",
-    top: "bottom_acc",
-    hand: "bottom",
-    bottom_acc: "top_acc",
-    bottom: "top",
+    over_up_acc: "hand",
+    over_up: "over_bt_acc",
+    hand: "over_bt",
+    over_bt_acc: "over_up_acc",
+    over_bt: "over_up",
   }
   setLayer(ID, "background", {
     width: opt.width ? opt.width : defalutOpt.width,
@@ -279,15 +272,20 @@ function Avatarlayer(ID: string, option = null): void {
     srcfn(options) {
       return options.background ? __resolve(AVATARPATH, `background/${options.background.src}.png`) : options.dummy
     },
-    blendModefn(options) {
-        if (options.background?.outside && options.backgound?.color) {
-            return BLENDMODE.HARD_LIGHT
+      blendModefn(options) {
+      if (isObject(options.background)) {
+        if (options.background.outside) {
+          
+          return BLENDMODE.HARD_LIGHT
         }
+      }
     },
-    blendfn(options) {
-        if (options.background?.outside && options.backgound?.color) {
-            return options.backgound.color
+    blendfn(options){
+        if (isObject(options.background)) {
+        if (options.background.outside) {
+            return options.background.color
         }
+      }
     }
   })
   setLayer(ID, "kemoback_wing", {
@@ -735,87 +733,87 @@ function Avatarlayer(ID: string, option = null): void {
       }
     }
   })
-  setLayer(ID, "bottom", {
+  setLayer(ID, "over_bt", {
     width: opt.width ? opt.width : defalutOpt.width,
     height: opt.height ? opt.height : defalutOpt.height,
     dx: opt.dx ? opt.dx : defalutOpt.dx,
     dy: opt.dy ? opt.dy : defalutOpt.dy,
     zfn(options) {  
-      if (isObject(options.top)) {
-        return options.top.tuckin ? zindex[tuckin["bottom"]] : zindex["bottom"]
+      if (isObject(options.over_up)) {
+        return options.over_up.tuckin ? zindex[tuckin["over_bt"]] : zindex["over_bt"]
       }
-      return zindex["bottom"]
+      return zindex["over_bt"]
     },
     showfn(options) {
 
 
-      return !!options.bottom
+      return !!options.over_bt
     },
     srcfn(options) {
-      if (isObject(options.bottom)) {
-        return options.bottom ? __resolve(AVATARPATH, `bottom/${options.bottom.src}.png`) : options.dummy
+      if (isObject(options.over_bt)) {
+        return options.over_bt ? __resolve(AVATARPATH, `over_bt/${options.over_bt.src}.png`) : options.dummy
       }
-      return options.bottom ? __resolve(AVATARPATH, `bottom/${options.bottom}.png`) : options.dummy
+      return options.over_bt ? __resolve(AVATARPATH, `over_bt/${options.over_bt}.png`) : options.dummy
     },
     blendModefn(options) {
-      if (isObject(options.bottom)) {
-        if (!options.bottom.fixcolor) {
+      if (isObject(options.over_bt)) {
+        if (!options.over_bt.fixcolor) {
           return BLENDMODE.MULTIPLY
         }
       }
 
     },
     blendfn(options) {
-      if (isObject(options.bottom)) {
+      if (isObject(options.over_bt)) {
 
-        if (!options.bottom.fixcolor) {
+        if (!options.over_bt.fixcolor) {
 
-          return options.bottom.color
+          return options.over_bt.color
         }
       }
     }
   })
-  setLayer(ID, "bottom_acc", {
+  setLayer(ID, "over_bt_acc", {
     width: opt.width ? opt.width : defalutOpt.width,
     height: opt.height ? opt.height : defalutOpt.height,
     dx: opt.dx ? opt.dx : defalutOpt.dx,
     dy: opt.dy ? opt.dy : defalutOpt.dy,
     zfn(options) {
-      return options.top.tuckin ? zindex[tuckin["bottom_acc"]] : zindex["bottom_acc"]
+      return options.over_up.tuckin ? zindex[tuckin["over_bt_acc"]] : zindex["over_bt_acc"]
     },
     showfn(options) {
-      if (isObject(options.bottom)) {
-        return !!options.bottom.acc
+      if (isObject(options.over_bt)) {
+        return !!options.over_bt.acc
       }
       return false
     },
     srcfn(options) {
-      if (isObject(options.bottom)) {
-        if (!options.bottom.fixacc) {
-          return options.bottom ? __resolve(AVATARPATH, `bottom/${options.bottom.src}.png`) : options.dummy
+      if (isObject(options.over_bt)) {
+        if (!options.over_bt.fixacc) {
+          return options.over_bt ? __resolve(AVATARPATH, `over_bt/${options.over_bt.src}.png`) : options.dummy
         }
-        return options.bottom.acc ? __resolve(AVATARPATH, `bottom/${options.bottom.acc}.png`) : options.dummy
+        return options.over_bt.acc ? __resolve(AVATARPATH, `over_bt/${options.over_bt.acc}.png`) : options.dummy
       }
       return options.dummy
     },
     blendModefn(options) {
-      if (isObject(options.bottom)) {
-        if (!options.bottom.fixacc) {
+      if (isObject(options.over_bt)) {
+        if (!options.over_bt.fixacc) {
           return BLENDMODE.MULTIPLY
         }
       }
     },
     blendfn(options) {
-      if (isObject(options.bottom)) {
-        if (!options.bottom.fixacc) {
-          return options.bottom.subcolor
+      if (isObject(options.over_bt)) {
+        if (!options.over_bt.fixacc) {
+          return options.over_bt.subcolor
         }
       }
     },
     masksrcfn(options) {
-      if (isObject(options.bottom)) {
-        if (!options.bottom.fixacc) {
-          return __resolve(AVATARPATH, `bottom/${options.bottom.acc}.png`)
+      if (isObject(options.over_bt)) {
+        if (!options.over_bt.fixacc) {
+          return __resolve(AVATARPATH, `over_bt/${options.over_bt.acc}.png`)
         }
       }
     }
@@ -826,7 +824,7 @@ function Avatarlayer(ID: string, option = null): void {
     dx: opt.dx ? opt.dx : defalutOpt.dx,
     dy: opt.dy ? opt.dy : defalutOpt.dy,
     zfn(options) {
-      return options.top.tuckin ? zindex[tuckin["hand"]] : zindex["hand"]
+      return options.over_up.tuckin ? zindex[tuckin["hand"]] : zindex["hand"]
     },
     showfn(options) {
 
@@ -933,82 +931,82 @@ function Avatarlayer(ID: string, option = null): void {
       }
     }
   })
-  setLayer(ID, "top", {
+  setLayer(ID, "over_up", {
     width: opt.width ? opt.width : defalutOpt.width,
     height: opt.height ? opt.height : defalutOpt.height,
     dx: opt.dx ? opt.dx : defalutOpt.dx,
     dy: opt.dy ? opt.dy : defalutOpt.dy,
     zfn(options) {
-      return options.top.tuckin ? zindex[tuckin["top"]] : zindex["top"]
+      return options.over_up.tuckin ? zindex[tuckin["over_up"]] : zindex["over_up"]
     },
     showfn(options) {
-      return !!options.top
+      return !!options.over_up
     },
     srcfn(options) {
-      if (isObject(options.top)) {
-        return options.top ? __resolve(AVATARPATH, `top/${options.top.src}.png`) : options.dummy
+      if (isObject(options.over_up)) {
+        return options.over_up ? __resolve(AVATARPATH, `over_up/${options.over_up.src}.png`) : options.dummy
       }
-      return options.top ? __resolve(AVATARPATH, `top/${options.top}.png`) : options.dummy
+      return options.over_up ? __resolve(AVATARPATH, `over_up/${options.over_up}.png`) : options.dummy
     },
     blendModefn(options) {
-      if (isObject(options.top)) {
-        if (!options.top.fixcolor) {
+      if (isObject(options.over_up)) {
+        if (!options.over_up.fixcolor) {
           return BLENDMODE.MULTIPLY
         }
       }
 
     },
     blendfn(options) {
-      if (isObject(options.top)) {
+      if (isObject(options.over_up)) {
 
-        if (!options.top.fixcolor) {
+        if (!options.over_up.fixcolor) {
 
-          return options.top.color
+          return options.over_up.color
         }
       }
     }
   })
-  setLayer(ID, "top_acc", {
+  setLayer(ID, "over_up_acc", {
     width: opt.width ? opt.width : defalutOpt.width,
     height: opt.height ? opt.height : defalutOpt.height,
     dx: opt.dx ? opt.dx : defalutOpt.dx,
     dy: opt.dy ? opt.dy : defalutOpt.dy,
     zfn(options) {
-      return options.top.tuckin ? zindex[tuckin["top_acc"]] : zindex["top_acc"]
+      return options.over_up.tuckin ? zindex[tuckin["over_up_acc"]] : zindex["over_up_acc"]
     },
     showfn(options) {
-      if (isObject(options.top)) {
-        return !!options.top.acc
+      if (isObject(options.over_up)) {
+        return !!options.over_up.acc
       }
       return false
     },
     srcfn(options) {
-      if (isObject(options.top)) {
-        if (!options.top.fixacc) {
-          return options.top ? __resolve(AVATARPATH, `top/${options.top.src}.png`) : options.dummy
+      if (isObject(options.over_up)) {
+        if (!options.over_up.fixacc) {
+          return options.over_up ? __resolve(AVATARPATH, `over_up/${options.over_up.src}.png`) : options.dummy
         }
-        return options.top.acc ? __resolve(AVATARPATH, `top/${options.top.acc}.png`) : options.dummy
+        return options.over_up.acc ? __resolve(AVATARPATH, `over_up/${options.over_up.acc}.png`) : options.dummy
       }
       return options.dummy
     },
     blendModefn(options) {
-      if (isObject(options.top)) {
-        if (!options.top.fixacc) {
+      if (isObject(options.over_up)) {
+        if (!options.over_up.fixacc) {
           return BLENDMODE.MULTIPLY
         }
       }
     },
     blendfn(options) {
-      if (isObject(options.top)) {
-        if (!options.top.fixacc) {
-          return options.top.subcolor
+      if (isObject(options.over_up)) {
+        if (!options.over_up.fixacc) {
+          return options.over_up.subcolor
         }
       }
     },
     masksrcfn(options) {
-      if (isObject(options.top)) {
-        if (!options.top.fixacc) {
-          return __resolve(AVATARPATH, `top/${options.top.acc}.png`)
+      if (isObject(options.over_up)) {
+        if (!options.over_up.fixacc) {
+          return __resolve(AVATARPATH, `over_up/${options.over_up.acc}.png`)
         }
       }
     }
@@ -1897,7 +1895,7 @@ function Avatarlayer(ID: string, option = null): void {
 		return PORTRAITCANVAS.canvas
 	}
 	export function setShop(colors, mode) {
-		const group = ["outter", "top", "inner_up"]
+		const group = ["outter", "over_up", "inner_up"]
 	const _resolve = (...args)=>args.join("/")
 		const opt = shopoptions
 		const showcase = V.showcase
@@ -1905,7 +1903,7 @@ function Avatarlayer(ID: string, option = null): void {
 		const fixcolor = showcase.fixcolor
 		const color = !(mode === "base") ? showcase.color  : colors ? colors : showcase.color
 		let src = fixcolor ? _resolve(showcase.layer, showcase.index, `${color}${isbeast ? "_1" : ""}`) : _resolve(showcase.layer, showcase.index, `basic${isbeast ? "_1" : ""}`)
-
+    V.showcase.hasImg ?  null  :  src =  "dummy"
 		// console.log(src,SHOPMODEL);
 		let fixacc = showcase.fixacc
 		let subcolor =  mode === "acc" ? colors  : showcase.subcolor

@@ -282,15 +282,19 @@ var Avatar;
         return options2.background ? __resolve(AVATARPATH, `background/${options2.background.src}.png`) : options2.dummy;
       },
       blendModefn(options2) {
-        var _a, _b;
-        if (((_a = options2.background) == null ? void 0 : _a.outside) && ((_b = options2.backgound) == null ? void 0 : _b.color)) {
-          return BLENDMODE.HARD_LIGHT;
+        if (isObject(options2.background)) {
+          if (options2.background.outside) {
+            console.log(BLENDMODE.HARD_LIGHT);
+            return BLENDMODE.HARD_LIGHT;
+          }
         }
       },
       blendfn(options2) {
-        var _a, _b;
-        if (((_a = options2.background) == null ? void 0 : _a.outside) && ((_b = options2.backgound) == null ? void 0 : _b.color)) {
-          return options2.backgound.color;
+        if (isObject(options2.background)) {
+          if (options2.background.outside) {
+            console.log(options2.background.color);
+            return options2.background.color;
+          }
         }
       }
     });
@@ -1705,6 +1709,7 @@ var Avatar;
     const fixcolor = showcase.fixcolor;
     const color = !(mode === "base") ? showcase.color : colors ? colors : showcase.color;
     let src = fixcolor ? _resolve(showcase.layer, showcase.index, `${color}${isbeast ? "_1" : ""}`) : _resolve(showcase.layer, showcase.index, `basic${isbeast ? "_1" : ""}`);
+    V.showcase.hasImg ? null : src = "dummy";
     let fixacc = showcase.fixacc;
     let subcolor = mode === "acc" ? colors : showcase.subcolor;
     opt["acc"] = showcase.acc ? _resolve(showcase.layer, showcase.index, showcase.acc) : null;

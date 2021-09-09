@@ -13,6 +13,18 @@
 
 :: 测试
 
+js内可以用 for (v in obj)的方式循环
+v 是 key, obj是对象本体，可以遍历对象
+
+<<numberbox "_num" 0>>
+//建立个 +- 数值的输入框。 或许可以用在商店购物？
+设置个临时 obj = { itemname:itemname, num :0 }
+然后 <<numberbox "_obj.num" 0>>
+点购买时对这些临时变量进行转换处理，扔到items里？
+甚至可以批量购买
+当有变动时就添加到 shopcar {} 里面？
+…… 要不每个物品都有对应的obj， 但点击加入购物车后，就扔到shopcar内，用unique？
+
 /在段落开头添加内容
 <<run text = document.getElementById('situation').innerHTML
 "魔女最近离开父母家，独立出来自己住了。一切才刚开始各种不习惯……<br>\n\n魔女躺在懒人沙发上茫无目的地玩着手机……<br>\n\n<br>"

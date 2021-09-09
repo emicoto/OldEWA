@@ -171,13 +171,13 @@ required:false,
 <<set $tryon[_layer] to clone($showcase)>>
 
 <<switch _layer>>
-    <<case "top">>
+    <<case "over_up">>
         <<if $showcase.slot is "onepiece">>
-            <<set $Equip.bottom = null, $tryon.bottom = null>>
+            <<set $Equip.over_bt = null, $tryon.over_bt = null>>
         <</if>>
-    <<case "bottom">>
-        <<if $Equip.top.slot is "onepiece">>
-            <<set $Equip.top = null,$tryon.top = null>>
+    <<case "over_bt">>
+        <<if $Equip.over_up.slot is "onepiece">>
+            <<set $Equip.over_up = null,$tryon.over_up = null>>
         <</if>>
     <<case "inner_up">>
         <<if $showcase.slot is "onepiece">>
@@ -185,8 +185,8 @@ required:false,
         <<elseif $showcase.slot is "fullbody">>
             <<set 
              $Equip.inner_bt = null, $tryon.inner_bt = null,
-             $Equip.top = null, $tryon.top = null,
-             $Equip.bottom to null, $tryon.bottom =null>>
+             $Equip.over_up = null, $tryon.over_up = null,
+             $Equip.over_bt to null, $tryon.over_bt =null>>
         <</if>>
 <</switch>>
 <<SetAvatar>>
@@ -194,7 +194,7 @@ required:false,
 
 <<widget "showinner">>
     <<set $Equip.outter = null, $tryon.outter = null>>
-    <<set $Equip.top = null, $tryon.top = null>>
-    <<set $Equip.bottom = null, $tryon.bottom = null>>
+    <<set $Equip.over_up = null, $tryon.over_up = null>>
+    <<set $Equip.over_bt = null, $tryon.over_bt = null>>
     <<SetAvatar>>
 <</widget>>

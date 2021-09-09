@@ -19,8 +19,8 @@
   <ul>
     <li class="category"><a href="#hat">头饰</a></li>
     <li class="category"><a href="#outter">外套</a></li>
-    <li class="category"><a href="#top">上装</a></li>
-    <li class="category"><a href="#bottom">下装</a></li>
+    <li class="category"><a href="#over_up">上装</a></li>
+    <li class="category"><a href="#over_bt">下装</a></li>
     <li class="category"><a href="#inner_up">内衣</a></li>
     <li class="category"><a href="#inner_bt">内裤</a></li>
     <li class="category"><a href="#legs">袜子</a></li>
@@ -36,12 +36,12 @@
         <<ShowAShopItems "outter">>
     </div>
 
-    <div id="top">
-        <<ShowAShopItems "top">>
+    <div id="over_up">
+        <<ShowAShopItems "over_up">>
     </div>
 
-    <div id="bottom">
-        <<ShowAShopItems "bottom">>
+    <div id="over_bt">
+        <<ShowAShopItems "over_bt">>
     </div>
 
     <div id="inner_up">
@@ -140,7 +140,7 @@
 <</widget>>
 
 <<widget "resettryon">>
-    <<set $tryon to {neck: null, hand: null, face: null,hat: null, outter: null, top: null,bottom: null,inner_up: null, inner_bt: null,shoes: null, legs: null,}>>
+    <<set $tryon to {neck: null, hand: null, face: null,hat: null, outter: null, over_up: null,over_bt: null,inner_up: null, inner_bt: null,shoes: null, legs: null,}>>
 <</widget>>
 
 :: 试衣偷窥：触发

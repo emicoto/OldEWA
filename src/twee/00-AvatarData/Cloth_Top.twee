@@ -1,7 +1,7 @@
 ﻿:: InitClothTop [widget]
 
 <<widget "InitClothTop">>
-<<set Avatars.top to [
+<<set Avatars.over_up to [
     {
         id: 0, uid: 0,
         index : "naked",    name : "裸",     gender : "n",
@@ -17,7 +17,7 @@
         fixcolor: true,    color:null,  colorname: null,
         colors : [],
         
-        category: "上衣/连衣裙", layer : "top",
+        category: "上衣/连衣裙", layer : "over_up",
         shop : null, 
         
         slot : "top", 
@@ -42,7 +42,7 @@
         fixcolor: false,    color:"#FDFFFF",  colorname: "白",
         colors : [],
         
-        category: "上衣", layer : "top",
+        category: "上衣", layer : "over_up",
         shop : "all",
         
         slot : "top", 
@@ -67,7 +67,7 @@
         fixcolor: false,    color:"#FDFFFF",  colorname: "白",
         colors : ["mint"],
         
-        category: "上衣", layer : "top",
+        category: "上衣", layer : "over_up",
         shop : "all",
         
         slot : "top", 
@@ -92,7 +92,7 @@
         fixcolor: true,    color:"black",  colorname: "黑",
         colors : ["white","black"],
         
-        category: "上衣", layer : "top",  slot : "onepiece", 
+        category: "上衣", layer : "over_up",  slot : "onepiece", 
         shop : "all",
         
         tuckinable: false,        tuckin : false, 
@@ -116,7 +116,7 @@
         fixcolor: false,    color:"#FDFFFF",  colorname: "白",
         colors : [],
         
-        category: "上衣", layer : "top",  slot : "top", 
+        category: "上衣", layer : "over_up",  slot : "top", 
         shop : "all",
         
         tuckinable: false,        tuckin : false, 

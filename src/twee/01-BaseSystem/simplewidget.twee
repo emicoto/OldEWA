@@ -135,21 +135,21 @@
     <</if>>
 
     <<switch $args[0]>>
-        <<case "top">>
-            <<if Avatars.top[$args[1]].slot is "onepiece">>
-                <<set $Equip.bottom to null>>
+        <<case "over_up">>
+            <<if Avatars.over_up[$args[1]].slot is "onepiece">>
+                <<set $Equip.over_bt to null>>
             <</if>>
-        <<case "bottom">>
-            <<if $Equip.top.slot is "onepiece">>
-                <<set $Equip.top to null>>
+        <<case "over_bt">>
+            <<if $Equip.over_up.slot is "onepiece">>
+                <<set $Equip.over_up to null>>
             <</if>>
         <<case "inner_up">>
             <<if Avatars.inner_up[$args[1]].slot is "onepiece">>
                 <<set $Equip.inner_bt to null>>
             <<elseif Avatars.inner_up[$args[1]].slot is "fullbody">>
                 <<set $Equip.inner_bt to null>>
-                <<set $Equip.top to null>>
-                <<set $Equip.bottom to null>>
+                <<set $Equip.over_up to null>>
+                <<set $Equip.over_bt to null>>
             <</if>>
     <</switch>>
 <</widget>>

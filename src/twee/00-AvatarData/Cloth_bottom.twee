@@ -1,7 +1,8 @@
 ﻿:: InitClothUnderbottoms [widget]
 
 <<widget "InitClothBottom">>
-<<set Avatars.bottom to [
+
+<<set Avatars.over_bt to [
     {
         id: 0, uid: 0,
         index : "naked",    name : "裸",     gender : "n",
@@ -17,7 +18,7 @@
         fixcolor: true,    color:null,  colorname: null,
         colors : [],
         
-        category: "下衣", layer : "bottom", slot : "bottom", 
+        category: "下衣", layer : "over_bt", slot : "bottom", 
         shop : null, 
         
         acc : null,
@@ -40,7 +41,7 @@
         fixcolor: false,    color:"#787878",  colorname: "黑",
         colors : [],
         
-        category: "下衣", layer : "bottom", slot : "bottom", 
+        category: "下衣", layer : "over_bt", slot : "bottom", 
         shop : "all", 
         
         acc : null,
@@ -63,7 +64,7 @@
         fixcolor: false,    color:"#787878",  colorname: "黑",
         colors : ["black"],
         
-        category: "下衣", layer : "bottom", slot : "bottom",
+        category: "下衣", layer : "over_bt", slot : "bottom",
         shop : "all", 
             
         acc : null,
@@ -86,7 +87,7 @@
         fixcolor: false,    color:"#787878",  colorname: "黑",
         colors : ["black"],
         
-        category: "下衣", layer : "bottom", slot : "bottom", 
+        category: "下衣", layer : "over_bt", slot : "bottom", 
         shop : "all", 
         
         acc : null,
@@ -109,7 +110,7 @@
         fixcolor: false,    color:"#FDFFFF",  colorname: "白",
         colors : [],
         
-        category: "下衣", layer : "bottom", slot : "bottom", 
+        category: "下衣", layer : "over_bt", slot : "bottom", 
         shop : "all", 
         
         acc : "line",

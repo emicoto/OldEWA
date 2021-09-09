@@ -126,7 +126,7 @@ function stAvatar() {
     V.avatar.addon.penis = setAvatar("addon.penis",(PC.rec.射精.c > 10 && PFlag.bottom <= 1))
 
     /* 设置身上的服装 */
-    const layers = ["outter","top","bottom","inner_up","inner_bt","neck","hat","face","hand","legs","shoes","back"]
+    const layers = ["outter","over_up","over_bt","inner_up","inner_bt","neck","hat","face","hand","legs","shoes","back"]
 
     for(let i=0;i<layers.length;i++){
         let n = layers[i]
@@ -138,14 +138,14 @@ function stAvatar() {
                 fixacc : Equip[n].fixacc, subcolor: Equip[n].subcolor,
             })
             
-            if( n=="top" && Equip.top.tuckinable==true){
-                V.avatar.top.tuckin = Equip.top.tuckin
-                Avatar.options.top.tuckin = Equip.top.tuckin
-                Avatar.setAvatar("top.tuckin",Equip.top.tuckin,true);
+            if( n=="over_up" && Equip.over_up.tuckinable==true){
+                V.avatar.over_up.tuckin = Equip.over_up.tuckin
+                Avatar.options.over_up.tuckin = Equip.over_up.tuckin
+                Avatar.setAvatar("over_up.tuckin",Equip.over_up.tuckin,true);
             }    
         }
         else if(Equip[n] != null && Equip[n].hasImg==false){
-            if(n=="bottom"){
+            if(n=="over_bt"){
                 V.avatar[n] = setAvatar(n,{
                     fixcolor: false, color:"#445687", src:"shortpant/basic", acc:null
                 })
@@ -155,12 +155,12 @@ function stAvatar() {
                     fixcolor: false, color:"#FFFFFF", src:"boxer/basic", acc:null
                 })
             }
-            else if(n=="top" && Equip[n].slot != "onepiece"){
+            else if(n=="over_up" && Equip[n].slot != "onepiece"){
                 V.avatar[n] = setAvatar(n,{
                     fixcolor: false, color:"#FFFFFF", src:`Tshirt/basic${breastDif(Equip[n])}${PregDif(Equip[n])}`, acc:null
                 })
             }
-            else if(n=="top"&& Equip[n].slot == "onepiece"){
+            else if(n=="over_up"&& Equip[n].slot == "onepiece"){
                 V.avatar[n] = setAvatar(n,{
                     fixcolor: true, color:"white", src:`bwopiece/white${breastDif(Equip[n])}${PregDif(Equip[n])}`, acc:null
                 })

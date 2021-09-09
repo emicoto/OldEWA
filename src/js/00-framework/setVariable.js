@@ -9,9 +9,13 @@ function setV(props,condition,value){
   console.log(Object.is(V[props], condition))
   if (Object.is(V[props], condition)) {
     if (ISOBJ) {
+
+      if(!V[props]) V[props] = {};
+
       Object.keys(value).forEach((v)=>{
         V[props][v] = value[v]
       })
+      
     }
     if (!ISOBJ) {
       V[props] = value

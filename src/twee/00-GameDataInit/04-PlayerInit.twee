@@ -230,9 +230,9 @@ $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌}
 /* 现有衣服等装备 */
 <<set $Equip to {
 	hat     : null,     neck    : null,	    face : null,
-	outter  : null,	    top     : null,     inner_up: null,
-    hand    : null,     bottom  : null,     inner_bt: null,
-    shoes   : null,     legs   : null,
+	outter  : null,	    over_up : null,     inner_up: null,
+    hand    : null,     over_bt : null,     inner_bt: null,
+    shoes   : null,     legs    : null,
     back    : null,
     hairfront : "natural",    hairback  : "straight",
     emote     : "正常",
@@ -245,8 +245,8 @@ $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌}
 <!-- 临时备份 -->
 <<set $TEquip to {
     hat     : null,     neck    : null,	    face : null,
-	outter  : null,	    top     : null,     inner_up: null,
-    hand    : null,     bottom  : null,     inner_bt: null,
+	outter  : null,	    over_up : null,     inner_up: null,
+    hand    : null,     over_bt : null,     inner_bt: null,
     shoes   : null,     legs   : null,
     back    : null,
     hairfront : "natural",    hairback  : "straight",
@@ -255,12 +255,12 @@ $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌}
     nipple : null,
 }>>
 
-<<dressup "top" 1 "#F14660" "红">>
+<<dressup "over_up" 1 "#F14660" "红">>
 <<dressup "inner_bt" 1>>
-<<dressup "bottom" 1>>
+<<dressup "over_bt" 1>>
 <<dressup "shoes" 1>>
 <<dressup "legs" 1>>
-<<set $Equip.top.uid = 1, $Equip.inner_bt.uid = 1, $Equip.bottom.uid = 1, $Equip.shoes.uid = 1, $Equip.legs.uid = 1>>
+<<set $Equip.over_up.uid = 1, $Equip.inner_bt.uid = 1, $Equip.over_bt.uid = 1, $Equip.shoes.uid = 1, $Equip.legs.uid = 1>>
 
 <<set $PFace to {
     name    : "正常",

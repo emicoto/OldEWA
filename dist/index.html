@@ -4049,8 +4049,8 @@ window.Avatars = {
 	b : {},
 	l : {},
 	layer : [],
-	top : [],
-	bottom:[],
+	over_up : [],
+	over_bt:[],
 	inner_up:[],
 	inner_bt:[],
 	hat : [],
@@ -5051,9 +5051,13 @@ function setV(props,condition,value){
   console.log(Object.is(V[props], condition))
   if (Object.is(V[props], condition)) {
     if (ISOBJ) {
+
+      if(!V[props]) V[props] = {};
+
       Object.keys(value).forEach((v)=>{
         V[props][v] = value[v]
       })
+      
     }
     if (!ISOBJ) {
       V[props] = value
@@ -8406,15 +8410,19 @@ var Avatar;
         return options2.background ? __resolve(AVATARPATH, `background/${options2.background.src}.png`) : options2.dummy;
       },
       blendModefn(options2) {
-        var _a, _b;
-        if (((_a = options2.background) == null ? void 0 : _a.outside) && ((_b = options2.backgound) == null ? void 0 : _b.color)) {
-          return BLENDMODE.HARD_LIGHT;
+        if (isObject(options2.background)) {
+          if (options2.background.outside) {
+            console.log(BLENDMODE.HARD_LIGHT);
+            return BLENDMODE.HARD_LIGHT;
+          }
         }
       },
       blendfn(options2) {
-        var _a, _b;
-        if (((_a = options2.background) == null ? void 0 : _a.outside) && ((_b = options2.backgound) == null ? void 0 : _b.color)) {
-          return options2.backgound.color;
+        if (isObject(options2.background)) {
+          if (options2.background.outside) {
+            console.log(options2.background.color);
+            return options2.background.color;
+          }
         }
       }
     });
@@ -9829,6 +9837,7 @@ var Avatar;
     const fixcolor = showcase.fixcolor;
     const color = !(mode === "base") ? showcase.color : colors ? colors : showcase.color;
     let src = fixcolor ? _resolve(showcase.layer, showcase.index, `${color}${isbeast ? "_1" : ""}`) : _resolve(showcase.layer, showcase.index, `basic${isbeast ? "_1" : ""}`);
+    V.showcase.hasImg ? null : src = "dummy";
     let fixacc = showcase.fixacc;
     let subcolor = mode === "acc" ? colors : showcase.subcolor;
     opt["acc"] = showcase.acc ? _resolve(showcase.layer, showcase.index, showcase.acc) : null;
@@ -9910,8 +9919,8 @@ window.fixStuckAnimations = function() {
 /* 属性集算 */
 function setreveal(){
     const isReveal=w=>Equip[w] ?Equip[w].reveal :0;
-    const tops =[isReveal("outter"),isReveal("top"),isReveal("inner_up"),]
-    const bottoms=[isReveal("bottom"),isReveal("inner_bt")]
+    const tops =[isReveal("outter"),isReveal("over_up"),isReveal("inner_up"),]
+    const bottoms=[isReveal("over_bt"),isReveal("inner_bt")]
     tops.sort((a,b)=>b-a)
     bottoms.sort((a,b)=>b-a)
     /*console.log("上衣:",tops)
@@ -9924,7 +9933,7 @@ F.setreveal = setreveal
 
 function allureBuff() {
     const isAllure = w => Equip[w] ? Equip[w].beauty : 0;
-    const items = ["hat","outter","top","bottom","inner_up","inner_bt","legs","shoes","neck","face","hand","back"]
+    const items = ["hat","outter","over_up","over_bt","inner_up","inner_bt","legs","shoes","neck","face","hand","back"]
 
     var a = 0
     for(let i = 0; i < items.length; i++){
@@ -9941,14 +9950,14 @@ F.allureBuff = allureBuff
 
 function defBuff() {
     const isDef = w => Equip[w] ? Equip[w].defence : 0;
-    const items = ["hat","outter","top","bottom","inner_up","inner_bt","legs","shoes","neck","face","hand","back"]
+    const items = ["hat","outter","over_up","over_bt","inner_up","inner_bt","legs","shoes","neck","face","hand","back"]
 
     var a = 0
     for(let i = 0; i < items.length; i++){
             a = a+isDef(items[i])
         }
 
-    return 1+a
+    return a
 }
 
 window.defBuff = defBuff
@@ -9957,7 +9966,7 @@ F.defBuff = defBuff
 function warmth() {
     const isHot = w => Equip[w] ? Equip[w].hot : 0;
     const isCold = w => Equip[w] ? Equip[w].cold : 0;
-    const items = ["hat","outter","top","bottom","inner_up","inner_bt","legs","shoes","neck","face","hand","back"]
+    const items = ["hat","outter","over_up","over_bt","inner_up","inner_bt","legs","shoes","neck","face","hand","back"]
 
     var a = [0,0]
     for(let i = 0; i < items.length; i++){
@@ -10065,7 +10074,7 @@ function BuyOutFit(args) {
         
         text = "你花费了"+tryoncost()+"元购买了身上试穿的衣服。"
         
-        V.tryon = {neck: null, hand: null, face: null,hat: null, outter: null, top: null,bottom: null,inner_up: null, inner_bt: null,shoes: null, legs: null,}
+        V.tryon = {neck: null, hand: null, face: null,hat: null, outter: null, over_up: null,over_bt: null,inner_up: null, inner_bt: null,shoes: null, legs: null,}
         V.TEquip = clone(V.Equip)
         
     }
@@ -10082,7 +10091,7 @@ function BuyOutFit(args) {
 window.BuyOutFit = BuyOutFit
 
 function tryoncheck() {
-    const group = ["neck","hand","face","hat","outter","top","bottom","inner_up","inner_bt","shoes","legs"]
+    const group = ["neck","hand","face","hat","outter","over_up","over_bt","inner_up","inner_bt","shoes","legs"]
     var i,n
     for ( i=0; i<group.length; i++){
         if (V.tryon[group[i]]) return true;
@@ -10172,15 +10181,15 @@ function dressOn(args, arg) {
         closet[args].push(obj)
     }
 
-    if(args == "top"  && Equip.bottom && Equip.top.slot == "onepiece"){
-        let obj = clone(Equip.bottom)
-        closet.bottom.push(obj)
-        Equip.bottom = null
+    if(args == "over_up"  && Equip.over_bt && Equip.over_up.slot == "onepiece"){
+        let obj = clone(Equip.over_bt)
+        closet.over_bt.push(obj)
+        Equip.over_bt = null
         
-    }else if (args == "bottom" && Equip.top && Equip.top.slot == "onepiece"){
-        let obj = clone(Equip.top)
-        closet.top.push(obj)
-        Equip.top = null
+    }else if (args == "over_bt" && Equip.over_up && Equip.over_up.slot == "onepiece"){
+        let obj = clone(Equip.over_up)
+        closet.over_up.push(obj)
+        Equip.over_up = null
 
     }else if (args == "inner_up" && Equip.inner_bt && Equip.inner_up.slot == "onepiece"){
         let obj = clone(Equip.inner_bt)
@@ -10194,16 +10203,16 @@ function dressOn(args, arg) {
             closet.inner_bt.push(obj)
             Equip.inner_bt = null }
 
-        if(Equip.top){
-            let obj = clone(Equip.top)
-            closet.top.push(obj)
-            Equip.top = null
+        if(Equip.over_up){
+            let obj = clone(Equip.over_up)
+            closet.over_up.push(obj)
+            Equip.over_up = null
         }
         
-        if(Equip.bottom){
-            let obj = clone(Equip.bottom)
-            closet.bottom.push(obj)
-            Equip.bottom = null
+        if(Equip.over_bt){
+            let obj = clone(Equip.over_bt)
+            closet.over_bt.push(obj)
+            Equip.over_bt = null
         }
     }
 
@@ -10234,11 +10243,11 @@ F.dressOn = dressOn
 
 function gonaked(mode){
 
-    if((Equip.top && mode=="debug") || mode!="debug"){
+    if((Equip.over_up && mode=="debug") || mode!="debug"){
         V.TEquip = clone(V.Equip)
     }
 
-    const group=["hat","outter","top","bottom","inner_up","inner_bt","legs","shoes","face","neck","hand","back"]
+    const group=["hat","outter","over_up","over_bt","inner_up","inner_bt","legs","shoes","face","neck","hand","back"]
 
     if (mode=="closet"){
         for(let i=0; i< group.length; i++){
@@ -10247,7 +10256,7 @@ function gonaked(mode){
 
     }
     else if(mode=="H" || !mode){
-        let layer = ["outter","top","bottom","inner_up","inner_bt","shoes","legs"]
+        let layer = ["outter","over_up","over_bt","inner_up","inner_bt","shoes","legs"]
         for(let i=0; i<layer.length;i++){
             Equip[group[i]] = null
         }
@@ -10430,7 +10439,7 @@ function stAvatar() {
     V.avatar.addon.penis = setAvatar("addon.penis",(PC.rec.射精.c > 10 && PFlag.bottom <= 1))
 
     /* 设置身上的服装 */
-    const layers = ["outter","top","bottom","inner_up","inner_bt","neck","hat","face","hand","legs","shoes","back"]
+    const layers = ["outter","over_up","over_bt","inner_up","inner_bt","neck","hat","face","hand","legs","shoes","back"]
 
     for(let i=0;i<layers.length;i++){
         let n = layers[i]
@@ -10442,14 +10451,14 @@ function stAvatar() {
                 fixacc : Equip[n].fixacc, subcolor: Equip[n].subcolor,
             })
             
-            if( n=="top" && Equip.top.tuckinable==true){
-                V.avatar.top.tuckin = Equip.top.tuckin
-                Avatar.options.top.tuckin = Equip.top.tuckin
-                Avatar.setAvatar("top.tuckin",Equip.top.tuckin,true);
+            if( n=="over_up" && Equip.over_up.tuckinable==true){
+                V.avatar.over_up.tuckin = Equip.over_up.tuckin
+                Avatar.options.over_up.tuckin = Equip.over_up.tuckin
+                Avatar.setAvatar("over_up.tuckin",Equip.over_up.tuckin,true);
             }    
         }
         else if(Equip[n] != null && Equip[n].hasImg==false){
-            if(n=="bottom"){
+            if(n=="over_bt"){
                 V.avatar[n] = setAvatar(n,{
                     fixcolor: false, color:"#445687", src:"shortpant/basic", acc:null
                 })
@@ -10459,12 +10468,12 @@ function stAvatar() {
                     fixcolor: false, color:"#FFFFFF", src:"boxer/basic", acc:null
                 })
             }
-            else if(n=="top" && Equip[n].slot != "onepiece"){
+            else if(n=="over_up" && Equip[n].slot != "onepiece"){
                 V.avatar[n] = setAvatar(n,{
                     fixcolor: false, color:"#FFFFFF", src:`Tshirt/basic${breastDif(Equip[n])}${PregDif(Equip[n])}`, acc:null
                 })
             }
-            else if(n=="top"&& Equip[n].slot == "onepiece"){
+            else if(n=="over_up"&& Equip[n].slot == "onepiece"){
                 V.avatar[n] = setAvatar(n,{
                     fixcolor: true, color:"white", src:`bwopiece/white${breastDif(Equip[n])}${PregDif(Equip[n])}`, acc:null
                 })
@@ -10648,7 +10657,34 @@ function stAvatar() {
 
 window.stAvatar = stAvatar
 F.stAvatar = stAvatar
-/* twine-user-script #26: "CharaWidget.js" */
+/* twine-user-script #26: "closet.js" */
+function getRandomCloset() {
+  const randomArray = (arr) => {
+    const arrs = []
+    for (let index = 0; index < 10; index++) {
+      arrs.push(parseInt(Math.random() * arr.length ))
+      
+    }
+    const legth = parseInt(Math.random() * arrs.length )
+    console.log(legth ,arrs,arrs[legth],arr[arrs[legth]]);
+    
+    return arr[arrs[legth]]
+  }
+  const cloth = {}
+  const __t =Object.entries(V.closet).filter(([name,value])=>!(name === "slot"))
+  // console.log(__t );
+  __t.forEach(([name,value])=>{
+    if (Array.isArray(value) && value.length) {
+      console.log(value);
+      
+      cloth[name] = randomArray(value)
+    }
+  })
+  return cloth
+}
+
+window.getRandomCloset = getRandomCloset
+/* twine-user-script #27: "CharaWidget.js" */
 function setChara(args){
     if(args=="pc" || args=="player"){
         V.CChara = {
@@ -10684,7 +10720,7 @@ function setChara(args){
 }
 F.setChara = setChara
 DefineMacroS("setchara",setChara)
-/* twine-user-script #27: "EventWidget.js" */
+/* twine-user-script #28: "EventWidget.js" */
 function setEvent() {
     var event = V.event
     event.lang = V.lang
@@ -10890,7 +10926,7 @@ window.useitem = useitem
     print V.items[catgt][_keys[_i]].name
     useitem(catgr,_keys[_i])
 */
-/* twine-user-script #28: "FixValue.js" */
+/* twine-user-script #29: "FixValue.js" */
 function FixValue() {
 
     PC.money = Math.clamp(PC.money, 0, 9999999999)
@@ -11023,7 +11059,7 @@ function FixValue() {
 window.FixValue = FixValue
 F.FixValue = FixValue
 DefineMacroS("fixvalue",FixValue)
-/* twine-user-script #29: "Location.js" */
+/* twine-user-script #30: "Location.js" */
 /* 地点互动和事件相关 */
 /* 总之先粗略地做一下... 符合条件的就显示出来 */
 F.getsituation = function(location, series, key){
@@ -11106,7 +11142,7 @@ function setLocation(args) {
 window.setLocation = setLocation
 DefineMacroS("location",setLocation)
 
-/* twine-user-script #30: "SaveShow.js" */
+/* twine-user-script #31: "SaveShow.js" */
 function showSavedCard(type,slot,obj){
 
     if(obj !== null){
@@ -11303,7 +11339,7 @@ window.DelAlert = function(type, slot){
     Dialog.append(Lang(text,text_en))
     Dialog.open()
 }
-/* twine-user-script #31: "SaveWidget.js" */
+/* twine-user-script #32: "SaveWidget.js" */
 window.initSaveData = function(forceRun){
 
     if('ewaSaveDetails' in localStorage === true) {
@@ -11547,7 +11583,7 @@ window.deleteSaveDetails = function (type,slot){
 	}
 	localStorage.setItem("EWA-saveDetail" ,JSON.stringify(saveDetails));
 }
-/* twine-user-script #32: "TimeProcess.js" */
+/* twine-user-script #33: "TimeProcess.js" */
 
 function gettimezone(h) {
 	switch(true){
@@ -11720,7 +11756,7 @@ function passtime(t,mode){
 	if(Flag.daychange)daychange();
 
 }
-/* twine-user-script #33: "save.js" */
+/* twine-user-script #34: "save.js" */
 
 
 window.getSaveDetails = function (saveSlot){
@@ -11897,7 +11933,7 @@ window.isJsonString = function(s) {
 	}
 	return true;
 }
-/* twine-user-script #34: "PlayerInfo.js" */
+/* twine-user-script #35: "PlayerInfo.js" */
 /* 名字和称呼的处理 */
 function gsplit(m,f,p="chara"){
   if (p=="player"){
@@ -12159,7 +12195,7 @@ function it(){
 }
 DefineMacroS("it", it);
 
-/* twine-user-script #35: "SkillRank.js" */
+/* twine-user-script #36: "SkillRank.js" */
 function displayskillrank(num){
     const select = new SelectCase()
     select.add(0,100,"<span style='color:#839EC0;'><b>F</b></span>")
@@ -12245,7 +12281,7 @@ window.rankcolor = function(num){
         return "#D7A800";
     }
 }
-/* twine-user-script #36: "SimpleWidget.js" */
+/* twine-user-script #37: "SimpleWidget.js" */
 function printmoney(num) {
     return num && num.toString()
         .replace(/\d+/, function(s){
@@ -12342,7 +12378,7 @@ window.gametime = function(a){
     V.gametime = time
     return `${time.day}D.${time.hour}:${time.min}:${time.sec}`
 }
-/* twine-user-script #37: "UI Widget.js" */
+/* twine-user-script #38: "UI Widget.js" */
 /* 通用 */
 
 function weirdeffect(){
@@ -12425,7 +12461,7 @@ function delay(id,text) {
 }
 F.delay = delay
 DefineMacroS("delay",delay)
-/* twine-user-script #38: "chs.min.js" */
+/* twine-user-script #39: "chs.min.js" */
 /*! chs.js – 简体中文, by: Liyro Pen. | Copyright © 2017 Thomas Michael Edwards <thomasmedwards@gmail.com>. All rights reserved. | Licensed under a BSD 2-clause "Simplified" License. */
 !(function () {
   (l10nStrings.identity = "游戏"),
@@ -12490,7 +12526,7 @@ DefineMacroS("delay",delay)
     &quot;frame&quot;,&quot;addon&quot;,
     &quot;hat&quot;,&quot;kemofront&quot;,&quot;eyebrow&quot;,&quot;hairfront&quot;,
     &quot;neck&quot;,&quot;face&quot;,&quot;emoadd&quot;,&quot;eyes&quot;,&quot;mouth&quot;,
-    &quot;outter&quot;,&quot;top&quot;,&quot;inner_up&quot;,&quot;hand&quot;,&quot;bottom&quot;,&quot;inner_bt&quot;,&quot;shoes&quot;,&quot;legs&quot;,
+    &quot;outter&quot;,&quot;over_up&quot;,&quot;inner_up&quot;,&quot;hand&quot;,&quot;over_bt&quot;,&quot;inner_bt&quot;,&quot;shoes&quot;,&quot;legs&quot;,
     &quot;body&quot;,&quot;hairback&quot;,&quot;back&quot;,&quot;kemoback&quot;,&quot;background&quot;,
 ]&gt;&gt;
 
@@ -12513,7 +12549,7 @@ DefineMacroS("delay",delay)
 ]&gt;&gt;
 
 &lt;&lt;set A.categoryname to {
-    hat:&quot;帽子&quot;, outter:&quot;外搭&quot;, top:&quot;上衣&quot;, bottom:&quot;下衣&quot;, inner_up:&quot;内衣&quot;, inner_bt:&quot;内裤&quot;, legs:&quot;袜子&quot;,
+    hat:&quot;帽子&quot;, outter:&quot;外搭&quot;, over_up:&quot;上衣&quot;, over_bt:&quot;下衣&quot;, inner_up:&quot;内衣&quot;, inner_bt:&quot;内裤&quot;, legs:&quot;袜子&quot;,
     shoes: &quot;鞋子&quot;, neck:&quot;颈饰&quot;, face:&quot;脸饰&quot;, hand:&quot;手饰&quot;, back:&quot;背饰&quot;,
 }&gt;&gt;
 
@@ -12661,7 +12697,7 @@ DefineMacroS("delay",delay)
             category: &quot;外衣&quot;, layer : &quot;outter&quot;,
             shop : null, 
             
-            slot : &quot;top&quot;, 
+            slot : &quot;over_up&quot;, 
             tuckinable: false,        tuckin : false, 
             acc : null,
             patterns: [],
@@ -12742,7 +12778,7 @@ DefineMacroS("delay",delay)
     }&gt;&gt;
     
 &lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="3" name="InitClothTop" tags="widget" position="350,100" size="100,100">&lt;&lt;widget &quot;InitClothTop&quot;&gt;&gt;
-&lt;&lt;set Avatars.top to [
+&lt;&lt;set Avatars.over_up to [
     {
         id: 0, uid: 0,
         index : &quot;naked&quot;,    name : &quot;裸&quot;,     gender : &quot;n&quot;,
@@ -12758,10 +12794,10 @@ DefineMacroS("delay",delay)
         fixcolor: true,    color:null,  colorname: null,
         colors : [],
         
-        category: &quot;上衣/连衣裙&quot;, layer : &quot;top&quot;,
+        category: &quot;上衣/连衣裙&quot;, layer : &quot;over_up&quot;,
         shop : null, 
         
-        slot : &quot;top&quot;, 
+        slot : &quot;over_up&quot;, 
         tuckinable: false,        tuckin : false, 
         acc : null,
         patterns: [],
@@ -12783,10 +12819,10 @@ DefineMacroS("delay",delay)
         fixcolor: false,    color:&quot;#FDFFFF&quot;,  colorname: &quot;白&quot;,
         colors : [],
         
-        category: &quot;上衣&quot;, layer : &quot;top&quot;,
+        category: &quot;上衣&quot;, layer : &quot;over_up&quot;,
         shop : &quot;all&quot;,
         
-        slot : &quot;top&quot;, 
+        slot : &quot;over_up&quot;, 
         tuckinable: true,        tuckin : false, 
         acc : &quot;slime&quot;,
         patterns: [&quot;slime&quot;,&quot;heart&quot;],
@@ -12808,10 +12844,10 @@ DefineMacroS("delay",delay)
         fixcolor: false,    color:&quot;#FDFFFF&quot;,  colorname: &quot;白&quot;,
         colors : [&quot;mint&quot;],
         
-        category: &quot;上衣&quot;, layer : &quot;top&quot;,
+        category: &quot;上衣&quot;, layer : &quot;over_up&quot;,
         shop : &quot;all&quot;,
         
-        slot : &quot;top&quot;, 
+        slot : &quot;over_up&quot;, 
         tuckinable: true,        tuckin : false, 
         acc : null,
         patterns: [],
@@ -12833,7 +12869,7 @@ DefineMacroS("delay",delay)
         fixcolor: true,    color:&quot;black&quot;,  colorname: &quot;黑&quot;,
         colors : [&quot;white&quot;,&quot;black&quot;],
         
-        category: &quot;上衣&quot;, layer : &quot;top&quot;,  slot : &quot;onepiece&quot;, 
+        category: &quot;上衣&quot;, layer : &quot;over_up&quot;,  slot : &quot;onepiece&quot;, 
         shop : &quot;all&quot;,
         
         tuckinable: false,        tuckin : false, 
@@ -12857,7 +12893,7 @@ DefineMacroS("delay",delay)
         fixcolor: false,    color:&quot;#FDFFFF&quot;,  colorname: &quot;白&quot;,
         colors : [],
         
-        category: &quot;上衣&quot;, layer : &quot;top&quot;,  slot : &quot;top&quot;, 
+        category: &quot;上衣&quot;, layer : &quot;over_up&quot;,  slot : &quot;over_up&quot;, 
         shop : &quot;all&quot;,
         
         tuckinable: false,        tuckin : false, 
@@ -12868,7 +12904,8 @@ DefineMacroS("delay",delay)
     },
 ]&gt;&gt;
 &lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="4" name="InitClothUnderbottoms" tags="widget" position="475,100" size="100,100">&lt;&lt;widget &quot;InitClothBottom&quot;&gt;&gt;
-&lt;&lt;set Avatars.bottom to [
+
+&lt;&lt;set Avatars.over_bt to [
     {
         id: 0, uid: 0,
         index : &quot;naked&quot;,    name : &quot;裸&quot;,     gender : &quot;n&quot;,
@@ -12884,7 +12921,7 @@ DefineMacroS("delay",delay)
         fixcolor: true,    color:null,  colorname: null,
         colors : [],
         
-        category: &quot;下衣&quot;, layer : &quot;bottom&quot;, slot : &quot;bottom&quot;, 
+        category: &quot;下衣&quot;, layer : &quot;over_bt&quot;, slot : &quot;over_bt&quot;, 
         shop : null, 
         
         acc : null,
@@ -12907,7 +12944,7 @@ DefineMacroS("delay",delay)
         fixcolor: false,    color:&quot;#787878&quot;,  colorname: &quot;黑&quot;,
         colors : [],
         
-        category: &quot;下衣&quot;, layer : &quot;bottom&quot;, slot : &quot;bottom&quot;, 
+        category: &quot;下衣&quot;, layer : &quot;over_bt&quot;, slot : &quot;over_bt&quot;, 
         shop : &quot;all&quot;, 
         
         acc : null,
@@ -12930,7 +12967,7 @@ DefineMacroS("delay",delay)
         fixcolor: false,    color:&quot;#787878&quot;,  colorname: &quot;黑&quot;,
         colors : [&quot;black&quot;],
         
-        category: &quot;下衣&quot;, layer : &quot;bottom&quot;, slot : &quot;bottom&quot;,
+        category: &quot;下衣&quot;, layer : &quot;over_bt&quot;, slot : &quot;over_bt&quot;,
         shop : &quot;all&quot;, 
             
         acc : null,
@@ -12953,7 +12990,7 @@ DefineMacroS("delay",delay)
         fixcolor: false,    color:&quot;#787878&quot;,  colorname: &quot;黑&quot;,
         colors : [&quot;black&quot;],
         
-        category: &quot;下衣&quot;, layer : &quot;bottom&quot;, slot : &quot;bottom&quot;, 
+        category: &quot;下衣&quot;, layer : &quot;over_bt&quot;, slot : &quot;over_bt&quot;, 
         shop : &quot;all&quot;, 
         
         acc : null,
@@ -12976,7 +13013,7 @@ DefineMacroS("delay",delay)
         fixcolor: false,    color:&quot;#FDFFFF&quot;,  colorname: &quot;白&quot;,
         colors : [],
         
-        category: &quot;下衣&quot;, layer : &quot;bottom&quot;, slot : &quot;bottom&quot;, 
+        category: &quot;下衣&quot;, layer : &quot;over_bt&quot;, slot : &quot;over_bt&quot;, 
         shop : &quot;all&quot;, 
         
         acc : &quot;line&quot;,
@@ -13005,7 +13042,7 @@ DefineMacroS("delay",delay)
         category: &quot;内衣&quot;, layer : &quot;inner_up&quot;,
         shop : null, 
         
-        slot : &quot;top&quot;,
+        slot : &quot;over_up&quot;,
         tuckinable: false,        tuckin : false, 
         acc : null,
         patterns: [],
@@ -13030,7 +13067,7 @@ DefineMacroS("delay",delay)
         category: &quot;内衣&quot;, layer : &quot;inner_up&quot;,
         shop : &quot;all&quot;, 
         
-        slot : &quot;top&quot;,
+        slot : &quot;over_up&quot;,
         tuckinable: false,        tuckin : false, 
         acc : null,
         patterns: [],
@@ -13055,7 +13092,7 @@ DefineMacroS("delay",delay)
         category: &quot;内衣&quot;, layer : &quot;inner_up&quot;,
         shop : &quot;all&quot;, 
         
-        slot : &quot;top&quot;,
+        slot : &quot;over_up&quot;,
         tuckinable: false,        tuckin : false, 
         acc : null,
         patterns: [],
@@ -13082,7 +13119,7 @@ DefineMacroS("delay",delay)
         fixcolor: true,    color:null,  colorname: null,
         colors : [],
         
-        category: &quot;内裤&quot;, layer : &quot;inner_bt&quot;, slot : &quot;bottom&quot;, 
+        category: &quot;内裤&quot;, layer : &quot;inner_bt&quot;, slot : &quot;over_bt&quot;, 
         shop : null, 
         
         acc : null,
@@ -13105,7 +13142,7 @@ DefineMacroS("delay",delay)
         fixcolor: false,    color:&quot;#FDFFFF&quot;,  colorname: &quot;白&quot;,
         colors : [],
         
-        category: &quot;内裤&quot;, layer : &quot;inner_bt&quot;, slot : &quot;bottom&quot;, 
+        category: &quot;内裤&quot;, layer : &quot;inner_bt&quot;, slot : &quot;over_bt&quot;, 
         shop : &quot;all&quot;, 
         
         acc : null,
@@ -13128,7 +13165,7 @@ DefineMacroS("delay",delay)
         fixcolor: false,    color:&quot;#FDFFFF&quot;,  colorname: &quot;白&quot;,
         colors : [],
         
-        category: &quot;内裤&quot;, layer : &quot;inner_bt&quot;, slot : &quot;bottom&quot;, 
+        category: &quot;内裤&quot;, layer : &quot;inner_bt&quot;, slot : &quot;over_bt&quot;, 
         shop : &quot;all&quot;, 
         
         acc : null,
@@ -13888,8 +13925,8 @@ DefineMacroS("delay",delay)
     addon       : {body:false,bottom:false,face:false,hair:false,mouth:false,penis:false},
         
     neck        : null, hand        : null, face        : null,
-    hat         : null, outter      : null, top         : null,
-    bottom      : null, inner_up    : null, inner_bt    : null,
+    hat         : null, outter      : null, over_up     : null,
+    over_bt     : null, inner_up    : null, inner_bt    : null,
     shoes       : null, legs       : null,
 
     emoadd      : {tear:false, shy:false, red:false, hurt:false},
@@ -13903,8 +13940,8 @@ DefineMacroS("delay",delay)
 
 &lt;&lt;set $tryon to {
     neck        : null, hand        : null, face        : null,
-    hat         : null, outter      : null, top         : null,
-    bottom      : null, inner_up    : null, inner_bt    : null,
+    hat         : null, outter      : null, over_up     : null,
+    over_bt      : null, inner_up    : null, inner_bt    : null,
     shoes       : null, legs       : null,
 }&gt;&gt;
 
@@ -13925,21 +13962,21 @@ DefineMacroS("delay",delay)
 
 &lt;!-- 衣柜。身上的衣服会从衣柜里取出来放到 Equip里 --&gt;
 &lt;&lt;set $closet to {
-    outter : [],    top : [],    bottom : [],
-    inner_up : [],    inner_bt : [],
-    shoes : [],    legs : [],
+    outter : [null,],       over_up : [null,],      over_bt : [null,],
+    inner_up : [null,],     inner_bt : [null,],
+    shoes : [null,],        legs : [null,],
 
-    hat : [],    face : [],    neck : [],
-    hand : [],    back : [],
+    hat : [null,],      face : [null,],     neck : [null,],
+    hand : [null,],     back : [null,],
     slot:{
         level:1,
-        outter:5, top:10, bottom:10, inner_up: 10, inner_bt: 10,
+        outter:5, over_up:10, over_bt:10, inner_up: 10, inner_bt: 10,
         shoes:10, legs:10, hat:5, face:5, neck:5, hand:5, back:5,
     }
 }&gt;&gt;
 
-&lt;&lt;set $closet.top[0] to clone(A.top[4])&gt;&gt;
-&lt;&lt;set $closet.bottom[0] to clone(A.bottom[4])&gt;&gt;
+&lt;&lt;set $closet.over_up[0] to clone(A.over_up[4])&gt;&gt;
+&lt;&lt;set $closet.over_bt[0] to clone(A.over_bt[4])&gt;&gt;
 &lt;&lt;set $closet.inner_bt[0] to clone(A.inner_bt[1])&gt;&gt;
 &lt;&lt;set $closet.legs[0] to clone(A.legs[1])&gt;&gt;
 
@@ -14199,9 +14236,9 @@ $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌}
 /* 现有衣服等装备 */
 &lt;&lt;set $Equip to {
 	hat     : null,     neck    : null,	    face : null,
-	outter  : null,	    top     : null,     inner_up: null,
-    hand    : null,     bottom  : null,     inner_bt: null,
-    shoes   : null,     legs   : null,
+	outter  : null,	    over_up : null,     inner_up: null,
+    hand    : null,     over_bt : null,     inner_bt: null,
+    shoes   : null,     legs    : null,
     back    : null,
     hairfront : &quot;natural&quot;,    hairback  : &quot;straight&quot;,
     emote     : &quot;正常&quot;,
@@ -14214,8 +14251,8 @@ $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌}
 &lt;!-- 临时备份 --&gt;
 &lt;&lt;set $TEquip to {
     hat     : null,     neck    : null,	    face : null,
-	outter  : null,	    top     : null,     inner_up: null,
-    hand    : null,     bottom  : null,     inner_bt: null,
+	outter  : null,	    over_up : null,     inner_up: null,
+    hand    : null,     over_bt : null,     inner_bt: null,
     shoes   : null,     legs   : null,
     back    : null,
     hairfront : &quot;natural&quot;,    hairback  : &quot;straight&quot;,
@@ -14224,12 +14261,12 @@ $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌}
     nipple : null,
 }&gt;&gt;
 
-&lt;&lt;dressup &quot;top&quot; 1 &quot;#F14660&quot; &quot;红&quot;&gt;&gt;
+&lt;&lt;dressup &quot;over_up&quot; 1 &quot;#F14660&quot; &quot;红&quot;&gt;&gt;
 &lt;&lt;dressup &quot;inner_bt&quot; 1&gt;&gt;
-&lt;&lt;dressup &quot;bottom&quot; 1&gt;&gt;
+&lt;&lt;dressup &quot;over_bt&quot; 1&gt;&gt;
 &lt;&lt;dressup &quot;shoes&quot; 1&gt;&gt;
 &lt;&lt;dressup &quot;legs&quot; 1&gt;&gt;
-&lt;&lt;set $Equip.top.uid = 1, $Equip.inner_bt.uid = 1, $Equip.bottom.uid = 1, $Equip.shoes.uid = 1, $Equip.legs.uid = 1&gt;&gt;
+&lt;&lt;set $Equip.over_up.uid = 1, $Equip.inner_bt.uid = 1, $Equip.over_bt.uid = 1, $Equip.shoes.uid = 1, $Equip.legs.uid = 1&gt;&gt;
 
 &lt;&lt;set $PFace to {
     name    : &quot;正常&quot;,
@@ -15086,12 +15123,12 @@ $(document).on(&#39;:passagerender&#39;, function (ev) {
         &lt;&lt;ShowAShopItems &quot;outter&quot;&gt;&gt;
     &lt;/div&gt;
 
-    &lt;div id=&quot;top&quot;&gt;
-        &lt;&lt;ShowAShopItems &quot;top&quot;&gt;&gt;
+    &lt;div id=&quot;over_up&quot;&gt;
+        &lt;&lt;ShowAShopItems &quot;over_up&quot;&gt;&gt;
     &lt;/div&gt;
 
-    &lt;div id=&quot;bottom&quot;&gt;
-        &lt;&lt;ShowAShopItems &quot;bottom&quot;&gt;&gt;
+    &lt;div id=&quot;over_bt&quot;&gt;
+        &lt;&lt;ShowAShopItems &quot;over_bt&quot;&gt;&gt;
     &lt;/div&gt;
 
     &lt;div id=&quot;inner_up&quot;&gt;
@@ -15190,7 +15227,7 @@ $(document).on(&#39;:passagerender&#39;, function (ev) {
 &lt;&lt;/widget&gt;&gt;
 
 &lt;&lt;widget &quot;resettryon&quot;&gt;&gt;
-    &lt;&lt;set $tryon to {neck: null, hand: null, face: null,hat: null, outter: null, top: null,bottom: null,inner_up: null, inner_bt: null,shoes: null, legs: null,}&gt;&gt;
+    &lt;&lt;set $tryon to {neck: null, hand: null, face: null,hat: null, outter: null, over_up: null,over_bt: null,inner_up: null, inner_bt: null,shoes: null, legs: null,}&gt;&gt;
 &lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="26" name="试衣偷窥：触发" tags="" position="725,350" size="100,100">&lt;&lt;mode &quot;event&quot;&gt;&gt;
 &lt;&lt;you&gt;&gt;还穿着商店里的衣服，确定就这么离开商店吗？&lt;br&gt;
 &lt;br&gt;
@@ -15381,13 +15418,13 @@ required:false,
 &lt;&lt;set $tryon[_layer] to clone($showcase)&gt;&gt;
 
 &lt;&lt;switch _layer&gt;&gt;
-    &lt;&lt;case &quot;top&quot;&gt;&gt;
+    &lt;&lt;case &quot;over_up&quot;&gt;&gt;
         &lt;&lt;if $showcase.slot is &quot;onepiece&quot;&gt;&gt;
-            &lt;&lt;set $Equip.bottom = null, $tryon.bottom = null&gt;&gt;
+            &lt;&lt;set $Equip.over_bt = null, $tryon.over_bt = null&gt;&gt;
         &lt;&lt;/if&gt;&gt;
-    &lt;&lt;case &quot;bottom&quot;&gt;&gt;
-        &lt;&lt;if $Equip.top.slot is &quot;onepiece&quot;&gt;&gt;
-            &lt;&lt;set $Equip.top = null,$tryon.top = null&gt;&gt;
+    &lt;&lt;case &quot;over_bt&quot;&gt;&gt;
+        &lt;&lt;if $Equip.over_up.slot is &quot;onepiece&quot;&gt;&gt;
+            &lt;&lt;set $Equip.over_up = null,$tryon.over_up = null&gt;&gt;
         &lt;&lt;/if&gt;&gt;
     &lt;&lt;case &quot;inner_up&quot;&gt;&gt;
         &lt;&lt;if $showcase.slot is &quot;onepiece&quot;&gt;&gt;
@@ -15395,8 +15432,8 @@ required:false,
         &lt;&lt;elseif $showcase.slot is &quot;fullbody&quot;&gt;&gt;
             &lt;&lt;set 
              $Equip.inner_bt = null, $tryon.inner_bt = null,
-             $Equip.top = null, $tryon.top = null,
-             $Equip.bottom to null, $tryon.bottom =null&gt;&gt;
+             $Equip.over_up = null, $tryon.over_up = null,
+             $Equip.over_bt to null, $tryon.over_bt =null&gt;&gt;
         &lt;&lt;/if&gt;&gt;
 &lt;&lt;/switch&gt;&gt;
 &lt;&lt;SetAvatar&gt;&gt;
@@ -15404,8 +15441,8 @@ required:false,
 
 &lt;&lt;widget &quot;showinner&quot;&gt;&gt;
     &lt;&lt;set $Equip.outter = null, $tryon.outter = null&gt;&gt;
-    &lt;&lt;set $Equip.top = null, $tryon.top = null&gt;&gt;
-    &lt;&lt;set $Equip.bottom = null, $tryon.bottom = null&gt;&gt;
+    &lt;&lt;set $Equip.over_up = null, $tryon.over_up = null&gt;&gt;
+    &lt;&lt;set $Equip.over_bt = null, $tryon.over_bt = null&gt;&gt;
     &lt;&lt;SetAvatar&gt;&gt;
 &lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="29" name="AvatarSetup" tags="widget" position="1100,350" size="100,100">&lt;&lt;widget &quot;SetAvatar&quot;&gt;&gt;
 
@@ -15460,12 +15497,12 @@ required:false,
         &lt;&lt;showcloset &quot;outter&quot;&gt;&gt;
     &lt;/div&gt;
 
-    &lt;div id=&quot;top&quot;&gt;
-    &lt;&lt;showcloset &quot;top&quot;&gt;&gt;
+    &lt;div id=&quot;over_up&quot;&gt;
+    &lt;&lt;showcloset &quot;over_up&quot;&gt;&gt;
     &lt;/div&gt;
 
-    &lt;div id=&quot;bottom&quot;&gt;
-    &lt;&lt;showcloset &quot;bottom&quot;&gt;&gt;
+    &lt;div id=&quot;over_bt&quot;&gt;
+    &lt;&lt;showcloset &quot;over_bt&quot;&gt;&gt;
     &lt;/div&gt;
 
     &lt;div id=&quot;inner_up&quot;&gt;
@@ -15533,6 +15570,9 @@ required:false,
 
 &lt;&lt;if $closet[_catgr].length gte 1&gt;&gt;
     &lt;&lt;for _i to 0; _i lt $closet[_catgr].length; _i ++&gt;&gt;
+        &lt;&lt;if $closet[_catgr][_i] is null&gt;&gt;
+            &lt;&lt;continue&gt;&gt;
+        &lt;&lt;/if&gt;&gt;
         &lt;&lt;if $closet[_catgr][_i].hasImg is true&gt;&gt;
             &lt;&lt;set _img to &quot;image/avatar/&quot;+_catgr+&quot;/&quot;+$closet[_catgr][_i].index + &quot;/thumb.png&quot;&gt;&gt;
         &lt;&lt;else&gt;&gt;
@@ -16616,21 +16656,21 @@ function wait(text) {
     &lt;&lt;/if&gt;&gt;
 
     &lt;&lt;switch $args[0]&gt;&gt;
-        &lt;&lt;case &quot;top&quot;&gt;&gt;
-            &lt;&lt;if Avatars.top[$args[1]].slot is &quot;onepiece&quot;&gt;&gt;
-                &lt;&lt;set $Equip.bottom to null&gt;&gt;
+        &lt;&lt;case &quot;over_up&quot;&gt;&gt;
+            &lt;&lt;if Avatars.over_up[$args[1]].slot is &quot;onepiece&quot;&gt;&gt;
+                &lt;&lt;set $Equip.over_bt to null&gt;&gt;
             &lt;&lt;/if&gt;&gt;
-        &lt;&lt;case &quot;bottom&quot;&gt;&gt;
-            &lt;&lt;if $Equip.top.slot is &quot;onepiece&quot;&gt;&gt;
-                &lt;&lt;set $Equip.top to null&gt;&gt;
+        &lt;&lt;case &quot;over_bt&quot;&gt;&gt;
+            &lt;&lt;if $Equip.over_up.slot is &quot;onepiece&quot;&gt;&gt;
+                &lt;&lt;set $Equip.over_up to null&gt;&gt;
             &lt;&lt;/if&gt;&gt;
         &lt;&lt;case &quot;inner_up&quot;&gt;&gt;
             &lt;&lt;if Avatars.inner_up[$args[1]].slot is &quot;onepiece&quot;&gt;&gt;
                 &lt;&lt;set $Equip.inner_bt to null&gt;&gt;
             &lt;&lt;elseif Avatars.inner_up[$args[1]].slot is &quot;fullbody&quot;&gt;&gt;
                 &lt;&lt;set $Equip.inner_bt to null&gt;&gt;
-                &lt;&lt;set $Equip.top to null&gt;&gt;
-                &lt;&lt;set $Equip.bottom to null&gt;&gt;
+                &lt;&lt;set $Equip.over_up to null&gt;&gt;
+                &lt;&lt;set $Equip.over_bt to null&gt;&gt;
             &lt;&lt;/if&gt;&gt;
     &lt;&lt;/switch&gt;&gt;
 &lt;&lt;/widget&gt;&gt;

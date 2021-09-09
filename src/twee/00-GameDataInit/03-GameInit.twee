@@ -46,8 +46,8 @@
     addon       : {body:false,bottom:false,face:false,hair:false,mouth:false,penis:false},
         
     neck        : null, hand        : null, face        : null,
-    hat         : null, outter      : null, top         : null,
-    bottom      : null, inner_up    : null, inner_bt    : null,
+    hat         : null, outter      : null, over_up     : null,
+    over_bt     : null, inner_up    : null, inner_bt    : null,
     shoes       : null, legs       : null,
 
     emoadd      : {tear:false, shy:false, red:false, hurt:false},
@@ -61,8 +61,8 @@
 
 <<set $tryon to {
     neck        : null, hand        : null, face        : null,
-    hat         : null, outter      : null, top         : null,
-    bottom      : null, inner_up    : null, inner_bt    : null,
+    hat         : null, outter      : null, over_up     : null,
+    over_bt      : null, inner_up    : null, inner_bt    : null,
     shoes       : null, legs       : null,
 }>>
 
@@ -83,21 +83,21 @@
 
 <!-- 衣柜。身上的衣服会从衣柜里取出来放到 Equip里 -->
 <<set $closet to {
-    outter : [],    top : [],    bottom : [],
-    inner_up : [],    inner_bt : [],
-    shoes : [],    legs : [],
+    outter : [null,],       over_up : [null,],      over_bt : [null,],
+    inner_up : [null,],     inner_bt : [null,],
+    shoes : [null,],        legs : [null,],
 
-    hat : [],    face : [],    neck : [],
-    hand : [],    back : [],
+    hat : [null,],      face : [null,],     neck : [null,],
+    hand : [null,],     back : [null,],
     slot:{
         level:1,
-        outter:5, top:10, bottom:10, inner_up: 10, inner_bt: 10,
+        outter:5, over_up:10, over_bt:10, inner_up: 10, inner_bt: 10,
         shoes:10, legs:10, hat:5, face:5, neck:5, hand:5, back:5,
     }
 }>>
 
-<<set $closet.top[0] to clone(A.top[4])>>
-<<set $closet.bottom[0] to clone(A.bottom[4])>>
+<<set $closet.over_up[0] to clone(A.over_up[4])>>
+<<set $closet.over_bt[0] to clone(A.over_bt[4])>>
 <<set $closet.inner_bt[0] to clone(A.inner_bt[1])>>
 <<set $closet.legs[0] to clone(A.legs[1])>>
 

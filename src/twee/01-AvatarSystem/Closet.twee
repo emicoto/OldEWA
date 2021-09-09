@@ -25,12 +25,12 @@
         <<showcloset "outter">>
     </div>
 
-    <div id="top">
-    <<showcloset "top">>
+    <div id="over_up">
+    <<showcloset "over_up">>
     </div>
 
-    <div id="bottom">
-    <<showcloset "bottom">>
+    <div id="over_bt">
+    <<showcloset "over_bt">>
     </div>
 
     <div id="inner_up">
@@ -103,6 +103,9 @@
 
 <<if $closet[_catgr].length gte 1>>
     <<for _i to 0; _i lt $closet[_catgr].length; _i ++>>
+        <<if $closet[_catgr][_i] is null>>
+            <<continue>>
+        <</if>>
         <<if $closet[_catgr][_i].hasImg is true>>
             <<set _img to "image/avatar/"+_catgr+"/"+$closet[_catgr][_i].index + "/thumb.png">>
         <<else>>

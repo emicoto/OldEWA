@@ -13,8 +13,8 @@ window.fixStuckAnimations = function() {
 /* 属性集算 */
 function setreveal(){
     const isReveal=w=>Equip[w] ?Equip[w].reveal :0;
-    const tops =[isReveal("outter"),isReveal("top"),isReveal("inner_up"),]
-    const bottoms=[isReveal("bottom"),isReveal("inner_bt")]
+    const tops =[isReveal("outter"),isReveal("over_up"),isReveal("inner_up"),]
+    const bottoms=[isReveal("over_bt"),isReveal("inner_bt")]
     tops.sort((a,b)=>b-a)
     bottoms.sort((a,b)=>b-a)
     /*console.log("上衣:",tops)
@@ -27,7 +27,7 @@ F.setreveal = setreveal
 
 function allureBuff() {
     const isAllure = w => Equip[w] ? Equip[w].beauty : 0;
-    const items = ["hat","outter","top","bottom","inner_up","inner_bt","legs","shoes","neck","face","hand","back"]
+    const items = ["hat","outter","over_up","over_bt","inner_up","inner_bt","legs","shoes","neck","face","hand","back"]
 
     var a = 0
     for(let i = 0; i < items.length; i++){
@@ -44,14 +44,14 @@ F.allureBuff = allureBuff
 
 function defBuff() {
     const isDef = w => Equip[w] ? Equip[w].defence : 0;
-    const items = ["hat","outter","top","bottom","inner_up","inner_bt","legs","shoes","neck","face","hand","back"]
+    const items = ["hat","outter","over_up","over_bt","inner_up","inner_bt","legs","shoes","neck","face","hand","back"]
 
     var a = 0
     for(let i = 0; i < items.length; i++){
             a = a+isDef(items[i])
         }
 
-    return 1+a
+    return a
 }
 
 window.defBuff = defBuff
@@ -60,7 +60,7 @@ F.defBuff = defBuff
 function warmth() {
     const isHot = w => Equip[w] ? Equip[w].hot : 0;
     const isCold = w => Equip[w] ? Equip[w].cold : 0;
-    const items = ["hat","outter","top","bottom","inner_up","inner_bt","legs","shoes","neck","face","hand","back"]
+    const items = ["hat","outter","over_up","over_bt","inner_up","inner_bt","legs","shoes","neck","face","hand","back"]
 
     var a = [0,0]
     for(let i = 0; i < items.length; i++){
@@ -168,7 +168,7 @@ function BuyOutFit(args) {
         
         text = "你花费了"+tryoncost()+"元购买了身上试穿的衣服。"
         
-        V.tryon = {neck: null, hand: null, face: null,hat: null, outter: null, top: null,bottom: null,inner_up: null, inner_bt: null,shoes: null, legs: null,}
+        V.tryon = {neck: null, hand: null, face: null,hat: null, outter: null, over_up: null,over_bt: null,inner_up: null, inner_bt: null,shoes: null, legs: null,}
         V.TEquip = clone(V.Equip)
         
     }
@@ -185,7 +185,7 @@ function BuyOutFit(args) {
 window.BuyOutFit = BuyOutFit
 
 function tryoncheck() {
-    const group = ["neck","hand","face","hat","outter","top","bottom","inner_up","inner_bt","shoes","legs"]
+    const group = ["neck","hand","face","hat","outter","over_up","over_bt","inner_up","inner_bt","shoes","legs"]
     var i,n
     for ( i=0; i<group.length; i++){
         if (V.tryon[group[i]]) return true;
@@ -275,15 +275,15 @@ function dressOn(args, arg) {
         closet[args].push(obj)
     }
 
-    if(args == "top"  && Equip.bottom && Equip.top.slot == "onepiece"){
-        let obj = clone(Equip.bottom)
-        closet.bottom.push(obj)
-        Equip.bottom = null
+    if(args == "over_up"  && Equip.over_bt && Equip.over_up.slot == "onepiece"){
+        let obj = clone(Equip.over_bt)
+        closet.over_bt.push(obj)
+        Equip.over_bt = null
         
-    }else if (args == "bottom" && Equip.top && Equip.top.slot == "onepiece"){
-        let obj = clone(Equip.top)
-        closet.top.push(obj)
-        Equip.top = null
+    }else if (args == "over_bt" && Equip.over_up && Equip.over_up.slot == "onepiece"){
+        let obj = clone(Equip.over_up)
+        closet.over_up.push(obj)
+        Equip.over_up = null
 
     }else if (args == "inner_up" && Equip.inner_bt && Equip.inner_up.slot == "onepiece"){
         let obj = clone(Equip.inner_bt)
@@ -297,16 +297,16 @@ function dressOn(args, arg) {
             closet.inner_bt.push(obj)
             Equip.inner_bt = null }
 
-        if(Equip.top){
-            let obj = clone(Equip.top)
-            closet.top.push(obj)
-            Equip.top = null
+        if(Equip.over_up){
+            let obj = clone(Equip.over_up)
+            closet.over_up.push(obj)
+            Equip.over_up = null
         }
         
-        if(Equip.bottom){
-            let obj = clone(Equip.bottom)
-            closet.bottom.push(obj)
-            Equip.bottom = null
+        if(Equip.over_bt){
+            let obj = clone(Equip.over_bt)
+            closet.over_bt.push(obj)
+            Equip.over_bt = null
         }
     }
 
@@ -337,11 +337,11 @@ F.dressOn = dressOn
 
 function gonaked(mode){
 
-    if((Equip.top && mode=="debug") || mode!="debug"){
+    if((Equip.over_up && mode=="debug") || mode!="debug"){
         V.TEquip = clone(V.Equip)
     }
 
-    const group=["hat","outter","top","bottom","inner_up","inner_bt","legs","shoes","face","neck","hand","back"]
+    const group=["hat","outter","over_up","over_bt","inner_up","inner_bt","legs","shoes","face","neck","hand","back"]
 
     if (mode=="closet"){
         for(let i=0; i< group.length; i++){
@@ -350,7 +350,7 @@ function gonaked(mode){
 
     }
     else if(mode=="H" || !mode){
-        let layer = ["outter","top","bottom","inner_up","inner_bt","shoes","legs"]
+        let layer = ["outter","over_up","over_bt","inner_up","inner_bt","shoes","legs"]
         for(let i=0; i<layer.length;i++){
             Equip[group[i]] = null
         }
