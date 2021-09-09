@@ -17,6 +17,11 @@
         if(type=='normal')tslot = slot+4;
         else tslot = slot;
 
+        if(V.lang == "EN"){
+            /* T.data.pctitle = setup.L.EN.title[T.data.pctitle] */
+            /* T.data.location = D.placelist[T.data.location].name_en */
+        }
+
         let htmltext = (
          '<div id="savecard" class="glassinset"><div id="cardcontent">'
             +'<div id="gametime">'
@@ -42,7 +47,7 @@
             +`<div id="buttons">`
                 + ( type=="normal" ? (saveOK(slot) ? `<input type="button" id="savebutton" value="SAVE" onclick="SaveGame(${tslot},${T.data.saveId},null,true)">`: `<input type="button" id="savebutton" value="SAVE" disabled>`) : "")
                 +`<input type="button" id="loadbutton" value="LOAD" onclick="LoadGame('${type}',${tslot})">`
-                +(conf.saves[slot].locked == true ?`<input type="button" id="delbutton" value="DEL" disabled>` : `<input type="button" id="delbutton" value="DEL" onclick="deleteSave('${type}',${slot})">` )
+                +(conf.saves[slot].locked == true ?`<input type="button" id="delbutton" value="DEL" disabled>` : `<input type="button" id="delbutton" value="DEL" onclick="deleteSave('${type}',${tslot})">` )
             +`</div>`
             +`</div></div>`
         )
@@ -112,9 +117,80 @@ window.SaveAlert = function(type, slot){
 }
 
 window.LoadAlert = function(type, slot){
-    slot = parseInt(slot)
+    let a = getSaveDetails() 
+    var sdata = {}
+    var fslot
+    var pslot
+
+
+    if(type=="auto"){
+        fslot = slot
+        pslot = "A"+(fslot < 10? "0":"")+(fslot+1)
+        sdata = a.autosave[slot].metadata
+    }else{
+        fslot = (slot-4)
+        pslot = "N"+(fslot < 10? "0":"")+(fslot+1)
+        sdata = a.slots[fslot].metadata
+    }
+
+    let text = (
+    `<span style='color:#EA0827;'><b>是否要读取${pslot}号存档？</b></span><br><br>`
+    +`${pslot}存档角色：${sdata.saveName}<br>`
+    +"游戏内时间："+`${sdata.gamedate.year}年${sdata.gamedate.month}月${sdata.gamedate.day}日 ${sdata.gamedate.hour}时${sdata.gamedate.min}分<br>`
+    +"所在地点："+sdata.location+"<br><br><br>"
+    +`<input id='alert-ok' type='button' value='确定' onClick='LoadGame("${type}",${slot},true);SugarCube.Dialog.close()'>`
+    +`<input id='alert-cancel' type='button' value='取消' onClick='SugarCube.Dialog.close()'>`
+    )
+
+    let text_en = (
+    `<span style='color:#EA0827;'><b>Are you sure to load ${pslot} savedata？</b></span><br><br>`
+        +`${pslot} chara：${sdata.saveName}<br>`
+        +"InGame time:"+`${sdata.gamedate.month}/${sdata.gamedate.day}/${sdata.gamedate.year}, at ${sdata.gamedate.hour}:${sdata.gamedate.min}<br>`
+        +"location"+sdata.location+"<br><br><br>"
+        +`<input id='alert-ok' type='button' value='OK' onClick='deleteSave("${type}",${slot},true);SugarCube.Dialog.close()'>`
+        +`<input id='alert-cancel' type='button' value='Cancel' onClick='SugarCube.Dialog.close()'>`
+    )
+
+    Dialog.append(Lang(text,text_en))
+    Dialog.open()
+
 }
 
 window.DelAlert = function(type, slot){
-    slot = parseInt(slot)
+    let a = getSaveDetails() 
+    var sdata = {}
+    var fslot
+    var pslot
+
+
+    if(type=="auto"){
+        fslot = slot
+        pslot = "A"+(fslot < 10? "0":"")+(fslot+1)
+        sdata = a.autosave[slot].metadata
+    }else{
+        fslot = (slot-4)
+        pslot = "N"+(fslot < 10? "0":"")+(fslot+1)
+        sdata = a.slots[fslot].metadata
+    }
+
+    let text = (
+    `<span style='color:#EA0827;'><b>是否要删除${pslot}号存档？</b></span><br><br>`
+        +`${pslot}存档角色：${sdata.saveName}<br>`
+        +"游戏内时间："+`${sdata.gamedate.year}年${sdata.gamedate.month}月${sdata.gamedate.day}日 ${sdata.gamedate.hour}时${sdata.gamedate.min}分<br>`
+        +"所在地点："+sdata.location+"<br><br><br>"
+        +`<input id='alert-ok' type='button' value='确定' onClick='deleteSave("${type}",${slot},true);SugarCube.Dialog.close()'>`
+        +`<input id='alert-cancel' type='button' value='取消' onClick='SugarCube.Dialog.close()'>`
+    )
+
+    let text_en = (
+    `<span style='color:#EA0827;'><b>Are you sure to delete ${pslot} savedata？</b></span><br><br>`
+        +`${pslot} chara：${sdata.saveName}<br>`
+        +"InGame time:"+`${sdata.gamedate.month}/${sdata.gamedate.day}/${sdata.gamedate.year}, at ${sdata.gamedate.hour}:${sdata.gamedate.min}<br>`
+        +"location"+sdata.location+"<br><br><br>"
+        +`<input id='alert-ok' type='button' value='OK' onClick='deleteSave("${type}",${slot},true);SugarCube.Dialog.close()'>`
+        +`<input id='alert-cancel' type='button' value='Cancel' onClick='SugarCube.Dialog.close()'>`
+    )
+
+    Dialog.append(Lang(text,text_en))
+    Dialog.open()
 }

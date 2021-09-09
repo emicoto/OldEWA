@@ -49,7 +49,7 @@ canvas {
     background-image: url('./image/pattern.png');
     background-repeat: repeat;
     background-color:transparent;
-    z-index: -1000;
+    z-index: -1;
 }  
 
 #passages {

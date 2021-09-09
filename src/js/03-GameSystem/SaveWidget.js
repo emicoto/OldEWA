@@ -1,5 +1,4 @@
-﻿
-window.initSaveData = function(forceRun){
+﻿window.initSaveData = function(forceRun){
     
     if('ewaSaveDetails' in localStorage===false || forceRun === true){
         let saveDetails = {autosave:[null,null,null,null],slots:[null,null,null,null,null,null,null,null,null,null,null,null]}
@@ -16,7 +15,7 @@ window.initSaveData = function(forceRun){
         else{
             let save = JSON.parse(localStorage.getItem("ewaSaveDetails"))
 
-            if(!save.autosave || save?.autosave?.length < 4 || save?.slots?.length < 12){
+            if(!save.autosave || !Array.isArray(save.autosave) || save.autosave.length < 4 || save.slots.length < 12){
                 let newsaves = prepareSaveDetails()
 
                 localStorage.setItem("ewaSaveDetails" ,JSON.stringify(newsaves))
@@ -176,8 +175,6 @@ window.SaveGame = function(slot, uid=null, metadata, check) {
         var metadata = setSaveMetaData()
     }
 
-    console.log(uid, check)
-
         /* 覆盖时的确认检测，以及不是同一个角色的档案时的确认检测 */
     if (uid != null && V.saveId != uid && check===true){
         SaveAlert('UID',slot)
@@ -203,19 +200,19 @@ F.SaveGame = window.SaveGame
 window.LoadGame = function(type, slot, check) {
 
     // 设置了每次读档都提示是否要确认时
-    if( (V.conf.checkLoad===true && !check) || check === true){
-        new Wikifier(null, `<<loadConfirm '${type}' ${slot}>>`);
+    if( (V.conf.checkLoad===true && !check)){
+        LoadAlert(type,slot)
     }
     else{
         Save.slots.load(slot)
     }
 }
 
-window.deleteSave = function(type,slot, check){
+window.deleteSave = function(type,slot,check){
 
     /* 设置了删档需要确认时 */
-    if(V.conf.checkDel === true && !check || check === true){
-        new Wikifier(null,`<<deleteConfirm '${type}' ${slot}>>`);
+    if(V.conf.checkDel === true && !check){
+        DelAlert(type,slot)
         return;
 
     }
@@ -224,9 +221,9 @@ window.deleteSave = function(type,slot, check){
         deleteSaveDetails("auto", slot)
 
     }else{
-        let tslot = slot +4
-        Save.slots.delete(tslot)
-        deleteSaveDetails("normal",slot)
+        let fslot = slot -4
+        Save.slots.delete(slot)
+        deleteSaveDetails("normal",fslot)
     }
     resetSaveMenu()
 }

@@ -50,7 +50,7 @@ importStyles("style.css")
 console.log("Game Version:", StartConfig.version);
 
 l10nStrings.errorTitle = StartConfig.version + " Error";
-
+Config.saves.tryDiskOnMobile = true
 
 /**
  * Not a configuration, but we are overriding a basic part of sugarcube
