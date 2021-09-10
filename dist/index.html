@@ -829,7 +829,11 @@ hr {
   margin: 5px;
   font-size: 16px;
   letter-spacing: 1px;
-  font-weight: 500;
+}
+
+#append-text {
+  font-size: 16px;
+  letter-spacing: 1px;
 }
 
 .div-link {
@@ -933,15 +937,16 @@ background-color: white;
   border-radius: 3px;
   transition: all 1.25s;
 }
-#action-text2.flash {
+.flash {
 background-color:rgb(169, 255, 241);
 }
 .popup {
   animation: popup 0.3s linear alternate-reverse;
 }
 .action-flash {
-border-color: rgb(169, 255, 241) !important;
+  background-color: rgb(169, 255, 241) !important;
   color: black !important;
+  transition: all 0.3s;
 }
 .action-flash a {
 color: darkgoldenrod !important;
@@ -2158,14 +2163,14 @@ body #story-caption #storyCaptionDiv {
 /* 图片滤镜*/
 .sunset {
   background-color:#E26105;
-  opacity:0.4;
-  mix-blend-mode: hard-light;
+  opacity:0.2;
+  mix-blend-mode: multiply;
 }
 
 .night {
   background-color:#180E9C;
-  opacity:0.4;
-  mix-blend-mode: hard-light;
+  opacity:0.2;
+  mix-blend-mode: multiply;
 }
 
 .reset {
@@ -4618,7 +4623,7 @@ Object.defineProperties(window, {
 	},
 	EFlag : {
 		get:function(){
-			return State.variables.TFlag
+			return State.variables.EFlag
 		}
 	},
 	PFlag: {
@@ -4700,6 +4705,11 @@ Object.defineProperties(window, {
 		get:function(){
 			return State.variables.TCSV
 		}
+	},
+	Base : {
+		get:function(){
+			return State.variables.Base
+		}
 	}
 });
 
@@ -4714,7 +4724,7 @@ window.setMirrorVariables = function(){
 		conf : conf,
 		closet: closet, items: items,
 		pet : pet, Equip : Equip, FEquip : FEquip, TEquip:TEquip,
-		Source : Source, TCSV : TCSV,
+		Base : Base, Source : Source, TCSV : TCSV,
 	}
 }
 
@@ -10639,6 +10649,13 @@ function stAvatar() {
         V.avatar.emoadd.red = setAvatar("emoadd.red",true, true)
     }
 
+    if(PFlag.bottom+PFlag.top <= 2) {
+        V.avatar.emoadd.shy = setAvatar('emoadd.shy',true, true)
+        V.avatar.mouth = setAvatar('mouth','sigh',true)
+        V.avatar.eyebrow = setAvatar('eyebrow','sad',true)
+    }
+
+
     /* 淫纹 */
     if(PC.skin.腹部){
         let path = "./image/avatar/body/"+PC.skin.腹部.index+".png"
@@ -10926,14 +10943,18 @@ window.useitem = useitem
     useitem(catgr,_keys[_i])
 */
 /* twine-user-script #29: "FixValue.js" */
+window.fixfloat = function(v,n){
+    return parseFloat(v.toFixed(n))
+}
+
 function FixValue() {
 
     PC.money = Math.clamp(PC.money, 0, 9999999999)
 
     /* 固定数值的修正 */
 
-    V.fix.hot = parseFloat((26+(PC.abl.健身/200)).toFixed(2))
-    V.fix.cold = parseFloat((20-(PC.abl.健身/200)).toFixed(2))
+    V.fix.hot = fixfloat((26+(PC.abl.健身/200)),2)
+    V.fix.cold = fixfloat((20-(PC.abl.健身/200)),2)
     V.fix.beauty = 1600
     PC.info.hairlen = Math.clamp(PC.info.hairlen,0,9999)
     PC.info.hairlenf = Math.clamp(PC.info.hairlenf,0,9999)
@@ -10945,10 +10966,10 @@ function FixValue() {
     PC.base.体力[0] = Math.clamp(PC.base.体力[0],-100,PC.base.体力[1])
 
     PC.base.理智[1] =  Math.round(Math.clamp(500+(PC.abl.意志*(PC.level/5)),0,2500))  
-    PC.base.理智[0] = Math.clamp(PC.base.理智[0],0,PC.base.理智[1])
+    PC.base.理智[0] = Math.clamp(PC.base.理智[0],-10,PC.base.理智[1])
 
     PC.base.魔力[1] =  Math.round(Math.clamp(100+PC.level*(PC.abl.意志/8),100,1200)) 
-    PC.base.魔力[0] = Math.clamp(PC.base.魔力[0],0,PC.base.魔力[1])
+    PC.base.魔力[0] = Math.clamp(PC.base.魔力[0],-10,PC.base.魔力[1])
 
     let g = Object.keys(PC.base)
 
@@ -10958,7 +10979,7 @@ function FixValue() {
         if(["体力","理智","魔力"].includes(n)) continue;
 
         //[current,max] 最大值固定 1000 并且把现在值固定在 0-max值内
-        if(["饮食","健康","酒精","药物","抑郁","欲望"].includes(n)) {
+        if(["饮食","健康","酒精","药物","抑郁"].includes(n)) {
             PC.base[n][1] = 1000;
             PC.base[n][0] = Math.clamp(PC.base[n][0],0,PC.base[n][1]);
         }
@@ -10968,19 +10989,20 @@ function FixValue() {
             PC.base[n][1] = Math.round(Math.clamp(PC.base[n][1],1000,5000))
             PC.base[n][0] = Math.max(PC.base[n][0],0)  //防止出现负数
         }
-        /* max值不可成长但现在值可突破最大值
-        if([].includes(n)){
+        /* max值不可成长但现在值可突破最大值*/
+        if(["欲望"].includes(n)){
             PC.base[n][1] = 1000
-        }*/
+            PC.base[n][0] = fixfloat(Math.min(PC.base[n][0],10000),4)
+        }
     }
 
     // 扩张的修正
-    PC.stretch.anal = parseFloat(Math.clamp(PC.stretch.anal,1,(12+(PC.info.body*2))).toFixed(2))
+    PC.stretch.anal = fixfloat(Math.clamp(PC.stretch.anal,1,(12+(PC.info.body*2))),2)
 
     if(PC.info.tag == "少女") PC.stretch.ureth = Math.clamp(PC.stretch.ureth,0.5,6);
-    else PC.stretch.ureth = parseFloat(Math.clamp(PC.stretch.ureth,0.2,(0.5+PC.genital.阴茎/10)).toFixed(2));
+    else PC.stretch.ureth = fixfloat(Math.clamp(PC.stretch.ureth,0.2,(0.5+PC.genital.阴茎/10)),2);
 
-    if(PC.genital.子宫) PC.stretch.vagina = parseFloat(Math.clamp(PC.stretch.vagina,1,(12+(PC.info.body*2))).toFixed(2));
+    if(PC.genital.子宫) PC.stretch.vagina = fixfloat(Math.clamp(PC.stretch.vagina,1,(12+(PC.info.body*2))),2);
     else PC.stretch.vagina = null;
 
     // 液体分量的修正
@@ -11010,11 +11032,11 @@ function FixValue() {
     PC.rpg.SP[1] = Math.round(Math.clamp(PC.rpg.SP[1],50,50+PC.eskl.性耐性/5))
     PC.rpg.SP[0] = Math.clamp(PC.rpg.SP[0],0,PC.rpg.SP[1])
 
-    PC.rpg.ATK = parseFloat(Math.clamp((10+PC.abl.战技/10),1,500).toFixed(1))
-    PC.rpg.DEF = parseFloat(Math.clamp((10+PC.abl.健身/10)+defBuff(),1,500).toFixed(1))
-    PC.rpg.MATK = parseFloat(Math.clamp((10+(PC.abl.奥术/10*PC.school.自然/500)),1,500).toFixed(1))
-    PC.rpg.MDEF = parseFloat(Math.clamp((10+(PC.abl.异能/10*PC.school.物理/500)),1,500).toFixed(1))
-    PC.rpg.SPD = parseFloat(Math.clamp((10+(PC.abl.运动/10)),1,500).toFixed(1))
+    PC.rpg.ATK = fixfloat(Math.clamp((10+PC.abl.战技/10),1,500),2)
+    PC.rpg.DEF = fixfloat(Math.clamp((10+PC.abl.健身/10)+defBuff(),1,500),2)
+    PC.rpg.MATK = fixfloat(Math.clamp((10+(PC.abl.奥术/10*PC.school.自然/500)),1,500),2)
+    PC.rpg.MDEF = fixfloat(Math.clamp((10+(PC.abl.异能/10*PC.school.物理/500)),1,500),2)
+    PC.rpg.SPD = fixfloat(Math.clamp((10+(PC.abl.运动/10)),1,500),2)
 
     /* 技能等级相关值修正 */
     const max = function(){
@@ -11629,7 +11651,6 @@ function timeprocess() {
 
 		week = week + Math.floor(hour/24);
 		hour = hour % 24;
-		Flag.daychange = true
 	};
 
 	zone = gettimezone(hour);
@@ -11690,55 +11711,163 @@ window.timeprocess = timeprocess
 F.timeprocess = timeprocess
 DefineMacroS("timeprocess",timeprocess)
 
-Macro.add('time', {
-	handler: function () {
-		var time = V.day.time;
-		var min, hour, zone;
 
-		if (time < 0) time = 0;
-
-		if (time >= 24*60 ) time = 23*59+59;
-
-		hour = Math.floor(time/60);
-		min = time%60;
-
-		zone = gettimezone(hour)
-
-		V.day.min = min
-		V.day.hour = hour
-		V.day.zone = zone
-	}
-});
-
-window.dailyMultiple = function(){
+window.dailyMultip = function(){
 	let t = V.times.passed - V.times.wakeup
-	if(t/60 >= 4){
-		return Math.floor(Math.pow(1.1,(t/60 - 4))*1000)/1000
+	if(t/60 >= 5){
+		return fixfloat(Math.pow(1.09,(t/60 - 5)),4)
 	}
 	else return 1;
 }
 
-window.sanityMultiple = function(){
-	let san = PC.base.理智
+window.DesireMultip = function(){
+	 let san = (1-(PC.base.理智[0]/PC.base.理智[1]))*12
+
+	 if(PC.genital.阴茎 > 5 ) return fixfloat(Math.pow(1.25,san+1),4);
+	 else return fixfloat(Math.pow(1.25,san+1)/2,4);
 }
 
-function daychange(){
-
-	Flag.daychange = false
-	return ""
+window.SanMultip = function(){
+	let desire = (PC.base.欲望[0]/PC.base.欲望[1])*100
+	if(desire >= 50){
+		let d = (PC.base.欲望[0]/PC.base.欲望[1])
+		return fixfloat(Math.pow(2,d),4)
+	}
+	return 1
 }
+
+window.testpt = function(t){
+	V.times.passed += t
+	let m =dailyMultip()
+
+	let sleepy = fixfloat((0.1*t*m*SanMultip()),4)
+	let desired = fixfloat((((V.PC.genital > 5 ? 0.03 : 0.02)+(PC.base.理智[0]<= 0 ? 0.2 : 0)-(PC.base.体力[0] <= PC.base.体力[1]/10 ? 0.15: 0))*t*DesireMultip()),4)
+	let hungry = fixfloat((1.2*t*(m*0.34)),4)
+	let tired  = fixfloat((0.12*t*(m*0.8)),4)
+	let lostmana = 0.01*t
+
+	console.log('睡意'+sleepy,'欲望'+desired,'饥饿'+hungry,'疲劳'+tired,'流失魔力'+lostmana)
+
+	PC.base.理智[0] = fixfloat(PC.base.理智[0]-sleepy,4)
+	PC.base.欲望[0] = fixfloat(PC.base.欲望[0]+desired,4)
+	PC.base.饮食[0] = fixfloat(PC.base.饮食[0]-hungry,4)
+	PC.base.体力[0] = fixfloat(PC.base.体力[0]-tired,4)
+	PC.base.魔力[0] = fixfloat(PC.base.魔力[0]-lostmana,4)
+
+	FixValue()
+
+
+	return `	理智:${PC.base.理智[0]}/${PC.base.理智[1]}, 欲望:${PC.base.欲望[0]}/${PC.base.欲望[1]},
+	饮食：${PC.base.饮食[0]}/${PC.base.饮食[1]}, 体力：${PC.base.体力[0]}/${PC.base.体力[1]}, 
+	魔力：${PC.base.魔力[0]}/${PC.base.魔力[1]}`
+}
+
+window.Testpasstime = function(t){
+	for(let i=0; i < t; i++){
+		let passedtime = (V.times.passed - V.times.wakeup)
+		let min = passedtime%60
+		let hour = fixfloat(passedtime/60,1)
+		console.log(`醒来${hour}时${min}过后\n`,testpt(5))
+	}
+}
+
+window.OverTime = function(){
+	let t = V.times.passed - V.times.wakeup
+	return [1,2,3,4,5,6,7].includes(Math.floor(t/1200))
+}
+
 
 function passtime(t,mode){
-	V.times.passed += t  // 睡醒后的累计经过时间。只有进行睡眠休息时才会清除
+	let lapse = V.times.passed - V.times.wakeup
 
 	/* 经过时间加到现在时间前的处理 */
-	let m = dailyMultiple()
-	let hungry = Math.floor((1.2*t*m)*1000)/1000
-	let sleepy = Math.floor((0.3*t*m)*1000)/1000
-	let tired  = Math.floor((0.6*t*m)*1000)/1000
-	let lostmana = 0.02*t
-	let desired = 0.01*t
 
+	V.times.passed += t  // 睡醒后的累计经过时间。只有进行睡眠休息时才会清除
+	if(V.day.time + t >= 1380) Flag.daychange = true; //先不加到现在时间，瞅瞅过23点没。
+	if(PC.state.睡眠) V.times.passed = 0; //如果在睡觉，就清空经过时间。
+	
+
+	//时间经过时基础数值的变动
+
+	//没睡觉就会有所消耗。
+	if(PC.state.睡眠 == false){
+		let m = dailyMultip()
+		let sleepy = fixfloat((0.1*t*m*SanMultip()),4)
+		let desired = fixfloat((((V.PC.genital > 5 ? 0.03 : 0.02)+(PC.base.理智[0]<= 0 ? 0.2 : 0)-(PC.base.体力[0] <= PC.base.体力[1]/10 ? 0.15: 0))*t*DesireMultip()),4)
+		let hungry = fixfloat((1.2*t*(m*0.34)),4)
+		let tired  = fixfloat((0.12*t*(m*0.8)),4)
+		let lostmana = 0.01*t
+
+		PC.base.理智[0] = fixfloat(PC.base.理智[0]-sleepy,4)
+		PC.base.欲望[0] = fixfloat(PC.base.欲望[0]+desired,4)
+		PC.base.饮食[0] = fixfloat(PC.base.饮食[0]-hungry,4)
+		PC.base.体力[0] = fixfloat(PC.base.体力[0]-tired,4)
+		PC.base.魔力[0] = fixfloat(PC.base.魔力[0]-lostmana,4)
+	}
+	else
+	{
+		//睡眠时，流失的魔力大减
+		let lostmana = 0.002*t
+		PC.base.魔力[0] = fixfloat(PC.base.魔力[0]-lostmana,4)
+	}
+
+	//FLAG处理，每天只会累计一次。数值低于/高于安全线，就会+1. 如果当天没有低于安全线，就会扣除1个计数（如果计数大于0的话）
+	//按实际活动时间来处理 //不吃不喝不休息最多也只能撑个两三天……
+	if(PC.base.体力[0] <= PC.base.体力[1]/10 && OverTime()) PFlag.疲劳++  ;
+	else if(PC.base.体力[0] >= PC.base.体力[1]*0.25 && PFlag.疲劳 > 0 && Flag.daychange) PFlag.疲劳 --;
+
+	if(PC.base.饮食[0] <= PC.base.饮食[1]/10 && OverTime()) PFlag.营养不良++ ;
+	else if(PC.base.饮食[0] >= PC.base.饮食[1]*0.8 && PFlag.营养不良 > 0 && Flag.daychange) PFlag.营养不良-- ;
+
+	if(PC.base.欲望[0] >= PC.base.欲望[1]*0.8 && OverTime()) PFlag.禁欲 ++;
+	else if(PC.base.欲望[0] <= PC.base.欲望[1]*0.3 && PFlag.禁欲 > 0 && Flag.daychange) PFlag.禁欲 --;
+
+	if(!PC.state.睡眠 && OverTime() ) PFlag.熬夜 ++;
+	else if(PC.state.睡眠 && V.day.time <= 1440) PFlag.熬夜 --;
+
+	if(PC.base.魔力[0] <= 0 && Flag.daychange) PFlag.缺魔 ++;
+	else if(PC.base.魔力[0] > 50 && Flag.daychange && PFlag.缺魔 > 0 ) PFlag.缺魔 --;
+
+
+	if(PFlag.疲劳 >= 3)PC.state.疲劳 = true;
+	else if(PFlag.疲劳 <= 0)PC.state.疲劳 = false
+
+	if(PFlag.营养不良 >= 3)PC.state.营养不良 = true;
+	else if(PFlag.营养不良 <= 0)PC.state.营养不良 = false
+
+	if(PFlag.禁欲 >= 3)PC.state.禁欲 = true;
+	else if(PFlag.禁欲 <= 0)PC.state.禁欲 = false
+
+	if(PFlag.熬夜 >= 3)PC.state.熬夜 = true;
+	else if(PFlag.熬夜 <= 0)PC.state.熬夜 = false
+
+	if(PFlag.缺魔 >= 3)PC.state.缺魔 = true;
+	else if(PFlag.缺魔 <= 0)PC.state.缺魔 = false
+
+	//生病处理
+	let ills = 0.01*(1+(PFlag.疲劳 > 0 ? 0.05:0)+(PC.state.营养不良 > 0 ? 0.1:0)+(PC.state.禁欲 > 0? 0.005:0)+(PC.state.熬夜 > 0 ? 0.01:0)+(PC.state.缺魔 > 0 ? 0.005 : 0))*t
+	if(PC.base.饮食[0] <= 0 || PC.base.体力[0] <= 0 || PC.base.理智[0] <= 0 || PC.base.魔力[0] <= -10) PC.base.健康[0] = fixfloat(PC.base.健康[0]-ills,4);
+	if(PC.base.健康[0] < PC.base.健康[1]*0.8 && !PC.state.生病){
+		//健康低于80%就算生病了
+		PC.state.生病 = true;
+		let text = "不知是不是"
+		let reason = []
+			if(PC.state.疲劳) reason.push('疲劳');
+			if(PC.state.营养不良) reason.push('营养不良');
+			if(PC.state.禁欲) reason.push('过度禁欲');
+
+		anounceAppend("<<you>>生病了。<br>")
+	 } 
+	if(PC.base.健康[0] == PC.base.健康[1] && PC.state.生病) {
+		PC.state.生病 = false; //痊愈处理
+	}
+
+	//压力值变化，如果熬夜、疲劳、生病等，陷入负面状态都会获得压力值。
+
+	//抑郁变化，如果压力过高，就会自动获得抑郁值。
+
+
+	FixValue()
 
 	/* 天气变化  累计的时间满3个小时或者一次经过3小时以上就换个天气，然后清零。 没满就*/
 	if(V.times.stock >= 180 || t >= 180){ weather(); V.times.stock = 0;}
@@ -11753,6 +11882,17 @@ function passtime(t,mode){
 
 	/* 日期变更时的处理 */
 	if(Flag.daychange)daychange();
+
+}
+
+
+function daychange(){
+	
+	Flag.daychange = false
+	return ""
+}
+
+function weather(){
 
 }
 /* twine-user-script #34: "save.js" */
@@ -11958,6 +12098,17 @@ function you() {
     }
   }
 DefineMacroS("you", you);
+
+function HE(){
+  switch(conf.persons){
+    case 1:
+      return "我";
+    case 2:
+      return "你";
+    default:
+      return gsplit('他','她','player')
+  }
+}
 
 function I(key=null) {
   var name = PC.info.name;
@@ -12402,6 +12553,23 @@ function weirdeffect(){
 }
 window.weirdeffect = weirdeffect
 
+function anounceAppend(args){
+    var text = args
+
+    if(document.getElementById('append-text') != null){
+        //优先在append-text显示
+        document.getElementById('append-text').innerHTML = document.getElementById('append-text').innerHTML + text
+        $('#append-text').addClass('action-flash'); setTimeout(()=> {$('#append-text').removeClass('action-flash')},500)
+    }
+    else if(document.getElementById('situation') != null){
+        //失败了就在situation前显示
+        document.getElementById('situation').innerHTML = document.getElementById('situation').innerHTML + "<div id='add-text'>" +text+"</div>"
+        $('#add-text').addClass('action-flash'); setTimeout(()=> {$('#add-text').removeClass('action-flash')},500)
+    }
+    //不管有没有找到对应元素，都会在弹出窗口显示一次
+    anouncePopUP(args)
+}
+
 function anouncePopUP(args,sound="弹出通知"){
     var text = args
     V.log.anouce.push(text)
@@ -12455,7 +12623,7 @@ function delay(id,text) {
         $('#'+id).append("<span class='delay'>"+text+"<br></span>")
     }else if(Array.isArray(text)==true){
         $( "#"+id ).append( "<span class='h"+i+" hidden'>"+text[i]+"<br></span>");
-        setTimeout(() => {$("#combat_message .h"+i).removeClass('hidden').addClass('delay')}, (500*i))
+        setTimeout(() => {$(`#${id} .h`+i).removeClass('hidden').addClass('delay')}, (500*i))
     }
 }
 F.delay = delay
@@ -13543,6 +13711,16 @@ DefineMacroS("delay",delay)
         description(){},
         situation:[],
     },
+    浴室 :{
+        place:&quot;浴室&quot;, side:&quot;室内&quot;,
+        tag:[&quot;沐浴&quot;],
+        chara:[],
+        bus:false, subway:false, car:false, bike:false,
+        homebutton: false,
+        img:&quot;bathroom&quot;,
+        description(){},
+        situation:[],
+    }
 }&gt;&gt;   
 &lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="10" name="StoryInit" tags="" position="1225,100" size="100,100">/* 首次运行时初始化自动存档 */
 &lt;&lt;run initSaveData()&gt;&gt;
@@ -13566,6 +13744,7 @@ DefineMacroS("delay",delay)
 &lt;&lt;set $PFlag to {}&gt;&gt; /* Player flag */
 &lt;&lt;set $BFlag to {}&gt;&gt; /* combat flag */
 &lt;&lt;set $CFlag to {}&gt;&gt; /* chara flag */
+&lt;&lt;set $Base to {}&gt;&gt;  /* Base Stastis */
 &lt;&lt;set $Source to {}&gt;&gt; /* sources */
 &lt;&lt;set $TCSV to {}&gt;&gt; /* temp character current state variables */
 
@@ -13608,6 +13787,7 @@ DefineMacroS("delay",delay)
 &lt;&lt;InitPlayerData&gt;&gt;
 &lt;&lt;setchara &quot;player&quot;&gt;&gt;
 &lt;&lt;set $CFlag.pc to $PFlag&gt;&gt;
+&lt;&lt;set $Base.pc to $PC.base&gt;&gt;
 &lt;&lt;set $Source.pc to $PC.source&gt;&gt;
 &lt;&lt;set $TCSV.pc to $PC.tcsv&gt;&gt;
 
@@ -14185,6 +14365,7 @@ DefineMacroS("delay",delay)
 &lt;!-- PC的状态 --&gt;
 &lt;&lt;set $PC.state to {
     生病 : false,    怀孕 : false,    寄生 : false,    肠内受孕 : false,    失眠 : false,   发情:false,
+    睡眠 : false,    营养不良: false, 欲求不满: false,      疲劳: false,
 }&gt;&gt;
 
 &lt;&lt;set $PC.genital to { &quot;阴茎&quot; : 14, &quot;子宫&quot; : null,}&gt;&gt;
@@ -14202,6 +14383,7 @@ $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌}
     bukkake   : { body:false, face:false, hair:false, },
     pregnant: { type:null, seed:null, phrase:null, date:null, }, /* 怀孕flag type:A怀孕还是正常怀孕 seed：孩子种类, father:父亲, phrase：阶段 date:预产期 */
     trueform : null, showmimi:null, showtail:null, showwing:null, showhorn:null,
+    疲劳 : 0, 营养不良: 0, 禁欲 : 0,  熬夜 : 0,  缺魔 : 0,
 }&gt;&gt;
 
 &lt;!-- 记录 --&gt;
@@ -16739,7 +16921,7 @@ function wait(text) {
 &lt;&lt;link &quot;打开衣柜　 1m&quot; &quot;衣柜&quot;&gt;&gt;&lt;&lt;passtime 1&gt;&gt;&lt;&lt;set $TEquip to clone($Equip)&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
 &lt;br&gt;
 &lt;&lt;link &quot;健身　　 　30m&quot; $passage&gt;&gt;&lt;&lt;passtime 30&gt;&gt;&lt;&lt;/link&gt;&gt;　　&lt;&lt;link &quot;打游戏 　　30m&quot; $passage&gt;&gt;&lt;&lt;passtime 30&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
-&lt;&lt;link &quot;洗澡　 　　30m&quot; $passage&gt;&gt;&lt;&lt;passtime 30&gt;&gt;&lt;&lt;/link&gt;&gt;　　&lt;&lt;link &quot;和宠物玩耍 60m&quot; $passage&gt;&gt;&lt;&lt;passtime 60&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
+&lt;&lt;link &quot;洗澡　 　　30m&quot; &quot;洗澡&quot;&gt;&gt;&lt;&lt;set $TEquip to clone($Equip)&gt;&gt;&lt;&lt;set $Source.pc.压力 -= 100, $Source.pc.体力 += 60&gt;&gt;&lt;&lt;passtime 30&gt;&gt;&lt;&lt;/link&gt;&gt;　　&lt;&lt;link &quot;和宠物玩耍 60m&quot; $passage&gt;&gt;&lt;&lt;passtime 60&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
 &lt;&lt;link &quot;跳过时间　 23hr&quot; $passage&gt;&gt;&lt;&lt;passtime 1380&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
 &lt;&lt;link &quot;出门　 　　5m&quot; &quot;怡安小区&quot; &gt;&gt;&lt;&lt;passtime 5&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
 &lt;/div&gt;
@@ -16754,7 +16936,17 @@ function wait(text) {
 自慰
 使用道具
 和宠物（床伴？）聊天
-学习 */</tw-passagedata><tw-passagedata pid="49" name="城市生活_1" tags="" position="1100,600" size="100,100">&lt;&lt;you&gt;&gt;最近离开父母家，独立出来自己住了。一切才刚开始各种不习惯……&lt;br&gt;
+学习 */</tw-passagedata><tw-passagedata pid="49" name="洗澡" tags="" position="1100,600" size="100,100">&lt;&lt;set $location to &quot;浴室&quot;&gt;&gt;
+&lt;&lt;gonaked &quot;closet&quot;&gt;&gt;
+&lt;img src=&#39;image/cg/bath.png&#39; class=&quot;border:1px solid #928348&quot;&gt;&lt;br&gt;
+&lt;&lt;you&gt;&gt;脱光衣服，整个人泡进浴缸里，放松着。&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;div class=&quot;tolink&quot;&gt;
+&lt;&lt;link &quot;自慰&quot; &quot;自慰&quot;&gt;&gt;&lt;&lt;passtime 5&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
+&lt;&lt;link &quot;玩泡沫　30m&quot; $passage&gt;&gt;&lt;&lt;passtime 30&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
+&lt;&lt;link &quot;出浴　　5m&quot; &quot;你的家 单身公寓&quot;&gt;&gt;&lt;&lt;passtime 5&gt;&gt;&lt;&lt;redress &quot;closet&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="50" name="城市生活_1" tags="" position="1225,600" size="100,100">&lt;&lt;you&gt;&gt;最近离开父母家，独立出来自己住了。一切才刚开始各种不习惯……&lt;br&gt;
 &lt;&lt;=condtext([
     [inTime(6,8),&quot;一大早就起来了,要做点什么好呢……？&quot;],
     [inTime(8,11),&quot;&lt;&lt;you&gt;&gt;躺在懒人沙发上茫无目的地玩着手机……&quot;],
@@ -16764,9 +16956,9 @@ function wait(text) {
     [inTime(19,23),&quot;到晚上了，该放学的早放学了，该下班的也下班了。网络迎来了高峰期……&lt;br&gt;嗨起来！&quot;],
     [&quot;else&quot;,&quot;很晚了，得睡觉了……&quot;]
 ])&gt;&gt;
-&lt;br&gt;</tw-passagedata><tw-passagedata pid="50" name="宠物的日常_1" tags="" position="1225,600" size="100,100">最近多了个小家伙跟在身边, 虽然有点粘人但还是挺治愈的。&lt;br&gt;
+&lt;br&gt;</tw-passagedata><tw-passagedata pid="51" name="宠物的日常_1" tags="" position="100,725" size="100,100">最近多了个小家伙跟在身边, 虽然有点粘人但还是挺治愈的。&lt;br&gt;
 嗯……要跟宠物&lt;&lt;print $pet.name&gt;&gt;做点什么好呢？&lt;br&gt;
-&lt;br&gt;</tw-passagedata><tw-passagedata pid="51" name="怡安小区" tags="location" position="100,725" size="100,100">&lt;&lt;location &quot;怡安小区&quot;&gt;&gt;&lt;&lt;mode &quot;location&quot;&gt;&gt;
+&lt;br&gt;</tw-passagedata><tw-passagedata pid="52" name="怡安小区" tags="location" position="225,725" size="100,100">&lt;&lt;location &quot;怡安小区&quot;&gt;&gt;&lt;&lt;mode &quot;location&quot;&gt;&gt;
 
 &lt;span class=&quot;title&quot;&gt;怡安小区&lt;/span&gt;&lt;br&gt;
 &lt;div class=&quot;lbox&quot;&gt;
@@ -16791,9 +16983,9 @@ function wait(text) {
 &lt;/div&gt;
 
 /* 景南市。一个位于周唐南方大省柳洲省的一级大城市。&lt;br&gt;
-有山有水，面朝大海，四季分明，是个风景优美的旅游城市。&lt;br&gt; */</tw-passagedata><tw-passagedata pid="52" name="怡安小区 links" tags="links" position="225,725" size="100,100">&lt;div class=&quot;links&quot; title=&quot;移动时间：12分钟&quot;&gt;&lt;&lt;link &quot;・ 嘉庆广场&quot; &quot;嘉庆广场&quot;&gt;&gt;&lt;&lt;passtime 12&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
+有山有水，面朝大海，四季分明，是个风景优美的旅游城市。&lt;br&gt; */</tw-passagedata><tw-passagedata pid="53" name="怡安小区 links" tags="links" position="350,725" size="100,100">&lt;div class=&quot;links&quot; title=&quot;移动时间：12分钟&quot;&gt;&lt;&lt;link &quot;・ 嘉庆广场&quot; &quot;嘉庆广场&quot;&gt;&gt;&lt;&lt;passtime 12&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
 &lt;div class=&quot;links&quot; title=&quot;移动时间：5分钟&quot;&gt;&lt;&lt;link &quot;・ 巴士站&quot; $passage&gt;&gt;&lt;&lt;passtime 5&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
-&lt;div class=&quot;links&quot; title=&quot;移动时间：10分钟&quot;&gt;&lt;&lt;link &quot;・ 地铁站&quot; $passage&gt;&gt;&lt;&lt;passtime 10&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="53" name="怡安小区公园" tags="location" position="350,725" size="100,100">&lt;&lt;location &quot;怡安小区公园&quot;&gt;&gt;&lt;&lt;mode &quot;location&quot;&gt;&gt;
+&lt;div class=&quot;links&quot; title=&quot;移动时间：10分钟&quot;&gt;&lt;&lt;link &quot;・ 地铁站&quot; $passage&gt;&gt;&lt;&lt;passtime 10&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="54" name="怡安小区公园" tags="location" position="475,725" size="100,100">&lt;&lt;location &quot;怡安小区公园&quot;&gt;&gt;&lt;&lt;mode &quot;location&quot;&gt;&gt;
 
 &lt;span class=&quot;title&quot;&gt;怡安小区 - 公园&lt;/span&gt;&lt;br&gt;
 &lt;div class=&quot;lbox&quot;&gt;
@@ -16813,8 +17005,8 @@ function wait(text) {
 
 &lt;div id=&quot;navi&quot; class=&quot;navi_unable&quot;&gt;
     &lt;&lt;navi&gt;&gt;
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="54" name="怡安小区公园 links" tags="" position="475,725" size="100,100">&lt;div class=&quot;links&quot; title=&quot;移动时间：3分钟&quot;&gt;&lt;&lt;link &quot;・ 小区大门&quot; &quot;怡安小区&quot;&gt;&gt;&lt;&lt;passtime 3&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
-&lt;div class=&quot;links&quot; title=&quot;移动时间：15分钟&quot;&gt;&lt;&lt;link &quot;・ 嘉庆广场&quot; &quot;嘉庆广场&quot;&gt;&gt;&lt;&lt;passtime 15&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="55" name="嘉庆广场" tags="location" position="600,725" size="100,100">&lt;&lt;location &quot;嘉庆广场&quot;&gt;&gt;&lt;&lt;mode &quot;location&quot;&gt;&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="55" name="怡安小区公园 links" tags="" position="600,725" size="100,100">&lt;div class=&quot;links&quot; title=&quot;移动时间：3分钟&quot;&gt;&lt;&lt;link &quot;・ 小区大门&quot; &quot;怡安小区&quot;&gt;&gt;&lt;&lt;passtime 3&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
+&lt;div class=&quot;links&quot; title=&quot;移动时间：15分钟&quot;&gt;&lt;&lt;link &quot;・ 嘉庆广场&quot; &quot;嘉庆广场&quot;&gt;&gt;&lt;&lt;passtime 15&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="56" name="嘉庆广场" tags="location" position="725,725" size="100,100">&lt;&lt;location &quot;嘉庆广场&quot;&gt;&gt;&lt;&lt;mode &quot;location&quot;&gt;&gt;
 &lt;span class=&quot;title&quot;&gt;嘉庆广场&lt;/span&gt;&lt;br&gt;
 &lt;div class=&quot;lbox&quot;&gt;
 &lt;&lt;=D.placedata.嘉庆广场.description()&gt;&gt;
@@ -16833,9 +17025,9 @@ function wait(text) {
 
 &lt;div id=&quot;navi&quot; class=&quot;navi_unable&quot;&gt;
     &lt;&lt;navi&gt;&gt;
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="56" name="嘉庆广场 links" tags="" position="725,725" size="100,100">&lt;div class=&quot;links&quot; title=&quot;移动时间：15分钟&quot;&gt;&lt;&lt;link &quot;・ 怡安小区&quot; &quot;怡安小区&quot;&gt;&gt;&lt;&lt;passtime 15&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="57" name="嘉庆广场 links" tags="" position="850,725" size="100,100">&lt;div class=&quot;links&quot; title=&quot;移动时间：15分钟&quot;&gt;&lt;&lt;link &quot;・ 怡安小区&quot; &quot;怡安小区&quot;&gt;&gt;&lt;&lt;passtime 15&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
 &lt;div class=&quot;links&quot; title=&quot;移动时间：2分钟&quot;&gt;&lt;&lt;link &quot;・ 地铁站&quot;&gt;&gt;&lt;&lt;passtime 2&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
-&lt;div class=&quot;links&quot; title=&quot;移动时间：1分钟&quot;&gt;&lt;&lt;link &quot;・ 巴士站&quot;&gt;&gt;&lt;&lt;passtime 1&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="57" name="商场的日常风景_1" tags="" position="850,725" size="100,100">&lt;&lt;=condtext([
+&lt;div class=&quot;links&quot; title=&quot;移动时间：1分钟&quot;&gt;&lt;&lt;link &quot;・ 巴士站&quot;&gt;&gt;&lt;&lt;passtime 1&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="58" name="商场的日常风景_1" tags="" position="975,725" size="100,100">&lt;&lt;=condtext([
 [inTime(8.5,10), &quot;明明距离商场开门的时间还很早，但已经有人陆陆续续聚集在入口广场上了。&quot;],
 [inTime(10,18), &quot;营业中的嘉庆广场，无论是广场外部还是商场内部，人来人往，十分热闹。&quot;],
 [inTime(18,20), &quot;已经到晚饭时间了，商场内的餐厅传来了美味的香气。比起白天，人已经少了很多，但依然热闹。&quot;],
@@ -16843,12 +17035,12 @@ function wait(text) {
 [&quot;else&quot;,&quot;商场建筑黑漆漆的，已经完全关闭。但广场上依然亮着点点灯光，夜晚的喷水广场在点点灯光下，十分好看。&quot;]
 ])&gt;&gt;
 
-&lt;br&gt;</tw-passagedata><tw-passagedata pid="58" name="商场闲逛_1" tags="" position="975,725" size="100,100">&lt;&lt;=either(
+&lt;br&gt;</tw-passagedata><tw-passagedata pid="59" name="商场闲逛_1" tags="" position="1100,725" size="100,100">&lt;&lt;=either(
 &quot;&lt;&lt;you&gt;&gt;坐在南面入口广场一侧的椅子上，仰头看着绿茵茵的木棉树，偶尔会发现在树枝中跳窜的小麻雀。&quot;,
 &quot;&lt;&lt;you&gt;&gt;走在广场上，观察着来来往往的人群，目光时不时被在路边派发传单的布偶人吸引。&quot;,
 &quot;&lt;&lt;you&gt;&gt;拿起手机，以商场为背景，给自己拍了张新的照片。&quot;,
 &quot;&lt;&lt;you&gt;&gt;站在广场角落的报亭前，随手拿起一份报纸看了眼今天的新闻。&quot;,
-)&gt;&gt;</tw-passagedata><tw-passagedata pid="59" name="商店" tags="location" position="1100,725" size="100,100">&lt;&lt;location &quot;商店&quot;&gt;&gt;&lt;&lt;mode &quot;location&quot;&gt;&gt;
+)&gt;&gt;</tw-passagedata><tw-passagedata pid="60" name="商店" tags="location" position="1225,725" size="100,100">&lt;&lt;location &quot;商店&quot;&gt;&gt;&lt;&lt;mode &quot;location&quot;&gt;&gt;
 
 &lt;span class=&quot;title&quot;&gt;服装店&lt;/span&gt;&lt;br&gt;
 &lt;div class=&quot;lbox&quot;&gt;
@@ -16856,7 +17048,7 @@ function wait(text) {
 &lt;/div&gt;
 &lt;&lt;set $shoptype to [&quot;all&quot;,&quot;offline&quot;]&gt;&gt;
 
-&lt;&lt;include &quot;试衣间&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="60" name="Event" tags="eventloop nosave" position="1225,725" size="100,100">&lt;&lt;mode &quot;event&quot;&gt;&gt;
+&lt;&lt;include &quot;试衣间&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="61" name="Event" tags="eventloop nosave" position="100,850" size="100,100">&lt;&lt;mode &quot;event&quot;&gt;&gt;
 
 &lt;div id=&quot;eventsituation&quot;&gt;
 &lt;&lt;CallEvent&gt;&gt;
@@ -16875,7 +17067,7 @@ function wait(text) {
 
 &lt;div id=&quot;eventeffect&quot;&gt;
 &lt;&lt;CallEventEffect&gt;&gt;
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="61" name="EventSystem" tags="widget" position="100,850" size="100,100">/* 再现ERA口上系统的TRYCALL体系 主 */
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="62" name="EventSystem" tags="widget" position="225,850" size="100,100">/* 再现ERA口上系统的TRYCALL体系 主 */
 &lt;&lt;widget &quot;CallEvent&quot;&gt;&gt;
 &lt;&lt;if setEvent() isnot false&gt;&gt;
     &lt;&lt;set _passagename to setEvent()&gt;&gt;
@@ -16959,12 +17151,12 @@ function wait(text) {
 
 &lt;&lt;/if&gt;&gt;
 
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="62" name="主线 开幕：EventFirst" tags="" position="225,850" size="100,100">&lt;&lt;set $count to 0&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="63" name="主线 开幕：EventFirst" tags="" position="350,850" size="100,100">&lt;&lt;set $count to 0&gt;&gt;
 &lt;&lt;set $UI.nextbutton to false&gt;&gt;
 &lt;&lt;set $eventnext to 0&gt;&gt;
-&lt;&lt;bookmark &quot;主线开幕_初次&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="63" name="主线 开幕-初次" tags="" position="350,850" size="100,100">&lt;div id=&#39;opcontainer&#39;&gt;
+&lt;&lt;bookmark &quot;主线开幕_初次&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="64" name="主线 开幕-初次" tags="" position="475,850" size="100,100">&lt;div id=&#39;opcontainer&#39;&gt;
 &lt;div id=&quot;weirdtext&quot;&gt;&lt;&lt;Opening $count&gt;&gt;&lt;/div&gt;
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="64" name="主线 开幕-初次：E" tags="" position="475,850" size="100,100">&lt;&lt;if $count lt 8&gt;&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="65" name="主线 开幕-初次：E" tags="" position="600,850" size="100,100">&lt;&lt;if $count lt 8&gt;&gt;
 &lt;&lt;addclass &quot;#eventsituation&quot; &quot;weirdtext&quot;&gt;&gt;
 &lt;&lt;script&gt;&gt;
 //requires jQuery because I am lazy.
@@ -16975,7 +17167,7 @@ $(document).ready(function(){
 &lt;&lt;else&gt;&gt;
 &lt;&lt;removeclass &quot;#eventsituation&quot; &quot;weirdtext&quot;&gt;&gt;
 &lt;&lt;replace &#39;#opcontainer&#39;&gt;&gt;&lt;&lt;Opening $count&gt;&gt;&lt;&lt;/replace&gt;&gt;
-&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="65" name="主线 开幕-初次：W" tags="widget" position="600,850" size="100,100">&lt;&lt;widget &quot;Opening&quot;&gt;&gt;
+&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="66" name="主线 开幕-初次：W" tags="widget" position="725,850" size="100,100">&lt;&lt;widget &quot;Opening&quot;&gt;&gt;
 
 &lt;&lt;switch $args[0]&gt;&gt;
 &lt;&lt;case 0&gt;&gt;
@@ -17089,7 +17281,7 @@ $(document).ready(function(){
 
 &lt;&lt;/switch&gt;&gt;
 
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="66" name="主线 开幕-初次：S" tags="" position="725,850" size="100,100">&lt;&lt;switch $count&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="67" name="主线 开幕-初次：S" tags="" position="850,850" size="100,100">&lt;&lt;switch $count&gt;&gt;
 &lt;&lt;case 0&gt;&gt;
 	&lt;&lt;set _text to Lang(&quot;睁开眼睛&quot;,&quot;Open The Eyes&quot;)&gt;&gt;
 	&lt;div class=&quot;Wselect&quot;&gt;&lt;&lt;link _text&gt;&gt;&lt;&lt;set $count to 1&gt;&gt;&lt;&lt;Revent&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
@@ -17132,7 +17324,7 @@ $(document).ready(function(){
 	&lt;&lt;set _text to Lang(&quot;继续&quot;,&quot;Next&quot;)&gt;&gt;
 	&lt;div @class=&quot;($count &gt;= 8 ? &#39;Eselect&#39; : &#39;Wselect&#39; )&quot;&gt;&lt;&lt;link _text&gt;&gt;&lt;&lt;set $count to $eventnext&gt;&gt;&lt;&lt;Revent&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
 
-&lt;&lt;/switch&gt;&gt;</tw-passagedata><tw-passagedata pid="67" name="主线 开幕-初次-穿越版" tags="" position="850,850" size="100,100">&lt;&lt;Opening2 $count&gt;&gt;</tw-passagedata><tw-passagedata pid="68" name="主线 开幕-初次-穿越版：W" tags="widget" position="975,850" size="100,100">&lt;&lt;widget &quot;Opening2&quot;&gt;&gt;
+&lt;&lt;/switch&gt;&gt;</tw-passagedata><tw-passagedata pid="68" name="主线 开幕-初次-穿越版" tags="" position="975,850" size="100,100">&lt;&lt;Opening2 $count&gt;&gt;</tw-passagedata><tw-passagedata pid="69" name="主线 开幕-初次-穿越版：W" tags="widget" position="1100,850" size="100,100">&lt;&lt;widget &quot;Opening2&quot;&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
 &lt;&lt;switch $count&gt;&gt;
 &lt;&lt;case 0&gt;&gt;
@@ -17254,7 +17446,7 @@ $(document).ready(function(){
 &lt;&lt;/switch&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
 
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="69" name="主线 开幕-初次-穿越版：S" tags="" position="1100,850" size="100,100">&lt;&lt;switch $count&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="70" name="主线 开幕-初次-穿越版：S" tags="" position="1225,850" size="100,100">&lt;&lt;switch $count&gt;&gt;
 &lt;&lt;case 1&gt;&gt;
 &lt;&lt;set _text to Lang(&quot;拿起手机&quot;,&quot;Pick up the phone&quot;)&gt;&gt;
 &lt;div class=&quot;Eselect&quot;&gt;&lt;&lt;link _text&gt;&gt;&lt;&lt;set $count to 2&gt;&gt;&lt;&lt;Revent&gt;&gt;&lt;&lt;passtime 2&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
@@ -17302,7 +17494,7 @@ $(document).ready(function(){
 &lt;&lt;set _text to Lang(&quot;继续&quot;,&quot;Next&quot;)&gt;&gt;
 &lt;div class=&quot;Eselect&quot;&gt;&lt;&lt;link _text&gt;&gt;&lt;&lt;set $count to $eventnext&gt;&gt;&lt;&lt;Revent&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
 
-&lt;&lt;/switch&gt;&gt;</tw-passagedata><tw-passagedata pid="70" name="主线 开幕-轮回" tags="" position="1225,850" size="100,100">&lt;&lt;bookmark &quot;主线开幕_轮回&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="71" name="PC 主线-开幕-房间描述" tags="nobr" position="100,975" size="100,100">&lt;&lt;lang 
+&lt;&lt;/switch&gt;&gt;</tw-passagedata><tw-passagedata pid="71" name="主线 开幕-轮回" tags="" position="100,975" size="100,100">&lt;&lt;bookmark &quot;主线开幕_轮回&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="72" name="PC 主线-开幕-房间描述" tags="nobr" position="225,975" size="100,100">&lt;&lt;lang 
 &quot;一睁开眼，首先看到的是茂绿的窗外，响亮的蝉鸣宣告着当前的季节。窗户旁摆放着一张大书桌，上面摆放着&lt;&lt;if $PC.type is 2&gt;&gt;一个宽屏大液显&lt;&lt;elseif $PC.type is 1&gt;&gt;新帝HQ24数位屏和数位板&lt;&lt;else&gt;&gt;一个电脑屏幕&lt;&lt;/if&gt;&gt;，书桌旁的小桌子上则是电脑主机。在靠近书桌的墙边，则整齐地摆放着两个书架，书架上是&lt;&lt;switch $PC.type&gt;&gt;&lt;&lt;case 1&gt;&gt;各种漫画和小说还有塑料小人&lt;&lt;case 2&gt;&gt;各种各样的书籍&lt;&lt;case 3&gt;&gt;各种修仙小说和漫画&lt;&lt;/switch&gt;&gt;，墙上则&lt;&lt;switch $PC.type&gt;&gt;&lt;&lt;case 1&gt;&gt;挂着一些远古生物的挂画和各种游戏海报&lt;&lt;case 2&gt;&gt;挂着一些漂亮的装饰画&lt;&lt;case 3&gt;&gt;挂着一个黑白两色的八卦阵和一些仙侠作品的海报&lt;&lt;/switch&gt;&gt;&quot;
 
 &quot;Across from the bed is the window, and outside the window is the loud sound of cicadas announcing the current season. Right next to the window sits a large desk with a computer with two screens, two bookshelves lined up side by side with various books and comics and some anime figurines, and posters of superheroes on the wall&quot;

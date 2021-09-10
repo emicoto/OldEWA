@@ -249,7 +249,11 @@ hr {
   margin: 5px;
   font-size: 16px;
   letter-spacing: 1px;
-  font-weight: 500;
+}
+
+#append-text {
+  font-size: 16px;
+  letter-spacing: 1px;
 }
 
 .div-link {
@@ -353,15 +357,16 @@ background-color: white;
   border-radius: 3px;
   transition: all 1.25s;
 }
-#action-text2.flash {
+.flash {
 background-color:rgb(169, 255, 241);
 }
 .popup {
   animation: popup 0.3s linear alternate-reverse;
 }
 .action-flash {
-border-color: rgb(169, 255, 241) !important;
+  background-color: rgb(169, 255, 241) !important;
   color: black !important;
+  transition: all 0.3s;
 }
 .action-flash a {
 color: darkgoldenrod !important;

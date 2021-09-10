@@ -20,7 +20,7 @@
 <<link "打开衣柜　 1m" "衣柜">><<passtime 1>><<set $TEquip to clone($Equip)>><</link>><br>
 <br>
 <<link "健身　　 　30m" $passage>><<passtime 30>><</link>>　　<<link "打游戏 　　30m" $passage>><<passtime 30>><</link>><br>
-<<link "洗澡　 　　30m" $passage>><<passtime 30>><</link>>　　<<link "和宠物玩耍 60m" $passage>><<passtime 60>><</link>><br>
+<<link "洗澡　 　　30m" "洗澡">><<set $TEquip to clone($Equip)>><<set $Source.pc.压力 -= 100, $Source.pc.体力 += 60>><<passtime 30>><</link>>　　<<link "和宠物玩耍 60m" $passage>><<passtime 60>><</link>><br>
 <<link "跳过时间　 23hr" $passage>><<passtime 1380>><</link>><br>
 <<link "出门　 　　5m" "怡安小区" >><<passtime 5>><</link>><br>
 </div>
@@ -36,6 +36,20 @@
 使用道具
 和宠物（床伴？）聊天
 学习 */
+
+:: 洗澡
+<<set $location to "浴室">>
+<<gonaked "closet">>
+<img src='image/cg/bath.png' class="border:1px solid #928348"><br>
+<<you>>脱光衣服，整个人泡进浴缸里，放松着。<br>
+<br>
+<br>
+<div class="tolink">
+<<link "自慰" "自慰">><<passtime 5>><</link>><br>
+<<link "玩泡沫　30m" $passage>><<passtime 30>><</link>><br>
+<<link "出浴　　5m" "你的家 单身公寓">><<passtime 5>><<redress "closet">><</link>><br>
+</div>
+
 
 
 :: 城市生活_1

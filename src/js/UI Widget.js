@@ -22,6 +22,23 @@ function weirdeffect(){
 }
 window.weirdeffect = weirdeffect
 
+function anounceAppend(args){
+    var text = args
+
+    if(document.getElementById('append-text') != null){
+        //优先在append-text显示
+        document.getElementById('append-text').innerHTML = document.getElementById('append-text').innerHTML + text
+        $('#append-text').addClass('action-flash'); setTimeout(()=> {$('#append-text').removeClass('action-flash')},500)
+    }
+    else if(document.getElementById('situation') != null){
+        //失败了就在situation前显示
+        document.getElementById('situation').innerHTML = document.getElementById('situation').innerHTML + "<div id='add-text'>" +text+"</div>"
+        $('#add-text').addClass('action-flash'); setTimeout(()=> {$('#add-text').removeClass('action-flash')},500)
+    }
+    //不管有没有找到对应元素，都会在弹出窗口显示一次
+    anouncePopUP(args)
+}
+
 function anouncePopUP(args,sound="弹出通知"){
     var text = args
     V.log.anouce.push(text)
@@ -75,7 +92,7 @@ function delay(id,text) {
         $('#'+id).append("<span class='delay'>"+text+"<br></span>")
     }else if(Array.isArray(text)==true){
         $( "#"+id ).append( "<span class='h"+i+" hidden'>"+text[i]+"<br></span>");
-        setTimeout(() => {$("#combat_message .h"+i).removeClass('hidden').addClass('delay')}, (500*i))
+        setTimeout(() => {$(`#${id} .h`+i).removeClass('hidden').addClass('delay')}, (500*i))
     }
 }
 F.delay = delay

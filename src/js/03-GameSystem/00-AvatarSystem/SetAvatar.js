@@ -328,6 +328,13 @@ function stAvatar() {
         V.avatar.emoadd.red = setAvatar("emoadd.red",true, true)
     }
 
+    if(PFlag.bottom+PFlag.top <= 2) {
+        V.avatar.emoadd.shy = setAvatar('emoadd.shy',true, true)
+        V.avatar.mouth = setAvatar('mouth','sigh',true)
+        V.avatar.eyebrow = setAvatar('eyebrow','sad',true)
+    }
+
+
     /* 淫纹 */
     if(PC.skin.腹部){
         let path = "./image/avatar/body/"+PC.skin.腹部.index+".png"

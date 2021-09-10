@@ -137,6 +137,16 @@
         description(){},
         situation:[],
     },
+    浴室 :{
+        place:"浴室", side:"室内",
+        tag:["沐浴"],
+        chara:[],
+        bus:false, subway:false, car:false, bike:false,
+        homebutton: false,
+        img:"bathroom",
+        description(){},
+        situation:[],
+    }
 }>>   
 <</widget>>
 

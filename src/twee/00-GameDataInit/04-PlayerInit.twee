@@ -180,6 +180,7 @@
 <!-- PC的状态 -->
 <<set $PC.state to {
     生病 : false,    怀孕 : false,    寄生 : false,    肠内受孕 : false,    失眠 : false,   发情:false,
+    睡眠 : false,    营养不良: false, 欲求不满: false,      疲劳: false,
 }>>
 
 <<set $PC.genital to { "阴茎" : 14, "子宫" : null,}>>
@@ -197,6 +198,7 @@ $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌}
     bukkake   : { body:false, face:false, hair:false, },
     pregnant: { type:null, seed:null, phrase:null, date:null, }, /* 怀孕flag type:A怀孕还是正常怀孕 seed：孩子种类, father:父亲, phrase：阶段 date:预产期 */
     trueform : null, showmimi:null, showtail:null, showwing:null, showhorn:null,
+    疲劳 : 0, 营养不良: 0, 禁欲 : 0,  熬夜 : 0,  缺魔 : 0,
 }>>
 
 <!-- 记录 -->

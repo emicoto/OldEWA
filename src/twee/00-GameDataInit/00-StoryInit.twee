@@ -21,6 +21,7 @@
 <<set $PFlag to {}>> /* Player flag */
 <<set $BFlag to {}>> /* combat flag */
 <<set $CFlag to {}>> /* chara flag */
+<<set $Base to {}>>  /* Base Stastis */
 <<set $Source to {}>> /* sources */
 <<set $TCSV to {}>> /* temp character current state variables */
 
@@ -63,6 +64,7 @@
 <<InitPlayerData>>
 <<setchara "player">>
 <<set $CFlag.pc to $PFlag>>
+<<set $Base.pc to $PC.base>>
 <<set $Source.pc to $PC.source>>
 <<set $TCSV.pc to $PC.tcsv>>
 

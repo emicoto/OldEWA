@@ -52,7 +52,7 @@ Object.defineProperties(window, {
 	},
 	EFlag : {
 		get:function(){
-			return State.variables.TFlag
+			return State.variables.EFlag
 		}
 	},
 	PFlag: {
@@ -134,6 +134,11 @@ Object.defineProperties(window, {
 		get:function(){
 			return State.variables.TCSV
 		}
+	},
+	Base : {
+		get:function(){
+			return State.variables.Base
+		}
 	}
 });
 
@@ -148,7 +153,7 @@ window.setMirrorVariables = function(){
 		conf : conf,
 		closet: closet, items: items,
 		pet : pet, Equip : Equip, FEquip : FEquip, TEquip:TEquip,
-		Source : Source, TCSV : TCSV,
+		Base : Base, Source : Source, TCSV : TCSV,
 	}
 }
 

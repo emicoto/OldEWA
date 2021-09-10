@@ -24,6 +24,17 @@ function you() {
   }
 DefineMacroS("you", you);
 
+function HE(){
+  switch(conf.persons){
+    case 1:
+      return "我";
+    case 2:
+      return "你";
+    default:
+      return gsplit('他','她','player')
+  }
+}
+
 function I(key=null) {
   var name = PC.info.name;
   switch (conf.persons){

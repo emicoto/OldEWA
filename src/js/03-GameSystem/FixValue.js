@@ -1,11 +1,15 @@
-﻿function FixValue() {
+﻿window.fixfloat = function(v,n){
+    return parseFloat(v.toFixed(n))
+}
+
+function FixValue() {
 
     PC.money = Math.clamp(PC.money, 0, 9999999999)
 
     /* 固定数值的修正 */
 
-    V.fix.hot = parseFloat((26+(PC.abl.健身/200)).toFixed(2))
-    V.fix.cold = parseFloat((20-(PC.abl.健身/200)).toFixed(2))
+    V.fix.hot = fixfloat((26+(PC.abl.健身/200)),2)
+    V.fix.cold = fixfloat((20-(PC.abl.健身/200)),2)
     V.fix.beauty = 1600
     PC.info.hairlen = Math.clamp(PC.info.hairlen,0,9999)
     PC.info.hairlenf = Math.clamp(PC.info.hairlenf,0,9999)
@@ -17,10 +21,10 @@
     PC.base.体力[0] = Math.clamp(PC.base.体力[0],-100,PC.base.体力[1])
 
     PC.base.理智[1] =  Math.round(Math.clamp(500+(PC.abl.意志*(PC.level/5)),0,2500))  
-    PC.base.理智[0] = Math.clamp(PC.base.理智[0],0,PC.base.理智[1])
+    PC.base.理智[0] = Math.clamp(PC.base.理智[0],-10,PC.base.理智[1])
 
     PC.base.魔力[1] =  Math.round(Math.clamp(100+PC.level*(PC.abl.意志/8),100,1200)) 
-    PC.base.魔力[0] = Math.clamp(PC.base.魔力[0],0,PC.base.魔力[1])
+    PC.base.魔力[0] = Math.clamp(PC.base.魔力[0],-10,PC.base.魔力[1])
 
     let g = Object.keys(PC.base)
 
@@ -30,7 +34,7 @@
         if(["体力","理智","魔力"].includes(n)) continue;
 
         //[current,max] 最大值固定 1000 并且把现在值固定在 0-max值内
-        if(["饮食","健康","酒精","药物","抑郁","欲望"].includes(n)) {
+        if(["饮食","健康","酒精","药物","抑郁"].includes(n)) {
             PC.base[n][1] = 1000;
             PC.base[n][0] = Math.clamp(PC.base[n][0],0,PC.base[n][1]);
         }
@@ -40,19 +44,20 @@
             PC.base[n][1] = Math.round(Math.clamp(PC.base[n][1],1000,5000))
             PC.base[n][0] = Math.max(PC.base[n][0],0)  //防止出现负数
         }
-        /* max值不可成长但现在值可突破最大值
-        if([].includes(n)){
+        /* max值不可成长但现在值可突破最大值*/
+        if(["欲望"].includes(n)){
             PC.base[n][1] = 1000
-        }*/
+            PC.base[n][0] = fixfloat(Math.min(PC.base[n][0],10000),4)
+        }
     }
 
     // 扩张的修正
-    PC.stretch.anal = parseFloat(Math.clamp(PC.stretch.anal,1,(12+(PC.info.body*2))).toFixed(2))
+    PC.stretch.anal = fixfloat(Math.clamp(PC.stretch.anal,1,(12+(PC.info.body*2))),2)
 
     if(PC.info.tag == "少女") PC.stretch.ureth = Math.clamp(PC.stretch.ureth,0.5,6);
-    else PC.stretch.ureth = parseFloat(Math.clamp(PC.stretch.ureth,0.2,(0.5+PC.genital.阴茎/10)).toFixed(2));
+    else PC.stretch.ureth = fixfloat(Math.clamp(PC.stretch.ureth,0.2,(0.5+PC.genital.阴茎/10)),2);
 
-    if(PC.genital.子宫) PC.stretch.vagina = parseFloat(Math.clamp(PC.stretch.vagina,1,(12+(PC.info.body*2))).toFixed(2));
+    if(PC.genital.子宫) PC.stretch.vagina = fixfloat(Math.clamp(PC.stretch.vagina,1,(12+(PC.info.body*2))),2);
     else PC.stretch.vagina = null;
 
     // 液体分量的修正
@@ -82,11 +87,11 @@
     PC.rpg.SP[1] = Math.round(Math.clamp(PC.rpg.SP[1],50,50+PC.eskl.性耐性/5))
     PC.rpg.SP[0] = Math.clamp(PC.rpg.SP[0],0,PC.rpg.SP[1])
 
-    PC.rpg.ATK = parseFloat(Math.clamp((10+PC.abl.战技/10),1,500).toFixed(1))
-    PC.rpg.DEF = parseFloat(Math.clamp((10+PC.abl.健身/10)+defBuff(),1,500).toFixed(1))
-    PC.rpg.MATK = parseFloat(Math.clamp((10+(PC.abl.奥术/10*PC.school.自然/500)),1,500).toFixed(1))
-    PC.rpg.MDEF = parseFloat(Math.clamp((10+(PC.abl.异能/10*PC.school.物理/500)),1,500).toFixed(1))
-    PC.rpg.SPD = parseFloat(Math.clamp((10+(PC.abl.运动/10)),1,500).toFixed(1))
+    PC.rpg.ATK = fixfloat(Math.clamp((10+PC.abl.战技/10),1,500),2)
+    PC.rpg.DEF = fixfloat(Math.clamp((10+PC.abl.健身/10)+defBuff(),1,500),2)
+    PC.rpg.MATK = fixfloat(Math.clamp((10+(PC.abl.奥术/10*PC.school.自然/500)),1,500),2)
+    PC.rpg.MDEF = fixfloat(Math.clamp((10+(PC.abl.异能/10*PC.school.物理/500)),1,500),2)
+    PC.rpg.SPD = fixfloat(Math.clamp((10+(PC.abl.运动/10)),1,500),2)
 
     /* 技能等级相关值修正 */
     const max = function(){

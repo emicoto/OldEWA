@@ -24,3 +24,24 @@ Object.entries(V.closet).forEach(([index,value])=>{
     if (arr.uid === V.TEquip[index].uid)  dressOn(index, i);
   });
 })
+
+
+Macro.add('time', {
+	handler: function () {
+		var time = V.day.time;
+		var min, hour, zone;
+
+		if (time < 0) time = 0;
+
+		if (time >= 24*60 ) time = 23*59+59;
+
+		hour = Math.floor(time/60);
+		min = time%60;
+
+		zone = gettimezone(hour)
+
+		V.day.min = min
+		V.day.hour = hour
+		V.day.zone = zone
+	}
+});
