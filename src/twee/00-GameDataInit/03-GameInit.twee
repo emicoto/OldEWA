@@ -25,6 +25,7 @@
     Flag.daychange = false;
     Flag.actmode = "自由";
     Flag.chaos = 0;
+    Flag.overtime = 0;
 >>
 
 <<set $local to {}>>

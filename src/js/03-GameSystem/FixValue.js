@@ -34,7 +34,7 @@ function FixValue() {
         if(["体力","理智","魔力"].includes(n)) continue;
 
         //[current,max] 最大值固定 1000 并且把现在值固定在 0-max值内
-        if(["饮食","健康","酒精","药物","抑郁"].includes(n)) {
+        if(["饮食","健康","酒精","药物","抑郁","清洁"].includes(n)) {
             PC.base[n][1] = 1000;
             PC.base[n][0] = Math.clamp(PC.base[n][0],0,PC.base[n][1]);
         }
@@ -44,8 +44,9 @@ function FixValue() {
             PC.base[n][1] = Math.round(Math.clamp(PC.base[n][1],1000,5000))
             PC.base[n][0] = Math.max(PC.base[n][0],0)  //防止出现负数
         }
+
         /* max值不可成长但现在值可突破最大值*/
-        if(["欲望"].includes(n)){
+        if(n=="欲望"){
             PC.base[n][1] = 1000
             PC.base[n][0] = fixfloat(Math.min(PC.base[n][0],10000),4)
         }

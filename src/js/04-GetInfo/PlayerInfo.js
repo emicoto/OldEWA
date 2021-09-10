@@ -1,6 +1,6 @@
 ﻿/* 名字和称呼的处理 */
 function gsplit(m,f,p="chara"){
-  if (p=="player"){
+  if (p=="player" || p=="pc"){
     if (PC.info.gender == "m" ) return m;
     else return f;
   }else {
@@ -31,7 +31,7 @@ function HE(){
     case 2:
       return "你";
     default:
-      return gsplit('他','她','player')
+      return gsplit('他','她','pc')
   }
 }
 
@@ -59,8 +59,8 @@ function my(key=null) {
     if(key!=null)return "Your";
     else return "your";
   default:
-    if(key!=null)return gsplit("His","Her","player");
-    else return gsplit("his","her","player");
+    if(key!=null)return gsplit("His","Her","pc");
+    else return gsplit("his","her","pc");
   }
 }
 DefineMacroS("my", my);
@@ -74,8 +74,8 @@ function me(key=null) {
     if(key!=null)return "You";
     else return "you";
   default:
-    if(key!=null)return gsplit("Him","Her","player");
-    else return gsplit("him","her","player");
+    if(key!=null)return gsplit("Him","Her","pc");
+    else return gsplit("him","her","pc");
   }
 }
 DefineMacroS("me", me);
@@ -100,7 +100,7 @@ function myself() {
     case 2:
       return "yourself";
     default:
-      return gsplit("himself","herself","player");
+      return gsplit("himself","herself","pc");
     }
 }
 DefineMacroS("myself", myself);
