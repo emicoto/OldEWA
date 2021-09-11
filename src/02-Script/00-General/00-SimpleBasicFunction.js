@@ -58,7 +58,7 @@ class SelectCase {
 	  }
 	  return this.default;
 	}
-  }
+}
 
 window.inrange = function(num,min,max){
 	if (num >= min && num <= max){return true}

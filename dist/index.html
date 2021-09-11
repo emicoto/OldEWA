@@ -91,187 +91,6 @@ var LZString={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234
 <style id="style-ui" type="text/css">#ui-dialog-body.settings [id|=setting-body]>div:first-child{display:table;width:100%}#ui-dialog-body.settings [id|=setting-label]{display:table-cell;padding:.4em 2em .4em 0}#ui-dialog-body.settings [id|=setting-label]+div{display:table-cell;min-width:8em;text-align:right;vertical-align:middle;white-space:nowrap}#ui-dialog-body.list{padding:0}#ui-dialog-body.list ul{margin:0;padding:0;list-style:none;border:1px solid transparent}#ui-dialog-body.list li{margin:0}#ui-dialog-body.list li:not(:first-child){border-top:1px solid #444}#ui-dialog-body.list li a{display:block;padding:.25em .75em;border:1px solid transparent;color:#eee;text-decoration:none}#ui-dialog-body.list li a:hover{background-color:#333;border-color:#eee}#ui-dialog-body.saves{padding:0 0 1px}#ui-dialog-body.saves>:not(:first-child){border-top:1px solid #444}#ui-dialog-body.saves table{border-spacing:0;width:100%}#ui-dialog-body.saves tr:not(:first-child){border-top:1px solid #444}#ui-dialog-body.saves td{padding:.33em .33em}#ui-dialog-body.saves td:first-child{min-width:1.5em;text-align:center}#ui-dialog-body.saves td:nth-child(3){line-height:1.2}#ui-dialog-body.saves td:last-child{text-align:right}#ui-dialog-body.saves .empty{color:#999;speak:none;text-align:center;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}#ui-dialog-body.saves .datestamp{font-size:75%;margin-left:1em}#ui-dialog-body.saves ul.buttons li{padding:.4em}#ui-dialog-body.saves ul.buttons>li+li>button{margin-left:.2em}#ui-dialog-body.saves ul.buttons li:last-child{float:right}#ui-dialog-body.settings div[id|=header-body]{margin:1em 0}#ui-dialog-body.settings div[id|=header-body]:first-child{margin-top:0}#ui-dialog-body.settings div[id|=header-body]:not(:first-child){border-top:1px solid #444;padding-top:1em}#ui-dialog-body.settings div[id|=header-body]>*{margin:0}#ui-dialog-body.settings h2[id|=header-heading]{font-size:1.375em}#ui-dialog-body.settings p[id|=header-desc],#ui-dialog-body.settings p[id|=setting-desc]{font-size:87.5%;margin:0 0 0 .5em}#ui-dialog-body.settings div[id|=setting-body]+div[id|=setting-body]{margin:1em 0}#ui-dialog-body.settings [id|=setting-control]{white-space:nowrap}#ui-dialog-body.settings button[id|=setting-control]{color:#eee;background-color:transparent;border:1px solid #444;padding:.4em}#ui-dialog-body.settings button[id|=setting-control]:hover{background-color:#333;border-color:#eee}#ui-dialog-body.settings button[id|=setting-control].enabled{background-color:#282;border-color:#4a4}#ui-dialog-body.settings button[id|=setting-control].enabled:hover{background-color:#4a4;border-color:#6c6}#ui-dialog-body.settings input[type=range][id|=setting-control]{max-width:35vw}#ui-dialog-body.list a,#ui-dialog-body.settings span[id|=setting-input]{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}#ui-dialog-body.saves button[id=saves-clear]:before,#ui-dialog-body.saves button[id=saves-export]:before,#ui-dialog-body.saves button[id=saves-import]:before,#ui-dialog-body.settings button[id|=setting-control].enabled:after,#ui-dialog-body.settings button[id|=setting-control]:after{font-family:tme-fa-icons;font-style:normal;font-weight:400;font-variant:normal;text-transform:none;line-height:1;speak:none}#ui-dialog-body.saves button[id=saves-export]:before{content:"\e829\00a0"}#ui-dialog-body.saves button[id=saves-import]:before{content:"\e82a\00a0"}#ui-dialog-body.saves button[id=saves-clear]:before{content:"\e827\00a0"}#ui-dialog-body.settings button[id|=setting-control]:after{content:"\00a0\00a0\e830"}#ui-dialog-body.settings button[id|=setting-control].enabled:after{content:"\00a0\00a0\e831"}</style>
 <style id="style-ui-bar" type="text/css">#story{margin-left:20em;-webkit-transition:margin-left .2s ease-in;-o-transition:margin-left .2s ease-in;transition:margin-left .2s ease-in}#ui-bar.stowed~#story{margin-left:4.5em}@media screen and (max-width:1136px){#story{margin-left:19em}#ui-bar.stowed~#story{margin-left:3.5em}}@media screen and (max-width:768px){#story{margin-left:3.5em}}#ui-bar{position:fixed;z-index:50;top:0;left:0;width:17.5em;height:100%;margin:0;padding:0;-webkit-transition:left .2s ease-in;-o-transition:left .2s ease-in;transition:left .2s ease-in}#ui-bar.stowed{left:-15.5em}#ui-bar-tray{position:absolute;top:.2em;left:0;right:0}#ui-bar-body{height:90%;height:calc(100% - 2.5em);margin:2.5em 0;padding:0 1.5em}#ui-bar.stowed #ui-bar-body,#ui-bar.stowed #ui-bar-history{visibility:hidden;-webkit-transition:visibility .2s step-end;-o-transition:visibility .2s step-end;transition:visibility .2s step-end}#ui-bar{background-color:#222;border-right:1px solid #444;text-align:center}#ui-bar a{text-decoration:none}#ui-bar hr{border-color:#444}#ui-bar-history [id|=history],#ui-bar-toggle{font-size:1.2em;line-height:inherit;color:#eee;background-color:transparent;border:1px solid #444}#ui-bar-toggle{display:block;position:absolute;top:0;right:0;border-right:none;padding:.3em .45em .25em}#ui-bar.stowed #ui-bar-toggle{padding:.3em .35em .25em .55em}#ui-bar-toggle:hover{background-color:#444;border-color:#eee}#ui-bar-history{margin:0 auto}#ui-bar-history [id|=history]{padding:.2em .45em .35em}#ui-bar-history #history-jumpto{padding:.2em .665em .35em}#ui-bar-history [id|=history]:not(:first-child){margin-left:1.2em}#ui-bar-history [id|=history]:hover{background-color:#444;border-color:#eee}#ui-bar-history [id|=history]:disabled{color:#444;background-color:transparent;border-color:#444}#ui-bar-body{line-height:1.5;overflow:auto}#ui-bar-body>:not(:first-child){margin-top:2em}#story-title{margin:0;font-size:162.5%}#story-author{margin-top:2em;font-weight:700}#menu ul{margin:1em 0 0;padding:0;list-style:none;border:1px solid #444}#menu ul:empty{display:none}#menu li{margin:0}#menu li:not(:first-child){border-top:1px solid #444}#menu li a{display:block;padding:.25em .75em;border:1px solid transparent;color:#eee;text-transform:uppercase}#menu li a:hover{background-color:#444;border-color:#eee}#menu a,#ui-bar-history [id|=history],#ui-bar-toggle{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}#menu-core li[id|=menu-item] a:before,#ui-bar-history [id|=history],#ui-bar-toggle:before{font-family:tme-fa-icons;font-style:normal;font-weight:400;font-variant:normal;text-transform:none;line-height:1;speak:none}#ui-bar-toggle:before{content:"\e81d"}#ui-bar.stowed #ui-bar-toggle:before{content:"\e81e"}#menu-item-saves a:before{content:"\e82b\00a0"}#menu-item-settings a:before{content:"\e82d\00a0"}#menu-item-restart a:before{content:"\e82c\00a0"}#menu-item-share a:before{content:"\e82f\00a0"}</style>
 <style id="style-ui-debug" type="text/css">#debug-bar{background-color:#222;border-left:1px solid #444;border-top:1px solid #444;bottom:0;margin:0;max-height:75%;padding:.5em;position:fixed;right:0;z-index:99900}#debug-bar>div:not([id])+div{margin-top:.5em}#debug-bar>div>label{margin-right:.5em}#debug-bar>div>input[type=text]{min-width:0;width:8em}#debug-bar>div>select{width:15em}#debug-bar-toggle{color:#eee;background-color:#222;border:1px solid #444;height:101%;height:calc(100% + 1px);left:-2em;left:calc(-2em - 1px);position:absolute;top:-1px;width:2em}#debug-bar-toggle:hover{background-color:#333;border-color:#eee}#debug-bar-hint{bottom:.175em;font-size:4.5em;opacity:.33;pointer-events:none;position:fixed;right:.6em;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;white-space:nowrap}#debug-bar-watch{background-color:#222;border-left:1px solid #444;border-top:1px solid #444;bottom:102%;bottom:calc(100% + 1px);font-size:.9em;left:-1px;max-height:650%;max-height:65vh;position:absolute;overflow-x:hidden;overflow-y:scroll;right:0;z-index:99800}#debug-bar-watch[hidden]{display:none}#debug-bar-watch div{color:#999;font-style:italic;margin:1em auto;text-align:center}#debug-bar-watch table{width:100%}#debug-bar-watch tr:nth-child(2n){background-color:rgba(127,127,127,.15)}#debug-bar-watch td{padding:.2em 0}#debug-bar-watch td:first-child+td{padding:.2em .3em .2em .1em}#debug-bar-watch .watch-delete{background-color:transparent;border:none;color:#c00}#debug-bar-watch-all,#debug-bar-watch-none{margin-left:.5em}#debug-bar-views-toggle,#debug-bar-watch-toggle{color:#eee;background-color:transparent;border:1px solid #444;margin-right:1em;padding:.4em}#debug-bar-views-toggle:hover,#debug-bar-watch-toggle:hover{background-color:#333;border-color:#eee}#debug-bar-watch:not([hidden])~div #debug-bar-watch-toggle,html[data-debug-view] #debug-bar-views-toggle{background-color:#282;border-color:#4a4}#debug-bar-watch:not([hidden])~div #debug-bar-watch-toggle:hover,html[data-debug-view] #debug-bar-views-toggle:hover{background-color:#4a4;border-color:#6c6}#debug-bar-hint:after,#debug-bar-toggle:before,#debug-bar-views-toggle:after,#debug-bar-watch .watch-delete:before,#debug-bar-watch-add:before,#debug-bar-watch-all:before,#debug-bar-watch-none:before,#debug-bar-watch-toggle:after{font-family:tme-fa-icons;font-style:normal;font-weight:400;font-variant:normal;text-transform:none;line-height:1;speak:none}#debug-bar-toggle:before{content:"\e838"}#debug-bar-hint:after{content:"\e838\202f\e822"}#debug-bar-watch .watch-delete:before{content:"\e804"}#debug-bar-watch-add:before{content:"\e805"}#debug-bar-watch-all:before{content:"\e83a"}#debug-bar-watch-none:before{content:"\e827"}#debug-bar-views-toggle:after,#debug-bar-watch-toggle:after{content:"\00a0\00a0\e830"}#debug-bar-watch:not([hidden])~div #debug-bar-watch-toggle:after,html[data-debug-view] #debug-bar-views-toggle:after{content:"\00a0\00a0\e831"}html[data-debug-view] .debug{padding:.25em;background-color:#234}html[data-debug-view] .debug[title]{cursor:help}html[data-debug-view] .debug.block{display:inline-block;vertical-align:middle}html[data-debug-view] .debug.invalid{text-decoration:line-through}html[data-debug-view] .debug.hidden,html[data-debug-view] .debug.hidden .debug{background-color:#555}html:not([data-debug-view]) .debug.hidden{display:none}html[data-debug-view] .debug[data-name][data-type].nonvoid:after,html[data-debug-view] .debug[data-name][data-type]:before{background-color:rgba(0,0,0,.25);font-family:monospace,monospace;white-space:pre}html[data-debug-view] .debug[data-name][data-type]:before{content:attr(data-name)}html[data-debug-view] .debug[data-name][data-type|=macro]:before{content:"<<" attr(data-name) ">>"}html[data-debug-view] .debug[data-name][data-type|=macro].nonvoid:after{content:"<</" attr(data-name) ">>"}html[data-debug-view] .debug[data-name][data-type|=html]:before{content:"<" attr(data-name) ">"}html[data-debug-view] .debug[data-name][data-type|=html].nonvoid:after{content:"</" attr(data-name) ">"}html[data-debug-view] .debug[data-name][data-type]:not(:empty):before{margin-right:.25em}html[data-debug-view] .debug[data-name][data-type].nonvoid:not(:empty):after{margin-left:.25em}html[data-debug-view] .debug[data-name][data-type|=special],html[data-debug-view] .debug[data-name][data-type|=special]:before{display:block}</style>
-<script id="script-module-Game" type="text/javascript">// Code/Game.js
-var Game = {
-  Data: {
-    Player: {},
-    Npc: {}
-  },
-  Character: {},
-  Utils: {},
-  Mods: {}
-};
-console.log(Game);</script>
-<script id="script-module-Manager" type="text/javascript">var __defProp = Object.defineProperty;
-var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
-var __markAsModule = (target) => __defProp(target, "__esModule", { value: true });
-var __esm = (fn, res) => function __init() {
-  return fn && (res = (0, fn[Object.keys(fn)[0]])(fn = 0)), res;
-};
-var __export = (target, all) => {
-  __markAsModule(target);
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __publicField = (obj, key, value) => {
-  __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
-  return value;
-};
-
-// dsv:H:\_EWA\Code\Data\csv\test.csv
-var test_exports = {};
-__export(test_exports, {
-  default: () => test_default
-});
-var test_default;
-var init_test = __esm({
-  "dsv:H:\\_EWA\\Code\\Data\\csv\\test.csv"() {
-    test_default = [
-      {
-        "编号": "0",
-        "名字": "鸽子",
-        "设置": ""
-      },
-      {
-        "编号": "1",
-        "名字": "狐狸",
-        "设置": "true"
-      }
-    ];
-  }
-});
-
-// import-glob:./Data/**/*.csv
-var __exports = {};
-__export(__exports, {
-  default: () => __default,
-  filenames: () => filenames
-});
-var modules, __default, filenames;
-var init__ = __esm({
-  "import-glob:./Data/**/*.csv"() {
-    init_test();
-    modules = [test_exports];
-    __default = modules;
-    filenames = ["./Data/csv/test.csv"];
-  }
-});
-
-// Code/Data/JSON/CHARACTER.json
-var CHARACTER_exports = {};
-__export(CHARACTER_exports, {
-  default: () => CHARACTER_default
-});
-var CHARACTER_default;
-var init_CHARACTER = __esm({
-  "Code/Data/JSON/CHARACTER.json"() {
-    CHARACTER_default = [
-      {
-        CID: "1",
-        名字: "黎渊",
-        性别: "男",
-        genital: { 阴茎: 16, 子宫: -1 },
-        vaginity: { 初吻: "自己的姐姐", 童贞: 1, 处女: -1, A处女: 1 },
-        好感: 0,
-        信赖: 0,
-        欲望: 0,
-        支配: 10,
-        items: {},
-        type: 3
-      }
-    ];
-  }
-});
-
-// import-glob:./Data/**/*.json
-var __exports2 = {};
-__export(__exports2, {
-  default: () => __default2,
-  filenames: () => filenames2
-});
-var modules2, __default2, filenames2;
-var init__2 = __esm({
-  "import-glob:./Data/**/*.json"() {
-    init_CHARACTER();
-    modules2 = [CHARACTER_exports];
-    __default2 = modules2;
-    filenames2 = ["./Data/JSON/CHARACTER.json"];
-  }
-});
-
-// yaml:H:\_EWA\Code\Data\YAML\test.yml
-var test_exports2 = {};
-__export(test_exports2, {
-  default: () => test_default2,
-  名字: () => 名字
-});
-var 名字, test_default2;
-var init_test2 = __esm({
-  "yaml:H:\\_EWA\\Code\\Data\\YAML\\test.yml"() {
-    名字 = "鸽子";
-    test_default2 = { 名字 };
-  }
-});
-
-// import-glob:./Data/**/*.yml
-var __exports3 = {};
-__export(__exports3, {
-  default: () => __default3,
-  filenames: () => filenames3
-});
-var modules3, __default3, filenames3;
-var init__3 = __esm({
-  "import-glob:./Data/**/*.yml"() {
-    init_test2();
-    modules3 = [test_exports2];
-    __default3 = modules3;
-    filenames3 = ["./Data/YAML/test.yml"];
-  }
-});
-
-// import-glob:./Data/**/*.js
-var __exports4 = {};
-__export(__exports4, {
-  default: () => __default4,
-  filenames: () => filenames4
-});
-var modules4, __default4, filenames4;
-var init__4 = __esm({
-  "import-glob:./Data/**/*.js"() {
-    modules4 = [];
-    __default4 = modules4;
-    filenames4 = [];
-  }
-});
-
-// Code/Manager.js
-var Csv = (init__(), __exports);
-var Json = (init__2(), __exports2);
-var Yaml = (init__3(), __exports3);
-var js = (init__4(), __exports4);
-var Manager = class {
-  constructor(files) {
-    __publicField(this, "files", new Map());
-    const File = (file) => {
-      const obj = {};
-      file.filenames.map((v, i) => {
-        const filename = v.split("/").slice(2).join("/");
-        obj[filename] = file.default[i].default;
-      });
-      return obj;
-    };
-    Object.keys(files).map((v) => this.files.set(v, File(files[v])));
-  }
-  getFile(key, filename) {
-    return this.files.get(key)[filename];
-  }
-};
-Game.Manager = new Manager({
-  csv: Csv,
-  json: Json,
-  yaml: Yaml,
-  js
-});</script>
 <link type="image/png" rel="icon" sizes="24x24" href="icon.png" />
 <link rel="stylesheet" href="CSS/jquery-ui.css">
 <style>
@@ -3995,7 +3814,111 @@ html[data-debug-view] .debug.hidden .debug {
 	flex-basis: 0;
 }
 
-</style><script role="script" id="twine-user-script" type="text/twine-javascript">/* twine-user-script #1: "namespace.js" */
+</style><script role="script" id="twine-user-script" type="text/twine-javascript">/* twine-user-script #1: "00-loadfirst.js" */
+if (document.location.href.toLowerCase().includes("/temp/") || document.location.href.toLowerCase().includes("/private/") || hasOwnProperty.call(window, "storyFormat")) {
+	// Change this to the path where this HTML file is
+	// located if you want to run this from inside Twine.
+	setup.Path = "H:/_EWA/dist/";  // Running inside Twine application
+} else {
+	setup.Path = "";  // Running in a browser
+}
+setup.ImagePath = setup.Path + "image/";
+setup.SoundPath = setup.Path + "sound/";
+
+window.ImgExist = function(url) {
+    var img = new Image();
+	
+    img.onload = function () {
+        if (this.complete == true){
+            // 改了这里
+            return true;
+        }
+    }
+    img.onerror = function () {
+        return false;
+    }
+
+	img.src = url;
+	
+	if (img.complete) {
+	  return true;
+	} else {
+	  img.onload = () => {
+		return true;
+	  };
+	  img.onerror = () => {
+		return false;
+	  };
+	}
+}
+
+// volume slider, by chapel; for sugarcube 2
+// version 1.1 - modified by HiEv for SugarCube v2.28.0+
+// For custom CSS for slider use: http://danielstern.ca/range.css/#/
+
+// create namespace
+setup.vol = {};
+
+// options object
+setup.vol.options = {
+	current	 : 5,
+	rangeMax : 10,
+	step	 : 1
+};
+
+setup.vol.last = setup.vol.options.current;
+setup.vol.start = setup.vol.last / setup.vol.options.rangeMax;
+
+postdisplay['volume-task'] = function (taskName) {
+	delete postdisplay[taskName];
+	SimpleAudio.volume(setup.vol.start);
+};
+
+!function () {
+	$(document).on('input', 'input[name=volume]', function() {
+		// grab new volume from input
+		var volRef		= setup.vol.options;
+		var change		= $('input[name=volume]').val();
+		var newVol		= change / volRef.rangeMax;
+		volRef.current	= newVol.toFixed(2);
+		// change volume; set slider position
+		SimpleAudio.volume(newVol);
+		setup.vol.last = change;
+	});
+}();  // jshint ignore:line
+
+Macro.add('volume', {
+	handler : function () {
+		// set up variables
+		var $wrapper  = $(document.createElement('span'));
+		var $slider   = $(document.createElement('input'));
+		var volRef    = setup.vol.options;
+		// create range input
+		$slider
+			.attr({
+				id    : 'volume-control',
+				type  : 'range',
+				name  : 'volume',
+				min   : '0',
+				max   : volRef.rangeMax,
+				step  : volRef.step,
+				value : setup.vol.last
+			}).addClass('VolumeSlider');
+		// class '.macro-volume' and id '#volume-control' for styling
+		// output
+		$wrapper
+			.append($slider)
+			.appendTo(this.output);
+	}
+});
+
+function Lang(CN,EN) {
+  if(V.lang=="CN")return CN;
+  if(V.lang=="EN")return EN;
+}
+window.Lang = Lang
+DefineMacroS("lang", Lang)
+/* twine-user-script #2: "00-namespace.js" */
 /**
  * As part of my various refactors, I ended up introducing a bunch of
  * global namespace-esk variables.
@@ -4122,7 +4045,7 @@ $(document).on(':passageend', () => {
 	})
 })
 */
-/* twine-user-script #2: "error.js" */
+/* twine-user-script #3: "01-error.js" */
 /**
  * Error reporter utility that provides enriched error messages to the user as a simple sugarcube plugin app
  */
@@ -4259,316 +4182,7 @@ Errors.report = (message, copyData) => {
 		}, 5000)
 	}
 }
-/* twine-user-script #3: ".init.js" */
-Versions.registry = [];
-Versions.log = [];
-Versions.recordStep = (step) => {
-	Versions.log.push(step);
-}
-// this will be updated automatically
-Versions.latest = 0;
-Versions.register = (versionId, migration) => {
-	console.log(`Registering version schema`, typeof versionId, versionId, migration);
-	if (versionId !== (Versions.registry.length + 1)) {
-		// If we get all versions in order, we don't have to try to
-		// verify them after the fact.
-		Errors.report(`Invalid migration registration. Next expected version id was ${Versions.registry.length + 1}, but got ${versionId} instead. Version migrations might not work as expected`)
-	}
-	Versions.registry[versionId - 1] = {
-		migration, versionId
-	}
-	Versions.latest = Math.max(Versions.latest, versionId);
-}
-Versions.migrate = (originalVersion, state) => {
-	Versions.log = [];
-	let currentVersion = originalVersion;
-	let migrationFailed = false;
-	let nextMigration = Versions.registry[currentVersion];
-	while(nextMigration && !migrationFailed) {
-		migrationFailed = nextMigration.migration(originalVersion, state);
-		currentVersion = nextMigration.versionId;
-		nextMigration = Versions.registry[currentVersion];
-	};
-	if (migrationFailed) {
-		Errors.report(`One or more errors occurred while attempting to migrate from schema version ${originalVersion} to the latest`, Versions.log);
-	}
-	if (currentVersion !== Versions.latest && !migrationFailed) {
-		Errors.report(`Migration steps missing for schema version: ${originalVersion}`, Versions.log)
-	}
-	return currentVersion;
-}
-/**
- * Utility for migrations to use. Make more robust migrations + provides logging in case of later errors
- *
- * Usage:
- * Versions.stepper(originalVersion, <youridhere>)
- *  .step(() => ...)
- *	  // option; critical = true;
- *	  // if it fails nothing else will execute and the migration will be marked as a failure
- *  .step(() => ..., { critical: true })
- *	  // option; name = <string>
- *	  // provides a human readable name for the purpose of logging and error reporting
- *  .step(() => ..., { name: 'my specific step' })
- *	  // option; requires = <function>
- *	  // ensures that the step did what was intended to be done.
- *	  // this is useful in that if the update step fails, but we're already in a good state
- *	  // then we know we can (probably) continue successfully, despite the earlier failure
- *  .step(() => ..., { requires: () => ... })
- *
- * Note, by convention, a single stepper should be used
- */
-Versions.Stepper = class Stepper {
-	constructor(originalVersion, currentStage) {
-		this.originalVersion = originalVersion;
-		this.currentStage = currentStage;
-		this.nextStepIdNumber = 0;
-		this.shouldContinue = true;
-	}
-	step(statement, { critical, requires, name }={}) {
-		const errors = [];
-		let requirementsComplete = !requires;
-		if (this.shouldContinue) {
-			if (name === undefined) { name = statement.toString(); }
-			const stepId = `${this.currentStage}-${this.nextStepIdNumber++}`
-			try {
-				statement();
-			} catch(e) {
-				errors.push(e);
-			} finally {
-				try {
-					requirementsComplete = requires();
-				} catch(e) {
-					errors.push(e);
-				}
-			}
-			Versions.recordStep({
-				stepId,
-				originalVersion: this.originalVersion,
-				currentStage: this.currentStage,
-				name,
-				errors
-			})
-			this.shouldContinue = requirementsComplete && !(errors.length > 0 && critical);
-		}
-		return this;
-	}
-}
-Versions.stepper = (originalVersion, currentStage) => {
-	return new Versions.Stepper(originalVersion, currentStage);
-}
-
-$(document).on(":archiverevive", function (e) {
-	const state = e.archive.state;
-	const version = state.variables.version;
-
-	if (!version || version.schema === undefined) {
-		// The sugarcube baseline version has yet to be applied. Move to a special passage to
-		// apply it. The user will be able to resume afterwords.
-		if (state.title !== 'Upgrade Waiting Room' && state.title !== 'Start') {
-			console.log(`Schema version number not found. Banishing the player to the waiting room.`)
-			state.variables.navigation = state.variables.navigation || { }
-			state.variables.navigation.stack = state.variables.navigation.stack || [];
-			state.variables.navigation.stack.push(state.title);
-			state.title = 'Upgrade Waiting Room';
-		}
-	} else if (version.schema !== Versions.latest) {
-		console.log(`Migrating game state from ${schemaVersion} to ${Versions.latest}`);
-		state.variables.schemaVersion = Versions.migrate(schemaVersion === undefined ? 0 : schemaVersion, state);
-		// modified history, be sure to notify the framework by returning the history object
-		// TODO: apply class transformations to objects in state *after* migrations are complete
-	}
-});
-/* twine-user-script #4: "0001-0.2.17.0.js" */
-/**
- * By convention, we list the migrations in a version file where the migration was introduced
- *
- * This convention is a 0 padded migration number (in this case 0001), followed by the game version
- *
- * Note that this convention is loosely enforced -- we'll throw an error if you attempt to save a
- * migration from an earlier version
- */
-Versions.register(1, (originalVersion, state) => {
-	// IMPORTANT: WHEN WE DO MIGRATION, DO NOT USE SUGARCUBE
-	// sugarcube maybe in an invalid state when this happens and/or
-	// your script might not behave as you intend
-
-	// This is a double edge sword. It means that we can always
-	// expect migrations to be done before any sugarcube executes
-	// *but* that means all migrations should be done as pure javascript
-
-	// In addition, this should be before any other complex logic.
-	// This means that classes stored in state will not be revived at this point
-	// (any class solution should keep that in mind)
-
-	// This migration is a good template. It serves as a marker for the baseline
-	// version. It will (most likely) never be executed, as the baseline migration
-	// will happen in sugarcube (unlike the other migrations)
-	return Versions.stepper(originalVersion, 1)
-		.step(() => {
-			// this is a no-op step
-		}, { name: 'placeholder'}).shouldContinue;
-})
-/* twine-user-script #5: "1_Macros.js" */
-/**
- * Define macro, passing arguments to function and store them in $args, preserving & restoring previous $args
- */
- function DefineMacro(macroName, macroFunction, tags, skipArgs) {
-	Macro.add(macroName, {
-		isWidget: true,
-		tags: tags,
-		skipArgs: skipArgs,
-		handler: function () {
-			EWA.Perflog.logWidgetStart(macroName);
-			try {
-				var oldArgs = State.variables.args;
-				State.variables.args = this.args.slice();
-				macroFunction.apply(this, this.args);
-				if (typeof oldArgs === 'undefined') {
-					delete State.variables.args;
-				} else {
-					State.variables.args = oldArgs;
-				}
-			} finally {
-				EWA.Perflog.logWidgetEnd(macroName);
-			}
-		}
-	});
-}
-
-/**
- * Define macro, where macroFunction returns text to wikify & print
- */
- function DefineMacroS(macroName, macroFunction, tags, skipArgs, maintainContext) {
-	DefineMacro(macroName, function () {
-		$(this.output).wiki(macroFunction.apply(maintainContext ? this : null, this.args))
-	}, tags, skipArgs);
-}
-
-window.wikifier = function (widget, arg1, arg2, arg3) {
-	if (arg3 !== undefined) {
-		new Wikifier(null, '<<' + widget + ' ' + arg1 + ' ' + arg2 + ' ' + arg3 + '>>');
-	}
-	else if (arg2 !== undefined) {
-		new Wikifier(null, '<<' + widget + ' ' + arg1 + ' ' + arg2 + '>>');
-	}
-	else if (arg1 !== undefined) {
-		new Wikifier(null, '<<' + widget + ' ' + arg1 + '>>');
-	}
-	else if (arg1 === undefined) {
-		new Wikifier(null, '<<' + widget + '>>');
-	}
-}
-
-window.wikifier2 = function (str) {
-	new Wikifier(null, str);
-}
-
-/*
- * Similar to <<script>>, but preprocesses the contents, so $variables are accessible.
- * The variable "output" is also exposed (unlike <<run>>, <<set>>)
- *
- * Example:
- * <<twinescript>>
- *     output.textContent = $text
- * <</twinescript>>
- */
-Macro.add('twinescript', {
-	skipArgs : true,
-	tags     : null,
-
-	handler() {
-		const output = document.createDocumentFragment();
-
-		try {
-			Scripting.evalTwineScript(this.payload[0].contents, output);
-		}
-		catch (ex) {
-			return this.error(`bad evaluation: ${typeof ex === 'object' ? ex.message : ex}`);
-		}
-
-		// Custom debug view setup.
-		if (Config.debug) {
-			this.createDebugView();
-		}
-
-		if (output.hasChildNodes()) {
-			this.output.appendChild(output);
-		}
-	}
-});
-
-/*
- * Usage:
- * <<radiovar VARNAME VALUE [LABEL]>> ONCHANGE <</radiovar>>
- *
- * Will display a radiobutton, optionally labeled, that corresponds
- * to state variable VARNAME having value VALUE.
- *
- * When var value is set to this value, silently execute ONCHANGE
- */
-Macro.add("radiovar", {
-	tags: null,
-	handler: function() {
-		if (this.args.length < 2) return this.error("missing <<radiovar>> arguments");
-		var varname = this.args[0];
-		var value = this.args[1];
-		var content = this.payload[0].contents;
-		var e = $("<input>")
-			.attr({
-				name: "radiovar"+Util.slugify(varname),
-				id: "radiovar"+Util.slugify(varname)+"-"+Util.slugify(value),
-				tabindex: 0,
-				type: "radio"
-			})
-			.prop("checked", State.getVar(varname) ==  value)
-			.addClass("macro-radiovar")
-			.on('change.macros', function () {
-				if (this.checked) {
-					State.setVar(varname, value);
-					Wikifier.wikifyEval(content);
-				}
-			});
-		if (this.args[2]) e = $("<label>").append(this.args[2], e);
-		e.appendTo(this.output);
-	}
-});
-
-
-function updatehistorycontrols(){
-	if (V.maxStates === undefined || V.maxStates > 20) {
-		/* initiate new variable based on engine config and limit it to 20 */
-		V.maxStates = Math.clamp(1, 20, Config.history.maxStates);
-	}
-	if (V.maxStates == 1) {
-		/* when disabled, irreversibly delete history controls the way sugarcube intended */
-		Config.history.maxStates = 1;
-		jQuery('#ui-bar-history').remove();
-	} else {
-		/* set actual maxStates in accordance with our new variable */
-		Config.history.maxStates = V.maxStates;
-		/* ensure that controls are enabled so sugarcube won't destroy them on reload */
-		Config.history.controls = true;
-		/* if irreversibly deleted, restore #ui-bar-history from oblivion and pop it after #ui-bar-toggle */
-		if (jQuery("#ui-bar-history").length == 0){
-			jQuery("#ui-bar-toggle").after(`
-				<div id="ui-bar-history">
-					<button id="history-backward" tabindex="0" title="'+t+'" aria-label="'+t+'">\uE821</button>
-					<button id="history-jumpto" tabindex="0" title="'+r+'" aria-label="'+r+'">\uE839</button>
-					<button id="history-forward" tabindex="0" title="'+n+'" aria-label="'+n+'">\uE822</button>
-				</div>`);
-			/* make buttons active/inactive based on the available history states */
-			jQuery(document).on(':historyupdate.ui-bar', (($backward, $forward) => () => {
-					$backward.ariaDisabled(State.length < 2);
-					$forward.ariaDisabled(State.length === State.size);
-				})(jQuery('#history-backward'), jQuery('#history-forward')));
-			/* update uibar to accept it's new masters */
-			UIBar.start();
-		}
-		jQuery("#ui-bar-history").show();
-	}
-}
-DefineMacro("updatehistorycontrols", updatehistorycontrols);
-/* twine-user-script #6: "1_statevars.js" */
+/* twine-user-script #4: "01-statevars.js" */
 
 Object.defineProperties(window, {
 	V: {
@@ -4740,458 +4354,7 @@ F.setVariablesChain = function(){
 
 }
 
-/* twine-user-script #7: "observable.js" */
-window.inDOM = function(node) {
-	return document.body.contains(node)
-}
-
-/**
- * Simple observable value framework, somewhat inspired by Vue.js
- *
- * @example
- * var text = new ObservableValue("hello");
- * text.subscribe( (newText, oldText) => console.log('Text changed from', oldText, 'to', newText) );
- * text.bindText(document.getElementById("text"));
- * text.value = "hello world";
- */
-class ObservableValue {
-	constructor(defaultValue) {
-		this._value = defaultValue;
-		this._listeners = [];
-		this._mutating = false; // we are in process of changing value
-		this._nextValues = null; // queued value changes
-	}
-	/**
-	 * Receive notifications on value change.
-	 * If the onChange function returns exactly false, stop notifications.
-	 * Exact equality is checked, so void-returning functions are fine too.
-	 *
-	 * Be careful with changing values in the listener!
-	 * @param {function} onChange function(newValue, oldValue):any
-	 */
-	subscribe(onChange) {
-		this._listeners.push(onChange);
-	}
-	/**
-	 * Don't notify {@param onChange} listener anymore
-	 */
-	unsubscribe(onChange) {
-		let index = this._listeners.indexOf(onChange);
-		if (index >= 0) this._listeners.splice(index, 1);
-	}
-
-	/**
-	 * Subscribe and auto-unsubscribe when element gets removed from DOM.
-	 * @param {Node} element
-	 * @param {function} onchange function(newValue, oldValue)
-	 * @return {Node} element
-	 */
-	domSubscribe(element, onchange) {
-		this.subscribe((newValue,oldValue)=>{
-			if (onchange(newValue,oldValue) === false) return false;
-			return inDOM(element);
-		});
-		return element
-	}
-	/**
-	 * Bind element's textContent to this value.
-	 * @param {Node} element
-	 * @return {Node} element
-	 */
-	bindText(element) {
-		element.textContent = this._value;
-		this.domSubscribe(element,(newValue)=>{
-			element.textContent = newValue;
-		});
-		return element;
-	}
-	_notifyListeners(newValue,oldValue) {
-		const remove = [];
-		const listeners = this._listeners.slice();
-		for (let listener of listeners) {
-			try {
-				let keep = listener(newValue, oldValue);
-				if (keep === false) remove.push(listener);
-			} catch (e) {
-				remove.push(listener);
-				console.error("Exception in ObservableValue listener: ",e,"listener is ",listener);
-			}
-		}
-		for (let listener of remove) {
-			this.unsubscribe(listener);
-		}
-	}
-	/**
-	 * Get current value
-	 */
-	get value() {
-		return this._value;
-	}
-	/**
-	 * Change value, notifying subscribers
-	 */
-	set value(newValue) {
-		if (this._mutating) {
-			this._nextValues.push(newValue);
-			return;
-		}
-
-		let oldValue = this._value;
-		if (oldValue === newValue) return;
-		this._value = newValue;
-
-		this._mutating = true;
-		this._nextValues = [];
-
-		this._notifyListeners(newValue,oldValue);
-
-		let n = 0;
-		while (this._nextValues.length > 0) {
-			if (n++ > 999) {
-				console.error("Possible endless loop in ObservableValue ",this);
-				break;
-			}
-			oldValue = newValue;
-			newValue = this._nextValues.shift();
-			this._notifyListeners(newValue,oldValue);
-		}
-		this._mutating = false;
-		this._nextValues = null;
-	}
-}
-
-/**
- * Modify obj, wrapping every property into an ObservableValue. Not deep!
- * @param {object} obj
- * @return {object} obj
- */
-ObservableValue.fromObject = function(obj) {
-	for (let key of Object.keys(obj)) {
-		obj[key] = new ObservableValue(obj[key]);
-	}
-	return obj;
-}
-window.ObservableValue = ObservableValue;
-/* twine-user-script #8: "perflog.js" */
-// Time in milliseconds, float with microsecond precision if available.
-const millitime = (typeof performance === 'object' && typeof performance.now === 'function') ?
-	function() { return performance.now() } : function() { return new Date().getTime() };
-EWA.Perflog.millitime = millitime;
-
-/**
- * Widget performance records for one passage.
- * Key = widget name, value = {
- *  name: widget name,
- * 	n: number of widget calls,
- *  total: Sum of execution times including internal widget calls, milliseconds
- *  own: Sum of execution times excluding internal widget calls, milliseconds
- * }.
- */
-var wpRec = {}; // Widget performance records
-const wpSelf = { name: "__perflog_logWidgetEnd", n: 0, total: 0, own: 0 };
-wpRec[wpSelf.name] = wpSelf;
-/**
- * Global widget performance records
- */
-EWA.Perflog.globalRec = {};
-EWA.Perflog.lastRec = {};
-EWA.Perflog.enabled = true;
-EWA.Perflog.self = true; // Record own performance
-/**
- * Performance stack entry = { t0: widget start time, i: internal widget duration }
- */
-const wpStack = []; // Widget performance stack
-EWA.Perflog.nPassages = 0;
-$(document).on(':passageend', function() {
-	if (!EWA.Perflog.enabled) return;
-	try {
-		if (EWA.Perflog.self) EWA.Perflog.logWidgetStart("__perflog_passageEnd")
-		EWA.Perflog.nPassages++;
-		for (var name in wpRec) {
-			var rec = wpRec[name];
-			var grec = EWA.Perflog.globalRec[name];
-			if (!grec) {
-				EWA.Perflog.globalRec[name] = rec;
-			} else {
-				grec.n += rec.n;
-				grec.total += rec.total;
-				grec.own += rec.own;
-			}
-		}
-		EWA.Perflog.lastRec = wpRec;
-		wpRec = {};
-	} finally {
-		if (EWA.Perflog.self) EWA.Perflog.logWidgetEnd("__perflog_passageEnd")
-	}
-});
-EWA.Perflog.logWidgetStart = function(widgetName) {
-	if (!EWA.Perflog.enabled) return;
-	wpStack.push({
-		name: widgetName,
-		t0: millitime(),
-		i: 0
-	});
-}
-/**
- * Record that widget `widgetName` executed in `totaltime` ms,
- * including `internaltime` internal widget calls
- * @param {string} widgetName
- * @param {number} totaltime
- * @param {number=0} internaltime
- */
-EWA.Perflog.logWidgetTime = function(widgetName, totaltime, internaltime) {
-	if (typeof internaltime !== "number") internaltime = 0;
-	const prevPerflog = wpStack[wpStack.length - 1];
-	if (prevPerflog) {
-		prevPerflog.i += totaltime;
-	}
-	var perfrec = wpRec[widgetName];
-	if (!perfrec) perfrec = wpRec[widgetName] = {
-		name:widgetName,
-		n:0,
-		total:0,
-		own:0
-	};
-	perfrec.n++;
-	perfrec.total += totaltime;
-	perfrec.own += totaltime - internaltime;
-}
-EWA.Perflog.logWidgetEnd = function(widgetName) {
-	if (!EWA.Perflog.enabled) return;
-	const time = millitime();
-	const perflog = wpStack[wpStack.length - 1];
-	if (!perflog || perflog.name !== widgetName) {
-		Errors.report("Inconsistent widget performance stack", wpStack);
-		return;
-	}
-	wpStack.pop();
-	EWA.Perflog.logWidgetTime(widgetName, time-perflog.t0, perflog.i);
-	if (EWA.Perflog.self) {
-		const selfDt = millitime() - time
-		wpSelf.n++;
-		wpSelf.own += selfDt;
-		wpSelf.total += selfDt;
-	}
-}
-
-/**
- * Returns a "nice" string representation of a number without too much decimal digits.
- * @param {number} x
- */
-function niceround(x) {
-	if (Math.floor(x) === x) return x; // Integers
-	if (-1 < x && x < 1) {
-		// Small number, round to 0.001 instead
-		return Math.round(x*1000)/1000;
-	}
-	return Math.round(x*10)/10;
-}
-/**
- * Return performance report. Can be viewed by DevTools table() function.
- *
- * Returns array of objects:
- *  `name`: Widget name
- *  `n`: Times widget called
- *  `total`: Sum of widget execution time, including inner widgets, ms
- *  `own`: Sum of widget execution time, excluding inner widgets, ms
- *  `totalp1`: Average widget execution time, including inner widgets, ms
- *  `ownp1`: Average widget execution time, excluding inner widgets, ms
- *  `npp`: Average time widget called per passage
- *  `totalpp`: Average total time per passage
- *  `ownpp`: Average own time per passage
- *
- * @param {object} options
- * @param {string} [options.sort='total'] Property to sort entries by
- * @param {number} [options.limit=20] Max number of entries to report, 0 to no limit
- * @param {boolean} [options.global=true] Report widgets from all recorded history or from last passage only.
- * @param {boolean} [options.round=true] Round to 0.1 precision
- */
-EWA.Perflog.report = function (options) {
-	options = Object.assign({
-		sort: 'own',
-		limit: 20,
-		global: true,
-		round: true
-	}, options);
-	const numfn = options.round ? niceround : (x)=>x;
-	var entries;
-	if (options.global) {
-		const np = EWA.Perflog.nPassages;
-		// Add 'per passage' metrics
-		entries = Object.values(EWA.Perflog.globalRec).map(e=>({
-			name: e.name,
-			n: e.n,
-			total: numfn(e.total),
-			own: numfn(e.own),
-			npp: numfn(e.n/np),
-			totalpp: numfn(e.total/np),
-			ownpp: numfn(e.own/np),
-			totalp1: numfn(e.total/e.n),
-			ownp1: numfn(e.own/e.n)
-		}));
-	} else {
-		entries = Object.values(EWA.Perflog.lastRec).map(e=>({
-			name: e.name,
-			n: e.n,
-			total: numfn(e.total),
-			own: numfn(e.own),
-			totalp1: numfn(e.total/e.n),
-			ownp1: numfn(e.own/e.n),
-		}));
-	}
-	var comparator;
-	const sort = options.sort;
-	switch (sort) {
-		case 'own':
-		case 'total':
-		case 'n':
-		case 'npp':
-		case 'ownpp':
-		case 'totalpp':
-		case 'totalp1':
-		case 'ownp1':
-			comparator = (a,b)=>b[sort] - a[sort];
-			break;
-		case 'name':
-		default:
-			comparator = (a,b)=> a.name < b.name ? -1 : a.name > b.name ? +1 : 0;
-	}
-	entries.sort(comparator);
-	if (options.limit > 0 && entries.length > options.limit) entries.splice(options.limit);
-	return entries;
-}
-/* twine-user-script #9: "setVariable.js" */
-/**
- * 设置V属性
- * @param {string} props 
- * @param {any} condition 
- * @param {any} value 
- */
-function setV(props,condition,value){
-  const ISOBJ = Object.prototype.toString.call(value) === "[object Object]"
-  console.log(Object.is(V[props], condition))
-  if (Object.is(V[props], condition)) {
-    if (ISOBJ) {
-
-      if(!V[props]) V[props] = {};
-
-      Object.keys(value).forEach((v)=>{
-        V[props][v] = value[v]
-      })
-      
-    }
-    if (!ISOBJ) {
-      V[props] = value
-    }
-  }
-}
-
-window.setV = setV
-/* twine-user-script #10: "00-loadfirst.js" */
-if (document.location.href.toLowerCase().includes("/temp/") || document.location.href.toLowerCase().includes("/private/") || hasOwnProperty.call(window, "storyFormat")) {
-	// Change this to the path where this HTML file is
-	// located if you want to run this from inside Twine.
-	setup.Path = "H:/_EWA/dist/";  // Running inside Twine application
-} else {
-	setup.Path = "";  // Running in a browser
-}
-setup.ImagePath = setup.Path + "image/";
-setup.SoundPath = setup.Path + "sound/";
-
-window.ImgExist = function(url) {
-    var img = new Image();
-	
-    img.onload = function () {
-        if (this.complete == true){
-            // 改了这里
-            return true;
-        }
-    }
-    img.onerror = function () {
-        return false;
-    }
-
-	img.src = url;
-	
-	if (img.complete) {
-	  return true;
-	} else {
-	  img.onload = () => {
-		return true;
-	  };
-	  img.onerror = () => {
-		return false;
-	  };
-	}
-}
-
-// volume slider, by chapel; for sugarcube 2
-// version 1.1 - modified by HiEv for SugarCube v2.28.0+
-// For custom CSS for slider use: http://danielstern.ca/range.css/#/
-
-// create namespace
-setup.vol = {};
-
-// options object
-setup.vol.options = {
-	current	 : 5,
-	rangeMax : 10,
-	step	 : 1
-};
-
-setup.vol.last = setup.vol.options.current;
-setup.vol.start = setup.vol.last / setup.vol.options.rangeMax;
-
-postdisplay['volume-task'] = function (taskName) {
-	delete postdisplay[taskName];
-	SimpleAudio.volume(setup.vol.start);
-};
-
-!function () {
-	$(document).on('input', 'input[name=volume]', function() {
-		// grab new volume from input
-		var volRef		= setup.vol.options;
-		var change		= $('input[name=volume]').val();
-		var newVol		= change / volRef.rangeMax;
-		volRef.current	= newVol.toFixed(2);
-		// change volume; set slider position
-		SimpleAudio.volume(newVol);
-		setup.vol.last = change;
-	});
-}();  // jshint ignore:line
-
-Macro.add('volume', {
-	handler : function () {
-		// set up variables
-		var $wrapper  = $(document.createElement('span'));
-		var $slider   = $(document.createElement('input'));
-		var volRef    = setup.vol.options;
-		// create range input
-		$slider
-			.attr({
-				id    : 'volume-control',
-				type  : 'range',
-				name  : 'volume',
-				min   : '0',
-				max   : volRef.rangeMax,
-				step  : volRef.step,
-				value : setup.vol.last
-			}).addClass('VolumeSlider');
-		// class '.macro-volume' and id '#volume-control' for styling
-		// output
-		$wrapper
-			.append($slider)
-			.appendTo(this.output);
-	}
-});
-
-function Lang(CN,EN) {
-  if(V.lang=="CN")return CN;
-  if(V.lang=="EN")return EN;
-}
-window.Lang = Lang
-DefineMacroS("lang", Lang)
-/* twine-user-script #11: "sugarcubeConfig.js" */
+/* twine-user-script #5: "01-sugarcubeConfig.js" */
 Config.history.controls = true;
 
 Config.history.maxStates = 2;
@@ -5226,7 +4389,7 @@ Config.saves.autosave = ["bookmark", "autosave","eventend"];
 Config.saves.isAllowed = function () {
 	if (tags().includes("nosave")) {
 		return false;
-	}else if (V.actmode == "combat") {
+	}else if (PFlag.actmode == "combat") {
 		return false;
 	}
 	
@@ -5436,6 +4599,604 @@ importScripts([
 .catch(function (err) {
 	console.log(err);
 });*/
+/* twine-user-script #6: "02-Macros.js" */
+/**
+ * Define macro, passing arguments to function and store them in $args, preserving & restoring previous $args
+ */
+ function DefineMacro(macroName, macroFunction, tags, skipArgs) {
+	Macro.add(macroName, {
+		isWidget: true,
+		tags: tags,
+		skipArgs: skipArgs,
+		handler: function () {
+			EWA.Perflog.logWidgetStart(macroName);
+			try {
+				var oldArgs = State.variables.args;
+				State.variables.args = this.args.slice();
+				macroFunction.apply(this, this.args);
+				if (typeof oldArgs === 'undefined') {
+					delete State.variables.args;
+				} else {
+					State.variables.args = oldArgs;
+				}
+			} finally {
+				EWA.Perflog.logWidgetEnd(macroName);
+			}
+		}
+	});
+}
+
+/**
+ * Define macro, where macroFunction returns text to wikify & print
+ */
+ function DefineMacroS(macroName, macroFunction, tags, skipArgs, maintainContext) {
+	DefineMacro(macroName, function () {
+		$(this.output).wiki(macroFunction.apply(maintainContext ? this : null, this.args))
+	}, tags, skipArgs);
+}
+
+window.wikifier = function (widget, arg1, arg2, arg3) {
+	if (arg3 !== undefined) {
+		new Wikifier(null, '<<' + widget + ' ' + arg1 + ' ' + arg2 + ' ' + arg3 + '>>');
+	}
+	else if (arg2 !== undefined) {
+		new Wikifier(null, '<<' + widget + ' ' + arg1 + ' ' + arg2 + '>>');
+	}
+	else if (arg1 !== undefined) {
+		new Wikifier(null, '<<' + widget + ' ' + arg1 + '>>');
+	}
+	else if (arg1 === undefined) {
+		new Wikifier(null, '<<' + widget + '>>');
+	}
+}
+
+window.wikifier2 = function (str) {
+	new Wikifier(null, str);
+}
+
+/*
+ * Similar to <<script>>, but preprocesses the contents, so $variables are accessible.
+ * The variable "output" is also exposed (unlike <<run>>, <<set>>)
+ *
+ * Example:
+ * <<twinescript>>
+ *     output.textContent = $text
+ * <</twinescript>>
+ */
+Macro.add('twinescript', {
+	skipArgs : true,
+	tags     : null,
+
+	handler() {
+		const output = document.createDocumentFragment();
+
+		try {
+			Scripting.evalTwineScript(this.payload[0].contents, output);
+		}
+		catch (ex) {
+			return this.error(`bad evaluation: ${typeof ex === 'object' ? ex.message : ex}`);
+		}
+
+		// Custom debug view setup.
+		if (Config.debug) {
+			this.createDebugView();
+		}
+
+		if (output.hasChildNodes()) {
+			this.output.appendChild(output);
+		}
+	}
+});
+
+/*
+ * Usage:
+ * <<radiovar VARNAME VALUE [LABEL]>> ONCHANGE <</radiovar>>
+ *
+ * Will display a radiobutton, optionally labeled, that corresponds
+ * to state variable VARNAME having value VALUE.
+ *
+ * When var value is set to this value, silently execute ONCHANGE
+ */
+Macro.add("radiovar", {
+	tags: null,
+	handler: function() {
+		if (this.args.length < 2) return this.error("missing <<radiovar>> arguments");
+		var varname = this.args[0];
+		var value = this.args[1];
+		var content = this.payload[0].contents;
+		var e = $("<input>")
+			.attr({
+				name: "radiovar"+Util.slugify(varname),
+				id: "radiovar"+Util.slugify(varname)+"-"+Util.slugify(value),
+				tabindex: 0,
+				type: "radio"
+			})
+			.prop("checked", State.getVar(varname) ==  value)
+			.addClass("macro-radiovar")
+			.on('change.macros', function () {
+				if (this.checked) {
+					State.setVar(varname, value);
+					Wikifier.wikifyEval(content);
+				}
+			});
+		if (this.args[2]) e = $("<label>").append(this.args[2], e);
+		e.appendTo(this.output);
+	}
+});
+
+
+function updatehistorycontrols(){
+	if (V.maxStates === undefined || V.maxStates > 20) {
+		/* initiate new variable based on engine config and limit it to 20 */
+		V.maxStates = Math.clamp(1, 20, Config.history.maxStates);
+	}
+	if (V.maxStates == 1) {
+		/* when disabled, irreversibly delete history controls the way sugarcube intended */
+		Config.history.maxStates = 1;
+		jQuery('#ui-bar-history').remove();
+	} else {
+		/* set actual maxStates in accordance with our new variable */
+		Config.history.maxStates = V.maxStates;
+		/* ensure that controls are enabled so sugarcube won't destroy them on reload */
+		Config.history.controls = true;
+		/* if irreversibly deleted, restore #ui-bar-history from oblivion and pop it after #ui-bar-toggle */
+		if (jQuery("#ui-bar-history").length == 0){
+			jQuery("#ui-bar-toggle").after(`
+				<div id="ui-bar-history">
+					<button id="history-backward" tabindex="0" title="'+t+'" aria-label="'+t+'">\uE821</button>
+					<button id="history-jumpto" tabindex="0" title="'+r+'" aria-label="'+r+'">\uE839</button>
+					<button id="history-forward" tabindex="0" title="'+n+'" aria-label="'+n+'">\uE822</button>
+				</div>`);
+			/* make buttons active/inactive based on the available history states */
+			jQuery(document).on(':historyupdate.ui-bar', (($backward, $forward) => () => {
+					$backward.ariaDisabled(State.length < 2);
+					$forward.ariaDisabled(State.length === State.size);
+				})(jQuery('#history-backward'), jQuery('#history-forward')));
+			/* update uibar to accept it's new masters */
+			UIBar.start();
+		}
+		jQuery("#ui-bar-history").show();
+	}
+}
+DefineMacro("updatehistorycontrols", updatehistorycontrols);
+/* twine-user-script #7: "chs.min.js" */
+/*! chs.js – 简体中文, by: Liyro Pen. | Copyright © 2017 Thomas Michael Edwards <thomasmedwards@gmail.com>. All rights reserved. | Licensed under a BSD 2-clause "Simplified" License. */
+!(function () {
+  (l10nStrings.identity = "游戏"),
+    (l10nStrings.aborting = "终止"),
+    (l10nStrings.cancel = "取消"),
+    (l10nStrings.close = "关闭"),
+    (l10nStrings.ok = "确认"),
+    (l10nStrings.errorTitle = "错误"),
+    (l10nStrings.errorNonexistentPassage = '段落"{passage}"不存在'),
+    (l10nStrings.errorSaveMissingData =
+      "存档缺少必须的数据，可能被读取的文件不是存档或者存档被损坏"),
+    (l10nStrings.errorSaveIdMismatch = "保存{identity}是错误的"),
+    (l10nStrings._warningIntroLacking = "你的浏览器可能损坏或者被禁用"),
+    (l10nStrings._warningOutroDegraded =
+      "，所以{identity}在受限制模式中运行。你可以继续运行，但是一些内容可能不能正确工作。"),
+    (l10nStrings.warningNoWebStorage =
+      "{_warningIntroLacking} Web Storage API {_warningOutroDegraded}"),
+    (l10nStrings.warningDegraded =
+      "{_warningIntroLacking} {identity}需要的功能 {_warningOutroDegraded}"),
+    (l10nStrings.debugViewTitle = "调试模式"),
+    (l10nStrings.debugViewToggle = "切换调试模式"),
+    (l10nStrings.uiBarToggle = "打开/关闭导航栏"),
+    (l10nStrings.uiBarBackward = "后退"),
+    (l10nStrings.uiBarForward = "前进"),
+    (l10nStrings.uiBarJumpto = "跳到{identity}的历史记录中的某一点"),
+    (l10nStrings.jumptoTitle = "跳到"),
+    (l10nStrings.jumptoTurn = "转到"),
+    (l10nStrings.jumptoUnavailable = "目前没有跳跃点…"),
+    (l10nStrings.savesTitle = "存档"),
+    (l10nStrings.savesDisallowed = "在这个段落中不允许存档"),
+    (l10nStrings.savesEmptySlot = "— 插槽空 —"),
+    (l10nStrings.savesIncapable =
+      "{_warningIntroLacking}支持存档所需的功能，因此本次游戏的存档功能已被禁用"),
+    (l10nStrings.savesLabelAuto = "自动存档"),
+    (l10nStrings.savesLabelDelete = "删除"),
+    (l10nStrings.savesLabelExport = "另存为……"),
+    (l10nStrings.savesLabelImport = "读取……"),
+    (l10nStrings.savesLabelLoad = "读取"),
+    (l10nStrings.savesLabelClear = "全部删除"),
+    (l10nStrings.savesLabelSave = "保存"),
+    (l10nStrings.savesLabelSlot = "插槽"),
+    (l10nStrings.savesSavedOn = "保存在："),
+    (l10nStrings.savesUnavailable = "未找到存档插槽…"),
+    (l10nStrings.savesUnknownDate = "未知"),
+    (l10nStrings.settingsTitle = "设置"),
+    (l10nStrings.settingsOff = "关闭"),
+    (l10nStrings.settingsOn = "开启"),
+    (l10nStrings.settingsReset = "重置为默认值"),
+    (l10nStrings.restartTitle = "重新开始"),
+    (l10nStrings.restartPrompt = "你确定要重新开始吗？未保存的进度将会丢失。"),
+    (l10nStrings.shareTitle = "分享"),
+    (l10nStrings.autoloadTitle = "自动保存"),
+    (l10nStrings.autoloadCancel = "前往最初的段落"),
+    (l10nStrings.autoloadOk = "读取自动存档"),
+    (l10nStrings.autoloadPrompt = "有一个自动存档，读取它还是前往最初的段落？"),
+    (l10nStrings.macroBackText = "返回"),
+    (l10nStrings.macroReturnText = "返回");
+})();
+/* twine-user-script #8: "observable.js" */
+window.inDOM = function(node) {
+	return document.body.contains(node)
+}
+
+/**
+ * Simple observable value framework, somewhat inspired by Vue.js
+ *
+ * @example
+ * var text = new ObservableValue("hello");
+ * text.subscribe( (newText, oldText) => console.log('Text changed from', oldText, 'to', newText) );
+ * text.bindText(document.getElementById("text"));
+ * text.value = "hello world";
+ */
+class ObservableValue {
+	constructor(defaultValue) {
+		this._value = defaultValue;
+		this._listeners = [];
+		this._mutating = false; // we are in process of changing value
+		this._nextValues = null; // queued value changes
+	}
+	/**
+	 * Receive notifications on value change.
+	 * If the onChange function returns exactly false, stop notifications.
+	 * Exact equality is checked, so void-returning functions are fine too.
+	 *
+	 * Be careful with changing values in the listener!
+	 * @param {function} onChange function(newValue, oldValue):any
+	 */
+	subscribe(onChange) {
+		this._listeners.push(onChange);
+	}
+	/**
+	 * Don't notify {@param onChange} listener anymore
+	 */
+	unsubscribe(onChange) {
+		let index = this._listeners.indexOf(onChange);
+		if (index >= 0) this._listeners.splice(index, 1);
+	}
+
+	/**
+	 * Subscribe and auto-unsubscribe when element gets removed from DOM.
+	 * @param {Node} element
+	 * @param {function} onchange function(newValue, oldValue)
+	 * @return {Node} element
+	 */
+	domSubscribe(element, onchange) {
+		this.subscribe((newValue,oldValue)=>{
+			if (onchange(newValue,oldValue) === false) return false;
+			return inDOM(element);
+		});
+		return element
+	}
+	/**
+	 * Bind element's textContent to this value.
+	 * @param {Node} element
+	 * @return {Node} element
+	 */
+	bindText(element) {
+		element.textContent = this._value;
+		this.domSubscribe(element,(newValue)=>{
+			element.textContent = newValue;
+		});
+		return element;
+	}
+	_notifyListeners(newValue,oldValue) {
+		const remove = [];
+		const listeners = this._listeners.slice();
+		for (let listener of listeners) {
+			try {
+				let keep = listener(newValue, oldValue);
+				if (keep === false) remove.push(listener);
+			} catch (e) {
+				remove.push(listener);
+				console.error("Exception in ObservableValue listener: ",e,"listener is ",listener);
+			}
+		}
+		for (let listener of remove) {
+			this.unsubscribe(listener);
+		}
+	}
+	/**
+	 * Get current value
+	 */
+	get value() {
+		return this._value;
+	}
+	/**
+	 * Change value, notifying subscribers
+	 */
+	set value(newValue) {
+		if (this._mutating) {
+			this._nextValues.push(newValue);
+			return;
+		}
+
+		let oldValue = this._value;
+		if (oldValue === newValue) return;
+		this._value = newValue;
+
+		this._mutating = true;
+		this._nextValues = [];
+
+		this._notifyListeners(newValue,oldValue);
+
+		let n = 0;
+		while (this._nextValues.length > 0) {
+			if (n++ > 999) {
+				console.error("Possible endless loop in ObservableValue ",this);
+				break;
+			}
+			oldValue = newValue;
+			newValue = this._nextValues.shift();
+			this._notifyListeners(newValue,oldValue);
+		}
+		this._mutating = false;
+		this._nextValues = null;
+	}
+}
+
+/**
+ * Modify obj, wrapping every property into an ObservableValue. Not deep!
+ * @param {object} obj
+ * @return {object} obj
+ */
+ObservableValue.fromObject = function(obj) {
+	for (let key of Object.keys(obj)) {
+		obj[key] = new ObservableValue(obj[key]);
+	}
+	return obj;
+}
+window.ObservableValue = ObservableValue;
+/* twine-user-script #9: "perflog.js" */
+// Time in milliseconds, float with microsecond precision if available.
+const millitime = (typeof performance === 'object' && typeof performance.now === 'function') ?
+	function() { return performance.now() } : function() { return new Date().getTime() };
+EWA.Perflog.millitime = millitime;
+
+/**
+ * Widget performance records for one passage.
+ * Key = widget name, value = {
+ *  name: widget name,
+ * 	n: number of widget calls,
+ *  total: Sum of execution times including internal widget calls, milliseconds
+ *  own: Sum of execution times excluding internal widget calls, milliseconds
+ * }.
+ */
+var wpRec = {}; // Widget performance records
+const wpSelf = { name: "__perflog_logWidgetEnd", n: 0, total: 0, own: 0 };
+wpRec[wpSelf.name] = wpSelf;
+/**
+ * Global widget performance records
+ */
+EWA.Perflog.globalRec = {};
+EWA.Perflog.lastRec = {};
+EWA.Perflog.enabled = true;
+EWA.Perflog.self = true; // Record own performance
+/**
+ * Performance stack entry = { t0: widget start time, i: internal widget duration }
+ */
+const wpStack = []; // Widget performance stack
+EWA.Perflog.nPassages = 0;
+$(document).on(':passageend', function() {
+	if (!EWA.Perflog.enabled) return;
+	try {
+		if (EWA.Perflog.self) EWA.Perflog.logWidgetStart("__perflog_passageEnd")
+		EWA.Perflog.nPassages++;
+		for (var name in wpRec) {
+			var rec = wpRec[name];
+			var grec = EWA.Perflog.globalRec[name];
+			if (!grec) {
+				EWA.Perflog.globalRec[name] = rec;
+			} else {
+				grec.n += rec.n;
+				grec.total += rec.total;
+				grec.own += rec.own;
+			}
+		}
+		EWA.Perflog.lastRec = wpRec;
+		wpRec = {};
+	} finally {
+		if (EWA.Perflog.self) EWA.Perflog.logWidgetEnd("__perflog_passageEnd")
+	}
+});
+EWA.Perflog.logWidgetStart = function(widgetName) {
+	if (!EWA.Perflog.enabled) return;
+	wpStack.push({
+		name: widgetName,
+		t0: millitime(),
+		i: 0
+	});
+}
+/**
+ * Record that widget `widgetName` executed in `totaltime` ms,
+ * including `internaltime` internal widget calls
+ * @param {string} widgetName
+ * @param {number} totaltime
+ * @param {number=0} internaltime
+ */
+EWA.Perflog.logWidgetTime = function(widgetName, totaltime, internaltime) {
+	if (typeof internaltime !== "number") internaltime = 0;
+	const prevPerflog = wpStack[wpStack.length - 1];
+	if (prevPerflog) {
+		prevPerflog.i += totaltime;
+	}
+	var perfrec = wpRec[widgetName];
+	if (!perfrec) perfrec = wpRec[widgetName] = {
+		name:widgetName,
+		n:0,
+		total:0,
+		own:0
+	};
+	perfrec.n++;
+	perfrec.total += totaltime;
+	perfrec.own += totaltime - internaltime;
+}
+EWA.Perflog.logWidgetEnd = function(widgetName) {
+	if (!EWA.Perflog.enabled) return;
+	const time = millitime();
+	const perflog = wpStack[wpStack.length - 1];
+	if (!perflog || perflog.name !== widgetName) {
+		Errors.report("Inconsistent widget performance stack", wpStack);
+		return;
+	}
+	wpStack.pop();
+	EWA.Perflog.logWidgetTime(widgetName, time-perflog.t0, perflog.i);
+	if (EWA.Perflog.self) {
+		const selfDt = millitime() - time
+		wpSelf.n++;
+		wpSelf.own += selfDt;
+		wpSelf.total += selfDt;
+	}
+}
+
+/**
+ * Returns a "nice" string representation of a number without too much decimal digits.
+ * @param {number} x
+ */
+function niceround(x) {
+	if (Math.floor(x) === x) return x; // Integers
+	if (-1 < x && x < 1) {
+		// Small number, round to 0.001 instead
+		return Math.round(x*1000)/1000;
+	}
+	return Math.round(x*10)/10;
+}
+/**
+ * Return performance report. Can be viewed by DevTools table() function.
+ *
+ * Returns array of objects:
+ *  `name`: Widget name
+ *  `n`: Times widget called
+ *  `total`: Sum of widget execution time, including inner widgets, ms
+ *  `own`: Sum of widget execution time, excluding inner widgets, ms
+ *  `totalp1`: Average widget execution time, including inner widgets, ms
+ *  `ownp1`: Average widget execution time, excluding inner widgets, ms
+ *  `npp`: Average time widget called per passage
+ *  `totalpp`: Average total time per passage
+ *  `ownpp`: Average own time per passage
+ *
+ * @param {object} options
+ * @param {string} [options.sort='total'] Property to sort entries by
+ * @param {number} [options.limit=20] Max number of entries to report, 0 to no limit
+ * @param {boolean} [options.global=true] Report widgets from all recorded history or from last passage only.
+ * @param {boolean} [options.round=true] Round to 0.1 precision
+ */
+EWA.Perflog.report = function (options) {
+	options = Object.assign({
+		sort: 'own',
+		limit: 20,
+		global: true,
+		round: true
+	}, options);
+	const numfn = options.round ? niceround : (x)=>x;
+	var entries;
+	if (options.global) {
+		const np = EWA.Perflog.nPassages;
+		// Add 'per passage' metrics
+		entries = Object.values(EWA.Perflog.globalRec).map(e=>({
+			name: e.name,
+			n: e.n,
+			total: numfn(e.total),
+			own: numfn(e.own),
+			npp: numfn(e.n/np),
+			totalpp: numfn(e.total/np),
+			ownpp: numfn(e.own/np),
+			totalp1: numfn(e.total/e.n),
+			ownp1: numfn(e.own/e.n)
+		}));
+	} else {
+		entries = Object.values(EWA.Perflog.lastRec).map(e=>({
+			name: e.name,
+			n: e.n,
+			total: numfn(e.total),
+			own: numfn(e.own),
+			totalp1: numfn(e.total/e.n),
+			ownp1: numfn(e.own/e.n),
+		}));
+	}
+	var comparator;
+	const sort = options.sort;
+	switch (sort) {
+		case 'own':
+		case 'total':
+		case 'n':
+		case 'npp':
+		case 'ownpp':
+		case 'totalpp':
+		case 'totalp1':
+		case 'ownp1':
+			comparator = (a,b)=>b[sort] - a[sort];
+			break;
+		case 'name':
+		default:
+			comparator = (a,b)=> a.name < b.name ? -1 : a.name > b.name ? +1 : 0;
+	}
+	entries.sort(comparator);
+	if (options.limit > 0 && entries.length > options.limit) entries.splice(options.limit);
+	return entries;
+}
+/* twine-user-script #10: "setVariable.js" */
+/**
+ * 设置V属性
+ * @param {string} props 
+ * @param {any} condition 
+ * @param {any} value 
+ */
+function setV(props,condition,value){
+  const ISOBJ = Object.prototype.toString.call(value) === "[object Object]"
+  console.log(Object.is(V[props], condition))
+  if (Object.is(V[props], condition)) {
+    if (ISOBJ) {
+
+      if(!V[props]) V[props] = {};
+
+      Object.keys(value).forEach((v)=>{
+        V[props][v] = value[v]
+      })
+      
+    }
+    if (!ISOBJ) {
+      V[props] = value
+    }
+  }
+}
+
+window.setV = setV
+/* twine-user-script #11: "ActionCom.js" */
+D.COM = {
+    洗澡:{
+        /*各种行为选项的执行处理 */
+        act(){
+            TCSV.pc.入浴 = true;
+            Source.pc.压力 -= 5;
+            Source.pc.体力 += 1;
+            Source.pc.清洁 += 2;
+        }
+    },
+    健身:{
+        act(){
+            Source.pc.体力 -= 80;
+            Source.pc.清洁 -= 100;
+            Source.pc.饮食 -= 120;
+        }
+    },
+    玩游戏:{
+        act(){
+            Source.pc.压力 -= 100;
+            Source.pc.抑郁 -= 100;
+            Source.pc.恐惧 -= 100;
+        }
+    },
+    休息:{
+        act(){
+            TCSV.pc.休息 = true;
+            Source.pc.体力 += 1
+        }
+    },
+}
 /* twine-user-script #12: "00-SimpleBasicFunction.js" */
 function Random(min, max) {
 	min = Math.ceil(min);
@@ -5497,7 +5258,7 @@ class SelectCase {
 	  }
 	  return this.default;
 	}
-  }
+}
 
 window.inrange = function(num,min,max){
 	if (num >= min && num <= max){return true}
@@ -6661,12 +6422,6 @@ window.saveDataCompare = function(save1, save2){
 		}
 	})
 	return result;
-}
-
-// Make .divs-links clickable as if they're anchors
-window.linkifyDivs = function (parentSelector = "") {
-	$(document).ready(() => { $(parentSelector + " .div-link").click(function (e) { $(this).find('a').first().click(); }) });
-	$(document).ready(() => { $(parentSelector + " .div-link a").click(function (e) { e.stopPropagation(); }) });
 }
 /* twine-user-script #15: "UI.js" */
 window.overlayShowHide = function (elementId) {
@@ -10968,6 +10723,15 @@ window.maxAbl = function() {
 	}
 }
 
+window.maxBase = function(){
+	switch(conf.hardmode){
+		case 0.5: return 2000;
+		case 1: return 2500;
+		case 2: return 3200;
+		case 5: return 4200;
+	}
+}
+
 window.dailyMultip = function(){
 	let t = V.times.passed - V.times.wakeup
 	let max = maxAbl()/10
@@ -10993,7 +10757,7 @@ window.DesireMultip = function(){
 	 //意志加成，每120意志削减 7.5%，最终削减 75% 倍率获得
 	 let wil = fixfloat(1 - (((PC.abl.意志)/max)*0.075),4)
 	 multip = Math.max(fixfloat(1 + ((multip - 1)*wil),4),1)
-     
+
      return multip
 }
 
@@ -11104,6 +10868,7 @@ function FixValue() {
 
     /* 固定数值的修正 */
     let mrate = maxAbl()/10
+    let maxbase = maxBase()
 
     V.fix.hot = fixfloat((30+(PC.abl.健身/(mrate*1.25))),2)
     V.fix.cold = fixfloat((20-(PC.abl.健身/(mrate*0.75))),2)
@@ -11114,13 +10879,13 @@ function FixValue() {
     T.warmth = warmth()
 
     /* BASE条修正 */
-    PC.base.体力[1] =  Math.round(Math.clamp(500+(PC.abl.健身*(PC.level/5)),0,2500))
+    PC.base.体力[1] =  Math.round(Math.clamp(500+(PC.abl.健身*(PC.level/5)),0,maxbase))
     PC.base.体力[0] = Math.clamp(PC.base.体力[0],-100,PC.base.体力[1])
 
-    PC.base.理智[1] =  Math.round(Math.clamp(500+(PC.abl.意志*(PC.level/5)),0,2500))  
+    PC.base.理智[1] =  Math.round(Math.clamp(500+(PC.abl.意志*(PC.level/5)),0,maxbase))  
     PC.base.理智[0] = Math.clamp(PC.base.理智[0],-10,PC.base.理智[1])
 
-    PC.base.魔力[1] =  Math.round(Math.clamp(100+PC.level*(PC.abl.意志/8),100,1200)) 
+    PC.base.魔力[1] =  Math.round(Math.clamp(100+PC.level*(PC.abl.意志/8),100,maxbase/2)) 
     PC.base.魔力[0] = Math.clamp(PC.base.魔力[0],-10,PC.base.魔力[1])
 
     let g = Object.keys(PC.base)
@@ -11916,18 +11681,25 @@ function PassTime(t,mode){
 		Flag.ovetime = 0
 	}
 
-	//时间经过时基础数值的变动
-	let desired = fixfloat((desireGain()*t*DesireMultip()),4)
-	let dirty = 0.5*t*dirtyMultip()
+	//时间经过时基础数值的变动，进行对应行为时，就不会获得
+
+	let m = dailyMultip()
+	let desired, dirty, sleepy, hungry, tired, lostmana
+
+	if(PFlag.actmode != "H" || TCSV.pc.贤者时间 <= 0) desired = fixfloat((desireGain()*t*DesireMultip()),4);
+	if(!TCSV.pc.入浴) dirty = 1*t*dirtyMultip();
+	if(!TCSV.pc.果腹) hungry = fixfloat((1.2*t*(m*0.34)),4);
+
+	sleepy = fixfloat((0.1*t*m*SanMultip()),4);
+	tired  = fixfloat((0.12*t*(m*0.8)),4)
+	
+	
+	lostmana = 0.01*t	
 
 	//没睡觉就会有所消耗。
 	if(PC.state.睡眠 == false){
 
-		let m = dailyMultip()
-		let sleepy = fixfloat((0.1*t*m*SanMultip()),4)
-		let hungry = fixfloat((1.2*t*(m*0.34)),4)
-		let tired  = fixfloat((0.12*t*(m*0.8)),4)
-		let lostmana = 0.01*t
+
 
 		PC.base.理智[0] = fixfloat(PC.base.理智[0]-sleepy,4)
 		PC.base.欲望[0] = fixfloat(PC.base.欲望[0]+desired,4)
@@ -11961,11 +11733,11 @@ function PassTime(t,mode){
 	//source值在base上变动前的处理。主要处理快感和心理素质一类
 	SourceTrack()
 
-	//处理完毕后，把SOURCE变动到 base里的处理	
+	//处理完毕后，把SOURCE变动到 base里的处理（基础值x时间值，方便在不同位置执行相同动作时，能根据行为时长进行反应。）
 	const g = Object.keys(Source.pc)
 	for (let v in g){
 		let n = g[v]
-		PC.base[n][0] += Source.pc[n]
+		PC.base[n][0] += Source.pc[n]*t
 
 		//累计加减值过后，突破上限获得成长时
 		if(["压力","疼痛","恐惧","耻辱","快M", "快B", "快C", "快V", "快U", "快A"].includes(n)){
@@ -11977,6 +11749,16 @@ function PassTime(t,mode){
 
 		//计算完毕后把source清空。
 		Source.pc[n] = 0
+	}
+
+	// TCSV里的倒计时处理
+	const tc = Object.keys(TCSV.pc)
+	for(let v in tc){
+		let n = tc[v]
+
+		if(['贤者时间','果腹'].includes(n)){
+			TCSV.pc[n] = Math.max(TCSV.pc[n] - t,0)
+		}
 	}
 
 	//FLAG处理，每天只会累计一次。数值低于/高于安全线，就会+1. 如果当天没有低于安全线，就会扣除1个计数（如果计数大于0的话）
@@ -12860,65 +12642,6 @@ function delay(id,text) {
 }
 F.delay = delay
 DefineMacroS("delay",delay)
-/* twine-user-script #39: "chs.min.js" */
-/*! chs.js – 简体中文, by: Liyro Pen. | Copyright © 2017 Thomas Michael Edwards <thomasmedwards@gmail.com>. All rights reserved. | Licensed under a BSD 2-clause "Simplified" License. */
-!(function () {
-  (l10nStrings.identity = "游戏"),
-    (l10nStrings.aborting = "终止"),
-    (l10nStrings.cancel = "取消"),
-    (l10nStrings.close = "关闭"),
-    (l10nStrings.ok = "确认"),
-    (l10nStrings.errorTitle = "错误"),
-    (l10nStrings.errorNonexistentPassage = '段落"{passage}"不存在'),
-    (l10nStrings.errorSaveMissingData =
-      "存档缺少必须的数据，可能被读取的文件不是存档或者存档被损坏"),
-    (l10nStrings.errorSaveIdMismatch = "保存{identity}是错误的"),
-    (l10nStrings._warningIntroLacking = "你的浏览器可能损坏或者被禁用"),
-    (l10nStrings._warningOutroDegraded =
-      "，所以{identity}在受限制模式中运行。你可以继续运行，但是一些内容可能不能正确工作。"),
-    (l10nStrings.warningNoWebStorage =
-      "{_warningIntroLacking} Web Storage API {_warningOutroDegraded}"),
-    (l10nStrings.warningDegraded =
-      "{_warningIntroLacking} {identity}需要的功能 {_warningOutroDegraded}"),
-    (l10nStrings.debugViewTitle = "调试模式"),
-    (l10nStrings.debugViewToggle = "切换调试模式"),
-    (l10nStrings.uiBarToggle = "打开/关闭导航栏"),
-    (l10nStrings.uiBarBackward = "后退"),
-    (l10nStrings.uiBarForward = "前进"),
-    (l10nStrings.uiBarJumpto = "跳到{identity}的历史记录中的某一点"),
-    (l10nStrings.jumptoTitle = "跳到"),
-    (l10nStrings.jumptoTurn = "转到"),
-    (l10nStrings.jumptoUnavailable = "目前没有跳跃点…"),
-    (l10nStrings.savesTitle = "存档"),
-    (l10nStrings.savesDisallowed = "在这个段落中不允许存档"),
-    (l10nStrings.savesEmptySlot = "— 插槽空 —"),
-    (l10nStrings.savesIncapable =
-      "{_warningIntroLacking}支持存档所需的功能，因此本次游戏的存档功能已被禁用"),
-    (l10nStrings.savesLabelAuto = "自动存档"),
-    (l10nStrings.savesLabelDelete = "删除"),
-    (l10nStrings.savesLabelExport = "另存为……"),
-    (l10nStrings.savesLabelImport = "读取……"),
-    (l10nStrings.savesLabelLoad = "读取"),
-    (l10nStrings.savesLabelClear = "全部删除"),
-    (l10nStrings.savesLabelSave = "保存"),
-    (l10nStrings.savesLabelSlot = "插槽"),
-    (l10nStrings.savesSavedOn = "保存在："),
-    (l10nStrings.savesUnavailable = "未找到存档插槽…"),
-    (l10nStrings.savesUnknownDate = "未知"),
-    (l10nStrings.settingsTitle = "设置"),
-    (l10nStrings.settingsOff = "关闭"),
-    (l10nStrings.settingsOn = "开启"),
-    (l10nStrings.settingsReset = "重置为默认值"),
-    (l10nStrings.restartTitle = "重新开始"),
-    (l10nStrings.restartPrompt = "你确定要重新开始吗？未保存的进度将会丢失。"),
-    (l10nStrings.shareTitle = "分享"),
-    (l10nStrings.autoloadTitle = "自动保存"),
-    (l10nStrings.autoloadCancel = "前往最初的段落"),
-    (l10nStrings.autoloadOk = "读取自动存档"),
-    (l10nStrings.autoloadPrompt = "有一个自动存档，读取它还是前往最初的段落？"),
-    (l10nStrings.macroBackText = "返回"),
-    (l10nStrings.macroReturnText = "返回");
-})();
 </script><tw-passagedata pid="1" name="InitAvatar" tags="widget" position="100,100" size="100,100">&lt;&lt;widget &quot;InitAvatar&quot;&gt;&gt;
 
 &lt;&lt;set A.layer to [
@@ -13762,16 +13485,9 @@ DefineMacroS("delay",delay)
 &lt;&lt;run A.facelist = Object.keys(A.emote)&gt;&gt;
 
 &lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="8" name="ActionCOM" tags="widget" position="975,100" size="100,100">&lt;&lt;widget &quot;InitActionCOM&quot;&gt;&gt;
-
-&lt;&lt;set D.COM to {
-    洗澡:{
-        source(){
-            Source.pc.压力 -= 100;
-            Source.pc.体力 += 60;
-            Source.pc.清洁 += 500;
-        }
-    }
-}&gt;&gt;
+/*  体力初始值: 500, max 2500~5000(根据难易度变动) */
+/*  清洁度无行动日常消耗 每分钟 1点 */
+/*  饮食 1 = 4卡路里， 1:4 */
 
 &lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="9" name="ItemData" tags="widget" position="1100,100" size="100,100">&lt;&lt;widget &quot;InitItemData&quot;&gt;&gt;
 
@@ -14303,7 +14019,7 @@ DefineMacroS("delay",delay)
 
 &lt;&lt;run 
     Flag.daychange = false;
-    Flag.actmode = &quot;自由&quot;;
+    Flag.mode = &quot;日常&quot;; //游玩模式
     Flag.chaos = 0;
     Flag.overtime = 0;
 &gt;&gt;
@@ -14601,11 +14317,24 @@ $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌}
 自己破处：XX的处女在X年X月X日，用玩具自行贯穿了 --&gt;
 
 &lt;&lt;set $PFlag to {
+    actmode : &quot;free&quot;,
+
+    /* 泌乳状态 */
     lactation : false,    lactatecd : 0,
+
+    /* 裸露状态 */
     top      : 9,     bottom   : 4, 
+
+    /* 浴精状态 */
     bukkake   : { body:false, face:false, hair:false, },
-    pregnant: { type:null, seed:null, phrase:null, date:null, }, /* 怀孕flag type:A怀孕还是正常怀孕 seed：孩子种类, father:父亲, phrase：阶段 date:预产期 */
+
+    /* 怀孕flag type:A怀孕还是正常怀孕 seed：孩子种类, father:父亲, phrase：阶段 date:预产期 */
+    pregnant: { type:null, seed:null, phrase:null, date:null, },
+
+    /* 种族模样切换开关 */ 
     trueform : null, showmimi:null, showtail:null, showwing:null, showhorn:null,
+
+    /* 状态记录开关 */
     疲劳 : 0, 营养不良: 0, 禁欲 : 0,  熬夜 : 0,  缺魔 : 0,
 }&gt;&gt;
 
@@ -17148,7 +16877,7 @@ function wait(text) {
 &lt;&lt;link &quot;打开衣柜　 1m&quot; &quot;衣柜&quot;&gt;&gt;&lt;&lt;passtime 1&gt;&gt;&lt;&lt;set $TEquip to clone($Equip)&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
 &lt;br&gt;
 &lt;&lt;link &quot;健身　　 　30m&quot; $passage&gt;&gt;&lt;&lt;passtime 30&gt;&gt;&lt;&lt;/link&gt;&gt;　　&lt;&lt;link &quot;打游戏 　　30m&quot; $passage&gt;&gt;&lt;&lt;passtime 30&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
-&lt;&lt;link &quot;洗澡　 　　30m&quot; &quot;洗澡&quot;&gt;&gt;&lt;&lt;set $TEquip to clone($Equip)&gt;&gt;&lt;&lt;run D.COM.洗澡.source()&gt;&gt;&lt;&lt;passtime 30&gt;&gt;&lt;&lt;/link&gt;&gt;　　&lt;&lt;link &quot;和宠物玩耍 60m&quot; $passage&gt;&gt;&lt;&lt;passtime 60&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
+&lt;&lt;link &quot;洗澡　 　　30m&quot; &quot;洗澡&quot;&gt;&gt;&lt;&lt;set $TEquip to clone($Equip)&gt;&gt;&lt;&lt;run D.COM.洗澡.act()&gt;&gt;&lt;&lt;passtime 30&gt;&gt;&lt;&lt;/link&gt;&gt;　　&lt;&lt;link &quot;和宠物玩耍 60m&quot; $passage&gt;&gt;&lt;&lt;passtime 60&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
 &lt;&lt;link &quot;跳过时间　 23hr&quot; $passage&gt;&gt;&lt;&lt;passtime 1380&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
 &lt;&lt;link &quot;出门　 　　5m&quot; &quot;怡安小区&quot; &gt;&gt;&lt;&lt;passtime 5&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
 &lt;/div&gt;
