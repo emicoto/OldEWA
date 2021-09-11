@@ -1,5 +1,5 @@
 ﻿window.fixfloat = function(v,n){
-    return parseFloat(v.toFixed(n))
+    return Math.floor(v*Math.pow(10,n))/Math.pow(10,n)
 }
 
 function FixValue() {

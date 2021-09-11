@@ -21,6 +21,10 @@
     zone : "上午",  weekday : "周一",
     season: "夏",   weather:"晴",
 }>>
+<<set $weather to {
+    temp: 27, active: '晴朗', list:['晴朗','晴朗','晴朗','晴朗','晴朗','晴朗','晴朗']
+}>>
+
 <<run 
     Flag.daychange = false;
     Flag.actmode = "自由";
