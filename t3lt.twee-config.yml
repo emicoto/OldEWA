@@ -380,3 +380,5 @@ sugarcube-2:
       name: savePage2
     saveExportImport:
       name: saveExportImport
+    InitActionCOM:
+      name: InitActionCOM

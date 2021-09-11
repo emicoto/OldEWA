@@ -21,14 +21,12 @@
 <<set $PFlag to {}>> /* Player flag */
 <<set $BFlag to {}>> /* combat flag */
 <<set $CFlag to {}>> /* chara flag */
+<<set $EFlag to {}>> /* event flag事件系统相关变量 */
+<<set $COM to {}>>  /* command 相关处理 */
 <<set $Base to {}>>  /* Base Stastis */
 <<set $Source to {}>> /* sources */
 <<set $TCSV to {}>> /* temp character current state variables */
-
-<<if $PC is undefined>><<set $PC to {}>><</if>>
-
-/* event flag事件系统相关变量 */
-<<set $EFlag to {}>>
+<<set $PC to {}>>
 
 <<set $event to {
     type : "主线", name : "开幕", branch : "初次" , phrase: null,
@@ -63,11 +61,6 @@
 <<InitNPCData>>
 <<InitPlayerData>>
 <<setchara "player">>
-<<set $CFlag.pc to $PFlag>>
-<<set $Base.pc to $PC.base>>
-<<set $Source.pc to $PC.source>>
-<<set $TCSV.pc to $PC.tcsv>>
-
 
 /* 各种记录 */
 <<set $log to {
@@ -95,26 +88,6 @@
     }>>
 <</if>>
 
-<<if $saveDetails is undefined>>
-	<<set $saveDetails to {
-		exported:{
-			days: clone($days),
-			count: 0,
-			dayCount: 0,
-		},
-		auto:{
-			count: 0
-		},
-		slot:{
-			count: 0,
-			dayCount: 0,
-		}
-	}>>
-	<<unset $lastExported>>
-<</if>>
 <<if $saveId is undefined>>
 	<<set $saveId to random(10000, 99999)>>
 <</if>>
-
-/* 镜像目录 */
-<<run setMirrorVariables()>>

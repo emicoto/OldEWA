@@ -43,6 +43,7 @@
 <<widget "playerstatus">>
 
 <<showbasebar "饮食" "#FFA327">><br>
+<<showbasebar "清洁" "#A3FFF7">><br>
 <<showbasebar "健康" "#BBFA5F">><br>
 <<showbasebar "体力" "#FEDF45">><br>
 <<showbasebar "魔力" "#C2A5FF">><br>

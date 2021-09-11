@@ -27,7 +27,7 @@
 
 <<run 
     Flag.daychange = false;
-    Flag.actmode = "自由";
+    Flag.mode = "日常"; //游玩模式
     Flag.chaos = 0;
     Flag.overtime = 0;
 >>

@@ -55,6 +55,11 @@ Object.defineProperties(window, {
 			return State.variables.EFlag
 		}
 	},
+	CFlag : {
+		get:function(){
+			return State.variables.CFlag
+		}
+	},
 	PFlag: {
 		get:function(){
 			return State.variables.PFlag
@@ -125,11 +130,6 @@ Object.defineProperties(window, {
 			return State.variables.Source
 		}
 	},
-	CFlag : {
-		get:function(){
-			return State.variables.CFlag
-		}
-	},
 	TCSV :{
 		get:function(){
 			return State.variables.TCSV
@@ -155,6 +155,17 @@ window.setMirrorVariables = function(){
 		pet : pet, Equip : Equip, FEquip : FEquip, TEquip:TEquip,
 		Base : Base, Source : Source, TCSV : TCSV,
 	}
+
+	CFlag.pc = PFlag
+	Base.pc = PC.base
+	Source.pc = PC.source
+	TCSV.pc = PC.tcsv
+}
+/* 备注：不能直接 TEquip = Equip这样，会出错！ */
+
+//把 PC，NPC的 FLAG,BASE,SOURCE,TCSV数据整合在对应的目录之下
+//只能在StoryInit 之后运行，不然会映射失败。
+F.setVariablesChain = function(){
+
 }
 
-/* 备注：不能直接 TEquip = Equip这样，会出错！ */

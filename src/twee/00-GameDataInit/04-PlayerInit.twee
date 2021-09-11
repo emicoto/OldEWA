@@ -2,7 +2,7 @@
 
 <<widget "InitPlayerData">>
 <!-- 角色创建 -->
-<<set $starttrait to 0>>
+<<set $starttrait to "菜鸟">>
 
 <!-- 角色数据 -->
 <<set $PC to {
@@ -24,7 +24,7 @@
 
 <<set $PC.info to {
     name  : "魔女",   tag : "伪娘",    race : "人类",
-    major  : "文艺创作", title: "菜鸟勇者", gender:"m",
+    major  : "文艺创作", title: "魔法少女", gender:"m",
     eyes: 1, body: 1, breast: 1, hips: 2, beauty: 1600, 
     hairlen : 120,  hairlenf: 120,
     haircolor  : "aqua",   hairstyle : "natural", /* 不做修饰时的发型，只有自然、卷发、顺直三种，只能在美容店修改*/
@@ -47,7 +47,7 @@
 <<set $custominfo to "">>
 
 <<set $PC.base to {
-    饮食 : [1000,1000],   健康 : [1000,1000],     魔力 : [0,100],
+    饮食 : [1000,1000],   健康 : [1000,1000],     魔力 : [20,100],
     体力 : [500,500],     理智 : [500,500],       清洁: [1000,1000],
     
     酒精 : [0,1000],      药物 : [0,1000], 
@@ -193,11 +193,24 @@ $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌}
 自己破处：XX的处女在X年X月X日，用玩具自行贯穿了 -->
 
 <<set $PFlag to {
+    actmode : "free",
+
+    /* 泌乳状态 */
     lactation : false,    lactatecd : 0,
+
+    /* 裸露状态 */
     top      : 9,     bottom   : 4, 
+
+    /* 浴精状态 */
     bukkake   : { body:false, face:false, hair:false, },
-    pregnant: { type:null, seed:null, phrase:null, date:null, }, /* 怀孕flag type:A怀孕还是正常怀孕 seed：孩子种类, father:父亲, phrase：阶段 date:预产期 */
+
+    /* 怀孕flag type:A怀孕还是正常怀孕 seed：孩子种类, father:父亲, phrase：阶段 date:预产期 */
+    pregnant: { type:null, seed:null, phrase:null, date:null, },
+
+    /* 种族模样切换开关 */ 
     trueform : null, showmimi:null, showtail:null, showwing:null, showhorn:null,
+
+    /* 状态记录开关 */
     疲劳 : 0, 营养不良: 0, 禁欲 : 0,  熬夜 : 0,  缺魔 : 0,
 }>>
 

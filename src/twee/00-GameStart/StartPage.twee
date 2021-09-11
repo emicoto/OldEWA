@@ -13,6 +13,9 @@ EWA v<<print StartConfig.version>>
 
 
 :: Start [nosave]
+/* 镜像目录 */
+<<run setMirrorVariables()>>
+
 <<audio "标题" volume 0.5 play loop>>
 <div id="startpage">
 <span class="intro">

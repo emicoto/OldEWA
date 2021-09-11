@@ -289,7 +289,7 @@ Game.Manager = new Manager({
 		<div id="init-lacking">Your browser lacks required capabilities. Please upgrade it or switch to another to continue.</div>
 		<div id="init-loading"><div>Loading&hellip;</div></div>
 	</div>
-	<!-- UUID://731DEBA3-F846-4AA9-97C0-8137F28469AC// --><tw-storydata name="EWA" startnode="21" creator="Tweego" creator-version="2.1.1+81d1d71" ifid="731DEBA3-F846-4AA9-97C0-8137F28469AC" zoom="1" format="SugarCube" format-version="2.35.0" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">/* twine-user-stylesheet #1: "00-font.css" */
+	<!-- UUID://731DEBA3-F846-4AA9-97C0-8137F28469AC// --><tw-storydata name="EWA" startnode="22" creator="Tweego" creator-version="2.1.1+81d1d71" ifid="731DEBA3-F846-4AA9-97C0-8137F28469AC" zoom="1" format="SugarCube" format-version="2.35.0" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">/* twine-user-stylesheet #1: "00-font.css" */
 @font-face{
 font-family : "黄婷婷"; /*18*/
 src : url("CSS/FZSJ-SNH48HTTJW.otf");
@@ -4626,6 +4626,11 @@ Object.defineProperties(window, {
 			return State.variables.EFlag
 		}
 	},
+	CFlag : {
+		get:function(){
+			return State.variables.CFlag
+		}
+	},
 	PFlag: {
 		get:function(){
 			return State.variables.PFlag
@@ -4696,11 +4701,6 @@ Object.defineProperties(window, {
 			return State.variables.Source
 		}
 	},
-	CFlag : {
-		get:function(){
-			return State.variables.CFlag
-		}
-	},
 	TCSV :{
 		get:function(){
 			return State.variables.TCSV
@@ -4726,9 +4726,20 @@ window.setMirrorVariables = function(){
 		pet : pet, Equip : Equip, FEquip : FEquip, TEquip:TEquip,
 		Base : Base, Source : Source, TCSV : TCSV,
 	}
+
+	CFlag.pc = PFlag
+	Base.pc = PC.base
+	Source.pc = PC.source
+	TCSV.pc = PC.tcsv
+}
+/* 备注：不能直接 TEquip = Equip这样，会出错！ */
+
+//把 PC，NPC的 FLAG,BASE,SOURCE,TCSV数据整合在对应的目录之下
+//只能在StoryInit 之后运行，不然会映射失败。
+F.setVariablesChain = function(){
+
 }
 
-/* 备注：不能直接 TEquip = Equip这样，会出错！ */
 /* twine-user-script #7: "observable.js" */
 window.inDOM = function(node) {
 	return document.body.contains(node)
@@ -10944,7 +10955,147 @@ window.useitem = useitem
 */
 /* twine-user-script #29: "FixValue.js" */
 window.fixfloat = function(v,n){
-    return parseFloat(v.toFixed(n))
+    return Math.floor(v*Math.pow(10,n))/Math.pow(10,n)
+}
+
+
+window.maxAbl = function() {
+	switch(conf.hardmode){
+		case 0.5: return 1000;
+		case 1: return 1200;
+		case 2: return 2400;
+		case 5: return 3600;
+	}
+}
+
+window.dailyMultip = function(){
+	let t = V.times.passed - V.times.wakeup
+	let max = maxAbl()/10
+	let wil = fixfloat(1 - (((PC.abl.意志)/max)*0.04),4)
+
+	if(t/60 >= 5){
+		let multip = Math.pow(1.09,(t/60 - 5))
+		multip = Math.max(fixfloat(1 + ((multip - 1)*wil),4),1)
+		return multip
+	}
+	else return 1;
+}
+
+window.DesireMultip = function(){
+	 let multip = 1
+	 let san = (1-(PC.base.理智[0]/PC.base.理智[1]))*12
+
+	 //根据丁丁有无，获得率也不同
+	 if(PC.genital.阴茎 > 5 )  multip = (Math.pow(1.25,san+1),4);
+	 else  multip = (Math.pow(1.25,san+1)/2,4);
+
+	 let max = maxAbl()/10
+	 //意志加成，每120意志削减 7.5%，最终削减 75% 倍率获得
+	 let wil = fixfloat(1 - (((PC.abl.意志)/max)*0.075),4)
+	 multip = Math.max(fixfloat(1 + ((multip - 1)*wil),4),1)
+     
+     return multip
+}
+
+
+
+window.SanMultip = function(){
+	let desire = (PC.base.欲望[0]/PC.base.欲望[1])*100
+
+	let max = maxAbl()/10
+	let wil = fixfloat(1 - (((PC.abl.意志)/max)*0.075),4)
+
+	if(desire >= 50){
+		let d = (PC.base.欲望[0]/PC.base.欲望[1])
+		let multip = Math.pow(2,d)
+		multip = Math.max(fixfloat(1 + ((multip - 1)*wil),4),1)
+
+		return multip
+	}
+	return 1
+}
+
+window.healthwarn = function() {
+    return (PC.base.饮食[0] <= 0 || PC.base.体力[0] <= 0 || PC.base.理智[0] <= 0 || PC.base.魔力[0] <= -10)
+}
+
+window.HealthMultip = function(){
+	var multip = 1
+
+	if(tempDiff()){
+		let cold = Math.abs( V.weather.temp - PC.cold )
+		let heat = Math.abs( V.weather.temp - PC.hot )
+
+		if (cold > 3) multip = Math.pow(1.233,cold-3)
+		else if (heat > 3) multip = fixfloat(Math.pow(1.233,heat-3),4)	
+		else multip = 1
+	}
+
+	if(healthwarn()){
+		multip += ( 0.01
+			+ (PFlag.营养不良 > 0 ? 0.1 : 0)
+			+ (PFlag.疲劳 > 0 ? 0.05 : 0)
+			+ (PFlag.熬夜 > 0 ? 0.02 : 0)
+			+ (PFlag.禁欲 > 0 ? 0.002 : 0)
+			+ (PFlag.缺魔  > 0 ? 0.005 : 0)
+		)
+	}
+
+	//根据健身（体质）进行补正， 每 120健身 减少 6.5%,最多削减 65%的获得加成
+	let max = maxAbl()/10
+	let vit = fixfloat(1 - (((PC.abl.健身)/max)*0.065),4)
+
+	multip = Math.max(fixfloat(1 + ((multip - 1)*vit),4),1)
+	
+	return multip
+}
+
+window.tempDiff = function(){
+	let cold = Math.abs( V.weather.temp - PC.cold )
+	let heat = Math.abs( V.weather.temp - PC.hot )
+	return ((cold > 3 || heat > 3) && V.local?.side == "室外")
+}
+
+
+window.OverTime = function(){
+	let ot = Math.floor(V.times.passed - V.times.wakeup/1200)
+	return ot > 0 && ot < Flag.overtime
+}
+
+window.desireGain = function(){
+	//有丁丁的情况
+		let d = 0
+		let min = 0
+
+	if(V.PC.genital.阴茎 > 5){
+		d = random(1,6)/100
+		min = 0.005
+	}
+	//没有丁丁欲望减半
+	else{
+		d = random(5,30)/1000
+		min = 0.002
+	}
+
+	//根据理智和身体状况+-基础值。
+	d = d + (PC.base.理智[0]<= 0 ? 0.2 : 0) - ((PC.base.体力[0] <= PC.base.体力[1]/10 || PFlag.疲劳 > 0 ) ? 0.15: 0)
+
+	//最后根据纯洁度调整
+	d = Math.max(d *((1000-PC.lewd.纯洁)/1000),min)
+	//根据性成瘾度调整,性瘾满了每分钟就彪涨1.25点欲望，无加成下差不多半天就满
+	if(PC.lewd.性瘾 > 0){
+		d += (PC.lewd.性瘾/800)
+	}
+
+	return fixfloat(d,4)
+}
+
+window.dirtyMultip = function(){
+	if(V.weather.temp > PC.info.hot){
+		let multip = 1 + ((V.weather.temp - PC.info.hot)/3)*0.5
+		return multip
+	}
+	return 1
 }
 
 function FixValue() {
@@ -10952,9 +11103,10 @@ function FixValue() {
     PC.money = Math.clamp(PC.money, 0, 9999999999)
 
     /* 固定数值的修正 */
+    let mrate = maxAbl()/10
 
-    V.fix.hot = fixfloat((26+(PC.abl.健身/200)),2)
-    V.fix.cold = fixfloat((20-(PC.abl.健身/200)),2)
+    V.fix.hot = fixfloat((30+(PC.abl.健身/(mrate*1.25))),2)
+    V.fix.cold = fixfloat((20-(PC.abl.健身/(mrate*0.75))),2)
     V.fix.beauty = 1600
     PC.info.hairlen = Math.clamp(PC.info.hairlen,0,9999)
     PC.info.hairlenf = Math.clamp(PC.info.hairlenf,0,9999)
@@ -11606,8 +11758,6 @@ window.deleteSaveDetails = function (type,slot){
 	localStorage.setItem("EWA-saveDetail" ,JSON.stringify(saveDetails));
 }
 /* twine-user-script #33: "TimeProcess.js" */
-
-
 window.testpt = function(t){
 	V.times.passed += t
 	let m =dailyMultip()
@@ -11748,39 +11898,12 @@ window.timeprocess = timeprocess
 F.timeprocess = timeprocess
 DefineMacroS("timeprocess",timeprocess)
 
+/**
+ * 设置V属性
+ * @param {number} t 
+ */
 
-window.dailyMultip = function(){
-	let t = V.times.passed - V.times.wakeup
-	if(t/60 >= 5){
-		return fixfloat(Math.pow(1.09,(t/60 - 5)),4)
-	}
-	else return 1;
-}
-
-window.DesireMultip = function(){
-	 let san = (1-(PC.base.理智[0]/PC.base.理智[1]))*12
-
-	 if(PC.genital.阴茎 > 5 ) return fixfloat(Math.pow(1.25,san+1),4);
-	 else return fixfloat(Math.pow(1.25,san+1)/2,4);
-}
-
-window.SanMultip = function(){
-	let desire = (PC.base.欲望[0]/PC.base.欲望[1])*100
-	if(desire >= 50){
-		let d = (PC.base.欲望[0]/PC.base.欲望[1])
-		return fixfloat(Math.pow(2,d),4)
-	}
-	return 1
-}
-
-
-window.OverTime = function(){
-	let ot = Math.floor(V.times.passed - V.times.wakeup/1200)
-	return ot > 0 && ot < Flag.overtime
-}
-
-
-function passtime(t,mode){
+function PassTime(t,mode){
 	let lapse = V.times.passed - V.times.wakeup
 	let overtime = Math.floor(lapse/1200)
 
@@ -11792,15 +11915,16 @@ function passtime(t,mode){
 		V.times.passed = 0; //如果在睡觉，就清空经过时间,和超时活动flag
 		Flag.ovetime = 0
 	}
-	
 
 	//时间经过时基础数值的变动
+	let desired = fixfloat((desireGain()*t*DesireMultip()),4)
+	let dirty = 0.5*t*dirtyMultip()
 
 	//没睡觉就会有所消耗。
 	if(PC.state.睡眠 == false){
+
 		let m = dailyMultip()
 		let sleepy = fixfloat((0.1*t*m*SanMultip()),4)
-		let desired = fixfloat((((V.PC.genital > 5 ? 0.03 : 0.02)+(PC.base.理智[0]<= 0 ? 0.2 : 0)-(PC.base.体力[0] <= PC.base.体力[1]/10 ? 0.15: 0))*t*DesireMultip()),4)
 		let hungry = fixfloat((1.2*t*(m*0.34)),4)
 		let tired  = fixfloat((0.12*t*(m*0.8)),4)
 		let lostmana = 0.01*t
@@ -11810,78 +11934,101 @@ function passtime(t,mode){
 		PC.base.饮食[0] = fixfloat(PC.base.饮食[0]-hungry,4)
 		PC.base.体力[0] = fixfloat(PC.base.体力[0]-tired,4)
 		PC.base.魔力[0] = fixfloat(PC.base.魔力[0]-lostmana,4)
+		PC.base.清洁[0] = fixfloat(PC.base.清洁[0]-dirty,4)
 	}
 	else
 	{
 		//睡眠时，流失的魔力大减
 		let lostmana = 0.002*t
 		PC.base.魔力[0] = fixfloat(PC.base.魔力[0]-lostmana,4)
-	}
 
+		//睡眠也会获得欲望，但会减半
+		desired = desired/2
+		PC.base.欲望[0] = fixfloat(PC.base.欲望[0]+desired,4)
+
+		//清洁度掉率也大减
+		dirty = dirty*0.25
+		PC.base.清洁[0] = fixfloat(PC.base.清洁[0]-dirty,4)
+
+		//体力、理智的恢复
+		let energy = fixfloat((PC.base.体力[1]*0.00166)*t,4)
+		let sanity = fixfloat((PC.base.理智[1]*0.00125)*t,4)
+
+		PC.base.体力[0] = fixfloat(PC.base.体力[0]+energy,4)
+		PC.base.理智[0] = fixfloat(PC.base.理智[0]+sanity,4)
+	}
 
 	//source值在base上变动前的处理。主要处理快感和心理素质一类
 	SourceTrack()
 
 	//处理完毕后，把SOURCE变动到 base里的处理	
-	const g = Object.keys(PC.source)
+	const g = Object.keys(Source.pc)
 	for (let v in g){
-
-		PC.base[v][0] += PC.source[v]
+		let n = g[v]
+		PC.base[n][0] += Source.pc[n]
 
 		//累计加减值过后，突破上限获得成长时
-		if(["压力","疼痛","恐惧","耻辱","快M", "快B", "快C", "快V", "快U", "快A"].includes(v)){
-			if(PC.base[v][0] > PC.base[v][1]) PC.base[v][1] = PC.base[v][1]*1.01
+		if(["压力","疼痛","恐惧","耻辱","快M", "快B", "快C", "快V", "快U", "快A"].includes(n)){
+			if(PC.base[n][0] > PC.base[n][1]) PC.base[n][1] = PC.base[n][1]*1.01
 
 			//高潮、以及获得刻印时的各种处理。
+			MarkCheck()
 		}
 
 		//计算完毕后把source清空。
-		PC.source[v] = 0
+		Source.pc[n] = 0
 	}
-
-	
 
 	//FLAG处理，每天只会累计一次。数值低于/高于安全线，就会+1. 如果当天没有低于安全线，就会扣除1个计数（如果计数大于0的话）
 	//按实际活动时间来处理 //不吃不喝不休息最多也只能撑个两三天……
 	if(PC.base.体力[0] <= PC.base.体力[1]/10 && OverTime()) PFlag.疲劳++  ;
-	else if(PC.base.体力[0] >= PC.base.体力[1]*0.25 && PFlag.疲劳 > 0 && Flag.daychange) PFlag.疲劳 --;
+	if(PC.base.体力[0] >= PC.base.体力[1]*0.25 && PFlag.疲劳 > 0 && Flag.daychange) PFlag.疲劳 --;
 
 	if(PC.base.饮食[0] <= PC.base.饮食[1]/10 && OverTime()) PFlag.营养不良++ ;
-	else if(PC.base.饮食[0] >= PC.base.饮食[1]*0.8 && PFlag.营养不良 > 0 && Flag.daychange) PFlag.营养不良-- ;
+	if(PC.base.饮食[0] >= PC.base.饮食[1]*0.8 && PFlag.营养不良 > 0 && Flag.daychange) PFlag.营养不良-- ;
 
 	if(PC.base.欲望[0] >= PC.base.欲望[1]*0.8 && OverTime()) PFlag.禁欲 ++;
-	else if(PC.base.欲望[0] <= PC.base.欲望[1]*0.3 && PFlag.禁欲 > 0 && Flag.daychange) PFlag.禁欲 --;
+	if(PC.base.欲望[0] <= PC.base.欲望[1]*0.3 && PFlag.禁欲 > 0 && Flag.daychange) PFlag.禁欲 --;
 
 	if(!PC.state.睡眠 && OverTime() ) PFlag.熬夜 ++;
-	else if(PC.state.睡眠 && V.day.time <= 1440) PFlag.熬夜 --;
+	if(PC.state.睡眠 && V.day.time <= 1440) PFlag.熬夜 --;
 
 	if(PC.base.魔力[0] <= 0 && Flag.daychange) PFlag.缺魔 ++;
-	else if(PC.base.魔力[0] > 50 && Flag.daychange && PFlag.缺魔 > 0 ) PFlag.缺魔 = 0;
+	if(PC.base.魔力[0] > 50 && Flag.daychange && PFlag.缺魔 > 0 ) PFlag.缺魔 = 0;
 
 
 	if(PFlag.疲劳 >= 3)PC.state.疲劳 = true;
-	else if(PFlag.疲劳 <= 0)PC.state.疲劳 = false
+	if(PFlag.疲劳 <= 0)PC.state.疲劳 = false
 
 	if(PFlag.营养不良 >= 3)PC.state.营养不良 = true;
-	else if(PFlag.营养不良 <= 0)PC.state.营养不良 = false
+	if(PFlag.营养不良 <= 0)PC.state.营养不良 = false
 
 	if(PFlag.禁欲 >= 3)PC.state.禁欲 = true;
-	else if(PFlag.禁欲 <= 0)PC.state.禁欲 = false
+	if(PFlag.禁欲 <= 0)PC.state.禁欲 = false
 
 	if(PFlag.熬夜 >= 3)PC.state.熬夜 = true;
-	else if(PFlag.熬夜 <= 0)PC.state.熬夜 = false
+	if(PFlag.熬夜 <= 0)PC.state.熬夜 = false
 
 	if(PFlag.缺魔 >= 3)PC.state.缺魔 = true;
-	else if(PFlag.缺魔 <= 0)PC.state.缺魔 = false
+	if(PFlag.缺魔 <= 0)PC.state.缺魔 = false
 
-	//温度判定。如果现在的适应温度大于小于现在温度 3度以上，就会获得生病值
 
 	//生病处理
-	//先集算要扣的健康基础值
-	let ills = 0.01*(1+(PFlag.疲劳 > 0 ? 0.05:0)+(PFlag.营养不良 > 0 ? 0.1:0)+(PFlag.禁欲 > 0? 0.005:0)+(PFlag.熬夜 > 0 ? 0.01:0)+(PFlag.缺魔  > 0 ? 0.005 : 0))*t
+	//先集算要扣的健康基础值，温度变化，或者各种负面状态都会获得生病值
+	let ills = (
+		( (healthwarn()? 0.1 : 0)
+		+ (tempDiff() ? 0.15 : 0)
+		+ (PFlag.营养不良 > 0 ? 0.2:0)
+		+ (PFlag.疲劳 > 0 ? 0.1 : 0)
+		+ (PFlag.熬夜 > 0 ? 0.05:0)
+		+ (PFlag.禁欲 > 0 ? 0.01:0)
+		+ (PFlag.缺魔  > 0 ? 0.01 : 0)
+		)
+		*t * HealthMultip()
+	)
 
-	//只要有基础数值低于安全值，就会扣健康
-	if(PC.base.饮食[0] <= 0 || PC.base.体力[0] <= 0 || PC.base.理智[0] <= 0 || PC.base.魔力[0] <= -10) PC.base.健康[0] = fixfloat(PC.base.健康[0]-ills,4);
+	//只要有基础数值低于安全值,或者温差过大，就会扣健康
+	if(healthwarn() || tempDiff() ) PC.base.健康[0] = fixfloat(PC.base.健康[0]-ills,4);
 
 	//生病确定
 	if(PC.base.健康[0] < PC.base.健康[1]*0.8 && !PC.state.生病){
@@ -11899,7 +12046,7 @@ function passtime(t,mode){
 		else if(reason.length > 1) text = text + reason.join('和') 
 		else text = text + '天气变化还是什么'
 
-		anounceAppend(text + "的关系，<<you>>生病了。<br>")
+		anounceAppend(text + "的关系，<<you>>好像生病了。<br>")
 	 } 
 	if(PC.base.健康[0] == PC.base.健康[1] && PC.state.生病) {
 		PC.state.生病 = false; //痊愈处理
@@ -11931,6 +12078,10 @@ function passtime(t,mode){
 
 }
 
+window.PassTime = PassTime
+F.PassTime = PassTime
+
+
 function SourceTrack(){
 
 	//清醒时的处理
@@ -11940,9 +12091,22 @@ function SourceTrack(){
 	//睡着时的处理
 	else{
 
+
 	}
 
-	return ""
+
+}
+
+function MarkCheck() {
+	//清醒时的处理
+	if(PC.state.睡眠 == false) {
+
+	}
+	//睡着时的处理
+	else{
+
+
+	}
 }
 
 function daychange(){
@@ -11956,12 +12120,12 @@ function daychange(){
 
 	}
 	Flag.daychange = false
-	return ""
+
 }
 
 function weather(){
 
-	return ""
+
 }
 /* twine-user-script #34: "save.js" */
 
@@ -13597,7 +13761,19 @@ DefineMacroS("delay",delay)
 
 &lt;&lt;run A.facelist = Object.keys(A.emote)&gt;&gt;
 
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="8" name="ItemData" tags="widget" position="975,100" size="100,100">&lt;&lt;widget &quot;InitItemData&quot;&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="8" name="ActionCOM" tags="widget" position="975,100" size="100,100">&lt;&lt;widget &quot;InitActionCOM&quot;&gt;&gt;
+
+&lt;&lt;set D.COM to {
+    洗澡:{
+        source(){
+            Source.pc.压力 -= 100;
+            Source.pc.体力 += 60;
+            Source.pc.清洁 += 500;
+        }
+    }
+}&gt;&gt;
+
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="9" name="ItemData" tags="widget" position="1100,100" size="100,100">&lt;&lt;widget &quot;InitItemData&quot;&gt;&gt;
 
 &lt;&lt;set D.itemlist to {
     foods:{}, medicine:{}, tool:{}, collection:{}, homekea:{},
@@ -13641,7 +13817,7 @@ DefineMacroS("delay",delay)
     },    
 }&gt;&gt;
 
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="9" name="LocationData" tags="widget" position="1100,100" size="100,100">&lt;&lt;widget &quot;InitPlaceData&quot;&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="10" name="LocationData" tags="widget" position="1225,100" size="100,100">&lt;&lt;widget &quot;InitPlaceData&quot;&gt;&gt;
  &lt;&lt;set D.placedata to {
     单身公寓 : {
         place:&quot;单身公寓&quot;, side:&quot;室内&quot;,
@@ -13790,7 +13966,7 @@ DefineMacroS("delay",delay)
         situation:[],
     }
 }&gt;&gt;   
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="10" name="StoryInit" tags="" position="1225,100" size="100,100">/* 首次运行时初始化自动存档 */
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="11" name="StoryInit" tags="" position="100,225" size="100,100">/* 首次运行时初始化自动存档 */
 &lt;&lt;run initSaveData()&gt;&gt;
 &lt;!-- 首先初始化资料库 --&gt;
 &lt;&lt;InitDataBase&gt;&gt;
@@ -13812,14 +13988,12 @@ DefineMacroS("delay",delay)
 &lt;&lt;set $PFlag to {}&gt;&gt; /* Player flag */
 &lt;&lt;set $BFlag to {}&gt;&gt; /* combat flag */
 &lt;&lt;set $CFlag to {}&gt;&gt; /* chara flag */
+&lt;&lt;set $EFlag to {}&gt;&gt; /* event flag事件系统相关变量 */
+&lt;&lt;set $COM to {}&gt;&gt;  /* command 相关处理 */
 &lt;&lt;set $Base to {}&gt;&gt;  /* Base Stastis */
 &lt;&lt;set $Source to {}&gt;&gt; /* sources */
 &lt;&lt;set $TCSV to {}&gt;&gt; /* temp character current state variables */
-
-&lt;&lt;if $PC is undefined&gt;&gt;&lt;&lt;set $PC to {}&gt;&gt;&lt;&lt;/if&gt;&gt;
-
-/* event flag事件系统相关变量 */
-&lt;&lt;set $EFlag to {}&gt;&gt;
+&lt;&lt;set $PC to {}&gt;&gt;
 
 &lt;&lt;set $event to {
     type : &quot;主线&quot;, name : &quot;开幕&quot;, branch : &quot;初次&quot; , phrase: null,
@@ -13854,11 +14028,6 @@ DefineMacroS("delay",delay)
 &lt;&lt;InitNPCData&gt;&gt;
 &lt;&lt;InitPlayerData&gt;&gt;
 &lt;&lt;setchara &quot;player&quot;&gt;&gt;
-&lt;&lt;set $CFlag.pc to $PFlag&gt;&gt;
-&lt;&lt;set $Base.pc to $PC.base&gt;&gt;
-&lt;&lt;set $Source.pc to $PC.source&gt;&gt;
-&lt;&lt;set $TCSV.pc to $PC.tcsv&gt;&gt;
-
 
 /* 各种记录 */
 &lt;&lt;set $log to {
@@ -13886,29 +14055,9 @@ DefineMacroS("delay",delay)
     }&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 
-&lt;&lt;if $saveDetails is undefined&gt;&gt;
-	&lt;&lt;set $saveDetails to {
-		exported:{
-			days: clone($days),
-			count: 0,
-			dayCount: 0,
-		},
-		auto:{
-			count: 0
-		},
-		slot:{
-			count: 0,
-			dayCount: 0,
-		}
-	}&gt;&gt;
-	&lt;&lt;unset $lastExported&gt;&gt;
-&lt;&lt;/if&gt;&gt;
 &lt;&lt;if $saveId is undefined&gt;&gt;
 	&lt;&lt;set $saveId to random(10000, 99999)&gt;&gt;
-&lt;&lt;/if&gt;&gt;
-
-/* 镜像目录 */
-&lt;&lt;run setMirrorVariables()&gt;&gt;</tw-passagedata><tw-passagedata pid="11" name="Widgets variablesStatic" tags="widget" position="100,225" size="100,100">&lt;&lt;widget &quot;InitDataBase&quot;&gt;&gt;
+&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="12" name="Widgets variablesStatic" tags="widget" position="225,225" size="100,100">&lt;&lt;widget &quot;InitDataBase&quot;&gt;&gt;
 
 /* 加载语言库 */
 &lt;&lt;SetupLanguage&gt;&gt;
@@ -13961,6 +14110,7 @@ DefineMacroS("delay",delay)
 &lt;&lt;set D.explist to [&quot;战败&quot;,&quot;攻击&quot;,&quot;被攻击&quot;,&quot;诱惑&quot;,&quot;射精&quot;,&quot;高潮&quot;,&quot;M高潮&quot;,&quot;B高潮&quot;,&quot;C高潮&quot;,&quot;U高潮&quot;,&quot;V高潮&quot;,&quot;A高潮&quot;,&quot;多重高潮&quot;,&quot;自慰&quot;,&quot;口交&quot;,&quot;性交&quot;,&quot;肛交&quot;,&quot;喷乳&quot;,&quot;被猥琐&quot;,&quot;被眠奸&quot;,&quot;被迷奸&quot;,&quot;被强奸&quot;,&quot;被轮奸&quot;,&quot;被兽奸&quot;,&quot;被触手奸&quot;,&quot;兽交&quot;,&quot;触手&quot;,&quot;史莱姆&quot;,&quot;怀孕&quot;,&quot;A怀孕&quot;,&quot;分娩&quot;,&quot;尿道开发&quot;,&quot;阴道扩张&quot;,&quot;肛门扩张&quot;,&quot;产卵&quot;,&quot;寄生&quot;,&quot;监禁&quot;,&quot;SM&quot;]&gt;&gt;
 
 &lt;&lt;InitPlaceData&gt;&gt;
+&lt;&lt;InitActionCOM&gt;&gt;
 &lt;&lt;InitItemData&gt;&gt;
 &lt;&lt;InitAvatar&gt;&gt;
 
@@ -14051,7 +14201,7 @@ DefineMacroS("delay",delay)
 &lt;&lt;cacheaudio &quot;获得成就&quot; &quot;sound/rising.mp3&quot;&gt;&gt;
 
 
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="12" name="LanguageDictionaryr" tags="widget" position="225,225" size="100,100">&lt;&lt;widget &quot;SetupLanguage&quot;&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="13" name="LanguageDictionaryr" tags="widget" position="350,225" size="100,100">&lt;&lt;widget &quot;SetupLanguage&quot;&gt;&gt;
 &lt;&lt;set setup.L to {}&gt;&gt;
 &lt;&lt;set setup.L.CN to {
         肤色:{
@@ -14125,7 +14275,7 @@ DefineMacroS("delay",delay)
         },
 }&gt;&gt;
 
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="13" name="InitGameData" tags="widget" position="350,225" size="100,100">&lt;&lt;widget &quot;InitGameData&quot;&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="14" name="InitGameData" tags="widget" position="475,225" size="100,100">&lt;&lt;widget &quot;InitGameData&quot;&gt;&gt;
 
 &lt;!-- 初始化游戏数据 --&gt;
 &lt;&lt;set $gametime to {hour:0, min:0, sec:0, day:0}&gt;&gt;
@@ -14147,6 +14297,10 @@ DefineMacroS("delay",delay)
     zone : &quot;上午&quot;,  weekday : &quot;周一&quot;,
     season: &quot;夏&quot;,   weather:&quot;晴&quot;,
 }&gt;&gt;
+&lt;&lt;set $weather to {
+    temp: 27, active: &#39;晴朗&#39;, list:[&#39;晴朗&#39;,&#39;晴朗&#39;,&#39;晴朗&#39;,&#39;晴朗&#39;,&#39;晴朗&#39;,&#39;晴朗&#39;,&#39;晴朗&#39;]
+}&gt;&gt;
+
 &lt;&lt;run 
     Flag.daychange = false;
     Flag.actmode = &quot;自由&quot;;
@@ -14254,9 +14408,9 @@ DefineMacroS("delay",delay)
     {},{},{},{},{},{},{}], /* 动作队列 */
 }&gt;&gt;
 
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="14" name="InitPlayerChara" tags="widget" position="475,225" size="100,100">&lt;&lt;widget &quot;InitPlayerData&quot;&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="15" name="InitPlayerChara" tags="widget" position="600,225" size="100,100">&lt;&lt;widget &quot;InitPlayerData&quot;&gt;&gt;
 &lt;!-- 角色创建 --&gt;
-&lt;&lt;set $starttrait to 0&gt;&gt;
+&lt;&lt;set $starttrait to &quot;菜鸟&quot;&gt;&gt;
 
 &lt;!-- 角色数据 --&gt;
 &lt;&lt;set $PC to {
@@ -14278,7 +14432,7 @@ DefineMacroS("delay",delay)
 
 &lt;&lt;set $PC.info to {
     name  : &quot;魔女&quot;,   tag : &quot;伪娘&quot;,    race : &quot;人类&quot;,
-    major  : &quot;文艺创作&quot;, title: &quot;菜鸟勇者&quot;, gender:&quot;m&quot;,
+    major  : &quot;文艺创作&quot;, title: &quot;魔法少女&quot;, gender:&quot;m&quot;,
     eyes: 1, body: 1, breast: 1, hips: 2, beauty: 1600, 
     hairlen : 120,  hairlenf: 120,
     haircolor  : &quot;aqua&quot;,   hairstyle : &quot;natural&quot;, /* 不做修饰时的发型，只有自然、卷发、顺直三种，只能在美容店修改*/
@@ -14294,14 +14448,14 @@ DefineMacroS("delay",delay)
 
 /* 固定修正的参数 */
 &lt;&lt;set $fix to {
-    beauty: 1600,   hot: 26,   cold: 20,
+    beauty: 1600,   hot: 30,   cold: 20,
 }&gt;&gt;
 
 &lt;&lt;set $shortinfo to &quot; | 勇敢的少年想创造奇迹。&quot;&gt;&gt;
 &lt;&lt;set $custominfo to &quot;&quot;&gt;&gt;
 
 &lt;&lt;set $PC.base to {
-    饮食 : [1000,1000],   健康 : [1000,1000],     魔力 : [0,100],
+    饮食 : [1000,1000],   健康 : [1000,1000],     魔力 : [20,100],
     体力 : [500,500],     理智 : [500,500],       清洁: [1000,1000],
     
     酒精 : [0,1000],      药物 : [0,1000], 
@@ -14383,7 +14537,7 @@ DefineMacroS("delay",delay)
 }&gt;&gt;
 
 &lt;!-- 变态度 --&gt;
-&lt;!-- 下限-1000，上限1000 --&gt;
+&lt;!-- 除纯洁下限为0，其他下限-1000，上限1000 --&gt;
 &lt;&lt;set $PC.lewd to {
     纯洁 : 800, /* 内心的纯洁度，影响欲望 */
     露出 : 0,    /* 露出接受程度 */
@@ -14525,7 +14679,7 @@ $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌}
     red     : false,    hurt    : false,
 }&gt;&gt;
 
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="15" name="EventList" tags="widget" position="600,225" size="100,100">&lt;&lt;widget &quot;registerEventList&quot;&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="16" name="EventList" tags="widget" position="725,225" size="100,100">&lt;&lt;widget &quot;registerEventList&quot;&gt;&gt;
 
 &lt;&lt;set D.event to {
     主线:[],
@@ -14551,7 +14705,7 @@ $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌}
     {id:0, type:&quot;角色-凌寻&quot;, name:&quot;初遇&quot;, branch:[&quot;开头&quot;,&quot;英雄救美-成功&quot;,&quot;英雄救美-失败&quot;,&quot;结尾&quot;], phrase:0},
 ]&gt;&gt;
 
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="16" name="快速开始" tags="widget" position="725,225" size="100,100">&lt;&lt;widget &quot;QuickStart&quot;&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="17" name="快速开始" tags="widget" position="850,225" size="100,100">&lt;&lt;widget &quot;QuickStart&quot;&gt;&gt;
 &lt;div style=&quot;margin-left:16px;font-size:14px&quot;&gt;∵ &lt;&lt;lang &quot;预设人物卡&quot; &quot;Preset&quot;&gt;&gt;：
 &lt;select id=&quot;preset&quot; name=&quot;preset&quot; onchange=&quot;V.preset = this.value; showcharainfo()&quot;&gt;
 	&lt;option value=&quot;魔女&quot; selected&gt;魔女&lt;/option&gt;
@@ -14574,7 +14728,7 @@ $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌}
 &lt;&lt;default&gt;&gt;大家的魔女&lt;br&gt; 是个伪娘。既然是魔（法少）女，那当然擅长魔法。&lt;br&gt;以上都是大嘘。只是个一个二次元爱好者，喜欢玩游戏，会画点画，玩COSPLAY，搞搞女装直播的样子。
 &lt;&lt;/switch&gt;&gt;
 
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="17" name="创建人物" tags="widget" position="850,225" size="100,100">&lt;&lt;widget &quot;CharaMaking&quot;&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="18" name="创建人物" tags="widget" position="975,225" size="100,100">&lt;&lt;widget &quot;CharaMaking&quot;&gt;&gt;
 &lt;&lt;set $Flag.charamaking to true&gt;&gt;
 &lt;&lt;if $PC.trait.泌乳体质 is undefined&gt;&gt;
     &lt;&lt;set $PC.trait.泌乳体质 to false&gt;&gt;
@@ -14640,7 +14794,7 @@ $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌}
 &lt;&lt;/silently&gt;&gt;
 &lt;!-- Event --&gt;
 
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="18" name="创建人物组件" tags="widget" position="975,225" size="100,100">&lt;&lt;widget &quot;CMBoy&quot;&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="19" name="创建人物组件" tags="widget" position="1100,225" size="100,100">&lt;&lt;widget &quot;CMBoy&quot;&gt;&gt;
 　阴茎大小　&lt;&lt;CMPsize&gt;&gt;&lt;br&gt;
 　阴茎感度　&lt;&lt;CMPenis&gt;&gt;&lt;br&gt;
 &lt;&lt;/widget&gt;&gt;
@@ -15195,7 +15349,7 @@ $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌}
         &lt;&lt;setface &quot;正常&quot;&gt;&gt;
     &lt;&lt;/if&gt;&gt;
 
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="19" name="游戏设定" tags="widget" position="1100,225" size="100,100">&lt;&lt;widget &quot;GameSetting&quot;&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="20" name="游戏设定" tags="widget" position="1225,225" size="100,100">&lt;&lt;widget &quot;GameSetting&quot;&gt;&gt;
 &lt;div id=&quot;GameSetting&quot;&gt;
 　&lt;&lt;lang &quot;游戏视角&quot; &quot;Persons&quot;&gt;&gt;： &lt;label&gt;&lt;&lt;radiobutton &quot;$conf.persons&quot; 1 autocheck&gt;&gt; &lt;&lt;lang &quot;第一人称&quot; &quot;First: I&quot;&gt;&gt;&lt;/label&gt;　|　&lt;label&gt;&lt;&lt;radiobutton &quot;$conf.persons&quot; 2 autocheck&gt;&gt;&lt;&lt;lang &quot;第二人称&quot; &quot;Second: You&quot;&gt;&gt;&lt;/label&gt;　|　&lt;label&gt;&lt;&lt;radiobutton &quot;$conf.persons&quot; 3 autocheck&gt;&gt;&lt;&lt;lang &quot;第三人称(默认)&quot; &quot;Third: Call Name(defalt)&quot;&gt;&gt;&lt;/label&gt;
 &lt;&lt;lang &quot; &quot; &quot;※Not full support on English&quot;&gt;&gt;&lt;br&gt;
@@ -15210,7 +15364,10 @@ $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌}
 
 　&lt;&lt;link &quot;&gt; 改变语言/Comfirm Language&quot; &quot;Start&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;
 &lt;/div&gt;
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="20" name="StoryDisplayTitle" tags="" position="1225,225" size="100,100">EWA v&lt;&lt;print StartConfig.version&gt;&gt;</tw-passagedata><tw-passagedata pid="21" name="Start" tags="nosave" position="100,350" size="100,100">&lt;&lt;audio &quot;标题&quot; volume 0.5 play loop&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="21" name="StoryDisplayTitle" tags="" position="100,350" size="100,100">EWA v&lt;&lt;print StartConfig.version&gt;&gt;</tw-passagedata><tw-passagedata pid="22" name="Start" tags="nosave" position="225,350" size="100,100">/* 镜像目录 */
+&lt;&lt;run setMirrorVariables()&gt;&gt;
+
+&lt;&lt;audio &quot;标题&quot; volume 0.5 play loop&gt;&gt;
 &lt;div id=&quot;startpage&quot;&gt;
 &lt;span class=&quot;intro&quot;&gt;
 &lt;&lt;lang 
@@ -15275,7 +15432,7 @@ $(document).on(&#39;:passagerender&#39;, function (ev) {
 });
 &lt;&lt;/script&gt;&gt;
 
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="22" name="初始设定" tags="" position="225,350" size="100,100">&lt;&lt;set $UI.activepage to &quot;QuickStart&quot;&gt;&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="23" name="初始设定" tags="" position="350,350" size="100,100">&lt;&lt;set $UI.activepage to &quot;QuickStart&quot;&gt;&gt;
 
 &lt;div id=&quot;StartingPageMenu&quot;&gt;
 	&lt;&lt;set _text to Lang(&quot;快速开始&quot;,&quot;QuickStart&quot;)&gt;&gt;
@@ -15301,7 +15458,7 @@ $(document).on(&#39;:passagerender&#39;, function (ev) {
 &lt;/div&gt;
 
 &lt;br&gt;
-&lt;&lt;dashline&gt;&gt;</tw-passagedata><tw-passagedata pid="23" name="开始" tags="" position="350,350" size="100,100">&lt;&lt;masteraudio stop&gt;&gt;
+&lt;&lt;dashline&gt;&gt;</tw-passagedata><tw-passagedata pid="24" name="开始" tags="" position="475,350" size="100,100">&lt;&lt;masteraudio stop&gt;&gt;
 
 &lt;div id=&quot;eventsituation&quot;&gt;
 &lt;&lt;you&gt;&gt;准备好了吗？&lt;br&gt;
@@ -15329,7 +15486,7 @@ $(document).on(&#39;:passagerender&#39;, function (ev) {
 [[回到开头|Start]]
 &lt;/div&gt;
 
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="24" name="Upgrade Waiting Room" tags="" position="475,350" size="100,100">欢迎来到失乐园物语（Elysion Wolrd Adventure） &lt;&lt;print StartConfig.version&gt;&gt;。 游戏升级中，请稍后。&lt;br&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="25" name="Upgrade Waiting Room" tags="" position="600,350" size="100,100">欢迎来到失乐园物语（Elysion Wolrd Adventure） &lt;&lt;print StartConfig.version&gt;&gt;。 游戏升级中，请稍后。&lt;br&gt;
 
 &lt;&lt;silently&gt;&gt;
 &lt;&lt;variablesVersionUpdate&gt;&gt;
@@ -15337,7 +15494,7 @@ $(document).on(&#39;:passagerender&#39;, function (ev) {
 
 升级完毕。&lt;br&gt;
 
-[[继续|$navigation.stack.last()][$navigation.stack.pop()]]</tw-passagedata><tw-passagedata pid="25" name="试衣间" tags="" position="600,350" size="100,100">&lt;&lt;if $temp.tryoncomeback is undefined&gt;&gt;
+[[继续|$navigation.stack.last()][$navigation.stack.pop()]]</tw-passagedata><tw-passagedata pid="26" name="试衣间" tags="" position="725,350" size="100,100">&lt;&lt;if $temp.tryoncomeback is undefined&gt;&gt;
     &lt;&lt;EnterTryRoom&gt;&gt;
 &lt;&lt;else&gt;&gt;
     &lt;&lt;set $temp to {}&gt;&gt;
@@ -15478,11 +15635,11 @@ $(document).on(&#39;:passagerender&#39;, function (ev) {
 
 &lt;&lt;widget &quot;resettryon&quot;&gt;&gt;
     &lt;&lt;set $tryon to {neck: null, hand: null, face: null,hat: null, outter: null, over_up: null,over_bt: null,inner_up: null, inner_bt: null,shoes: null, legs: null,}&gt;&gt;
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="26" name="试衣偷窥：触发" tags="" position="725,350" size="100,100">&lt;&lt;mode &quot;event&quot;&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="27" name="试衣偷窥：触发" tags="" position="850,350" size="100,100">&lt;&lt;mode &quot;event&quot;&gt;&gt;
 &lt;&lt;you&gt;&gt;还穿着商店里的衣服，确定就这么离开商店吗？&lt;br&gt;
 &lt;br&gt;
 &lt;&lt;link &quot;不买，就这么离开&quot; &quot;试衣偷窥：不买&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
-&lt;&lt;link &quot;还是回去付钱吧&quot; $eventexit[0]&gt;&gt;&lt;&lt;set $temp.tryoncomeback to true&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;</tw-passagedata><tw-passagedata pid="27" name="试衣偷窥：不买" tags="" position="850,350" size="100,100">&lt;&lt;set _luck to random(1,100)&gt;&gt;
+&lt;&lt;link &quot;还是回去付钱吧&quot; $eventexit[0]&gt;&gt;&lt;&lt;set $temp.tryoncomeback to true&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;</tw-passagedata><tw-passagedata pid="28" name="试衣偷窥：不买" tags="" position="975,350" size="100,100">&lt;&lt;set _luck to random(1,100)&gt;&gt;
 
 &lt;&lt;you&gt;&gt;打算就这么穿着衣服走……&lt;br&gt;
 
@@ -15497,7 +15654,7 @@ $(document).on(&#39;:passagerender&#39;, function (ev) {
             &lt;&lt;link &quot;离开&quot; $eventexit[0]&gt;&gt;&lt;&lt;set $temp.tryoncomeback to true&gt;&gt;&lt;&lt;/link&gt;&gt;
         &lt;&lt;/if&gt;&gt;
     &lt;/div&gt;
-&lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="28" name="服装店-工具" tags="widget" position="975,350" size="100,100">&lt;&lt;widget &quot;EnterTryRoom&quot;&gt;&gt;
+&lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="29" name="服装店-工具" tags="widget" position="1100,350" size="100,100">&lt;&lt;widget &quot;EnterTryRoom&quot;&gt;&gt;
 /* 把身上衣服暂存在TEquip里 */
 &lt;&lt;set $TEquip to clone($Equip)&gt;&gt;
 
@@ -15694,13 +15851,13 @@ required:false,
     &lt;&lt;set $Equip.over_up = null, $tryon.over_up = null&gt;&gt;
     &lt;&lt;set $Equip.over_bt = null, $tryon.over_bt = null&gt;&gt;
     &lt;&lt;SetAvatar&gt;&gt;
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="29" name="AvatarSetup" tags="widget" position="1100,350" size="100,100">&lt;&lt;widget &quot;SetAvatar&quot;&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="30" name="AvatarSetup" tags="widget" position="1225,350" size="100,100">&lt;&lt;widget &quot;SetAvatar&quot;&gt;&gt;
 
 &lt;&lt;silently&gt;&gt;
 &lt;&lt;run stAvatar()&gt;&gt;
 &lt;&lt;/silently&gt;&gt;
 
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="30" name="ShowAvatar" tags="widget" position="1225,350" size="100,100">&lt;&lt;widget &quot;avatar&quot;&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="31" name="ShowAvatar" tags="widget" position="100,475" size="100,100">&lt;&lt;widget &quot;avatar&quot;&gt;&gt;
 &lt;&lt;if $conf.render is &quot;canvas&quot;&gt;&gt;
     &lt;&lt;twinescript&gt;&gt;
     output.appendChild(Avatar.getCanvas())
@@ -15721,7 +15878,7 @@ required:false,
 &lt;&lt;/if&gt;&gt;
 
 &lt;/div&gt;
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="31" name="衣柜" tags="" position="100,475" size="100,100">&lt;div id=&quot;action-text2&quot;&gt;&lt;&lt;you&gt;&gt;打开了衣柜。&lt;/div&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="32" name="衣柜" tags="" position="225,475" size="100,100">&lt;div id=&quot;action-text2&quot;&gt;&lt;&lt;you&gt;&gt;打开了衣柜。&lt;/div&gt;
 &lt;div id=&quot;action-mode&quot; class=&quot;graytext&quot;&gt;
 动作： &lt;label&gt;&lt;&lt;radiobutton &quot;$UI.closetmode&quot; &quot;穿&quot; autocheck&gt;&gt; &lt;&lt;lang &quot;穿&quot; &quot;wear&quot;&gt;&gt;&lt;/label&gt; &lt;label&gt;&lt;&lt;radiobutton &quot;$UI.closetmode&quot; &quot;扔&quot; autocheck&gt;&gt; &lt;&lt;lang &quot;扔&quot; &quot;wear&quot;&gt;&gt;&lt;/label&gt;
 &lt;/div&gt;
@@ -15807,7 +15964,7 @@ required:false,
     &lt;&lt;set _timer to _timer -1&gt;&gt;
     &lt;&lt;if _timer lte 0&gt;&gt;&lt;&lt;stop&gt;&gt;&lt;&lt;/if&gt;&gt;
 &lt;&lt;/repeat&gt;&gt;
-&lt;&lt;/silently&gt;&gt;</tw-passagedata><tw-passagedata pid="32" name="Closet-Widget" tags="widget" position="225,475" size="100,100">&lt;&lt;widget &quot;showcloset&quot;&gt;&gt;
+&lt;&lt;/silently&gt;&gt;</tw-passagedata><tw-passagedata pid="33" name="Closet-Widget" tags="widget" position="350,475" size="100,100">&lt;&lt;widget &quot;showcloset&quot;&gt;&gt;
 &lt;&lt;set _catgr to $args[0]&gt;&gt;
 &lt;&lt;set _catgrname to A.categoryname&gt;&gt;
 &lt;&lt;set _nakeimg to &quot;image/avatar/&quot;+_catgr+&quot;/thumb.png&quot;&gt;&gt;
@@ -15855,7 +16012,7 @@ required:false,
         &lt;/div&gt;
     &lt;&lt;/for&gt;&gt;
 &lt;&lt;/if&gt;&gt;
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="33" name="StoryCaption" tags="" position="350,475" size="100,100">&lt;div @class=&quot;(Errors.log.length==0?&#39;hidden&#39;:&#39;&#39;) + &#39; error-reporter-btn&#39;&quot; onclick=&quot;Errors.Reporter.toggle()&quot;&gt;&lt;/div&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="34" name="StoryCaption" tags="" position="475,475" size="100,100">&lt;div @class=&quot;(Errors.log.length==0?&#39;hidden&#39;:&#39;&#39;) + &#39; error-reporter-btn&#39;&quot; onclick=&quot;Errors.Reporter.toggle()&quot;&gt;&lt;/div&gt;
 
 &lt;&lt;showtitle&gt;&gt;
 
@@ -15945,7 +16102,7 @@ required:false,
 &lt;&lt;repeat 0.3s&gt;&gt;
 &lt;&lt;run $(&#39;#customOverlay&#39;).draggable({handle: &#39;.handle&#39;});$(&#39;#ui-dialog&#39;).draggable({handle: &#39;.handle&#39;});&gt;&gt;
 &lt;&lt;set _timer -= 1&gt;&gt;
-&lt;&lt;if _timer lte 0&gt;&gt;&lt;&lt;stop&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/repeat&gt;&gt;</tw-passagedata><tw-passagedata pid="34" name="SidebarWidget" tags="widget" position="475,475" size="100,100">&lt;&lt;widget &quot;showmoney&quot;&gt;&gt;
+&lt;&lt;if _timer lte 0&gt;&gt;&lt;&lt;stop&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/repeat&gt;&gt;</tw-passagedata><tw-passagedata pid="35" name="SidebarWidget" tags="widget" position="600,475" size="100,100">&lt;&lt;widget &quot;showmoney&quot;&gt;&gt;
 &lt;div class=&quot;points&quot;&gt;&lt;&lt;printmoney $PC.points&gt;&gt;P&lt;/div&gt;&lt;span class=&quot;slice&quot;&gt; | &lt;/span&gt;&lt;div class=&quot;money&quot;&gt;&lt;&lt;printmoney $PC.money&gt;&gt;&lt;&lt;icon &quot;moneyicon&quot;&gt;&gt;&lt;/div&gt;
 &lt;&lt;/widget&gt;&gt;
 
@@ -15988,6 +16145,7 @@ required:false,
 &lt;&lt;widget &quot;playerstatus&quot;&gt;&gt;
 
 &lt;&lt;showbasebar &quot;饮食&quot; &quot;#FFA327&quot;&gt;&gt;&lt;br&gt;
+&lt;&lt;showbasebar &quot;清洁&quot; &quot;#A3FFF7&quot;&gt;&gt;&lt;br&gt;
 &lt;&lt;showbasebar &quot;健康&quot; &quot;#BBFA5F&quot;&gt;&gt;&lt;br&gt;
 &lt;&lt;showbasebar &quot;体力&quot; &quot;#FEDF45&quot;&gt;&gt;&lt;br&gt;
 &lt;&lt;showbasebar &quot;魔力&quot; &quot;#C2A5FF&quot;&gt;&gt;&lt;br&gt;
@@ -16051,7 +16209,7 @@ required:false,
     &lt;&lt;button OPTIONS&gt;&gt;&lt;&lt;overlayReplace &quot;options&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
     &lt;/div&gt;
     &lt;/div&gt;
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="35" name="Options" tags="widget" position="600,475" size="100,100">&lt;&lt;widget &quot;options&quot;&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="36" name="Options" tags="widget" position="725,475" size="100,100">&lt;&lt;widget &quot;options&quot;&gt;&gt;
  制作中……&lt;br&gt;
 &lt;&lt;/widget&gt;&gt;
 
@@ -16130,7 +16288,7 @@ required:false,
 	&lt;&lt;replace #saveList&gt;&gt;
 		&lt;&lt;saveList&gt;&gt;
 	&lt;&lt;/replace&gt;&gt;
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="36" name="overlayReplace" tags="widget" position="725,475" size="100,100">&lt;&lt;widget &quot;overlayReplace&quot;&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="37" name="overlayReplace" tags="widget" position="850,475" size="100,100">&lt;&lt;widget &quot;overlayReplace&quot;&gt;&gt;
 	&lt;&lt;if $args[0]&gt;&gt;
 		&lt;&lt;if $UI.currentOverlay isnot $args[0]&gt;&gt;
 			&lt;&lt;set $UI.currentOverlay to $args[0]&gt;&gt;
@@ -16231,7 +16389,7 @@ required:false,
 &lt;/div&gt;
 
 &lt;br&gt;&lt;br&gt;
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="37" name="Profile Detail" tags="widget" position="850,475" size="100,100">&lt;&lt;widget &quot;statistics&quot;&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="38" name="Profile Detail" tags="widget" position="975,475" size="100,100">&lt;&lt;widget &quot;statistics&quot;&gt;&gt;
 
 &lt;&lt;/widget&gt;&gt;
 
@@ -16282,7 +16440,7 @@ required:false,
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="38" name="Profile" tags="widget" position="975,475" size="100,100">&lt;&lt;widget &quot;profile&quot;&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="39" name="Profile" tags="widget" position="1100,475" size="100,100">&lt;&lt;widget &quot;profile&quot;&gt;&gt;
 &lt;div id=&quot;profile&quot;&gt;
 
 &lt;&lt;set _like to random(($PC.info.beauty/100),($PC.info.beauty/10))&gt;&gt;
@@ -16301,10 +16459,10 @@ required:false,
 &lt;&lt;dashline&gt;&gt;
 &lt;li class=&quot;textborder&quot;&gt; 现在状态 &lt;/li&gt;
 &lt;div id=&quot;statusdisplay&quot;&gt;
-   &lt;&lt;showbasebar &quot;饮食&quot; &quot;#FFA327&quot;&gt;&gt;　&lt;&lt;showbasebar &quot;健康&quot; &quot;#BBFA5F&quot;&gt;&gt;　&lt;&lt;showbasebar &quot;体力&quot; &quot;#FEDF45&quot;&gt;&gt;&lt;br&gt;
-   &lt;&lt;showbasebar &quot;理智&quot; &quot;#A7C2FF&quot;&gt;&gt;　&lt;&lt;showbasebar &quot;魔力&quot; &quot;#C2A5FF&quot;&gt;&gt;　&lt;&lt;showbasebar &quot;欲望&quot; &quot;#FF7377&quot;&gt;&gt;&lt;br&gt;
-   &lt;&lt;showbasebar &quot;压力&quot; &quot;#8690C8&quot;&gt;&gt;　&lt;&lt;showbasebar &quot;疼痛&quot; &quot;#7C68C5&quot;&gt;&gt;　&lt;&lt;showbasebar &quot;抑郁&quot; &quot;#9070DA&quot;&gt;&gt;&lt;br&gt;
-   &lt;&lt;showbasebar &quot;恐惧&quot; &quot;#B86D4C&quot;&gt;&gt;　&lt;&lt;showbasebar &quot;耻辱&quot; &quot;#C05EDF&quot;&gt;&gt;&lt;br&gt;
+   &lt;&lt;showbasebar &quot;饮食&quot; &quot;#FFA327&quot;&gt;&gt;　&lt;&lt;showbasebar &quot;健康&quot; &quot;#BBFA5F&quot;&gt;&gt;　&lt;&lt;showbasebar &quot;清洁&quot; &quot;#A3FFF7&quot;&gt;&gt;&lt;br&gt;
+   &lt;&lt;showbasebar &quot;体力&quot; &quot;#FEDF45&quot;&gt;&gt;　&lt;&lt;showbasebar &quot;理智&quot; &quot;#A7C2FF&quot;&gt;&gt;　&lt;&lt;showbasebar &quot;魔力&quot; &quot;#C2A5FF&quot;&gt;&gt;&lt;br&gt;
+   &lt;&lt;showbasebar &quot;欲望&quot; &quot;#FF7377&quot;&gt;&gt;　&lt;&lt;showbasebar &quot;压力&quot; &quot;#8690C8&quot;&gt;&gt;　&lt;&lt;showbasebar &quot;抑郁&quot; &quot;#9070DA&quot;&gt;&gt;&lt;br&gt;
+   &lt;&lt;showbasebar &quot;疼痛&quot; &quot;#7C68C5&quot;&gt;&gt;　&lt;&lt;showbasebar &quot;恐惧&quot; &quot;#B86D4C&quot;&gt;&gt;　&lt;&lt;showbasebar &quot;耻辱&quot; &quot;#C05EDF&quot;&gt;&gt;&lt;br&gt;
 &lt;/div&gt;
 
 &lt;&lt;dashline&gt;&gt;
@@ -16353,7 +16511,7 @@ required:false,
 
 &lt;/div&gt;
 
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="39" name="Profile Secret" tags="widget" position="1100,475" size="100,100">&lt;&lt;widget &quot;secretfile&quot;&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="40" name="Profile Secret" tags="widget" position="1225,475" size="100,100">&lt;&lt;widget &quot;secretfile&quot;&gt;&gt;
 &lt;div id=&quot;profile&quot;&gt;
 ♥&lt;u&gt; &lt;b&gt;性感状态&lt;/b&gt; &lt;/u&gt;&lt;br&gt;
 &lt;div id=&quot;statusdisplay&quot;&gt;
@@ -16418,7 +16576,7 @@ Total &lt;&lt;print $PC.rec.高潮.t&gt;&gt;&lt;br&gt;
 
 &lt;&lt;dashline&gt;&gt;
 &lt;/div&gt;
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="40" name="Profile-widget" tags="widget" position="1225,475" size="100,100">&lt;&lt;widget &quot;changeinfo&quot;&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="41" name="Profile-widget" tags="widget" position="100,600" size="100,100">&lt;&lt;widget &quot;changeinfo&quot;&gt;&gt;
 &lt;&lt;if _infochange is true&gt;&gt;
     一名&lt;&lt;print $PC.info.tag&gt;&gt;&lt;&lt;print $PC.info.title&gt;&gt;&lt;&lt;textbox &quot;$shortinfo&quot; $shortinfo&gt;&gt; &lt;&lt;link &quot;保存修改&quot;&gt;&gt;&lt;&lt;set _infochange to false&gt;&gt;&lt;&lt;replace #shortinfo&gt;&gt;&lt;&lt;changeinfo&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
 &lt;&lt;else&gt;&gt;
@@ -16549,7 +16707,7 @@ Total &lt;&lt;print $PC.rec.高潮.t&gt;&gt;&lt;br&gt;
 &lt;&lt;else&gt;&gt;
     &lt;div class=&quot;error-view&quot;&gt;error: no args&lt;/div&gt;
 &lt;&lt;/if&gt;&gt;
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="41" name="SideMenuPage" tags="widget" position="100,600" size="100,100">&lt;&lt;widget &quot;items&quot;&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="42" name="SideMenuPage" tags="widget" position="225,600" size="100,100">&lt;&lt;widget &quot;items&quot;&gt;&gt;
 
 &lt;&lt;/widget&gt;&gt;
 
@@ -16567,7 +16725,7 @@ Total &lt;&lt;print $PC.rec.高潮.t&gt;&gt;&lt;br&gt;
 
 &lt;&lt;widget &quot;achivement&quot;&gt;&gt;
 
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="42" name="Combat" tags="core combat loop" position="225,600" size="100,100">&lt;&lt;mode &quot;combat&quot;&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="43" name="Combat" tags="core combat loop" position="350,600" size="100,100">&lt;&lt;mode &quot;combat&quot;&gt;&gt;
 &lt;div id=&quot;combat&quot;&gt;
 
 &lt;div id=&quot;enemyside&quot;&gt;
@@ -16669,7 +16827,7 @@ function wait(text) {
         setTimeout(() =&gt; {$(&quot;#combat_message .h&quot;+i).removeClass(&#39;hidden&#39;).addClass(&#39;delay&#39;);msg_end.scrollIntoView() }, (500*i))
     }
 }
-&lt;/script&gt;</tw-passagedata><tw-passagedata pid="43" name="TimeProcess" tags="widget" position="350,600" size="100,100">&lt;&lt;widget &quot;TimeEffect&quot;&gt;&gt;
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="44" name="TimeProcess" tags="widget" position="475,600" size="100,100">&lt;&lt;widget &quot;TimeEffect&quot;&gt;&gt;
 &lt;&lt;timeprocess&gt;&gt;
 
 /* 每日结束时的处理 */
@@ -16680,7 +16838,7 @@ function wait(text) {
 &lt;&lt;set $daychange to false&gt;&gt;
 &lt;&lt;/if&gt;&gt;
     
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="44" name="CombatUIWidget" tags="widget" position="475,600" size="100,100">&lt;&lt;widget &quot;CB_playerside&quot;&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="45" name="CombatUIWidget" tags="widget" position="600,600" size="100,100">&lt;&lt;widget &quot;CB_playerside&quot;&gt;&gt;
 &lt;div id=&quot;characard&quot;&gt;
     &lt;div class=&quot;face&quot;&gt;&lt;&lt;portrait&gt;&gt;&lt;/div&gt;
     &lt;div class=&quot;CC_name&quot;&gt;玩家&lt;/div&gt;
@@ -16746,7 +16904,7 @@ function wait(text) {
     &lt;/div&gt;
     &lt;div class=&quot;CC_state&quot;&gt;&lt;/div&gt;
 &lt;/div&gt;
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="45" name="PassageHeader" tags="" position="600,600" size="100,100">&lt;&lt;set $passage to passage()&gt;&gt;&lt;&lt;set $tags to tags($passage)&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="46" name="PassageHeader" tags="" position="725,600" size="100,100">&lt;&lt;set $passage to passage()&gt;&gt;&lt;&lt;set $tags to tags($passage)&gt;&gt;
 /* 时间经过处理 */
 &lt;&lt;fixvalue&gt;&gt;&lt;&lt;TimeEffect&gt;&gt;
 /* 其他通用预处理 */
@@ -16757,7 +16915,7 @@ function wait(text) {
 /* 通知弹出框 */
 &lt;div id=&quot;action-popup&quot; class=&quot;hide&quot;&gt;&lt;span id=&quot;action-text&quot;&gt;&lt;/span&gt;&lt;/div&gt;
 &lt;div id=&quot;hd-append-top&quot;&gt;&lt;/div&gt;
-&lt;div id=&quot;hd-append-text&quot; class=&quot;append-normal&quot;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="46" name="PassageFooter" tags="" position="725,600" size="100,100">&lt;div id=&quot;gameVersionDisplay&quot;&gt;EWA ver&lt;&lt;print StartConfig.version&gt;&gt;&lt;/div&gt;
+&lt;div id=&quot;hd-append-text&quot; class=&quot;append-normal&quot;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="47" name="PassageFooter" tags="" position="850,600" size="100,100">&lt;div id=&quot;gameVersionDisplay&quot;&gt;EWA ver&lt;&lt;print StartConfig.version&gt;&gt;&lt;/div&gt;
 
 
 &lt;!-- 隐藏元素 */ --&gt;
@@ -16771,7 +16929,7 @@ function wait(text) {
 
 
 /* AVATAR设定的更新检测 ，一个页面显示完毕之后重新调整左边栏的表情变化 */
-&lt;&lt;SetAvatar&gt;&gt;</tw-passagedata><tw-passagedata pid="47" name="Widget" tags="widget" position="850,600" size="100,100">&lt;&lt;widget &quot;dashline&quot;&gt;&gt;
+&lt;&lt;SetAvatar&gt;&gt;</tw-passagedata><tw-passagedata pid="48" name="Widget" tags="widget" position="975,600" size="100,100">&lt;&lt;widget &quot;dashline&quot;&gt;&gt;
     &lt;div class=&quot;dashline&quot;&gt;&lt;/div&gt;
 &lt;&lt;/widget&gt;&gt;
 
@@ -16969,7 +17127,7 @@ function wait(text) {
     &lt;&lt;set _percent to percent(_num[0],_num[1])&gt;&gt;
     &lt;&lt;set _color to $args[1]&gt;&gt;
     &lt;&lt;meterbar _percent _color&gt;&gt;
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="48" name="你的家 单身公寓" tags="location" position="975,600" size="100,100">&lt;&lt;location &quot;单身公寓&quot;&gt;&gt;&lt;&lt;mode &quot;location&quot;&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="49" name="你的家 单身公寓" tags="location" position="1100,600" size="100,100">&lt;&lt;location &quot;单身公寓&quot;&gt;&gt;&lt;&lt;mode &quot;location&quot;&gt;&gt;
 &lt;&lt;resetplaylist&gt;&gt;
 
 &lt;span class=&quot;title&quot;&gt;&lt;&lt;print $PC.info.name&gt;&gt;家&lt;/span&gt;&lt;br&gt;
@@ -16990,7 +17148,7 @@ function wait(text) {
 &lt;&lt;link &quot;打开衣柜　 1m&quot; &quot;衣柜&quot;&gt;&gt;&lt;&lt;passtime 1&gt;&gt;&lt;&lt;set $TEquip to clone($Equip)&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
 &lt;br&gt;
 &lt;&lt;link &quot;健身　　 　30m&quot; $passage&gt;&gt;&lt;&lt;passtime 30&gt;&gt;&lt;&lt;/link&gt;&gt;　　&lt;&lt;link &quot;打游戏 　　30m&quot; $passage&gt;&gt;&lt;&lt;passtime 30&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
-&lt;&lt;link &quot;洗澡　 　　30m&quot; &quot;洗澡&quot;&gt;&gt;&lt;&lt;set $TEquip to clone($Equip)&gt;&gt;&lt;&lt;set $Source.pc.压力 -= 100, $Source.pc.体力 += 60, $Source.pc.清洁 += 500&gt;&gt;&lt;&lt;passtime 30&gt;&gt;&lt;&lt;/link&gt;&gt;　　&lt;&lt;link &quot;和宠物玩耍 60m&quot; $passage&gt;&gt;&lt;&lt;passtime 60&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
+&lt;&lt;link &quot;洗澡　 　　30m&quot; &quot;洗澡&quot;&gt;&gt;&lt;&lt;set $TEquip to clone($Equip)&gt;&gt;&lt;&lt;run D.COM.洗澡.source()&gt;&gt;&lt;&lt;passtime 30&gt;&gt;&lt;&lt;/link&gt;&gt;　　&lt;&lt;link &quot;和宠物玩耍 60m&quot; $passage&gt;&gt;&lt;&lt;passtime 60&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
 &lt;&lt;link &quot;跳过时间　 23hr&quot; $passage&gt;&gt;&lt;&lt;passtime 1380&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
 &lt;&lt;link &quot;出门　 　　5m&quot; &quot;怡安小区&quot; &gt;&gt;&lt;&lt;passtime 5&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
 &lt;/div&gt;
@@ -17005,7 +17163,7 @@ function wait(text) {
 自慰
 使用道具
 和宠物（床伴？）聊天
-学习 */</tw-passagedata><tw-passagedata pid="49" name="洗澡" tags="" position="1100,600" size="100,100">&lt;&lt;set $location to &quot;浴室&quot;&gt;&gt;
+学习 */</tw-passagedata><tw-passagedata pid="50" name="洗澡" tags="" position="1225,600" size="100,100">&lt;&lt;set $location to &quot;浴室&quot;&gt;&gt;
 &lt;&lt;gonaked &quot;closet&quot;&gt;&gt;
 &lt;img src=&#39;image/cg/bath.png&#39; class=&quot;border:1px solid #928348&quot;&gt;&lt;br&gt;
 &lt;&lt;you&gt;&gt;脱光衣服，整个人泡进浴缸里，放松着。&lt;br&gt;
@@ -17015,7 +17173,7 @@ function wait(text) {
 &lt;&lt;link &quot;自慰&quot; &quot;自慰&quot;&gt;&gt;&lt;&lt;passtime 5&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
 &lt;&lt;link &quot;玩泡沫　30m&quot; $passage&gt;&gt;&lt;&lt;passtime 30&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
 &lt;&lt;link &quot;出浴　　5m&quot; &quot;你的家 单身公寓&quot;&gt;&gt;&lt;&lt;passtime 5&gt;&gt;&lt;&lt;redress &quot;closet&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="50" name="城市生活_1" tags="" position="1225,600" size="100,100">&lt;&lt;you&gt;&gt;最近离开父母家，独立出来自己住了。一切才刚开始各种不习惯……&lt;br&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="51" name="城市生活_1" tags="" position="100,725" size="100,100">&lt;&lt;you&gt;&gt;最近离开父母家，独立出来自己住了。一切才刚开始各种不习惯……&lt;br&gt;
 &lt;&lt;=condtext([
     [inTime(6,8),&quot;一大早就起来了,要做点什么好呢……？&quot;],
     [inTime(8,11),&quot;&lt;&lt;you&gt;&gt;躺在懒人沙发上茫无目的地玩着手机……&quot;],
@@ -17025,9 +17183,9 @@ function wait(text) {
     [inTime(19,23),&quot;到晚上了，该放学的早放学了，该下班的也下班了。网络迎来了高峰期……&lt;br&gt;嗨起来！&quot;],
     [&quot;else&quot;,&quot;很晚了，得睡觉了……&quot;]
 ])&gt;&gt;
-&lt;br&gt;</tw-passagedata><tw-passagedata pid="51" name="宠物的日常_1" tags="" position="100,725" size="100,100">最近多了个小家伙跟在身边, 虽然有点粘人但还是挺治愈的。&lt;br&gt;
+&lt;br&gt;</tw-passagedata><tw-passagedata pid="52" name="宠物的日常_1" tags="" position="225,725" size="100,100">最近多了个小家伙跟在身边, 虽然有点粘人但还是挺治愈的。&lt;br&gt;
 嗯……要跟宠物&lt;&lt;print $pet.name&gt;&gt;做点什么好呢？&lt;br&gt;
-&lt;br&gt;</tw-passagedata><tw-passagedata pid="52" name="怡安小区" tags="location" position="225,725" size="100,100">&lt;&lt;location &quot;怡安小区&quot;&gt;&gt;&lt;&lt;mode &quot;location&quot;&gt;&gt;
+&lt;br&gt;</tw-passagedata><tw-passagedata pid="53" name="怡安小区" tags="location" position="350,725" size="100,100">&lt;&lt;location &quot;怡安小区&quot;&gt;&gt;&lt;&lt;mode &quot;location&quot;&gt;&gt;
 
 &lt;span class=&quot;title&quot;&gt;怡安小区&lt;/span&gt;&lt;br&gt;
 &lt;div class=&quot;lbox&quot;&gt;
@@ -17052,9 +17210,9 @@ function wait(text) {
 &lt;/div&gt;
 
 /* 景南市。一个位于周唐南方大省柳洲省的一级大城市。&lt;br&gt;
-有山有水，面朝大海，四季分明，是个风景优美的旅游城市。&lt;br&gt; */</tw-passagedata><tw-passagedata pid="53" name="怡安小区 links" tags="links" position="350,725" size="100,100">&lt;div class=&quot;links&quot; title=&quot;移动时间：12分钟&quot;&gt;&lt;&lt;link &quot;・ 嘉庆广场&quot; &quot;嘉庆广场&quot;&gt;&gt;&lt;&lt;passtime 12&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
+有山有水，面朝大海，四季分明，是个风景优美的旅游城市。&lt;br&gt; */</tw-passagedata><tw-passagedata pid="54" name="怡安小区 links" tags="links" position="475,725" size="100,100">&lt;div class=&quot;links&quot; title=&quot;移动时间：12分钟&quot;&gt;&lt;&lt;link &quot;・ 嘉庆广场&quot; &quot;嘉庆广场&quot;&gt;&gt;&lt;&lt;passtime 12&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
 &lt;div class=&quot;links&quot; title=&quot;移动时间：5分钟&quot;&gt;&lt;&lt;link &quot;・ 巴士站&quot; $passage&gt;&gt;&lt;&lt;passtime 5&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
-&lt;div class=&quot;links&quot; title=&quot;移动时间：10分钟&quot;&gt;&lt;&lt;link &quot;・ 地铁站&quot; $passage&gt;&gt;&lt;&lt;passtime 10&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="54" name="怡安小区公园" tags="location" position="475,725" size="100,100">&lt;&lt;location &quot;怡安小区公园&quot;&gt;&gt;&lt;&lt;mode &quot;location&quot;&gt;&gt;
+&lt;div class=&quot;links&quot; title=&quot;移动时间：10分钟&quot;&gt;&lt;&lt;link &quot;・ 地铁站&quot; $passage&gt;&gt;&lt;&lt;passtime 10&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="55" name="怡安小区公园" tags="location" position="600,725" size="100,100">&lt;&lt;location &quot;怡安小区公园&quot;&gt;&gt;&lt;&lt;mode &quot;location&quot;&gt;&gt;
 
 &lt;span class=&quot;title&quot;&gt;怡安小区 - 公园&lt;/span&gt;&lt;br&gt;
 &lt;div class=&quot;lbox&quot;&gt;
@@ -17074,8 +17232,8 @@ function wait(text) {
 
 &lt;div id=&quot;navi&quot; class=&quot;navi_unable&quot;&gt;
     &lt;&lt;navi&gt;&gt;
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="55" name="怡安小区公园 links" tags="" position="600,725" size="100,100">&lt;div class=&quot;links&quot; title=&quot;移动时间：3分钟&quot;&gt;&lt;&lt;link &quot;・ 小区大门&quot; &quot;怡安小区&quot;&gt;&gt;&lt;&lt;passtime 3&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
-&lt;div class=&quot;links&quot; title=&quot;移动时间：15分钟&quot;&gt;&lt;&lt;link &quot;・ 嘉庆广场&quot; &quot;嘉庆广场&quot;&gt;&gt;&lt;&lt;passtime 15&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="56" name="嘉庆广场" tags="location" position="725,725" size="100,100">&lt;&lt;location &quot;嘉庆广场&quot;&gt;&gt;&lt;&lt;mode &quot;location&quot;&gt;&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="56" name="怡安小区公园 links" tags="" position="725,725" size="100,100">&lt;div class=&quot;links&quot; title=&quot;移动时间：3分钟&quot;&gt;&lt;&lt;link &quot;・ 小区大门&quot; &quot;怡安小区&quot;&gt;&gt;&lt;&lt;passtime 3&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
+&lt;div class=&quot;links&quot; title=&quot;移动时间：15分钟&quot;&gt;&lt;&lt;link &quot;・ 嘉庆广场&quot; &quot;嘉庆广场&quot;&gt;&gt;&lt;&lt;passtime 15&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="57" name="嘉庆广场" tags="location" position="850,725" size="100,100">&lt;&lt;location &quot;嘉庆广场&quot;&gt;&gt;&lt;&lt;mode &quot;location&quot;&gt;&gt;
 &lt;span class=&quot;title&quot;&gt;嘉庆广场&lt;/span&gt;&lt;br&gt;
 &lt;div class=&quot;lbox&quot;&gt;
 &lt;&lt;=D.placedata.嘉庆广场.description()&gt;&gt;
@@ -17094,9 +17252,9 @@ function wait(text) {
 
 &lt;div id=&quot;navi&quot; class=&quot;navi_unable&quot;&gt;
     &lt;&lt;navi&gt;&gt;
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="57" name="嘉庆广场 links" tags="" position="850,725" size="100,100">&lt;div class=&quot;links&quot; title=&quot;移动时间：15分钟&quot;&gt;&lt;&lt;link &quot;・ 怡安小区&quot; &quot;怡安小区&quot;&gt;&gt;&lt;&lt;passtime 15&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="58" name="嘉庆广场 links" tags="" position="975,725" size="100,100">&lt;div class=&quot;links&quot; title=&quot;移动时间：15分钟&quot;&gt;&lt;&lt;link &quot;・ 怡安小区&quot; &quot;怡安小区&quot;&gt;&gt;&lt;&lt;passtime 15&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
 &lt;div class=&quot;links&quot; title=&quot;移动时间：2分钟&quot;&gt;&lt;&lt;link &quot;・ 地铁站&quot;&gt;&gt;&lt;&lt;passtime 2&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
-&lt;div class=&quot;links&quot; title=&quot;移动时间：1分钟&quot;&gt;&lt;&lt;link &quot;・ 巴士站&quot;&gt;&gt;&lt;&lt;passtime 1&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="58" name="商场的日常风景_1" tags="" position="975,725" size="100,100">&lt;&lt;=condtext([
+&lt;div class=&quot;links&quot; title=&quot;移动时间：1分钟&quot;&gt;&lt;&lt;link &quot;・ 巴士站&quot;&gt;&gt;&lt;&lt;passtime 1&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="59" name="商场的日常风景_1" tags="" position="1100,725" size="100,100">&lt;&lt;=condtext([
 [inTime(8.5,10), &quot;明明距离商场开门的时间还很早，但已经有人陆陆续续聚集在入口广场上了。&quot;],
 [inTime(10,18), &quot;营业中的嘉庆广场，无论是广场外部还是商场内部，人来人往，十分热闹。&quot;],
 [inTime(18,20), &quot;已经到晚饭时间了，商场内的餐厅传来了美味的香气。比起白天，人已经少了很多，但依然热闹。&quot;],
@@ -17104,12 +17262,12 @@ function wait(text) {
 [&quot;else&quot;,&quot;商场建筑黑漆漆的，已经完全关闭。但广场上依然亮着点点灯光，夜晚的喷水广场在点点灯光下，十分好看。&quot;]
 ])&gt;&gt;
 
-&lt;br&gt;</tw-passagedata><tw-passagedata pid="59" name="商场闲逛_1" tags="" position="1100,725" size="100,100">&lt;&lt;=either(
+&lt;br&gt;</tw-passagedata><tw-passagedata pid="60" name="商场闲逛_1" tags="" position="1225,725" size="100,100">&lt;&lt;=either(
 &quot;&lt;&lt;you&gt;&gt;坐在南面入口广场一侧的椅子上，仰头看着绿茵茵的木棉树，偶尔会发现在树枝中跳窜的小麻雀。&quot;,
 &quot;&lt;&lt;you&gt;&gt;走在广场上，观察着来来往往的人群，目光时不时被在路边派发传单的布偶人吸引。&quot;,
 &quot;&lt;&lt;you&gt;&gt;拿起手机，以商场为背景，给自己拍了张新的照片。&quot;,
 &quot;&lt;&lt;you&gt;&gt;站在广场角落的报亭前，随手拿起一份报纸看了眼今天的新闻。&quot;,
-)&gt;&gt;</tw-passagedata><tw-passagedata pid="60" name="商店" tags="location" position="1225,725" size="100,100">&lt;&lt;location &quot;商店&quot;&gt;&gt;&lt;&lt;mode &quot;location&quot;&gt;&gt;
+)&gt;&gt;</tw-passagedata><tw-passagedata pid="61" name="商店" tags="location" position="100,850" size="100,100">&lt;&lt;location &quot;商店&quot;&gt;&gt;&lt;&lt;mode &quot;location&quot;&gt;&gt;
 
 &lt;span class=&quot;title&quot;&gt;服装店&lt;/span&gt;&lt;br&gt;
 &lt;div class=&quot;lbox&quot;&gt;
@@ -17117,7 +17275,7 @@ function wait(text) {
 &lt;/div&gt;
 &lt;&lt;set $shoptype to [&quot;all&quot;,&quot;offline&quot;]&gt;&gt;
 
-&lt;&lt;include &quot;试衣间&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="61" name="Event" tags="eventloop nosave" position="100,850" size="100,100">&lt;&lt;mode &quot;event&quot;&gt;&gt;
+&lt;&lt;include &quot;试衣间&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="62" name="Event" tags="eventloop nosave" position="225,850" size="100,100">&lt;&lt;mode &quot;event&quot;&gt;&gt;
 
 &lt;div id=&quot;eventsituation&quot;&gt;
 &lt;&lt;CallEvent&gt;&gt;
@@ -17136,7 +17294,7 @@ function wait(text) {
 
 &lt;div id=&quot;eventeffect&quot;&gt;
 &lt;&lt;CallEventEffect&gt;&gt;
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="62" name="EventSystem" tags="widget" position="225,850" size="100,100">/* 再现ERA口上系统的TRYCALL体系 主 */
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="63" name="EventSystem" tags="widget" position="350,850" size="100,100">/* 再现ERA口上系统的TRYCALL体系 主 */
 &lt;&lt;widget &quot;CallEvent&quot;&gt;&gt;
 &lt;&lt;if setEvent() isnot false&gt;&gt;
     &lt;&lt;set _passagename to setEvent()&gt;&gt;
@@ -17220,12 +17378,12 @@ function wait(text) {
 
 &lt;&lt;/if&gt;&gt;
 
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="63" name="主线 开幕：EventFirst" tags="" position="350,850" size="100,100">&lt;&lt;set $count to 0&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="64" name="主线 开幕：EventFirst" tags="" position="475,850" size="100,100">&lt;&lt;set $count to 0&gt;&gt;
 &lt;&lt;set $UI.nextbutton to false&gt;&gt;
 &lt;&lt;set $eventnext to 0&gt;&gt;
-&lt;&lt;bookmark &quot;主线开幕_初次&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="64" name="主线 开幕-初次" tags="" position="475,850" size="100,100">&lt;div id=&#39;opcontainer&#39;&gt;
+&lt;&lt;bookmark &quot;主线开幕_初次&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="65" name="主线 开幕-初次" tags="" position="600,850" size="100,100">&lt;div id=&#39;opcontainer&#39;&gt;
 &lt;div id=&quot;weirdtext&quot;&gt;&lt;&lt;Opening $count&gt;&gt;&lt;/div&gt;
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="65" name="主线 开幕-初次：E" tags="" position="600,850" size="100,100">&lt;&lt;if $count lt 8&gt;&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="66" name="主线 开幕-初次：E" tags="" position="725,850" size="100,100">&lt;&lt;if $count lt 8&gt;&gt;
 &lt;&lt;addclass &quot;#eventsituation&quot; &quot;weirdtext&quot;&gt;&gt;
 &lt;&lt;script&gt;&gt;
 //requires jQuery because I am lazy.
@@ -17236,7 +17394,7 @@ $(document).ready(function(){
 &lt;&lt;else&gt;&gt;
 &lt;&lt;removeclass &quot;#eventsituation&quot; &quot;weirdtext&quot;&gt;&gt;
 &lt;&lt;replace &#39;#opcontainer&#39;&gt;&gt;&lt;&lt;Opening $count&gt;&gt;&lt;&lt;/replace&gt;&gt;
-&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="66" name="主线 开幕-初次：W" tags="widget" position="725,850" size="100,100">&lt;&lt;widget &quot;Opening&quot;&gt;&gt;
+&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="67" name="主线 开幕-初次：W" tags="widget" position="850,850" size="100,100">&lt;&lt;widget &quot;Opening&quot;&gt;&gt;
 
 &lt;&lt;switch $args[0]&gt;&gt;
 &lt;&lt;case 0&gt;&gt;
@@ -17350,7 +17508,7 @@ $(document).ready(function(){
 
 &lt;&lt;/switch&gt;&gt;
 
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="67" name="主线 开幕-初次：S" tags="" position="850,850" size="100,100">&lt;&lt;switch $count&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="68" name="主线 开幕-初次：S" tags="" position="975,850" size="100,100">&lt;&lt;switch $count&gt;&gt;
 &lt;&lt;case 0&gt;&gt;
 	&lt;&lt;set _text to Lang(&quot;睁开眼睛&quot;,&quot;Open The Eyes&quot;)&gt;&gt;
 	&lt;div class=&quot;Wselect&quot;&gt;&lt;&lt;link _text&gt;&gt;&lt;&lt;set $count to 1&gt;&gt;&lt;&lt;Revent&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
@@ -17393,7 +17551,7 @@ $(document).ready(function(){
 	&lt;&lt;set _text to Lang(&quot;继续&quot;,&quot;Next&quot;)&gt;&gt;
 	&lt;div @class=&quot;($count &gt;= 8 ? &#39;Eselect&#39; : &#39;Wselect&#39; )&quot;&gt;&lt;&lt;link _text&gt;&gt;&lt;&lt;set $count to $eventnext&gt;&gt;&lt;&lt;Revent&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
 
-&lt;&lt;/switch&gt;&gt;</tw-passagedata><tw-passagedata pid="68" name="主线 开幕-初次-穿越版" tags="" position="975,850" size="100,100">&lt;&lt;Opening2 $count&gt;&gt;</tw-passagedata><tw-passagedata pid="69" name="主线 开幕-初次-穿越版：W" tags="widget" position="1100,850" size="100,100">&lt;&lt;widget &quot;Opening2&quot;&gt;&gt;
+&lt;&lt;/switch&gt;&gt;</tw-passagedata><tw-passagedata pid="69" name="主线 开幕-初次-穿越版" tags="" position="1100,850" size="100,100">&lt;&lt;Opening2 $count&gt;&gt;</tw-passagedata><tw-passagedata pid="70" name="主线 开幕-初次-穿越版：W" tags="widget" position="1225,850" size="100,100">&lt;&lt;widget &quot;Opening2&quot;&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
 &lt;&lt;switch $count&gt;&gt;
 &lt;&lt;case 0&gt;&gt;
@@ -17515,7 +17673,7 @@ $(document).ready(function(){
 &lt;&lt;/switch&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
 
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="70" name="主线 开幕-初次-穿越版：S" tags="" position="1225,850" size="100,100">&lt;&lt;switch $count&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="71" name="主线 开幕-初次-穿越版：S" tags="" position="100,975" size="100,100">&lt;&lt;switch $count&gt;&gt;
 &lt;&lt;case 1&gt;&gt;
 &lt;&lt;set _text to Lang(&quot;拿起手机&quot;,&quot;Pick up the phone&quot;)&gt;&gt;
 &lt;div class=&quot;Eselect&quot;&gt;&lt;&lt;link _text&gt;&gt;&lt;&lt;set $count to 2&gt;&gt;&lt;&lt;Revent&gt;&gt;&lt;&lt;passtime 2&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
@@ -17563,7 +17721,7 @@ $(document).ready(function(){
 &lt;&lt;set _text to Lang(&quot;继续&quot;,&quot;Next&quot;)&gt;&gt;
 &lt;div class=&quot;Eselect&quot;&gt;&lt;&lt;link _text&gt;&gt;&lt;&lt;set $count to $eventnext&gt;&gt;&lt;&lt;Revent&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
 
-&lt;&lt;/switch&gt;&gt;</tw-passagedata><tw-passagedata pid="71" name="主线 开幕-轮回" tags="" position="100,975" size="100,100">&lt;&lt;bookmark &quot;主线开幕_轮回&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="72" name="PC 主线-开幕-房间描述" tags="nobr" position="225,975" size="100,100">&lt;&lt;lang 
+&lt;&lt;/switch&gt;&gt;</tw-passagedata><tw-passagedata pid="72" name="主线 开幕-轮回" tags="" position="225,975" size="100,100">&lt;&lt;bookmark &quot;主线开幕_轮回&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="73" name="PC 主线-开幕-房间描述" tags="nobr" position="350,975" size="100,100">&lt;&lt;lang 
 &quot;一睁开眼，首先看到的是茂绿的窗外，响亮的蝉鸣宣告着当前的季节。窗户旁摆放着一张大书桌，上面摆放着&lt;&lt;if $PC.type is 2&gt;&gt;一个宽屏大液显&lt;&lt;elseif $PC.type is 1&gt;&gt;新帝HQ24数位屏和数位板&lt;&lt;else&gt;&gt;一个电脑屏幕&lt;&lt;/if&gt;&gt;，书桌旁的小桌子上则是电脑主机。在靠近书桌的墙边，则整齐地摆放着两个书架，书架上是&lt;&lt;switch $PC.type&gt;&gt;&lt;&lt;case 1&gt;&gt;各种漫画和小说还有塑料小人&lt;&lt;case 2&gt;&gt;各种各样的书籍&lt;&lt;case 3&gt;&gt;各种修仙小说和漫画&lt;&lt;/switch&gt;&gt;，墙上则&lt;&lt;switch $PC.type&gt;&gt;&lt;&lt;case 1&gt;&gt;挂着一些远古生物的挂画和各种游戏海报&lt;&lt;case 2&gt;&gt;挂着一些漂亮的装饰画&lt;&lt;case 3&gt;&gt;挂着一个黑白两色的八卦阵和一些仙侠作品的海报&lt;&lt;/switch&gt;&gt;&quot;
 
 &quot;Across from the bed is the window, and outside the window is the loud sound of cicadas announcing the current season. Right next to the window sits a large desk with a computer with two screens, two bookshelves lined up side by side with various books and comics and some anime figurines, and posters of superheroes on the wall&quot;

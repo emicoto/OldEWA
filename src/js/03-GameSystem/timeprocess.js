@@ -138,140 +138,12 @@ window.timeprocess = timeprocess
 F.timeprocess = timeprocess
 DefineMacroS("timeprocess",timeprocess)
 
-window.maxAbl = function() {
-	switch(conf.hardmode){
-		case 0.5: return 1000;
-		case 1: return 1200;
-		case 2: return 2400;
-		case 5: return 3600;
-	}
-}
+/**
+ * 设置V属性
+ * @param {number} t 
+ */
 
-window.dailyMultip = function(){
-	let t = V.times.passed - V.times.wakeup
-	let max = maxAbl()/10
-	let wil = fixfloat(1 - (((PC.abl.意志)/max)*0.04),4)
-
-	if(t/60 >= 5){
-		let multip = Math.pow(1.09,(t/60 - 5))
-		multip = Math.max(fixfloat(1 + ((multip - 1)*wil),4),1)
-		return multip
-	}
-	else return 1;
-}
-
-window.DesireMultip = function(){
-	 let multip = 1
-	 let san = (1-(PC.base.理智[0]/PC.base.理智[1]))*12
-
-	 //根据丁丁有无，获得率也不同
-	 if(PC.genital.阴茎 > 5 )  multip = (Math.pow(1.25,san+1),4);
-	 else  multip = (Math.pow(1.25,san+1)/2,4);
-
-	 let max = maxAbl()/10
-	 //意志加成，每120意志削减 7.5%，最终削减 75% 倍率获得
-	 let wil = fixfloat(1 - (((PC.abl.意志)/max)*0.075),4)
-	 multip = Math.max(fixfloat(1 + ((multip - 1)*wil),4),1)
-
-
-}
-
-window.SanMultip = function(){
-	let desire = (PC.base.欲望[0]/PC.base.欲望[1])*100
-
-	let max = maxAbl()/10
-	let wil = fixfloat(1 - (((PC.abl.意志)/max)*0.075),4)
-
-	if(desire >= 50){
-		let d = (PC.base.欲望[0]/PC.base.欲望[1])
-		let multip = Math.pow(2,d)
-		multip = Math.max(fixfloat(1 + ((multip - 1)*wil),4),1)
-
-		return multip
-	}
-	return 1
-}
-
-window.HealthMultip = function(){
-	var multip = 1
-
-	if(tempDiff()){
-		let cold = Math.abs( V.weather.temp - PC.cold )
-		let heat = Math.abs( V.weather.temp - PC.hot )
-
-		if (cold > 3) multip = Math.pow(1.233,cold-3)
-		else if (heat > 3) multip = fixfloat(Math.pow(1.233,heat-3),4)	
-		else multip = 1
-	}
-
-	if(healthwarn()){
-		multip += ( 0.01
-			+ (PFlag.营养不良 > 0 ? 0.1 : 0)
-			+ (PFlag.疲劳 > 0 ? 0.05 : 0)
-			+ (PFlag.熬夜 > 0 ? 0.02 : 0)
-			+ (PFlag.禁欲 > 0 ? 0.002 : 0)
-			+ (PFlag.缺魔  > 0 ? 0.005 : 0)
-		)
-	}
-
-	//根据健身（体质）进行补正， 每 120健身 减少 6.5%,最多削减 65%的获得加成
-	let max = maxAbl()/10
-	let vit = fixfloat(1 - (((PC.abl.健身)/max)*0.065),4)
-
-	multip = Math.max(fixfloat(1 + ((multip - 1)*vit),4),1)
-	
-	return multip
-}
-
-window.tempDiff = function(){
-	let cold = Math.abs( V.weather.temp - PC.cold )
-	let heat = Math.abs( V.weather.temp - PC.hot )
-	return ((cold > 3 || heat > 3) && V.local?.side == "室外")
-}
-
-
-window.OverTime = function(){
-	let ot = Math.floor(V.times.passed - V.times.wakeup/1200)
-	return ot > 0 && ot < Flag.overtime
-}
-
-window.desireGain = function(){
-	//有丁丁的情况
-		let d = 0
-		let min = 0
-
-	if(V.PC.genital.阴茎 > 5){
-		d = random(1,6)/100
-		min = 0.005
-	}
-	//没有丁丁欲望减半
-	else{
-		d = random(5,30)/1000
-		min = 0.002
-	}
-
-	//根据理智和身体状况+-基础值。
-	d = d + (PC.base.理智[0]<= 0 ? 0.2 : 0) - ((PC.base.体力[0] <= PC.base.体力[1]/10 || PFlag.疲劳 > 0 ) ? 0.15: 0)
-
-	//最后根据纯洁度调整
-	d = Math.max(d *((1000-PC.lewd.纯洁)/1000),min)
-	//根据性成瘾度调整,性瘾满了每分钟就彪涨1.25点欲望，无加成下差不多半天就满
-	if(PC.lewd.性瘾 > 0){
-		d += (PC.lewd.性瘾/800)
-	}
-
-	return fixfloat(d,4)
-}
-
-window.dirtyMultip = function(){
-	if(V.weather.temp > PC.info.hot){
-		let multip = 1 + ((V.weather.temp - PC.info.hot)/3)*0.5
-		return multip
-	}
-	return 1
-}
-
-function passtime(t,mode){
+function PassTime(t,mode){
 	let lapse = V.times.passed - V.times.wakeup
 	let overtime = Math.floor(lapse/1200)
 
@@ -284,18 +156,25 @@ function passtime(t,mode){
 		Flag.ovetime = 0
 	}
 
-	//时间经过时基础数值的变动
-	let desired = fixfloat((desiredGain()*t*DesireMultip()),4)
-	let dirty = 0.5*t*dirtyMultip()
+	//时间经过时基础数值的变动，进行对应行为时，就不会获得
+
+	let m = dailyMultip()
+	let desired, dirty, sleepy, hungry, tired, lostmana
+
+	if(PFlag.actmode != "H" || TCSV.pc.贤者时间 <= 0) desired = fixfloat((desireGain()*t*DesireMultip()),4);
+	if(!TCSV.pc.入浴) dirty = 1*t*dirtyMultip();
+	if(!TCSV.pc.果腹) hungry = fixfloat((1.2*t*(m*0.34)),4);
+
+	sleepy = fixfloat((0.1*t*m*SanMultip()),4);
+	tired  = fixfloat((0.12*t*(m*0.8)),4)
+	
+	
+	lostmana = 0.01*t	
 
 	//没睡觉就会有所消耗。
 	if(PC.state.睡眠 == false){
 
-		let m = dailyMultip()
-		let sleepy = fixfloat((0.1*t*m*SanMultip()),4)
-		let hungry = fixfloat((1.2*t*(m*0.34)),4)
-		let tired  = fixfloat((0.12*t*(m*0.8)),4)
-		let lostmana = 0.01*t
+
 
 		PC.base.理智[0] = fixfloat(PC.base.理智[0]-sleepy,4)
 		PC.base.欲望[0] = fixfloat(PC.base.欲望[0]+desired,4)
@@ -329,11 +208,11 @@ function passtime(t,mode){
 	//source值在base上变动前的处理。主要处理快感和心理素质一类
 	SourceTrack()
 
-	//处理完毕后，把SOURCE变动到 base里的处理	
-	const g = Object.keys(PC.source)
+	//处理完毕后，把SOURCE变动到 base里的处理（基础值x时间值，方便在不同位置执行相同动作时，能根据行为时长进行反应。）
+	const g = Object.keys(Source.pc)
 	for (let v in g){
 		let n = g[v]
-		PC.base[n][0] += PC.source[n]
+		PC.base[n][0] += Source.pc[n]*t
 
 		//累计加减值过后，突破上限获得成长时
 		if(["压力","疼痛","恐惧","耻辱","快M", "快B", "快C", "快V", "快U", "快A"].includes(n)){
@@ -344,7 +223,17 @@ function passtime(t,mode){
 		}
 
 		//计算完毕后把source清空。
-		PC.source[n] = 0
+		Source.pc[n] = 0
+	}
+
+	// TCSV里的倒计时处理
+	const tc = Object.keys(TCSV.pc)
+	for(let v in tc){
+		let n = tc[v]
+
+		if(['贤者时间','果腹'].includes(n)){
+			TCSV.pc[n] = Math.max(TCSV.pc[n] - t,0)
+		}
 	}
 
 	//FLAG处理，每天只会累计一次。数值低于/高于安全线，就会+1. 如果当天没有低于安全线，就会扣除1个计数（如果计数大于0的话）
@@ -383,10 +272,6 @@ function passtime(t,mode){
 
 	//生病处理
 	//先集算要扣的健康基础值，温度变化，或者各种负面状态都会获得生病值
-	let healthwarn = function(){
-		return (PC.base.饮食[0] <= 0 || PC.base.体力[0] <= 0 || PC.base.理智[0] <= 0 || PC.base.魔力[0] <= -10)
-	}
-
 	let ills = (
 		( (healthwarn()? 0.1 : 0)
 		+ (tempDiff() ? 0.15 : 0)
@@ -450,6 +335,10 @@ function passtime(t,mode){
 
 }
 
+window.PassTime = PassTime
+F.PassTime = PassTime
+
+
 function SourceTrack(){
 
 	//清醒时的处理
@@ -459,13 +348,22 @@ function SourceTrack(){
 	//睡着时的处理
 	else{
 
+
 	}
 
 
 }
 
 function MarkCheck() {
+	//清醒时的处理
+	if(PC.state.睡眠 == false) {
 
+	}
+	//睡着时的处理
+	else{
+
+
+	}
 }
 
 function daychange(){
@@ -484,5 +382,5 @@ function daychange(){
 
 function weather(){
 
-	return ""
+
 }

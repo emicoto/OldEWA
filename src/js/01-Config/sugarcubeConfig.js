@@ -32,7 +32,7 @@ Config.saves.autosave = ["bookmark", "autosave","eventend"];
 Config.saves.isAllowed = function () {
 	if (tags().includes("nosave")) {
 		return false;
-	}else if (V.actmode == "combat") {
+	}else if (PFlag.actmode == "combat") {
 		return false;
 	}
 	
