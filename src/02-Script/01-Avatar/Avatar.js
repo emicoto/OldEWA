@@ -99,7 +99,8 @@ var Avatar;
         return [];
       },
       defaultOptions() {
-        console.log(zindex);
+        if (V.coredebug)
+          console.log(zindex);
         return {
           zindex,
           frame: null,
@@ -1564,7 +1565,8 @@ var Avatar;
         return o;
       })).flat();
     }
-    console.log(obj);
+    if (V.coredebug)
+      console.log(obj);
     Renderer.Animations[options2.name] = obj;
   }
   Avatar2.animation = animation;
@@ -1756,11 +1758,11 @@ var Avatar;
       }
     }
     if (!update) {
-      if (V.harddebug)
+      if (V.coredebug)
         console.log("未更新:", key, option, last, change[last], change);
     }
     if (update) {
-      if (V.harddebug)
+      if (V.coredebug)
         console.log("更新:", key, option, last, change[last], change);
       Avatar2.AVATARMODEL.redraw();
       Avatar2.PORTRAITMODEL.redraw();

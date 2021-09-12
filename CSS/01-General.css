@@ -225,7 +225,7 @@ hr {
 }
 
 .tolink a {
-  background-image: url("image/icon/tolink.png");
+  background-image: url("./image/icon/tolink.png");
   background-repeat: no-repeat;
   background-position-x: -2px;
   vertical-align: middle;
@@ -236,7 +236,7 @@ hr {
 }
 
 .tolink a:hover {
-  background-image: url("image/icon/tolink_hover.png");
+  background-image: url("./image/icon/tolink_hover.png");
   color: #d4bf00;
   border:0px;
 }

@@ -1,4 +1,8 @@
-﻿declare interface AvatarItems{
+﻿type ATags = ("裸露"|"日常"|"睡衣"|"正式"|"商务"|"舞台"|"社交"|"泳装"|"运动"|"学生"|"仆从"|"制服"|"COSPLAY"|"情趣"|"变态"|"神圣"|"古风"|"洛丽塔"|"时尚"|"防水"|"雨衣"|"潜水"|"福瑞"|"高跟"|"战斗"|"闪耀"|"魔力"|"特殊")
+
+type shopline = ( "none" | "general" | "mens" | "womens" | "brand" | "lingerie" | "lewd" | "spring" | "summer" | "autumn" | "winter" | "fashional" | "classic" | "special")
+
+declare interface AvatarItems{
     id: number, uid: 0,
     index: string, 
     name: string, 
@@ -6,7 +10,7 @@
     text: string,
     name_en: string,
     text_en: string,
-    tag : ["裸露"|"日常"|"睡衣"|"正式"|"商务"|"舞台"|"泳装"|"运动"|"学生"|"服务"|"制服"|"COSPLAY"|"情趣"|"变态"|"神圣"|"古风"|"洛丽塔"|"时尚"|"雨衣"|"潜水"|"福瑞"|"高跟鞋"|"战斗服"],
+    tag : Array<ATags>,
     hasImg: false | true,
     hasDif?: {breast: false|true, pregnant: false | true,},
 
@@ -21,25 +25,26 @@
     fixcolor: true | false,
     color: string | null,
     colorname: string | null,
-    colors:[string] | [],
+    colors: Array<string>
 
     category:"帽子"|"头饰"|"眼镜"|"面罩"|"耳饰"|"外搭"|"连衣裙"|"连体服"|"上衣"|"下衣"|"内衣"|"内裤"|"袜子"|"鞋子"|"装饰"|"无",
 
     layer : "hat"|"neck"|"face"|"outter"|"over_up"|"inner_up"|"hand"|"over_bt"|"inner_bt"|"shoes"|"legs"|"back",
 
-    shop: [null | "all" | "online" | "offline" | "adluts" | "unique" | "special" | "limit" | "event" | "seasonal" | "spring" | "summer" | "autumn" | "winter"],
+    shop: "none" | "all" | "online" | "offline" | "adluts" | "unique" | "special" | "event" | "ordermade",
+    lineup: [shopline,shopline?],
 
     slot: "top" | "bottom" | "head" | "hands" | "feet" | "legs" | "onepiece" | "wholebody" | "overall",
 
     tuckinable?: false | true,
     tuckin?: false | true,
     acc?: null | string,
-    patterns?: [string] | [],
+    patterns?: Array<string>
     fixacc?: true | false,
     subcolor?: null | string,
 
     Functional?: true | false,
-    effect?()
+    effect?(min:number)
 }
 
 declare interface HairItems {
@@ -47,14 +52,21 @@ declare interface HairItems {
 }
 
 declare interface LewdItems {
-    name: string, png: string | null,
-    hasDif?:{breast:false|true, pregnant:false|true},
+    name: string,
+    name_en: string,
+    text: string,
+    text_en: string,
+
+
     hasImg: false | true,
+    png: string | null,
+    hasDif?:{breast:false|true, pregnant:false|true},
+
     functional: true | false,
 
-    cost: number, energy: number,
+    cost: number, energy: number, maxenergy: number,
     category: "特殊", layer: "nipple" | "penis" | "plus",
-    shop: "adults" | "unique" | "online"
+    shop: "adults" | "unique"
 }
 
 declare interface EmojiItems{
@@ -71,6 +83,110 @@ declare interface EmojiItems{
     hurt: false | true;
 }
 
+type foodtags =("肉类"|"蔬菜"|"水果"|"米饭"|"薯片"|"汽水"|"酒类"|"主食"|"便当"|"中餐"|"西餐"|"日料"|"海鲜"|"魔力"|"活物"|"史莱姆"|"虫"|"特殊"|"无")
+declare interface FoodItems {
+    id: number,
+    uid:number,
+    name: string,
+    name_en?:string,
+    text: string,
+    text_en?: string,
+
+    type: "食物"|"饮料"|"零食",
+    category: "foods",
+    tags:[foodtags,foodtags?,foodtags?],
+    thumb: null | string,
+
+    price: number,
+    fresh: number,
+
+    shop: null | "快餐" | "便利店" | "超市" | "贩售机" | "商店" | "餐厅" | "神秘" | "暗网" | "外卖" | "all",
+
+    effect(target:string)
+}
+
+declare interface MedicineItems {
+    name: string,
+    name_en?:string,
+    text: string,
+    text_en?: string,
+
+    type: "治疗"|"强化"|"美容"|"毒药"|"改造"|"特殊",
+    category: "medicine",
+    thumb: null | string,
+
+    price: number,
+    num: 0,
+    shop: null | "药店" | "超市" | "便利店" | "医院" | "神秘" | "暗网" | "网购" | "all"
+
+    effect()
+
+}
+
+declare interface GeneralItems {
+    name: string,
+    name_en?:string,
+    text: string,
+    text_en?: string,
+
+    type: string,
+    category: "tool" | "collection" | "material" | "other" | "important",
+
+    shop?: null | string,
+    price: number,
+    num: 0,
+}
+
+declare interface FunctionalItems {
+    name: string,
+    name_en?:string,
+    text: string,
+    text_en?: string,
+
+    type: string,
+    category: "weapon" | "adluts" | "accesory",
+    tags?: [string] | [],
+
+    shop?: null | string,
+    price: number,
+    num: 0,
+
+    effect(target:string,time:number),
+}
+
+declare interface SituationSheet {
+    id: number, series: string, phrase: number, display: "before" | "content" | "after",
+    condition()
+}
+
+
+type locationtag = (
+        /* 家 */
+        "家" | "厨房"| "休息" | "沐浴" | "衣柜"| "电脑" | "WIFI" | "学习" | "私人" |
+
+        /* 设施类 */
+        "更衣间" | "厕所" | "快餐" | "舞台" | "运动" | "移动餐车" | "移动摊位" |
+        "通风口" | "下水道出入口" | "逃生口" | "电梯" |
+
+        /*地点属性 */
+        "树丛" | "封闭" | "狭窄" | "开阔" | "高处" | "水源" | "地下" | "宽敞" | "藏匿点" | "历史" |  "神秘" | "特殊" | "光照" | "阴暗" | "风口" | "海边" | "高山" | "常雪" | "幻境" | "大道" | "小路" |
+
+        /* 地点功能 */
+        "交通" | "公园" | "活动" | "停车场" | "景观" | "信仰" | "广场" | "餐厅" | "商店" | "便利店" | "仓库" |"夜店" | "无" );
+
+declare interface LocationData {
+    place: string, side: "室内" | "室外",
+    tag:[locationtag?,locationtag?,locationtag?,locationtag?,locationtag?],
+
+    chara: [] | [string],
+
+    bus: false | true, subway: false | true, car: false | true, bike: false | true,
+    homebutton?: false | true,
+    img: string,
+    
+    description(),
+    situation?: [SituationSheet],
+}
 declare namespace Avatars {
     export let list : {};
     export let layer : {};
@@ -85,41 +201,84 @@ declare namespace Avatars {
     export let hand: AvatarItems[];
     export let neck: AvatarItems[];
     export let face: AvatarItems[];
-    export let hairfront: {};
-    export let hairback: {};
-    export let lewdup : {};
-    export let lewdbt : {};
-    export let emote : {};
+    export let hairfront: [HairItems];
+    export let hairback: [HairItems];
+    export let lewdup : [LewdItems];
+    export let lewdbt : [LewdItems];
+    export let emote : [EmojiItems];
 }
 
 const data : AvatarItems = {
-    id: 0, uid: 0,
-    index : "naked",    name : "裸",     gender : "n",
-    text : "无",   
-    name_en:"",
-    text_en:"", 
-    tag  : ["裸露"],
-    hasDif : {breast:false, pregnant:false},
-    hasImg : false,
-
-    cost : 0,        reveal : 0,        hot : 0, cold : 0,
-    durable : 0,     maxdurable : 0,     beauty: 0,     defence: 0,
-    fixcolor: true,    color:null,  colorname: null,
-    colors : [],
-    
-    category: "外搭", layer : "outter",
-    shop : null, 
-    
-    slot : "top", 
-    tuckinable: false,        tuckin : false, 
-    acc : null,
-    patterns: [],
-    fixacc  : true,
-    subcolor : null,
+    id: 0,
+    uid: 0,
+    index: "",
+    name: "",
+    gender: "n",
+    text: "",
+    name_en: "",
+    text_en: "",
+    tag: ['裸露'],
+    hasImg: false,
+    cost: 0,
+    reveal: 0,
+    durable: 0,
+    maxdurable: 0,
+    fixcolor: false,
+    color: "",
+    colorname: "",
+    colors: [],
+    category: "无",
+    layer: 'inner_up',
+    shop: 'none',
+    lineup: ['none'],
+    slot: "legs"
 }
 
 const emoji : EmojiItems = {
     name: "羞耻",
     eyebrow:'sad', eyes:'full', mouth:'oop', frame:null,
     tear:false, shy:true, red:false, hurt:false,
+}
+
+const lewd : LewdItems = {
+    name: "",
+    name_en: "",
+    text: "",
+    text_en: "",
+    hasImg: false,
+    png: "",
+    functional: false,
+    cost: 0,
+    energy: 0,
+    maxenergy: 0,
+    category: "特殊",
+    layer: "nipple",
+    shop: "unique",
+}
+
+const newfoods : FoodItems = {
+    id: 0,
+    uid: 0,
+    name: "",
+    text: "",
+    type: "食物",
+    category: "foods",
+    tags: ["无"],
+    thumb: "",
+    price: 0,
+    fresh: 0,
+    shop: "all",
+    effect: function () {
+        ;
+    }
+}
+
+const newplace : LocationData = {
+        place:"试衣间", side:"室内", 
+        tag:["交通","大道"],
+        chara:[], 
+        bus:false, subway:false, car:false, bike:false,
+        homebutton: false,
+        img:"tryon",
+        description(){},
 }

@@ -1,12 +1,12 @@
 ﻿@font-face{
 font-family : "黄婷婷"; /*18*/
-src : url("FZSJ-SNH48HTTJW.otf");
+src : url("Font/FZSJ-SNH48HTTJW.otf");
 }
 
 @font-face{
 font-family: "稚艺简体"; /*14+b*/
-src: url("FZZHYJW.woff") format('woff'),
-     url("FZZHYJW.woff2") format('woff2');
+src: url("Font/FZZHYJW.woff") format('woff'),
+     url("Font/FZZHYJW.woff2") format('woff2');
 font-weight: normal;
 font-style: normal;
 font-display: swap;
@@ -14,62 +14,62 @@ font-display: swap;
 
 @font-face{
 font-family: "筑紫古典";
-src: url("FZFWZhuZGDSMCJW.otf");
+src: url("Font/FZFWZhuZGDSMCJW.otf");
 }
 
 @font-face{
 font-family: "珍珠体"; 
-src: url("FZFWZZTJW.otf");
+src: url("Font/FZFWZZTJW.otf");
 }
 
 @font-face{
 font-family: "筑紫A圆";
-src: url("FZFWZhuZiAYuanJWL.otf");
+src: url("Font/FZFWZhuZiAYuanJWL.otf");
 }
 
 @font-face{
 font-family: "筑紫黑体";
-src: url("FZFWZhuZiHeiR.otf");
+src: url("Font/FZFWZhuZiHeiR.otf");
 }
 
 @font-face{
   font-family: "筑紫标题";
-  src: url("FZFWZhuZiABiaoTMCJW.otf");
+  src: url("Font/FZFWZhuZiABiaoTMCJW.otf");
   }
 
 @font-face{
   font-family: "正保黑体";
-  src: url("FZBaoHTJW.otf");
+  src: url("Font/FZBaoHTJW.otf");
   }
 
 @font-face{
   font-family: "正保黑体L";
-  src: url("FZBaoHTJW_Xi.otf");
+  src: url("Font/FZBaoHTJW_Xi.otf");
   }
 
 @font-face{
   font-family: "新综艺";
-  src: url("FZXinZYHJW_L.otf");
+  src: url("Font/FZXinZYHJW_L.otf");
   }
 
 @font-face{
   font-family: "新综艺B";
-  src: url("FZXinZYHJW_M.otf");
+  src: url("Font/FZXinZYHJW_M.otf");
   }
 
 @font-face{
 font-family: "欢乐体";
-src: url("/FZFWHuanLTJW.otf");
+src: url("Font/FZFWHuanLTJW.otf");
 }
 
 @font-face{
   font-family: "轻吟体";
-  src: url("FZFWQingYinTiJWL.otf");
+  src: url("Font/FZFWQingYinTiJWL.otf");
   }
 
 @font-face{
   font-family: "轻吟体M";
-  src: url("FZFWQingYinTiJWM.otf");
+  src: url("Font/FZFWQingYinTiJWM.otf");
   }
 
 /*

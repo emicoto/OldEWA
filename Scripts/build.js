@@ -28,7 +28,7 @@ const COMMANDS = [tweego()];
 const TWEEGO_PATH = _resolve("devTools/tweego/StoryFormats");
 const options = {
   html: `-o ${_resolve("dist/index.html")}`,
-  Head: `--head ${_resolve("public/head.html")}`,
+  Head: `--head ${_resolve("devTools/head.html")}`,
   src: _resolve("src"),
   isWatch: process.argv.includes("-w") ? "-w" : "",
   modules: `--module=${_resolve("modules")}`,

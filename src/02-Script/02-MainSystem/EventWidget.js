@@ -145,21 +145,21 @@ DefineMacroS("Revent", Revent);
 
 function getitem(catgr, item, num=1) {
     var cname, ename
-    if(D.itemlist[catgr][item].name.length > 0){
+    if(D.Items[catgr][item].name.length > 0){
         if (V.items[catgr][item]){
             V.items[catgr][item].num += num
         }else{
             V.items[catgr][item] = {
-                name: D.itemlist[catgr][item].name,
-                name_en: D.itemlist[catgr][item].name_en,
-                type: D.itemlist[catgr][item].type,
-                category: D.itemlist[catgr][item].category,                
-                thumb: D.itemlist[catgr][item].thumb,
+                name: D.Items[catgr][item].name,
+                name_en: D.Items[catgr][item].name_en,
+                type: D.Items[catgr][item].type,
+                category: D.Items[catgr][item].category,                
+                thumb: D.Items[catgr][item].thumb,
                 num: num,
             }
 
-        cname = D.itemlist[catgr][item].name;
-        ename = D.itemlist[catgr][item].name_en;
+        cname = D.Items[catgr][item].name;
+        ename = D.Items[catgr][item].name_en;
         }
         
     }else{
@@ -190,7 +190,7 @@ window.getitem = getitem
 DefineMacroS("getitem", getitem);
 
 function useitem(catgr,item) {
-    D.itemlist[catgr][item].effect()
+    D.Items[catgr][item].effect()
     V.items[catgr][item].num -= 1
     return V.items
 }

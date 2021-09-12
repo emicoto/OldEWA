@@ -3,10 +3,10 @@
 <<widget "QuickStart">>
 <div style="margin-left:16px;font-size:14px">∵ <<lang "预设人物卡" "Preset">>：
 <select id="preset" name="preset" onchange="V.preset = this.value; showcharainfo()">
-	<option value="魔女" selected>魔女</option>
-	<option value="沐歌">沐歌</option>
-	<option value="云鹿">云鹿</option>
-    <option value="魔女" hidden="hidden" selected="selected">魔女</option>
+	<option value="魔女" selected><<lang "魔女" "Majo">></option>
+	<option value="沐歌"><<lang "沐歌" "Claire">></option>
+	<option value="云鹿"><<lang "云鹿" "Yun">></option>
+    <option value="魔女" hidden="hidden" selected="selected"><<lang "魔女" "Majo">></option>
 </select>
 </div>
 
@@ -17,10 +17,22 @@
 
 <<widget "charainfo">>
 <<switch $preset>>
-<<case "魔女">>大家的魔女<br> 是个伪娘。既然是魔（法少）女，那当然擅长魔法。<br>以上都是大嘘。只是个一个二次元爱好者，喜欢玩游戏，会画点画，玩COSPLAY，搞搞女装直播的样子。
-<<case "沐歌">>新人爱豆<br> 初露头角的美少女爱豆。除了唱歌，跳舞和演艺也不错。<br> 虽然是新人，其实后台有点硬，起码家境不穷。
-<<case "云鹿">>修仙爱好者<br> 小正太，热衷修仙文学。从小跟着爷爷练武术，身体素质很好。<br> 除了追小说，自己也会试着写小说的样子。
-<<default>>大家的魔女<br> 是个伪娘。既然是魔（法少）女，那当然擅长魔法。<br>以上都是大嘘。只是个一个二次元爱好者，喜欢玩游戏，会画点画，玩COSPLAY，搞搞女装直播的样子。
+<<case "魔女">>
+<<lang "大家的魔女<br> 是个伪娘。既然是魔（法少）女，那当然擅长魔法。<br>以上都是大嘘。只是个一个二次元爱好者，喜欢玩游戏，会画点画，玩COSPLAY，搞搞女装直播的样子。"
+"Magic Girl<br> He's a trap! Since he's a Majo(magical girls), of course he good at magic.<br> All of the above is just a Otaku-neta. In fact, Majo just a otaku fan who likes to play games, like to draw anime style chara, cosplay, and do live stream with feminie clothes."
+>>
+<<case "沐歌">>
+<<lang "新人爱豆<br> 初露头角的美少女爱豆。除了唱歌，跳舞和演艺也不错。<br> 虽然是新人，其实后台有点硬，起码家境不穷。"
+"Idol<br>A beauty girl who just make a debut on Idol career. She is good on singing, dancing and acting. Although she is new to idol career, but acctually she has a bit of backstage, or at least her family is high tier class."
+>>
+<<case "云鹿">>
+<<lang "修仙爱好者<br> 小正太，热衷修仙文学。从小跟着爷爷练武术，身体素质很好。<br> 除了追小说，自己也会试着写小说的样子。"
+"Apprentice<br> A boy who love the Xiuxian literature. He learn  martial arts from his grandfather from childhood, and very good at sports.<br>In addition to reading web novels, he also will try to write Xiuxian novels by himself."
+>>
+<<default>>
+<<lang "大家的魔女<br> 是个伪娘。既然是魔（法少）女，那当然擅长魔法。<br>以上都是大嘘。只是个一个二次元爱好者，喜欢玩游戏，会画点画，玩COSPLAY，搞搞女装直播的样子。"
+"Magic Girl<br> He's a trap! Since he's a Majo(magical girls), of course he good at magic.<br> All of the above is just a Otaku-neta. In fact, Majo just a otaku fan who likes to play games, like to draw anime style chara, cosplay, and do live stream with feminie clothes."
+>>
 <</switch>>
 
 <</widget>>
@@ -32,38 +44,40 @@
 <<if $PC.trait.泌乳体质 is undefined>>
     <<set $PC.trait.泌乳体质 to false>>
 <</if>>
+<<set _nakedbutton to Lang("查看裸体","ShowNaked")>>
+<<set _redressbutton to Lang("穿上衣服",'Re-Dress')>>
 
-<li>角色名字： <<textbox "$PC.info.name" $PC.info.name>>　　∵ 人物背景：<<CMBackground>></li>
-<li>性别属性： <<CMGender>>　　　<<button 查看裸体>><<gonaked "debug">><</button>> <<button 穿上衣服>><<redress>><</button>></li>
-<li>兴趣特长： <<CMMainclass>>　　　<<if $debug>>∵ 切换表情: <<CMEmote>><</if>></li>
-<li>　性观念： <<CMChara>></li>
+<li><<lang "角色名字" "Name">>： <<textbox "$PC.info.name" $PC.info.name>>　　∵ <<lang "人物背景" "Titles">>：<<CMBackground>></li>
+<li><<lang "性别属性" "Gender Tag">>： <<CMGender>>　　　<<button _nakedbutton>><<gonaked "debug">><</button>> <<button _redressbutton>><<redress>><</button>></li>
+<li><<lang "兴趣特长" "Major">>： <<CMMainclass>>　　　∵ <<lang "切换表情" "Emoji">>: <<CMEmote>></li>
+<li>　<<lang "性观念" "Attitude">>： <<CMChara>></li>
 
 <<dashline>>
 <span id="charamaking">
-<li>外貌体征</li>
-　体型　<<CMBodytype>>　　肤色　<<CMSkin>>　　特殊　<<CMRace>><br>
-　发色　<<CMHairColor>>　　发长　<<CMHair>>　　发型　<<CMHairstyle>><br>
-　眼型　<<CMEyetype>>　　瞳色　<<CMEyeColor>><span id="CMFurOption"></span><br>
-　罩杯　<<CMBreast>>　　臀型　<<CMButts>>　　<label><<print '<<checkbox "$PC.trait.泌乳体质" false true ' + ($PC.trait.泌乳体质 is true ? "checked" : "") + '>>'>>泌乳体质？</label><br>
+<li><<lang "外貌体征" "Physical">></li>
+　<<lang "体型" "Body">>　<<CMBodytype>>　　<<lang "肤色" "Skin">>　<<CMSkin>>　　<<lang "特殊" "Special">>　<<CMRace>><br>
+　<<lang "发色" "HairColor">>　<<CMHairColor>>　　<<lang "发长" "HairLength">>　<<CMHair>>　　<<lang "发型" "HairStyle">>　<<CMHairstyle>><br>
+　<<lang "眼型" "Eyes">>　<<CMEyetype>>　　<<lang "瞳色" "EyeColor">>　<<CMEyeColor>><span id="CMFurOption"></span><br>
+　<<lang "罩杯" "Breast">>　<<CMBreast>>　　<<lang "臀型" "Hips">>　<<CMButts>>　　<label><<print '<<checkbox "$PC.trait.泌乳体质" false true ' + ($PC.trait.泌乳体质 is true ? "checked" : "") + '>>'>><<lang "泌乳体质" "Natrual Lactation">>？</label><br>
 <<dashline>>
-<li>感官特征</li>
-　嘴巴感度　<<CMMouth>><br>
-　胸部感度　<<CMChest>><br>
+<li><<lang "感官特征" "Sensual">></li>
+　<<lang "嘴巴感度" "Mouth Sensitivity">>　<<CMMouth>><br>
+　<<lang "胸部感度" "Breast Sensitivity">>　<<CMChest>><br>
 <span id="CMgenital"></span>
-　肛门感度　<<CMAnal>><br>
+　<<lang "肛门感度" "Anal Sensitivity">>　<<CMAnal>><br>
 <<dashline>>
-<li>特殊素质</li>
-<span style="font-size:11px;color:gray">　备注：部分素质会影响成就的获得。</span><br>
-<label>　<<radiobutton "$starttrait" "菜鸟" autocheck>> 菜鸟</label>　　<span class="description">没什么特别的，只有一点新手补助。第一次玩推荐这个。</span><br>
-<label>　<<radiobutton "$starttrait" "好色" autocheck>> 好色</label>　　<span class="description">对性行为抵抗下降，欲望更容易上升。</span><br>
-<label>　<<radiobutton "$starttrait" "轻浮" autocheck>> 轻浮</label>　　<span class="description">对滥交接受度良好，容易从负面心理状态中恢复。</span><br>
-<label>　<<radiobutton "$starttrait" "人气" autocheck>> 人气</label>　　<span class="description">粉丝、魅力、金钱都有加成，但容易触发严重事件。</span><br>
-<label>　<<radiobutton "$starttrait" "天使心" autocheck>> 天使心</label>　<span class="description">天使一般的心肠，不再有怨恨，但也无法拒绝别人的任何请求。</span><br>
-<label>　<<radiobutton "$starttrait" "露出癖" autocheck>> 露出癖</label>　<span class="description">喜欢暴露的穿着，但面对裸奔还是会害羞的。</span><br>
-<label>　<<radiobutton "$starttrait" "福瑞爱" autocheck>> 福瑞爱</label>　<span class="description">对福瑞的接受度良好，容易提升兽交癖好。</span><br>
-<label>　<<radiobutton "$starttrait" "抖M体质" autocheck>> 抖M</label>　　<span class="description">抖M体质，疼痛减免。</span><br>
-<label>　<<radiobutton "$starttrait" "倾国倾城" autocheck>> 倾国倾城</label> <span class="description">一眼万年。招来狂蜂浪蝶，事件永不中断。</span><br>
-<label>　<<radiobutton "$starttrait" "经商头脑" autocheck>> 经商头脑</label> <span class="description">生财有道，摆摊卖东西有加成。但要注意强盗或小偷。</span><br>
+<li><<lang "特殊素质" "Start Traits">></li>
+<span style="font-size:11px;color:gray">　<<lang "备注：部分素质会影响成就的获得。" "SP: Some traits may affect the achievement.">></span><br>
+<label>　<<radiobutton "$starttrait" "菜鸟" autocheck>> <<lang "菜鸟" "Newbie">></label>　　<span class="description"><<lang "没什么特别的，只有一点新手补助。第一次玩推荐这个。" "Nothing special but has newbie grants. Recommend for beginner.">></span><br>
+<label>　<<radiobutton "$starttrait" "好色" autocheck>> <<lang "好色" "Horny">></label>　　<span class="description"><<lang "对性行为抵抗下降，欲望更容易上升。" "Reduced antipathy to sexual activity, but desire is more likely to rise.">></span><br>
+<label>　<<radiobutton "$starttrait" "轻浮" autocheck>> <<lang "轻浮" "Flirty">></label>　　<span class="description"><<lang "对滥交接受度良好，容易从负面心理状态中恢复。" "Good acceptance of promiscuity and easy recovery from negative mental states.">></span><br>
+<label>　<<radiobutton "$starttrait" "人气" autocheck>> <<lang "人气" "Famous">></label>　　<span class="description"><<lang "粉丝、魅力、金钱都有加成，但容易触发严重事件。" "A huge bonus when gain followers, charm the enemy, and earn money from live stream. But hight rate to trigger serious events.">></span><br>
+<label>　<<radiobutton "$starttrait" "天使心" autocheck>> <<lang "天使心" "Angelic">></label>　<span class="description"><<lang "天使一般的心肠，不再有怨恨，但也无法拒绝别人的任何请求。" "Angelic heart, no more hates and resentful for sexual activity, but also unable to refuse any request from others.">></span><br>
+<label>　<<radiobutton "$starttrait" "露出癖" autocheck>> <<lang "露出癖" "Exhibitionist">></label>　<span class="description"><<lang "喜欢暴露的穿着，但面对裸奔还是会害羞的。" "Like to dress exposed but still feeling shy when totally naked." >></span><br>
+<label>　<<radiobutton "$starttrait" "福瑞爱" autocheck>> <<lang "福瑞爱" "FurryLove">></label>　<span class="description"><<lang "对福瑞的接受度良好，容易提升兽交癖好。" "Good acceptance of furry, and rise bestiality fetishes easily.">></span><br>
+<label>　<<radiobutton "$starttrait" "抖M体质" autocheck>> <<lang "抖M" "Masochist">></label>　　<span class="description"><<lang "抖M体质，疼痛减免。" "Masochist body, reduced pain.">></span><br>
+<label>　<<radiobutton "$starttrait" "倾国倾城" autocheck>> <<lang "倾国倾城" "Heavenly Beauty">></label> <span class="description"><<lang "一眼万年。招来狂蜂浪蝶，事件永不中断。" "Love at first sight. A wave after waves of events, never has ending.">></span><br>
+<label>　<<radiobutton "$starttrait" "经商头脑" autocheck>> <<lang "经商头脑" "Business Sense">></label> <span class="description"><<lang "生财有道，摆摊卖东西有加成。但要注意强盗或小偷。" "Gain a huge bonus when selling things. But the robbers and thieves are watching you.">></span><br>
 <span id="omegatrait"></span>
 <!-- 自动纠正 -->
 <<silently>>
@@ -74,7 +88,7 @@
                 <<case "伪娘">>
                     <<replace #CMgenital>><<CMBoy>><</replace>>
                     <<replace #omegatrait>>
-                    <label>　<<radiobutton "$starttrait" "OMEGA" autocheck>> OMEGA</label>　<span class="description">向女装山脉祈愿，获得肠道孕囊，实现肛内怀孕。</span><br>
+                    <label>　<<radiobutton "$starttrait" "OMEGA" autocheck>> OMEGA</label>　<span class="description"><<lang "向女装山脉祈愿，获得肠道孕囊，实现肛内怀孕。" "Pray to the god of trap for obtain an intestinal gestational sac, make the dream of anal pregnancy become true!">></span><br>
                     <</replace>>
                 <<case "少年">>
                     <<replace #CMgenital>><<CMBoy>><</replace>>

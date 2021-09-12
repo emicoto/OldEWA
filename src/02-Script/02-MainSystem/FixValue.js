@@ -233,8 +233,8 @@ function FixValue() {
     PC.rpg.HP[1] = Math.round(Math.clamp((PC.base.体力[1]/5+100),1,1000)) //HP=体力/5+健康/10
     PC.rpg.HP[0] = Math.clamp(PC.rpg.HP[0],-1,PC.rpg.HP[1]) //战斗结束时按比例返回至体力和健康值
 
-    PC.rpg.MP[1] = PC.base.魔力
-    PC.rpg.MP[0] = PC.base.魔力
+    PC.rpg.MP[1] = PC.base.魔力[1]
+    PC.rpg.MP[0] = PC.base.魔力[0]
 
     PC.rpg.SP[1] = Math.round(Math.clamp(PC.rpg.SP[1],50,50+PC.eskl.性耐性/5))
     PC.rpg.SP[0] = Math.clamp(PC.rpg.SP[0],0,PC.rpg.SP[1])

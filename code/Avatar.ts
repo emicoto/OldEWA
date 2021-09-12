@@ -91,7 +91,7 @@ namespace Avatar {
 				return []
 			},
 			defaultOptions() {
-				console.log(zindex);
+				if(V.coredebug)console.log(zindex);
 				
 				return {
 					zindex:zindex,
@@ -1764,7 +1764,7 @@ function Avatarlayer(ID: string, option = null): void {
 				}
 			)).flat()
 		}
-		console.log(obj);
+		if(V.coredebug) console.log(obj);
 
 		Renderer.Animations[options.name] = obj
 	}
@@ -1957,10 +1957,10 @@ subcolor
 			}
 		}
 		if (!update) {
-			if (V.harddebug) console.log("未更新:", key, option, last, change[last], change);
+			if (V.coredebug) console.log("未更新:", key, option, last, change[last], change);
 		}
 		if (update) {
-			if (V.harddebug) console.log("更新:", key, option, last, change[last], change);
+			if (V.coredebug) console.log("更新:", key, option, last, change[last], change);
 			AVATARMODEL.redraw()
 			PORTRAITMODEL.redraw()
 		}

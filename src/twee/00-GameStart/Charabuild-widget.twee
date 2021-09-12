@@ -1,27 +1,27 @@
 ﻿:: 创建人物组件 [widget]
 
 <<widget "CMBoy">>
-　阴茎大小　<<CMPsize>><br>
-　阴茎感度　<<CMPenis>><br>
+　<<lang "阴茎大小　" "Penis Size ">><<CMPsize>><br>
+　<<lang "阴茎感度　" "Penis Sensitivity ">><<CMPenis>><br>
 <</widget>>
 
 <<widget "CMCri">>
-　阴蒂感度　<<CMPenis>><br>
+　<<lang "阴蒂感度" "Clitoris Sensitivity ">>　<<CMPenis>><br>
 <</widget>>
 
 <<widget "CMGirl">>
-　阴道感度　<<CMVagina>><br>
+　<<lang "阴道感度" "Vagina Sensitivity ">>　<<CMVagina>><br>
 <</widget>>
 
 <<widget "CMGender">>
-    <<set _optionlist to ["伪娘","扶她","少年","少女"]>>
+    <<set _optionlist to D.CMlist.GenderTag[$lang]>>
     <<listbox "$PC.info.tag" autoselect>>
-	<<optionsfrom _optionlist>>
+        <<optionsfrom _optionlist>>
     <</listbox>>
 <</widget>>
 
 <<widget "CMBackground">>
-    <<set _optionlist to {"魔法少女":1,"小爱豆":2,"修仙者":3}>>
+    <<set _optionlist to D.CMlist.title[$lang]>>
     <!-- <<if $debug is true or $achivement.reset gt 0>><<set _optionlist.穿越者 to 7>> -->
         <<listbox "$PC.type" autoselect>>
         <<optionsfrom _optionlist>>
@@ -29,98 +29,98 @@
 <</widget>>
 
 <<widget "CMChara">>
-    <<set _optionlist to {"正常":2,"开放":4,"保守":1}>>
+    <<set _optionlist to D.CMlist.atti[$lang]>>
         <<listbox "$PC.attitude" autoselect>>
         <<optionsfrom _optionlist>>
     <</listbox>>
 <</widget>>
 
 <<widget "CMRace">>
-    <<set _optionlist to {"适应力":"人类","兽耳":"兽族","魔纹":"灵族","羽翼":"羽族","蓝肤":"夜族"}>>
+    <<set _optionlist to D.CMlist.race[$lang]>>
     <<listbox "$PC.info.race" autoselect>>
 	<<optionsfrom _optionlist>>
     <</listbox>>
     <script>
         $("#listbox-pcinforace").on("change",()=>{
             PC.info.race == "兽族" ? 
-            new Wikifier(null,"<<replace #CMFurOption>>　　原型　<<CMFurType>><</replace>>"):
+            new Wikifier(null,"<<replace #CMFurOption>>　　<<lang '原型' 'FurType'>>　<<CMFurType>><</replace>>"):
             new Wikifier(null,"<<replace #CMFurOption>><</replace>><<set $PC.info.kemotype to null>>")
         })
     </script>
 <</widget>>
 
 <<widget "CMMainclass">>
-    <<set _optionlist to ["文艺创作","物理科学","自然科学","生理科学","音乐表演","运动格斗"]>>
+    <<set _optionlist to D.CMlist.major[$lang]>>
     <<listbox "$PC.info.major" autoselect>>
         <<optionsfrom _optionlist>>
     <</listbox>>
 <</widget>>
 
 <<widget "CMBodytype">>
-    <<set _optionlist to {"普通":2,"高大":3,"娇小":1}>>
+    <<set _optionlist to D.CMlist.body[$lang]>>
     <<listbox "$PC.info.body" autoselect>>
         <<optionsfrom _optionlist>>
     <</listbox>>
 <</widget>>
 
 <<widget "CMSkin">>
-    <<set _optionlist to {"健康":"health","白皙":"white","麦色":"mugi","棕色":"dark","黝黑":"black","苍白":"pale"}>>
+    <<set _optionlist to D.CMlist.skin[$lang]>>
     <<listbox "$PC.info.skin" autoselect>>
         <<optionsfrom _optionlist>>
     <</listbox>>
 <</widget>>
 
 <<widget "CMFurType">>
-    <<set _optionlist to {"猫":"cat","狗":"dog","狼":"wolf","狐":"fox","鹿":"deer","羊":"sheep","牛":"cow"}>>
+    <<set _optionlist to D.CMlist.furtype[$lang]>>
     <<listbox "$PC.info.kemotype" autoselect>>
         <<optionsfrom _optionlist>>
     <</listbox>>
 <</widget>>
 
 <<widget "CMBreast">>
-    <<set _optionlist to {"平坦":0,"微隆":1,"贫乳":2,"普乳":3,"巨乳":4,"魔乳":5}>>
+    <<set _optionlist to D.CMlist.breast[$lang]>>
     <<listbox "$PC.info.breast" autoselect>>
         <<optionsfrom _optionlist>>
     <</listbox>>
 <</widget>>
 
 <<widget "CMButts">>
-    <<set _optionlist to {"窄小":1,"普通":2,"圆润":3,"丰臀":4,"安产":5}>>
+    <<set _optionlist to D.CMlist.butts[$lang]>>
     <<listbox "$PC.info.hips" autoselect>>
         <<optionsfrom _optionlist>>
     <</listbox>>
 <</widget>>
 
 <<widget "CMHairColor">>
-    <<set _optionlist to {"黑色":"black","深棕色":"darkbrown","酒红色":"wine","棕色":"brown","奶茶色":"milktea","金色":"blond","米黄色":"softblond","白金色":"platinum","银色":"silver","纯白色":"white","紫色":"purple","绿色":"green","蓝色":"blue","水色":"aqua","粉色":"pink","红色":"red","橙色":"orange"}>>
+    <<set _optionlist to D.CMlist.haircolor[$lang]>>
     <<listbox "$PC.info.haircolor" autoselect>>
         <<optionsfrom _optionlist>>
     <</listbox>>
 <</widget>>
 
 <<widget "CMHair">>
-    <<set _optionlist to {"齐耳短发":50,"及脖中发":100,"及肩中发":250,"及胸长发":500,"及腰长发":800}>>
+    <<set _optionlist to D.CMlist.hairlength[$lang]>>
     <<listbox "$PC.info.hairlen" autoselect>>
         <<optionsfrom _optionlist>>
     <</listbox>>
 <</widget>>
 
 <<widget "CMHairstyle">>
-    <<set _optionlist to {"自然":"natural","卷发":"curly","直发":"straight"}>>
+    <<set _optionlist to D.CMlist.hairlength[$lang]>>
     <<listbox "$PC.info.hairstyle" autoselect>>
         <<optionsfrom _optionlist>>
     <</listbox>>
 <</widget>>
 
 <<widget "CMEyeColor">>
-    <<set _optionlist to {"黑色":"black","棕色":"brown","碧绿色":"emerald","绿色":"green","淡绿色":"lightgreen","蓝色":"blue","水色":"aqua","紫色":"purple","淡紫色":"lightpurple","银色":"white","金色":"amber","红色":"red"}>>
+    <<set _optionlist to D.CMlist.eyecolor[$lang]>>
         <<listbox "$PC.info.eyecolor" autoselect>>
         <<optionsfrom _optionlist>>
     <</listbox>>
 <</widget>>
 
 <<widget "CMEyetype">>
-    <<set _optionlist to {"普通":1,"吊眼":2}>>
+    <<set _optionlist to D.CMlist.eyetype[$lang]>>
         <<listbox "$PC.info.eyes" autoselect>>
         <<optionsfrom _optionlist>>
     <</listbox>>
@@ -134,119 +134,66 @@
 <</widget>>
 
 <<widget "CMMouth">>
-    <label> <<radiobutton "$PC.sens.m" 0.2 autocheck>> 钝感　</label>
-    <label> <<radiobutton "$PC.sens.m" 1 autocheck>> 普通　</label>
-    <label> <<radiobutton "$PC.sens.m" 2 autocheck>> 敏感　</label>
-    <label> <<radiobutton "$PC.sens.m" 4 autocheck>> 比较敏感　</label>
-    <label> <<radiobutton "$PC.sens.m" 6 autocheck>> 十分敏感　</label>
+    <label> <<radiobutton "$PC.sens.m" 0.2 autocheck>> <<lang "钝感" "bad">>　</label>
+    <label> <<radiobutton "$PC.sens.m" 1 autocheck>> <<lang "普通" "normal">>　</label>
+    <label> <<radiobutton "$PC.sens.m" 2 autocheck>> <<lang "敏感" "pretty">>　</label>
+    <label> <<radiobutton "$PC.sens.m" 4 autocheck>> <<lang "比较敏感" "very">>　</label>
+    <label> <<radiobutton "$PC.sens.m" 6 autocheck>> <<lang "十分敏感" "super">>　</label>
 <</widget>>
 
 <<widget "CMChest">>
-    <label> <<radiobutton "$PC.sens.b" 0.2 autocheck>> 钝感　</label>
-    <label> <<radiobutton "$PC.sens.b" 1 autocheck>> 普通　</label>
-    <label> <<radiobutton "$PC.sens.b" 2 autocheck>> 敏感　</label>
-    <label> <<radiobutton "$PC.sens.b" 4 autocheck>> 比较敏感　</label>
-    <label> <<radiobutton "$PC.sens.b" 6 autocheck>> 十分敏感　</label>
+    <label> <<radiobutton "$PC.sens.b" 0.2 autocheck>> <<lang "钝感" "bad">>　</label>
+    <label> <<radiobutton "$PC.sens.b" 1 autocheck>> <<lang "普通" "normal">>　</label>
+    <label> <<radiobutton "$PC.sens.b" 2 autocheck>> <<lang "敏感" "pretty">>　</label>
+    <label> <<radiobutton "$PC.sens.b" 4 autocheck>> <<lang "比较敏感" "very">>　</label>
+    <label> <<radiobutton "$PC.sens.b" 6 autocheck>> <<lang "十分敏感" "super">>　</label>
 <</widget>>
 
 <<widget "CMVagina">>
-    <label> <<radiobutton "$PC.sens.v" 0.2 autocheck>> 钝感　</label>
-    <label> <<radiobutton "$PC.sens.v" 1 autocheck>> 普通　</label>
-    <label> <<radiobutton "$PC.sens.v" 2 autocheck>> 敏感　</label>
-    <label> <<radiobutton "$PC.sens.v" 4 autocheck>> 比较敏感　</label>
-    <label> <<radiobutton "$PC.sens.v" 6 autocheck>> 十分敏感　</label>
+    <label> <<radiobutton "$PC.sens.v" 0.2 autocheck>> <<lang "钝感" "bad">>　</label>
+    <label> <<radiobutton "$PC.sens.v" 1 autocheck>> <<lang "普通" "normal">>　</label>
+    <label> <<radiobutton "$PC.sens.v" 2 autocheck>> <<lang "敏感" "pretty">>　</label>
+    <label> <<radiobutton "$PC.sens.v" 4 autocheck>> <<lang "比较敏感" "very">>　</label>
+    <label> <<radiobutton "$PC.sens.v" 6 autocheck>> <<lang "十分敏感" "super">>　</label>
 <</widget>>
 
 <<widget "CMPenis">>
-    <label> <<radiobutton "$PC.sens.c" 0.2 autocheck>> 钝感　</label>
-    <label> <<radiobutton "$PC.sens.c" 1 autocheck>> 普通　</label>
-    <label> <<radiobutton "$PC.sens.c" 2 autocheck>> 敏感　</label>
-    <label> <<radiobutton "$PC.sens.c" 4 autocheck>> 比较敏感　</label>
-    <label> <<radiobutton "$PC.sens.c" 6 autocheck>> 十分敏感　</label>
+    <label> <<radiobutton "$PC.sens.c" 0.2 autocheck>> <<lang "钝感" "bad">>　</label>
+    <label> <<radiobutton "$PC.sens.c" 1 autocheck>> <<lang "普通" "normal">>　</label>
+    <label> <<radiobutton "$PC.sens.c" 2 autocheck>> <<lang "敏感" "pretty">>　</label>
+    <label> <<radiobutton "$PC.sens.c" 4 autocheck>> <<lang "比较敏感" "very">>　</label>
+    <label> <<radiobutton "$PC.sens.c" 6 autocheck>> <<lang "十分敏感" "super">>　</label>
 <</widget>>
 
 <<widget "CMPsize">>
-    <label> <<radiobutton "$PC.genital.阴茎" 6 autocheck>> 迷你　</label>
-    <label> <<radiobutton "$PC.genital.阴茎" 10 autocheck>> 短小　</label>
-    <label> <<radiobutton "$PC.genital.阴茎" 15 autocheck>> 普通　</label>
-    <label> <<radiobutton "$PC.genital.阴茎" 18 autocheck>> 粗长　</label>
-    <label> <<radiobutton "$PC.genital.阴茎" 24 autocheck>> 巨大　</label>
+    <label> <<radiobutton "$PC.genital.阴茎" 6 autocheck>> <<lang "迷你" "tiny">>　</label>
+    <label> <<radiobutton "$PC.genital.阴茎" 10 autocheck>> <<lang "短小" "short">>　</label>
+    <label> <<radiobutton "$PC.genital.阴茎" 15 autocheck>> <<lang "普通" "normal">>　</label>
+    <label> <<radiobutton "$PC.genital.阴茎" 18 autocheck>> <<lang "粗长" "big">>　</label>
+    <label> <<radiobutton "$PC.genital.阴茎" 24 autocheck>> <<lang "巨大" "huge">>　</label>
 <</widget>>
 
 <<widget "CMAnal">>
-    <label> <<radiobutton "$PC.sens.a" 0.2 autocheck>> 无感　</label>
-    <label> <<radiobutton "$PC.sens.a" 1 autocheck>> 普通　</label>
-    <label> <<radiobutton "$PC.sens.a" 2 autocheck>> 敏感　</label>
-    <label> <<radiobutton "$PC.sens.a" 4 autocheck>> 十分敏感　</label>
-    <label> <<radiobutton "$PC.sens.a" 6 autocheck>> 超级敏感　</label>
+    <label> <<radiobutton "$PC.sens.a" 0.2 autocheck>> <<lang "钝感" "bad">>　</label>
+    <label> <<radiobutton "$PC.sens.a" 1 autocheck>> <<lang "普通" "normal">>　</label>
+    <label> <<radiobutton "$PC.sens.a" 2 autocheck>> <<lang "敏感" "pretty">>　</label>
+    <label> <<radiobutton "$PC.sens.a" 4 autocheck>> <<lang "敏感" "very">>　</label>
+    <label> <<radiobutton "$PC.sens.a" 6 autocheck>> <<lang "敏感" "super">>　</label>
 <</widget>>
 
 
 <<widget "CMApply">>
     <<switch $preset >>
         <<case "魔女">>
-            <<set $PC.type to 1>>
-            <<set $PC.info.name to "魔女">>
-            <<set $PC.info.tag to "伪娘">>
-            <<set $PC.info.race to "人类">>
-            <<set $PC.info.major to "自然科学">>
-            <<set $PC.attitude to 4>>
-            <<set $PC.info.breast to 1>>
-            <<set $PC.info.hips to 1>>
-            <<set $PC.info.body to 1>>
-            <<set $PC.info.hairlen to 100>>
-            <<set $PC.info.hairlenf to 100>>
-            <<set $PC.info.hairstyle to "straight">>
-            <<set $PC.info.haircolor to "aqua">>
-            <<set $PC.info.eyecolor to "aqua">>
-            <<set $PC.info.skin to "white">> 
-            <<set $PC.sens to {"m" : 2,  "b":2,  "c":2,  "v":null, "u":1, "a":4}>>
-            <<set $PC.genital to { "阴茎" : 10, "子宫" : null }>>
-            <<set $starttrait to "抖M体质">>
+            <<PCCard_MG>>
 
         <<case "沐歌">>
-            <<set $PC.type to 2>>
-            <<set $PC.info.name to "沐歌">>
-            <<set $PC.info.tag to "少女">>
-            <<set $PC.info.race to "人类">>
-            <<set $PC.info.major to "音乐表演">>
-            <<set $PC.attitude to 1>>
-            <<set $PC.info.breast to 2>>
-            <<set $PC.info.hips to 2>>
-            <<set $PC.info.body to 1>>
-            <<set $PC.info.hairlen to 250>>
-            <<set $PC.info.hairlenf to 250>>
-            <<set $PC.info.hairstyle to "straight">>
-            <<set $PC.info.haircolor to "darkbrown">>
-            <<set $PC.info.eyecolor to "brown">>
-            <<set $PC.info.skin to "health">>
-            <<set $PC.sens to {"m" : 1,  "b":4,  "v":1, "c":1, "u":1, "a":1}>>             
-            <<set $starttrait to "人气">>
-
-            <<set $PC.genital to { "阴茎" : null, "子宫" : 1 }>>
+            <<PCCard_Idol>>
 
         <<case "云鹿">>
-            <<set $PC.type to 3>>
-            <<set $PC.info.name to "云鹿">>
-            <<set $PC.info.tag to "少年">>
-            <<set $PC.info.race to "兽族">>
-            <<set $PC.info.major to "运动格斗">>
-            <<set $PC.attitude to 1>>
-            <<set $PC.info.breast to 0>>
-            <<set $PC.info.hips to 1>>
-            <<set $PC.info.body to 1>>
-            <<set $PC.info.hairlen to 120>> <<set $PC.info.hairlenf to 120>>
-            <<set $PC.info.hairstyle to "straight">>
-            <<set $PC.info.haircolor to "platinum">>
-            <<set $PC.info.eyecolor to "emerald">>
-            <<set $PC.info.skin to "white">>
-            <<set $PC.sens to {"m" : 1,  "b":2,  "c":2, "v":null, "u":1, "a":2}>>
-
-            <<set $PC.genital to { "阴茎" : 10, "子宫" : null }>>
-
-            <<set $starttrait to "菜鸟">>
-            <<set $PC.info.kemotype to "deer">>        
+           <<PCCard_Yun>>
     <</switch>>
+
     <<CMChangeApply>>
 <</widget>>
 
@@ -276,12 +223,8 @@
             <<set $titles.魔法少女 to true>>
             <<set $PC.lewd to {
                     "纯洁" : 800,
-                    "露出" : 0,
-                    "滥交" : 0,
-                    "受虐" : 50,
-                    "顺从" : 0,
-                    "兽交" : 0,
-                    "药瘾" : 0,
+                    "露出" : 0,  "滥交" : 0,  "受虐" : 50,
+                    "顺从" : 0,  "兽交" : 0,  "药瘾" : 0,
                     "性瘾" : 0
                 }>>
         <<case 2>>
@@ -289,12 +232,8 @@
             <<set $titles.爱抖露 to true>>
             <<set $PC.lewd to {
                 "纯洁" : 900,
-                "露出" : 50,
-                "滥交" : 0,
-                "受虐" : 0,
-                "顺从" : 0,
-                "兽交" : 0,
-                "药瘾" : 0,
+                "露出" : 50,  "滥交" : 0,  "受虐" : 0,
+                "顺从" : 0,  "兽交" : 0,  "药瘾" : 0,
                 "性瘾" : 0
             }>>
         <<case 3>>
@@ -302,12 +241,8 @@
             <<set $titles.道童 to true>>
             <<set $PC.lewd to {
                 "纯洁" : 1000,
-                "露出" : 0,
-                "滥交" : 0,
-                "受虐" : 0,
-                "顺从" : 100,
-                "兽交" : 0,
-                "药瘾" : 0,
+                "露出" : 0,  "滥交" : 0,  "受虐" : 0,
+                "顺从" : 100,  "兽交" : 0,  "药瘾" : 0,
                 "性瘾" : 0,
             }>>
     <</switch>>
@@ -315,116 +250,80 @@
     <<switch $PC.info.major>>
         <<case "自然科学">>
             <<set $PC.school to {
-                "文学" : 0,
-                "数学" : 80,
-                "物理" : 0,
-                "生理" : 0,
-                "自然" : 120,
-                "表演" : 0,
+                "文学" : 0, "数学" : 80,
+                "物理" : 0, "生理" : 0,
+                "自然" : 120, "表演" : 0,
                 "艺术" : 0
             }>>
             <<set $PC.abl to {
-                "异能" : 0,
-                "奥术" : 120,
-                "战技" : 0, 
-                "健身" : 0,
-                "运动" : 0,
-                "灵巧" : 0, 
+                "异能" : 0, "奥术" : 120,
+                "战技" : 0, "健身" : 0,
+                "运动" : 0, "灵巧" : 0, 
                 "意志" : 0,
             }>>
         <<case "物理科学">>
             <<set $PC.school to {
-                "文学" : 0,
-                "数学" : 80,
-                "物理" : 120,
-                "生理" : 0,
-                "自然" : 0,
-                "表演" : 0,
+                "文学" : 0, "数学" : 80,
+                "物理" : 120, "生理" : 0,
+                "自然" : 0, "表演" : 0,
                 "艺术" : 0
             }>>
             <<set $PC.abl to {
-                "异能" : 120,
-                "奥术" : 0,
-                "战技" : 0, 
-                "健身" : 0,
-                "运动" : 0,
-                "灵巧" : 0, 
+                "异能" : 120, "奥术" : 0,
+                "战技" : 0, "健身" : 0,
+                "运动" : 0, "灵巧" : 0, 
                 "意志" : 0,
             }>>
         <<case "文艺创作">>
             <<set $PC.school to {
-                "文学" : 120,
-                "数学" : 0,
-                "物理" : 0,
-                "生理" : 0,
-                "自然" : 0,
-                "表演" : 0,
+                "文学" : 120, "数学" : 0,
+                "物理" : 0, "生理" : 0,
+                "自然" : 0, "表演" : 0,
                 "艺术" : 80
             }>>
             <<set $PC.abl to {
-                "异能" : 0,
-                "奥术" : 0,
-                "战技" : 0, 
-                "健身" : 0,
-                "运动" : 0,
-                "灵巧" : 120, 
+                "异能" : 0, "奥术" : 0,
+                "战技" : 0, "健身" : 0,
+                "运动" : 0, "灵巧" : 120, 
                 "意志" : 0,
             }>>
         <<case "生理科学">>
             <<set $PC.school to {
-                "文学" : 0,
-                "数学" : 0,
-                "物理" : 0,
-                "生理" : 120,
-                "自然" : 80,
-                "表演" : 0,
+                "文学" : 0, "数学" : 0,
+                "物理" : 0, "生理" : 120,
+                "自然" : 80, "表演" : 0,
                 "艺术" : 0
             }>>
             <<set $PC.abl to {
-                "异能" : 0,
-                "奥术" : 0,
-                "战技" : 0, 
-                "健身" : 120,
-                "运动" : 0,
-                "灵巧" : 0, 
+                "异能" : 0, "奥术" : 0,
+                "战技" : 0, "健身" : 120,
+                "运动" : 0, "灵巧" : 0, 
                 "意志" : 0,
             }>>
         <<case "音乐表演">>
             <<set $PC.school to {
-                "文学" : 0,
-                "数学" : 0,
-                "物理" : 0,
-                "生理" : 0,
-                "自然" : 80,
-                "表演" : 120,
+                "文学" : 0, "数学" : 0,
+                "物理" : 0, "生理" : 0,
+                "自然" : 80, "表演" : 120,
                 "艺术" : 0,
             }>>
             <<set $PC.abl to {
-                "异能" : 0,
-                "奥术" : 0,
-                "战技" : 0, 
-                "健身" : 0,
-                "运动" : 0,
-                "灵巧" : 0, 
+                "异能" : 0, "奥术" : 0,
+                "战技" : 0, "健身" : 0,
+                "运动" : 0, "灵巧" : 0, 
                 "意志" : 120,
             }>>
         <<case "运动格斗">>
             <<set $PC.school to {
-                "文学" : 0,
-                "数学" : 0,
-                "物理" : 0,
-                "生理" : 50,
-                "自然" : 50,
-                "表演" : 0,
+                "文学" : 0, "数学" : 0,
+                "物理" : 0, "生理" : 50,
+                "自然" : 50, "表演" : 0,
                 "艺术" : 0
             }>>
             <<set $PC.abl to {
-                "异能" : 0,
-                "奥术" : 0,
-                "战技" : 120, 
-                "健身" : 0,
-                "运动" : 100,
-                "灵巧" : 0, 
+                "异能" : 0, "奥术" : 0,
+                "战技" : 120, "健身" : 0,
+                "运动" : 100, "灵巧" : 0, 
                 "意志" : 0,
             }>>
     <</switch>>
@@ -470,43 +369,13 @@
         <<case 1>>
             /* 宠物点数 HP/SP/MP 50=1点 总45点 */
             <<set $PC.follower to (500+random(100,5000))>>
-            <<set $pet to {
-                name:"史莱姆", type:"史莱姆", level:1, 
-                HP:[50,50], SP:[200,200], MP:[200,200],
-                ATK:3, DEF:18, MATK:4, MDEF:8, SPD:3,
-                好感:100, 忠诚:10, 欲望:10, 支配:0,
-                gender:"m", genital: {"阴茎":16, "子宫":null},
-                genitype: "史莱姆",
-                special: ["液态"],
-                state: {},
-                active:false,flag:{},
-            }>>
+            <<set $pet to clone(D.pet.史莱姆)>>
         <<case 2>>
             <<set $PC.follower to (1000+random(500,5000))>>
-            <<set $pet to {
-                name:"魔狼", type:"魔狼", level:1,
-                HP:[200,200], SP:[100,100], MP:[100,100],
-                ATK:10, DEF:5, MATK:5, MDEF:5, SPD:12,
-                好感:20, 忠诚:80, 欲望:20, 支配:0,
-                gender:"m", genital: {"阴茎":24, "子宫":null},
-                genitype: "狼阴茎",
-                special: ["变身"],
-                state: {},
-                active:false,flag:{},
-            }>>
+            <<set $pet to clone(D.pet.魔狼)>>
         <<case 3>>
             <<set $PC.follower to (100+random(100,2000))>>
-            <<set $pet to {
-                name:"灵虫", type:"灵虫", level:1,
-                HP:[500,500], SP:[100,100], MP:[150,150],
-                ATK:2, DEF:10, MATK:2, MDEF:15, SPD:1,
-                好感:0, 忠诚:20, 欲望:100, 支配:0,
-                gender:"m", genital: {"阴茎":24, "子宫":null},
-                genitype: "幽灵触手",
-                special: ["再生"],
-                state: {},
-                active:false,flag:{},
-            }>>
+            <<set $pet to clone(D.pet.灵虫)>>
     <</switch>>
     <<if $PC.info.race is "兽族">>
         <<switch $PC.info.kemotype>>
@@ -547,12 +416,35 @@
     <<else>>
         <<set $PC.produce.乳汁 to [0,0]>>
         <<set $PFlag.lactation to false>>
-        <<set $PFlag.lactatecd to null>>
+        <<set $PFlag.lactatecd to 0>>
     <</if>>
 
     <<if $PFlag.top lt 2>>
         <<redress>>
         <<setface "正常">>
     <</if>>
+
+<</widget>>
+
+<<widget "CMApplyCloth">>
+    
+    <<switch $PC.info.tag>>
+        <<case "少女">>
+            <<gonaked>>
+            
+        <<case "扶她">>
+            <<gonaked>>
+
+        <<case "少年">>
+            <<gonaked>>
+            <<dressup "over_up" 1 "#F14660" "红">>
+            <<dressup "inner_bt" 1>>
+            <<dressup "over_bt" 1>>
+            <<dressup "shoes" 1>>
+            <<dressup "legs" 1>>
+        <<case "伪娘">>
+            <<gonaked>>
+
+    <</switch>>
 
 <</widget>>

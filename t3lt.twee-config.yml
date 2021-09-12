@@ -382,3 +382,9 @@ sugarcube-2:
       name: saveExportImport
     InitActionCOM:
       name: InitActionCOM
+    PCCard_MG:
+      name: PCCard_MG
+    PCCard_Yun:
+      name: PCCard_Yun
+    PCCard_Idol:
+      name: PCCard_Idol

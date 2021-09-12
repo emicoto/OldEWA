@@ -1,0 +1,27 @@
+﻿:: Widgets BGMlist [widget]
+
+<<widget "InitBGM">>
+
+/* BGM */
+<<cacheaudio "迷雾" "sound/Haibane/Feding.mp3">>
+<<cacheaudio "月光" "sound/ClairDeLune.mp3">>
+<<cacheaudio "标题" "sound/WolfRainRequim.mp3">>
+<<cacheaudio "蝉鸣" "sound/minmin.mp3">>
+<<cacheaudio "穿越之谜" "sound/LainOST_MistofDifferentDimension.mp3">>
+
+<<cacheaudio "Lof1" "sound/just-lofi-relax.mp3">>
+<<cacheaudio "Lof2" "sound/rain-and-nostalgia.mp3">>
+<<cacheaudio "Lof3" "sound/amp-lofi-ukulele.mp3">>
+<<createplaylist "mainloop">>
+	<<track "Lof1" volume 0.5>>
+    <<track "Lof2" volume 0.5>>
+    <<track "Lof3" volume 0.5>>
+<</createplaylist>>
+<<set setup.mainloop to SimpleAudio.lists.get("mainloop")>>
+
+/* 音效 */
+<<cacheaudio "弹出通知" "sound/ring.mp3">>
+<<cacheaudio "获得成就" "sound/rising.mp3">>
+
+
+<</widget>>

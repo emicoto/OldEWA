@@ -2,7 +2,6 @@
 /* 首次运行时初始化自动存档 */
 <<run initSaveData()>>
 <!-- 首先初始化资料库 -->
-<<InitDataBase>>
 <<InitBGM>>
 
 <!-- DEBUG -->
@@ -13,20 +12,6 @@
 <</if>>
 
 <<set $lang to "CN">>
-<<set $coredebug to false>>
-
-<!-- 游戏系统环境设定 -->
-<<set $Flag to {}>> /* game flag */
-<<set $TFlag to {}>> /* Temp flag */
-<<set $PFlag to {}>> /* Player flag */
-<<set $BFlag to {}>> /* combat flag */
-<<set $CFlag to {}>> /* chara flag */
-<<set $EFlag to {}>> /* event flag事件系统相关变量 */
-<<set $COM to {}>>  /* command 相关处理 */
-<<set $Base to {}>>  /* Base Stastis */
-<<set $Source to {}>> /* sources */
-<<set $TCSV to {}>> /* temp character current state variables */
-<<set $PC to {}>>
 
 <<set $event to {
     type : "主线", name : "开幕", branch : "初次" , phrase: null,
@@ -35,43 +20,18 @@
 <<set $count to 0>>      /* 通用计数变量。需要离开当前passage或重置的情况 */
 <<set $eventend to false>>
 <<set $eventnext to 0>>
-<<set $Flag.charamaking to null>>
-
-<<set $temp to {}>>
-
-<<set $conf to {
-	persons:3, timelimit:true, hardmode:1, 
-	render: "canvas", checkSave: true, checkLoad: false, checkDel: true,
-}>>
-
-<<set $conf.saves to [
-	{locked:false},{locked:false},{locked:false},{locked:false},{locked:false},{locked:false},
-	{locked:false},{locked:false},{locked:false},{locked:false},{locked:false},{locked:false},
-]>>
-
-/* 按钮演出类的切换开关 */
-<<set $UI to {
-	movebutton:false, menubutton:false, activepage:null, closetmode:"穿", nextbutton:false, currentOverlay:null,
-}>>
 
 <<set $anounce to {flag:false, text:"", type:"弹出通知"}>>
 
 <!-- 游戏各种flag初始化 -->
 <<InitGameData>>
-<<InitNPCData>>
 <<InitPlayerData>>
 <<setchara "player">>
 
-/* 各种记录 */
-<<set $log to {
-	dairy:[], anouce:[], remind:[],
-}>>
 
 <<if $bookmark is undefined>>
 	<<set $bookmark to {}>>
 <</if>>
-
-<<set $record to {}>> 
 
 <!-- 已获得的头衔列表 -->
 <<if $titles is undefined>>
