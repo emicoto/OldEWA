@@ -1,30 +1,27 @@
-﻿:: InitClothUnderbottoms [widget]
-
-<<widget "InitClothBottom">>
-
-<<set Avatars.over_bt to [
-    {
+﻿A.over_bt = [
+        {
         id: 0, uid: 0,
-        index : "naked",    name : "裸",     gender : "n",
-        text : "无",  
-        name_en:"",
-        text_en:"", 
-        tag  : ["裸露"],
-        hasImg : false,
-        hasDif : {breast:false, pregnant:false},
+        index: 'naked',  name:'没穿裤子', gender: 'n',
+        text: '你什么裤子裙子都没穿。',
+        name_en: 'naked',
+        text_en: "you didn't wear any pants or skirt.",
+        tag:['裸露'],
+        hasImg: false,
+        hasDif:{breast: false, pregnant: false},
 
-        cost : 0,        reveal : 0,    hot : 0,    cold : 0,
-        durable : 0,     maxdurable : 0,     beauty: 0,     defence: 0,
-        fixcolor: true,    color:null,  colorname: null,
-        colors : [],
+        cost:0, reveal: 0, hot: 0, cold: 0,
+        durable: 0, maxdurable: 0, beauty: 0, defence: 0,
+        fixcolor: true, color: null, colorname: null,
+        colors: [],
+
+        category:'无', layer: 'over_bt',
+        shop: null,
+        slot: 'bottom',
         
-        category: "下衣", layer : "over_bt", slot : "bottom", 
-        shop : null, 
-        
-        acc : null,
+        acc: null,
         patterns: [],
-        fixacc  : true,
-        subcolor : null,
+        fixacc: true,
+        subcolor: null,
     },
     {
         id: 1, uid: 0,
@@ -118,5 +115,4 @@
         fixacc  : false,
         subcolor : "#787878",
     },
-]>>
-<</widget>>
+]

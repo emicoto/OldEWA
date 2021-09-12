@@ -103,7 +103,7 @@ var Avatar;
         return {
           zindex,
           frame: null,
-          addon: { body: false, over_bt: false, face: false, hair: false, mouth: false, penis: false },
+          addon: { body: false, bottom: false, face: false, hair: false, mouth: false, penis: false },
           neck: null,
           hand: null,
           face: null,

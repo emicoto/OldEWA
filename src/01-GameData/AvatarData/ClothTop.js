@@ -1,31 +1,28 @@
-﻿:: InitClothTop [widget]
-
-<<widget "InitClothTop">>
-<<set Avatars.over_up to [
+﻿
+A.over_up = [
     {
         id: 0, uid: 0,
-        index : "naked",    name : "裸",     gender : "n",
-        text : "无",   
-        name_en:"",
-        text_en:"", 
-        tag  : ["裸露"],
-        hasImg : false,
-        hasDif : {breast:false, pregnant:false},
+        index: "naked",  name:"没穿上衣", gender: "n",
+        text: "你什么上衣都没穿。",
+        name_en: "naked",
+        text_en: "you didn't wear any shirt or uppers.",
+        tag:["裸露"],
+        hasImg: false,
+        hasDif:{breast: false, pregnant: false},
 
-        cost : 0,        reveal : 0,        hot : 0, cold : 0,
-        durable : 0,     maxdurable : 0,     beauty: 0,     defence: 0,
-        fixcolor: true,    color:null,  colorname: null,
-        colors : [],
+        cost:0, reveal: 0, hot: 0, cold: 0,
+        durable: 0, maxdurable: 0, beauty: 0, defence: 0,
+        fixcolor: true, color: null, colorname: null,
+        colors: [],
         
-        category: "上衣/连衣裙", layer : "over_up",
-        shop : null, 
-        
-        slot : "top", 
-        tuckinable: false,        tuckin : false, 
-        acc : null,
+        category:"无", layer: "over_up",
+        shop: null,
+        slot: "top",
+
+        acc: null,
         patterns: [],
-        fixacc  : true,
-        subcolor : null,
+        fixacc: true,
+        subcolor: null,
     },
     {
         id: 1, uid: 0,
@@ -37,16 +34,16 @@
         hasImg : true,
         hasDif : {breast:true, pregnant:true},
 
-        cost : 35,        reveal : 9,        hot : -1, cold : -1,  /* 数值是直接在21上加减 */
-        durable : 20,     maxdurable : 20,     beauty: 0,     defence: 0.5,
-        fixcolor: false,    color:"#FDFFFF",  colorname: "白",
+        cost : 35,  reveal : 9, hot : -1,   cold : -1,
+        durable : 20,   maxdurable : 20,    beauty: 0,  defence: 0.5,
+        fixcolor: false,    color:"#FDFFFF",    colorname: "白",
         colors : [],
         
-        category: "上衣", layer : "over_up",
+        category: "上衣",   layer : "over_up",
         shop : "all",
         
         slot : "top", 
-        tuckinable: true,        tuckin : false, 
+        tuckinable: true,   tuckin : false, 
         acc : "slime",
         patterns: ["slime","heart"],
         fixacc  : true,
@@ -54,7 +51,7 @@
     },
     {
         id: 2, uid: 0,
-        index : "shirt",    name : "衬衫",     gender : "n",
+        index : "shirt",    name : "衬衫",  gender : "n",
         text : "一件简单的西式长袖衬衫。浅浅的暗纹给你增加了些许气质。",
         name_en:"business shirt",
         text_en:"A simple long-sleeved dress shirt. The dark line design adds a touch of grace to you.",
@@ -62,16 +59,16 @@
         hasImg : true,
         hasDif : {breast:true, pregnant:true},
 
-        cost : 120,        reveal : 10,        hot : -1.5, cold : -1.5,  /* 数值是直接在21上加减 */
-        durable : 20,     maxdurable : 20,     beauty: 0.02,     defence: 0.5,
-        fixcolor: false,    color:"#FDFFFF",  colorname: "白",
+        cost : 120, reveal : 10,    hot : -1.5, cold : -1.5, 
+        durable : 20,   maxdurable : 20,    beauty: 0.02,   defence: 0.5,
+        fixcolor: false,    color:"#FDFFFF",    colorname: "白",
         colors : ["mint"],
         
-        category: "上衣", layer : "over_up",
+        category: "上衣",   layer : "over_up",
         shop : "all",
         
         slot : "top", 
-        tuckinable: true,        tuckin : false, 
+        tuckinable: true,   tuckin : false, 
         acc : null,
         patterns: [],
         fixacc  : true,
@@ -79,7 +76,7 @@
     },
     {
         id: 3, uid: 0,
-        index : "bwopiece",    name : "BW连衣裙",     gender : "f",
+        index : "bwopiece", name : "BW连衣裙",  gender : "f",
         text : "一件设计简单的连衣裙。修身的设计显得你身材更苗条。毕竟是易淘上的便宜货，不能指望布料的防御效果。",
         name_en:"BW onepiece",
         text_en:"a simple design onepiece. The slim fit design looks slimmer on your body. The cheap goods on Ebay, can not expect the fabric defense effect.",
@@ -87,15 +84,15 @@
         hasImg : true,
         hasDif : {breast:true, pregnant:true},
 
-        cost : 200,        reveal : 9,        hot : -0.5, cold : -0.5,  /* 数值是直接在21上加减 */
-        durable : 15,     maxdurable : 15,     beauty: 0.05,     defence: 0,
-        fixcolor: true,    color:"black",  colorname: "黑",
+        cost : 200, reveal : 9, hot : -0.5, cold : -0.5,
+        durable : 15,   maxdurable : 15,    beauty: 0.05,   defence: 0,
+        fixcolor: true, color:"black",  colorname: "黑",
         colors : ["white","black"],
         
-        category: "上衣", layer : "over_up",  slot : "onepiece", 
+        category: "上衣",   layer : "over_up",  slot : "onepiece", 
         shop : "all",
         
-        tuckinable: false,        tuckin : false, 
+        tuckinable: false,  tuckin : false, 
         acc : null,
         patterns: [],
         fixacc  : true,
@@ -103,7 +100,7 @@
     },
     {
         id: 4, uid: 0,
-        index : "slpshortup",    name : "短袖睡衣",     gender : "n",
+        index : "slpshortup",   name : "短袖睡衣",     gender : "n",
         text : "一件设计简单的睡衣。轻柔透气的布料给你带来好梦。",
         name_en:"summer pajamas",
         text_en:"A simple design pajamas. The light and breathable fabric brings you good dreams.",
@@ -111,19 +108,18 @@
         hasImg : true,
         hasDif : {breast:true, pregnant:true},
 
-        cost : 60,        reveal : 9,        hot : -0.5, cold : -0.5,  /* 数值是直接在21上加减 */
-        durable : 10,     maxdurable : 10,     beauty: 0,     defence: 0,
-        fixcolor: false,    color:"#FDFFFF",  colorname: "白",
+        cost : 60,  reveal : 9, hot : -0.5, cold : -0.5, 
+        durable : 10,   maxdurable : 10,    beauty: 0,  defence: 0,
+        fixcolor: false,    color:"#FDFFFF",    colorname: "白",
         colors : [],
         
-        category: "上衣", layer : "over_up",  slot : "top", 
+        category: "上衣",   layer : "over_up",  slot : "top", 
         shop : "all",
         
-        tuckinable: false,        tuckin : false, 
+        tuckinable: false,  tuckin : false, 
         acc : "line",
         patterns: ["line","dot","star"],
         fixacc  : false,
         subcolor : "#787878",
     },
-]>>
-<</widget>>
+]

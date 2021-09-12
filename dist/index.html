@@ -93,10 +93,11 @@ var LZString={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234
 <style id="style-ui-debug" type="text/css">#debug-bar{background-color:#222;border-left:1px solid #444;border-top:1px solid #444;bottom:0;margin:0;max-height:75%;padding:.5em;position:fixed;right:0;z-index:99900}#debug-bar>div:not([id])+div{margin-top:.5em}#debug-bar>div>label{margin-right:.5em}#debug-bar>div>input[type=text]{min-width:0;width:8em}#debug-bar>div>select{width:15em}#debug-bar-toggle{color:#eee;background-color:#222;border:1px solid #444;height:101%;height:calc(100% + 1px);left:-2em;left:calc(-2em - 1px);position:absolute;top:-1px;width:2em}#debug-bar-toggle:hover{background-color:#333;border-color:#eee}#debug-bar-hint{bottom:.175em;font-size:4.5em;opacity:.33;pointer-events:none;position:fixed;right:.6em;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;white-space:nowrap}#debug-bar-watch{background-color:#222;border-left:1px solid #444;border-top:1px solid #444;bottom:102%;bottom:calc(100% + 1px);font-size:.9em;left:-1px;max-height:650%;max-height:65vh;position:absolute;overflow-x:hidden;overflow-y:scroll;right:0;z-index:99800}#debug-bar-watch[hidden]{display:none}#debug-bar-watch div{color:#999;font-style:italic;margin:1em auto;text-align:center}#debug-bar-watch table{width:100%}#debug-bar-watch tr:nth-child(2n){background-color:rgba(127,127,127,.15)}#debug-bar-watch td{padding:.2em 0}#debug-bar-watch td:first-child+td{padding:.2em .3em .2em .1em}#debug-bar-watch .watch-delete{background-color:transparent;border:none;color:#c00}#debug-bar-watch-all,#debug-bar-watch-none{margin-left:.5em}#debug-bar-views-toggle,#debug-bar-watch-toggle{color:#eee;background-color:transparent;border:1px solid #444;margin-right:1em;padding:.4em}#debug-bar-views-toggle:hover,#debug-bar-watch-toggle:hover{background-color:#333;border-color:#eee}#debug-bar-watch:not([hidden])~div #debug-bar-watch-toggle,html[data-debug-view] #debug-bar-views-toggle{background-color:#282;border-color:#4a4}#debug-bar-watch:not([hidden])~div #debug-bar-watch-toggle:hover,html[data-debug-view] #debug-bar-views-toggle:hover{background-color:#4a4;border-color:#6c6}#debug-bar-hint:after,#debug-bar-toggle:before,#debug-bar-views-toggle:after,#debug-bar-watch .watch-delete:before,#debug-bar-watch-add:before,#debug-bar-watch-all:before,#debug-bar-watch-none:before,#debug-bar-watch-toggle:after{font-family:tme-fa-icons;font-style:normal;font-weight:400;font-variant:normal;text-transform:none;line-height:1;speak:none}#debug-bar-toggle:before{content:"\e838"}#debug-bar-hint:after{content:"\e838\202f\e822"}#debug-bar-watch .watch-delete:before{content:"\e804"}#debug-bar-watch-add:before{content:"\e805"}#debug-bar-watch-all:before{content:"\e83a"}#debug-bar-watch-none:before{content:"\e827"}#debug-bar-views-toggle:after,#debug-bar-watch-toggle:after{content:"\00a0\00a0\e830"}#debug-bar-watch:not([hidden])~div #debug-bar-watch-toggle:after,html[data-debug-view] #debug-bar-views-toggle:after{content:"\00a0\00a0\e831"}html[data-debug-view] .debug{padding:.25em;background-color:#234}html[data-debug-view] .debug[title]{cursor:help}html[data-debug-view] .debug.block{display:inline-block;vertical-align:middle}html[data-debug-view] .debug.invalid{text-decoration:line-through}html[data-debug-view] .debug.hidden,html[data-debug-view] .debug.hidden .debug{background-color:#555}html:not([data-debug-view]) .debug.hidden{display:none}html[data-debug-view] .debug[data-name][data-type].nonvoid:after,html[data-debug-view] .debug[data-name][data-type]:before{background-color:rgba(0,0,0,.25);font-family:monospace,monospace;white-space:pre}html[data-debug-view] .debug[data-name][data-type]:before{content:attr(data-name)}html[data-debug-view] .debug[data-name][data-type|=macro]:before{content:"<<" attr(data-name) ">>"}html[data-debug-view] .debug[data-name][data-type|=macro].nonvoid:after{content:"<</" attr(data-name) ">>"}html[data-debug-view] .debug[data-name][data-type|=html]:before{content:"<" attr(data-name) ">"}html[data-debug-view] .debug[data-name][data-type|=html].nonvoid:after{content:"</" attr(data-name) ">"}html[data-debug-view] .debug[data-name][data-type]:not(:empty):before{margin-right:.25em}html[data-debug-view] .debug[data-name][data-type].nonvoid:not(:empty):after{margin-left:.25em}html[data-debug-view] .debug[data-name][data-type|=special],html[data-debug-view] .debug[data-name][data-type|=special]:before{display:block}</style>
 <link type="image/png" rel="icon" sizes="24x24" href="icon.png" />
 <link rel="stylesheet" href="CSS/jquery-ui.css">
+<link rel="stylesheet" href="CSS/main.css">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script&family=Kaisei+HarunoUmi&family=Kiwi+Maru:wght@300&family=Ma+Shan+Zheng&family=Noto+Sans+SC:wght@300&family=Noto+Serif+SC&family=Raleway:wght@300&family=Shippori+Mincho+B1&family=ZCOOL+KuaiLe&family=ZCOOL+QingKe+HuangYou&family=ZCOOL+XiaoWei&display=swap');
 </style>
-<script src="CSS/jquery-ui.js"></script>
+<script src="lib/jquery-ui.js"></script>
 <script src="lib/path.min.js"></script>
 <script src="lib/clickLove.js"></script>
 <script src="lib/jscolor.js"></script>
@@ -108,3713 +109,7 @@ var LZString={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234
 		<div id="init-lacking">Your browser lacks required capabilities. Please upgrade it or switch to another to continue.</div>
 		<div id="init-loading"><div>Loading&hellip;</div></div>
 	</div>
-	<!-- UUID://731DEBA3-F846-4AA9-97C0-8137F28469AC// --><tw-storydata name="EWA" startnode="22" creator="Tweego" creator-version="2.1.1+81d1d71" ifid="731DEBA3-F846-4AA9-97C0-8137F28469AC" zoom="1" format="SugarCube" format-version="2.35.0" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">/* twine-user-stylesheet #1: "00-font.css" */
-@font-face{
-font-family : "黄婷婷"; /*18*/
-src : url("CSS/FZSJ-SNH48HTTJW.otf");
-}
-
-@font-face{
-font-family: "稚艺简体"; /*14+b*/
-src: url("CSS/FZZHYJW.woff") format('woff'),
-     url("CSS/FZZHYJW.woff2") format('woff2');
-font-weight: normal;
-font-style: normal;
-font-display: swap;
-}
-
-@font-face{
-font-family: "筑紫古典";
-src: url("CSS/FZFWZhuZGDSMCJW.otf");
-}
-
-@font-face{
-font-family: "珍珠体"; 
-src: url("CSS/FZFWZZTJW.otf");
-}
-
-@font-face{
-font-family: "筑紫A圆";
-src: url("CSS/FZFWZhuZiAYuanJWL.otf");
-}
-
-@font-face{
-font-family: "筑紫黑体";
-src: url("CSS/FZFWZhuZiHeiR.otf");
-}
-
-@font-face{
-  font-family: "筑紫标题";
-  src: url("CSS/FZFWZhuZiABiaoTMCJW.otf");
-  }
-
-@font-face{
-  font-family: "正保黑体";
-  src: url("CSS/FZBaoHTJW.otf");
-  }
-
-@font-face{
-  font-family: "正保黑体L";
-  src: url("CSS/FZBaoHTJW_Xi.otf");
-  }
-
-@font-face{
-  font-family: "新综艺";
-  src: url("CSS/FZXinZYHJW_L.otf");
-  }
-
-@font-face{
-  font-family: "新综艺B";
-  src: url("CSS/FZXinZYHJW_M.otf");
-  }
-
-@font-face{
-font-family: "欢乐体";
-src: url("CSS/FZFWHuanLTJW.otf");
-}
-
-@font-face{
-  font-family: "轻吟体";
-  src: url("CSS/FZFWQingYinTiJWL.otf");
-  }
-
-@font-face{
-  font-family: "轻吟体M";
-  src: url("CSS/FZFWQingYinTiJWM.otf");
-  }
-
-/*
-google font: 
-font-family: 'Dancing Script', cursive;
-font-family: 'Kaisei HarunoUmi', serif;
-font-family: 'Kiwi Maru', serif;
-font-family: 'Ma Shan Zheng', cursive;
-font-family: 'Noto Sans SC', sans-serif;
-font-family: 'Noto Serif SC', serif;
-font-family: 'Raleway', sans-serif;
-font-family: 'Shippori Mincho B1', serif;
-font-family: 'ZCOOL KuaiLe', cursive;
-font-family: 'ZCOOL QingKe HuangYou', cursive;
-font-family: 'ZCOOL XiaoWei', serif;
-*/
-/* twine-user-stylesheet #2: "01-Base.css" */
-
-html {
-    /* Vertical colour gradient */
-  background-image: linear-gradient(
-    to bottom,
-    rgb(240, 240, 240) 30%,
-    rgb(190, 190, 190)
-  );
-  background-image: -webkit-linear-gradient(
-    top,
-    rgb(240, 240, 240) 30%,
-    rgb(190, 190, 190)
-  );
-    background-attachment: fixed;
-
-    /* Fallback colour */
-    background-color: #eee;
-
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    width: 100%;
-    height: 100%;
-}
-
-body {
-    /* Remove default styles */
-    background-color: transparent;
-    margin: -1% 0 0 0;
-    font-family: "Raleway", Georgia, "轻吟体M";
-    /* Used to center the box */
-    text-align: left;
-    color: #707556;
-    width: 100%;
-    height: 100%;
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
-
-canvas {
-  overflow: hidden;
-}
-
-#main {
-    width: 100%;
-    height: 100%;
-    border: rgba(255, 255, 255, 0) 1px solid;
-    background-image: url('./image/pattern.png');
-    background-repeat: repeat;
-    background-color:transparent;
-    z-index: -1;
-}  
-
-#passages {
-    float: left;
-    width: 80%;
-    height: 100%;
-    display: block;
-}
-
-.passage {
-    margin: 0px;
-    /* Inner margin within the box */
-    padding: 24px;
-    /* Text formatting */
-    color: rgb(65, 58, 3);
-    font-size: 90%;
-    line-height:180%;
-    text-align:justify;
-}
-
-/* Shrink the page when viewed on devices with a low screen width */
-@media screen and (max-width: 1920px) {
-  .passage {
-  font-size: 100%;
-  }
-  #passages {
-  width: 80%;
-  }
-}
-@media screen and (max-width: 1200px) {
-    .passage {
-    font-size: 90%;
-    }
-    #passages {
-    width: 90%;
-    }
-}
-@media screen and (max-width: 960px) {
-  .passage {
-    font-size: 90%;
-  }
-  #passages {
-    width: 90%;
-  }
-}
-
-@media screen and (max-width: 840px) {
-  .passage {
-    font-size: 87.5%;
-  }
-  #passages {
-    width: 95%;
-  }
-}
-
-@media screen and (max-width: 720px) {
-  .passage {
-    font-size: 75%;
-  }
-  #passages {
-    width: 100%;
-  }
-}
-
-#passages button {
-  background-color: #eee;
-  border-color: #ccc;
-  width: fit-content;
-}
-
-#passages button:hover {
-  background-color: #ddd;
-  border-color: #111;
-  cursor: pointer;
-}
-
-label {
-	cursor: pointer;
-}
-
-input[type=range] {
-  -webkit-appearance: none;
-	vertical-align: middle;
-  border: 0;
-}
-
-input[type=range]:focus {
-  outline: none;
-}
-
-#volume {
-  font-size: 10px;
-  font-family: 'Times New Roman', "MS PGothic";
-  position: fixed;
-  top:0px;
-  left:55px;
-}
-
-.VolumeSlider, .VolumeSlider::-webkit-slider-runnable-track {
-  -webkit-appearance: none;
-  width: 120px;
-  height: 5px;
-  max-height: 5px;
-  background: #fff;
-  outline: none;
-  opacity: 0.6;
-  -webkit-transition: .2s;
-  transition: opacity .2s;
-  border: 1px solid #bbb;
-}
-
-.VolumeSlider:hover {
-  opacity: 1;
-}
-
-.VolumeSlider::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 5px;
-  height: 15px;
-  background: #bfc22f;
-  cursor: pointer;
-  margin-top: -5px;
-}
-
-.VolumeSlider::-moz-range-thumb {
-  width: 5px;
-  height: 15px;
-  background: #bfc22f;
-  cursor: pointer;
-  margin-top: -5px;
-}
-
-input[type=range]:focus::-webkit-slider-runnable-track {
-  background: #d1d1d1;
-}
-
-*::-webkit-scrollbar-thumb{
-	background-color: rgb(220, 220, 220);
-}
-
-*::-webkit-scrollbar{
-	background-color: #eee;
-	width: 3px;
-  height: 3px;
-}
-/* twine-user-stylesheet #3: "01-General.css" */
-/* Links */
-a, a.internalLink, a.externalLink {
-    color: rgb(151, 136, 0);
-    font-family: 珍珠体;
-    font-size: 16px;
-    letter-spacing: 2px;
-}
-
-a:hover, a.internalLink:hover, a.externalLink:hover {
-	color: rgb(255, 72, 133);
-	text-decoration: none;
-  border-bottom:1px solid;
-}
-  
-span.link-disabled {
-	color: #ACBCBB;
-}
-  
-button {
-	color: #111;
-  font-family: 新综艺;
-  padding: 5px;
-  min-height: 20px;
-}
-
-li {
-  font-family: "Times New Roman", 筑紫黑体;
-}
-
-input, select, textarea {
-    background-color: rgba(255, 255, 255, 0.5);
-    color: #111;
-    border-color: #ccc;
-    max-width:200px;
-    font-family:"Times New Roman", "Noto Serif SC" ;
-}
-
-input:not(:disabled):focus, select:not(:disabled):focus, textarea:not(:disabled):focus,
-input:not(:disabled):hover, select:not(:disabled):hover, textarea:not(:disabled):hover {
-    background-color: white;
-    border-color: rgb(88, 94, 43);
-    transition: all 0.6s;
-}
-
-input[type="text"] {
-  background-color:white;
-  border-style:dashed;
-  border-radius: 5px;
-  border-color:rgb(203, 204, 167);
-  min-width: 80px;
-  min-height: 20px;
-  color: olive;
-}
-
-input[type="text"]:hover {
-  background-color: rgb(247, 246, 240);
-  border-color:rgb(88, 94, 43);
-  color:black;
-}
-
-.dashline {
-  width:auto;
-  height:1px;
-  border-bottom: 1px rgba(71, 67, 49, 0.2) dashed;
-  position: relative;
-}
-
-.splitline {
-  height: auto;
-  width: 1px;
-  border-right: 1px rgba(71, 67, 49, 0.2) dashed;
-  position: relative;
-}
-
-.metername { 
-  width:40px; 
-  height:18px; 
-  font-size: 14px;
-  float:left;
-  z-index:1;
-  font-family: "Times New Roman", 新综艺;
-}   
-
-
-.metercon {
-  z-index:1;
-  width:120px;
-  height: 6px;
-  margin-top: 8px;
-  background-color: #ddd;
-  border:1px solid #ccc;
-  float: left;
-}
-
-.bar {
-  z-index:2;
-  max-width: 120px;
-  min-width: 0px;
-  height:6px;
-  background-color: #ccc;
-  transition: all 0.75s;
-}
-
-hr {
-    border-color: rgb(88, 94, 43);
-}
-
-.hidden {
-	display: none !important;
-}
-
-.hide {
-  visibility: hidden;
-}
-
-.show {
-  visibility: visible !important;
-}
-
-.close {
-	background-color: gray;
-}
-
-.Abc {
-  text-transform: capitalize;
-}
-
-.ABC {
-  text-transform: uppercase;
-}
-
-.abc {
-  text-transform: lowercase;
-}
-
-.gray {
-    text-shadow: 1px 1px 0px rgba(187, 187, 187, 0.5),-2px -2px 0px #eee,;
-    color:#ccc;
-}
-
-.graytext {
-  color: rgb(165 161 142);
-}
-.goldtext {
-    color: #b7a900;
-}
-
-.macro-button {
-  background-color: #eee;
-  border-color: #ccc;
-  width: 100%;
-}
-
-.macro-button:hover {
-  background-color: #ddd;
-  border-color: #111;
-  cursor: pointer;
-}
-
-#handle {
-  min-width: 200px;
-  width: 80%;
-  min-height: 30px;
-  height: fit-content;
-  padding: 0px 20px;
-  text-align: left;
-  cursor: move;
-}
-
-#icon {
-  position: static;
-  vertical-align: text-top;
-}
-
-
-.left {
-	float: left;
-}
-
-.followleft {
-  height: 100%;
-  float: left;
-}
-
-.followright {
-  height: 100%;
-  float: right;
-}
-
-.followbottom {
-  position: absolute;
-  bottom:0px;
-  width: 100%;
-  height: auto;
-}
-
-.textbox {
-  width: 300px;
-  height: 150px;
-  font-size: 12px;
-  border-radius: 10px;
-  border: 2px solid #707556;
-}
-
-.title {
-  font-size: 32px;
-  font-family: "筑紫古典";
-  letter-spacing: 5px;
-  margin-left: -10px;
-}
-
-.lbox {
-  min-height: 20px;
-  width: fit-content;
-  max-width: 720px;
-  padding: 10px 20px;
-  background-color: rgba(255, 255, 255, 0.75);
-  border-radius: 5px;
-  border: rgba(212, 211, 197, 0.75) 1px solid;
-  color:rgb(153, 150, 130);
-  line-height: 18px;
-  font-size: 14px;
-  font-family: 'Times New Roman', 正保黑体;
-  margin: 10px 0px;
-}
-
-.tolink a {
-  background-image: url("image/icon/tolink.png");
-  background-repeat: no-repeat;
-  background-position-x: -2px;
-  vertical-align: middle;
-  letter-spacing: 2px;
-  padding: 0px 6px 4px 16px;
-  margin: 2px;
-  font-family: 新综艺;
-}
-
-.tolink a:hover {
-  background-image: url("image/icon/tolink_hover.png");
-  color: #d4bf00;
-  border:0px;
-}
-
-.situation {
-  min-height: 50px;
-  width: fit-content;
-  max-width: 1000px;
-  padding: 3px;
-  margin: 5px;
-  font-size: 16px;
-  letter-spacing: 1px;
-}
-
-#append-text {
-  font-size: 16px;
-  letter-spacing: 1px;
-}
-
-.div-link {
-	cursor: pointer;
-}
-.div-link a {
-	pointer-events: none;
-}
-
-#next {
-position: fixed;
-top: 20px;
-left: 300px;
-box-shadow: 5px 5px 5px #bbb;
-}
-
-#next:hover{
-background-color: rgb(255, 255, 255);
-}
-
-.nextbutton{
-  display: table-cell;
-  vertical-align: middle;
-  text-align: center;    
-}
-
-.nextbutton a {
-  color:rgb(71, 69, 60)
-}
-.nextbutton a:hover {
-  color:rgb(192, 189, 15)
-}
-
-.nextbutton {
-border: 1px solid #ccc;
-border-left: none;
-width: fit-content;
-padding: 0 0.5em;
-line-height: 2em;
-}
-.nextbutton:before,
-.nextbutton:after {
-content: "";
-border-top: 1px solid #ccc;
-display: block;
-position: absolute;
-width: 1.16em;
-height: 1em;
-z-index: -1;
-}
-.nextbutton:before {
-left: -1.16em;
-transform-origin: top right;
-transform: rotate(300deg);
-}
-.nextbutton:after {
-left: 0;
-transform-origin: top left;
-transform: rotate(240deg);
-}
-.nextbutton:hover,
-.nextbutton:hover::before,
-.nextbutton:hover::after {
-background-color: white;
-}
-
-
-#action-popup {
-  position: fixed;
-  top: 120px;
-  right:10%;
-  border: 2px solid rgb(216, 215, 199);
-  border-radius: 10px;
-  padding: 20px 10px;
-  text-align: center;
-  background-color: #fff;
-  z-index: 100;
-  min-width: 200px;
-  max-width: 600px;
-}
-
-@media screen and (max-width:1200px){
-  #action-popup{right:5%}
-}
-
-@media screen and (max-width:960px){
-  #action-popup{right:20px}
-}
-
-@media screen and (max-width:720px){
-  #action-popup{right:5px}
-}
-
-#action-popup.flash {
-  background-color:rgb(247, 255, 220);
-}
-
-#action-text2 {
-  display: table;
-  background-color: #eee;
-  border-radius: 3px;
-  transition: all 1.25s;
-}
-.flash {
-background-color:rgb(169, 255, 241);
-}
-.popup {
-  animation: popup 0.3s linear alternate-reverse;
-}
-.action-flash {
-  background-color: rgb(169, 255, 241) !important;
-  color: black !important;
-  transition: all 0.3s;
-}
-.action-flash a {
-color: darkgoldenrod !important;
-}
-.notransition {
-transition: none !important;
-}
-
-@keyframes popup {
-  100%  {transform: translateX(-1%); transform: scale(0.01)};
-  75% {transform: translateX(-50%); transform: scale(0.25)};
-  50% {transform: translateX(-100%); transform: scale(0.5)};
-  25% {transform: translateX(-150%); transform: scale(0.75)};
-  0% {transform: translateX(-200%); transform: scale(1.25)};
-}
-/* twine-user-stylesheet #4: "02-Sidebar.css" */
-
-#ui-bar {
-    background-color: #eee;
-    border-color: #ccc;
-    letter-spacing: 1px;
-    font-family: "Times New Roman", 筑紫黑体;
-    box-shadow: 0px 2px 10px rgba(99, 95, 41, 0.3);
-}
-
-#ui-bar hr {
-    border-color: #ccc;
-}
-
-#ui-bar button {
-    font-family: "Times New Roman", 筑紫黑体;
-    font-size: 15px;
-    letter-spacing: 4px;
-    max-width: 245px;
-    margin: 2px 0px;
-}
-
-#ui-bar-toggle{
-    color: rgb(59, 58, 49);
-    border-color: rgb(219, 219, 211);
-    width: 30px;
-    height: 30px;
-}
-
-#ui-bar-history {
-    width: 40px;
-    height: 100px;
-    z-index: auto;
-    position: absolute;
-    top:40px;
-    right:0px;
-}
-
-#ui-bar-history [id|="history"] {
-    color: #111;
-    border-color: #ccc;
-    width: 24px;
-    height: 24px;
-    font-size: 12px;
-    margin: 0px 30px 0px 30px;
-    text-align: center;
-}
-
-#ui-bar-toggle:hover{
-    background-color: #eee;
-    border-color: rgb(59, 58, 49);
-}
-
-#history-backward{
-    width: 30px;
-    height: 30px;
-    position: absolute;
-    top:30px;
-    right: -28px;
-}
-
-#history-forward {
-    width: 30px;
-    height: 30px;
-    position: absolute;
-    top:0px;
-    right:-28px;
-}
-
-#ui-bar-history [id|="history"]:hover {
-    background-color: #eee;
-    border-color: #111;
-}
-
-#ui-bar-history [id|="history"]:disabled {
-    color: rgb(219, 218, 200);
-    background-color: transparent;
-    border-color: rgb(204, 203, 190);
-}
-
-
-#versioninfo ,#story-title {
-    position:relative;
-    z-index: 2;
-}
-
-#ui-bar #title {
-    display: none;
-}
-  
-#story-title {
-    font-size: 40px;
-    line-height: 45px;
-    font-family: "Kaisei HarunoUmi";
-    color:#7F6E00;
-    font-style: normal;
-}
-
-#story-subtitle {
-    font-size: 12px;
-    font-family: Georgia;
-    font-style: italic;
-    color:#B4B07F;
-    letter-spacing: 2px;
-    margin-top: -4px;
-}
-
-#showtitle{
-    width: 280px;
-    height: fit-content;
-    position: fixed;
-    top:0px;
-    left:0px;
-    z-index: -1;
-}
-
-#gameVersionDisplay {
-    position: fixed;
-    left: 2px;
-    bottom: 2px;
-    font-size: 8px;
-    color: rgb(177, 179, 160);
-    z-index: 1000;
-}
-
-body #story-caption #storyCaptionDiv {
-	/* 232 px: img size, 1.32 em: stats line height, 4px: stats borders */
-	position: fixed;
-	top: 145px;
-	left: 10px;
-	height: calc(100% - 150px);
-	width: 268px;
-	padding-right: 2px;
-	padding-bottom: 12px;
-	overflow: scroll;
-	overflow-y: scroll;
-	overflow-wrap: anywhere;
-	scrollbar-color: #ddd #ccc;
-    scrollbar-width: thin;
-}
-
-#ui-bar header {
-    position: absolute;
-    top:5px;
-    z-index:-100;
-}
-
-#story-caption {
-	-webkit-backface-visibility: hidden;
-	backface-visibility: hidden;
-}
-
-#story-caption .error-reporter-btn {
-	position: absolute;
-	right: 16px;
-	top: 48px;
-	z-index: 999;
-}
-
-#showtimes {
-    border-top: 2px solid #716617;
-    border-bottom: 2px solid #716617;
-    position: fixed;
-    top:145px;
-    left:0px;
-    overflow: hidden;
-    width: 280px;
-    height: 22px;
-    z-index: 99;
-}
-
-.InGameDate {
-    border-top: 1px solid rgb(223, 220, 198,0.5);
-    border-bottom: 1px solid rgb(223, 220, 198,0.5);
-    background-color: #57522e;
-    position: absolute;
-    top:0px;
-    left:0px;
-    overflow: hidden;
-    width: 280px;
-    height: 20px;
-    z-index: 100;
-    font-family: 稚艺简体,'Times New Roman';
-    letter-spacing: 3px;
-    align-items: center;
-    line-height: 18px;  
-}
-
-.showtime {
-    font-size: 14px; 
-    color:rgb(240, 239, 231);
-}
-
-#show_money {
-    font-size: 16px;
-    line-height: 18px;   
-    vertical-align:middle;
-    font-family: 稚艺简体,'Times New Roman';
-    font-weight: 600;
-    letter-spacing: 3px;
-    position: relative;
-    display: inline-block;
-    width: 80%;
-    height: 24px;
-}
-#show_money .points {
-    text-align: right;
-    width: fit-content;
-    width: 45%;
-    float: left;
-    color: rgb(86, 187, 255);
-}
-
-#show_money .slice {
-    color:#ccc;
-    width: 20px;
-}
-
-#show_money .money{
-    width: fit-content;
-    width: 45%;
-    float: right;
-    color:rgb(172, 169, 2);
-    text-align: left;
-}
-
-#notice {
-    width: 100%;
-    height:fit-content;
-    font-size: 13px;
-    color:#8b8b7e;
-    padding: 5px;
-}
-
-#playerstats {
-    width: 170px;
-    align-content: center;
-    z-index: 0;
-    margin-top: -10px;
-    margin-bottom: 10px;
-    margin-left: 40px;
-    line-height: 20px;
-}
-
-#menu_container {
-    width: 320px;
-    min-height: 50px;
-    z-index: 10000;
-    background-color: rgba(255, 255, 255, 0.2);
-    border: 2px solid #FFF;
-    position: fixed;
-    border-radius: 0px 100px 100px 0px;
-    bottom:5%;
-    transition: all 0.75s ease-in-out;
-    overflow: hidden;
-    display: inline-block;
-    -webkit-backdrop-filter: blur(2px);
-    backdrop-filter: blur(2px); 
-
-}
-
-@media screen and (max-height: 1200px) {
-    #menu_container{
-        bottom:30%;
-    }
-}
-
-@media screen and (max-height: 960px) {
-    #menu_container{
-        bottom:18%;
-    }
-}
-
-@media screen and (max-height: 820px) {
-    #menu_container{
-        bottom:10%;
-    }
-}
-
-@media screen and (max-height: 680px) {
-    #menu_container{
-        bottom:10px;
-    }
-}
-.menu_hide {
-    left:-300px;
-    height: 80px;
-    font-size: 14px;
-    line-height: 16px;
-    padding: 1% 30px 1% 0px;
-    box-shadow: 1px 1px 5px rgba(113, 116, 138, 0.1);
-}
-
-.menu_active {
-    left: -10px;
-    line-height: 20px;
-    font-size: 16px;
-    padding:10px 30px 10px 0px;
-    height: fit-content;
-    -webkit-backdrop-filter: blur(5px);
-    backdrop-filter: blur(5px); 
-    box-shadow: 2px 2px 10px rgba(113, 116, 138, 0.2);
-}
-
-#menu_container:hover,
-#menu_container:focus,
-#menu_container:focus-visible{
-    left: -10px;
-    line-height: 20px;
-    font-size: 16px;
-    padding:10px 30px 10px 0px;
-    height: fit-content;
-    -webkit-backdrop-filter: blur(5px);
-    backdrop-filter: blur(5px); 
-    box-shadow: 2px 2px 10px rgba(113, 116, 138, 0.2);
-}
-
-#menu_container:hover .menu,
-#menu_container:focus .menu,
-#menu_container:focus-visible .menu,
-.menu_active .menu{
- color:#c0be33;
-}
-
-#menu_container .menu {
-    width: 20px;
-    height: 100%;
-    float: right;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    position: relative;
-    font-family: 轻吟体M;
-    text-align: center;
-    vertical-align: middle;
-    overflow-wrap: break-word;
-    cursor: pointer;
-}
-
-#menu_container .menu a:hover{
-    color:#c4c267;
-    border: none;
-}
-
-#menu_container .bottonarea{
-    width: calc(100% - 50px);
-    float: left;
-}
-
-#menu_container button{
-  width: 120px;
-  height: 30px;
-  border-radius: 5px;
-  border: #eee 1px;
-  float: right;
-  margin: 2px;
-  font-size: 14px;
-  font-family: 新综艺;
-  letter-spacing: 1px;
-  position: relative;
-}
-
-#menu_container button:hover, #menu_container button:focus{
-    color:#bfc212;
-    border: #eee 1px;
-    box-shadow:inset 2px 2px 1px 0px rgba(73, 50, 0, 0.1), 1px 1px 2px 0px rgba(255, 248, 186, 0.2);
-}
-
-#sidebar_stats button{
-    min-width: 75px;
-    max-width: 75px;
-    max-height: 12px;
-    border: #ddd 1px solid;
-    color: #9A9242;
-    font-size: 10px;
-    line-height: 4px;
-    text-align: center;
-    vertical-align:top;
-    margin: 0px;
-}
-
-#showgametime {
-    position: fixed;
-    right: 2px;
-    top: 2px;
-    font-size: 8px;
-    color: rgb(177, 179, 160);
-    z-index: 1000;
-}
-/* twine-user-stylesheet #5: "03-Savelist.css" */
-#saveList {
-	width: 100%;
-	height: 100%;
-	margin-top: -10px;
-	margin-right: 5px;
-	padding: 5px;
-	position: relative;
-}
-
-#savepage{
-	height: 100%;
-	position: relative;
-	width: 100%;
-	height: 100%;
-}
-
-#savecard {
-    width: 45%;
-    height: 140px;
-    margin: 1px 6px;
-    border-radius: 10px;
-    padding: 5px;
-	transition: all 0.5s;
-    background-color: rgba(255,255,255,0.2);
-	display: inline-block;
-	position: relative;
-}
-
-#savecard:hover {
-    background-color: rgb(255 255 255 / 50%);
-}
-
-@media screen and (max-width:840px){
-	#savecard{
-		width: 45%;
-	}
-}
-
-#savecard #sc-title, #savecard #gametime, #savecard a, #savecard button, #savecard input{
-	font-family: '新综艺';
-}
-
-#gametime {
-    position: absolute;
-    top: 12px;
-    left: 5px;
-    color: rgb(107 104 0 / 27%);
-    line-height: initial;
-    text-align: left;
-    z-index: -1;
-}
-
-#sv-date {
-    font-size: 42px;
-    letter-spacing: 2px;
-}
-#sv-time {
-    font-size: 30px;
-    letter-spacing: 2px;
-}
-#sv-year {
-    font-size: 18px;
-}
-
-
-#savename {
-    position: absolute;
-    top: 32%;
-    width: 100%;
-    text-align: center;
-    line-height: 18px;
-    text-shadow: 2px 6px 4px rgb(0 0 0 / 25%);
-}
-
-#sv-name {
-    font-size: 26px;
-}
-#sc-title {
-    font-size: 13px;
-    color: rgb(148 135 50);
-}
-
-#sv-location {
-    position: absolute;
-    bottom: 20px;
-    left: 5px;
-}
-
-#uid {
-    position: absolute;
-    font-size: 10px;
-    font-family: 'Noto Sans SC';
-    left: 5px;
-    bottom: 5px;
-}
-
-#playedtime {
-    font-size: 10px;
-    position: absolute;
-    top: 0px;
-    color: #ccc6be;
-}
-
-#savedtime {
-    position: absolute;
-    top: 0px;
-    right: 0px;
-    color: rgb(65 58 3);
-    font-size: 10px;
-    letter-spacing: 1px;
-    font-family: '筑紫古典';
-}
-
-#savecard input{
-	font-size: 12px;
-	letter-spacing: 1px;
-	background: transparent;
-	border-radius: 3px;
-	z-index: 10;
-	width: 48px;
-	height: 24px;
-}
-
-#savebutton, #loadbutton, #delbutton{
-    z-index: 10;
-    position: absolute;
-
-}
-
-#savebutton {
-    bottom: 5px;
-    right: 5px;	
-}
-
-#loadbutton {
-    bottom: 32px;
-    right: 5px;
-}
-
-#delbutton {
-    bottom: 60px;
-    right: 5px;
-}
-#savelock {
-    position: absolute;
-    bottom: 8px;
-    right: 55px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    width: 16px;
-    height: 16px;
-    text-align: center;
-}
-#savelock img{
-	transition: all 0.5s;	
-}
-#savelock img:hover{
-	filter: brightness(1.5) saturate(1.5);
-}
-#savelock a:hover{
-	border: none;
-}
-
-
-#sv-location {
-    position: absolute;
-    bottom: 20px;
-    left: 5px;
-}
-
-#autosave, #saves {
-    font-size: 10px;
-    text-align: center;
-    letter-spacing: 2px;
-    font-family: Georgia;
-}
-
-#s-pages {
-	width: 95%;
-	color: #8e8777;
-	font-size: 10px;
-	letter-spacing: 2px;
-	font-family: Georgia;
-}
-
-#saveDataInput {
-    min-width: 80%;
-    height: 120px;
-    resize: none;
-}
-/* twine-user-stylesheet #6: "04-OverlayPage.css" */
-.customOverlay {
-    display: block;
-    position: absolute;
-    top: 5%;
-    left: 5%;
-    height: 80%;
-    width: 680px;
-    max-height: 800px;
-    border-radius: 20px 5px 5px 20px;
-    border: 3px solid rgba(255, 255, 255, 0);
-    background-color: rgba(255, 255, 255, 0.3);
-    box-shadow: -2px -2px 1px rgba(255, 255, 255, 0.75), 2px 2px 1px rgba(120, 120, 120, 0.3), -5px 20px 20px rgba(40, 40, 40, 0.3);
-    text-align: left;
-    padding: 5px;
-    overflow-y: scroll;
-    z-index: 1000;
-    user-select: none;
-    -webkit-backdrop-filter: blur(6px);
-    backdrop-filter: blur(6px); 
-}
-
-.customOverlay[data-overlay="canvasLayers"],
-.customOverlay[data-overlay="canvasColours"],
-.customOverlay[data-overlay="canvasModel"] {
-    max-width: unset;
-}
-
-@media screen and (max-width: 840px) {
-  .customOverlay{
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    width: 540px;
-  }
-}
-
-.overlayMenu ul {
-	text-align: left;
-	list-style: none;
-	margin: 0;
-	padding: 0;
-}
-
-.overlayMenu ul li {
-	float: left;
-	height: 35px;
-	margin-right: 1px;
-}
-
-.debugOverlay {
-	display: block;
-	position: fixed;
-	top: 20px;
-	bottom: 20px;
-	right: 20px;
-	height: 80%;
-	width: auto;
-	max-width: 700px;
-	z-index: 1001;
-	padding: 3px;
-	border: 2px #fff solid;
-	background-color: #333;
-	overflow-y: scroll;
-}
-
-.debugOverlay ul li input {
-	width: 80px;
-	margin: 0;
-}
-
-.overlayItem {
-	border-top: 2px #fff solid;
-	clear: both;
-}
-
-#statsHelp {
-	overflow-y: scroll;
-	height: auto;
-	max-height: 200px;
-}
-
-@media only screen and (min-width: 720px) {
-      .customOverlay {
-          left: 300px;
-      }
-}
-
-#overlaytitle {
-    width: 98%;
-    height: 50px;
-    font-size: 24px;
-    font-style: border;
-    position: absolute;
-    top:5px;
-    left:5px;
-    float: left;
-}
-
-#customOverlayTitle {
-    height: 40px;
-}
-
-#overlaytitle li {
-    list-style:none;
-    list-style-position: inside;
-    font-family: 筑紫古典;
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    margin-left: 10px;
-    color: rgb(151, 141, 1);
-}
-#overlaytitle #handle li ::before {
-    content: "♢";
-    font-size: 24px;
-    margin: 2px;
-}
-#overlaytitle #handle li ::after {
-    content: "♢";
-    font-size: 24px;
-    margin: 2px;
-}
-#overlaytitle button{
-    float: right;
-    top:5px;
-    right:5px;
-    margin-right: 2px;
-    font-size: 10px;
-    width: fit-content;
-    min-width: 24px;
-    height: 24px;
-    background: transparent;
-}
-
-#overlaytitle button:hover, #overlaytitle button:focus{
-    background-color:rgba(255, 255, 255, 0.25);
-}
-
-#customOverlay {
-    font-family: 'Times New Roman', 轻吟体;
-}
-
-#customOverlay button {
-    background: transparent;
-    width: fit-content;
-    font-size: 12px;
-    height: 24px;
-    padding-bottom: 2px;
-}
-  
-#customOverlay button:hover {
-    background-color: rgba(255, 255, 255, 0.5);
-}
-
-#customOverlayContent {
-    line-height: 20px;
-    padding: 10px;
-    font-size: 14px;
-}
-
-#customOverlayContent li {
-    height: 22px;
-    margin-left:10px;
-    font-size: 14px;
-    list-style:"・ ";
-    list-style-position: inside;
-}
-
-#profile {
-    padding:0px 10px;
-    font-size: 14px;
-    float: left;
-}
-
-#profile a{
-    font-size: 14px;
-    line-height: 20px;
-}
-
-#profile li {
-    list-style: none;
-    font-family:"Times New Roman", 珍珠体 ;
-    margin-left: -3px;
-    font-weight: 600;
-    color: rgb(165, 154, 0);
-    letter-spacing: 5px;
-}
-
-#profile li::before {
-    content: "♢";
-}
-
-#profile li::after {
-    content: "♢";
-}
-
-#profile .dashline {
-    margin-left: -5px;
-    margin-top: 5px;
-    margin-bottom: 8px;
-    border-bottom: 1px solid rgba(56, 54, 49, 0.1);
-}
-
-#profile .metername{
-    margin-left: 10px;
-}
-
-.selfinfo {
-    margin-left: 15px;
-    font-size: 13px;
-    color: rgb(152, 153, 85);
-}
-
-.photoinfo {
-    width: 95%;
-    margin-left: 15px;
-    line-height:20px;
-}
-
-#sensationbar .metername{
-    font-family: Georgia, Verdana, 轻吟体;
-}
-
-#sensationbar .metercon {
-    max-width:100px;
-}
-
-#sensationbar .bar {
-    max-width:100px;
-}
-
-@media screen and (max-width: 840px) {
-  .metercon{
-    max-width:100px;
-  }
-  .bar{
-    max-width: 100px;
-  }
-}
-
-#skilldata {
-    width: 100%;
-    align-items: center;
-}
-
-.classdata {
-    float:left;
-    width: 100px;
-    height: 30px;
-    
-    line-height: 15px;
-    border:1px solid rgb(214, 213, 211);
-    margin: 4px;
-    z-index: 0;
-}
-
-.classdata:hover{
-    background-color: rgba(245, 245, 245, 0.75);
-}
-
-#skilldata .metercon {
-    max-width: 100px;
-    max-height: 2px;
-    margin: 8px 0px 0px 0px;
-    padding: 0px;
-}
-
-#skilldata .bar {
-    max-width: 100px;
-    max-height: 2px;
-    margin: 0px;
-    padding: 0px;
-}
-
-#skilldata .metername {
-    float: left;
-    height: 14px;
-    text-align: center;
-    z-index: 0;
-    font-size: 12px;
-    margin-top: 5px;
-}
-
-.metername {
-    font-size: 12px;
-}
-
-#skilldata .skillrank {
-    float: right;
-    height: 14px;
-    text-align: center;
-    z-index: 0;
-    margin-right: 20px;
-    font-size: 11px;
-    margin-top: 5px;
-}
-
-#explist {
-    height:max-content;
-    width: 100%;
-    position: relative;
-    float:left;
-    display: block;
-}
-
-.listblock {
-    height: 20px;
-    font-size: 12px;
-
-    float: left;
-    align-content: left;
-    border-right: 1px dashed #ccc;
-    margin-left: 8px;
-    position: relative;
-}
-
-.listname {
-    float:left;
-    width: 64px;
-    text-align: left;
-    margin-right: 4px;
-}
-
-.listnum {
-    float: left;
-    width: 64px;
-    text-align: left;
-}
-
-#rpgstatus {
-    margin-left: 10px;
-    font-size: 12px;
-    font-family:新综艺;
-    width: 90%;
-}
-/* twine-user-stylesheet #7: "05-Element.css" */
-/* StartPage and Charamaking */
-#startpage input {
-    max-width: 100px;
-    max-height: 20px;
-    font-size: 15px;
-}
-
-#startpage {
-    line-height: auto;
-}
-
-.intro {
-    font-family: 筑紫古典;
-    font-size: 18px;
-    text-shadow: 0 0 3px rgb(237, 240, 222)
-}
-
-#StartingPageMenu {
-    width:100%;
-}
-
-#charainfo {
-    margin-left:30px;
-    font-size:15px;
-    color:gray;
-    font-family:"Noto Serif SC";
-    letter-spacing: 1px;
-}
-
-#StartingPageMenu button {
-    width:150px;
-    font-size: 16px;
-    letter-spacing:2px;
-    margin: 4px;
-    background-color: rgba(250, 250, 250);
-    border: 1px solid lightgray;
-    border-radius: 5px;
-    color: rgb(76, 77, 63);
-}
-
-#StartingPageMenu button:hover {
-    background-color: rgb(231, 231, 231);
-    border: 1px solid rgb(51, 51, 51);
-    color: rgb(0, 0, 0);
-}
-
-#StartingPage li {
-    font-size: 15px;
-    line-height: 24px;
-    list-style: "∵ ";
-}
-
-#StartingPage select {
-    font-size: 14px;
-    width: 100px;
-    height: 30px;
-    color: olive;
-}
-
-#StartingPage select:hover {
-    color: black;
-    border-color: olive;
-}
-
-#StartingPage .dashline {
-    margin-top: 5px;
-    margin-bottom: 5px;
-}
-
-#charamaking {
-    font-size: 15px;
-    font-family: Georgia,筑紫黑体;
-}
-
-#charamaking li {
-    font-size: 15px;
-    list-style: "・";
-    color:olive;
-    font-family: Georgia,新综艺B;
-}
-
-#GameSetting {
-    font-size: 14px;
-    letter-spacing: 2px;
-    line-height: 24px;
-}
-
-#GameSetting a {
-    font-size: 14px;
-    font-family: Georgia, 新综艺B;
-}
-
-/* Event */
-#eventsituation {
-    max-width: 800px;
-    width: 100%;
-    display: block;
-    height: fit-content;
-    margin: auto;
-    font-size: 24px;
-    font-family:珍珠体, Georgia;
-    text-align: center;
-    letter-spacing: 2px;
-	line-height: 40px;
-    padding: 20px;
-    transition: all 0.75s;
-}
-
-#eventselectarea {
-    max-width: 800px;
-    width: 100%;
-    display:block;
-    text-align: center;
-    align-content: center;
-    align-items: center;
-    margin: auto;
-    transition: all 0.75s;
-}
-
-.Eselect {
-    width: 150px;
-    display: inline-block;
-    line-height: 40px;
-    letter-spacing: 2px;
-    text-align: center;
-    padding: 20px;
-    position: relative;
-}
-
-.Eselect a {
-	font-family: 珍珠体;
-	font-size: 24px;
-    font-weight: 300;
-    color:rgb(129, 122, 16);
-}
-
-.Eselect:hover ::before {
-  content: "- ";
-}
-.Eselect:hover ::after {
-  content: " -";
-}
-
-.Eselect a:hover{
-    color: rgb(180, 166, 36);
-    text-shadow:0 0 2px rgb(180, 166, 36);
-    border: none;
-}
-
-/* Navigator */
-
-#navi {
-    width: 200px;
-    z-index: 50;
-    position: fixed;
-    bottom: 250px;
-    border: 2px solid #ccc;
-    padding: 4px;
-    height: 30px;
-    background-color: #fff;
-    border-radius: 25px 0% 0% 25px;
-    transition: all 0.75s ease-in-out; 
-}
-
-#navi:hover {
-    right: -2px;
-}
-
-.navi_unable {
-    right: -100px
-}
-
-.navi_active {
-    right: -2px;
-
-}
-
-#movebutton {
-    position: absolute;
-    top:5px;
-    left:20px;
-}
-
-#links {
-    width: 176px;
-    height: 250px;
-    top: 39px;
-    left: 25px;
-    overflow-y: scroll;
-    background-color: rgba(255, 255, 255, 0.5);
-    position: absolute;
-    padding-left: 5px;
-    border: 1px solid #eee;
-    -webkit-backdrop-filter: drop-shadow(0px 0px 5px rgba(163, 153, 153, 0.2)) blur(5px);
-    backdrop-filter: drop-shadow(0px 0px 5px rgba(163, 153, 153, 0.2)) blur(5px); 
-}
-
-#links a {
-    font-size: 14px;
-}
-
-#links a:hover {
-    border: 0px;
-}
-
-.links:hover ::after {
-    content: " ◁";
-}
-
-.links {
-    width: 150px;
-    height: fit-content;
-    float: left;
-    position: relative;
-    border-bottom: 1px dashed #ccc;
-    padding-left: 20px;
-}
-
-/* general elements*/
-.description {
-    margin-left: 10px;
-    font-size: 14px;
-    color:gray;
-}
-
-.appen-eventsituation {
-    max-width: 800px;
-    width: 100%;    
-    margin: 0px auto;
-    display: block;
-    font-size: 24px;
-    font-family:珍珠体, Georgia;
-    text-align: center;
-    letter-spacing: 2px;
-	line-height: 40px;
-    transition: all 0.75s;
-}
-
-.append-normal {
-    margin:2px;
-    margin-left:10px;
-}
-/* twine-user-stylesheet #8: "06-EffectAnimetion.css" */
-
-.delayed {
-    opacity: 0;
-  }
-
-.delay {
-  animation: fadeIn linear 0.75s;
-  -webkit-animation: fadeIn linear 0.75s;
-  -moz-animation: fadeIn linear 0.75s;
-  -o-animation: fadeIn linear 0.75s;
-  -ms-animation: fadeIn linear 0.75s;
-}
-
-@keyframes fadeIn {
-  0% {opacity:0;}
-  100% {opacity:1;}
-}
-
-@-moz-keyframes fadeIn {
-  0% {opacity:0;}
-  100% {opacity:1;}
-}
-
-@-webkit-keyframes fadeIn {
-  0% {opacity:0;}
-  100% {opacity:1;}
-}
-
-@-o-keyframes fadeIn {
-  0% {opacity:0;}
-  100% {opacity:1;}
-}
-
-@-ms-keyframes fadeIn {
-  0% {opacity:0;}
-  100% {opacity:1;}
-}
-
-
-
-/* 图片滤镜*/
-.sunset {
-  background-color:#E26105;
-  opacity:0.2;
-  mix-blend-mode: multiply;
-}
-
-.night {
-  background-color:#180E9C;
-  opacity:0.2;
-  mix-blend-mode: multiply;
-}
-
-.reset {
-  background-color: transparent !important;
-  opacity: 0 !important;
-  mix-blend-mode: normal !important;
-}
-
-@keyframes fadefilter {
-  0% {opacity:0;}
-  100% {opacity:0.4;}
-}
-
-@-moz-keyframes fadeIn {
-  0% {opacity:0;}
-  100% {opacity:0.4;}
-}
-
-@-webkit-keyframes fadeIn {
-  0% {opacity:0;}
-  100% {opacity:0.4;}
-}
-
-@-o-keyframes fadeIn {
-  0% {opacity:0;}
-  100% {opacity:0.4;}
-}
-
-@-ms-keyframes fadeIn {
-  0% {opacity:0;}
-  100% {opacity:0.4;}
-}
-
-/*水平翻转*/
-  .flipx {
-    -moz-transform:scaleX(-1);
-    -webkit-transform:scaleX(-1);
-    -o-transform:scaleX(-1);
-    transform:scaleX(-1);
-    /*IE*/
-    filter:FlipH;
-}
-
-/*垂直翻转*/
-.flipy {
-  -moz-transform:scaleY(-1);
-  -webkit-transform:scaleY(-1);
-  -o-transform:scaleY(-1);
-  transform:scaleY(-1);
-  /*IE*/
-  filter:FlipV;
-}
-
-
-.movedown {
-  animation: movedown 1.5s alternate;
-}
-
-@keyframes movedown {
-  0% {height: 60px;};
-  25% {height: 120px};
-  50% {height: 180px};
-  100% {height: 250px};
-}
-
-/* Drunk Text - Start */
-.drunk {
-	animation: drunkCam 30s alternate;
-}
-@keyframes drunkCam {
-	0%  { filter: blur(0px); text-shadow: 0 0 0 #aaa; }
-	20% { filter: blur(1px); text-shadow: 8px 0 0 #aaa; }
-	24% { filter: blur(0px); text-shadow: 0 0 0 #aaa; }
-	26% { filter: blur(0px); text-shadow: 0 0 0 #aaa; }
-	28% { filter: blur(1px); text-shadow: 10px 0 0 #aaa; }
-	30% { filter: blur(0px); text-shadow: 0 0 0 #aaa; }
-	60% { filter: blur(1px); text-shadow: 5px 0 0 #aaa; }
-	62% { filter: blur(0px); text-shadow: 0 0 0 #aaa; }
-	65% { filter: blur(2px); text-shadow: 8px 0 0 #aaa; }
-	67% { filter: blur(0px); text-shadow: 0 0 0 #aaa; }
-	80% { filter: blur(0px); text-shadow: 8px 0 0 #aaa; }
-	85% { filter: blur(2px); text-shadow: 10px 0 0 #aaa; }
-	88% { filter: blur(1px); text-shadow: 5px 0 0 #aaa; }
-	90% { filter: blur(0px); text-shadow: 0 0 0 #aaa; }
-}
-/* Drunk Text - End */
-
-/* Glitchy Text - Start */
-
-/* The "clip" in ".glitch" is depreciated, so technically you should use the "clip-path" that's in ".glitchy" instead, however IE doesn't support "clip-path", and most browsers still support "clip". */
-
-.glitch {
-  color: white;
-  position: relative;
-}
-.glitch:before {
-  content: attr(data-text);
-  width: calc(100% + 0.5em);
-  position: absolute;
-  left: -9px;
-  text-shadow: 1px 0 blue;
-  top: -5px;
-  color: #FFD;
-  background: #111;
-  overflow: hidden;
-  clip: rect(0, 900px, 0, 0);
-  animation: noise-anim-2 3s infinite linear alternate-reverse;
-  -webkit-animation: noise-anim-2 3s infinite linear alternate-reverse;
-}
-.glitch:after {
-  content: attr(data-text);
-  width: calc(100% + 0.5em);
-  position: absolute;
-  left: -5px;
-  text-shadow: -1px 0 red;
-  top: -5px;
-  color: #DFF;
-  background: #111;
-  overflow: hidden;
-  clip: rect(0, 900px, 0, 0);
-  animation: noise-anim 2s infinite linear alternate-reverse;
-  -webkit-animation: noise-anim 2s infinite linear alternate-reverse;
-}
-@keyframes noise-anim {
-  0% {
-    clip: rect(80px, 9999px, 16px, 0);
-  }
-  5% {
-    clip: rect(94px, 9999px, 17px, 0);
-  }
-  10% {
-    clip: rect(9px, 9999px, 92px, 0);
-  }
-  15.0% {
-    clip: rect(37px, 9999px, 4px, 0);
-  }
-  20% {
-    clip: rect(53px, 9999px, 47px, 0);
-  }
-  25% {
-    clip: rect(99px, 9999px, 69px, 0);
-  }
-  30.0% {
-    clip: rect(15px, 9999px, 49px, 0);
-  }
-  35% {
-    clip: rect(83px, 9999px, 81px, 0);
-  }
-  40% {
-    clip: rect(55px, 9999px, 43px, 0);
-  }
-  45% {
-    clip: rect(28px, 9999px, 27px, 0);
-  }
-  50% {
-    clip: rect(64px, 9999px, 28px, 0);
-  }
-  55.0% {
-    clip: rect(76px, 9999px, 91px, 0);
-  }
-  60.0% {
-    clip: rect(29px, 9999px, 72px, 0);
-  }
-  65% {
-    clip: rect(70px, 9999px, 10px, 0);
-  }
-  70% {
-    clip: rect(5px, 9999px, 84px, 0);
-  }
-  75% {
-    clip: rect(46px, 9999px, 81px, 0);
-  }
-  80% {
-    clip: rect(7px, 9999px, 85px, 0);
-  }
-  85.0% {
-    clip: rect(17px, 9999px, 89px, 0);
-  }
-  90% {
-    clip: rect(41px, 9999px, 59px, 0);
-  }
-  95% {
-    clip: rect(53px, 9999px, 90px, 0);
-  }
-  100% {
-    clip: rect(10px, 9999px, 30px, 0);
-  }
-}
-@keyframes noise-anim-2 {
-  0% {
-    clip: rect(84px, 9999px, 3px, 0);
-  }
-  5% {
-    clip: rect(31px, 9999px, 69px, 0);
-  }
-  10% {
-    clip: rect(37px, 9999px, 33px, 0);
-  }
-  15.0% {
-    clip: rect(18px, 9999px, 6px, 0);
-  }
-  20% {
-    clip: rect(25px, 9999px, 87px, 0);
-  }
-  25% {
-    clip: rect(100px, 9999px, 8px, 0);
-  }
-  30.0% {
-    clip: rect(24px, 9999px, 87px, 0);
-  }
-  35% {
-    clip: rect(39px, 9999px, 16px, 0);
-  }
-  40% {
-    clip: rect(96px, 9999px, 25px, 0);
-  }
-  45% {
-    clip: rect(16px, 9999px, 100px, 0);
-  }
-  50% {
-    clip: rect(92px, 9999px, 76px, 0);
-  }
-  55.0% {
-    clip: rect(29px, 9999px, 40px, 0);
-  }
-  60.0% {
-    clip: rect(40px, 9999px, 39px, 0);
-  }
-  65% {
-    clip: rect(94px, 9999px, 44px, 0);
-  }
-  70% {
-    clip: rect(2px, 9999px, 78px, 0);
-  }
-  75% {
-    clip: rect(86px, 9999px, 50px, 0);
-  }
-  80% {
-    clip: rect(2px, 9999px, 46px, 0);
-  }
-  85.0% {
-    clip: rect(41px, 9999px, 71px, 0);
-  }
-  90% {
-    clip: rect(75px, 9999px, 15px, 0);
-  }
-  95% {
-    clip: rect(41px, 9999px, 8px, 0);
-  }
-  100% {
-    clip: rect(23px, 9999px, 75px, 0);
-  }
-}
-
-.glitchy {
-  color: #111;
-  position: relative;
-}
-.glitchy:before {
-  content: attr(data-text);
-  width: calc(100% + 0.5em);
-  position: absolute;
-  left: -9px;
-  text-shadow: 1px 0 blue;
-  top: -5px;
-  color: #111;
-  background: #FFD;
-  overflow: hidden;
-  clip-path: polygon(0 0);
-  animation: noise-animY-2 3s infinite linear alternate-reverse;
-  -webkit-animation: noise-animY-2 3s infinite linear alternate-reverse;
-}
-.glitchy:after {
-  content: attr(data-text);
-  width: calc(100% + 0.5em);
-  position: absolute;
-  left: -5px;
-  text-shadow: -1px 0 red;
-  top: -5px;
-  color: #111;
-  background: #DFF;
-  overflow: hidden;
-  clip-path: polygon(0 0);
-  animation: noise-animY 2s infinite linear alternate-reverse;
-  -webkit-animation: noise-animY 2s infinite linear alternate-reverse;
-}
-@keyframes noise-animY {
-  0% {
-    clip-path: polygon(0 80px, 100% 80px, 100% 16px, 0 16px);
-  }
-  5% {
-    clip-path: polygon(0 94px, 100% 94px, 100% 17px, 0 17px);
-  }
-  10% {
-    clip-path: polygon(0 9px, 100% 9px, 100% 92px, 0 92px);
-  }
-  15.0% {
-    clip-path: polygon(0 37px, 100% 37px, 100% 4px, 0 4px);
-  }
-  20% {
-    clip-path: polygon(0 53px, 100% 53px, 100% 47px, 0 47px);
-  }
-  25% {
-    clip-path: polygon(0 99px, 100% 99px, 100% 69px, 0 69px);
-  }
-  30.0% {
-    clip-path: polygon(0 15px, 100% 15px, 100% 49px, 0 49px);
-  }
-  35% {
-    clip-path: polygon(0 83px, 100% 83px, 100% 81px, 0 81px);
-  }
-  40% {
-    clip-path: polygon(0 55px, 100% 55px, 100% 43px, 0 43px);
-  }
-  45% {
-    clip-path: polygon(0 28px, 100% 28px, 100% 27px, 0 27px);
-  }
-  50% {
-    clip-path: polygon(0 64px, 100% 64px, 100% 28px, 0 28px);
-  }
-  55.0% {
-    clip-path: polygon(0 76px, 100% 76px, 100% 91px, 0 91px);
-  }
-  60.0% {
-    clip-path: polygon(0 29px, 100% 29px, 100% 72px, 0 72px);
-  }
-  65% {
-    clip-path: polygon(0 70px, 100% 70px, 100% 10px, 0 10px);
-  }
-  70% {
-    clip-path: polygon(0 5px, 100% 5px, 100% 84px, 0 84px);
-  }
-  75% {
-    clip-path: polygon(0 46px, 100% 46px, 100% 81px, 0 81px);
-  }
-  80% {
-    clip-path: polygon(0 7px, 100% 7px, 100% 85px, 0 85px);
-  }
-  85.0% {
-    clip-path: polygon(0 17px, 100% 17px, 100% 89px, 0 89px);
-  }
-  90% {
-    clip-path: polygon(0 41px, 100% 41px, 100% 59px, 0 59px);
-  }
-  95% {
-    clip-path: polygon(0 53px, 100% 53px, 100% 90px, 0 90px);
-  }
-  100% {
-    clip-path: polygon(0 10px, 100% 10px, 100% 30px, 0 30px);
-  }
-}
-@keyframes noise-animY-2 {
-  0% {
-    clip-path: polygon(0 84px, 100% 84px, 100% 3px, 0 3px);
-  }
-  5% {
-    clip-path: polygon(0 31px, 100% 31px, 100% 69px, 0 69px);
-  }
-  10% {
-    clip-path: polygon(0 37px, 100% 37px, 100% 33px, 0 33px);
-  }
-  15.0% {
-    clip-path: polygon(0 18px, 100% 18px, 100% 6px, 0 6px);
-  }
-  20% {
-    clip-path: polygon(0 25px, 100% 25px, 100% 87px, 0 87px);
-  }
-  25% {
-    clip-path: polygon(0 100px, 100% 100px, 100% 8px, 0 8px);
-  }
-  30.0% {
-    clip-path: polygon(0 24px, 100% 24px, 100% 87px, 0 87px);
-  }
-  35% {
-    clip-path: polygon(0 39px, 100% 39px, 100% 16px, 0 16px);
-  }
-  40% {
-    clip-path: polygon(0 96px, 100% 96px, 100% 25px, 0 25px);
-  }
-  45% {
-    clip-path: polygon(0 16px, 100% 16px, 100% 100px, 0 100px);
-  }
-  50% {
-    clip-path: polygon(0 92px, 100% 92px, 100% 76px, 0 76px);
-  }
-  55.0% {
-    clip-path: polygon(0 29px, 100% 29px, 100% 40px, 0 40px);
-  }
-  60.0% {
-    clip-path: polygon(0 40px, 100% 40px, 100% 39px, 0 39px);
-  }
-  65% {
-    clip-path: polygon(0 94px, 100% 94px, 100% 44px, 0 44px);
-  }
-  70% {
-    clip-path: polygon(0 2px, 100% 2px, 100% 78px, 0 78px);
-  }
-  75% {
-    clip-path: polygon(0 86px, 100% 86px, 100% 50px, 0 50px);
-  }
-  80% {
-    clip-path: polygon(0 2px, 100% 2px, 100% 46px, 0 46px);
-  }
-  85.0% {
-    clip-path: polygon(0 41px, 100% 41px, 100% 71px, 0 71px);
-  }
-  90% {
-    clip-path: polygon(0 75px, 100% 75px, 100% 15px, 0 15px);
-  }
-  95% {
-    clip-path: polygon(0 41px, 100% 41px, 100% 8px, 0 8px);
-  }
-  100% {
-    clip-path: polygon(0 23px, 100% 23px, 100% 75px, 0 75px);
-  }
-}
-/* Glitchy Text - End */
-
-
-/* 云里雾里奇妙特效 */
-/*Center the weird text*/
-#weirdtext{
-	max-width: 800px;
-	display: block;
-	font-family: 珍珠体;
-	font-size: 24px;
-	line-height: 40px;
-	letter-spacing: 2px;
-	color: #444;
-  text-align: center;
-  margin: auto;
-  padding: 20px;
-}
-
-.wselectarea {
-  max-width: 800px;
-  width: 100%;
-  display:block;
-  text-align: center;
-  align-content: center;
-  align-items: center;
-  margin: auto;
-}
-
-.weirdtext {
-  width: fit-content;
-  min-width: 150px;
-  display: inline-block;
-  line-height: 40px;
-	letter-spacing: 2px;
-  text-align: center;
-  padding: 20px;
-  position: relative;
-  color: #444;
-}
-
-.Wselect {
-  width: fit-content;
-  min-width: 150px;
-  display: inline-block;
-  line-height: 40px;
-	letter-spacing: 2px;
-  text-align: center;
-  padding: 20px;
-  position: relative;
-  color: #444;
-}
-
-.Wselect a {
-	font-family: 珍珠体;
-	font-size: 24px;
-	color: #444;
-  font-weight: 300;
-  animation: mix 4s linear infinite;
-	-webkit-animation: mix 4s linear infinite;
-}
-
-.Wselect:hover ::before {
-  content: "- ";
-}
-.Wselect:hover ::after {
-  content: " -";
-}
-
-.Wselect a:hover{
-  color: #666;
-  animation: none;
-	-webkit-animation: none;
-  text-shadow:0 0 2px #666;
-  border: none;
-}
-/*all spans have to be block or inline block to transform*/
-#weirdtext span{
-	display: inline-block;
-}
-
-/*When JS finds a space, it replaces it with a span with .space class*/
-/*I did this so you can do stuff with the spaces if you want.*/
-.space{
-	width: 15px;
-}
-
-
-/*These classes are added to each letter/span using JS so they animate*/
-.weffect1{
-	animation: zoom 6s linear infinite;
-	-webkit-animation: zoom 6s linear infinite;
-}
-.weffect2{
-	animation: mix 5s linear infinite;
-	-webkit-animation: mix 5s linear infinite;
-}
-.weffect3{
-	animation: mix2 3s linear infinite;
-	-webkit-animation: mix2 3s linear infinite;	
-}
-.weffect4{
-	animation: rot 5s linear infinite;
-	-webkit-animation: rot 5s linear infinite;
-}
-.weffect5{
-	animation: fade2 4s linear infinite;
-	-webkit-animation: fade2 4s linear infinite;
-}
-
-
-/*Here's a bunch of animations*/
-
-@keyframes zoom{
-	0%{transform: scale(1);
-    color:rgba(0,0,0,0);
-    text-shadow:0 0 0px #444;}
-	50%{transform: scale(1.2);
-    color:rgba(0,0,0,0);
-    text-shadow:0 0 1px #444;}
-	100%{transform: scale(1);
-    color:rgba(0,0,0,0);
-    text-shadow:0 0 0px #444;}
-}
-@-webkit-keyframes zoom{
-	0%{-webkit-transform: scale(1);
-    color:rgba(0,0,0,0);
-    text-shadow:0 0 0px #444;}
-	50%{-webkit-transform: scale(1.2);
-    color:rgba(0,0,0,0);
-    text-shadow:0 0 1px #444;}
-	100%{-webkit-transform: scale(1);
-    color:rgba(0,0,0,0);
-    text-shadow:0 0 0px #444;}
-}
-
-@keyframes bounce{
-	0%{transform: translateY(0px);}
-	50%{transform: translateY(2px);}
-	100%{transform: translateY(0px);}
-}
-@-webkit-keyframes bounce{
-	0%{-webkit-transform: translateY(0px);}
-	50%{-webkit-transform: translateY(2px);}
-	100%{-webkit-transform: translateY(0px);}
-}
-
-@keyframes squash{
-	0%{transform:scale(1,1);}
-	50%{transform:scale(1,1.2);}
-	100%{transform:scale(1,1);}
-}
-@-webkit-keyframes squash{
-	0%{-webkit-transform:scale(1,1);}
-	50%{-webkit-transform:scale(1,1.2);}
-	100%{-webkit-transform:scale(1,1);}
-}
-
-@keyframes rot{
-	0%{transform: rotate(9deg);
-    color:rgba(0,0,0,0);
-    text-shadow:0 0 1px #444;}
-	50%{transform: rotate(-9deg);
-    color:rgba(0,0,0,0);
-    text-shadow:0 0 0px #444;}
-	100%{transform: rotate(9deg);
-    color:rgba(0,0,0,0);
-    text-shadow:0 0 2px #444;}
-}
-@-webkit-keyframes rot{
-	0%{-webkit-transform: rotate(9deg);
-    color:rgba(0,0,0,0);
-    text-shadow:0 0 1px #444;}
-	50%{-webkit-transform: rotate(-9deg);
-    color:rgba(0,0,0,0);
-    text-shadow:0 0 0px #444;
-  }
-	100%{-webkit-transform: rotate(9deg);
-    color:rgba(0,0,0,0);
-    text-shadow:0 0 2px #444;
-  }
-}
-
-@keyframes fade2{
-	0%{
-		transform: scale(.8);
-		opacity: .7;
-    color:rgba(0,0,0,0);
-    text-shadow:0 0 2px #444;
-	}
-	50%{
-		transform: scale(1);
-		opacity: 1;
-    color:rgba(0,0,0,0);
-    text-shadow:0 0 1px #444;
-	}
-	100%{
-		transform: scale(.8);
-		opacity: .7;
-    color:rgba(0,0,0,0);
-    text-shadow:0 0 4px #444;
-	}
-}
-@-webkit-keyframes fade2{
-	0%{
-		-webkit-transform: scale(.8);
-		opacity: .7;
-    color:rgba(0,0,0,0);
-    text-shadow:0 0 2px #444;
-	}
-	50%{
-		-webkit-transform: scale(1);
-		opacity: 1;
-    color:rgba(0,0,0,0);
-    text-shadow:0 0 1px #444;
-	}
-	100%{
-		-webkit-transform: scale(.8);
-		opacity: .7;
-    color:rgba(0,0,0,0);
-    text-shadow:0 0 4px #444;
-	}
-}
-
-@keyframes mix {
-  0%{
-		transform: scale(.9);
-		opacity: .7;
-    color:rgba(0,0,0,0);
-    text-shadow:0 0 2px #444;
-    transform: rotate(3deg);
-	}
-	50%{
-		transform: scale(1);
-		opacity: 1;
-    color:rgba(0,0,0,0);
-    text-shadow:0 0 1px #444;
-    transform: rotate(-3deg);
-	}
-	100%{
-		transform: scale(.9);
-		opacity: .7;
-    color:rgba(0,0,0,0);
-    text-shadow:0 0 4px #444;
-    transform: rotate(3deg);
-	}
-}
-
-@-webkit-keyframes mix {
-  0%{
-		-webkit-transform: scale(.9);
-		opacity: .7;
-    color:rgba(0,0,0,0);
-    text-shadow:0 0 2px #444;
-    -webkit-transform: rotate(3deg);
-	}
-	50%{
-		-webkit-transform: scale(1);
-		opacity: 1;
-    color:rgba(0,0,0,0);
-    text-shadow:0 0 1px #444;
-    -webkit-transform: rotate(-3deg);
-	}
-	100%{
-		-webkit-transform: scale(.9);
-		opacity: .7;
-    color:rgba(0,0,0,0);
-    text-shadow:0 0 4px #444;
-    -webkit-transform: rotate(3deg);
-	}
-}
-
-@keyframes mix2 {
-  0%{
-		transform: scale(.9);
-		opacity: .6;
-    color:rgba(0,0,0,0);
-    text-shadow:0 0 1px #444;
-    transform: rotate(6deg);
-	}
-	50%{
-		transform: scale(1);
-		opacity: 1;
-    color:rgba(0,0,0,0);
-    text-shadow:0 0 3px #444;
-    transform: rotate(-6deg);
-	}
-	100%{
-		transform: scale(.9);
-		opacity: .6;
-    color:rgba(0,0,0,0);
-    text-shadow:0 0 2px #444;
-    transform: rotate(6deg);
-	}
-}
-
-@-webkit-keyframes mix2 {
-  0%{
-		-webkit-transform: scale(.9);
-		opacity: .6;
-    color:rgba(0,0,0,0);
-    text-shadow:0 0 1px #444;
-    -webkit-transform: rotate(6deg);
-	}
-	50%{
-		-webkit-transform: scale(1);
-		opacity: 1;
-    color:rgba(0,0,0,0);
-    text-shadow:0 0 3px #444;
-    -webkit-transform: rotate(-6deg);
-	}
-	100%{
-		-webkit-transform: scale(.9);
-		opacity: .6;
-    color:rgba(0,0,0,0);
-    text-shadow:0 0 1px #444;
-    -webkit-transform: rotate(6deg);
-	}
-}
-/* 云里雾里奇妙特效结束 */
-
-
-/* 模拟抽插 CSS动画 */
-.thrust_x_s {
-  -webkit-animation-name:"thurst_x";
-  animation-name:"thurst_x";
-  -webkit-animation-duration: 2s;
-  animation-duration:2s;
-  -webkit-animation-iteration-count: infinite;
-  animation-iteration-count:infinite;
-}
-
-.thrust_x_f {
-  -webkit-animation-name:"thurst_x";
-  animation-name:"thurst_x";
-  -webkit-animation-duration: 1s;
-  animation-duration:1s;
-  -webkit-animation-iteration-count: infinite;
-  animation-iteration-count:infinite;
-}
-
-.thrust_x_f2 {
-  -webkit-animation-name:"thurst_x";
-  animation-name:"thurst_x";
-  -webkit-animation-duration: 0.5s;
-  animation-duration:0.5s;
-  -webkit-animation-iteration-count: infinite;
-  animation-iteration-count:infinite;
-}
-
-.thrust_y_s {
-  -webkit-animation-name:"thurst_y";
-  animation-name:"thurst_y";
-  -webkit-animation-duration: 2s;
-  animation-duration:2s;
-  -webkit-animation-iteration-count: infinite;
-  animation-iteration-count:infinite;
-}
-
-.thrust_y_f {
-  -webkit-animation-name:"thurst_y";
-  animation-name:"thurst_y";
-  -webkit-animation-duration: 1s;
-  animation-duration:1s;
-  -webkit-animation-iteration-count: infinite;
-  animation-iteration-count:infinite;
-}
-
-.thrust_y_f2 {
-  -webkit-animation-name:"thurst_y";
-  animation-name:"thurst_y";
-  -webkit-animation-duration: 0.5s;
-  animation-duration:0.5s;
-  -webkit-animation-iteration-count: infinite;
-  animation-iteration-count:infinite;
-}
-
-@keyframes thurst_x {
-  0%   {left:-10px; top:-10px;}
-  25%  {left:10px; top:10px;}
-  50%  {left:-10px; top:-10px;}
-  75%  {left:10px; top:10px;}
-  100% {left:-10px; top:-10px;}
-}
-
-@keyframes thurst_y {
-  0%   {left:0px; top:-10px;}
-  25%  {left:0px; top:10px;}
-  50%  {left:0px; top:-10px;}
-  75%  {left:0px; top:10px;}
-  100% {left:0px; top:-10px;}
-}
-/* twine-user-stylesheet #9: "07-Widget.css" */
-/* HoverTxt code - Start */
-.hoverTxt {
-	position: relative;
-	top: 5px;
-	vertical-align: text-bottom;
-	height: 30px;
-}
-.hoverTxt:hover span {
-	visibility: visible;
-}
-.hoverTxt span {
-	position: absolute;
-	background-color: #f3f3ed;
-	padding: 3px;
-	border: 1px solid #aaa;
-	border-radius: 10px;
-	visibility: hidden;
-	color: black;
-	text-decoration: none;
-}
-.hoverBox {
-	top: -100px;
-	text-align: left;
-	box-shadow: 0px 0px 12px 2px rgba(0, 0, 0, 0.5);
-	z-index: 100;
-}
-/* HoverTxt code - End */
-
-/* hovertip v2.0 - Start */
-.hoverTip {
-	display: inline-block;
-	top: 4px;
-	border-width: 0px;
-    border-bottom: 1px dashed #ccc;  /* If you want dots under the hoverable text */
-}
-.hoverTipTxt {
-	position: relative;
-	vertical-align: text-bottom;
-	line-height: initial;
-}
-.hoverTipTxt .hoverBox {
-	position: absolute;
-	visibility: hidden;
-}
-.hoverTipTxt:hover .hoverBox, .hoverTipTxt:focus .hoverBox {
-	visibility: visible;
-}
-.hoverBox {
-	padding: 3px 10px;
-	width: intrinsic;  /* Safari/WebKit uses a non-standard name */
-	width: -webkit-max-content;  /* Chrome */
-	width: -moz-max-content;  /* Firefox/Gecko */
-	width: max-content;
-	max-width: 330px;
-	line-height: initial;
-	text-align: left;
-	color: rgb(146, 126, 11);
-	background-color: rgba(255, 255, 255, 0.95);
-	border: rgba(221, 218, 187, 0.95) solid 2px;
-	-webkit-border-radius: 6px;
-	   -moz-border-radius: 6px;
-	        border-radius: 6px;
-	-webkit-box-shadow: 0px 0px 6px 2px rgba(134, 128, 109, 0.2);
-	   -moz-box-shadow: 0px 0px 6px 2px rgba(134, 128, 109, 0.2);
-	        box-shadow: 0px 0px 6px 2px rgba(134, 128, 109, 0.2);
-	z-index: 100;
-}
-.hoverTail::after {
-	content: "";
-	position: absolute;
-	top: 100%;  /* At the bottom of the tooltip */
-	left: 50%;
-	margin-left: -5px;
-	border-width: 8px;
-	border-style: solid;
-	border-color: rgba(221, 218, 187, 0.95) transparent transparent transparent;
-	z-index: 100;
-}
-.hoverBox a {
-	-webkit-transition-duration: unset;
-	   -moz-transition-duration: unset;
-	     -o-transition-duration: unset;
-	        transition-duration: unset;
-}
-#ui-bar .hoverBox {
-	max-width: 230px;
-}
-/* hovertip v2.0 - End */
-/* twine-user-stylesheet #10: "08-Avater.css" */
-#avatar {
-    width: 180px;
-    height: 260px;
-    border: 1px solid #ddd;
-    position: relative;
-    overflow: hidden;
-    margin-left: 40px;
-}
-
-.Layer {
-    width: 180px;
-    height: 260px;
-    top: 0px;
-    left: 0px;
-    position: absolute;
-}
-
-.portrait {
-    width: 160px;
-    width: 160px;
-    top: -15px;
-    left: -12px;
-    position: absolute;
-}
-
-#portrait {
-    width: 120px;
-    height: 120px;
-    border: 1px solid #ddd;
-    position: relative;
-    overflow: hidden;
-    float: left;
-    border-radius: 100%;
-    margin: 5px;
-}
-
-#portrait canvas{
-    overflow: hidden;
-}
-
-/* 商店相关 */
-
-#show_container {
-    width: 100%;
-    min-width: 500px;
-    max-width: 800px;
-    height: fit-content;
-    min-height: 250px;
-    position: relative;
-    padding-bottom: 5px;
-    border-bottom: 1px solid #ddd;
-    font-size: 14px;
-    font-family: 'Times New Roman',正保黑体;
-    display: inline-table;
-}
-
-#show_container .followright {
-    width: calc(100% - 120px);
-    display: inline;
-}
-
-#showcase {
-    width: 100px;
-    height: 240px;
-    overflow: hidden;
-    position: absolute;
-    bottom: 0px;
-}
-
-#showcase canvas{
-    overflow: hidden;
-}
-
-.manequin {
-    width: 166px;
-    height: 240px;
-    position: absolute;
-    bottom:0px;
-    left: -30px;
-    /* Vertical colour gradient */
-    background-image: linear-gradient(
-        to bottom,
-        rgb(207, 207, 207) 30%,
-        rgb(110, 110, 110)
-      );
-      background-image: -webkit-linear-gradient(
-        top,
-        rgb(207, 207, 207) 30%,
-        rgb(110, 110, 110)
-      );
-        /* Fallback colour */
-    background-color: #eee;
-}
-
-.Caselayer {
-    top: 0px;
-    left: -35px;
-    position: absolute;
-    height: 240px;
-}
-
-#item_info {
-    width: 100%;
-    height: fit-content;
-    line-height: 20px;
-    letter-spacing: 1px;
-}
-
-#description {
-    width: 80%;
-    max-width: 500px;
-}
-
-#option_containter {
-    width: calc(100% - 120px);
-    height: fit-content;
-    border-top: 1px solid #ddd;
-    padding: 5px;
-    background-color: transparent;
-}
-
-#pattern_option {
-    width: 100%;;
-    min-height: 30px;
-    padding: 5px;
-    padding-left: 10px;
-    font-size: 14px;
-    position:relative;
-}
-
-#color_plate {
-    width: 100%;
-    min-height: 30px;
-    position: relative;
-    padding: auto;
-    font-size: 13px;
-}
-
-.color_plate {
-    border: 1px solid #aaa;
-    margin: 2px;
-    float: left;
-    position: relative;
-    vertical-align: middle;
-    height:24px;
-}
-
-#color_plate button {
-    color:black;
-    text-shadow: -1px -1px 0px rgba(255, 255, 255, 0.5), 1px 1px 0px rgba(255, 255, 255, 0.5), -1px 1px 0px rgba(255, 255, 255, 0.5), 1px -1px 0px rgba(255, 255, 255, 0.5);
-    width: fit-content;
-    height:24px;   
-    text-align: center;
-    min-width: 40px;
-    border: 0px;
-    background-color: rgba(255, 255, 255, 0);
-    padding: auto;
-}
-
-#color_plate button:hover{
-    background-color: rgba(255, 255, 255, 0.5);
-    color:deeppink;
-}
-
-
-
-#ShopList, #ClosetList {
-    background-color: transparent;
-    border: 0px;
-    width: 100%;
-}
-
-#ShopList ul, #ClosetList ul {
-    border: 0px;
-    background-color: transparent;
-    width: 100%;
-    height: 32px;
-    display: inline;
-}
-
-.category {
-    float: left;
-    position: relative;
-    width: fit-content;
-    height: 30px;
-    border: 1px solid #aaa;
-    padding: auto;
-    margin-left: 2px;
-    text-align: center;
-    font-size: 13px;
-}
-
-#ShopList .ui-tabs, #ShopList .ui-tabs-tab, #ClosetList .ui-tabs, #ClosetList .ui-tabs-tab {
-    border: 1px #ccc solid;
-    background-color: rgba(255, 255, 255, 0.3);
-}
-
-#ShopList a , #ClosetList a{
-    color: #999;
-}
-
-#ShopList .ui-tabs-active, #ClosetList .ui-tabs-active{
-    background-color: #ddd;
-    border: 1px #ccc solid;
-}
-
-
-#ShopList .ui-tabs-active a  , #ClosetList .ui-tabs-active a{
-    color:rgb(56, 54, 52);
-}
-
-#ShopList li , #ClosetList li{
-    list-style: none;
-}
-
-#ShopList ::before, #ShopList ::after , #ClosetList ::before, #ClosetList ::after{
-    display: none;
-}
-
-#ShopList .ui-tabs-panel , #ClosetList .ui-tabs-panel{
-    background-color: rgba(255, 255, 255, 0.3);
-    border: 1px solid #ddd;
-    padding: 10px;
-    display: inline-table;
-    width: 100%;
-    min-width: 500px;
-    max-width: 800px;
-    height: fit-content;
-    min-height: 100px;
-    margin-top: -1px;
-}
-
-#ShopList a:hover, #ShopList li a:hover , #ClosetList a:hover, #ClosetList li a:hover{
-    border:none;
-}
-
-#show_items {
-    width: 120px;
-    height: 80px;
-    margin: 2px 5px;
-    position:relative;
-    border: 1px solid #ccc;
-    float: left;
-    overflow: clip;    
-}
-
-.itemthumb {
-    width: 80px;
-    height: 80px;
-    position: absolute;
-    top:0px;
-    left:-5px;
-    z-index: 0;
-}
-
-.itemthumb:hover {
-    background-color: rgba(127, 255, 212, 0.2);
-}
-
-.itemname {
-    width: fit-content;
-    height: 20px;
-    position: absolute;
-    right: 0px;
-    bottom: 0px;
-    z-index: 1;
-    text-shadow: -1px -1px 0px #fff,1px 1px 0px #fff,-1px 1px 0px #fff,1px -1px 0px #fff;
-    font-size: 14px;
-}
-
-.itemprice {
-    width: fit-content;
-    height: 30px;
-    position: absolute;
-    right: 0px;
-    bottom: 5px;
-    z-index: 1;
-    font-size: 15px;
-    font-family: 新综艺B;
-    color: orange;
-    letter-spacing: 1px;
-}
-
-/* 衣柜相关 */
-
-#W_showitems {
-    width: 100px;
-    height: 130px;
-    margin: 2px 5px;
-    position:relative;
-    border: 1px solid #ccc;
-    float: left;
-    overflow: clip;
-    line-height: 16px;
-    font-family: 新综艺;
-}
-
-.W_itemname {
-    font-size: 13px;
-    position: absolute;
-    bottom: 48px;
-    right: 5%;
-    text-shadow: -1px -1px 0px #fff,1px 1px 0px #fff,-1px 1px 0px #fff,1px -1px 0px #fff;
-}
-.itemdurab{
-    position: absolute;
-    bottom:32px;
-    right:5%;
-    font-size: 12px;
-}
-
-.itemdegree {
-    font-size:12px;
-    position: absolute;
-    bottom:16px;
-    right:5%;
-}
-
-.itembuff {
-    font-size:12px;
-    position: absolute;
-    bottom:2px;
-    right:5%;
-}
-
-.W_color {
-    border: 1px solid #aaa;
-    position: absolute;
-    min-width: 30px;
-    top: 2px;
-    right:2px;
-    font-size: 12px;
-    text-align: center;
-    text-shadow: -1px -1px 0px #fff,1px 1px 0px #fff,-1px 1px 0px #fff,1px -1px 0px #fff;
-    height: 18px;
-}
-
-.W_pattern {
-    border: 1px solid #aaa;
-    position: absolute;
-    min-width: 30px;
-    top: 24px;
-    right:2px;
-    font-size: 10px;
-    font-family: 'Times New Roman', Times, serif;
-    text-align: center;
-    height: 18px;
-    background-color: rgba(238, 238, 238, 0.5);
-    text-shadow: -1px -1px 0px #fff,1px 1px 0px #fff,-1px 1px 0px #fff,1px -1px 0px #fff;
-}
-/* twine-user-stylesheet #11: "09-combat.css" */
-#combat {
-    text-align:center;
-}
-#enemyside, #playerside{
-    width: fit-content;
-    height: fit-content;
-    min-height: 120px;
-    display: inline-flex;
-    padding: 2px;
-    position: relative;
-    text-align: center;
-}
-
-#message_container {
-    border: 1px solid #ccc;
-    width: 100%;
-    min-width: 500px;
-    height: 150px;
-    font-size: 14px;
-    overflow-y: scroll;
-    font-family: 新综艺B;
-    letter-spacing: 1px;
-    line-height: 18px;
-    padding: 5px;
-    display: inline-block;
-    position: relative;
-    border-radius: 10px 0px 0px 10px;
-    background-color: rgba(255, 255, 255, 0.40);
-}
-
-#characard {
-    width: 120px;
-    min-width: 120px;
-    min-height: 80px;
-    border: 1px solid #ddd;
-    margin: 2px;
-    position: relative;
-    padding: 5px;
-    float: left;
-}
-
-#playerside #characard{
-    width: 240px;
-    min-width: 240px;
-    min-height: 120px;
-}
-
-#characard .metername { 
-    width:16px; 
-    height:18px; 
-    font-size: 10px;
-    z-index:1;
-    font-family: 新综艺B;
-    color:darkolivegreen;
-    text-shadow: 1px 1px 1px#fff,-1px -1px 1px#fff,-1px 1px 1px#fff,1px -1px 1px#fff;
-}   
-
-.showHP, .showMP, .showSP{
-    font-size: 10px;
-    font-family: 新综艺B;
-    letter-spacing: 1px;
-}
-
-#characard .metercon {
-    z-index:1;
-    width:100px;
-    height: 6px;
-    background-color: #ddd;
-    border:1px solid #ccc;
-    margin-left: 2px;
-    transition: all 0.75s;
-}
-
-#characard .bar {
-    z-index:2;
-    max-width: 100px;
-    min-width: 0px;
-    height:6px;
-    background-color: #ccc;
-    transition: all 0.75s;
-}
-
-#characard .face {
-    position:absolute;
-    top:2px;
-    left:2px;
-}
-
-#playerside #characard .CC_name {
-    position: absolute;
-    top:100px;
-    left:10px;
-    text-shadow: 1px 1px 1px#fff,-1px -1px 1px#fff,-1px 1px 1px#fff,1px -1px 1px#fff;
-}
-
-#playerside #showHP{
-    width: 120px;
-    height: 20px;
-    position: absolute;
-    left:120px;
-    top:10px;
-}
-
-#playerside .showHP, #playerside .showMP, #playerside .showSP{
-    position: absolute;
-    right: 5px;
-    height: 16px;
-    text-shadow: 1px 1px 1px#fff,-1px -1px 1px#fff,-1px 1px 1px#fff,1px -1px 1px#fff;
-}
-
-#playerside #showMP{
-    width: 120px;
-    height: 20px;
-    position: absolute;
-    left:120px;
-    top:30px;
-}
-
-#playerside #showSP {
-    width: 120px;
-    height: 20px;
-    position: absolute;
-    left:120px;
-    top:50px;
-}
-
-#enemyside #showHP, #enemyside #showMP, #enemyside #showSP {
-    width: 120px;
-    height: 20px;
-    position: relative;
-}
-/* twine-user-stylesheet #12: "Debug.css" */
-    /* Debug view styling */
-html:not([data-debug-view]) #debug-view-toggle {
-    color: #111;
-    border-color: #ccc;
-}
-
-html:not([data-debug-view]) #debug-view-toggle:hover {
-    background-color: #eee;
-    border-color: #111;
-}
-
-html[data-debug-view] #debug-view-toggle {
-    background-color: #9e9;
-    border-color: #7c7;
-}
-
-html[data-debug-view] #debug-view-toggle:hover {
-    background-color: #7c7;
-    border-color: #5a5;
-}
-
-html[data-debug-view] .debug {
-    background-color: #dc9;
-}
-
-html[data-debug-view] .debug.hidden,
-html[data-debug-view] .debug.hidden .debug {
-    background-color: #bbb;
-}
-
-  /* Debug bar styling */
-  #debug-bar,
-  #debug-bar-toggle,
-  #debug-bar-watch {
-	  background-color: #eee;
-	  border-color: #ccc;
-  }
-  #debug-bar-watch div {
-	  color: #777;
-  }
-  #debug-bar-toggle,
-  #debug-bar-watch-toggle,
-  #debug-bar-views-toggle {
-	  color: #111;
-	  border-color: #ccc;
-  }
-  #debug-bar-toggle:hover,
-  #debug-bar-watch-toggle:hover,
-  #debug-bar-views-toggle:hover {
-	  background-color: #ddd;
-	  border-color: #111;
-  }
-  #debug-bar-watch:not([hidden]) ~ div #debug-bar-watch-toggle,
-  html[data-debug-view] #debug-bar-views-toggle {
-	  background-color: #9e9;
-	  border-color: #7c7;
-  }
-  #debug-bar-watch:not([hidden]) ~ div #debug-bar-watch-toggle:hover,
-  html[data-debug-view] #debug-bar-views-toggle:hover {
-	  background-color: #7c7;
-	  border-color: #5a5;
-  }
-
-.debug-images {
-	height: 256px;
-	width: 120px;
-	overflow: hidden;
-	background-color: #222;
-	border: solid 1px #ddd;
-}
-.debug-images > * {
-	position: absolute;
-	height: 256px;
-	overflow: hidden;
-	left: -57px;
-}
-
-.debug-hideImageOverflow {
-	overflow: hidden;
-	height: 256px;
-	width: 120px;
-	position: relative;
-}
-
-.error-view {
-	background-color: rgb(255, 249, 159);
-	border-left-color: rgb(255, 223, 40);
-	font-size: 12px;
-	color:#444;
-}
-
-.error-view > .error-source:not([hidden]) {
-	background-color: rgba(255, 255, 255, 0.2);
-}
-
-.debugPassages {
-	max-width: 2000px !important;
-}
-
-#saveCompareUI {
-	border: solid 1px #aaa;
-}
-
-#saveCompareUI {
-	border: solid 1px #aaa;
-}
-
-#comparedResult .item {
-	border: solid 1px #aaa;
-	padding: 3px;
-	margin: 3px 0;
-	word-wrap: break-word;
-}
-/* twine-user-stylesheet #13: "Dialog.css" */
-/* Default dialog styling */
-#ui-overlay {
-    background-color:rgba(218, 225, 233, 0.5);
-    -webkit-backdrop-filter: blur(3px);
-    backdrop-filter: blur(3px); 
-}
-
-#ui-overlay.open {
-    opacity: 1;
-    transition: all 0.5s;
-}
-
-#ui-dialog {
-    width: fit-content;
-    min-width: 250px;
-    max-width: 600px;
-    height: fit-content;
-    min-height: 100px;
-    max-height: 600px;
-    overflow: scroll;
-    overflow-wrap: anywhere;
-    border: 2px solid rgba(255, 255, 255, 0);
-    background-color: rgba(255, 255, 255, 0.5);
-    border-radius: 10px;
-    margin-top: 10%;
-    box-shadow: -2px -2px 1px rgba(255, 255, 255, 0.75), 2px 2px 1px rgba(120, 120, 120, 0.3), 5px 30px 20px rgba(40, 40, 40, 0.3);
-    padding: 10px;
-}
-
-#ui-dialog-titlebar {
-    background-color: transparent;
-    padding: 5px auto;
-    cursor: move;
-}
-
-#ui-dialog-titlebar h1 {
-    background-color: transparent;
-    padding: 5px auto;
-    margin: 5px;
-    font-family: 珍珠体, Georgia;
-    font-size: 18px;
-}
-
-#ui-dialog-close{
-    background-color: transparent;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    width: 20px;
-    height: 20px;
-    position: absolute;
-    top:2px;
-    right:5px;
-    z-index: 100;
-}
-#ui-dialog-close:hover {
-    background-color: rgb(255, 255, 255);
-    border-color: rgb(255, 255, 255);
-}
-#ui-dialog-body {
-    background-color: transparent;
-    border: none;
-    font-family:'Noto Sans SC';
-    height: fit-content;
-    max-height: 80%;
-}
-#ui-dialog-body hr {
-    background-color: #ccc;
-}
-
-#ui-dialog-body button {
-    background-color: transparent;
-    border: #ccc 1px solid;
-    width: fit-content;
-    min-width: 50px;
-    font-size: 14px;
-    letter-spacing: 1px;
-    transition: all 0.5s;
-    border-radius: 3px;
-}
-
-#ui-dialog-body button:hover {
-    background-color: rgba(255, 255, 255, 0.3);
-    border: rgb(255, 255, 255) 1px solid;
-    width: fit-content;
-    min-width: 50px;
-    font-size: 14px;
-    letter-spacing: 1px;
-    color:#42d9ff;
-    box-shadow: 0px 0px 3px rgba(182, 240, 255, 0.5);
-}
-
-#ui-dialog-body input[type="button"]{
-    background: transparent;
-    border-radius: 5px;
-    min-width: 50px;
-    max-height: 28px;
-    padding-top: 2px;
-    padding-bottom: 2px;
-}
-
-#alert-ok {
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-}
-
-#alert-cancel {
-    position: absolute;
-    bottom: 10px;
-    left: 10px;
-}
-
-/* List-based dialog styling */
-#ui-dialog-body.list li:not(:first-child) {
-    border-top-color: #ccc;
-}
-#ui-dialog-body.list li a {
-    color: #111;
-}
-#ui-dialog-body.list li a:hover {
-    background-color: #ddd;
-    border-color: #111;
-}
-
-/* Saves dialog styling */
-#ui-dialog-body.saves > *:not(:first-child),
-#ui-dialog-body.saves tr:not(:first-child) {
-    border-top-color: #ccc;
-}
-#ui-dialog-body.saves .empty {
-    color: #777;
-}
-
-/* Settings dialog styling */
-#ui-dialog-body.settings button[id|="setting-control"] {
-    color: #111;
-    border-color: #ccc;
-}
-#ui-dialog-body.settings button[id|="setting-control"]:hover {
-    background-color: #ddd;
-    border-color: #111;
-}
-#ui-dialog-body.settings button[id|="setting-control"].enabled {
-    background-color: #9e9;
-    border-color: #7c7;
-}
-#ui-dialog-body.settings button[id|="setting-control"].enabled:hover {
-    background-color: #7c7;
-    border-color: #5a5;
-}
-
-
-#menu {
-    display: none;
-}
-
-#menu ul {
-    border-color: #ccc;
-}
-#menu li:not(:first-child) {
-    border-top-color: #ccc;
-}
-#menu li a {
-    color: #111;
-}
-#menu li a:hover {
-    background-color: #ddd;
-    border-color: #111;
-}
-/* twine-user-stylesheet #14: "ElementEffect.css" */
-.none {
-  -webkit-backdrop-filter: none;
-          backdrop-filter: none;
-}
-
-.grayscale {
-  -webkit-backdrop-filter: grayscale(1);
-          backdrop-filter: grayscale(1);
-}
-
-.brightness {
-  -webkit-backdrop-filter: brightness(1.5);
-          backdrop-filter: brightness(1.5);
-}
-
-.blur {
-  -webkit-backdrop-filter: blur(10px);
-          backdrop-filter: blur(10px);
-}
-
-.contrast {
-  -webkit-backdrop-filter: contrast(1.2);
-          backdrop-filter: contrast(1.2);
-}
-
-.drop-shadow {
-  -webkit-backdrop-filter: drop-shadow(0px 0px 5px rgba(163, 153, 153, 0.2));
-          backdrop-filter: drop-shadow(0px 0px 5px rgba(163, 153, 153, 0.2));
-}
-
-.drop-shadow-overlay {
-  -webkit-backdrop-filter: drop-shadow(0px 0px 5px rgba(142, 238, 255, 0.1));
-          backdrop-filter: drop-shadow(0px 0px 5px rgba(142, 238, 255, 0.1));
-}
-
-.invert {
-  -webkit-backdrop-filter: invert(0.7);
-          backdrop-filter: invert(0.7);
-}
-
-.opacity {
-  -webkit-backdrop-filter: opacity(0.4);
-          backdrop-filter: opacity(0.4);
-}
-
-.sepia {
-  -webkit-backdrop-filter: sepia(0.4);
-          backdrop-filter: sepia(0.4);
-}
-
-.saturate {
-  -webkit-backdrop-filter: saturate(1.8);
-          backdrop-filter: saturate(1.8);
-}
-
-.hue-rotate {
-  -webkit-backdrop-filter: hue-rotate(120deg);
-          backdrop-filter: hue-rotate(120deg);
-}
-
-.roundbutton button{
-    transition: all 0.3s ease-in-out;
-    background-color: rgba(250, 250, 250);
-    border: 1px solid lightgray;
-    border-radius: 5px;
-    color: rgb(76, 77, 63);
-}
-
-.roundbutton button:hover{
-    background-color: rgb(231, 231, 231);
-    border: 1px solid rgb(51, 51, 51);
-    color: #000000;
-}
-
-.glassbtn, .glassbutton button {
-  font-family: 新综艺;
-  letter-spacing: 1px;
-  color: #000;
-  border: #eee 1px;  
-  border-radius: 5px;
-  background: transparent;
-  transition: all 0.3s ease;
-  box-shadow:inset 2px 2px 1px 0px rgba(255,255,255,.5), 1px 1px 2px 0px rgba(0,0,0,.1);
-  outline: none;
-}
-
-.glassbtn:hover, .glassbtn:focus, .glassbutton button:hover, .glassbutton button:focus {
-  background: transparent;
-  color:#b89f11;
-  border: #eee 1px;
-  box-shadow:inset 2px 2px 1px 0px rgba(73, 50, 0, 0.1), 1px 1px 2px 0px rgba(255, 248, 186, 0.2);
-}
-
-.textborder {
-    text-shadow: -1px -1px 0px rgba(255, 255, 255, 0.5), 1px 1px 0px rgba(255, 255, 255, 0.5), -1px 1px 0px rgba(255, 255, 255, 0.5), 1px -1px 0px rgba(255, 255, 255, 0.5);
-}
-
-.glassinset {
-  box-shadow: inset 1px 1px 0px rgba(68,63,36,0.3), 1px 1px 0px rgb(255,255,255,0.8);
-}
-/* twine-user-stylesheet #15: "Error.css" */
-#error-reporter-container {
-	display: block;
-}
-#error-reporter-container h3 {
-	margin-top: 0;
-}
-#error-reporter-container .hidden {
-	display: none !important;
-}
-#error-reporter-container .pane {
-	min-height: 10em;
-	border: 1px solid red;
-	padding: 1em;
-}
-#error-reporter-container .messages {
-	max-height: 50vh;
-	overflow-y: auto;
-	margin-bottom: 0.5em;
-}
-#error-reporter-container .copy-area {
-	flex-grow: 1;
-	flex-basis: 0;
-	margin: 0 1em;
-	max-height: 8em;
-}
-#error-reporter-container .pane > .actions {
-	display: flex;
-	flex-flow: row nowrap;
-	justify-content: start;
-	align-items: center;
-}
-#error-reporter-container .button {
-	display: inline-block;
-	user-select: none;
-	padding: 1em;
-	cursor: pointer;
-	background-color: darkslategray;
-	align-self: center;
-	flex: 0 0 auto;
-}
-#error-reporter-container .message-entry {
-	display: flex;
-	flex-flow: row nowrap;
-	justify-content: stretch;
-	align-items: center;
-	margin-bottom: 1em;
-	padding: 0.5em 1em;
-	/*border: 1px solid rgba(255, 255, 255, 0.8);*/
-}
-#error-reporter-container .message-entry .actions {
-	flex-grow: 0;
-	flex-shrink: 0;
-	flex-basis: auto;
-}
-#error-reporter-container .message-entry .message {
-	flex-grow: 1;
-	flex-basis: 0;
-}
-
-</style><script role="script" id="twine-user-script" type="text/twine-javascript">/* twine-user-script #1: "00-loadfirst.js" */
+	<!-- UUID://731DEBA3-F846-4AA9-97C0-8137F28469AC// --><tw-storydata name="EWA" startnode="14" creator="Tweego" creator-version="2.1.1+81d1d71" ifid="731DEBA3-F846-4AA9-97C0-8137F28469AC" zoom="1" format="SugarCube" format-version="2.35.0" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css"></style><script role="script" id="twine-user-script" type="text/twine-javascript">/* twine-user-script #1: "00-loadfirst.js" */
 if (document.location.href.toLowerCase().includes("/temp/") || document.location.href.toLowerCase().includes("/private/") || hasOwnProperty.call(window, "storyFormat")) {
 	// Change this to the path where this HTML file is
 	// located if you want to run this from inside Twine.
@@ -3973,9 +268,7 @@ window.defineGlobalNamespaces = (namespaces) => {
 defineGlobalNamespaces(EWA);
 
 window.Avatars = {
-	a : {},
-	b : {},
-	l : {},
+	list : {},
 	layer : [],
 	over_up : [],
 	over_bt:[],
@@ -3993,14 +286,8 @@ window.Avatars = {
 	hairback:[],
 }
 
-
 window.GameData = {}
-window.GameConfig = {
-	max_acc_slot: 3,
-	max_enemy: 5,
-	max_closet_slot: 40,
-	allowsave: false,
-}
+window.GameConfig = {}
 window.Afunction = {}
 
 window.EWA.Avatars = Avatars
@@ -5197,7 +1484,841 @@ D.COM = {
         }
     },
 }
-/* twine-user-script #12: "00-SimpleBasicFunction.js" */
+/* twine-user-script #12: "Accesory.js" */
+A.neck = [
+    {
+        id: 0, uid: 0,
+        index : "naked",    name : "空",     gender : "n",
+        text : "无", 
+        name_en:"",
+        text_en:"", 
+        tag  : ["裸露"],
+        hasImg : false,
+
+        cost : 0,   reveal : 0,    hot : 0,     cold : 0,
+        durable : 0,     maxdurable : 0,     beauty: 0,     defence: 0,
+        fixcolor: true,    color:null,  colorname: null,
+        colors : [],
+        
+        category: "无", layer : "neck", slot:"head",
+        shop : null, 
+    },
+]
+
+A.hat = [
+    {
+        id: 0, uid: 0,
+        index : "naked",    name : "空",     gender : "n",
+        text : "无", 
+        name_en:"",
+        text_en:"", 
+        tag  : ["裸露"],
+        hasImg : false,
+
+        cost : 0,   reveal : 0,    hot : 0,     cold : 0,
+        durable : 0,     maxdurable : 0,     beauty: 0,     defence: 0,
+        fixcolor: true,    color:null,  colorname: null,
+        colors : [],
+        
+        category: "无", layer : "hat", slot:"head",
+        shop : null, 
+    },
+]
+
+
+A.face = [
+    {
+        id: 0, uid: 0,
+        index : "naked",    name : "空",     gender : "n",
+        text : "无", 
+        name_en:"",
+        text_en:"", 
+        tag  : ["裸露"],
+        hasImg : false,
+
+        cost : 0,   reveal : 0,    hot : 0,     cold : 0,
+        durable : 0,     maxdurable : 0,     beauty: 0,     defence: 0,
+        fixcolor: true,    color:null,  colorname: null,
+        colors : [],
+        
+        category: "无", layer : "hat", slot:"head",
+        shop : null, 
+    },
+]
+
+A.hand = [
+    {
+        id: 0, uid: 0,
+        index : "naked",    name : "空",     gender : "n",
+        text : "无", 
+        name_en:"",
+        text_en:"", 
+        tag  : ["裸露"],
+        hasImg : false,
+
+        cost : 0,   reveal : 0,    hot : 0,     cold : 0,
+        durable : 0,     maxdurable : 0,     beauty: 0,     defence: 0,
+        fixcolor: true,    color:null,  colorname: null,
+        colors : [],
+        
+        category: "无", layer : "hat", slot:"head",
+        shop : null, 
+    },
+]
+/* twine-user-script #13: "ClothBottom.js" */
+A.over_bt = [
+        {
+        id: 0, uid: 0,
+        index: 'naked',  name:'没穿裤子', gender: 'n',
+        text: '你什么裤子裙子都没穿。',
+        name_en: 'naked',
+        text_en: "you didn't wear any pants or skirt.",
+        tag:['裸露'],
+        hasImg: false,
+        hasDif:{breast: false, pregnant: false},
+
+        cost:0, reveal: 0, hot: 0, cold: 0,
+        durable: 0, maxdurable: 0, beauty: 0, defence: 0,
+        fixcolor: true, color: null, colorname: null,
+        colors: [],
+
+        category:'无', layer: 'over_bt',
+        shop: null,
+        slot: 'bottom',
+        
+        acc: null,
+        patterns: [],
+        fixacc: true,
+        subcolor: null,
+    },
+    {
+        id: 1, uid: 0,
+        index : "shortpant",    name : "短裤",     gender : "n",
+        text : "一条简单的短裤。",   
+        name_en:"shortpant",
+        text_en:"A simple shortpant.",
+        tag  : ["日常"],
+        hasImg : true,
+        hasDif : {breast:false, pregnant:true},
+
+        cost : 50,        reveal : 4,   hot : -0.5,   cold : -0.5, 
+        durable : 20,     maxdurable : 20,     beauty: 0,     defence: 0.2,
+        fixcolor: false,    color:"#787878",  colorname: "黑",
+        colors : [],
+        
+        category: "下衣", layer : "over_bt", slot : "bottom", 
+        shop : "all", 
+        
+        acc : null,
+        patterns: [],
+        fixacc  : true,
+        subcolor : null,
+    },
+    {
+        id: 2, uid: 0,
+        index : "shortskirt",    name : "短裙",     gender : "f",
+        text : "一条简单的短裙。",  
+        name_en:"skirt",
+        text_en:"A simple skirt.",
+        tag  : ["日常"],
+        hasImg : true,
+        hasDif : {breast:false, pregnant:true},
+
+        cost : 60,        reveal : 4,   hot : -0.2,   cold : -0.2, 
+        durable : 12,     maxdurable : 12,     beauty: 0.01,     defence: 0,
+        fixcolor: false,    color:"#787878",  colorname: "黑",
+        colors : ["black"],
+        
+        category: "下衣", layer : "over_bt", slot : "bottom",
+        shop : "all", 
+            
+        acc : null,
+        patterns: [],
+        fixacc  : true,
+        subcolor : null,
+    },
+    {
+        id: 3, uid: 0,
+        index : "bskirt",    name : "西装短裙",     gender : "f",
+        text : "一条简单的西式短裙。毕竟是廉价款，不能指望耐久度。",  
+        name_en:"business skirt",
+        text_en:"A simple business skirt. Because it's cheap so you can't expect its durability." ,
+        tag  : ["日常","商务"],
+        hasImg : true,
+        hasDif : {breast:false, pregnant:true},
+
+        cost : 120,        reveal : 4,   hot : -0.2,   cold : -0.2, 
+        durable : 10,     maxdurable : 10,     beauty: 0.03,     defence: 0,
+        fixcolor: false,    color:"#787878",  colorname: "黑",
+        colors : ["black"],
+        
+        category: "下衣", layer : "over_bt", slot : "bottom", 
+        shop : "all", 
+        
+        acc : null,
+        patterns: [],
+        fixacc  : true,
+        subcolor : null,
+    },
+    {
+        id: 4, uid: 0,
+        index : "slpshortbt",    name : "睡衣短裤",     gender : "n",
+        text : "一件设计简单的睡衣短裤。轻柔透气的布料给你带来好梦。",  
+        name_en:"summer pajamas",
+        text_en:"A simple design pajamas. The light and breathable fabric brings you good dreams.", 
+        tag  : ["日常","睡衣"],
+        hasImg : true,
+        hasDif : {breast:false, pregnant:true},
+
+        cost : 50,        reveal : 4,   hot : -0.5,   cold : -0.5, 
+        durable : 10,     maxdurable : 10,     beauty: 0,     defence: 0.2,
+        fixcolor: false,    color:"#FDFFFF",  colorname: "白",
+        colors : [],
+        
+        category: "下衣", layer : "over_bt", slot : "bottom", 
+        shop : "all", 
+        
+        acc : "line",
+        patterns: ["line","dot","star"],
+        fixacc  : false,
+        subcolor : "#787878",
+    },
+]
+/* twine-user-script #14: "ClothTop.js" */
+
+A.over_up = [
+    {
+        id: 0, uid: 0,
+        index: "naked",  name:"没穿上衣", gender: "n",
+        text: "你什么上衣都没穿。",
+        name_en: "naked",
+        text_en: "you didn't wear any shirt or uppers.",
+        tag:["裸露"],
+        hasImg: false,
+        hasDif:{breast: false, pregnant: false},
+
+        cost:0, reveal: 0, hot: 0, cold: 0,
+        durable: 0, maxdurable: 0, beauty: 0, defence: 0,
+        fixcolor: true, color: null, colorname: null,
+        colors: [],
+        
+        category:"无", layer: "over_up",
+        shop: null,
+        slot: "top",
+
+        acc: null,
+        patterns: [],
+        fixacc: true,
+        subcolor: null,
+    },
+    {
+        id: 1, uid: 0,
+        index : "Tshirt",    name : "T恤",     gender : "n",
+        text : "一件简单的T恤。 并不能给你太多保护，但总比没有好。",  
+        name_en:"T-shirt",
+        text_en:"A simple design T-shirt. May give you a littel bit of protection, but better than nothing.",
+        tag  : ["日常"],
+        hasImg : true,
+        hasDif : {breast:true, pregnant:true},
+
+        cost : 35,  reveal : 9, hot : -1,   cold : -1,
+        durable : 20,   maxdurable : 20,    beauty: 0,  defence: 0.5,
+        fixcolor: false,    color:"#FDFFFF",    colorname: "白",
+        colors : [],
+        
+        category: "上衣",   layer : "over_up",
+        shop : "all",
+        
+        slot : "top", 
+        tuckinable: true,   tuckin : false, 
+        acc : "slime",
+        patterns: ["slime","heart"],
+        fixacc  : true,
+        subcolor : null,
+    },
+    {
+        id: 2, uid: 0,
+        index : "shirt",    name : "衬衫",  gender : "n",
+        text : "一件简单的西式长袖衬衫。浅浅的暗纹给你增加了些许气质。",
+        name_en:"business shirt",
+        text_en:"A simple long-sleeved dress shirt. The dark line design adds a touch of grace to you.",
+        tag  : ["日常","正式","商务"],
+        hasImg : true,
+        hasDif : {breast:true, pregnant:true},
+
+        cost : 120, reveal : 10,    hot : -1.5, cold : -1.5, 
+        durable : 20,   maxdurable : 20,    beauty: 0.02,   defence: 0.5,
+        fixcolor: false,    color:"#FDFFFF",    colorname: "白",
+        colors : ["mint"],
+        
+        category: "上衣",   layer : "over_up",
+        shop : "all",
+        
+        slot : "top", 
+        tuckinable: true,   tuckin : false, 
+        acc : null,
+        patterns: [],
+        fixacc  : true,
+        subcolor : null,
+    },
+    {
+        id: 3, uid: 0,
+        index : "bwopiece", name : "BW连衣裙",  gender : "f",
+        text : "一件设计简单的连衣裙。修身的设计显得你身材更苗条。毕竟是易淘上的便宜货，不能指望布料的防御效果。",
+        name_en:"BW onepiece",
+        text_en:"a simple design onepiece. The slim fit design looks slimmer on your body. The cheap goods on Ebay, can not expect the fabric defense effect.",
+        tag  : ["日常"],
+        hasImg : true,
+        hasDif : {breast:true, pregnant:true},
+
+        cost : 200, reveal : 9, hot : -0.5, cold : -0.5,
+        durable : 15,   maxdurable : 15,    beauty: 0.05,   defence: 0,
+        fixcolor: true, color:"black",  colorname: "黑",
+        colors : ["white","black"],
+        
+        category: "上衣",   layer : "over_up",  slot : "onepiece", 
+        shop : "all",
+        
+        tuckinable: false,  tuckin : false, 
+        acc : null,
+        patterns: [],
+        fixacc  : true,
+        subcolor : null,
+    },
+    {
+        id: 4, uid: 0,
+        index : "slpshortup",   name : "短袖睡衣",     gender : "n",
+        text : "一件设计简单的睡衣。轻柔透气的布料给你带来好梦。",
+        name_en:"summer pajamas",
+        text_en:"A simple design pajamas. The light and breathable fabric brings you good dreams.",
+        tag  : ["日常","睡衣"],
+        hasImg : true,
+        hasDif : {breast:true, pregnant:true},
+
+        cost : 60,  reveal : 9, hot : -0.5, cold : -0.5, 
+        durable : 10,   maxdurable : 10,    beauty: 0,  defence: 0,
+        fixcolor: false,    color:"#FDFFFF",    colorname: "白",
+        colors : [],
+        
+        category: "上衣",   layer : "over_up",  slot : "top", 
+        shop : "all",
+        
+        tuckinable: false,  tuckin : false, 
+        acc : "line",
+        patterns: ["line","dot","star"],
+        fixacc  : false,
+        subcolor : "#787878",
+    },
+]
+/* twine-user-script #15: "Cloth_inner.js" */
+A.inner_up = [
+    {
+        id: 0, uid: 0,
+        index: "naked",  name:"没穿内衣", gender: "n",
+        text: "你什么内衣都没穿。",
+        name_en: "naked",
+        text_en: "you didn't wear any bras.",
+        tag:["裸露"],
+        hasImg: false,
+        hasDif:{breast: false, pregnant: false},
+
+        cost:0, reveal: 0, hot: 0, cold: 0,
+        durable: 0, maxdurable: 0, beauty: 0, defence: 0,
+        fixcolor: true, color: null, colorname: null,
+        colors: [],
+
+        category:"无", layer: "inner_up",
+        shop: null,
+        slot: "top",
+
+        acc: null,
+        patterns: [],
+        fixacc: true,
+        subcolor: null,
+    },
+    {
+        id: 1, uid: 0,
+        index : "camisole",    name : "吊带背心",     gender : "f",
+        text : "一件简单的吊带背心，给胸部小小的你带来些许安全感。",   
+        tag  : ["日常"],
+        name_en:"camisole",
+        text_en:"A simple camisole, can give you a little bit comfort.", 
+        hasDif : {breast:false, pregnant:false},
+        hasImg : false,
+
+        cost : 30,        reveal : 7,        hot : -0.2, cold : -0.2,
+        durable : 10,     maxdurable : 10,     beauty: 0,     defence: 0,
+        fixcolor: false,    color:"#FFFFF",  colorname: "白",
+        colors : [],
+        
+        category: "内衣", layer : "inner_up",
+        shop : "all", 
+        slot : "top",
+
+        acc : null,
+        patterns: [],
+        fixacc  : true,
+        subcolor : null,
+    },
+    {
+        id: 2, uid: 0,
+        index : "simplebra",    name : "胸罩",     gender : "f",
+        text : "一件设计朴素的胸罩。",   
+        tag  : ["日常"],
+        name_en:"bra",
+        text_en:"A simple design bra.", 
+        hasDif : {breast:false, pregnant:false},
+        hasImg : false,
+
+        cost : 60,        reveal : 4,        hot : 0, cold : 0,
+        durable : 10,     maxdurable : 10,     beauty: 0,     defence: 0,
+        fixcolor: false,    color:"#FFFFF",  colorname: "白",
+        colors : [],
+        
+        category: "内衣", layer : "inner_up",
+        shop : "all", 
+        slot : "top",
+
+        acc : null,
+        patterns: [],
+        fixacc  : true,
+        subcolor : null,
+    },
+]
+
+A.inner_bt = [
+    {
+        id: 0, uid: 0,
+        index: "naked",  name:"没穿内裤", gender: "n",
+        text: "你什么内裤都没穿。",
+        name_en: "naked bottom",
+        text_en: "you didn't wear any underwear.",
+        tag:["裸露"],
+        hasImg: false,
+        hasDif:{breast: false, pregnant: false},
+
+        cost:0, reveal: 0, hot: 0, cold: 0,
+        durable: 0, maxdurable: 0, beauty: 0, defence: 0,
+        fixcolor: false, color: null, colorname: null,
+        colors: [],
+
+        category:"无", layer: "inner_bt",
+        shop: null,
+        slot: "bottom",
+
+        acc: null,
+        patterns: [],
+        fixacc: false,
+        subcolor: null,
+    },
+    {
+        id: 1, uid: 0,
+        index : "boxer",    name : "四角内裤",     gender : "m",
+        text : "一条简单的四角内裤。",
+        name_en:"boxer brief",
+        text_en:"A simple boxer brief.",
+        tag  : ["日常"],
+        hasImg : true,
+        hasDif : {breast:false, pregnant:false},
+
+        cost : 12,        reveal : 2,    hot : -0.1,    cold : -0.1,
+        durable : 10,     maxdurable : 10,     beauty: 0,     defence: 0,
+        fixcolor: false,    color:"#FDFFFF",  colorname: "白",
+        colors : [],
+        
+        category: "内裤", layer : "inner_bt", slot : "bottom", 
+        shop : "all", 
+        
+        acc : null,
+        patterns: [],
+        fixacc  : true,
+        subcolor : null,
+    },
+    {
+        id: 2, uid: 0,
+        index : "pantie",    name : "内裤",     gender : "f",
+        text : "一款简单朴素的内裤。",
+        name_en:"pantie",
+        text_en:"A simple pantie.",
+        tag  : ["日常"],
+        hasImg : true,
+        hasDif : {breast:false, pregnant:false},
+
+        cost : 15,        reveal : 2,    hot : 0,    cold : 0,
+        durable : 10,     maxdurable : 10,     beauty: 0,     defence: 0,
+        fixcolor: false,    color:"#FDFFFF",  colorname: "白",
+        colors : [],
+        
+        category: "内裤", layer : "inner_bt", slot : "bottom", 
+        shop : "all", 
+        
+        acc : null,
+        patterns: [],
+        fixacc  : true,
+        subcolor : null,
+    },
+]
+/* twine-user-script #16: "Cloth_legs.js" */
+A.shoes = [
+    {
+        id: 0, uid: 0,
+        index: "naked",  name:"没穿鞋子", gender: "n",
+        text: "你什么鞋子都没穿。",
+        name_en: "naked",
+        text_en: "you didn't wear any shoes.",
+        tag:["裸露"],
+        hasImg: false,
+        hasDif:{breast: false, pregnant: false},
+
+        cost:0, reveal: 0, hot: 0, cold: 0,
+        durable: 0, maxdurable: 0, beauty: 0, defence: 0,
+        fixcolor: true, color: null, colorname: null,
+        colors: [],
+
+        category:"无", layer: "shoes",
+        shop: null,
+        slot: "feet",
+
+        acc: null,
+        patterns: [],
+        fixacc: true,
+        subcolor: null,
+    },
+    {
+        id: 1, uid: 0,
+        index : "sportshoes",    name : "运动鞋",     gender : "n",
+        text : "一双普通的白色运动鞋。",
+        name_en:"sport shoes",
+        text_en:"A simple designed sport shoes.",
+        tag  : ["日常","运动"], 
+        hasImg : true,
+
+        cost : 60,       reveal : 0,    hot : -0.1,    cold : -0.1,
+        durable : 30,    maxdurable : 30,     beauty: 0,     defence: 0,
+        fixcolor: true,    color:"white",  colorname: "白",
+        colors : ["white"],
+        
+        category: "鞋子",     layer : "shoes",      slot : "feet",
+        shop : "all", 
+
+        acc : null,
+        patterns: [],
+        fixacc  : true,
+        subcolor : null,
+    },
+    {
+        id: 2, uid: 0,
+        index : "highheel",    name : "高跟鞋",     gender : "f",
+        text : "一双简单设计的高跟鞋。", 
+        name_en:"high heel",
+        text_en:"A simple design high heel",
+        tag  : ["日常","商务","高跟鞋"], 
+        hasImg : true,
+
+        cost : 80,       reveal : 0,    hot : 0,    cold : 0,
+        durable : 20,    maxdurable : 20,     beauty: 0.02,     defence: 0,
+        fixcolor: false,    color:"#FDFFFF",  colorname: "白",
+        colors : [],
+        
+        category: "鞋子",     layer : "shoes",      slot : "feet",
+        shop : "all", 
+
+        acc : null,
+        patterns: [],
+        fixacc  : true,
+        subcolor : null,
+    },
+]
+
+A.legs = [
+    {
+        id: 0, uid: 0,
+        index: "naked",  name:"没穿袜子", gender: "n",
+        text: "你什么袜子都没穿。",
+        name_en: "naked",
+        text_en: "you didn't wear any socks.",
+        tag:["裸露"],
+        hasImg: false,
+        hasDif:{breast: false, pregnant: false},
+
+        cost:0, reveal: 0, hot: 0, cold: 0,
+        durable: 0, maxdurable: 0, beauty: 0, defence: 0,
+        fixcolor: true, color: null, colorname: null,
+        colors: [],
+
+        category:"无", layer: "legs",
+        shop: null,
+        slot: "legs",
+
+        acc: null,
+        patterns: [],
+        fixacc: true,
+        subcolor: null,
+    },
+    {
+        id: 1, uid: 0,
+        index : "sportsocks",    name : "运动短袜",     gender : "n",
+        text : "一双简单的运动袜。",
+        name_en:"sports socks",
+        text_en:"A simple design sports socks",  
+        tag  : ["日常","运动"], 
+        hasImg : true,
+
+        cost : 10,       reveal : 0,    hot : -0.2,    cold : -0.2,
+        durable : 0,    maxdurable : 0,     beauty: 0,     defence: 0,
+        fixcolor: false,    color:"#FDFFFF",  colorname: "白",
+        colors : [],
+        
+        category: "袜子",     layer : "legs",      slot : "legs",
+        shop : "all", 
+
+        acc : null,
+        patterns: [],
+        fixacc  : true,
+        subcolor : null,
+    },
+]
+/* twine-user-script #17: "Cloth_outer.js" */
+A.outter = [
+    {
+    id: 0, uid: 0,
+    index : "naked",    name : "裸",     gender : "n",
+    text : "无",   
+    name_en:"",
+    text_en:"", 
+    tag  : ["裸露"],
+    hasDif : {breast:false, pregnant:false},
+    hasImg : false,
+
+    cost : 0,        reveal : 0,        hot : 0, cold : 0,
+    durable : 0,     maxdurable : 0,     beauty: 0,     defence: 0,
+    fixcolor: true,    color:null,  colorname: null,
+    colors : [],
+    
+    category: "无", layer : "outter",
+    shop : null, 
+    
+    slot : "top", 
+    tuckinable: false,        tuckin : false, 
+    acc : null,
+    patterns: [],
+    fixacc  : true,
+    subcolor : null,
+    },
+]
+/* twine-user-script #18: "ColorList.js" */
+A.layer = [
+    "frame","addon",
+    "hat","eyebrow","hairfront","kemofront",
+    "neck","face","emoadd","eyes","mouth",
+    "outter","over_up","inner_up","hand","over_bt","inner_bt","shoes","legs",
+    "penis","nipple","plus",
+    "body","hairback","back","kemoback","background",
+]
+
+A.categoryname = {
+    hat:"帽子",       outter:"外搭", 
+
+    over_up:"上衣",   over_bt:"下衣", 
+    inner_up:"内衣",  inner_bt:"内裤", 
+    legs:"袜子",      shoes: "鞋子", 
+
+    neck:"颈饰", face:"脸饰", hand:"手饰", back:"背饰",
+}
+
+A.colorlist = [
+    { name:"黑",    code:"#56545A" },
+    { name:"白",    code:"#FFFFFF" },
+    { name:"灰",    code:"#CBC8C7" },   
+    { name:"蓝",    code:"#4089F9" },
+    { name:"青",    code:"#5DD9FA" },
+    { name:"天蓝",  code:"#DDFDFF" },
+    { name:"粉",    code:"#FB83C4" },
+    { name:"紫",    code:"#B36CF6" },
+    { name:"红",    code:"#F14660" },
+    { name:"橙",    code:"#FC7051" },
+    { name:"黄",    code:"#F8F45F" },
+    { name:"米黄",  code:"#FDF3B1" },
+    { name:"绿",    code:"#8DC862" },
+    { name:"薄荷",  code:"#BBEEC1" },
+    { name:"棕",    code:"#9C6C51" },
+]
+
+A.haircolor = {
+         "black" : ["#4F4240","#CAA799"],
+     "darkbrown" : ["#765646","#EACFB2"],
+          "wine" : ["#9D5755","#EACFB2"] , 
+         "brown" : ["#A07856","#EACFB2"],
+       "milktea" : ["#D5AEA0","#FFEDEA"],
+         "blond" : ["#FFE664","#FFFFFF"],
+     "softblond" : ["#FFEEA9","#FFFFFF"],
+      "platinum" : ["#FFF1D5","#FFFFFF"],
+        "silver" : ["#EBF0F3","#FFFFFF"],
+         "white" : ["#FFFFFF","#EAFDFF"],
+        "purple" : ["#C8B5F9","#FFF1FE"],
+         "green" : ["#CEF3A0","#FFFDDA"],
+          "blue" : ["#6B97F6","#FFFFFF"],
+          "aqua" : ["#BADDFF","#FFFFFF"],
+          "pink" : ["#FFC0DA","#FFFDDA"],
+           "red" : ["#ED5C4D","#FFD2E7"],
+        "orange" : ["#FFA63D","#FAFFCF"],
+}
+
+A.colors = {
+     mint : { name:"薄荷绿", code: "#BBEEC1" },
+    white : { name:"白", code:"#FFFFFF"},
+    black : { name:"黑", code:"#56545A"},
+}
+/* twine-user-script #19: "EmojiList.js" */
+A.list.eyebrows = [
+    "angry","confuse","happy","normal","sad"
+]
+
+A.list.eyes = [
+    "ahe","blink1","blink2","blink2",
+    "close1","close2",
+    "full","idle","half","quater1","quater2",
+    "lookdown","lookleft","lookup1","lookup2","lookup3",
+]
+
+A.list.mouth = [
+    "angry","laugh","oop","open","sad","sign","smile","unhappy"
+]
+
+A.emote = {
+    正常 : {
+        name : "正常",
+        eyebrow : "normal",  eyes : "full",  mouth : "smile",  frame : null,
+        tear : false,   shy  : false,   red  : false,   hurt : false,          
+    },
+    开心:  {
+        name :"开心",           
+        eyebrow :"happy",   eyes :"quater2",  mouth :"laugh",  frame :null,
+        tear :false,    shy  :true,     red  :false,    hurt :false,
+    },
+    伤心: {
+        name : "伤心",
+        eyebrow : "sad",  eyes : "quater1",  mouth : "sad",  frame : null,
+        tear : true,    shy  : false,   red  : false,   hurt : false,
+    },
+    生气: {
+        name : "生气",
+        eyebrow : "angry",  eyes : "quater2",  mouth : "open",  frame : null,
+        tear : false,    shy  : false,  red  : false,    hurt : false,
+    },
+    害羞:{
+        name : "害羞",             
+        eyebrow : "happy",  eyes : "lookleft",  mouth : "smile",  frame : null,
+        tear : false,   shy  : true,    red  : false,   hurt : false,
+    },
+    羞耻:{
+        name: "羞耻",
+        eyebrow:'sad', eyes:'full', mouth:'oop', frame:null,
+        tear : false,   shy  : true,    red  : false,   hurt : false,
+    },
+    困惑:{
+        name : "困惑", 
+        eyebrow : "confuse",  eyes : "quater2",    mouth : "unhappy", frame : "confuse",
+        tear : false,   shy  : false,   red  : false,   hurt : false,
+    },
+    受伤: {
+        name : "受伤",            
+        eyebrow : "angry",  eyes : "blink1", mouth : "open",  frame : null,
+        tear : false,    shy  : false,  red  : false,    hurt : true,
+    },
+    快感1: {
+        name : "快感",           
+        eyebrow : "sad",    eyes : "quater2",  mouth : "open",  frame : null,
+        tear : false,    shy  : false,  red  : true,     hurt : false,
+    },
+    快感2: {
+        name : "快感",            
+        eyebrow : "confuse",    eyes : "lookup2",  mouth : "open",  frame : null,
+        tear : true,    shy  : false,   red  : true,    hurt : false,
+    },
+    高潮:{
+        name : "高潮",             
+        eyebrow : "sad",    eyes : "lookup1",  mouth : "open",  frame : null,
+        tear : true,    shy  : false,   red  : true,    hurt : false,
+    },
+}
+
+A.facelist = Object.keys(A.emote)
+/* twine-user-script #20: "HairStyle.js" */
+
+A.list.hairfront = ["natural","himecut","curly"]
+
+A.list.hairback = ["straight","curly"]
+
+A.hairfront = {
+    natural: {
+        id:0, index:"natural", fixcolor: false, max: 1
+    },
+    himecut : {
+        id:1, index:"himecut", fixcolor: false, max: 1
+    },
+    curly : {
+        id:1, index:"curly", fixcolor: false, max: 4
+    }
+}
+
+A.hairback = {
+    straight: {
+        id:0, index:"straight", fixcolor: false, max: 4
+    },
+    curly: {
+        id:1, index:"curly", fixcolor:false, max: 4
+    }
+}
+/* twine-user-script #21: "LewdItems.js" */
+A.lewdup = {
+    乳环:{
+        name:"乳环", png: "sp/nipring",
+        hasDif:{breast: true, pregnant:false}, hasImg:false, functional: true,
+        cost: 20, energy: 0,
+        category:"特殊", layer:"nipple",
+        shop: "adults",
+        text:"一对设计简单的乳环。毕竟是便宜货，戴久了可能会有不适。",
+
+        effect(min){
+            Source.pc.快B += 0.5*min;
+            Source.pc.疼痛 += 2*min;
+            return [V.FEquip.nipple,Source.pc.快B,Source.pc.疼痛]
+        },
+    },
+    乳环项链:{
+        name:"乳环项链", png:"sp/nipnecklace",
+        hasDif:{breast:true, pregnant:false}, hasImg:false, functional: true,
+        cost: 50, energy: 0,
+        category:"特殊", layer:"nipple",
+        shop:"adults",
+        text:"色气的乳环项链。毕竟是便宜货，戴久了可能会有不适。",
+
+        effect(min){
+            Source.pc.快B += 0.5*min;
+            Source.pc.疼痛 += 2*min;
+            return [V.FEquip.nipple,Source.快B,Source.pc.疼痛]
+        },
+    },
+    乳头跳蛋:{},
+}
+
+/*  贞操笼、贞操带、贞操内裤算内裤范围内!带震动棒版本的穿上时联动这里的function? */
+A.lewdbt = {
+    V震动棒:{},
+    A震动棒:{},
+    双震动棒:{},
+    V跳蛋:{},
+    A跳蛋:{},
+}
+/* twine-user-script #22: "GameConfig.js" */
+window.GameConfig = {
+	max_acc_slot: 3,
+	max_enemy: 5,
+	max_closet_slot: 40,
+	allowsave: false,
+}
+/* twine-user-script #23: "00-SimpleBasicFunction.js" */
 function Random(min, max) {
 	min = Math.ceil(min);
 	max = Math.floor(max);
@@ -5288,7 +2409,7 @@ window.sum = function( obj ) {
 window.findkey = function(data,value, compare = (a, b) => a === b) {
   return Object.keys(data).find(k => compare(data[k], value))
 }
-/* twine-user-script #13: "renderer.js" */
+/* twine-user-script #24: "renderer.js" */
 ///<reference path="model.d.ts"/>
 /*
  * Created by aimozg on 29.08.2020.
@@ -6349,7 +3470,7 @@ var Renderer;
 	window.lintRgb = Renderer.lintRgb;
 	window.lintRgbStaged = Renderer.lintRgbStaged;
 })(Renderer || (Renderer = {}));
-/* twine-user-script #14: "BaseFunction.js" */
+/* twine-user-script #25: "BaseFunction.js" */
 /**
  * Copies to targets keys from source that are not present there.
  * Shallow.
@@ -6423,7 +3544,7 @@ window.saveDataCompare = function(save1, save2){
 	})
 	return result;
 }
-/* twine-user-script #15: "UI.js" */
+/* twine-user-script #26: "UI.js" */
 window.overlayShowHide = function (elementId) {
 	var div = document.getElementById(elementId);
 	if (div != undefined) {
@@ -6668,7 +3789,7 @@ window.zoom = function (size, set) {
 window.isImageOk = function (id) {
 	return jQuery(id).naturalWidth !== 0 || true;
 }
-/* twine-user-script #16: "canvasmodel-editor.js" */
+/* twine-user-script #27: "canvasmodel-editor.js" */
 function copyToClipboard(textarea, data) {
 	textarea.value = data;
 	textarea.setAttribute("style", "");
@@ -6677,7 +3798,7 @@ function copyToClipboard(textarea, data) {
 	alert("Copied to clipboard!");
 	textarea.setAttribute("style", "display:none");
 }
-/* twine-user-script #17: "canvasmodel-utils.js" */
+/* twine-user-script #28: "canvasmodel-utils.js" */
 /**
  * (Low-level API)
  * Prepare a layer to be rendered.
@@ -6806,7 +3927,7 @@ Renderer.defaultListener = {
 		}
 	}
 }
-/* twine-user-script #18: "canvasmodel.js" */
+/* twine-user-script #29: "canvasmodel.js" */
 /*
  * On caching.
  *
@@ -7161,7 +4282,7 @@ Renderer.locateModel = function(modelName, slot) {
 	}
 }
 
-/* twine-user-script #19: "colour-namer.js" */
+/* twine-user-script #30: "colour-namer.js" */
 function clamp255 (val) { return val > 255 ? 255 : val < 0 ? 0 : val }
 
 // apply___Filter functions are ported from WebKit implementation of CSS filters
@@ -7389,7 +4510,7 @@ window.getCustomColourName = function (hue, saturation, brightness, contrast) {
 		return colour;
 	}
 }
-/* twine-user-script #20: "dynamicRendering.js" */
+/* twine-user-script #31: "dynamicRendering.js" */
 window.Dynamic = window.Dynamic || {};
 
 /**
@@ -7665,7 +4786,7 @@ Dynamic.createBoundHandler = (sourceHandler, ...valuesToInject) => {
 		throw e;
 	}
 }
-/* twine-user-script #21: "eventpool.js" */
+/* twine-user-script #32: "eventpool.js" */
 /*
  * Usage:
  *
@@ -7791,7 +4912,7 @@ Macro.add("runeventpool", {
 		jQuery(this.output).wiki(pick.content);
 	}
 });
-/* twine-user-script #22: "proto.js" */
+/* twine-user-script #33: "proto.js" */
 /**
  * ############# PURE EVIL ###################
  * Overwrites JSON.parse and JSON.stringify to
@@ -7901,7 +5022,7 @@ JSON.revive = function (reviverClass, data) {
   }
   return nextVal;
 }
-/* twine-user-script #23: "Avatar.js" */
+/* twine-user-script #34: "Avatar.js" */
 // Code/Avatar.ts
 window["BLENDMODE"] = {
   "SOURCE_OVER": "source-over",
@@ -8007,7 +5128,7 @@ var Avatar;
         return {
           zindex,
           frame: null,
-          addon: { body: false, over_bt: false, face: false, hair: false, mouth: false, penis: false },
+          addon: { body: false, bottom: false, face: false, hair: false, mouth: false, penis: false },
           neck: null,
           hand: null,
           face: null,
@@ -9677,7 +6798,8 @@ window.Avatar = Avatar;
 window.setAvatar = (key, options, updates) => Avatar.setAvatar(key, options, updates);
 window["avatarEmoji"] = (FACE, option) => Avatar.avatarEmoji(FACE, option);
 window["RandomNPCEmoji"] = (FACE, option) => Avatar.RandomNPCEmoji(FACE, option);
-/* twine-user-script #24: "AvatarWidget.js" */
+/* twine-user-script #35: "AvatarData.js" */
+/* twine-user-script #36: "AvatarWidget.js" */
 
 window.fixStuckAnimations = function() {
 	let scrollX = window.scrollX;
@@ -10084,7 +7206,7 @@ function getClosetSlot(args){
         return (closet.slot.level*closet.slot[layer]) - closet[layer].length
     }
 }
-/* twine-user-script #25: "SetAvatar.js" */
+/* twine-user-script #37: "SetAvatar.js" */
 function SetFace(args,key) {
 
     if(A.facelist.includes(args)==true){
@@ -10438,7 +7560,7 @@ function stAvatar() {
 
 window.stAvatar = stAvatar
 F.stAvatar = stAvatar
-/* twine-user-script #26: "closet.js" */
+/* twine-user-script #38: "closet.js" */
 function getRandomCloset() {
   const randomArray = (arr) => {
     const arrs = []
@@ -10466,7 +7588,7 @@ function getRandomCloset() {
 
 
 window.getRandomCloset = getRandomCloset
-/* twine-user-script #27: "CharaWidget.js" */
+/* twine-user-script #39: "CharaWidget.js" */
 function setChara(args){
     if(args=="pc" || args=="player"){
         V.CChara = {
@@ -10502,7 +7624,7 @@ function setChara(args){
 }
 F.setChara = setChara
 DefineMacroS("setchara",setChara)
-/* twine-user-script #28: "EventWidget.js" */
+/* twine-user-script #40: "EventWidget.js" */
 function setEvent() {
     var event = V.event
     event.lang = V.lang
@@ -10708,7 +7830,7 @@ window.useitem = useitem
     print V.items[catgt][_keys[_i]].name
     useitem(catgr,_keys[_i])
 */
-/* twine-user-script #29: "FixValue.js" */
+/* twine-user-script #41: "FixValue.js" */
 window.fixfloat = function(v,n){
     return Math.floor(v*Math.pow(10,n))/Math.pow(10,n)
 }
@@ -10998,7 +8120,7 @@ function FixValue() {
 window.FixValue = FixValue
 F.FixValue = FixValue
 DefineMacroS("fixvalue",FixValue)
-/* twine-user-script #30: "Location.js" */
+/* twine-user-script #42: "Location.js" */
 /* 地点互动和事件相关 */
 /* 总之先粗略地做一下... 符合条件的就显示出来 */
 F.getsituation = function(location, series, key){
@@ -11081,7 +8203,7 @@ function setLocation(args) {
 window.setLocation = setLocation
 DefineMacroS("location",setLocation)
 
-/* twine-user-script #31: "SaveShow.js" */
+/* twine-user-script #43: "SaveShow.js" */
 function showSavedCard(type,slot,obj){
 
     if(obj !== null){
@@ -11278,7 +8400,7 @@ window.DelAlert = function(type, slot){
     Dialog.append(Lang(text,text_en))
     Dialog.open()
 }
-/* twine-user-script #32: "SaveWidget.js" */
+/* twine-user-script #44: "SaveWidget.js" */
 window.initSaveData = function(forceRun){
 
     if('ewaSaveDetails' in localStorage === true) {
@@ -11522,7 +8644,7 @@ window.deleteSaveDetails = function (type,slot){
 	}
 	localStorage.setItem("EWA-saveDetail" ,JSON.stringify(saveDetails));
 }
-/* twine-user-script #33: "TimeProcess.js" */
+/* twine-user-script #45: "TimeProcess.js" */
 window.testpt = function(t){
 	V.times.passed += t
 	let m =dailyMultip()
@@ -11909,7 +9031,7 @@ function weather(){
 
 
 }
-/* twine-user-script #34: "save.js" */
+/* twine-user-script #46: "save.js" */
 
 
 window.getSaveDetails = function (saveSlot){
@@ -12086,7 +9208,7 @@ window.isJsonString = function(s) {
 	}
 	return true;
 }
-/* twine-user-script #35: "PlayerInfo.js" */
+/* twine-user-script #47: "PlayerInfo.js" */
 /* 名字和称呼的处理 */
 function gsplit(m,f,p="chara"){
   if (p=="player" || p=="pc"){
@@ -12359,7 +9481,7 @@ function it(){
 }
 DefineMacroS("it", it);
 
-/* twine-user-script #36: "SkillRank.js" */
+/* twine-user-script #48: "SkillRank.js" */
 function displayskillrank(num){
     const select = new SelectCase()
     select.add(0,100,"<span style='color:#839EC0;'><b>F</b></span>")
@@ -12445,7 +9567,7 @@ window.rankcolor = function(num){
         return "#D7A800";
     }
 }
-/* twine-user-script #37: "SimpleWidget.js" */
+/* twine-user-script #49: "SimpleWidget.js" */
 function printmoney(num) {
     return num && num.toString()
         .replace(/\d+/, function(s){
@@ -12542,7 +9664,7 @@ window.gametime = function(a){
     V.gametime = time
     return `${time.day}D.${time.hour}:${time.min}:${time.sec}`
 }
-/* twine-user-script #38: "UI Widget.js" */
+/* twine-user-script #50: "UI Widget.js" */
 /* 通用 */
 
 function weirdeffect(){
@@ -12642,854 +9764,7 @@ function delay(id,text) {
 }
 F.delay = delay
 DefineMacroS("delay",delay)
-</script><tw-passagedata pid="1" name="InitAvatar" tags="widget" position="100,100" size="100,100">&lt;&lt;widget &quot;InitAvatar&quot;&gt;&gt;
-
-&lt;&lt;set A.layer to [
-    &quot;frame&quot;,&quot;addon&quot;,
-    &quot;hat&quot;,&quot;kemofront&quot;,&quot;eyebrow&quot;,&quot;hairfront&quot;,
-    &quot;neck&quot;,&quot;face&quot;,&quot;emoadd&quot;,&quot;eyes&quot;,&quot;mouth&quot;,
-    &quot;outter&quot;,&quot;over_up&quot;,&quot;inner_up&quot;,&quot;hand&quot;,&quot;over_bt&quot;,&quot;inner_bt&quot;,&quot;shoes&quot;,&quot;legs&quot;,
-    &quot;body&quot;,&quot;hairback&quot;,&quot;back&quot;,&quot;kemoback&quot;,&quot;background&quot;,
-]&gt;&gt;
-
-&lt;&lt;set A.colorlist to [
-    { name:&quot;黑&quot;,    code:&quot;#56545A&quot; },
-    { name:&quot;白&quot;,    code:&quot;#FFFFFF&quot; },
-    { name:&quot;灰&quot;,    code:&quot;#CBC8C7&quot; },   
-    { name:&quot;蓝&quot;,    code:&quot;#4089F9&quot; },
-    { name:&quot;青&quot;,    code:&quot;#5DD9FA&quot; },
-    { name:&quot;天蓝&quot;,  code:&quot;#DDFDFF&quot; },
-    { name:&quot;粉&quot;,    code:&quot;#FB83C4&quot; },
-    { name:&quot;紫&quot;,    code:&quot;#B36CF6&quot; },
-    { name:&quot;红&quot;,    code:&quot;#F14660&quot; },
-    { name:&quot;橙&quot;,    code:&quot;#FC7051&quot; },
-    { name:&quot;黄&quot;,    code:&quot;#F8F45F&quot; },
-    { name:&quot;米黄&quot;,  code:&quot;#FDF3B1&quot; },
-    { name:&quot;绿&quot;,    code:&quot;#8DC862&quot; },
-    { name:&quot;薄荷&quot;,  code:&quot;#BBEEC1&quot; },
-    { name:&quot;棕&quot;,    code:&quot;#9C6C51&quot; },
-]&gt;&gt;
-
-&lt;&lt;set A.categoryname to {
-    hat:&quot;帽子&quot;, outter:&quot;外搭&quot;, over_up:&quot;上衣&quot;, over_bt:&quot;下衣&quot;, inner_up:&quot;内衣&quot;, inner_bt:&quot;内裤&quot;, legs:&quot;袜子&quot;,
-    shoes: &quot;鞋子&quot;, neck:&quot;颈饰&quot;, face:&quot;脸饰&quot;, hand:&quot;手饰&quot;, back:&quot;背饰&quot;,
-}&gt;&gt;
-
-&lt;&lt;set A.haircolor to {
-    &quot;black&quot;:[&quot;#4F4240&quot;,&quot;#CAA799&quot;],      &quot;darkbrown&quot;:[&quot;#765646&quot;,&quot;#EACFB2&quot;],      &quot;wine&quot;:[&quot;#9D5755&quot;,&quot;#EACFB2&quot;] , 
-    &quot;brown&quot;:[&quot;#A07856&quot;,&quot;#EACFB2&quot;],      &quot;milktea&quot;:[&quot;#D5AEA0&quot;,&quot;#FFEDEA&quot;],        &quot;blond&quot;:[&quot;#FFE664&quot;,&quot;#FFFFFF&quot;],
-    &quot;softblond&quot;:[&quot;#FFEEA9&quot;,&quot;#FFFFFF&quot;],  &quot;platinum&quot;:[&quot;#FFF1D5&quot;,&quot;#FFFFFF&quot;],       &quot;silver&quot;:[&quot;#EBF0F3&quot;,&quot;#FFFFFF&quot;],
-    &quot;white&quot;:[&quot;#FFFFFF&quot;,&quot;#EAFDFF&quot;],      &quot;purple&quot;:[&quot;#C8B5F9&quot;,&quot;#FFF1FE&quot;],         &quot;green&quot;:[&quot;#CEF3A0&quot;,&quot;#FFFDDA&quot;],
-    &quot;blue&quot;:[&quot;#6B97F6&quot;,&quot;#FFFFFF&quot;],       &quot;aqua&quot;:[&quot;#BADDFF&quot;,&quot;#FFFFFF&quot;],           &quot;pink&quot;:[&quot;#FFC0DA&quot;,&quot;#FFFDDA&quot;],
-    &quot;red&quot; :[&quot;#ED5C4D&quot;,&quot;#FFD2E7&quot;],       &quot;orange&quot;:[&quot;#FFA63D&quot;,&quot;#FAFFCF&quot;]
-}&gt;&gt;
-
-&lt;&lt;set A.colors to {
-    mint : { name:&quot;薄荷绿&quot;, code: &quot;#BBEEC1&quot; },
-    white : { name:&quot;白&quot;, code:&quot;#FFFFFF&quot;},
-    black : { name:&quot;黑&quot;, code:&quot;#56545A&quot;},
-}&gt;&gt;
-
-&lt;&lt;InitEmotion&gt;&gt;
-
-&lt;&lt;InitClothAccesory&gt;&gt;
-
-&lt;&lt;InitClothCoat&gt;&gt;
-&lt;&lt;InitClothTop&gt;&gt;
-&lt;&lt;InitClothBottom&gt;&gt;
-
-&lt;&lt;InitClothShoes&gt;&gt;
-&lt;&lt;InitClothSocks&gt;&gt;
-
-&lt;&lt;InitClothUndertops&gt;&gt;
-&lt;&lt;InitClothUnderbottoms&gt;&gt;
-
-&lt;&lt;InitFrontHairStyle&gt;&gt;
-&lt;&lt;InitBackHairStyle&gt;&gt;
-&lt;&lt;InitLewdEquip&gt;&gt;
-
-&lt;&lt;/widget&gt;&gt;
-/* 上身的裸露范围  10=完全不露  9=手臂范围可见 8=手臂到肩膀范围可见 7=手臂到上半胸可见 6=只有下腹可见 5=手臂+下腹可见 4=手臂到肩膀+下腹 3=手臂到上半胸+下腹 2=只有敏感部位有遮掩 1=半透明装 0=全裸*/
-/* 下身的裸露范围  5=完全不露  4=到膝盖  3=到大腿  2=三角区  1=半透明/暴露装/接近全裸  0=全裸  */</tw-passagedata><tw-passagedata pid="2" name="AvatarData 2" tags="widget" position="225,100" size="100,100">&lt;&lt;widget &quot;InitClothAccesory&quot;&gt;&gt;
-
-    &lt;&lt;set Avatars.neck to [
-        {
-            id: 0, uid: 0,
-            index : &quot;naked&quot;,    name : &quot;裸&quot;,     gender : &quot;n&quot;,
-            text : &quot;无&quot;, 
-            name_en:&quot;&quot;,
-            text_en:&quot;&quot;, 
-            tag  : [&quot;裸露&quot;],
-            hasImg : false,
-
-            cost : 0,   reveal : 0,    hot : 0,     cold : 0,
-            durable : 0,     maxdurable : 0,     beauty: 0,     defence: 0,
-            fixcolor: true,    color:null,  colorname: null,
-            colors : [],
-            
-            category: &quot;装饰&quot;, layer : &quot;neck&quot;,
-            shop : null, 
-        },
-    ]&gt;&gt;
-
-    &lt;&lt;set Avatars.hat to [
-        {
-            id: 0, uid: 0,
-            index : &quot;naked&quot;,    name : &quot;裸&quot;,     gender : &quot;n&quot;,
-            text : &quot;无&quot;,
-            name_en: &quot;&quot;,
-            text_en: &quot;&quot;, 
-            tag  : [&quot;裸露&quot;],
-            hasImg : false,
-
-            cost : 0,   reveal : 0,    hot : 0,     cold : 0,
-            durable : 0,     maxdurable : 0,     beauty: 0,     defence: 0,
-            fixcolor: true,    color:null,  colorname: null,
-            colors : [],
-            
-            category: &quot;头饰&quot;, layer : &quot;hat&quot;,
-            shop : null,
-            acc : null,
-            patterns: [],
-            fixacc  : true,
-            subcolor : null,
-        },
-    ]&gt;&gt;
-
-    &lt;&lt;set Avatars.face to [
-        {
-            id: 0, uid: 0,
-            index : &quot;naked&quot;,    name : &quot;裸&quot;,     gender : &quot;n&quot;,
-            text : &quot;无&quot;, 
-            name_en:&quot;&quot;,
-            text_en:&quot;&quot;, 
-            tag  : [&quot;裸露&quot;],
-            hasImg : false,
-
-            cost : 0,   reveal : 0,    hot : 0,     cold : 0,
-            durable : 0,     maxdurable : 0,     beauty: 0,     defence: 0,
-            fixcolor: true,    color:null,  colorname: null,
-            colors : [],
-            
-            category: &quot;装饰&quot;, layer : &quot;face&quot;,
-            shop : null, 
-        },
-    ]&gt;&gt;
-
-    &lt;&lt;set Avatars.hand to [
-        {
-            id : 0, uid: 0,
-            index : &quot;naked&quot;,    name : &quot;裸&quot;,     gender : &quot;n&quot;,
-            text : &quot;无&quot;,  
-            name_en:&quot;&quot;,
-            text_en:&quot;&quot;, 
-            tag  : [&quot;裸露&quot;],
-            hasImg : false,
-
-            cost : 0,   reveal : 0,    hot : 0,     cold : 0,
-            durable : 0,     maxdurable : 0,     beauty: 0,     defence: 0,
-            fixcolor: true,    color:null,  colorname: null,
-            colors : [],
-            
-            category: &quot;装饰&quot;, layer : &quot;hand&quot;,
-            shop : null, 
-        },
-    ]&gt;&gt;
-
-&lt;&lt;/widget&gt;&gt;
-
-&lt;&lt;widget &quot;InitClothCoat&quot;&gt;&gt;
-
-    &lt;&lt;set Avatars.outter to [
-        {
-            id: 0, uid: 0,
-            index : &quot;naked&quot;,    name : &quot;裸&quot;,     gender : &quot;n&quot;,
-            text : &quot;无&quot;,   
-            name_en:&quot;&quot;,
-            text_en:&quot;&quot;, 
-            tag  : [&quot;裸露&quot;],
-            hasDif : {breast:false, pregnant:false},
-            hasImg : false,
-
-            cost : 0,        reveal : 0,        hot : 0, cold : 0,
-            durable : 0,     maxdurable : 0,     beauty: 0,     defence: 0,
-            fixcolor: true,    color:null,  colorname: null,
-            colors : [],
-            
-            category: &quot;外衣&quot;, layer : &quot;outter&quot;,
-            shop : null, 
-            
-            slot : &quot;top&quot;, 
-            tuckinable: false,        tuckin : false, 
-            acc : null,
-            patterns: [],
-            fixacc  : true,
-            subcolor : null,
-        },
-    ]&gt;&gt;
-
-&lt;&lt;/widget&gt;&gt;
-
-&lt;&lt;widget &quot;InitFrontHairStyle&quot;&gt;&gt;
-    &lt;&lt;set Avatars.l.hairfront to [&quot;natural&quot;,&quot;himecut&quot;]&gt;&gt;
-    &lt;&lt;set Avatars.hairfront to {
-        natural: {
-            id:0, index:&quot;natural&quot;, fixcolor: false, max: 1
-        },
-        himecut : {
-            id:1, index:&quot;himecut&quot;, fixcolor: false, max: 1
-        },
-        curly : {
-            id:1, index:&quot;curly&quot;, fixcolor: false, max: 4
-        }
-    }&gt;&gt;
-&lt;&lt;/widget&gt;&gt;
-
-&lt;&lt;widget &quot;InitBackHairStyle&quot;&gt;&gt;
-    &lt;&lt;set Avatars.l.hairback to [&quot;straight&quot;]&gt;&gt;
-    &lt;&lt;set Avatars.hairback to {
-        straight: {
-            id:0, index:&quot;straight&quot;, fixcolor: false, max: 4
-        },
-        curly: {
-            id:1, index:&quot;curly&quot;, fixcolor:false, max: 4
-        }
-    }&gt;&gt;
-&lt;&lt;/widget&gt;&gt;
-
-&lt;&lt;widget &quot;InitLewdEquip&quot;&gt;&gt;
-    &lt;&lt;set Avatars.lewdup to {
-        乳环:{
-            name:&quot;乳环&quot;, png: &quot;sp/nipring&quot;,
-            hasDif:{breast: true, pregnant:false}, hasImg:false, functional: true,
-            cost: 20, energy: 0,
-            category:&quot;特殊&quot;, layer:&quot;nipple&quot;,
-            shop: &quot;adult&quot;,
-            text:&quot;一对设计简单的乳环。毕竟是便宜货，戴久了可能会有不适。&quot;,
-
-            effect(min){
-                Source.pc.快B += 0.5*min;
-                Source.pc.疼痛 += 2*min;
-                return [V.FEquip.nipple,Source.pc.快B,Source.pc.疼痛]
-            },
-        },
-        乳环项链:{
-            name:&quot;乳环项链&quot;, png:&quot;sp/nipnecklace&quot;,
-            hasDif:{breast:true, pregnant:false}, hasImg:false, functional: true,
-            cost: 50, energy: 0,
-            category:&quot;特殊&quot;, layer:&quot;nipple&quot;,
-            shop:&quot;adult&quot;,
-            text:&quot;色气的乳环项链。毕竟是便宜货，戴久了可能会有不适。&quot;,
-
-            effect(min){
-                Source.pc.快B += 0.5*min;
-                Source.pc.疼痛 += 2*min;
-                return [V.FEquip.nipple,Source.快B,Source.pc.疼痛]
-            },
-        },
-        乳头跳蛋:{},
-    }&gt;&gt;
-
-    /*  贞操笼、贞操带、贞操内裤算内裤范围内!带震动棒版本的穿上时联动这里的function? */
-    &lt;&lt;set Avatars.lewdbt to {
-        V震动棒:{},
-        A震动棒:{},
-        双震动棒:{},
-        V跳蛋:{},
-        A跳蛋:{},
-    }&gt;&gt;
-    
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="3" name="InitClothTop" tags="widget" position="350,100" size="100,100">&lt;&lt;widget &quot;InitClothTop&quot;&gt;&gt;
-&lt;&lt;set Avatars.over_up to [
-    {
-        id: 0, uid: 0,
-        index : &quot;naked&quot;,    name : &quot;裸&quot;,     gender : &quot;n&quot;,
-        text : &quot;无&quot;,   
-        name_en:&quot;&quot;,
-        text_en:&quot;&quot;, 
-        tag  : [&quot;裸露&quot;],
-        hasImg : false,
-        hasDif : {breast:false, pregnant:false},
-
-        cost : 0,        reveal : 0,        hot : 0, cold : 0,
-        durable : 0,     maxdurable : 0,     beauty: 0,     defence: 0,
-        fixcolor: true,    color:null,  colorname: null,
-        colors : [],
-        
-        category: &quot;上衣/连衣裙&quot;, layer : &quot;over_up&quot;,
-        shop : null, 
-        
-        slot : &quot;top&quot;, 
-        tuckinable: false,        tuckin : false, 
-        acc : null,
-        patterns: [],
-        fixacc  : true,
-        subcolor : null,
-    },
-    {
-        id: 1, uid: 0,
-        index : &quot;Tshirt&quot;,    name : &quot;T恤&quot;,     gender : &quot;n&quot;,
-        text : &quot;一件简单的T恤。 并不能给你太多保护，但总比没有好。&quot;,  
-        name_en:&quot;T-shirt&quot;,
-        text_en:&quot;A simple design T-shirt. May give you a littel bit of protection, but better than nothing.&quot;,
-        tag  : [&quot;日常&quot;],
-        hasImg : true,
-        hasDif : {breast:true, pregnant:true},
-
-        cost : 35,        reveal : 9,        hot : -1, cold : -1,  /* 数值是直接在21上加减 */
-        durable : 20,     maxdurable : 20,     beauty: 0,     defence: 0.5,
-        fixcolor: false,    color:&quot;#FDFFFF&quot;,  colorname: &quot;白&quot;,
-        colors : [],
-        
-        category: &quot;上衣&quot;, layer : &quot;over_up&quot;,
-        shop : &quot;all&quot;,
-        
-        slot : &quot;top&quot;, 
-        tuckinable: true,        tuckin : false, 
-        acc : &quot;slime&quot;,
-        patterns: [&quot;slime&quot;,&quot;heart&quot;],
-        fixacc  : true,
-        subcolor : null,
-    },
-    {
-        id: 2, uid: 0,
-        index : &quot;shirt&quot;,    name : &quot;衬衫&quot;,     gender : &quot;n&quot;,
-        text : &quot;一件简单的西式长袖衬衫。浅浅的暗纹给你增加了些许气质。&quot;,
-        name_en:&quot;business shirt&quot;,
-        text_en:&quot;A simple long-sleeved dress shirt. The dark line design adds a touch of grace to you.&quot;,
-        tag  : [&quot;日常&quot;,&quot;正式&quot;,&quot;商务&quot;],
-        hasImg : true,
-        hasDif : {breast:true, pregnant:true},
-
-        cost : 120,        reveal : 10,        hot : -1.5, cold : -1.5,  /* 数值是直接在21上加减 */
-        durable : 20,     maxdurable : 20,     beauty: 0.02,     defence: 0.5,
-        fixcolor: false,    color:&quot;#FDFFFF&quot;,  colorname: &quot;白&quot;,
-        colors : [&quot;mint&quot;],
-        
-        category: &quot;上衣&quot;, layer : &quot;over_up&quot;,
-        shop : &quot;all&quot;,
-        
-        slot : &quot;top&quot;, 
-        tuckinable: true,        tuckin : false, 
-        acc : null,
-        patterns: [],
-        fixacc  : true,
-        subcolor : null,
-    },
-    {
-        id: 3, uid: 0,
-        index : &quot;bwopiece&quot;,    name : &quot;BW连衣裙&quot;,     gender : &quot;f&quot;,
-        text : &quot;一件设计简单的连衣裙。修身的设计显得你身材更苗条。毕竟是易淘上的便宜货，不能指望布料的防御效果。&quot;,
-        name_en:&quot;BW onepiece&quot;,
-        text_en:&quot;a simple design onepiece. The slim fit design looks slimmer on your body. The cheap goods on Ebay, can not expect the fabric defense effect.&quot;,
-        tag  : [&quot;日常&quot;],
-        hasImg : true,
-        hasDif : {breast:true, pregnant:true},
-
-        cost : 200,        reveal : 9,        hot : -0.5, cold : -0.5,  /* 数值是直接在21上加减 */
-        durable : 15,     maxdurable : 15,     beauty: 0.05,     defence: 0,
-        fixcolor: true,    color:&quot;black&quot;,  colorname: &quot;黑&quot;,
-        colors : [&quot;white&quot;,&quot;black&quot;],
-        
-        category: &quot;上衣&quot;, layer : &quot;over_up&quot;,  slot : &quot;onepiece&quot;, 
-        shop : &quot;all&quot;,
-        
-        tuckinable: false,        tuckin : false, 
-        acc : null,
-        patterns: [],
-        fixacc  : true,
-        subcolor : null,
-    },
-    {
-        id: 4, uid: 0,
-        index : &quot;slpshortup&quot;,    name : &quot;短袖睡衣&quot;,     gender : &quot;n&quot;,
-        text : &quot;一件设计简单的睡衣。轻柔透气的布料给你带来好梦。&quot;,
-        name_en:&quot;summer pajamas&quot;,
-        text_en:&quot;A simple design pajamas. The light and breathable fabric brings you good dreams.&quot;,
-        tag  : [&quot;日常&quot;,&quot;睡衣&quot;],
-        hasImg : true,
-        hasDif : {breast:true, pregnant:true},
-
-        cost : 60,        reveal : 9,        hot : -0.5, cold : -0.5,  /* 数值是直接在21上加减 */
-        durable : 10,     maxdurable : 10,     beauty: 0,     defence: 0,
-        fixcolor: false,    color:&quot;#FDFFFF&quot;,  colorname: &quot;白&quot;,
-        colors : [],
-        
-        category: &quot;上衣&quot;, layer : &quot;over_up&quot;,  slot : &quot;top&quot;, 
-        shop : &quot;all&quot;,
-        
-        tuckinable: false,        tuckin : false, 
-        acc : &quot;line&quot;,
-        patterns: [&quot;line&quot;,&quot;dot&quot;,&quot;star&quot;],
-        fixacc  : false,
-        subcolor : &quot;#787878&quot;,
-    },
-]&gt;&gt;
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="4" name="InitClothUnderbottoms" tags="widget" position="475,100" size="100,100">&lt;&lt;widget &quot;InitClothBottom&quot;&gt;&gt;
-
-&lt;&lt;set Avatars.over_bt to [
-    {
-        id: 0, uid: 0,
-        index : &quot;naked&quot;,    name : &quot;裸&quot;,     gender : &quot;n&quot;,
-        text : &quot;无&quot;,  
-        name_en:&quot;&quot;,
-        text_en:&quot;&quot;, 
-        tag  : [&quot;裸露&quot;],
-        hasImg : false,
-        hasDif : {breast:false, pregnant:false},
-
-        cost : 0,        reveal : 0,    hot : 0,    cold : 0,
-        durable : 0,     maxdurable : 0,     beauty: 0,     defence: 0,
-        fixcolor: true,    color:null,  colorname: null,
-        colors : [],
-        
-        category: &quot;下衣&quot;, layer : &quot;over_bt&quot;, slot : &quot;bottom&quot;, 
-        shop : null, 
-        
-        acc : null,
-        patterns: [],
-        fixacc  : true,
-        subcolor : null,
-    },
-    {
-        id: 1, uid: 0,
-        index : &quot;shortpant&quot;,    name : &quot;短裤&quot;,     gender : &quot;n&quot;,
-        text : &quot;一条简单的短裤。&quot;,   
-        name_en:&quot;shortpant&quot;,
-        text_en:&quot;A simple shortpant.&quot;,
-        tag  : [&quot;日常&quot;],
-        hasImg : true,
-        hasDif : {breast:false, pregnant:true},
-
-        cost : 50,        reveal : 4,   hot : -0.5,   cold : -0.5, 
-        durable : 20,     maxdurable : 20,     beauty: 0,     defence: 0.2,
-        fixcolor: false,    color:&quot;#787878&quot;,  colorname: &quot;黑&quot;,
-        colors : [],
-        
-        category: &quot;下衣&quot;, layer : &quot;over_bt&quot;, slot : &quot;bottom&quot;, 
-        shop : &quot;all&quot;, 
-        
-        acc : null,
-        patterns: [],
-        fixacc  : true,
-        subcolor : null,
-    },
-    {
-        id: 2, uid: 0,
-        index : &quot;shortskirt&quot;,    name : &quot;短裙&quot;,     gender : &quot;f&quot;,
-        text : &quot;一条简单的短裙。&quot;,  
-        name_en:&quot;skirt&quot;,
-        text_en:&quot;A simple skirt.&quot;,
-        tag  : [&quot;日常&quot;],
-        hasImg : true,
-        hasDif : {breast:false, pregnant:true},
-
-        cost : 60,        reveal : 4,   hot : -0.2,   cold : -0.2, 
-        durable : 12,     maxdurable : 12,     beauty: 0.01,     defence: 0,
-        fixcolor: false,    color:&quot;#787878&quot;,  colorname: &quot;黑&quot;,
-        colors : [&quot;black&quot;],
-        
-        category: &quot;下衣&quot;, layer : &quot;over_bt&quot;, slot : &quot;bottom&quot;,
-        shop : &quot;all&quot;, 
-            
-        acc : null,
-        patterns: [],
-        fixacc  : true,
-        subcolor : null,
-    },
-    {
-        id: 3, uid: 0,
-        index : &quot;bskirt&quot;,    name : &quot;西装短裙&quot;,     gender : &quot;f&quot;,
-        text : &quot;一条简单的西式短裙。毕竟是廉价款，不能指望耐久度。&quot;,  
-        name_en:&quot;business skirt&quot;,
-        text_en:&quot;A simple business skirt. Because it&#39;s cheap so you can&#39;t expect its durability.&quot; ,
-        tag  : [&quot;日常&quot;,&quot;商务&quot;],
-        hasImg : true,
-        hasDif : {breast:false, pregnant:true},
-
-        cost : 120,        reveal : 4,   hot : -0.2,   cold : -0.2, 
-        durable : 10,     maxdurable : 10,     beauty: 0.03,     defence: 0,
-        fixcolor: false,    color:&quot;#787878&quot;,  colorname: &quot;黑&quot;,
-        colors : [&quot;black&quot;],
-        
-        category: &quot;下衣&quot;, layer : &quot;over_bt&quot;, slot : &quot;bottom&quot;, 
-        shop : &quot;all&quot;, 
-        
-        acc : null,
-        patterns: [],
-        fixacc  : true,
-        subcolor : null,
-    },
-    {
-        id: 4, uid: 0,
-        index : &quot;slpshortbt&quot;,    name : &quot;睡衣短裤&quot;,     gender : &quot;n&quot;,
-        text : &quot;一件设计简单的睡衣短裤。轻柔透气的布料给你带来好梦。&quot;,  
-        name_en:&quot;summer pajamas&quot;,
-        text_en:&quot;A simple design pajamas. The light and breathable fabric brings you good dreams.&quot;, 
-        tag  : [&quot;日常&quot;,&quot;睡衣&quot;],
-        hasImg : true,
-        hasDif : {breast:false, pregnant:true},
-
-        cost : 50,        reveal : 4,   hot : -0.5,   cold : -0.5, 
-        durable : 10,     maxdurable : 10,     beauty: 0,     defence: 0.2,
-        fixcolor: false,    color:&quot;#FDFFFF&quot;,  colorname: &quot;白&quot;,
-        colors : [],
-        
-        category: &quot;下衣&quot;, layer : &quot;over_bt&quot;, slot : &quot;bottom&quot;, 
-        shop : &quot;all&quot;, 
-        
-        acc : &quot;line&quot;,
-        patterns: [&quot;line&quot;,&quot;dot&quot;,&quot;star&quot;],
-        fixacc  : false,
-        subcolor : &quot;#787878&quot;,
-    },
-]&gt;&gt;
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="5" name="ClothInnerData" tags="widget" position="600,100" size="100,100">&lt;&lt;widget &quot;InitClothUndertops&quot;&gt;&gt;
-&lt;&lt;set Avatars.inner_up to [
-    {
-        id: 0, uid: 0,
-        index : &quot;naked&quot;,    name : &quot;裸&quot;,     gender : &quot;n&quot;,
-        text : &quot;无&quot;,   
-        name_en:&quot;&quot;,
-        text_en:&quot;&quot;, 
-        tag  : [&quot;裸露&quot;],
-        hasDif : {breast:false, pregnant:false},
-        hasImg : false,
-
-        cost : 0,        reveal : 0,        hot : 0, cold : 0,
-        durable : 0,     maxdurable : 0,     beauty: 0,     defence: 0,
-        fixcolor: true,    color:null,  colorname: null,
-        colors : [],
-        
-        category: &quot;内衣&quot;, layer : &quot;inner_up&quot;,
-        shop : null, 
-        
-        slot : &quot;top&quot;,
-        tuckinable: false,        tuckin : false, 
-        acc : null,
-        patterns: [],
-        fixacc  : true,
-        subcolor : null,
-    },
-    {
-        id: 1, uid: 0,
-        index : &quot;camisole&quot;,    name : &quot;吊带背心&quot;,     gender : &quot;f&quot;,
-        text : &quot;一件简单的吊带背心，给胸部小小的你带来些许安全感。&quot;,   
-        tag  : [&quot;日常&quot;],
-        name_en:&quot;camisole&quot;,
-        text_en:&quot;A simple camisole, can give you a little bit comfort.&quot;, 
-        hasDif : {breast:false, pregnant:false},
-        hasImg : false,
-
-        cost : 30,        reveal : 7,        hot : -0.2, cold : -0.2,
-        durable : 10,     maxdurable : 10,     beauty: 0,     defence: 0,
-        fixcolor: false,    color:&quot;#FFFFF&quot;,  colorname: &quot;白&quot;,
-        colors : [],
-        
-        category: &quot;内衣&quot;, layer : &quot;inner_up&quot;,
-        shop : &quot;all&quot;, 
-        
-        slot : &quot;top&quot;,
-        tuckinable: false,        tuckin : false, 
-        acc : null,
-        patterns: [],
-        fixacc  : true,
-        subcolor : null,
-    },
-    {
-        id: 2, uid: 0,
-        index : &quot;simplebra&quot;,    name : &quot;胸罩&quot;,     gender : &quot;f&quot;,
-        text : &quot;一件设计朴素的胸罩。&quot;,   
-        tag  : [&quot;日常&quot;],
-        name_en:&quot;bra&quot;,
-        text_en:&quot;A simple design bra.&quot;, 
-        hasDif : {breast:false, pregnant:false},
-        hasImg : false,
-
-        cost : 60,        reveal : 4,        hot : 0, cold : 0,
-        durable : 10,     maxdurable : 10,     beauty: 0,     defence: 0,
-        fixcolor: false,    color:&quot;#FFFFF&quot;,  colorname: &quot;白&quot;,
-        colors : [],
-        
-        category: &quot;内衣&quot;, layer : &quot;inner_up&quot;,
-        shop : &quot;all&quot;, 
-        
-        slot : &quot;top&quot;,
-        tuckinable: false,        tuckin : false, 
-        acc : null,
-        patterns: [],
-        fixacc  : true,
-        subcolor : null,
-    },
-]&gt;&gt;
-&lt;&lt;/widget&gt;&gt;
-
-&lt;&lt;widget &quot;InitClothUnderbottoms&quot;&gt;&gt;
-&lt;&lt;set Avatars.inner_bt to [
-    {
-        id: 0, uid: 0,
-        index : &quot;naked&quot;,    name : &quot;裸&quot;,     gender : &quot;n&quot;,
-        text : &quot;无&quot;,  
-        name_en:&quot;&quot;,
-        text_en:&quot;&quot;, 
-        tag  : [&quot;裸露&quot;],
-        hasImg : false,
-        hasDif : {breast:false, pregnant:false},
-
-        cost : 0,        reveal : 0,    hot : 0,    cold : 0,
-        durable : 0,     maxdurable : 0,     beauty: 0,     defence: 0,
-        fixcolor: true,    color:null,  colorname: null,
-        colors : [],
-        
-        category: &quot;内裤&quot;, layer : &quot;inner_bt&quot;, slot : &quot;bottom&quot;, 
-        shop : null, 
-        
-        acc : null,
-        patterns: [],
-        fixacc  : true,
-        subcolor : null,
-    },
-    {
-        id: 1, uid: 0,
-        index : &quot;boxer&quot;,    name : &quot;四角内裤&quot;,     gender : &quot;m&quot;,
-        text : &quot;一条简单的四角内裤。&quot;,
-        name_en:&quot;boxer brief&quot;,
-        text_en:&quot;A simple boxer brief.&quot;,
-        tag  : [&quot;日常&quot;],
-        hasImg : true,
-        hasDif : {breast:false, pregnant:false},
-
-        cost : 12,        reveal : 2,    hot : -0.1,    cold : -0.1,
-        durable : 10,     maxdurable : 10,     beauty: 0,     defence: 0,
-        fixcolor: false,    color:&quot;#FDFFFF&quot;,  colorname: &quot;白&quot;,
-        colors : [],
-        
-        category: &quot;内裤&quot;, layer : &quot;inner_bt&quot;, slot : &quot;bottom&quot;, 
-        shop : &quot;all&quot;, 
-        
-        acc : null,
-        patterns: [],
-        fixacc  : true,
-        subcolor : null,
-    },
-    {
-        id: 2, uid: 0,
-        index : &quot;pantie&quot;,    name : &quot;内裤&quot;,     gender : &quot;f&quot;,
-        text : &quot;一款简单朴素的内裤。&quot;,
-        name_en:&quot;pantie&quot;,
-        text_en:&quot;A simple pantie.&quot;,
-        tag  : [&quot;日常&quot;],
-        hasImg : true,
-        hasDif : {breast:false, pregnant:false},
-
-        cost : 15,        reveal : 2,    hot : 0,    cold : 0,
-        durable : 10,     maxdurable : 10,     beauty: 0,     defence: 0,
-        fixcolor: false,    color:&quot;#FDFFFF&quot;,  colorname: &quot;白&quot;,
-        colors : [],
-        
-        category: &quot;内裤&quot;, layer : &quot;inner_bt&quot;, slot : &quot;bottom&quot;, 
-        shop : &quot;all&quot;, 
-        
-        acc : null,
-        patterns: [],
-        fixacc  : true,
-        subcolor : null,
-    },
-]&gt;&gt;
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="6" name="ClothLegsData" tags="widget" position="725,100" size="100,100">&lt;&lt;widget &quot;InitClothShoes&quot;&gt;&gt;
-&lt;&lt;set Avatars.shoes to [
-    {
-        id: 0, uid: 0,
-        index : &quot;naked&quot;,    name : &quot;裸&quot;,     gender : &quot;n&quot;,
-        text : &quot;无&quot;,
-        name_en:&quot;&quot;,
-        text_en:&quot;&quot;, 
-        tag  : [&quot;裸露&quot;], 
-        hasImg : false,
-
-        cost : 0,       reveal : 0,    hot : 0,    cold : 0,
-        durable : 0,    maxdurable : 0,     beauty: 0,     defence: 0,
-        fixcolor: true,    color:null,  colorname: null,
-        colors : [],
-        
-        category: &quot;鞋子&quot;,     layer : &quot;shoes&quot;,      slot : &quot;shoes&quot;,
-        shop : null, 
-
-        acc : null,
-        patterns: [],
-        fixacc  : true,
-        subcolor : null,
-    },
-    {
-        id: 1, uid: 0,
-        index : &quot;sportshoes&quot;,    name : &quot;运动鞋&quot;,     gender : &quot;n&quot;,
-        text : &quot;一双普通的白色运动鞋。&quot;,
-        name_en:&quot;sport shoes&quot;,
-        text_en:&quot;A simple designed sport shoes.&quot;,
-        tag  : [&quot;日常&quot;,&quot;运动&quot;], 
-        hasImg : true,
-
-        cost : 60,       reveal : 0,    hot : -0.1,    cold : -0.1,
-        durable : 30,    maxdurable : 30,     beauty: 0,     defence: 0,
-        fixcolor: true,    color:&quot;white&quot;,  colorname: &quot;白&quot;,
-        colors : [&quot;white&quot;],
-        
-        category: &quot;鞋子&quot;,     layer : &quot;shoes&quot;,      slot : &quot;shoes&quot;,
-        shop : &quot;all&quot;, 
-
-        acc : null,
-        patterns: [],
-        fixacc  : true,
-        subcolor : null,
-    },
-    {
-        id: 2, uid: 0,
-        index : &quot;highheel&quot;,    name : &quot;高跟鞋&quot;,     gender : &quot;f&quot;,
-        text : &quot;一双简单设计的高跟鞋。&quot;, 
-        name_en:&quot;high heel&quot;,
-        text_en:&quot;A simple design high heel&quot;,
-        tag  : [&quot;日常&quot;,&quot;商务&quot;], 
-        hasImg : true,
-
-        cost : 80,       reveal : 0,    hot : 0,    cold : 0,
-        durable : 20,    maxdurable : 20,     beauty: 0.02,     defence: 0,
-        fixcolor: false,    color:&quot;#FDFFFF&quot;,  colorname: &quot;白&quot;,
-        colors : [],
-        
-        category: &quot;鞋子&quot;,     layer : &quot;shoes&quot;,      slot : &quot;shoes&quot;,
-        shop : &quot;all&quot;, 
-
-        acc : null,
-        patterns: [],
-        fixacc  : true,
-        subcolor : null,
-    },
-]&gt;&gt;
-&lt;&lt;/widget&gt;&gt;
-
-&lt;&lt;widget &quot;InitClothSocks&quot;&gt;&gt;
-&lt;&lt;set Avatars.legs to [
-    {
-        id: 0, uid: 0,
-        index : &quot;naked&quot;,    name : &quot;裸&quot;,     gender : &quot;n&quot;,
-        text : &quot;无&quot;, 
-        name_en:&quot;&quot;,
-        text_en:&quot;&quot;, 
-        tag  : [&quot;裸露&quot;], 
-        hasImg : false,
-
-        cost : 0,       reveal : 0,    hot : 0,    cold : 0,
-        durable : 0,    maxdurable : 0,     beauty: 0,     defence: 0,
-        fixcolor: true,    color:null,  colorname: null,
-        colors : [],
-        
-        category: &quot;袜子&quot;,     layer : &quot;legs&quot;,      slot : &quot;legs&quot;,
-        shop : null, 
-
-        acc : null,
-        patterns: [],
-        fixacc  : true,
-        subcolor : null,
-    },
-    {
-        id: 1, uid: 0,
-        index : &quot;sportsocks&quot;,    name : &quot;运动短袜&quot;,     gender : &quot;n&quot;,
-        text : &quot;一双简单的运动袜。&quot;,
-        name_en:&quot;sports socks&quot;,
-        text_en:&quot;A simple design sports socks&quot;,  
-        tag  : [&quot;日常&quot;,&quot;运动&quot;], 
-        hasImg : true,
-
-        cost : 10,       reveal : 0,    hot : -0.2,    cold : -0.2,
-        durable : 0,    maxdurable : 0,     beauty: 0,     defence: 0,
-        fixcolor: false,    color:&quot;#FDFFFF&quot;,  colorname: &quot;白&quot;,
-        colors : [],
-        
-        category: &quot;袜子&quot;,     layer : &quot;legs&quot;,      slot : &quot;legs&quot;,
-        shop : &quot;all&quot;, 
-
-        acc : null,
-        patterns: [],
-        fixacc  : true,
-        subcolor : null,
-    },
-]&gt;&gt;
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="7" name="EmotionList" tags="widget" position="850,100" size="100,100">&lt;&lt;widget &quot;InitEmotion&quot;&gt;&gt;
-&lt;&lt;set A.l.eyebrows to [&quot;angry&quot;,&quot;confuse&quot;,&quot;happy&quot;,&quot;normal&quot;,&quot;sad&quot;]&gt;&gt;
-&lt;&lt;set A.l.eyes to [&quot;ahe&quot;,&quot;blink1&quot;,&quot;blink2&quot;,&quot;blink2&quot;,&quot;close1&quot;,&quot;close2&quot;,&quot;full&quot;,&quot;idle&quot;,&quot;half&quot;,&quot;lookdown&quot;,&quot;lookleft&quot;,&quot;lookup1&quot;,&quot;lookup2&quot;,&quot;lookup3&quot;,&quot;quater1&quot;,&quot;quater2&quot;]&gt;&gt;
-&lt;&lt;set A.l.mouth to [&quot;angry&quot;,&quot;laugh&quot;,&quot;oop&quot;,&quot;open&quot;,&quot;sad&quot;,&quot;sign&quot;,&quot;smile&quot;,&quot;unhappy&quot;]&gt;&gt;
-
-&lt;&lt;set A.emote to {
-    正常 : {
-        name : &quot;正常&quot;,
-        eyebrow : &quot;normal&quot;,  eyes : &quot;full&quot;,  mouth : &quot;smile&quot;,  frame : null,
-        tear : false,   shy  : false,
-        red  : false,   hurt : false,          
-    },
-    开心:  {
-        name :&quot;开心&quot;,           
-        eyebrow :&quot;happy&quot;,   eyes :&quot;quater2&quot;,  mouth :&quot;laugh&quot;,  frame :null,
-        tear :false,    shy  :true,
-        red  :false,    hurt :false,
-    },
-    伤心: {
-        name : &quot;伤心&quot;,
-        eyebrow : &quot;sad&quot;,  eyes : &quot;quater1&quot;,  mouth : &quot;sad&quot;,  frame : null,
-        tear : true,    shy  : false,
-        red  : false,   hurt : false,
-    },
-    生气: {
-        name : &quot;生气&quot;,
-        eyebrow : &quot;angry&quot;,  eyes : &quot;quater2&quot;,  mouth : &quot;open&quot;,  frame : null,
-        tear : false,    shy  : false, 
-        red  : false,    hurt : false,
-    },
-    害羞:{
-        name : &quot;害羞&quot;,             
-        eyebrow : &quot;happy&quot;,  eyes : &quot;lookleft&quot;,  mouth : &quot;smile&quot;,  frame : null,
-        tear : false,   shy  : true,
-        red  : false,   hurt : false,
-    },
-    困惑:{
-        name : &quot;困惑&quot;, 
-        eyebrow : &quot;confuse&quot;,  eyes : &quot;quater2&quot;,    mouth : &quot;unhappy&quot;, frame : &quot;confuse&quot;,
-        tear : false,   shy  : false,
-        red  : false,   hurt : false,
-    },
-    受伤: {
-        name : &quot;受伤&quot;,            
-        eyebrow : &quot;angry&quot;,  eyes : &quot;blink1&quot;, mouth : &quot;open&quot;,  frame : null,
-        tear : false,    shy  : false,
-        red  : false,    hurt : true,
-    },
-    快感1: {
-        name : &quot;快感&quot;,           
-        eyebrow : &quot;sad&quot;,    eyes : &quot;quater2&quot;,  mouth : &quot;open&quot;,  frame : null,
-        tear : false,    shy  : false,
-        red  : true,     hurt : false,
-    },
-    快感2: {
-        name : &quot;快感&quot;,            
-        eyebrow : &quot;confuse&quot;,    eyes : &quot;lookup2&quot;,  mouth : &quot;open&quot;,  frame : null,
-        tear : true,    shy  : false,
-        red  : true,    hurt : false,
-    },
-    高潮:{
-        name : &quot;高潮&quot;,             
-        eyebrow : &quot;sad&quot;,    eyes : &quot;lookup1&quot;,  mouth : &quot;open&quot;,  frame : null,
-        tear : true,    shy  : false,
-        red  : true,    hurt : false,
-    },
-}&gt;&gt;
-
-&lt;&lt;run A.facelist = Object.keys(A.emote)&gt;&gt;
-
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="8" name="ActionCOM" tags="widget" position="975,100" size="100,100">&lt;&lt;widget &quot;InitActionCOM&quot;&gt;&gt;
-/*  体力初始值: 500, max 2500~5000(根据难易度变动) */
-/*  清洁度无行动日常消耗 每分钟 1点 */
-/*  饮食 1 = 4卡路里， 1:4 */
-
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="9" name="ItemData" tags="widget" position="1100,100" size="100,100">&lt;&lt;widget &quot;InitItemData&quot;&gt;&gt;
+</script><tw-passagedata pid="1" name="ItemData" tags="widget" position="100,100" size="100,100">&lt;&lt;widget &quot;InitItemData&quot;&gt;&gt;
 
 &lt;&lt;set D.itemlist to {
     foods:{}, medicine:{}, tool:{}, collection:{}, homekea:{},
@@ -13533,7 +9808,7 @@ DefineMacroS("delay",delay)
     },    
 }&gt;&gt;
 
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="10" name="LocationData" tags="widget" position="1225,100" size="100,100">&lt;&lt;widget &quot;InitPlaceData&quot;&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="2" name="LocationData" tags="widget" position="225,100" size="100,100">&lt;&lt;widget &quot;InitPlaceData&quot;&gt;&gt;
  &lt;&lt;set D.placedata to {
     单身公寓 : {
         place:&quot;单身公寓&quot;, side:&quot;室内&quot;,
@@ -13682,7 +9957,7 @@ DefineMacroS("delay",delay)
         situation:[],
     }
 }&gt;&gt;   
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="11" name="StoryInit" tags="" position="100,225" size="100,100">/* 首次运行时初始化自动存档 */
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="3" name="StoryInit" tags="" position="350,100" size="100,100">/* 首次运行时初始化自动存档 */
 &lt;&lt;run initSaveData()&gt;&gt;
 &lt;!-- 首先初始化资料库 --&gt;
 &lt;&lt;InitDataBase&gt;&gt;
@@ -13773,7 +10048,7 @@ DefineMacroS("delay",delay)
 
 &lt;&lt;if $saveId is undefined&gt;&gt;
 	&lt;&lt;set $saveId to random(10000, 99999)&gt;&gt;
-&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="12" name="Widgets variablesStatic" tags="widget" position="225,225" size="100,100">&lt;&lt;widget &quot;InitDataBase&quot;&gt;&gt;
+&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="4" name="Widgets variablesStatic" tags="widget" position="475,100" size="100,100">&lt;&lt;widget &quot;InitDataBase&quot;&gt;&gt;
 
 /* 加载语言库 */
 &lt;&lt;SetupLanguage&gt;&gt;
@@ -13826,10 +10101,7 @@ DefineMacroS("delay",delay)
 &lt;&lt;set D.explist to [&quot;战败&quot;,&quot;攻击&quot;,&quot;被攻击&quot;,&quot;诱惑&quot;,&quot;射精&quot;,&quot;高潮&quot;,&quot;M高潮&quot;,&quot;B高潮&quot;,&quot;C高潮&quot;,&quot;U高潮&quot;,&quot;V高潮&quot;,&quot;A高潮&quot;,&quot;多重高潮&quot;,&quot;自慰&quot;,&quot;口交&quot;,&quot;性交&quot;,&quot;肛交&quot;,&quot;喷乳&quot;,&quot;被猥琐&quot;,&quot;被眠奸&quot;,&quot;被迷奸&quot;,&quot;被强奸&quot;,&quot;被轮奸&quot;,&quot;被兽奸&quot;,&quot;被触手奸&quot;,&quot;兽交&quot;,&quot;触手&quot;,&quot;史莱姆&quot;,&quot;怀孕&quot;,&quot;A怀孕&quot;,&quot;分娩&quot;,&quot;尿道开发&quot;,&quot;阴道扩张&quot;,&quot;肛门扩张&quot;,&quot;产卵&quot;,&quot;寄生&quot;,&quot;监禁&quot;,&quot;SM&quot;]&gt;&gt;
 
 &lt;&lt;InitPlaceData&gt;&gt;
-&lt;&lt;InitActionCOM&gt;&gt;
 &lt;&lt;InitItemData&gt;&gt;
-&lt;&lt;InitAvatar&gt;&gt;
-
 
 &lt;&lt;/widget&gt;&gt;
 
@@ -13917,7 +10189,7 @@ DefineMacroS("delay",delay)
 &lt;&lt;cacheaudio &quot;获得成就&quot; &quot;sound/rising.mp3&quot;&gt;&gt;
 
 
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="13" name="LanguageDictionaryr" tags="widget" position="350,225" size="100,100">&lt;&lt;widget &quot;SetupLanguage&quot;&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="5" name="LanguageDictionaryr" tags="widget" position="600,100" size="100,100">&lt;&lt;widget &quot;SetupLanguage&quot;&gt;&gt;
 &lt;&lt;set setup.L to {}&gt;&gt;
 &lt;&lt;set setup.L.CN to {
         肤色:{
@@ -13991,7 +10263,7 @@ DefineMacroS("delay",delay)
         },
 }&gt;&gt;
 
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="14" name="InitGameData" tags="widget" position="475,225" size="100,100">&lt;&lt;widget &quot;InitGameData&quot;&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="6" name="InitGameData" tags="widget" position="725,100" size="100,100">&lt;&lt;widget &quot;InitGameData&quot;&gt;&gt;
 
 &lt;!-- 初始化游戏数据 --&gt;
 &lt;&lt;set $gametime to {hour:0, min:0, sec:0, day:0}&gt;&gt;
@@ -14124,7 +10396,7 @@ DefineMacroS("delay",delay)
     {},{},{},{},{},{},{}], /* 动作队列 */
 }&gt;&gt;
 
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="15" name="InitPlayerChara" tags="widget" position="600,225" size="100,100">&lt;&lt;widget &quot;InitPlayerData&quot;&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="7" name="InitPlayerChara" tags="widget" position="850,100" size="100,100">&lt;&lt;widget &quot;InitPlayerData&quot;&gt;&gt;
 &lt;!-- 角色创建 --&gt;
 &lt;&lt;set $starttrait to &quot;菜鸟&quot;&gt;&gt;
 
@@ -14408,7 +10680,7 @@ $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌}
     red     : false,    hurt    : false,
 }&gt;&gt;
 
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="16" name="EventList" tags="widget" position="725,225" size="100,100">&lt;&lt;widget &quot;registerEventList&quot;&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="8" name="EventList" tags="widget" position="975,100" size="100,100">&lt;&lt;widget &quot;registerEventList&quot;&gt;&gt;
 
 &lt;&lt;set D.event to {
     主线:[],
@@ -14434,7 +10706,7 @@ $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌}
     {id:0, type:&quot;角色-凌寻&quot;, name:&quot;初遇&quot;, branch:[&quot;开头&quot;,&quot;英雄救美-成功&quot;,&quot;英雄救美-失败&quot;,&quot;结尾&quot;], phrase:0},
 ]&gt;&gt;
 
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="17" name="快速开始" tags="widget" position="850,225" size="100,100">&lt;&lt;widget &quot;QuickStart&quot;&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="9" name="快速开始" tags="widget" position="1100,100" size="100,100">&lt;&lt;widget &quot;QuickStart&quot;&gt;&gt;
 &lt;div style=&quot;margin-left:16px;font-size:14px&quot;&gt;∵ &lt;&lt;lang &quot;预设人物卡&quot; &quot;Preset&quot;&gt;&gt;：
 &lt;select id=&quot;preset&quot; name=&quot;preset&quot; onchange=&quot;V.preset = this.value; showcharainfo()&quot;&gt;
 	&lt;option value=&quot;魔女&quot; selected&gt;魔女&lt;/option&gt;
@@ -14457,7 +10729,7 @@ $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌}
 &lt;&lt;default&gt;&gt;大家的魔女&lt;br&gt; 是个伪娘。既然是魔（法少）女，那当然擅长魔法。&lt;br&gt;以上都是大嘘。只是个一个二次元爱好者，喜欢玩游戏，会画点画，玩COSPLAY，搞搞女装直播的样子。
 &lt;&lt;/switch&gt;&gt;
 
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="18" name="创建人物" tags="widget" position="975,225" size="100,100">&lt;&lt;widget &quot;CharaMaking&quot;&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="10" name="创建人物" tags="widget" position="1225,100" size="100,100">&lt;&lt;widget &quot;CharaMaking&quot;&gt;&gt;
 &lt;&lt;set $Flag.charamaking to true&gt;&gt;
 &lt;&lt;if $PC.trait.泌乳体质 is undefined&gt;&gt;
     &lt;&lt;set $PC.trait.泌乳体质 to false&gt;&gt;
@@ -14523,7 +10795,7 @@ $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌}
 &lt;&lt;/silently&gt;&gt;
 &lt;!-- Event --&gt;
 
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="19" name="创建人物组件" tags="widget" position="1100,225" size="100,100">&lt;&lt;widget &quot;CMBoy&quot;&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="11" name="创建人物组件" tags="widget" position="100,225" size="100,100">&lt;&lt;widget &quot;CMBoy&quot;&gt;&gt;
 　阴茎大小　&lt;&lt;CMPsize&gt;&gt;&lt;br&gt;
 　阴茎感度　&lt;&lt;CMPenis&gt;&gt;&lt;br&gt;
 &lt;&lt;/widget&gt;&gt;
@@ -15078,7 +11350,7 @@ $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌}
         &lt;&lt;setface &quot;正常&quot;&gt;&gt;
     &lt;&lt;/if&gt;&gt;
 
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="20" name="游戏设定" tags="widget" position="1225,225" size="100,100">&lt;&lt;widget &quot;GameSetting&quot;&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="12" name="游戏设定" tags="widget" position="225,225" size="100,100">&lt;&lt;widget &quot;GameSetting&quot;&gt;&gt;
 &lt;div id=&quot;GameSetting&quot;&gt;
 　&lt;&lt;lang &quot;游戏视角&quot; &quot;Persons&quot;&gt;&gt;： &lt;label&gt;&lt;&lt;radiobutton &quot;$conf.persons&quot; 1 autocheck&gt;&gt; &lt;&lt;lang &quot;第一人称&quot; &quot;First: I&quot;&gt;&gt;&lt;/label&gt;　|　&lt;label&gt;&lt;&lt;radiobutton &quot;$conf.persons&quot; 2 autocheck&gt;&gt;&lt;&lt;lang &quot;第二人称&quot; &quot;Second: You&quot;&gt;&gt;&lt;/label&gt;　|　&lt;label&gt;&lt;&lt;radiobutton &quot;$conf.persons&quot; 3 autocheck&gt;&gt;&lt;&lt;lang &quot;第三人称(默认)&quot; &quot;Third: Call Name(defalt)&quot;&gt;&gt;&lt;/label&gt;
 &lt;&lt;lang &quot; &quot; &quot;※Not full support on English&quot;&gt;&gt;&lt;br&gt;
@@ -15093,7 +11365,7 @@ $PC.vaginity.处女 = {date:X月X日,situation:强奸,person:路人的巨屌}
 
 　&lt;&lt;link &quot;&gt; 改变语言/Comfirm Language&quot; &quot;Start&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;
 &lt;/div&gt;
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="21" name="StoryDisplayTitle" tags="" position="100,350" size="100,100">EWA v&lt;&lt;print StartConfig.version&gt;&gt;</tw-passagedata><tw-passagedata pid="22" name="Start" tags="nosave" position="225,350" size="100,100">/* 镜像目录 */
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="13" name="StoryDisplayTitle" tags="" position="350,225" size="100,100">EWA v&lt;&lt;print StartConfig.version&gt;&gt;</tw-passagedata><tw-passagedata pid="14" name="Start" tags="nosave" position="475,225" size="100,100">/* 镜像目录 */
 &lt;&lt;run setMirrorVariables()&gt;&gt;
 
 &lt;&lt;audio &quot;标题&quot; volume 0.5 play loop&gt;&gt;
@@ -15161,7 +11433,7 @@ $(document).on(&#39;:passagerender&#39;, function (ev) {
 });
 &lt;&lt;/script&gt;&gt;
 
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="23" name="初始设定" tags="" position="350,350" size="100,100">&lt;&lt;set $UI.activepage to &quot;QuickStart&quot;&gt;&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="15" name="初始设定" tags="" position="600,225" size="100,100">&lt;&lt;set $UI.activepage to &quot;QuickStart&quot;&gt;&gt;
 
 &lt;div id=&quot;StartingPageMenu&quot;&gt;
 	&lt;&lt;set _text to Lang(&quot;快速开始&quot;,&quot;QuickStart&quot;)&gt;&gt;
@@ -15187,7 +11459,7 @@ $(document).on(&#39;:passagerender&#39;, function (ev) {
 &lt;/div&gt;
 
 &lt;br&gt;
-&lt;&lt;dashline&gt;&gt;</tw-passagedata><tw-passagedata pid="24" name="开始" tags="" position="475,350" size="100,100">&lt;&lt;masteraudio stop&gt;&gt;
+&lt;&lt;dashline&gt;&gt;</tw-passagedata><tw-passagedata pid="16" name="开始" tags="" position="725,225" size="100,100">&lt;&lt;masteraudio stop&gt;&gt;
 
 &lt;div id=&quot;eventsituation&quot;&gt;
 &lt;&lt;you&gt;&gt;准备好了吗？&lt;br&gt;
@@ -15215,7 +11487,7 @@ $(document).on(&#39;:passagerender&#39;, function (ev) {
 [[回到开头|Start]]
 &lt;/div&gt;
 
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="25" name="Upgrade Waiting Room" tags="" position="600,350" size="100,100">欢迎来到失乐园物语（Elysion Wolrd Adventure） &lt;&lt;print StartConfig.version&gt;&gt;。 游戏升级中，请稍后。&lt;br&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="17" name="Upgrade Waiting Room" tags="" position="850,225" size="100,100">欢迎来到失乐园物语（Elysion Wolrd Adventure） &lt;&lt;print StartConfig.version&gt;&gt;。 游戏升级中，请稍后。&lt;br&gt;
 
 &lt;&lt;silently&gt;&gt;
 &lt;&lt;variablesVersionUpdate&gt;&gt;
@@ -15223,7 +11495,7 @@ $(document).on(&#39;:passagerender&#39;, function (ev) {
 
 升级完毕。&lt;br&gt;
 
-[[继续|$navigation.stack.last()][$navigation.stack.pop()]]</tw-passagedata><tw-passagedata pid="26" name="试衣间" tags="" position="725,350" size="100,100">&lt;&lt;if $temp.tryoncomeback is undefined&gt;&gt;
+[[继续|$navigation.stack.last()][$navigation.stack.pop()]]</tw-passagedata><tw-passagedata pid="18" name="试衣间" tags="" position="975,225" size="100,100">&lt;&lt;if $temp.tryoncomeback is undefined&gt;&gt;
     &lt;&lt;EnterTryRoom&gt;&gt;
 &lt;&lt;else&gt;&gt;
     &lt;&lt;set $temp to {}&gt;&gt;
@@ -15364,11 +11636,11 @@ $(document).on(&#39;:passagerender&#39;, function (ev) {
 
 &lt;&lt;widget &quot;resettryon&quot;&gt;&gt;
     &lt;&lt;set $tryon to {neck: null, hand: null, face: null,hat: null, outter: null, over_up: null,over_bt: null,inner_up: null, inner_bt: null,shoes: null, legs: null,}&gt;&gt;
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="27" name="试衣偷窥：触发" tags="" position="850,350" size="100,100">&lt;&lt;mode &quot;event&quot;&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="19" name="试衣偷窥：触发" tags="" position="1100,225" size="100,100">&lt;&lt;mode &quot;event&quot;&gt;&gt;
 &lt;&lt;you&gt;&gt;还穿着商店里的衣服，确定就这么离开商店吗？&lt;br&gt;
 &lt;br&gt;
 &lt;&lt;link &quot;不买，就这么离开&quot; &quot;试衣偷窥：不买&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
-&lt;&lt;link &quot;还是回去付钱吧&quot; $eventexit[0]&gt;&gt;&lt;&lt;set $temp.tryoncomeback to true&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;</tw-passagedata><tw-passagedata pid="28" name="试衣偷窥：不买" tags="" position="975,350" size="100,100">&lt;&lt;set _luck to random(1,100)&gt;&gt;
+&lt;&lt;link &quot;还是回去付钱吧&quot; $eventexit[0]&gt;&gt;&lt;&lt;set $temp.tryoncomeback to true&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;</tw-passagedata><tw-passagedata pid="20" name="试衣偷窥：不买" tags="" position="1225,225" size="100,100">&lt;&lt;set _luck to random(1,100)&gt;&gt;
 
 &lt;&lt;you&gt;&gt;打算就这么穿着衣服走……&lt;br&gt;
 
@@ -15383,7 +11655,7 @@ $(document).on(&#39;:passagerender&#39;, function (ev) {
             &lt;&lt;link &quot;离开&quot; $eventexit[0]&gt;&gt;&lt;&lt;set $temp.tryoncomeback to true&gt;&gt;&lt;&lt;/link&gt;&gt;
         &lt;&lt;/if&gt;&gt;
     &lt;/div&gt;
-&lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="29" name="服装店-工具" tags="widget" position="1100,350" size="100,100">&lt;&lt;widget &quot;EnterTryRoom&quot;&gt;&gt;
+&lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="21" name="服装店-工具" tags="widget" position="100,350" size="100,100">&lt;&lt;widget &quot;EnterTryRoom&quot;&gt;&gt;
 /* 把身上衣服暂存在TEquip里 */
 &lt;&lt;set $TEquip to clone($Equip)&gt;&gt;
 
@@ -15580,13 +11852,13 @@ required:false,
     &lt;&lt;set $Equip.over_up = null, $tryon.over_up = null&gt;&gt;
     &lt;&lt;set $Equip.over_bt = null, $tryon.over_bt = null&gt;&gt;
     &lt;&lt;SetAvatar&gt;&gt;
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="30" name="AvatarSetup" tags="widget" position="1225,350" size="100,100">&lt;&lt;widget &quot;SetAvatar&quot;&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="22" name="AvatarSetup" tags="widget" position="225,350" size="100,100">&lt;&lt;widget &quot;SetAvatar&quot;&gt;&gt;
 
 &lt;&lt;silently&gt;&gt;
 &lt;&lt;run stAvatar()&gt;&gt;
 &lt;&lt;/silently&gt;&gt;
 
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="31" name="ShowAvatar" tags="widget" position="100,475" size="100,100">&lt;&lt;widget &quot;avatar&quot;&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="23" name="ShowAvatar" tags="widget" position="350,350" size="100,100">&lt;&lt;widget &quot;avatar&quot;&gt;&gt;
 &lt;&lt;if $conf.render is &quot;canvas&quot;&gt;&gt;
     &lt;&lt;twinescript&gt;&gt;
     output.appendChild(Avatar.getCanvas())
@@ -15607,7 +11879,7 @@ required:false,
 &lt;&lt;/if&gt;&gt;
 
 &lt;/div&gt;
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="32" name="衣柜" tags="" position="225,475" size="100,100">&lt;div id=&quot;action-text2&quot;&gt;&lt;&lt;you&gt;&gt;打开了衣柜。&lt;/div&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="24" name="衣柜" tags="" position="475,350" size="100,100">&lt;div id=&quot;action-text2&quot;&gt;&lt;&lt;you&gt;&gt;打开了衣柜。&lt;/div&gt;
 &lt;div id=&quot;action-mode&quot; class=&quot;graytext&quot;&gt;
 动作： &lt;label&gt;&lt;&lt;radiobutton &quot;$UI.closetmode&quot; &quot;穿&quot; autocheck&gt;&gt; &lt;&lt;lang &quot;穿&quot; &quot;wear&quot;&gt;&gt;&lt;/label&gt; &lt;label&gt;&lt;&lt;radiobutton &quot;$UI.closetmode&quot; &quot;扔&quot; autocheck&gt;&gt; &lt;&lt;lang &quot;扔&quot; &quot;wear&quot;&gt;&gt;&lt;/label&gt;
 &lt;/div&gt;
@@ -15693,7 +11965,7 @@ required:false,
     &lt;&lt;set _timer to _timer -1&gt;&gt;
     &lt;&lt;if _timer lte 0&gt;&gt;&lt;&lt;stop&gt;&gt;&lt;&lt;/if&gt;&gt;
 &lt;&lt;/repeat&gt;&gt;
-&lt;&lt;/silently&gt;&gt;</tw-passagedata><tw-passagedata pid="33" name="Closet-Widget" tags="widget" position="350,475" size="100,100">&lt;&lt;widget &quot;showcloset&quot;&gt;&gt;
+&lt;&lt;/silently&gt;&gt;</tw-passagedata><tw-passagedata pid="25" name="Closet-Widget" tags="widget" position="600,350" size="100,100">&lt;&lt;widget &quot;showcloset&quot;&gt;&gt;
 &lt;&lt;set _catgr to $args[0]&gt;&gt;
 &lt;&lt;set _catgrname to A.categoryname&gt;&gt;
 &lt;&lt;set _nakeimg to &quot;image/avatar/&quot;+_catgr+&quot;/thumb.png&quot;&gt;&gt;
@@ -15741,7 +12013,7 @@ required:false,
         &lt;/div&gt;
     &lt;&lt;/for&gt;&gt;
 &lt;&lt;/if&gt;&gt;
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="34" name="StoryCaption" tags="" position="475,475" size="100,100">&lt;div @class=&quot;(Errors.log.length==0?&#39;hidden&#39;:&#39;&#39;) + &#39; error-reporter-btn&#39;&quot; onclick=&quot;Errors.Reporter.toggle()&quot;&gt;&lt;/div&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="26" name="StoryCaption" tags="" position="725,350" size="100,100">&lt;div @class=&quot;(Errors.log.length==0?&#39;hidden&#39;:&#39;&#39;) + &#39; error-reporter-btn&#39;&quot; onclick=&quot;Errors.Reporter.toggle()&quot;&gt;&lt;/div&gt;
 
 &lt;&lt;showtitle&gt;&gt;
 
@@ -15831,7 +12103,7 @@ required:false,
 &lt;&lt;repeat 0.3s&gt;&gt;
 &lt;&lt;run $(&#39;#customOverlay&#39;).draggable({handle: &#39;.handle&#39;});$(&#39;#ui-dialog&#39;).draggable({handle: &#39;.handle&#39;});&gt;&gt;
 &lt;&lt;set _timer -= 1&gt;&gt;
-&lt;&lt;if _timer lte 0&gt;&gt;&lt;&lt;stop&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/repeat&gt;&gt;</tw-passagedata><tw-passagedata pid="35" name="SidebarWidget" tags="widget" position="600,475" size="100,100">&lt;&lt;widget &quot;showmoney&quot;&gt;&gt;
+&lt;&lt;if _timer lte 0&gt;&gt;&lt;&lt;stop&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/repeat&gt;&gt;</tw-passagedata><tw-passagedata pid="27" name="SidebarWidget" tags="widget" position="850,350" size="100,100">&lt;&lt;widget &quot;showmoney&quot;&gt;&gt;
 &lt;div class=&quot;points&quot;&gt;&lt;&lt;printmoney $PC.points&gt;&gt;P&lt;/div&gt;&lt;span class=&quot;slice&quot;&gt; | &lt;/span&gt;&lt;div class=&quot;money&quot;&gt;&lt;&lt;printmoney $PC.money&gt;&gt;&lt;&lt;icon &quot;moneyicon&quot;&gt;&gt;&lt;/div&gt;
 &lt;&lt;/widget&gt;&gt;
 
@@ -15938,7 +12210,7 @@ required:false,
     &lt;&lt;button OPTIONS&gt;&gt;&lt;&lt;overlayReplace &quot;options&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
     &lt;/div&gt;
     &lt;/div&gt;
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="36" name="Options" tags="widget" position="725,475" size="100,100">&lt;&lt;widget &quot;options&quot;&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="28" name="Options" tags="widget" position="975,350" size="100,100">&lt;&lt;widget &quot;options&quot;&gt;&gt;
  制作中……&lt;br&gt;
 &lt;&lt;/widget&gt;&gt;
 
@@ -16017,7 +12289,7 @@ required:false,
 	&lt;&lt;replace #saveList&gt;&gt;
 		&lt;&lt;saveList&gt;&gt;
 	&lt;&lt;/replace&gt;&gt;
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="37" name="overlayReplace" tags="widget" position="850,475" size="100,100">&lt;&lt;widget &quot;overlayReplace&quot;&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="29" name="overlayReplace" tags="widget" position="1100,350" size="100,100">&lt;&lt;widget &quot;overlayReplace&quot;&gt;&gt;
 	&lt;&lt;if $args[0]&gt;&gt;
 		&lt;&lt;if $UI.currentOverlay isnot $args[0]&gt;&gt;
 			&lt;&lt;set $UI.currentOverlay to $args[0]&gt;&gt;
@@ -16118,7 +12390,7 @@ required:false,
 &lt;/div&gt;
 
 &lt;br&gt;&lt;br&gt;
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="38" name="Profile Detail" tags="widget" position="975,475" size="100,100">&lt;&lt;widget &quot;statistics&quot;&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="30" name="Profile Detail" tags="widget" position="1225,350" size="100,100">&lt;&lt;widget &quot;statistics&quot;&gt;&gt;
 
 &lt;&lt;/widget&gt;&gt;
 
@@ -16169,7 +12441,7 @@ required:false,
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="39" name="Profile" tags="widget" position="1100,475" size="100,100">&lt;&lt;widget &quot;profile&quot;&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="31" name="Profile" tags="widget" position="100,475" size="100,100">&lt;&lt;widget &quot;profile&quot;&gt;&gt;
 &lt;div id=&quot;profile&quot;&gt;
 
 &lt;&lt;set _like to random(($PC.info.beauty/100),($PC.info.beauty/10))&gt;&gt;
@@ -16240,7 +12512,7 @@ required:false,
 
 &lt;/div&gt;
 
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="40" name="Profile Secret" tags="widget" position="1225,475" size="100,100">&lt;&lt;widget &quot;secretfile&quot;&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="32" name="Profile Secret" tags="widget" position="225,475" size="100,100">&lt;&lt;widget &quot;secretfile&quot;&gt;&gt;
 &lt;div id=&quot;profile&quot;&gt;
 ♥&lt;u&gt; &lt;b&gt;性感状态&lt;/b&gt; &lt;/u&gt;&lt;br&gt;
 &lt;div id=&quot;statusdisplay&quot;&gt;
@@ -16305,7 +12577,7 @@ Total &lt;&lt;print $PC.rec.高潮.t&gt;&gt;&lt;br&gt;
 
 &lt;&lt;dashline&gt;&gt;
 &lt;/div&gt;
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="41" name="Profile-widget" tags="widget" position="100,600" size="100,100">&lt;&lt;widget &quot;changeinfo&quot;&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="33" name="Profile-widget" tags="widget" position="350,475" size="100,100">&lt;&lt;widget &quot;changeinfo&quot;&gt;&gt;
 &lt;&lt;if _infochange is true&gt;&gt;
     一名&lt;&lt;print $PC.info.tag&gt;&gt;&lt;&lt;print $PC.info.title&gt;&gt;&lt;&lt;textbox &quot;$shortinfo&quot; $shortinfo&gt;&gt; &lt;&lt;link &quot;保存修改&quot;&gt;&gt;&lt;&lt;set _infochange to false&gt;&gt;&lt;&lt;replace #shortinfo&gt;&gt;&lt;&lt;changeinfo&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
 &lt;&lt;else&gt;&gt;
@@ -16436,7 +12708,7 @@ Total &lt;&lt;print $PC.rec.高潮.t&gt;&gt;&lt;br&gt;
 &lt;&lt;else&gt;&gt;
     &lt;div class=&quot;error-view&quot;&gt;error: no args&lt;/div&gt;
 &lt;&lt;/if&gt;&gt;
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="42" name="SideMenuPage" tags="widget" position="225,600" size="100,100">&lt;&lt;widget &quot;items&quot;&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="34" name="SideMenuPage" tags="widget" position="475,475" size="100,100">&lt;&lt;widget &quot;items&quot;&gt;&gt;
 
 &lt;&lt;/widget&gt;&gt;
 
@@ -16454,7 +12726,7 @@ Total &lt;&lt;print $PC.rec.高潮.t&gt;&gt;&lt;br&gt;
 
 &lt;&lt;widget &quot;achivement&quot;&gt;&gt;
 
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="43" name="Combat" tags="core combat loop" position="350,600" size="100,100">&lt;&lt;mode &quot;combat&quot;&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="35" name="Combat" tags="core combat loop" position="600,475" size="100,100">&lt;&lt;mode &quot;combat&quot;&gt;&gt;
 &lt;div id=&quot;combat&quot;&gt;
 
 &lt;div id=&quot;enemyside&quot;&gt;
@@ -16556,7 +12828,7 @@ function wait(text) {
         setTimeout(() =&gt; {$(&quot;#combat_message .h&quot;+i).removeClass(&#39;hidden&#39;).addClass(&#39;delay&#39;);msg_end.scrollIntoView() }, (500*i))
     }
 }
-&lt;/script&gt;</tw-passagedata><tw-passagedata pid="44" name="TimeProcess" tags="widget" position="475,600" size="100,100">&lt;&lt;widget &quot;TimeEffect&quot;&gt;&gt;
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="36" name="TimeProcess" tags="widget" position="725,475" size="100,100">&lt;&lt;widget &quot;TimeEffect&quot;&gt;&gt;
 &lt;&lt;timeprocess&gt;&gt;
 
 /* 每日结束时的处理 */
@@ -16567,7 +12839,7 @@ function wait(text) {
 &lt;&lt;set $daychange to false&gt;&gt;
 &lt;&lt;/if&gt;&gt;
     
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="45" name="CombatUIWidget" tags="widget" position="600,600" size="100,100">&lt;&lt;widget &quot;CB_playerside&quot;&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="37" name="CombatUIWidget" tags="widget" position="850,475" size="100,100">&lt;&lt;widget &quot;CB_playerside&quot;&gt;&gt;
 &lt;div id=&quot;characard&quot;&gt;
     &lt;div class=&quot;face&quot;&gt;&lt;&lt;portrait&gt;&gt;&lt;/div&gt;
     &lt;div class=&quot;CC_name&quot;&gt;玩家&lt;/div&gt;
@@ -16633,7 +12905,7 @@ function wait(text) {
     &lt;/div&gt;
     &lt;div class=&quot;CC_state&quot;&gt;&lt;/div&gt;
 &lt;/div&gt;
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="46" name="PassageHeader" tags="" position="725,600" size="100,100">&lt;&lt;set $passage to passage()&gt;&gt;&lt;&lt;set $tags to tags($passage)&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="38" name="PassageHeader" tags="" position="975,475" size="100,100">&lt;&lt;set $passage to passage()&gt;&gt;&lt;&lt;set $tags to tags($passage)&gt;&gt;
 /* 时间经过处理 */
 &lt;&lt;fixvalue&gt;&gt;&lt;&lt;TimeEffect&gt;&gt;
 /* 其他通用预处理 */
@@ -16644,7 +12916,7 @@ function wait(text) {
 /* 通知弹出框 */
 &lt;div id=&quot;action-popup&quot; class=&quot;hide&quot;&gt;&lt;span id=&quot;action-text&quot;&gt;&lt;/span&gt;&lt;/div&gt;
 &lt;div id=&quot;hd-append-top&quot;&gt;&lt;/div&gt;
-&lt;div id=&quot;hd-append-text&quot; class=&quot;append-normal&quot;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="47" name="PassageFooter" tags="" position="850,600" size="100,100">&lt;div id=&quot;gameVersionDisplay&quot;&gt;EWA ver&lt;&lt;print StartConfig.version&gt;&gt;&lt;/div&gt;
+&lt;div id=&quot;hd-append-text&quot; class=&quot;append-normal&quot;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="39" name="PassageFooter" tags="" position="1100,475" size="100,100">&lt;div id=&quot;gameVersionDisplay&quot;&gt;EWA ver&lt;&lt;print StartConfig.version&gt;&gt;&lt;/div&gt;
 
 
 &lt;!-- 隐藏元素 */ --&gt;
@@ -16658,7 +12930,7 @@ function wait(text) {
 
 
 /* AVATAR设定的更新检测 ，一个页面显示完毕之后重新调整左边栏的表情变化 */
-&lt;&lt;SetAvatar&gt;&gt;</tw-passagedata><tw-passagedata pid="48" name="Widget" tags="widget" position="975,600" size="100,100">&lt;&lt;widget &quot;dashline&quot;&gt;&gt;
+&lt;&lt;SetAvatar&gt;&gt;</tw-passagedata><tw-passagedata pid="40" name="Widget" tags="widget" position="1225,475" size="100,100">&lt;&lt;widget &quot;dashline&quot;&gt;&gt;
     &lt;div class=&quot;dashline&quot;&gt;&lt;/div&gt;
 &lt;&lt;/widget&gt;&gt;
 
@@ -16856,7 +13128,7 @@ function wait(text) {
     &lt;&lt;set _percent to percent(_num[0],_num[1])&gt;&gt;
     &lt;&lt;set _color to $args[1]&gt;&gt;
     &lt;&lt;meterbar _percent _color&gt;&gt;
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="49" name="你的家 单身公寓" tags="location" position="1100,600" size="100,100">&lt;&lt;location &quot;单身公寓&quot;&gt;&gt;&lt;&lt;mode &quot;location&quot;&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="41" name="你的家 单身公寓" tags="location" position="100,600" size="100,100">&lt;&lt;location &quot;单身公寓&quot;&gt;&gt;&lt;&lt;mode &quot;location&quot;&gt;&gt;
 &lt;&lt;resetplaylist&gt;&gt;
 
 &lt;span class=&quot;title&quot;&gt;&lt;&lt;print $PC.info.name&gt;&gt;家&lt;/span&gt;&lt;br&gt;
@@ -16892,7 +13164,7 @@ function wait(text) {
 自慰
 使用道具
 和宠物（床伴？）聊天
-学习 */</tw-passagedata><tw-passagedata pid="50" name="洗澡" tags="" position="1225,600" size="100,100">&lt;&lt;set $location to &quot;浴室&quot;&gt;&gt;
+学习 */</tw-passagedata><tw-passagedata pid="42" name="洗澡" tags="" position="225,600" size="100,100">&lt;&lt;set $location to &quot;浴室&quot;&gt;&gt;
 &lt;&lt;gonaked &quot;closet&quot;&gt;&gt;
 &lt;img src=&#39;image/cg/bath.png&#39; class=&quot;border:1px solid #928348&quot;&gt;&lt;br&gt;
 &lt;&lt;you&gt;&gt;脱光衣服，整个人泡进浴缸里，放松着。&lt;br&gt;
@@ -16902,7 +13174,7 @@ function wait(text) {
 &lt;&lt;link &quot;自慰&quot; &quot;自慰&quot;&gt;&gt;&lt;&lt;passtime 5&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
 &lt;&lt;link &quot;玩泡沫　30m&quot; $passage&gt;&gt;&lt;&lt;passtime 30&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
 &lt;&lt;link &quot;出浴　　5m&quot; &quot;你的家 单身公寓&quot;&gt;&gt;&lt;&lt;passtime 5&gt;&gt;&lt;&lt;redress &quot;closet&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="51" name="城市生活_1" tags="" position="100,725" size="100,100">&lt;&lt;you&gt;&gt;最近离开父母家，独立出来自己住了。一切才刚开始各种不习惯……&lt;br&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="43" name="城市生活_1" tags="" position="350,600" size="100,100">&lt;&lt;you&gt;&gt;最近离开父母家，独立出来自己住了。一切才刚开始各种不习惯……&lt;br&gt;
 &lt;&lt;=condtext([
     [inTime(6,8),&quot;一大早就起来了,要做点什么好呢……？&quot;],
     [inTime(8,11),&quot;&lt;&lt;you&gt;&gt;躺在懒人沙发上茫无目的地玩着手机……&quot;],
@@ -16912,9 +13184,9 @@ function wait(text) {
     [inTime(19,23),&quot;到晚上了，该放学的早放学了，该下班的也下班了。网络迎来了高峰期……&lt;br&gt;嗨起来！&quot;],
     [&quot;else&quot;,&quot;很晚了，得睡觉了……&quot;]
 ])&gt;&gt;
-&lt;br&gt;</tw-passagedata><tw-passagedata pid="52" name="宠物的日常_1" tags="" position="225,725" size="100,100">最近多了个小家伙跟在身边, 虽然有点粘人但还是挺治愈的。&lt;br&gt;
+&lt;br&gt;</tw-passagedata><tw-passagedata pid="44" name="宠物的日常_1" tags="" position="475,600" size="100,100">最近多了个小家伙跟在身边, 虽然有点粘人但还是挺治愈的。&lt;br&gt;
 嗯……要跟宠物&lt;&lt;print $pet.name&gt;&gt;做点什么好呢？&lt;br&gt;
-&lt;br&gt;</tw-passagedata><tw-passagedata pid="53" name="怡安小区" tags="location" position="350,725" size="100,100">&lt;&lt;location &quot;怡安小区&quot;&gt;&gt;&lt;&lt;mode &quot;location&quot;&gt;&gt;
+&lt;br&gt;</tw-passagedata><tw-passagedata pid="45" name="怡安小区" tags="location" position="600,600" size="100,100">&lt;&lt;location &quot;怡安小区&quot;&gt;&gt;&lt;&lt;mode &quot;location&quot;&gt;&gt;
 
 &lt;span class=&quot;title&quot;&gt;怡安小区&lt;/span&gt;&lt;br&gt;
 &lt;div class=&quot;lbox&quot;&gt;
@@ -16939,9 +13211,9 @@ function wait(text) {
 &lt;/div&gt;
 
 /* 景南市。一个位于周唐南方大省柳洲省的一级大城市。&lt;br&gt;
-有山有水，面朝大海，四季分明，是个风景优美的旅游城市。&lt;br&gt; */</tw-passagedata><tw-passagedata pid="54" name="怡安小区 links" tags="links" position="475,725" size="100,100">&lt;div class=&quot;links&quot; title=&quot;移动时间：12分钟&quot;&gt;&lt;&lt;link &quot;・ 嘉庆广场&quot; &quot;嘉庆广场&quot;&gt;&gt;&lt;&lt;passtime 12&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
+有山有水，面朝大海，四季分明，是个风景优美的旅游城市。&lt;br&gt; */</tw-passagedata><tw-passagedata pid="46" name="怡安小区 links" tags="links" position="725,600" size="100,100">&lt;div class=&quot;links&quot; title=&quot;移动时间：12分钟&quot;&gt;&lt;&lt;link &quot;・ 嘉庆广场&quot; &quot;嘉庆广场&quot;&gt;&gt;&lt;&lt;passtime 12&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
 &lt;div class=&quot;links&quot; title=&quot;移动时间：5分钟&quot;&gt;&lt;&lt;link &quot;・ 巴士站&quot; $passage&gt;&gt;&lt;&lt;passtime 5&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
-&lt;div class=&quot;links&quot; title=&quot;移动时间：10分钟&quot;&gt;&lt;&lt;link &quot;・ 地铁站&quot; $passage&gt;&gt;&lt;&lt;passtime 10&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="55" name="怡安小区公园" tags="location" position="600,725" size="100,100">&lt;&lt;location &quot;怡安小区公园&quot;&gt;&gt;&lt;&lt;mode &quot;location&quot;&gt;&gt;
+&lt;div class=&quot;links&quot; title=&quot;移动时间：10分钟&quot;&gt;&lt;&lt;link &quot;・ 地铁站&quot; $passage&gt;&gt;&lt;&lt;passtime 10&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="47" name="怡安小区公园" tags="location" position="850,600" size="100,100">&lt;&lt;location &quot;怡安小区公园&quot;&gt;&gt;&lt;&lt;mode &quot;location&quot;&gt;&gt;
 
 &lt;span class=&quot;title&quot;&gt;怡安小区 - 公园&lt;/span&gt;&lt;br&gt;
 &lt;div class=&quot;lbox&quot;&gt;
@@ -16961,8 +13233,8 @@ function wait(text) {
 
 &lt;div id=&quot;navi&quot; class=&quot;navi_unable&quot;&gt;
     &lt;&lt;navi&gt;&gt;
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="56" name="怡安小区公园 links" tags="" position="725,725" size="100,100">&lt;div class=&quot;links&quot; title=&quot;移动时间：3分钟&quot;&gt;&lt;&lt;link &quot;・ 小区大门&quot; &quot;怡安小区&quot;&gt;&gt;&lt;&lt;passtime 3&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
-&lt;div class=&quot;links&quot; title=&quot;移动时间：15分钟&quot;&gt;&lt;&lt;link &quot;・ 嘉庆广场&quot; &quot;嘉庆广场&quot;&gt;&gt;&lt;&lt;passtime 15&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="57" name="嘉庆广场" tags="location" position="850,725" size="100,100">&lt;&lt;location &quot;嘉庆广场&quot;&gt;&gt;&lt;&lt;mode &quot;location&quot;&gt;&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="48" name="怡安小区公园 links" tags="" position="975,600" size="100,100">&lt;div class=&quot;links&quot; title=&quot;移动时间：3分钟&quot;&gt;&lt;&lt;link &quot;・ 小区大门&quot; &quot;怡安小区&quot;&gt;&gt;&lt;&lt;passtime 3&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
+&lt;div class=&quot;links&quot; title=&quot;移动时间：15分钟&quot;&gt;&lt;&lt;link &quot;・ 嘉庆广场&quot; &quot;嘉庆广场&quot;&gt;&gt;&lt;&lt;passtime 15&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="49" name="嘉庆广场" tags="location" position="1100,600" size="100,100">&lt;&lt;location &quot;嘉庆广场&quot;&gt;&gt;&lt;&lt;mode &quot;location&quot;&gt;&gt;
 &lt;span class=&quot;title&quot;&gt;嘉庆广场&lt;/span&gt;&lt;br&gt;
 &lt;div class=&quot;lbox&quot;&gt;
 &lt;&lt;=D.placedata.嘉庆广场.description()&gt;&gt;
@@ -16981,9 +13253,9 @@ function wait(text) {
 
 &lt;div id=&quot;navi&quot; class=&quot;navi_unable&quot;&gt;
     &lt;&lt;navi&gt;&gt;
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="58" name="嘉庆广场 links" tags="" position="975,725" size="100,100">&lt;div class=&quot;links&quot; title=&quot;移动时间：15分钟&quot;&gt;&lt;&lt;link &quot;・ 怡安小区&quot; &quot;怡安小区&quot;&gt;&gt;&lt;&lt;passtime 15&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="50" name="嘉庆广场 links" tags="" position="1225,600" size="100,100">&lt;div class=&quot;links&quot; title=&quot;移动时间：15分钟&quot;&gt;&lt;&lt;link &quot;・ 怡安小区&quot; &quot;怡安小区&quot;&gt;&gt;&lt;&lt;passtime 15&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
 &lt;div class=&quot;links&quot; title=&quot;移动时间：2分钟&quot;&gt;&lt;&lt;link &quot;・ 地铁站&quot;&gt;&gt;&lt;&lt;passtime 2&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
-&lt;div class=&quot;links&quot; title=&quot;移动时间：1分钟&quot;&gt;&lt;&lt;link &quot;・ 巴士站&quot;&gt;&gt;&lt;&lt;passtime 1&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="59" name="商场的日常风景_1" tags="" position="1100,725" size="100,100">&lt;&lt;=condtext([
+&lt;div class=&quot;links&quot; title=&quot;移动时间：1分钟&quot;&gt;&lt;&lt;link &quot;・ 巴士站&quot;&gt;&gt;&lt;&lt;passtime 1&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="51" name="商场的日常风景_1" tags="" position="100,725" size="100,100">&lt;&lt;=condtext([
 [inTime(8.5,10), &quot;明明距离商场开门的时间还很早，但已经有人陆陆续续聚集在入口广场上了。&quot;],
 [inTime(10,18), &quot;营业中的嘉庆广场，无论是广场外部还是商场内部，人来人往，十分热闹。&quot;],
 [inTime(18,20), &quot;已经到晚饭时间了，商场内的餐厅传来了美味的香气。比起白天，人已经少了很多，但依然热闹。&quot;],
@@ -16991,12 +13263,12 @@ function wait(text) {
 [&quot;else&quot;,&quot;商场建筑黑漆漆的，已经完全关闭。但广场上依然亮着点点灯光，夜晚的喷水广场在点点灯光下，十分好看。&quot;]
 ])&gt;&gt;
 
-&lt;br&gt;</tw-passagedata><tw-passagedata pid="60" name="商场闲逛_1" tags="" position="1225,725" size="100,100">&lt;&lt;=either(
+&lt;br&gt;</tw-passagedata><tw-passagedata pid="52" name="商场闲逛_1" tags="" position="225,725" size="100,100">&lt;&lt;=either(
 &quot;&lt;&lt;you&gt;&gt;坐在南面入口广场一侧的椅子上，仰头看着绿茵茵的木棉树，偶尔会发现在树枝中跳窜的小麻雀。&quot;,
 &quot;&lt;&lt;you&gt;&gt;走在广场上，观察着来来往往的人群，目光时不时被在路边派发传单的布偶人吸引。&quot;,
 &quot;&lt;&lt;you&gt;&gt;拿起手机，以商场为背景，给自己拍了张新的照片。&quot;,
 &quot;&lt;&lt;you&gt;&gt;站在广场角落的报亭前，随手拿起一份报纸看了眼今天的新闻。&quot;,
-)&gt;&gt;</tw-passagedata><tw-passagedata pid="61" name="商店" tags="location" position="100,850" size="100,100">&lt;&lt;location &quot;商店&quot;&gt;&gt;&lt;&lt;mode &quot;location&quot;&gt;&gt;
+)&gt;&gt;</tw-passagedata><tw-passagedata pid="53" name="商店" tags="location" position="350,725" size="100,100">&lt;&lt;location &quot;商店&quot;&gt;&gt;&lt;&lt;mode &quot;location&quot;&gt;&gt;
 
 &lt;span class=&quot;title&quot;&gt;服装店&lt;/span&gt;&lt;br&gt;
 &lt;div class=&quot;lbox&quot;&gt;
@@ -17004,7 +13276,7 @@ function wait(text) {
 &lt;/div&gt;
 &lt;&lt;set $shoptype to [&quot;all&quot;,&quot;offline&quot;]&gt;&gt;
 
-&lt;&lt;include &quot;试衣间&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="62" name="Event" tags="eventloop nosave" position="225,850" size="100,100">&lt;&lt;mode &quot;event&quot;&gt;&gt;
+&lt;&lt;include &quot;试衣间&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="54" name="Event" tags="eventloop nosave" position="475,725" size="100,100">&lt;&lt;mode &quot;event&quot;&gt;&gt;
 
 &lt;div id=&quot;eventsituation&quot;&gt;
 &lt;&lt;CallEvent&gt;&gt;
@@ -17023,7 +13295,7 @@ function wait(text) {
 
 &lt;div id=&quot;eventeffect&quot;&gt;
 &lt;&lt;CallEventEffect&gt;&gt;
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="63" name="EventSystem" tags="widget" position="350,850" size="100,100">/* 再现ERA口上系统的TRYCALL体系 主 */
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="55" name="EventSystem" tags="widget" position="600,725" size="100,100">/* 再现ERA口上系统的TRYCALL体系 主 */
 &lt;&lt;widget &quot;CallEvent&quot;&gt;&gt;
 &lt;&lt;if setEvent() isnot false&gt;&gt;
     &lt;&lt;set _passagename to setEvent()&gt;&gt;
@@ -17107,12 +13379,12 @@ function wait(text) {
 
 &lt;&lt;/if&gt;&gt;
 
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="64" name="主线 开幕：EventFirst" tags="" position="475,850" size="100,100">&lt;&lt;set $count to 0&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="56" name="主线 开幕：EventFirst" tags="" position="725,725" size="100,100">&lt;&lt;set $count to 0&gt;&gt;
 &lt;&lt;set $UI.nextbutton to false&gt;&gt;
 &lt;&lt;set $eventnext to 0&gt;&gt;
-&lt;&lt;bookmark &quot;主线开幕_初次&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="65" name="主线 开幕-初次" tags="" position="600,850" size="100,100">&lt;div id=&#39;opcontainer&#39;&gt;
+&lt;&lt;bookmark &quot;主线开幕_初次&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="57" name="主线 开幕-初次" tags="" position="850,725" size="100,100">&lt;div id=&#39;opcontainer&#39;&gt;
 &lt;div id=&quot;weirdtext&quot;&gt;&lt;&lt;Opening $count&gt;&gt;&lt;/div&gt;
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="66" name="主线 开幕-初次：E" tags="" position="725,850" size="100,100">&lt;&lt;if $count lt 8&gt;&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="58" name="主线 开幕-初次：E" tags="" position="975,725" size="100,100">&lt;&lt;if $count lt 8&gt;&gt;
 &lt;&lt;addclass &quot;#eventsituation&quot; &quot;weirdtext&quot;&gt;&gt;
 &lt;&lt;script&gt;&gt;
 //requires jQuery because I am lazy.
@@ -17123,7 +13395,7 @@ $(document).ready(function(){
 &lt;&lt;else&gt;&gt;
 &lt;&lt;removeclass &quot;#eventsituation&quot; &quot;weirdtext&quot;&gt;&gt;
 &lt;&lt;replace &#39;#opcontainer&#39;&gt;&gt;&lt;&lt;Opening $count&gt;&gt;&lt;&lt;/replace&gt;&gt;
-&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="67" name="主线 开幕-初次：W" tags="widget" position="850,850" size="100,100">&lt;&lt;widget &quot;Opening&quot;&gt;&gt;
+&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="59" name="主线 开幕-初次：W" tags="widget" position="1100,725" size="100,100">&lt;&lt;widget &quot;Opening&quot;&gt;&gt;
 
 &lt;&lt;switch $args[0]&gt;&gt;
 &lt;&lt;case 0&gt;&gt;
@@ -17237,7 +13509,7 @@ $(document).ready(function(){
 
 &lt;&lt;/switch&gt;&gt;
 
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="68" name="主线 开幕-初次：S" tags="" position="975,850" size="100,100">&lt;&lt;switch $count&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="60" name="主线 开幕-初次：S" tags="" position="1225,725" size="100,100">&lt;&lt;switch $count&gt;&gt;
 &lt;&lt;case 0&gt;&gt;
 	&lt;&lt;set _text to Lang(&quot;睁开眼睛&quot;,&quot;Open The Eyes&quot;)&gt;&gt;
 	&lt;div class=&quot;Wselect&quot;&gt;&lt;&lt;link _text&gt;&gt;&lt;&lt;set $count to 1&gt;&gt;&lt;&lt;Revent&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
@@ -17280,7 +13552,7 @@ $(document).ready(function(){
 	&lt;&lt;set _text to Lang(&quot;继续&quot;,&quot;Next&quot;)&gt;&gt;
 	&lt;div @class=&quot;($count &gt;= 8 ? &#39;Eselect&#39; : &#39;Wselect&#39; )&quot;&gt;&lt;&lt;link _text&gt;&gt;&lt;&lt;set $count to $eventnext&gt;&gt;&lt;&lt;Revent&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
 
-&lt;&lt;/switch&gt;&gt;</tw-passagedata><tw-passagedata pid="69" name="主线 开幕-初次-穿越版" tags="" position="1100,850" size="100,100">&lt;&lt;Opening2 $count&gt;&gt;</tw-passagedata><tw-passagedata pid="70" name="主线 开幕-初次-穿越版：W" tags="widget" position="1225,850" size="100,100">&lt;&lt;widget &quot;Opening2&quot;&gt;&gt;
+&lt;&lt;/switch&gt;&gt;</tw-passagedata><tw-passagedata pid="61" name="主线 开幕-初次-穿越版" tags="" position="100,850" size="100,100">&lt;&lt;Opening2 $count&gt;&gt;</tw-passagedata><tw-passagedata pid="62" name="主线 开幕-初次-穿越版：W" tags="widget" position="225,850" size="100,100">&lt;&lt;widget &quot;Opening2&quot;&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
 &lt;&lt;switch $count&gt;&gt;
 &lt;&lt;case 0&gt;&gt;
@@ -17402,7 +13674,7 @@ $(document).ready(function(){
 &lt;&lt;/switch&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
 
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="71" name="主线 开幕-初次-穿越版：S" tags="" position="100,975" size="100,100">&lt;&lt;switch $count&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="63" name="主线 开幕-初次-穿越版：S" tags="" position="350,850" size="100,100">&lt;&lt;switch $count&gt;&gt;
 &lt;&lt;case 1&gt;&gt;
 &lt;&lt;set _text to Lang(&quot;拿起手机&quot;,&quot;Pick up the phone&quot;)&gt;&gt;
 &lt;div class=&quot;Eselect&quot;&gt;&lt;&lt;link _text&gt;&gt;&lt;&lt;set $count to 2&gt;&gt;&lt;&lt;Revent&gt;&gt;&lt;&lt;passtime 2&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
@@ -17450,7 +13722,7 @@ $(document).ready(function(){
 &lt;&lt;set _text to Lang(&quot;继续&quot;,&quot;Next&quot;)&gt;&gt;
 &lt;div class=&quot;Eselect&quot;&gt;&lt;&lt;link _text&gt;&gt;&lt;&lt;set $count to $eventnext&gt;&gt;&lt;&lt;Revent&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
 
-&lt;&lt;/switch&gt;&gt;</tw-passagedata><tw-passagedata pid="72" name="主线 开幕-轮回" tags="" position="225,975" size="100,100">&lt;&lt;bookmark &quot;主线开幕_轮回&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="73" name="PC 主线-开幕-房间描述" tags="nobr" position="350,975" size="100,100">&lt;&lt;lang 
+&lt;&lt;/switch&gt;&gt;</tw-passagedata><tw-passagedata pid="64" name="主线 开幕-轮回" tags="" position="475,850" size="100,100">&lt;&lt;bookmark &quot;主线开幕_轮回&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="65" name="PC 主线-开幕-房间描述" tags="nobr" position="600,850" size="100,100">&lt;&lt;lang 
 &quot;一睁开眼，首先看到的是茂绿的窗外，响亮的蝉鸣宣告着当前的季节。窗户旁摆放着一张大书桌，上面摆放着&lt;&lt;if $PC.type is 2&gt;&gt;一个宽屏大液显&lt;&lt;elseif $PC.type is 1&gt;&gt;新帝HQ24数位屏和数位板&lt;&lt;else&gt;&gt;一个电脑屏幕&lt;&lt;/if&gt;&gt;，书桌旁的小桌子上则是电脑主机。在靠近书桌的墙边，则整齐地摆放着两个书架，书架上是&lt;&lt;switch $PC.type&gt;&gt;&lt;&lt;case 1&gt;&gt;各种漫画和小说还有塑料小人&lt;&lt;case 2&gt;&gt;各种各样的书籍&lt;&lt;case 3&gt;&gt;各种修仙小说和漫画&lt;&lt;/switch&gt;&gt;，墙上则&lt;&lt;switch $PC.type&gt;&gt;&lt;&lt;case 1&gt;&gt;挂着一些远古生物的挂画和各种游戏海报&lt;&lt;case 2&gt;&gt;挂着一些漂亮的装饰画&lt;&lt;case 3&gt;&gt;挂着一个黑白两色的八卦阵和一些仙侠作品的海报&lt;&lt;/switch&gt;&gt;&quot;
 
 &quot;Across from the bed is the window, and outside the window is the loud sound of cicadas announcing the current season. Right next to the window sits a large desk with a computer with two screens, two bookshelves lined up side by side with various books and comics and some anime figurines, and posters of superheroes on the wall&quot;

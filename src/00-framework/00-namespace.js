@@ -52,9 +52,7 @@ window.defineGlobalNamespaces = (namespaces) => {
 defineGlobalNamespaces(EWA);
 
 window.Avatars = {
-	a : {},
-	b : {},
-	l : {},
+	list : {},
 	layer : [],
 	over_up : [],
 	over_bt:[],
@@ -72,14 +70,8 @@ window.Avatars = {
 	hairback:[],
 }
 
-
 window.GameData = {}
-window.GameConfig = {
-	max_acc_slot: 3,
-	max_enemy: 5,
-	max_closet_slot: 40,
-	allowsave: false,
-}
+window.GameConfig = {}
 window.Afunction = {}
 
 window.EWA.Avatars = Avatars

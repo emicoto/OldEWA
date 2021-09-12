@@ -1,30 +1,27 @@
-﻿:: ClothInnerData [widget]
-<<widget "InitClothUndertops">>
-<<set Avatars.inner_up to [
+﻿A.inner_up = [
     {
         id: 0, uid: 0,
-        index : "naked",    name : "裸",     gender : "n",
-        text : "无",   
-        name_en:"",
-        text_en:"", 
-        tag  : ["裸露"],
-        hasDif : {breast:false, pregnant:false},
-        hasImg : false,
+        index: "naked",  name:"没穿内衣", gender: "n",
+        text: "你什么内衣都没穿。",
+        name_en: "naked",
+        text_en: "you didn't wear any bras.",
+        tag:["裸露"],
+        hasImg: false,
+        hasDif:{breast: false, pregnant: false},
 
-        cost : 0,        reveal : 0,        hot : 0, cold : 0,
-        durable : 0,     maxdurable : 0,     beauty: 0,     defence: 0,
-        fixcolor: true,    color:null,  colorname: null,
-        colors : [],
-        
-        category: "内衣", layer : "inner_up",
-        shop : null, 
-        
-        slot : "top",
-        tuckinable: false,        tuckin : false, 
-        acc : null,
+        cost:0, reveal: 0, hot: 0, cold: 0,
+        durable: 0, maxdurable: 0, beauty: 0, defence: 0,
+        fixcolor: true, color: null, colorname: null,
+        colors: [],
+
+        category:"无", layer: "inner_up",
+        shop: null,
+        slot: "top",
+
+        acc: null,
         patterns: [],
-        fixacc  : true,
-        subcolor : null,
+        fixacc: true,
+        subcolor: null,
     },
     {
         id: 1, uid: 0,
@@ -43,9 +40,8 @@
         
         category: "内衣", layer : "inner_up",
         shop : "all", 
-        
         slot : "top",
-        tuckinable: false,        tuckin : false, 
+
         acc : null,
         patterns: [],
         fixacc  : true,
@@ -68,41 +64,39 @@
         
         category: "内衣", layer : "inner_up",
         shop : "all", 
-        
         slot : "top",
-        tuckinable: false,        tuckin : false, 
+
         acc : null,
         patterns: [],
         fixacc  : true,
         subcolor : null,
     },
-]>>
-<</widget>>
+]
 
-<<widget "InitClothUnderbottoms">>
-<<set Avatars.inner_bt to [
+A.inner_bt = [
     {
         id: 0, uid: 0,
-        index : "naked",    name : "裸",     gender : "n",
-        text : "无",  
-        name_en:"",
-        text_en:"", 
-        tag  : ["裸露"],
-        hasImg : false,
-        hasDif : {breast:false, pregnant:false},
+        index: "naked",  name:"没穿内裤", gender: "n",
+        text: "你什么内裤都没穿。",
+        name_en: "naked bottom",
+        text_en: "you didn't wear any underwear.",
+        tag:["裸露"],
+        hasImg: false,
+        hasDif:{breast: false, pregnant: false},
 
-        cost : 0,        reveal : 0,    hot : 0,    cold : 0,
-        durable : 0,     maxdurable : 0,     beauty: 0,     defence: 0,
-        fixcolor: true,    color:null,  colorname: null,
-        colors : [],
-        
-        category: "内裤", layer : "inner_bt", slot : "bottom", 
-        shop : null, 
-        
-        acc : null,
+        cost:0, reveal: 0, hot: 0, cold: 0,
+        durable: 0, maxdurable: 0, beauty: 0, defence: 0,
+        fixcolor: false, color: null, colorname: null,
+        colors: [],
+
+        category:"无", layer: "inner_bt",
+        shop: null,
+        slot: "bottom",
+
+        acc: null,
         patterns: [],
-        fixacc  : true,
-        subcolor : null,
+        fixacc: false,
+        subcolor: null,
     },
     {
         id: 1, uid: 0,
@@ -150,5 +144,4 @@
         fixacc  : true,
         subcolor : null,
     },
-]>>
-<</widget>>
+]

@@ -1,28 +1,27 @@
-﻿:: ClothLegsData [widget]
-
-<<widget "InitClothShoes">>
-<<set Avatars.shoes to [
+﻿A.shoes = [
     {
         id: 0, uid: 0,
-        index : "naked",    name : "裸",     gender : "n",
-        text : "无",
-        name_en:"",
-        text_en:"", 
-        tag  : ["裸露"], 
-        hasImg : false,
+        index: "naked",  name:"没穿鞋子", gender: "n",
+        text: "你什么鞋子都没穿。",
+        name_en: "naked",
+        text_en: "you didn't wear any shoes.",
+        tag:["裸露"],
+        hasImg: false,
+        hasDif:{breast: false, pregnant: false},
 
-        cost : 0,       reveal : 0,    hot : 0,    cold : 0,
-        durable : 0,    maxdurable : 0,     beauty: 0,     defence: 0,
-        fixcolor: true,    color:null,  colorname: null,
-        colors : [],
-        
-        category: "鞋子",     layer : "shoes",      slot : "shoes",
-        shop : null, 
+        cost:0, reveal: 0, hot: 0, cold: 0,
+        durable: 0, maxdurable: 0, beauty: 0, defence: 0,
+        fixcolor: true, color: null, colorname: null,
+        colors: [],
 
-        acc : null,
+        category:"无", layer: "shoes",
+        shop: null,
+        slot: "feet",
+
+        acc: null,
         patterns: [],
-        fixacc  : true,
-        subcolor : null,
+        fixacc: true,
+        subcolor: null,
     },
     {
         id: 1, uid: 0,
@@ -38,7 +37,7 @@
         fixcolor: true,    color:"white",  colorname: "白",
         colors : ["white"],
         
-        category: "鞋子",     layer : "shoes",      slot : "shoes",
+        category: "鞋子",     layer : "shoes",      slot : "feet",
         shop : "all", 
 
         acc : null,
@@ -52,7 +51,7 @@
         text : "一双简单设计的高跟鞋。", 
         name_en:"high heel",
         text_en:"A simple design high heel",
-        tag  : ["日常","商务"], 
+        tag  : ["日常","商务","高跟鞋"], 
         hasImg : true,
 
         cost : 80,       reveal : 0,    hot : 0,    cold : 0,
@@ -60,7 +59,7 @@
         fixcolor: false,    color:"#FDFFFF",  colorname: "白",
         colors : [],
         
-        category: "鞋子",     layer : "shoes",      slot : "shoes",
+        category: "鞋子",     layer : "shoes",      slot : "feet",
         shop : "all", 
 
         acc : null,
@@ -68,32 +67,32 @@
         fixacc  : true,
         subcolor : null,
     },
-]>>
-<</widget>>
+]
 
-<<widget "InitClothSocks">>
-<<set Avatars.legs to [
+A.legs = [
     {
         id: 0, uid: 0,
-        index : "naked",    name : "裸",     gender : "n",
-        text : "无", 
-        name_en:"",
-        text_en:"", 
-        tag  : ["裸露"], 
-        hasImg : false,
+        index: "naked",  name:"没穿袜子", gender: "n",
+        text: "你什么袜子都没穿。",
+        name_en: "naked",
+        text_en: "you didn't wear any socks.",
+        tag:["裸露"],
+        hasImg: false,
+        hasDif:{breast: false, pregnant: false},
 
-        cost : 0,       reveal : 0,    hot : 0,    cold : 0,
-        durable : 0,    maxdurable : 0,     beauty: 0,     defence: 0,
-        fixcolor: true,    color:null,  colorname: null,
-        colors : [],
-        
-        category: "袜子",     layer : "legs",      slot : "legs",
-        shop : null, 
+        cost:0, reveal: 0, hot: 0, cold: 0,
+        durable: 0, maxdurable: 0, beauty: 0, defence: 0,
+        fixcolor: true, color: null, colorname: null,
+        colors: [],
 
-        acc : null,
+        category:"无", layer: "legs",
+        shop: null,
+        slot: "legs",
+
+        acc: null,
         patterns: [],
-        fixacc  : true,
-        subcolor : null,
+        fixacc: true,
+        subcolor: null,
     },
     {
         id: 1, uid: 0,
@@ -117,5 +116,4 @@
         fixacc  : true,
         subcolor : null,
     },
-]>>
-<</widget>>
+]

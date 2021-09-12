@@ -1,10 +1,6 @@
-let Game = {
-  Data: {
-    Player: {},
-    Npc: {},
-  },
+Game = {
+  Data: {},
   Character: {},
   Utils: {},
   Mods: {},
 };
-console.log(Game);
