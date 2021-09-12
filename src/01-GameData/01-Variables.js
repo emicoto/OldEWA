@@ -12,6 +12,8 @@ V.TCSV = {}
 V.PC = {}
 V.temp = {}
 
+V.COM.current = null
+
 /* 各种记录 */
 V.log = {
     dairy:[], anouce:[], remind:[],

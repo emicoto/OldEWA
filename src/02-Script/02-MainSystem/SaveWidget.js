@@ -9,29 +9,11 @@
 
         localStorage.setItem("EWA-saveDetail" ,JSON.stringify(saveDetails))
     }
-    else if('EWA-saveDetail' in localStorage===true){
-        let save = localStorage.getItem("EWA-saveDetail")
-
-        if(save == "undefined" || save == undefined || typeof(save) != "object"){
-            let saveDetails = {autosave:[null,null,null,null],slots:[null,null,null,null,null,null,null,null,null,null,null,null]}
-            localStorage.setItem("EWA-saveDetail" ,JSON.stringify(saveDetails))
-        }
-        else{
-            let save = JSON.parse(localStorage.getItem("EWA-saveDetail"))
-
-            if(!save.autosave || !Array.isArray(save.autosave) || save.autosave.length < 4 || save.slots.length < 12){
-                let newsaves = prepareSaveDetails()
-
-                localStorage.setItem("EWA-saveDetail" ,JSON.stringify(newsaves))
-                return newsaves
-            }
-        }
-        return save
-    }
 }
 
 window.initLocalStorage = function(){
     localStorage.removeItem("EWA-saveDetail")
+    localStorage.removeItem("ewaSaveDetails")
 }
 
 window.saveOK = function(slot){

@@ -1,7 +1,7 @@
 ﻿:: 衣柜
 <div id="action-text2"><<you>>打开了衣柜。</div>
 <div id="action-mode" class="graytext">
-动作： <label><<radiobutton "$UI.closetmode" "穿" autocheck>> <<lang "穿" "wear">></label> <label><<radiobutton "$UI.closetmode" "扔" autocheck>> <<lang "扔" "wear">></label>
+动作： <label><<radiobutton "$UI.closetmode" "穿" autocheck>> <<lang "穿" "wear">></label> <label><<radiobutton "$UI.closetmode" "扔" autocheck>> <<lang "扔" "discard">></label>
 </div>
 
 <div id="ClosetList">

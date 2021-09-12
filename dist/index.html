@@ -1689,8 +1689,10 @@ D.marksheet = { lv : 0,   max : 0,  fac : "无",   hyp : 0 }
 D.explist = [
     "打工","下厨","清扫","唱歌","演戏",
     "舞台","直播","交涉","销售",
+    "探索","狩猎","钓鱼",  
+ 
     "战斗","战败","诱惑","被诱惑","被猥琐",
-    "狩猎","被狩猎",
+ 
 
     "射精","高潮",
     "M高潮","B高潮","C高潮","U高潮","V高潮","A高潮","多重高潮",
@@ -1983,6 +1985,8 @@ V.TCSV = {}
 V.PC = {}
 V.temp = {}
 
+V.COM.current = null
+
 /* 各种记录 */
 V.log = {
     dairy:[], anouce:[], remind:[],
@@ -2050,16 +2054,16 @@ D.COM = {
     },
     健身:{
         act(){
-            Source.pc.体力 -= 80;
-            Source.pc.清洁 -= 100;
-            Source.pc.饮食 -= 120;
+            Source.pc.体力 -= 1.2;
+            Source.pc.清洁 -= 3;
+            Source.pc.饮食 -= 4;
         }
     },
     玩游戏:{
         act(){
-            Source.pc.压力 -= 100;
-            Source.pc.抑郁 -= 100;
-            Source.pc.恐惧 -= 100;
+            Source.pc.压力 -= 2;
+            Source.pc.抑郁 -= 1;
+            Source.pc.恐惧 -= 1;
         }
     },
     休息:{
@@ -9638,29 +9642,11 @@ window.initSaveData = function(forceRun){
 
         localStorage.setItem("EWA-saveDetail" ,JSON.stringify(saveDetails))
     }
-    else if('EWA-saveDetail' in localStorage===true){
-        let save = localStorage.getItem("EWA-saveDetail")
-
-        if(save == "undefined" || save == undefined || typeof(save) != "object"){
-            let saveDetails = {autosave:[null,null,null,null],slots:[null,null,null,null,null,null,null,null,null,null,null,null]}
-            localStorage.setItem("EWA-saveDetail" ,JSON.stringify(saveDetails))
-        }
-        else{
-            let save = JSON.parse(localStorage.getItem("EWA-saveDetail"))
-
-            if(!save.autosave || !Array.isArray(save.autosave) || save.autosave.length < 4 || save.slots.length < 12){
-                let newsaves = prepareSaveDetails()
-
-                localStorage.setItem("EWA-saveDetail" ,JSON.stringify(newsaves))
-                return newsaves
-            }
-        }
-        return save
-    }
 }
 
 window.initLocalStorage = function(){
     localStorage.removeItem("EWA-saveDetail")
+    localStorage.removeItem("ewaSaveDetails")
 }
 
 window.saveOK = function(slot){
@@ -10608,15 +10594,15 @@ DefineMacroS("him", him);
 function hair(){
   const select = new SelectCase();
   var num = PC.info.hairlen
-  select.add(0, 49, "超短发");
-  select.add(50, 99, "齐耳短发");
-  select.add(100, 249, "及脖中发");
-  select.add(250, 499, "及肩中发");
-  select.add(500, 799, "及胸长发");
-  select.add(800, 1200, "及腰长发");
-  select.default = "超长长发";
+  select.add(0, 49, Lang("超短发","very short hair"));
+  select.add(50, 99, Lang("齐耳短发","short hair"));
+  select.add(100, 249, Lang("及脖中发","medium long hair"));
+  select.add(250, 499, Lang("及肩中发", "shoulder length hair"));
+  select.add(500, 799, Lang("及胸长发", "long hair"));
+  select.add(800, 1200, Lang("及腰长发","very long hair"));
+  select.default = Lang("超长长发","super long hair");
   const hairlength = select.has(num);
-  return `${setup.L[V.lang]["发色"][PC.info.haircolor] + setup.L[V.lang]["发型"][PC.info.hairstyle] + hairlength}`;
+  return Lang(`${setup.L[V.lang]["发色"][PC.info.haircolor] + setup.L[V.lang]["发型"][PC.info.hairstyle] + hairlength}`, `${setup.L[V.lang]["发色"][PC.info.haircolor]} ${setup.L[V.lang]["发型"][PC.info.hairstyle]} ${hairlength}`);
 }
 
 DefineMacroS("hair",hair);
@@ -11221,7 +11207,7 @@ DefineMacroS("delay",delay)
 &lt;li&gt;&lt;&lt;lang &quot;角色名字&quot; &quot;Name&quot;&gt;&gt;： &lt;&lt;textbox &quot;$PC.info.name&quot; $PC.info.name&gt;&gt;　　∵ &lt;&lt;lang &quot;人物背景&quot; &quot;Titles&quot;&gt;&gt;：&lt;&lt;CMBackground&gt;&gt;&lt;/li&gt;
 &lt;li&gt;&lt;&lt;lang &quot;性别属性&quot; &quot;Gender Tag&quot;&gt;&gt;： &lt;&lt;CMGender&gt;&gt;　　　&lt;&lt;button _nakedbutton&gt;&gt;&lt;&lt;gonaked &quot;debug&quot;&gt;&gt;&lt;&lt;/button&gt;&gt; &lt;&lt;button _redressbutton&gt;&gt;&lt;&lt;redress&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;/li&gt;
 &lt;li&gt;&lt;&lt;lang &quot;兴趣特长&quot; &quot;Major&quot;&gt;&gt;： &lt;&lt;CMMainclass&gt;&gt;　　　∵ &lt;&lt;lang &quot;切换表情&quot; &quot;Emoji&quot;&gt;&gt;: &lt;&lt;CMEmote&gt;&gt;&lt;/li&gt;
-&lt;li&gt;　&lt;&lt;lang &quot;性观念&quot; &quot;Attitude&quot;&gt;&gt;： &lt;&lt;CMChara&gt;&gt;&lt;/li&gt;
+&lt;li&gt;&lt;&lt;lang &quot;　性观念&quot; &quot;Attitude&quot;&gt;&gt;： &lt;&lt;CMChara&gt;&gt;&lt;/li&gt;
 
 &lt;&lt;dashline&gt;&gt;
 &lt;span id=&quot;charamaking&quot;&gt;
@@ -11230,25 +11216,46 @@ DefineMacroS("delay",delay)
 　&lt;&lt;lang &quot;发色&quot; &quot;HairColor&quot;&gt;&gt;　&lt;&lt;CMHairColor&gt;&gt;　　&lt;&lt;lang &quot;发长&quot; &quot;HairLength&quot;&gt;&gt;　&lt;&lt;CMHair&gt;&gt;　　&lt;&lt;lang &quot;发型&quot; &quot;HairStyle&quot;&gt;&gt;　&lt;&lt;CMHairstyle&gt;&gt;&lt;br&gt;
 　&lt;&lt;lang &quot;眼型&quot; &quot;Eyes&quot;&gt;&gt;　&lt;&lt;CMEyetype&gt;&gt;　　&lt;&lt;lang &quot;瞳色&quot; &quot;EyeColor&quot;&gt;&gt;　&lt;&lt;CMEyeColor&gt;&gt;&lt;span id=&quot;CMFurOption&quot;&gt;&lt;/span&gt;&lt;br&gt;
 　&lt;&lt;lang &quot;罩杯&quot; &quot;Breast&quot;&gt;&gt;　&lt;&lt;CMBreast&gt;&gt;　　&lt;&lt;lang &quot;臀型&quot; &quot;Hips&quot;&gt;&gt;　&lt;&lt;CMButts&gt;&gt;　　&lt;label&gt;&lt;&lt;print &#39;&lt;&lt;checkbox &quot;$PC.trait.泌乳体质&quot; false true &#39; + ($PC.trait.泌乳体质 is true ? &quot;checked&quot; : &quot;&quot;) + &#39;&gt;&gt;&#39;&gt;&gt;&lt;&lt;lang &quot;泌乳体质&quot; &quot;Natrual Lactation&quot;&gt;&gt;？&lt;/label&gt;&lt;br&gt;
+
 &lt;&lt;dashline&gt;&gt;
 &lt;li&gt;&lt;&lt;lang &quot;感官特征&quot; &quot;Sensual&quot;&gt;&gt;&lt;/li&gt;
 　&lt;&lt;lang &quot;嘴巴感度&quot; &quot;Mouth Sensitivity&quot;&gt;&gt;　&lt;&lt;CMMouth&gt;&gt;&lt;br&gt;
 　&lt;&lt;lang &quot;胸部感度&quot; &quot;Breast Sensitivity&quot;&gt;&gt;　&lt;&lt;CMChest&gt;&gt;&lt;br&gt;
 &lt;span id=&quot;CMgenital&quot;&gt;&lt;/span&gt;
 　&lt;&lt;lang &quot;肛门感度&quot; &quot;Anal Sensitivity&quot;&gt;&gt;　&lt;&lt;CMAnal&gt;&gt;&lt;br&gt;
+
 &lt;&lt;dashline&gt;&gt;
 &lt;li&gt;&lt;&lt;lang &quot;特殊素质&quot; &quot;Start Traits&quot;&gt;&gt;&lt;/li&gt;
 &lt;span style=&quot;font-size:11px;color:gray&quot;&gt;　&lt;&lt;lang &quot;备注：部分素质会影响成就的获得。&quot; &quot;SP: Some traits may affect the achievement.&quot;&gt;&gt;&lt;/span&gt;&lt;br&gt;
-&lt;label&gt;　&lt;&lt;radiobutton &quot;$starttrait&quot; &quot;菜鸟&quot; autocheck&gt;&gt; &lt;&lt;lang &quot;菜鸟&quot; &quot;Newbie&quot;&gt;&gt;&lt;/label&gt;　　&lt;span class=&quot;description&quot;&gt;&lt;&lt;lang &quot;没什么特别的，只有一点新手补助。第一次玩推荐这个。&quot; &quot;Nothing special but has newbie grants. Recommend for beginner.&quot;&gt;&gt;&lt;/span&gt;&lt;br&gt;
-&lt;label&gt;　&lt;&lt;radiobutton &quot;$starttrait&quot; &quot;好色&quot; autocheck&gt;&gt; &lt;&lt;lang &quot;好色&quot; &quot;Horny&quot;&gt;&gt;&lt;/label&gt;　　&lt;span class=&quot;description&quot;&gt;&lt;&lt;lang &quot;对性行为抵抗下降，欲望更容易上升。&quot; &quot;Reduced antipathy to sexual activity, but desire is more likely to rise.&quot;&gt;&gt;&lt;/span&gt;&lt;br&gt;
-&lt;label&gt;　&lt;&lt;radiobutton &quot;$starttrait&quot; &quot;轻浮&quot; autocheck&gt;&gt; &lt;&lt;lang &quot;轻浮&quot; &quot;Flirty&quot;&gt;&gt;&lt;/label&gt;　　&lt;span class=&quot;description&quot;&gt;&lt;&lt;lang &quot;对滥交接受度良好，容易从负面心理状态中恢复。&quot; &quot;Good acceptance of promiscuity and easy recovery from negative mental states.&quot;&gt;&gt;&lt;/span&gt;&lt;br&gt;
-&lt;label&gt;　&lt;&lt;radiobutton &quot;$starttrait&quot; &quot;人气&quot; autocheck&gt;&gt; &lt;&lt;lang &quot;人气&quot; &quot;Famous&quot;&gt;&gt;&lt;/label&gt;　　&lt;span class=&quot;description&quot;&gt;&lt;&lt;lang &quot;粉丝、魅力、金钱都有加成，但容易触发严重事件。&quot; &quot;A huge bonus when gain followers, charm the enemy, and earn money from live stream. But hight rate to trigger serious events.&quot;&gt;&gt;&lt;/span&gt;&lt;br&gt;
-&lt;label&gt;　&lt;&lt;radiobutton &quot;$starttrait&quot; &quot;天使心&quot; autocheck&gt;&gt; &lt;&lt;lang &quot;天使心&quot; &quot;Angelic&quot;&gt;&gt;&lt;/label&gt;　&lt;span class=&quot;description&quot;&gt;&lt;&lt;lang &quot;天使一般的心肠，不再有怨恨，但也无法拒绝别人的任何请求。&quot; &quot;Angelic heart, no more hates and resentful for sexual activity, but also unable to refuse any request from others.&quot;&gt;&gt;&lt;/span&gt;&lt;br&gt;
-&lt;label&gt;　&lt;&lt;radiobutton &quot;$starttrait&quot; &quot;露出癖&quot; autocheck&gt;&gt; &lt;&lt;lang &quot;露出癖&quot; &quot;Exhibitionist&quot;&gt;&gt;&lt;/label&gt;　&lt;span class=&quot;description&quot;&gt;&lt;&lt;lang &quot;喜欢暴露的穿着，但面对裸奔还是会害羞的。&quot; &quot;Like to dress exposed but still feeling shy when totally naked.&quot; &gt;&gt;&lt;/span&gt;&lt;br&gt;
-&lt;label&gt;　&lt;&lt;radiobutton &quot;$starttrait&quot; &quot;福瑞爱&quot; autocheck&gt;&gt; &lt;&lt;lang &quot;福瑞爱&quot; &quot;FurryLove&quot;&gt;&gt;&lt;/label&gt;　&lt;span class=&quot;description&quot;&gt;&lt;&lt;lang &quot;对福瑞的接受度良好，容易提升兽交癖好。&quot; &quot;Good acceptance of furry, and rise bestiality fetishes easily.&quot;&gt;&gt;&lt;/span&gt;&lt;br&gt;
-&lt;label&gt;　&lt;&lt;radiobutton &quot;$starttrait&quot; &quot;抖M体质&quot; autocheck&gt;&gt; &lt;&lt;lang &quot;抖M&quot; &quot;Masochist&quot;&gt;&gt;&lt;/label&gt;　　&lt;span class=&quot;description&quot;&gt;&lt;&lt;lang &quot;抖M体质，疼痛减免。&quot; &quot;Masochist body, reduced pain.&quot;&gt;&gt;&lt;/span&gt;&lt;br&gt;
-&lt;label&gt;　&lt;&lt;radiobutton &quot;$starttrait&quot; &quot;倾国倾城&quot; autocheck&gt;&gt; &lt;&lt;lang &quot;倾国倾城&quot; &quot;Heavenly Beauty&quot;&gt;&gt;&lt;/label&gt; &lt;span class=&quot;description&quot;&gt;&lt;&lt;lang &quot;一眼万年。招来狂蜂浪蝶，事件永不中断。&quot; &quot;Love at first sight. A wave after waves of events, never has ending.&quot;&gt;&gt;&lt;/span&gt;&lt;br&gt;
-&lt;label&gt;　&lt;&lt;radiobutton &quot;$starttrait&quot; &quot;经商头脑&quot; autocheck&gt;&gt; &lt;&lt;lang &quot;经商头脑&quot; &quot;Business Sense&quot;&gt;&gt;&lt;/label&gt; &lt;span class=&quot;description&quot;&gt;&lt;&lt;lang &quot;生财有道，摆摊卖东西有加成。但要注意强盗或小偷。&quot; &quot;Gain a huge bonus when selling things. But the robbers and thieves are watching you.&quot;&gt;&gt;&lt;/span&gt;&lt;br&gt;
+&lt;label&gt;　&lt;&lt;radiobutton &quot;$starttrait&quot; &quot;菜鸟&quot; autocheck&gt;&gt;  &lt;&lt;lang &quot;菜鸟　　&quot; &quot;Newbie &quot;&gt;&gt;&lt;/label&gt;
+&lt;span class=&quot;description&quot;&gt;&lt;&lt;lang &quot;没什么特别的，只有一点新手补助。第一次玩推荐这个。&quot; &quot;Nothing special but has newbie grants. Recommend for beginner.&quot;&gt;&gt;&lt;/span&gt;&lt;br&gt;
+
+&lt;label&gt;　&lt;&lt;radiobutton &quot;$starttrait&quot; &quot;好色&quot; autocheck&gt;&gt; &lt;&lt;lang &quot;好色　　&quot; &quot;Horny &quot;&gt;&gt;&lt;/label&gt;
+&lt;span class=&quot;description&quot;&gt;&lt;&lt;lang &quot;对性行为抵抗下降，欲望更容易上升。&quot; &quot;Reduced antipathy to sexual activity, but desire is more likely to rise.&quot;&gt;&gt;&lt;/span&gt;&lt;br&gt;
+
+&lt;label&gt;　&lt;&lt;radiobutton &quot;$starttrait&quot; &quot;轻浮&quot; autocheck&gt;&gt; &lt;&lt;lang &quot;轻浮　　&quot; &quot;Flirty &quot;&gt;&gt;&lt;/label&gt;
+&lt;span class=&quot;description&quot;&gt;&lt;&lt;lang &quot;对滥交接受度良好，容易从负面心理状态中恢复。&quot; &quot;Good acceptance of promiscuity and easy recovery from negative mental states.&quot;&gt;&gt;&lt;/span&gt;&lt;br&gt;
+
+&lt;label&gt;　&lt;&lt;radiobutton &quot;$starttrait&quot; &quot;人气&quot; autocheck&gt;&gt; &lt;&lt;lang &quot;人气　　&quot; &quot;Famous &quot;&gt;&gt;&lt;/label&gt;
+&lt;span class=&quot;description&quot;&gt;&lt;&lt;lang &quot;粉丝、魅力、金钱都有加成，但容易触发严重事件。&quot; &quot;A huge bonus when gain followers, charm the enemy, and earn money from live stream. But hight rate to trigger serious events.&quot;&gt;&gt;&lt;/span&gt;&lt;br&gt;
+
+&lt;label&gt;　&lt;&lt;radiobutton &quot;$starttrait&quot; &quot;天使心&quot; autocheck&gt;&gt; &lt;&lt;lang &quot;天使心　&quot; &quot;Angelic &quot;&gt;&gt;&lt;/label&gt;
+&lt;span class=&quot;description&quot;&gt;&lt;&lt;lang &quot;天使一般的心肠，不再有怨恨，但也无法拒绝别人的任何请求。&quot; &quot;Angelic heart, no more hates and resentful for sexual activity, but also unable to refuse any request from others.&quot;&gt;&gt;&lt;/span&gt;&lt;br&gt;
+
+&lt;label&gt;　&lt;&lt;radiobutton &quot;$starttrait&quot; &quot;露出癖&quot; autocheck&gt;&gt; &lt;&lt;lang &quot;露出癖　&quot; &quot;Exhibitionist &quot;&gt;&gt;&lt;/label&gt;
+&lt;span class=&quot;description&quot;&gt;&lt;&lt;lang &quot;喜欢暴露的穿着，但面对裸奔还是会害羞的。&quot; &quot;Like to dress exposed but still feeling shy when totally naked.&quot; &gt;&gt;&lt;/span&gt;&lt;br&gt;
+
+&lt;label&gt;　&lt;&lt;radiobutton &quot;$starttrait&quot; &quot;福瑞爱&quot; autocheck&gt;&gt; &lt;&lt;lang &quot;福瑞爱　&quot; &quot;FurryLove &quot;&gt;&gt;&lt;/label&gt;
+&lt;span class=&quot;description&quot;&gt;&lt;&lt;lang &quot;对福瑞的接受度良好，容易提升兽交癖好。&quot; &quot;Good acceptance of furry, and rise bestiality fetishes easily.&quot;&gt;&gt;&lt;/span&gt;&lt;br&gt;
+
+&lt;label&gt;　&lt;&lt;radiobutton &quot;$starttrait&quot; &quot;抖M体质&quot; autocheck&gt;&gt; &lt;&lt;lang &quot;抖M　　&quot; &quot;Masochist &quot;&gt;&gt;&lt;/label&gt;
+&lt;span class=&quot;description&quot;&gt;&lt;&lt;lang &quot;抖M体质，疼痛减免。&quot; &quot;Masochist body, reduced pain.&quot;&gt;&gt;&lt;/span&gt;&lt;br&gt;
+
+&lt;label&gt;　&lt;&lt;radiobutton &quot;$starttrait&quot; &quot;倾国倾城&quot; autocheck&gt;&gt; &lt;&lt;lang &quot;倾国倾城 &quot; &quot;Heavenly Beauty &quot;&gt;&gt;&lt;/label&gt;
+&lt;span class=&quot;description&quot;&gt;&lt;&lt;lang &quot;一眼万年。招来狂蜂浪蝶，事件永不中断。&quot; &quot;Love at first sight. A wave after waves of events, never has ending.&quot;&gt;&gt;&lt;/span&gt;&lt;br&gt;
+
+&lt;label&gt;　&lt;&lt;radiobutton &quot;$starttrait&quot; &quot;经商头脑&quot; autocheck&gt;&gt; &lt;&lt;lang &quot;经商头脑 &quot; &quot;Business Sense &quot;&gt;&gt;&lt;/label&gt;&lt;span class=&quot;description&quot;&gt;
+&lt;&lt;lang &quot;生财有道，摆摊卖东西有加成。但要注意强盗或小偷。&quot; &quot;Gain a huge bonus when selling things. But the robbers and thieves are watching you.&quot;&gt;&gt;&lt;/span&gt;&lt;br&gt;
 &lt;span id=&quot;omegatrait&quot;&gt;&lt;/span&gt;
 &lt;!-- 自动纠正 --&gt;
 &lt;&lt;silently&gt;&gt;
@@ -11384,7 +11391,7 @@ DefineMacroS("delay",delay)
 &lt;&lt;/widget&gt;&gt;
 
 &lt;&lt;widget &quot;CMHairstyle&quot;&gt;&gt;
-    &lt;&lt;set _optionlist to D.CMlist.hairlength[$lang]&gt;&gt;
+    &lt;&lt;set _optionlist to D.CMlist.hairstyle[$lang]&gt;&gt;
     &lt;&lt;listbox &quot;$PC.info.hairstyle&quot; autoselect&gt;&gt;
         &lt;&lt;optionsfrom _optionlist&gt;&gt;
     &lt;&lt;/listbox&gt;&gt;
@@ -12256,7 +12263,7 @@ required:false,
 &lt;/div&gt;
 &lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="20" name="衣柜" tags="" position="1225,225" size="100,100">&lt;div id=&quot;action-text2&quot;&gt;&lt;&lt;you&gt;&gt;打开了衣柜。&lt;/div&gt;
 &lt;div id=&quot;action-mode&quot; class=&quot;graytext&quot;&gt;
-动作： &lt;label&gt;&lt;&lt;radiobutton &quot;$UI.closetmode&quot; &quot;穿&quot; autocheck&gt;&gt; &lt;&lt;lang &quot;穿&quot; &quot;wear&quot;&gt;&gt;&lt;/label&gt; &lt;label&gt;&lt;&lt;radiobutton &quot;$UI.closetmode&quot; &quot;扔&quot; autocheck&gt;&gt; &lt;&lt;lang &quot;扔&quot; &quot;wear&quot;&gt;&gt;&lt;/label&gt;
+动作： &lt;label&gt;&lt;&lt;radiobutton &quot;$UI.closetmode&quot; &quot;穿&quot; autocheck&gt;&gt; &lt;&lt;lang &quot;穿&quot; &quot;wear&quot;&gt;&gt;&lt;/label&gt; &lt;label&gt;&lt;&lt;radiobutton &quot;$UI.closetmode&quot; &quot;扔&quot; autocheck&gt;&gt; &lt;&lt;lang &quot;扔&quot; &quot;discard&quot;&gt;&gt;&lt;/label&gt;
 &lt;/div&gt;
 
 &lt;div id=&quot;ClosetList&quot;&gt;
@@ -12479,7 +12486,7 @@ required:false,
 &lt;&lt;run $(&#39;#customOverlay&#39;).draggable({handle: &#39;.handle&#39;});$(&#39;#ui-dialog&#39;).draggable({handle: &#39;.handle&#39;});&gt;&gt;
 &lt;&lt;set _timer -= 1&gt;&gt;
 &lt;&lt;if _timer lte 0&gt;&gt;&lt;&lt;stop&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/repeat&gt;&gt;</tw-passagedata><tw-passagedata pid="23" name="SidebarWidget" tags="widget" position="350,350" size="100,100">&lt;&lt;widget &quot;showmoney&quot;&gt;&gt;
-&lt;div class=&quot;points&quot;&gt;&lt;&lt;printmoney $PC.points&gt;&gt;P&lt;/div&gt;&lt;span class=&quot;slice&quot;&gt; | &lt;/span&gt;&lt;div class=&quot;money&quot;&gt;&lt;&lt;printmoney $PC.money&gt;&gt;&lt;&lt;icon &quot;moneyicon&quot;&gt;&gt;&lt;/div&gt;
+&lt;div class=&quot;points&quot;&gt;&lt;&lt;printmoney $PC.point&gt;&gt;P&lt;/div&gt;&lt;span class=&quot;slice&quot;&gt; | &lt;/span&gt;&lt;div class=&quot;money&quot;&gt;&lt;&lt;printmoney $PC.money&gt;&gt;&lt;&lt;icon &quot;moneyicon&quot;&gt;&gt;&lt;/div&gt;
 &lt;&lt;/widget&gt;&gt;
 
 &lt;&lt;widget &quot;showtitle&quot;&gt;&gt;

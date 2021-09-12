@@ -171,15 +171,15 @@ DefineMacroS("him", him);
 function hair(){
   const select = new SelectCase();
   var num = PC.info.hairlen
-  select.add(0, 49, "超短发");
-  select.add(50, 99, "齐耳短发");
-  select.add(100, 249, "及脖中发");
-  select.add(250, 499, "及肩中发");
-  select.add(500, 799, "及胸长发");
-  select.add(800, 1200, "及腰长发");
-  select.default = "超长长发";
+  select.add(0, 49, Lang("超短发","very short hair"));
+  select.add(50, 99, Lang("齐耳短发","short hair"));
+  select.add(100, 249, Lang("及脖中发","medium long hair"));
+  select.add(250, 499, Lang("及肩中发", "shoulder length hair"));
+  select.add(500, 799, Lang("及胸长发", "long hair"));
+  select.add(800, 1200, Lang("及腰长发","very long hair"));
+  select.default = Lang("超长长发","super long hair");
   const hairlength = select.has(num);
-  return `${setup.L[V.lang]["发色"][PC.info.haircolor] + setup.L[V.lang]["发型"][PC.info.hairstyle] + hairlength}`;
+  return Lang(`${setup.L[V.lang]["发色"][PC.info.haircolor] + setup.L[V.lang]["发型"][PC.info.hairstyle] + hairlength}`, `${setup.L[V.lang]["发色"][PC.info.haircolor]} ${setup.L[V.lang]["发型"][PC.info.hairstyle]} ${hairlength}`);
 }
 
 DefineMacroS("hair",hair);

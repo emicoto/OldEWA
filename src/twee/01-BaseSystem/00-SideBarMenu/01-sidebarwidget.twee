@@ -1,7 +1,7 @@
 ﻿:: SidebarWidget [widget]
 
 <<widget "showmoney">>
-<div class="points"><<printmoney $PC.points>>P</div><span class="slice"> | </span><div class="money"><<printmoney $PC.money>><<icon "moneyicon">></div>
+<div class="points"><<printmoney $PC.point>>P</div><span class="slice"> | </span><div class="money"><<printmoney $PC.money>><<icon "moneyicon">></div>
 <</widget>>
 
 <<widget "showtitle">>

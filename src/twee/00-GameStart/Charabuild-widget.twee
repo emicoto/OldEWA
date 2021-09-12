@@ -106,7 +106,7 @@
 <</widget>>
 
 <<widget "CMHairstyle">>
-    <<set _optionlist to D.CMlist.hairlength[$lang]>>
+    <<set _optionlist to D.CMlist.hairstyle[$lang]>>
     <<listbox "$PC.info.hairstyle" autoselect>>
         <<optionsfrom _optionlist>>
     <</listbox>>

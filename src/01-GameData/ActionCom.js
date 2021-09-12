@@ -10,16 +10,16 @@
     },
     健身:{
         act(){
-            Source.pc.体力 -= 80;
-            Source.pc.清洁 -= 100;
-            Source.pc.饮食 -= 120;
+            Source.pc.体力 -= 1.2;
+            Source.pc.清洁 -= 3;
+            Source.pc.饮食 -= 4;
         }
     },
     玩游戏:{
         act(){
-            Source.pc.压力 -= 100;
-            Source.pc.抑郁 -= 100;
-            Source.pc.恐惧 -= 100;
+            Source.pc.压力 -= 2;
+            Source.pc.抑郁 -= 1;
+            Source.pc.恐惧 -= 1;
         }
     },
     休息:{

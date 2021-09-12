@@ -50,7 +50,7 @@
 <li><<lang "角色名字" "Name">>： <<textbox "$PC.info.name" $PC.info.name>>　　∵ <<lang "人物背景" "Titles">>：<<CMBackground>></li>
 <li><<lang "性别属性" "Gender Tag">>： <<CMGender>>　　　<<button _nakedbutton>><<gonaked "debug">><</button>> <<button _redressbutton>><<redress>><</button>></li>
 <li><<lang "兴趣特长" "Major">>： <<CMMainclass>>　　　∵ <<lang "切换表情" "Emoji">>: <<CMEmote>></li>
-<li>　<<lang "性观念" "Attitude">>： <<CMChara>></li>
+<li><<lang "　性观念" "Attitude">>： <<CMChara>></li>
 
 <<dashline>>
 <span id="charamaking">
@@ -59,25 +59,46 @@
 　<<lang "发色" "HairColor">>　<<CMHairColor>>　　<<lang "发长" "HairLength">>　<<CMHair>>　　<<lang "发型" "HairStyle">>　<<CMHairstyle>><br>
 　<<lang "眼型" "Eyes">>　<<CMEyetype>>　　<<lang "瞳色" "EyeColor">>　<<CMEyeColor>><span id="CMFurOption"></span><br>
 　<<lang "罩杯" "Breast">>　<<CMBreast>>　　<<lang "臀型" "Hips">>　<<CMButts>>　　<label><<print '<<checkbox "$PC.trait.泌乳体质" false true ' + ($PC.trait.泌乳体质 is true ? "checked" : "") + '>>'>><<lang "泌乳体质" "Natrual Lactation">>？</label><br>
+
 <<dashline>>
 <li><<lang "感官特征" "Sensual">></li>
 　<<lang "嘴巴感度" "Mouth Sensitivity">>　<<CMMouth>><br>
 　<<lang "胸部感度" "Breast Sensitivity">>　<<CMChest>><br>
 <span id="CMgenital"></span>
 　<<lang "肛门感度" "Anal Sensitivity">>　<<CMAnal>><br>
+
 <<dashline>>
 <li><<lang "特殊素质" "Start Traits">></li>
 <span style="font-size:11px;color:gray">　<<lang "备注：部分素质会影响成就的获得。" "SP: Some traits may affect the achievement.">></span><br>
-<label>　<<radiobutton "$starttrait" "菜鸟" autocheck>> <<lang "菜鸟" "Newbie">></label>　　<span class="description"><<lang "没什么特别的，只有一点新手补助。第一次玩推荐这个。" "Nothing special but has newbie grants. Recommend for beginner.">></span><br>
-<label>　<<radiobutton "$starttrait" "好色" autocheck>> <<lang "好色" "Horny">></label>　　<span class="description"><<lang "对性行为抵抗下降，欲望更容易上升。" "Reduced antipathy to sexual activity, but desire is more likely to rise.">></span><br>
-<label>　<<radiobutton "$starttrait" "轻浮" autocheck>> <<lang "轻浮" "Flirty">></label>　　<span class="description"><<lang "对滥交接受度良好，容易从负面心理状态中恢复。" "Good acceptance of promiscuity and easy recovery from negative mental states.">></span><br>
-<label>　<<radiobutton "$starttrait" "人气" autocheck>> <<lang "人气" "Famous">></label>　　<span class="description"><<lang "粉丝、魅力、金钱都有加成，但容易触发严重事件。" "A huge bonus when gain followers, charm the enemy, and earn money from live stream. But hight rate to trigger serious events.">></span><br>
-<label>　<<radiobutton "$starttrait" "天使心" autocheck>> <<lang "天使心" "Angelic">></label>　<span class="description"><<lang "天使一般的心肠，不再有怨恨，但也无法拒绝别人的任何请求。" "Angelic heart, no more hates and resentful for sexual activity, but also unable to refuse any request from others.">></span><br>
-<label>　<<radiobutton "$starttrait" "露出癖" autocheck>> <<lang "露出癖" "Exhibitionist">></label>　<span class="description"><<lang "喜欢暴露的穿着，但面对裸奔还是会害羞的。" "Like to dress exposed but still feeling shy when totally naked." >></span><br>
-<label>　<<radiobutton "$starttrait" "福瑞爱" autocheck>> <<lang "福瑞爱" "FurryLove">></label>　<span class="description"><<lang "对福瑞的接受度良好，容易提升兽交癖好。" "Good acceptance of furry, and rise bestiality fetishes easily.">></span><br>
-<label>　<<radiobutton "$starttrait" "抖M体质" autocheck>> <<lang "抖M" "Masochist">></label>　　<span class="description"><<lang "抖M体质，疼痛减免。" "Masochist body, reduced pain.">></span><br>
-<label>　<<radiobutton "$starttrait" "倾国倾城" autocheck>> <<lang "倾国倾城" "Heavenly Beauty">></label> <span class="description"><<lang "一眼万年。招来狂蜂浪蝶，事件永不中断。" "Love at first sight. A wave after waves of events, never has ending.">></span><br>
-<label>　<<radiobutton "$starttrait" "经商头脑" autocheck>> <<lang "经商头脑" "Business Sense">></label> <span class="description"><<lang "生财有道，摆摊卖东西有加成。但要注意强盗或小偷。" "Gain a huge bonus when selling things. But the robbers and thieves are watching you.">></span><br>
+<label>　<<radiobutton "$starttrait" "菜鸟" autocheck>>  <<lang "菜鸟　　" "Newbie ">></label>
+<span class="description"><<lang "没什么特别的，只有一点新手补助。第一次玩推荐这个。" "Nothing special but has newbie grants. Recommend for beginner.">></span><br>
+
+<label>　<<radiobutton "$starttrait" "好色" autocheck>> <<lang "好色　　" "Horny ">></label>
+<span class="description"><<lang "对性行为抵抗下降，欲望更容易上升。" "Reduced antipathy to sexual activity, but desire is more likely to rise.">></span><br>
+
+<label>　<<radiobutton "$starttrait" "轻浮" autocheck>> <<lang "轻浮　　" "Flirty ">></label>
+<span class="description"><<lang "对滥交接受度良好，容易从负面心理状态中恢复。" "Good acceptance of promiscuity and easy recovery from negative mental states.">></span><br>
+
+<label>　<<radiobutton "$starttrait" "人气" autocheck>> <<lang "人气　　" "Famous ">></label>
+<span class="description"><<lang "粉丝、魅力、金钱都有加成，但容易触发严重事件。" "A huge bonus when gain followers, charm the enemy, and earn money from live stream. But hight rate to trigger serious events.">></span><br>
+
+<label>　<<radiobutton "$starttrait" "天使心" autocheck>> <<lang "天使心　" "Angelic ">></label>
+<span class="description"><<lang "天使一般的心肠，不再有怨恨，但也无法拒绝别人的任何请求。" "Angelic heart, no more hates and resentful for sexual activity, but also unable to refuse any request from others.">></span><br>
+
+<label>　<<radiobutton "$starttrait" "露出癖" autocheck>> <<lang "露出癖　" "Exhibitionist ">></label>
+<span class="description"><<lang "喜欢暴露的穿着，但面对裸奔还是会害羞的。" "Like to dress exposed but still feeling shy when totally naked." >></span><br>
+
+<label>　<<radiobutton "$starttrait" "福瑞爱" autocheck>> <<lang "福瑞爱　" "FurryLove ">></label>
+<span class="description"><<lang "对福瑞的接受度良好，容易提升兽交癖好。" "Good acceptance of furry, and rise bestiality fetishes easily.">></span><br>
+
+<label>　<<radiobutton "$starttrait" "抖M体质" autocheck>> <<lang "抖M　　" "Masochist ">></label>
+<span class="description"><<lang "抖M体质，疼痛减免。" "Masochist body, reduced pain.">></span><br>
+
+<label>　<<radiobutton "$starttrait" "倾国倾城" autocheck>> <<lang "倾国倾城 " "Heavenly Beauty ">></label>
+<span class="description"><<lang "一眼万年。招来狂蜂浪蝶，事件永不中断。" "Love at first sight. A wave after waves of events, never has ending.">></span><br>
+
+<label>　<<radiobutton "$starttrait" "经商头脑" autocheck>> <<lang "经商头脑 " "Business Sense ">></label><span class="description">
+<<lang "生财有道，摆摊卖东西有加成。但要注意强盗或小偷。" "Gain a huge bonus when selling things. But the robbers and thieves are watching you.">></span><br>
 <span id="omegatrait"></span>
 <!-- 自动纠正 -->
 <<silently>>
