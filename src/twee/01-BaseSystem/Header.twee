@@ -1,0 +1,12 @@
+:: PassageHeader
+<<set $passage to passage()>><<set $tags to tags($passage)>>
+/* 时间经过处理, passtime内部不能直接显示内容. 只能绕一圈到 TimeEffect */
+<<TimeEffect>>
+/* 其他通用预处理 */
+/* AVATAR设定的更新检测 */
+<<SetAvatar>>
+
+/* 通知弹出框 */
+<div id="action-popup" class="hide"><span id="action-text"></span></div>
+<div id="hd-append-top"></div>
+<div id="hd-append-text" class="append-normal"></div>

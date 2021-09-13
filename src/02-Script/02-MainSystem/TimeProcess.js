@@ -143,7 +143,7 @@ DefineMacroS("timeprocess",timeprocess)
  * @param {number} t 
  */
 
-function PassTime(t,mode){
+function TimeEffect(t,mode){
 	let lapse = V.times.passed - V.times.wakeup
 	let overtime = Math.floor(lapse/1200)
 
@@ -227,13 +227,17 @@ function PassTime(t,mode){
 	}
 
 	// TCSV里的倒计时处理
-	const tc = Object.keys(TCSV.pc)
-	for(let v in tc){
-		let n = tc[v]
-
+	for(let v in D.tcsvnum ){
+		let n = D.tcsvnum [v]
 		if(['贤者时间','果腹'].includes(n)){
 			TCSV.pc[n] = Math.max(TCSV.pc[n] - t,0)
 		}
+	}
+
+	// TCSV里的一次性开关清理
+	for(let v in D.tcsvnum){
+		let n = D.tcsvnum[v]
+		if(['入浴','休息','工作','学习'].includes(n)) TCSV[n] = false;
 	}
 
 	//FLAG处理，每天只会累计一次。数值低于/高于安全线，就会+1. 如果当天没有低于安全线，就会扣除1个计数（如果计数大于0的话）
@@ -335,8 +339,8 @@ function PassTime(t,mode){
 
 }
 
-window.PassTime = PassTime
-F.PassTime = PassTime
+window.TimeEffect = TimeEffect
+F.TimeEffect = TimeEffect
 
 
 function SourceTrack(){

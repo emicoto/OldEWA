@@ -1,0 +1,15 @@
+﻿:: PassageFooter
+<div id="gameVersionDisplay">EWA ver<<print StartConfig.version>></div>
+<<run anounceAppend("<<you>>的病好了，已经恢复了健康。<br>")>>
+<!-- 隐藏元素 */ -->
+<<set $UI.currentOverlay to null>>
+<div id="customOverlay" class="customOverlay hidden">
+	<div id="customOverlayTitle" class="fixedClose"></div>
+	<div id="customOverlayContent"></div>
+</div>
+
+
+/* 事件的各种数值变化后续处理 */
+<<fixvalue>>
+/* AVATAR设定的更新检测 ，一个页面显示完毕之后重新调整左边栏的表情变化 */
+<<SetAvatar>>

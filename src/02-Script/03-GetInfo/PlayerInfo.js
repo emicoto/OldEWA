@@ -11,7 +11,7 @@ function gsplit(m,f,p="chara"){
 window.gsplit = gsplit
 DefineMacroS("gsplit", gsplit);
 /* 除了我，你他之外，其他都是英文限定。所以中文用you，英文用Im分开算了。英文描写玩家统一用I、me、my、mine */
-function you() {
+window.you = function() {
     var name = PC.info.name;
     switch (conf.persons){
     case 1:
@@ -24,7 +24,7 @@ function you() {
   }
 DefineMacroS("you", you);
 
-function HE(){
+window.HE = function(){
   switch(conf.persons){
     case 1:
       return "我";
@@ -34,6 +34,7 @@ function HE(){
       return gsplit('他','她','pc')
   }
 }
+DefineMacroS("HE", HE)
 
 function I(key=null) {
   var name = PC.info.name;

@@ -2045,33 +2045,45 @@ V.closet = {
 D.COM = {
     洗澡:{
         /*各种行为选项的执行处理 */
-        act(){
+        act(t){
+            V.record.总泡澡时间 += t; V.record.洗澡 ++;
             TCSV.pc.入浴 = true;
-            Source.pc.压力 -= 5;
-            Source.pc.体力 += 1;
+            Source.pc.压力 -= 5; Source.pc.体力 ++;
             Source.pc.清洁 += 2;
         }
     },
     健身:{
-        act(){
-            Source.pc.体力 -= 1.2;
-            Source.pc.清洁 -= 3;
+        act(t){
+            V.record.总健身时间 += t; V.record.健身 ++;
+            Source.pc.体力 -= 1.2; Source.pc.清洁 -= 3;
             Source.pc.饮食 -= 4;
         }
     },
     玩游戏:{
-        act(){
-            Source.pc.压力 -= 2;
-            Source.pc.抑郁 -= 1;
+        act(t){
+            V.record.总游戏时间 += t;
+            Source.pc.压力 -= 2; Source.pc.抑郁 -= 1;
             Source.pc.恐惧 -= 1;
         }
     },
     休息:{
-        act(){
+        act(t){
             TCSV.pc.休息 = true;
-            Source.pc.体力 += 1
+            Source.pc.体力 += 1;
         }
     },
+    睡觉:{
+        act(t){
+            PC.state.睡眠 = true;
+            Source.pc.压力 -= 1;
+        }
+    },
+    打扫:{
+        act(t){
+            PC.exp.清扫 ++
+            Source.pc.体力 -= 1
+        }
+    }
 }
 /* twine-user-script #14: "00-ColorList.js" */
 A.layer = [
@@ -10002,7 +10014,7 @@ DefineMacroS("timeprocess",timeprocess)
  * @param {number} t 
  */
 
-function PassTime(t,mode){
+function TimeEffect(t,mode){
 	let lapse = V.times.passed - V.times.wakeup
 	let overtime = Math.floor(lapse/1200)
 
@@ -10086,13 +10098,17 @@ function PassTime(t,mode){
 	}
 
 	// TCSV里的倒计时处理
-	const tc = Object.keys(TCSV.pc)
-	for(let v in tc){
-		let n = tc[v]
-
+	for(let v in D.tcsvnum ){
+		let n = D.tcsvnum [v]
 		if(['贤者时间','果腹'].includes(n)){
 			TCSV.pc[n] = Math.max(TCSV.pc[n] - t,0)
 		}
+	}
+
+	// TCSV里的一次性开关清理
+	for(let v in D.tcsvnum){
+		let n = D.tcsvnum[v]
+		if(['入浴','休息','工作','学习'].includes(n)) TCSV[n] = false;
 	}
 
 	//FLAG处理，每天只会累计一次。数值低于/高于安全线，就会+1. 如果当天没有低于安全线，就会扣除1个计数（如果计数大于0的话）
@@ -10194,8 +10210,8 @@ function PassTime(t,mode){
 
 }
 
-window.PassTime = PassTime
-F.PassTime = PassTime
+window.TimeEffect = TimeEffect
+F.TimeEffect = TimeEffect
 
 
 function SourceTrack(){
@@ -10434,7 +10450,7 @@ function gsplit(m,f,p="chara"){
 window.gsplit = gsplit
 DefineMacroS("gsplit", gsplit);
 /* 除了我，你他之外，其他都是英文限定。所以中文用you，英文用Im分开算了。英文描写玩家统一用I、me、my、mine */
-function you() {
+window.you = function() {
     var name = PC.info.name;
     switch (conf.persons){
     case 1:
@@ -10447,7 +10463,7 @@ function you() {
   }
 DefineMacroS("you", you);
 
-function HE(){
+window.HE = function(){
   switch(conf.persons){
     case 1:
       return "我";
@@ -10457,6 +10473,7 @@ function HE(){
       return gsplit('他','她','pc')
   }
 }
+DefineMacroS("HE", HE)
 
 function I(key=null) {
   var name = PC.info.name;
@@ -10901,22 +10918,37 @@ function weirdeffect(){
 }
 window.weirdeffect = weirdeffect
 
-function anounceAppend(args){
+function anounceAppend(args,sound){
     var text = args
+    const waittext = function(args,sound){
+        if(document.getElementById('append-text') != null){
+            //优先在append-text显示
+            new Wikifier(null,"<<append '#append-text'>>"+text+"<</append>>")
+            $('#append-text').addClass('action-flash'); setTimeout(()=> {$('#append-text').removeClass('action-flash')},500)
+        }
+        else if(document.getElementById('situation') != null){
+            //失败了就在situation前显示
+            let copytext = document.getElementById('situation').innerHTML
+            new Wikifier(null,"<<replace '#situation'>>"+text+copytext+"<</replace>>")
+            $('#add-text').addClass('action-flash'); setTimeout(()=> {$('#add-text').removeClass('action-flash')},500)
+        }
+        else if(document.getElementById('hd-append-top') != null){
+            //situation也找不到就在header append里显示
+            new Wikifier(null,"<<append '#hd-append-top'>>"+text+"<</append>>")
+            $('#hd-append-top').addClass('action-flash'); setTimeout(()=> {$('#hd-append-top').removeClass('action-flash')},500)
+        }
+    }
+    
+    setTimeout(()=> {waittext(args,sound)}, 300)
 
-    if(document.getElementById('append-text') != null){
-        //优先在append-text显示
-        document.getElementById('append-text').innerHTML = document.getElementById('append-text').innerHTML + text
-        $('#append-text').addClass('action-flash'); setTimeout(()=> {$('#append-text').removeClass('action-flash')},500)
-    }
-    else if(document.getElementById('situation') != null){
-        //失败了就在situation前显示
-        document.getElementById('situation').innerHTML = document.getElementById('situation').innerHTML + "<div id='add-text'>" +text+"</div>"
-        $('#add-text').addClass('action-flash'); setTimeout(()=> {$('#add-text').removeClass('action-flash')},500)
-    }
     //不管有没有找到对应元素，都会在弹出窗口显示一次
-    anouncePopUP(args)
+    V.anounce.flag = true
+    V.anounce.text = text
+    if(sound)V.anounce.type = sound;
+    
+    anouncePopUP(args,sound)
 }
+window.anounceAppend = anounceAppend
 
 function anouncePopUP(args,sound="弹出通知"){
     var text = args
@@ -10925,7 +10957,7 @@ function anouncePopUP(args,sound="弹出通知"){
 
     ShowPopUP()
     new Wikifier(null,"<<replace '#action-text'>>"+text+"<</replace>>")
-    new Wikifier(null,`<<audio '${sound}' volume 0.5 play>>`)
+    if(sound != "无") new Wikifier(null,`<<audio '${sound}' volume 0.5 play>>`);
     return ""
 }
 window.anouncePopUP = anouncePopUP
@@ -10935,7 +10967,10 @@ DefineMacroS("anouncePopUP", anouncePopUP);
 function ShowPopUP() {
     $('#action-popup').addClass('show'); setTimeout(() => { $('#action-popup').removeClass('show') }, 3200);
     $('#action-popup').addClass('popup'); setTimeout(() => { $('#action-popup').removeClass('popup') }, 1000);
-    $('#action-text2').addClass('notransition flash'); setTimeout(() => { $('#action-text2').removeClass('notransition flash') }, 100);
+
+    if(document.getElementById('action-text2') != null){
+        $('#action-text2').addClass('notransition flash'); setTimeout(() => { $('#action-text2').removeClass('notransition flash') }, 100);   
+    }
 }
 window.ShowPopUP = ShowPopUP
 
@@ -13185,7 +13220,7 @@ Total &lt;&lt;print $PC.rec.高潮.t&gt;&gt;&lt;br&gt;
     &lt;div id=&quot;combat_command&quot;&gt;
         &lt;&lt;link &quot;攻击&quot;&gt;&gt;
         &lt;&lt;run 
-            wait([&quot;你攻击了敌人A。&quot;,&quot;敌人A受到你的攻击损失了1点HP。&quot;,&quot;但你很快遭遇了反攻，被撕下一层衣服。&quot;
+            wait([&quot;&lt;&lt;you&gt;&gt;攻击了敌人A。&quot;,&quot;敌人A受到你的攻击损失了1点HP。&quot;,&quot;但&lt;&lt;you&gt;&gt;很快遭遇了反攻，被撕下一层衣服。&quot;
             ]);
             &gt;&gt;
         &lt;&lt;set $PC.rpg.HP[0] -= 5&gt;&gt;
@@ -13206,11 +13241,34 @@ Total &lt;&lt;print $PC.rec.高潮.t&gt;&gt;&lt;br&gt;
 &lt;script&gt;
 function wait(text) {
     for(let i=0;i&lt;text.length;i++){
-        $( &quot;#combat_message&quot; ).append( &quot;&lt;span class=&#39;h&quot;+i+&quot; hidden&#39;&gt;&quot;+text[i]+&quot;&lt;br&gt;&lt;/span&gt;&quot;);
+        new Wikifier(null,&quot;&lt;&lt;append &#39;#combat_message&#39;&gt;&gt;&quot;+&quot;&lt;span class=&#39;h&quot;+i+&quot; hidden&#39;&gt;&quot;+text[i]+&quot;&lt;br&gt;&lt;/span&gt;&quot;+&quot;&lt;&lt;/append&gt;&gt;&quot;)
         setTimeout(() =&gt; {$(&quot;#combat_message .h&quot;+i).removeClass(&#39;hidden&#39;).addClass(&#39;delay&#39;);msg_end.scrollIntoView() }, (500*i))
     }
 }
-&lt;/script&gt;</tw-passagedata><tw-passagedata pid="32" name="TimeProcess" tags="widget" position="225,475" size="100,100">&lt;&lt;widget &quot;TimeEffect&quot;&gt;&gt;
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="32" name="PassageFooter" tags="" position="225,475" size="100,100">&lt;div id=&quot;gameVersionDisplay&quot;&gt;EWA ver&lt;&lt;print StartConfig.version&gt;&gt;&lt;/div&gt;
+&lt;&lt;run anounceAppend(&quot;&lt;&lt;you&gt;&gt;的病好了，已经恢复了健康。&lt;br&gt;&quot;)&gt;&gt;
+&lt;!-- 隐藏元素 */ --&gt;
+&lt;&lt;set $UI.currentOverlay to null&gt;&gt;
+&lt;div id=&quot;customOverlay&quot; class=&quot;customOverlay hidden&quot;&gt;
+	&lt;div id=&quot;customOverlayTitle&quot; class=&quot;fixedClose&quot;&gt;&lt;/div&gt;
+	&lt;div id=&quot;customOverlayContent&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+
+/* 事件的各种数值变化后续处理 */
+&lt;&lt;fixvalue&gt;&gt;
+/* AVATAR设定的更新检测 ，一个页面显示完毕之后重新调整左边栏的表情变化 */
+&lt;&lt;SetAvatar&gt;&gt;</tw-passagedata><tw-passagedata pid="33" name="PassageHeader" tags="" position="350,475" size="100,100">&lt;&lt;set $passage to passage()&gt;&gt;&lt;&lt;set $tags to tags($passage)&gt;&gt;
+/* 时间经过处理, passtime内部不能直接显示内容. 只能绕一圈到 TimeEffect */
+&lt;&lt;TimeEffect&gt;&gt;
+/* 其他通用预处理 */
+/* AVATAR设定的更新检测 */
+&lt;&lt;SetAvatar&gt;&gt;
+
+/* 通知弹出框 */
+&lt;div id=&quot;action-popup&quot; class=&quot;hide&quot;&gt;&lt;span id=&quot;action-text&quot;&gt;&lt;/span&gt;&lt;/div&gt;
+&lt;div id=&quot;hd-append-top&quot;&gt;&lt;/div&gt;
+&lt;div id=&quot;hd-append-text&quot; class=&quot;append-normal&quot;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="34" name="TimeProcess" tags="widget" position="475,475" size="100,100">&lt;&lt;widget &quot;TimeEffect&quot;&gt;&gt;
 &lt;&lt;timeprocess&gt;&gt;
 
 /* 每日结束时的处理 */
@@ -13221,7 +13279,7 @@ function wait(text) {
 &lt;&lt;set $daychange to false&gt;&gt;
 &lt;&lt;/if&gt;&gt;
     
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="33" name="CombatUIWidget" tags="widget" position="350,475" size="100,100">&lt;&lt;widget &quot;CB_playerside&quot;&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="35" name="CombatUIWidget" tags="widget" position="600,475" size="100,100">&lt;&lt;widget &quot;CB_playerside&quot;&gt;&gt;
 &lt;div id=&quot;characard&quot;&gt;
     &lt;div class=&quot;face&quot;&gt;&lt;&lt;portrait&gt;&gt;&lt;/div&gt;
     &lt;div class=&quot;CC_name&quot;&gt;玩家&lt;/div&gt;
@@ -13287,32 +13345,7 @@ function wait(text) {
     &lt;/div&gt;
     &lt;div class=&quot;CC_state&quot;&gt;&lt;/div&gt;
 &lt;/div&gt;
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="34" name="PassageHeader" tags="" position="475,475" size="100,100">&lt;&lt;set $passage to passage()&gt;&gt;&lt;&lt;set $tags to tags($passage)&gt;&gt;
-/* 时间经过处理 */
-&lt;&lt;fixvalue&gt;&gt;&lt;&lt;TimeEffect&gt;&gt;
-/* 其他通用预处理 */
-
-/* AVATAR设定的更新检测 */
-&lt;&lt;SetAvatar&gt;&gt;
-
-/* 通知弹出框 */
-&lt;div id=&quot;action-popup&quot; class=&quot;hide&quot;&gt;&lt;span id=&quot;action-text&quot;&gt;&lt;/span&gt;&lt;/div&gt;
-&lt;div id=&quot;hd-append-top&quot;&gt;&lt;/div&gt;
-&lt;div id=&quot;hd-append-text&quot; class=&quot;append-normal&quot;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="35" name="PassageFooter" tags="" position="600,475" size="100,100">&lt;div id=&quot;gameVersionDisplay&quot;&gt;EWA ver&lt;&lt;print StartConfig.version&gt;&gt;&lt;/div&gt;
-
-
-&lt;!-- 隐藏元素 */ --&gt;
-&lt;&lt;set $UI.currentOverlay to null&gt;&gt;
-&lt;div id=&quot;customOverlay&quot; class=&quot;customOverlay hidden&quot;&gt;
-	&lt;div id=&quot;customOverlayTitle&quot; class=&quot;fixedClose&quot;&gt;&lt;/div&gt;
-	&lt;div id=&quot;customOverlayContent&quot;&gt;&lt;/div&gt;
-&lt;/div&gt;
-
-/* 事件的各种数值变化后续处理 */
-
-
-/* AVATAR设定的更新检测 ，一个页面显示完毕之后重新调整左边栏的表情变化 */
-&lt;&lt;SetAvatar&gt;&gt;</tw-passagedata><tw-passagedata pid="36" name="Widget" tags="widget" position="725,475" size="100,100">&lt;&lt;widget &quot;dashline&quot;&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="36" name="Widget" tags="widget" position="725,475" size="100,100">&lt;&lt;widget &quot;dashline&quot;&gt;&gt;
     &lt;div class=&quot;dashline&quot;&gt;&lt;/div&gt;
 &lt;&lt;/widget&gt;&gt;
 
@@ -13511,8 +13544,9 @@ function wait(text) {
     &lt;&lt;set _color to $args[1]&gt;&gt;
     &lt;&lt;meterbar _percent _color&gt;&gt;
 &lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="37" name="你的家 单身公寓" tags="location" position="850,475" size="100,100">&lt;&lt;location &quot;单身公寓&quot;&gt;&gt;&lt;&lt;mode &quot;location&quot;&gt;&gt;
-&lt;&lt;resetplaylist&gt;&gt;
 
+&lt;&lt;resetplaylist&gt;&gt;
+&lt;&lt;set $TEquip to clone($Equip)&gt;&gt;
 &lt;span class=&quot;title&quot;&gt;&lt;&lt;print $PC.info.name&gt;&gt;家&lt;/span&gt;&lt;br&gt;
 &lt;div class=&quot;lbox&quot;&gt;&lt;&lt;=D.placedata.单身公寓.description()&gt;&gt;&lt;br&gt;
 &lt;/div&gt;
@@ -13521,6 +13555,8 @@ function wait(text) {
 &lt;div id=&quot;append-text&quot; class=&quot;append-normal&quot;&gt;&lt;/div&gt;
 &lt;div id=&quot;situation&quot; class=&quot;situation&quot;&gt;&lt;&lt;=F.getsituation(&quot;单身公寓&quot;)&gt;&gt;&lt;/div&gt;
 
+&lt;&lt;timed 1s&gt;&gt;就是测试下看看演出顺序怎么的&lt;&lt;/timed&gt;&gt;
+
 &lt;br&gt;
 &lt;div class=&quot;tolink&quot;&gt;
 &lt;&lt;link &quot;弹出窗口测试&quot;&gt;&gt;
@@ -13528,10 +13564,10 @@ function wait(text) {
 &lt;&lt;/link&gt;&gt;
 &lt;br&gt;&lt;br&gt;
 
-&lt;&lt;link &quot;打开衣柜　 1m&quot; &quot;衣柜&quot;&gt;&gt;&lt;&lt;passtime 1&gt;&gt;&lt;&lt;set $TEquip to clone($Equip)&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
+&lt;&lt;link &quot;打开衣柜　 1m&quot; &quot;衣柜&quot;&gt;&gt;&lt;&lt;passtime 1&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
 &lt;br&gt;
 &lt;&lt;link &quot;健身　　 　30m&quot; $passage&gt;&gt;&lt;&lt;passtime 30&gt;&gt;&lt;&lt;/link&gt;&gt;　　&lt;&lt;link &quot;打游戏 　　30m&quot; $passage&gt;&gt;&lt;&lt;passtime 30&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
-&lt;&lt;link &quot;洗澡　 　　30m&quot; &quot;洗澡&quot;&gt;&gt;&lt;&lt;set $TEquip to clone($Equip)&gt;&gt;&lt;&lt;run D.COM.洗澡.act()&gt;&gt;&lt;&lt;passtime 30&gt;&gt;&lt;&lt;/link&gt;&gt;　　&lt;&lt;link &quot;和宠物玩耍 60m&quot; $passage&gt;&gt;&lt;&lt;passtime 60&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
+&lt;&lt;link &quot;洗澡　 　　30m&quot; &quot;洗澡&quot;&gt;&gt;&lt;&lt;gonaked &quot;closet&quot;&gt;&gt;&lt;&lt;run D.COM.洗澡.act(30)&gt;&gt;&lt;&lt;passtime 30&gt;&gt;&lt;&lt;/link&gt;&gt;　　&lt;&lt;link &quot;和宠物玩耍 60m&quot; $passage&gt;&gt;&lt;&lt;passtime 60&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
 &lt;&lt;link &quot;跳过时间　 23hr&quot; $passage&gt;&gt;&lt;&lt;passtime 1380&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
 &lt;&lt;link &quot;出门　 　　5m&quot; &quot;怡安小区&quot; &gt;&gt;&lt;&lt;passtime 5&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
 &lt;/div&gt;
@@ -13547,7 +13583,6 @@ function wait(text) {
 使用道具
 和宠物（床伴？）聊天
 学习 */</tw-passagedata><tw-passagedata pid="38" name="洗澡" tags="" position="975,475" size="100,100">&lt;&lt;set $location to &quot;浴室&quot;&gt;&gt;
-&lt;&lt;gonaked &quot;closet&quot;&gt;&gt;
 &lt;img src=&#39;image/cg/bath.png&#39; class=&quot;border:1px solid #928348&quot;&gt;&lt;br&gt;
 &lt;&lt;you&gt;&gt;脱光衣服，整个人泡进浴缸里，放松着。&lt;br&gt;
 &lt;br&gt;

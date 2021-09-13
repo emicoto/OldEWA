@@ -22,22 +22,37 @@ function weirdeffect(){
 }
 window.weirdeffect = weirdeffect
 
-function anounceAppend(args){
+function anounceAppend(args,sound){
     var text = args
+    const waittext = function(args,sound){
+        if(document.getElementById('append-text') != null){
+            //优先在append-text显示
+            new Wikifier(null,"<<append '#append-text'>>"+text+"<</append>>")
+            $('#append-text').addClass('action-flash'); setTimeout(()=> {$('#append-text').removeClass('action-flash')},500)
+        }
+        else if(document.getElementById('situation') != null){
+            //失败了就在situation前显示
+            let copytext = document.getElementById('situation').innerHTML
+            new Wikifier(null,"<<replace '#situation'>>"+text+copytext+"<</replace>>")
+            $('#add-text').addClass('action-flash'); setTimeout(()=> {$('#add-text').removeClass('action-flash')},500)
+        }
+        else if(document.getElementById('hd-append-top') != null){
+            //situation也找不到就在header append里显示
+            new Wikifier(null,"<<append '#hd-append-top'>>"+text+"<</append>>")
+            $('#hd-append-top').addClass('action-flash'); setTimeout(()=> {$('#hd-append-top').removeClass('action-flash')},500)
+        }
+    }
+    
+    setTimeout(()=> {waittext(args,sound)}, 300)
 
-    if(document.getElementById('append-text') != null){
-        //优先在append-text显示
-        document.getElementById('append-text').innerHTML = document.getElementById('append-text').innerHTML + text
-        $('#append-text').addClass('action-flash'); setTimeout(()=> {$('#append-text').removeClass('action-flash')},500)
-    }
-    else if(document.getElementById('situation') != null){
-        //失败了就在situation前显示
-        document.getElementById('situation').innerHTML = document.getElementById('situation').innerHTML + "<div id='add-text'>" +text+"</div>"
-        $('#add-text').addClass('action-flash'); setTimeout(()=> {$('#add-text').removeClass('action-flash')},500)
-    }
     //不管有没有找到对应元素，都会在弹出窗口显示一次
-    anouncePopUP(args)
+    V.anounce.flag = true
+    V.anounce.text = text
+    if(sound)V.anounce.type = sound;
+    
+    anouncePopUP(args,sound)
 }
+window.anounceAppend = anounceAppend
 
 function anouncePopUP(args,sound="弹出通知"){
     var text = args
@@ -46,7 +61,7 @@ function anouncePopUP(args,sound="弹出通知"){
 
     ShowPopUP()
     new Wikifier(null,"<<replace '#action-text'>>"+text+"<</replace>>")
-    new Wikifier(null,`<<audio '${sound}' volume 0.5 play>>`)
+    if(sound != "无") new Wikifier(null,`<<audio '${sound}' volume 0.5 play>>`);
     return ""
 }
 window.anouncePopUP = anouncePopUP
@@ -56,7 +71,10 @@ DefineMacroS("anouncePopUP", anouncePopUP);
 function ShowPopUP() {
     $('#action-popup').addClass('show'); setTimeout(() => { $('#action-popup').removeClass('show') }, 3200);
     $('#action-popup').addClass('popup'); setTimeout(() => { $('#action-popup').removeClass('popup') }, 1000);
-    $('#action-text2').addClass('notransition flash'); setTimeout(() => { $('#action-text2').removeClass('notransition flash') }, 100);
+
+    if(document.getElementById('action-text2') != null){
+        $('#action-text2').addClass('notransition flash'); setTimeout(() => { $('#action-text2').removeClass('notransition flash') }, 100);   
+    }
 }
 window.ShowPopUP = ShowPopUP
 

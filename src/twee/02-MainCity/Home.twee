@@ -1,7 +1,8 @@
 ﻿:: 你的家 单身公寓 [location]
 <<location "单身公寓">><<mode "location">>
-<<resetplaylist>>
 
+<<resetplaylist>>
+<<set $TEquip to clone($Equip)>>
 <span class="title"><<print $PC.info.name>>家</span><br>
 <div class="lbox"><<=D.placedata.单身公寓.description()>><br>
 </div>
@@ -10,6 +11,8 @@
 <div id="append-text" class="append-normal"></div>
 <div id="situation" class="situation"><<=F.getsituation("单身公寓")>></div>
 
+<<timed 1s>>就是测试下看看演出顺序怎么的<</timed>>
+
 <br>
 <div class="tolink">
 <<link "弹出窗口测试">>
@@ -17,10 +20,10 @@
 <</link>>
 <br><br>
 
-<<link "打开衣柜　 1m" "衣柜">><<passtime 1>><<set $TEquip to clone($Equip)>><</link>><br>
+<<link "打开衣柜　 1m" "衣柜">><<passtime 1>><</link>><br>
 <br>
 <<link "健身　　 　30m" $passage>><<passtime 30>><</link>>　　<<link "打游戏 　　30m" $passage>><<passtime 30>><</link>><br>
-<<link "洗澡　 　　30m" "洗澡">><<set $TEquip to clone($Equip)>><<run D.COM.洗澡.act()>><<passtime 30>><</link>>　　<<link "和宠物玩耍 60m" $passage>><<passtime 60>><</link>><br>
+<<link "洗澡　 　　30m" "洗澡">><<gonaked "closet">><<run D.COM.洗澡.act(30)>><<passtime 30>><</link>>　　<<link "和宠物玩耍 60m" $passage>><<passtime 60>><</link>><br>
 <<link "跳过时间　 23hr" $passage>><<passtime 1380>><</link>><br>
 <<link "出门　 　　5m" "怡安小区" >><<passtime 5>><</link>><br>
 </div>
@@ -39,7 +42,6 @@
 
 :: 洗澡
 <<set $location to "浴室">>
-<<gonaked "closet">>
 <img src='image/cg/bath.png' class="border:1px solid #928348"><br>
 <<you>>脱光衣服，整个人泡进浴缸里，放松着。<br>
 <br>

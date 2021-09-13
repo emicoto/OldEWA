@@ -76,7 +76,7 @@
     <div id="combat_command">
         <<link "攻击">>
         <<run 
-            wait(["你攻击了敌人A。","敌人A受到你的攻击损失了1点HP。","但你很快遭遇了反攻，被撕下一层衣服。"
+            wait(["<<you>>攻击了敌人A。","敌人A受到你的攻击损失了1点HP。","但<<you>>很快遭遇了反攻，被撕下一层衣服。"
             ]);
             >>
         <<set $PC.rpg.HP[0] -= 5>>
@@ -97,7 +97,7 @@
 <script>
 function wait(text) {
     for(let i=0;i<text.length;i++){
-        $( "#combat_message" ).append( "<span class='h"+i+" hidden'>"+text[i]+"<br></span>");
+        new Wikifier(null,"<<append '#combat_message'>>"+"<span class='h"+i+" hidden'>"+text[i]+"<br></span>"+"<</append>>")
         setTimeout(() => {$("#combat_message .h"+i).removeClass('hidden').addClass('delay');msg_end.scrollIntoView() }, (500*i))
     }
 }
