@@ -129,7 +129,7 @@ D.map.景南市.怡安小区 = {
         situation:[]
     }, 
     单身公寓 : {
-        place:"单身公寓", side:"室内", group:"怡安小区",
+        place:"单身公寓", side:"室内", group:"怡安小区", passage:"你的家 单身公寓",
         tag:["家","煮食","休息","沐浴","衣柜","电脑","WIFI"], 
         chara:[], 
         img:"singleapartment",

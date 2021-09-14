@@ -19,7 +19,7 @@
 /* 可以进行的互动 */
 <<link "回家　　　　5m" "你的家 单身公寓">><<passtime 5>><</link>><br>
 <<link "共享菜园　　3m">><<passtime 3>><</link>><br>
-<<link "去公园散步　3m" "小区公园">><<passtime 3>><</link>><br>
+<<link "去公园散步　3m" "怡安小区公园">><<passtime 3>><</link>><br>
 </div>
 
 <div id="navi" class="navi_unable">

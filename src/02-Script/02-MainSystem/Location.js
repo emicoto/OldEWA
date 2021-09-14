@@ -123,8 +123,6 @@ function navigation(){
             let passage = n.place
             if(n.passage) passage = n.passage
 
-            if(n.tag.includes("家")) passage = "你的家 "+n.place
-
             text += `<div class="links" title="移动时间：${t}分钟"><<link "・ ${n.place}" "${passage}" >><<passtime ${t}>><</link>></div>`
         }
     }

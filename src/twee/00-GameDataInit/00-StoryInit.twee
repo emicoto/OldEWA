@@ -4,7 +4,7 @@
 <!-- 首先初始化资料库 -->
 <<InitBGM>>
 
-<!-- 游戏各种flag初始化 -->
+<!-- 游戏各种数据初始化 -->
 <<run 
     F.InitGame();
     F.InitRecord();
