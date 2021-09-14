@@ -86,22 +86,6 @@ function setAPath(obj){
 }
 window.setAPath = setAPath
 
-/* 背景设置 */
-function imglocation(){
-    var location = V.location
-    
-    if ( !D.placedata[location] || D.placedata[location].img == undefined  || D.placedata[location].img == null){
-      return "dummy"
-
-    }else{
-      let img = D.placedata[location].img
-      return img
-    }
-}
-window.imglocation = imglocation
-
-
-
 function isFurry(){
     if ((PFlag.trueform == true ||  Flag.charamaking == true) && PC.info.race=="兽族") return "furry/"
     else if ((PFlag.trueform == true || Flag.charamaking == true) && PC.info.race=="灵族") return "gold/"

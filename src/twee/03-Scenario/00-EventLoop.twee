@@ -99,7 +99,6 @@
 <<set $eventend to true>>
 <<set $eventexit to "你的家 单身公寓">>
 <<set $UI.nextbutton to true>>
-<<set $temp to {}>>
 <<set $eventnext to 0>>
 <<set $event to {}>>
 <<set $count to 0>>

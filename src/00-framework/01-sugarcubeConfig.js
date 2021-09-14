@@ -1,13 +1,13 @@
-Config.history.controls = true;
+Config.history.controls = false;
 
-Config.history.maxStates = 2;
+Config.history.maxStates = 1;
 
 State.prng.init()
 
 window.versionUpdateCheck = true;
 window.saveUpdateCheck = true;
 
-Config.saves.slots = 16;
+Config.saves.slots = 9;
 
 Config.saves.onLoad = function (save) {
 	window.versionUpdateCheck = true;
@@ -228,17 +228,3 @@ Macro.add('widget', {
 });
 // delete parser that adds unneeded line breaks -ng
 Wikifier.Parser.delete("lineBreak");
-
-/* ToDo: implement the dolls system, uncomment during and when its setup
-importScripts([
-	"img/dolls/NameValueMaps.js",
-	"img/dolls/dollUpdater.js",
-	"img/dolls/dollLoader.js",
-	"img/dolls/DollHouse.js",
-	"img/dolls/FDoll.js",
-]).then(function () {
-	console.log("Dolls scripts running");
-})
-.catch(function (err) {
-	console.log(err);
-});*/

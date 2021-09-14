@@ -11,11 +11,11 @@ V.conf = {
 }
 
 V.conf.saves = []
-for(let i=0; i < 12; i++){
+for(let i=0; i < 4; i++){
 	V.conf.saves[i] = {locked:false}
 }
 
 /* 按钮演出类的切换开关 */
 V.UI = {
-	movebutton:false, menubutton:false, activepage:null, closetmode:"穿", nextbutton:false, currentOverlay:null,
+	movebutton:false, menubutton:false, activepage:null, closetmode:"穿", nextbutton:false, currentOverlay:null, mode:"location",
 }

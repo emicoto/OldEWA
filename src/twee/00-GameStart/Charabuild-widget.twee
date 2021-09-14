@@ -437,11 +437,11 @@
 
         <<case "少年">>
             <<gonaked>>
-            <<dressup "over_up" 1 "#F14660" "红">>
-            <<dressup "inner_bt" 1>>
-            <<dressup "over_bt" 1>>
-            <<dressup "shoes" 1>>
-            <<dressup "legs" 1>>
+            <<getDress "over_up" 1 "#F14660" "红">>
+            <<getDress "inner_bt" 1>>
+            <<getDress "over_bt" 1>>
+            <<getDress "shoes" 1>>
+            <<getDress "legs" 1>>
         <<case "伪娘">>
             <<gonaked>>
 

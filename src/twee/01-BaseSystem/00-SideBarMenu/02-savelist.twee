@@ -1,7 +1,11 @@
 ﻿:: Options [widget]
 
 <<widget "options">>
- 制作中……<br>
+ <<link "一键初始化存档">><<run initLocalStorage()>><</link>>　!!除非浏览器的存档出现异常,请不要点!!<br>
+ <br>
+ 声音开启: 开 / 关 <br>
+ 音量: —————————— <br>
+ 
 <</widget>>
 
 <<widget "saveList">>
@@ -18,28 +22,13 @@
 <div id="autosave"> -- AUTO SAVE --</div>
 <<=F.showSavedCard('auto',0,V.temp.savedetail.autosave[0])>>
 <<=F.showSavedCard('auto',1,V.temp.savedetail.autosave[1])>>
+<<=F.showSavedCard('auto',2,V.temp.savedetail.autosave[2])>>
+<<=F.showSavedCard('auto',3,V.temp.savedetail.autosave[3])>>
 <div id="saves"> -- SAVES LIST -- </div>
 <<=F.showSavedCard('normal',0,V.temp.savedetail.slots[0])>>
 <<=F.showSavedCard('normal',1,V.temp.savedetail.slots[1])>>
 <<=F.showSavedCard('normal',2,V.temp.savedetail.slots[2])>>
 <<=F.showSavedCard('normal',3,V.temp.savedetail.slots[3])>>
-<<=F.showSavedCard('normal',4,V.temp.savedetail.slots[4])>>
-<<=F.showSavedCard('normal',5,V.temp.savedetail.slots[5])>>
-<div id="s-pages" style="text-align: right"><<link "> next page">><<replace "#savePage">><<savePage2>><</replace>><</link>></div>
-<</widget>>
-
-<<widget "savePage2">>
-<div id="autosave"> -- AUTO SAVE --</div>
-<<=F.showSavedCard('auto',2,V.temp.savedetail.autosave[2])>>
-<<=F.showSavedCard('auto',3,V.temp.savedetail.autosave[3])>>
-<div id="saves"> -- SAVES LIST -- </div>
-<<=F.showSavedCard('normal',6,V.temp.savedetail.slots[6])>>
-<<=F.showSavedCard('normal',7,V.temp.savedetail.slots[7])>>
-<<=F.showSavedCard('normal',8,V.temp.savedetail.slots[8])>>
-<<=F.showSavedCard('normal',9,V.temp.savedetail.slots[9])>>
-<<=F.showSavedCard('normal',10,V.temp.savedetail.slots[10])>>
-<<=F.showSavedCard('normal',11,V.temp.savedetail.slots[11])>>
-<div id="s-pages" style="text-align: left;"><<link "< prev page">><<replace "#savePage">><<savePage1>><</replace>><</link>></div>
 <</widget>>
 
 

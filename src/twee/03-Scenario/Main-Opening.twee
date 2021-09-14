@@ -261,7 +261,7 @@ $(document).ready(function(){
 	<<case 2>>
 		最后<<you>>从校园APP上得知了现在的身份——景南大学的学生，目前还是第一学年。
 		<<set $eventnext to 4>>
-		<<set $temp.c to undefined>>
+		<<run delete V.temp.c>>
 
 	<</switch>>
 
@@ -280,7 +280,7 @@ $(document).ready(function(){
 	<<case 1>>
 		再看了下浏览器的书签跟搜索记录，原主的兴趣爱好似乎和<<you>>几乎一样，或者说，<<you>>认为自己会喜欢的，会看的，都有。至于关于世界的情报……<<you>>用各种关键字简单查阅了一番。虽然<<you>>想不起来自己原来的世界是怎么样的，但总觉得，和这个世界也差不多。或许只是一些事物的名字变了，但大体还是一样的。或许，只是穿越到一个平行世界的另一个自己身上？<<you>>不由得这么想。
 		<<set $eventnext to 4>>
-		<<set $temp.c to undefined>>
+		<<run delete $temp.c>>
 
 	<</switch>>
 
@@ -304,7 +304,7 @@ $(document).ready(function(){
 	<<case 2>>
 		除了存折，在四处翻找过程中，<<you>>找到了应该是自己的学生证、身份证、护照等等证件。再次确认，上面印着的就是<<you>>的名字，一个笔画都没差别，就连生日也是一样的。<<you>>不禁再次怀疑，到底是自己错了，还是世界错了。不过当<<you>>找到一个会悬浮在半空的奇妙小方块时，<<you>>可以确信一件事：没错了，这是个平行世界。<<you>>原来的世界，绝对没有这么高科技的东西！
 		<<set $eventnext to 4>>
-		<<set $temp.c to undefined>>
+		<<run delete V.temp.c>>
 	<</switch>>
 
 /* 搜索房间完毕 */

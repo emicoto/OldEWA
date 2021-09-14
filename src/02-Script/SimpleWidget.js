@@ -51,7 +51,7 @@ window.hairlenth = function(num){
 }
 
 function inTime(a,b){
-    return between(V.day.time,a*60,b*60)
+    return between(V.date.time,a*60,b*60)
 }
 window.inTime = inTime
 F.inTime = inTime

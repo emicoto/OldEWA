@@ -1,5 +1,5 @@
 ﻿window.testpt = function(t){
-	V.times.passed += t
+	V.time.passed += t
 	let m =dailyMultip()
 
 	let sleepy = fixfloat((0.1*t*m*SanMultip()),4)
@@ -26,7 +26,7 @@
 
 window.Testpasstime = function(t){
 	for(let i=0; i < t; i++){
-		let passedtime = (V.times.passed - V.times.wakeup)
+		let passedtime = (V.time.passed - V.time.wakeup)
 		let min = passedtime%60
 		let hour = fixfloat(passedtime/60,1)
 		console.log(`醒来${hour}时${min}过后\n`,testpt(5))
@@ -56,11 +56,11 @@ function gettimezone(h) {
 F.gettimezone = gettimezone
 
 function timeprocess() {
-	var time = V.day.time;
-	var day = V.day.day;
-	var week = V.day.week;
-	var month = V.day.month;
-	var year = V.day.year;
+	var time = V.date.time;
+	var day = V.date.day;
+	var week = V.date.week;
+	var month = V.date.month;
+	var year = V.date.year;
 	var min,hour,zone,weekday;
 
 
@@ -74,7 +74,7 @@ function timeprocess() {
 
 	if (hour > 23){
 		day += Math.floor(hour/24);
-		V.days += Math.floor(hour/24);
+		V.dates += Math.floor(hour/24);
 
 		week = week + Math.floor(hour/24);
 		hour = hour % 24;
@@ -120,17 +120,17 @@ function timeprocess() {
 		month = Math.max(month%12,1);
 	};
 
-	V.day.time = time;
-	V.day.min = min;
-	V.day.hour = hour;
+	V.date.time = time;
+	V.date.min = min;
+	V.date.hour = hour;
 
-	V.day.zone = zone;
-	V.day.weekday = weekday;
+	V.date.zone = zone;
+	V.date.weekday = weekday;
 
-	V.day.day = day;
-	V.day.week = week;
-	V.day.month = month;
-	V.day.year = year;
+	V.date.day = day;
+	V.date.week = week;
+	V.date.month = month;
+	V.date.year = year;
 
 	return ""
 }
@@ -144,15 +144,15 @@ DefineMacroS("timeprocess",timeprocess)
  */
 
 function TimeEffect(t,mode){
-	let lapse = V.times.passed - V.times.wakeup
+	let lapse = V.time.passed - V.time.wakeup
 	let overtime = Math.floor(lapse/1200)
 
 	/* 经过时间加到现在时间前的处理 */
 
-	V.times.passed += t  // 睡醒后的累计经过时间。只有进行睡眠休息时才会清除
-	if(V.day.time + t >= 1380) Flag.daychange = true; //先不加到现在时间，瞅瞅过23点没。
+	V.time.passed += t  // 睡醒后的累计经过时间。只有进行睡眠休息时才会清除
+	if(V.date.time + t >= 1380) Flag.daychange = true; //先不加到现在时间，瞅瞅过23点没。
 	if(PC.state.睡眠){
-		V.times.passed = 0; //如果在睡觉，就清空经过时间,和超时活动flag
+		V.time.passed = 0; //如果在睡觉，就清空经过时间,和超时活动flag
 		Flag.ovetime = 0
 	}
 
@@ -252,7 +252,7 @@ function TimeEffect(t,mode){
 	if(PC.base.欲望[0] <= PC.base.欲望[1]*0.3 && PFlag.禁欲 > 0 && Flag.daychange) PFlag.禁欲 --;
 
 	if(!PC.state.睡眠 && OverTime() ) PFlag.熬夜 ++;
-	if(PC.state.睡眠 && V.day.time <= 1440) PFlag.熬夜 --;
+	if(PC.state.睡眠 && V.date.time <= 1440) PFlag.熬夜 --;
 
 	if(PC.base.魔力[0] <= 0 && Flag.daychange) PFlag.缺魔 ++;
 	if(PC.base.魔力[0] > 50 && Flag.daychange && PFlag.缺魔 > 0 ) PFlag.缺魔 = 0;
@@ -322,13 +322,13 @@ function TimeEffect(t,mode){
 	FixValue()
 
 	/* 天气变化  累计的时间满3个小时或者一次经过3小时以上就换个天气，然后清零。 没满就++*/
-	if(V.times.stock >= 180 || t >= 180){ weather(); V.times.stock = 0;}
-	else V.times.stock += t;
+	if(V.time.stock >= 180 || t >= 180){ weather(); V.time.stock = 0;}
+	else V.time.stock += t;
 
 
 	/* 把经过时间加到现在时间去，以及检测累计超时活动计数 */
 	if(overtime > Flag.overtime) Flag.overtime ++;	
-	V.day.time += t
+	V.date.time += t
 
 
 	/* 时间经过处理 */

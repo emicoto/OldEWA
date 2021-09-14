@@ -8,7 +8,7 @@
 <<set $PFlag.bukkake.body to false>>
 <<set $PFlag.bukkake.face to false>>
 <<set $PFlag.bukkake.hair to false>>
-<<set $location to "试衣间">>
+<<set $location to "更衣间">>
 <<SetAvatar>>
 
 <</widget>>

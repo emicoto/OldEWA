@@ -56,7 +56,7 @@
 <<widget "mode">>
 <<silently>>
     <<if $args[0]>>
-        <<set $displaymode to $args[0]>>
+        <<set $UI.mode to $args[0]>>
     <<else>>
         <<run alert("错误: UI模式设置缺乏参数")>>
     <</if>>
@@ -103,7 +103,7 @@
 <</widget>>
 
 <<widget "passtime">>
-<<set $day.time to $day.time+$args[0]>>
+<<set $temp.t to $args[0]>>
 <</widget>>
 
 <<widget "ApplyHairSet">>
@@ -158,9 +158,9 @@
 
 <<widget "navi">>
 <div id="links" class="hidden">
-    <<if $local.homebutton is true>>
+    <<if def $local.homebutton or $local.homebutton is true>>
         <div class="links"><<link "・ 回家" "你的家 单身公寓" >><<passtime 5>><</link>></div>
-    <</if>>    
+    <</if>>
     <<getlinks $location>>
 </div>
 

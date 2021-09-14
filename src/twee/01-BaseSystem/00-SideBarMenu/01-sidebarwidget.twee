@@ -26,7 +26,7 @@
 
 <<widget "timestats">>
 <div class="InGameDate">
-    <span class="showtime"><<print $day.year>>.<<if $day.month lt 10>>0<</if>><<print $day.month>>.<<if $day.day lt 10>>0<</if>><<print $day.day>> <<print $day.weekday>> <<if $day.hour lt 10>>0<</if>><<print $day.hour>>:<<if $day.min lt 10>>0<</if>><<print $day.min>> (<<print $day.zone>>)</span><br>
+    <span class="showtime"><<print $date.year>>.<<if $date.month lt 10>>0<</if>><<print $date.month>>.<<if $date.day lt 10>>0<</if>><<print $date.day>> <<print $date.weekday>> <<if $date.hour lt 10>>0<</if>><<print $date.hour>>:<<if $date.min lt 10>>0<</if>><<print $date.min>> (<<print $date.zone>>)</span><br>
 </div>
 <</widget>>
 

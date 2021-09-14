@@ -404,3 +404,36 @@ function getClosetSlot(args){
         return (closet.slot.level*closet.slot[layer]) - closet[layer].length
     }
 }
+
+//不是从衣柜里时, 用在初始化和 强制换装剧情
+/**
+ * @param {String} category 
+ * @param {Number} id 
+ */
+ function getDress(category, id, color, colorname, acc, subcolor){
+    let uid = random(100,100000)
+    V.Equip[category] = clone(A[category][id])
+    V.Equip[category].uid = uid
+
+    if(color) V.Equip[category].color = color;
+    if(colorname) V.Equip[category].colorname = colorname;
+    if(acc) V.Equip[category].acc = acc;
+    if(subcolor && A[category][id].fixacc === false) V.Equip[category].subcolor = subcolor
+
+    if(category=="over_up" && A.over_up[id].slot=="onepiece"){
+        V.Equip.over_bt = null
+    }
+    if(category=="over_bt" && A.over_up[id].slot == "onepiece"){
+        V.Equip.over_up = null
+    }
+    if(category=="inner_up"){
+        if(A.inner_up[id].slot == "onepiece") V.Equip.inner_bt = null;
+        if(A.inner_up[id].slot == "fullbody"){
+            V.Equip.inner_bt = null
+            V.Equip.over_up = null
+            V.Equip.over_bt = null
+        }
+    }
+}
+F.getDress = getDress
+DefineMacroS("getDress", getDress)

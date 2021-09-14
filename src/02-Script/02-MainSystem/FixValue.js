@@ -22,7 +22,7 @@ window.maxBase = function(){
 }
 
 window.dailyMultip = function(){
-	let t = V.times.passed - V.times.wakeup
+	let t = V.time.passed - V.time.wakeup
 	let max = maxAbl()/10
 	let wil = fixfloat(1 - (((PC.abl.意志)/max)*0.04),4)
 
@@ -111,7 +111,7 @@ window.tempDiff = function(){
 
 
 window.OverTime = function(){
-	let ot = Math.floor(V.times.passed - V.times.wakeup/1200)
+	let ot = Math.floor(V.time.passed - V.time.wakeup/1200)
 	return ot > 0 && ot < Flag.overtime
 }
 

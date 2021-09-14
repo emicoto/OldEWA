@@ -362,8 +362,8 @@ sugarcube-2:
       name: showmoney
     sidebar_stats:
       name: sidebar_stats
-    InitPlaceData:
-      name: InitPlaceData
+    Initlocations:
+      name: Initlocations
     InitItemData:
       name: InitItemData
     mode:
@@ -388,3 +388,7 @@ sugarcube-2:
       name: PCCard_Yun
     PCCard_Idol:
       name: PCCard_Idol
+    setmap:
+      name: setmap
+    getDress:
+      name: getDress

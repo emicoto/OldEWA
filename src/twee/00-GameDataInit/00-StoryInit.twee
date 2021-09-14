@@ -4,49 +4,17 @@
 <!-- 首先初始化资料库 -->
 <<InitBGM>>
 
-<!-- DEBUG -->
-<<if StartConfig.debug is true>>
-	<<set $debug to true>>
-<<else>>
-	<<set $debug to false>>
-<</if>>
-
-<<set $lang to "CN">>
-
-<<set $event to {
-    type : "主线", name : "开幕", branch : "初次" , phrase: null,
-}>> 
-<<set $eventexit to "你的家 单身公寓">>
-<<set $count to 0>>      /* 通用计数变量。需要离开当前passage或重置的情况 */
-<<set $eventend to false>>
-<<set $eventnext to 0>>
-
-<<set $anounce to {flag:false, text:"", type:"弹出通知"}>>
-
 <!-- 游戏各种flag初始化 -->
-<<InitGameData>>
-<<InitPlayerData>>
+<<run 
+    F.InitGame();
+    F.InitRecord();
+    F.InitGameFlag();
+    F.InitCombat();
+    F.InitPlayer();
+    F.InitClothes();
+>>
+
 <<setchara "player">>
-
-
-<<if $bookmark is undefined>>
-	<<set $bookmark to {}>>
-<</if>>
-
-<!-- 已获得的头衔列表 -->
-<<if $titles is undefined>>
-    <<set $titles to {}>>
-<</if>>
-
-<!-- 成就 -->
-<<if $achivement is undefined>>
-    <<set $achivement to {
-        locked:false,
-        scores:0,
-        achived:{},
-		loop:0,
-    }>>
-<</if>>
 
 <<if $saveId is undefined>>
 	<<set $saveId to random(10000, 99999)>>

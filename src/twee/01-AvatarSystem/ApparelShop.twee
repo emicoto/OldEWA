@@ -3,8 +3,8 @@
 <<if $temp.tryoncomeback is undefined>>
     <<EnterTryRoom>>
 <<else>>
-    <<set $temp to {}>>
-    <<set $location to "试衣间">>
+    <<run delete V.temp.tryoncomeback>>
+    <<set $location to "更衣间">>
 <</if>>
 
 <div id="append-text" class="append-normal"><span id="action-text2"></span></div>

@@ -1,16 +1,16 @@
 
 
 window.getSaveDetails = function (saveSlot){
-	if("EWA-saveDetail" in localStorage){
-		let saves = JSON.parse(localStorage.getItem("EWA-saveDetail"))
+	if("EWA.SaveDetails" in localStorage){
+		let saves = JSON.parse(localStorage.getItem("EWA.SaveDetails"))
 		if(saves) {T.saves = saves ;return saves;}
 		else {T.saves = returnSaveDetails(); return returnSaveDetails()}
 	}
 }
 
 window.deleteAllSaveDetails = function (saveSlot){
-	var saveDetails = {autosave:[null,null,null,null],slots:[null,null,null,null,null,null,null,null,null,null,null,null]}
-	localStorage.setItem("EWA-saveDetail" ,JSON.stringify(saveDetails));
+	var saveDetails = {autosave:[null,null,null,null],slots:[null,null,null,null]}
+	localStorage.setItem("EWA.SaveDetails" ,JSON.stringify(saveDetails));
 }
 
 window.importSave = function (saveFile) {
@@ -98,41 +98,6 @@ var importSettingsData = function (data) {
 	}
 }
 
-window.validateValue = function (keys, value) {
-	//console.log("validateValue",keys,value);
-	var keyArray = Object.keys(keys);
-	var valid = false;
-	if (keyArray.length === 0) {
-		valid = true;
-	}
-	if (keyArray.includes("min")) {
-		if (keys.min <= value && keys.max >= value) {
-			valid = true;
-		}
-	}
-	if (keyArray.includes("decimals") && value != undefined) {
-		if (value.toFixed(keys.decimals) != value) {
-			valid = false;
-		}
-	}
-	if (keyArray.includes("bool")) {
-		if (value === true || value === false) {
-			valid = true;
-		}
-	}
-	if (keyArray.includes("boolLetter")) {
-		if (value === "t" || value === "f") {
-			valid = true;
-		}
-	}
-	if (keyArray.includes("strings") && value != undefined) {
-		if (keys.strings.includes(value)) {
-			valid = true;
-		}
-	}
-	return valid;
-}
-
 window.loadExternalExportFile = function () {
 	importScripts("ewaSettingsExport.json")
 		.then(function () {
@@ -146,25 +111,6 @@ window.loadExternalExportFile = function () {
 		});
 }
 
-// !!Hack warning!! Don't use it maybe?
-window.updateMoment = function () {
-	// change last (and only) moment in local history
-	State.history[State.history.length - 1].variables = JSON.parse(JSON.stringify(V));
-	// prepare the moment object with modified history
-	let moment = SugarCube.State.marshalForSave();
-	// replace moment.history with moment.delta, because that's what SugarCube expects to find
-	// this is a bad thing to do probably btw, because while history and delta appear to look very similar,
-	// they're not always the same thing, SugarCube actually decodes delta into history (see: https://github.com/tmedwards/sugarcube-2/blob/36a8e1600160817c44866205bc4d2b7730b2e70c/src/state.js#L527)
-	// but for my purpose it works (i think?)
-	delete Object.assign(moment, {delta: moment.history}).history;
-	// replace saved moment in session with the new one
-	let gameName = SugarCube.Story.domId;
-	sessionStorage[gameName + ".state"] = JSON.stringify(moment);
-	// it appears that this line is not necessary for it to work
-	//SugarCube.session._engine[gameName + ".state"] = JSON.stringify(moment);
-
-	// Voilà! F5 will reload the current state now without going to another passage!
-}
 
 window.isJsonString = function(s) {
 	try {

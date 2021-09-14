@@ -156,10 +156,10 @@ window.setMirrorVariables = function(){
 		Base : Base, Source : Source, TCSV : TCSV,
 	}
 
-	CFlag.pc = PFlag
-	Base.pc = PC.base
-	Source.pc = PC.source
-	TCSV.pc = PC.tcsv
+	CFlag.pc = V.PFlag
+	Base.pc = V.PC.base
+	Source.pc = V.PC.source
+	TCSV.pc = V.PC.tcsv
 }
 /* 备注：不能直接 TEquip = Equip这样，会出错！ */
 
