@@ -1,6 +1,5 @@
 ﻿:: PassageFooter
 <div id="gameVersionDisplay">EWA ver<<print StartConfig.version>></div>
-<<run anounceAppend("<<you>>的病好了，已经恢复了健康。<br>")>>
 <!-- 隐藏元素 */ -->
 <<set $UI.currentOverlay to null>>
 <div id="customOverlay" class="customOverlay hidden">

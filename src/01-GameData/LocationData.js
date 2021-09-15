@@ -1,7 +1,7 @@
 ﻿D.list.locatags = [
     "无",
 
-    "交通","公园","菜园","活动","停车场","景观","信仰","广场","餐厅","商店","便利店","仓库","夜店", 
+    "交通","公园","菜园","活动","停车点","景观","信仰","广场","餐厅","商店","便利店","仓库","夜店", 
 
     "家" , "厨房", "休息" , "沐浴" , "衣柜", "电脑" , "WIFI" , "学习" , "私宅" , //自己家是'家',别人家是私宅
 
@@ -41,7 +41,7 @@ D.map.通用 = {
     },
     加油站 : {
         place:"加油站", side:"室外", group: "通用",
-        tag:["交通","厕所","停车场"],
+        tag:["交通","厕所","停车点"],
         chara:[],
         car:true,
         img:null,
@@ -61,8 +61,29 @@ D.map.通用 = {
         img:"bathroom",
         situation:[],
     },
+    公共厕所 : {
+        place:"公共厕所", side:"室内", group:"通用",
+        tag:["厕所","狭窄"],
+        chara:[],
+        img:"dummy",
+        situation:[],
+    },
+    停车场 : {
+        place:"停车场", side:"室外", group:"通用",
+        tag:["停车点","宽敞"],
+        chara:[],
+        img:"dummy",
+        situation:[],
+    },
+    地下停车场 : {
+        place:"停车场", side:"室内", group:"通用",
+        tag:["停车点","宽敞","地下"],
+        chara:[],
+        img:"dummy",
+        situation:[],
+    },
     AW服装店 : {
-        place:"A&W", side:"室内", group: "通用",
+        place:"AW服装店", side:"室内", group: "通用",
         tag:["服装店","更衣间"],
         chara:[],
         img:"AWclothes",
@@ -88,25 +109,26 @@ D.map.通用 = {
 //公交车将移动时间缩减 5倍 +- 5,最少5分钟一趟
 D.mapdata.景南市 = {
     单身公寓:{
-        links:{  浴室:1, 阳台:1, 客厅:0, 睡房:1,  },
-        index: "怡安小区",
+        links:{  阳台:-1, 单身公寓:0, 浴室:1,  睡房:1,  },
+        index: "怡安小区", enter:"单身公寓",
     },
     怡安小区:{
-        links:{  怡安小区:0, 单身公寓:5,小区公园:2, 共享菜园:1, 公交站:-1, },
-        index:"南兴区",
+        links:{ 单身公寓:5, 怡安小区:0, 小卖部:-5, 小区公园:2, 共享菜园:1, 公交站:-3, },
+        index:"南兴区", enter: "怡安小区",
         },
     嘉庆广场:{
-        links:{ 嘉庆广场: 0, AW服装店:5, 汉堡王: 5, 公共厕所: 3, 停车场: -5, 地铁站: -3, 公交站: 2, },
-        index: "南兴区",
+        links:{  嘉庆广场: 0, 停车场: -5, 公交站: 2, 地铁站: -3, 景润超市:-4, 公共厕所: 3, 汉堡王: 4, AW服装店:5,},
+        index: "南兴区", enter:"嘉庆广场",
     },    
     商业街:{
-        links:{  商业街: 0, 早餐店: 3, 文具店: 2, 茶餐厅: 4, 蔬果店: 1, 药店: 5, 中医馆: 6,},
-        index: "南兴区",
+        links:{ 商业街: 0, 公交站:1, 生鲜市场: -15, 五金店: -2, 旺记茶铺: 2, 天地书店: 3, 开封菜: 4, 药店: 5, 发廊: 8 ,中医馆: 10, 逸安武馆: 12,},
+        index: "南兴区", enter:"商业街",
     },
 
+    //位于公交站或地铁站时是不会有 移动按钮. 而是显示路线图, 直接到全市各个站点.
     南兴区:{
         links: {
-            怡安小区: 0, 箱庭托儿所: 10, 商业街: 12, 市十三中: 25, 嘉庆广场: 20, 金福酒家: 30, 市十三医院: 150, 派出所: 100, 消防所: 120,
+            公交站:0, 地铁站:15, 怡安小区: 0, 商业街: -12, 箱庭托儿所: -10,  嘉庆广场: 15, 市十三中: 30, 金福酒家: 40, 市第七医院: 150, 派出所: 100, 消防所: 120, 
         },
         index:"景南市",
     }
@@ -124,7 +146,7 @@ D.map.景南市.怡安小区 = {
         homebutton: true,
         img:"neiborhood",
         description(){
-            return "位于景南市南兴区的一个住宅小区。<br>现代化设计的公寓高楼林立在住宅园区内，道路两侧种满了花草树木。小区中央有个公园，"+(V.Flag.chaos < 15 ? "时不时有人散布经过。" : "但已经没人在外散步。")+"<br>从小区大门往大道走，就能到达嘉庆广场和地铁站。小区门口的巴士站也能通向景南市各区。交通十分方便。<br>";
+            return "位于景南市南兴区的一个住宅小区。<br>现代化设计的公寓高楼林立在住宅园区内，道路两侧种满了花草树木。小区中央有个公园，"+(Flag.chaos < 15 ? "时不时有人散布经过。" : "但已经没人在外散步。")+"<br>从小区大门往大道走，就能到达嘉庆广场和地铁站。小区门口的巴士站也能通向景南市各区。交通十分方便。<br>";
         },
         situation:[]
     }, 
@@ -133,13 +155,16 @@ D.map.景南市.怡安小区 = {
         tag:["家","煮食","休息","沐浴","衣柜","电脑","WIFI"], 
         chara:[], 
         img:"singleapartment",
+        description(){
+            return "一个60平方米左右的单身公寓。简约现代风的装修，巨大的落地窗，还有一个阳台，两个人住也相当舒适的公寓。"
+        },
         situation:[
             {id:0, series:"城市生活", phrase: 5, display:"content", /* display里是事件文本放置的位置，before是前置文本，content是正文，after是后置文本+选项 */
              condition(){
                  if(V.days <= 7) return "城市生活_1";
                  else if(V.days <= 14) return "城市生活_2";
                  else if(V.days <= 28) return "城市生活_3";
-                 else if(V.Flag.chaos < 20) return "城市生活_4";
+                 else if(Flag.chaos < 20) return "城市生活_4";
                  else return "城市生活_5";
              }},
             {id:1, series:"有宠物的日子", phrase: 5, display:"before",
@@ -156,17 +181,28 @@ D.map.景南市.怡安小区 = {
         img:"neiborhood_park",
         description(){
             let text = "绿意盎然，四周都种着花草树木。最吸引人的是南面一侧的用假山搭造的山泉景。<br>";
-            if(V.Flag.chaos < 15) return text+"公园中央有个宽敞的小广场，偶尔会有大妈们在这里跳舞。<br>西面有儿童玩耍的设施。时不时能听到孩子们的欢声笑语。<br>";
+            if(Flag.chaos < 15) return text+"公园中央有个宽敞的小广场，偶尔会有大妈们在这里跳舞。<br>西面有儿童玩耍的设施。时不时能听到孩子们的欢声笑语。<br>";
             else return text+"公园中央有个宽敞的小广场，现在只有心大的年轻人会在这里活动。<br>";
         },
         situation:[]
+    },
+
+    小卖部 : {
+        place: "小卖部", side:"室内", group: "怡安小区", passage: "怡安小区小卖部",
+        tag:["便利店","移动摊位"],
+        chara:[],
+        bike:true,
+        img:"conbini",
+        description(){
+            return "小区门前的便利店。基本的生活用品都能在这里找到。便利店旁时不时会有贩卖各种熟食的小摊。"
+        }
     },
 
     共享菜园 : {
         place: "共享菜园", side: "室外", group: "怡安小区",
         tag: ["光照", "菜园"],
         chara: [],
-        img: "neiborhood_park",
+        img: "saien",
         homebutton: true,
         description(){
             return "为了满足小区住户种植需求而特地建造的一个小菜园。"
@@ -178,29 +214,37 @@ D.map.景南市.怡安小区 = {
 D.map.景南市.嘉庆广场 = {
     嘉庆广场 : {
         place:"嘉庆广场", side:"室外", group: "嘉庆广场",
-        tag:["交通","商业广场","活动场所"],
+        tag:["交通","商业广场","活动场所","停车点","移动摊位","移动餐车"],
         chara:[],
         bus:true, subway:true, car:true, bike:true,
         img:"yiansquare",
         description(){
-            let text = "位于怡安小区东面的一个中型商业广场。<br>广场主体面积占地近12万平方米，周围都种着树木，同时路边都有适合乘凉休息的桌椅和小亭。<br>最引人瞩目的是，并排在南面入口广场两侧的、树龄上百的木棉花树，";
-            if(V.Flag.chaos < 15) return text+"每到花期会引来不少人聚集，广场上也会摆满小摊，让人一边享受美食一边观赏花景。<br>";
+            let text = "位于怡安小区东面的一个小型商业广场。<br>广场主体面积占地几万平方米，周围都种着树木，同时路边都有适合乘凉休息的桌椅和小亭。<br>最引人瞩目的是，并排在广场两侧的、树龄上百的木棉花树，";
+            if(Flag.chaos < 15) return text+"每到花期会引来不少人聚集，广场上也会摆满小摊，让人一边享受美食一边观赏花景。<br>";
             else return text + "，附近时不时会有人聚众闹事。";
         },
         situation:[
             {id:0, series:"商场的日常风景", phrase:3, display:"before",
              condition(){
-                 if(V.Flag.chaos < 15) return "商场的日常风景_1";
+                 if(Flag.chaos < 15) return "商场的日常风景_1";
              }},
 
             {id:1, series:"商场闲逛", phrase:3, display:"content",
              condition(){
-                 if(V.Flag.chaos < 15) return "商场闲逛_1";
+                 if(Flag.chaos < 15) return "商场闲逛_1";
              }},
         ],
     },
     景润超市 : {
-
+        place:"景润超市", side:"室内", group: "嘉庆广场",
+        tag:["交通","商店","快餐","通风口","逃生口"],
+        chara:[],
+        subway:true,
+        img:"supermark",
+        description(){
+            return "大型超市，各色商品琳琅满目。"
+        },
+        situation:[],
     },
     AW服装店: D.map.通用.AW服装店,
     汉堡王: D.map.通用.汉堡王,
@@ -208,4 +252,147 @@ D.map.景南市.嘉庆广场 = {
     停车场: D.map.通用.停车场,
     地铁站: D.map.通用.地铁站,
     公交站: D.map.通用.公交站,
+}
+
+D.map.景南市.商店街 = {
+    商店街 : {
+        place: "商店街", side: "室外", group: "商店街", passage: "宜兴步行街",
+        tag: ["交通","停车点","移动摊位","移动餐车","下水道出入口"],
+        chara: [],
+        img: "shoutenkai",
+        bus: true, bike: true, car: true,
+        description(){
+            return "怡安小区南面的宜兴步行街。都是老街坊开的店了，建筑复古，烟火气十足。"
+        },
+        situation:[],
+    },
+    生鲜市场 : {
+        place:"生鲜市场", side:"室外", group:"商店街",
+        tag: ["下水道出入口","宽敞","停车点"],
+        chara: [],
+        img: "ichiba",
+        bike: true, car: true,
+        description(){
+            return "这一带的本地生鲜市场，价格比超市的便宜还新鲜，只是卫生环境比超市差。"
+        },
+        situation:[],
+    },
+    五金店 : {
+        place: "五金店", side: "室内", group: "商店街",
+        tag: ["商店"],
+        chara: [],
+        img: "gokin",
+        bike: true, car: true,
+        description(){
+            return "相当有年代感的老建筑，贩售的工具十分齐全。"
+        },
+        situation:[],
+    },
+    //五金店能学开锁技能
+
+    旺记茶铺 : {
+        place: "旺记茶铺", side:"室内", group:"商店街",
+        tag: ["餐厅","休息"],
+        chara: [],
+        img: "chashi",
+        bike: true, car: true,
+        description(){
+            return "这附近的比较知名的茶点店。除了各种特色小点心，凉茶和糖水也很知名。"
+        },
+        situation:[],
+    },
+    天地书店 : {
+        place: "天地书店", side: "室内", group: "商店街",
+        tag: ["商店","WIFI","休息"],
+        chara: [],
+        img: "bookstore",
+        bike: true, car: true,
+        description(){
+            return "这附近的老牌书店，同时是一个网红店。开放式的两层结构，加上星光般的点点灯光，充满了浪漫氛围。除了图书，也有各种文具周边贩售。"
+        },
+    },
+    开封菜 : {
+        place: "开封菜", side: "室内", group: "商店街",
+        tag: ["餐厅","厕所"],
+        chara: [],
+        img: "famiresu",
+        bike: true, car: true,
+        description(){
+            return "具有本地特色的家庭餐馆。"
+        },
+        situation:[],
+    },
+    药店 : {
+        place: "药店", side: "室内", group: "商店街",
+        tag: ["商店"],
+        chara: [],
+        img: "phamacy",
+        bike: true, car: true,
+        description(){
+            return "到处可见的连锁药店。常用的药物这里都有。"
+        },
+        situation:[],
+    },
+    发廊 : {
+        place: "发廊", side: "室内", group: "商店街",
+        tag: ["理发","美容","厕所"],
+        chara: [],
+        img: "hairsalon",
+        bike: true, car: true,
+        description(){
+            return "这附近唯一的一家发廊。现代化的装修为这家有点年纪的发廊增添了些许时尚感。除了理发，也做点美容护肤、刺青之类的活。"
+        },
+        situation:[],
+    },
+    中医馆 :{
+        place: "中医馆", side: "室内", group: "商店街", title:"柳安堂",
+        tag: ["医疗"],
+        chara: [],
+        img: "zhongyi",
+        bike: true, car: true,
+        description(){
+            return "这一带比较知名的中医馆。现代化的中式装修，平静沉稳的色调能让人放松下来。"
+        },
+        situation:[],
+    },
+    逸安武馆 : {
+        place: "逸安武馆", side: "室内", group: "商店街",
+        tag: ["武馆","学习","格斗"],
+        chara: [],
+        img: "hairsalon",
+        bike: true, car: true,
+        description(){
+            if(Flag.chaos < 15) return "古色古香的武馆。这里能学习到真功夫。";
+            else return "附近有志之士的大本营。在杨馆主的镇压下这附近还算安稳。"
+        },
+        situation:[],
+    },
+    公交站 : D.map.通用.公交站,
+}
+
+D.map.景南市.南兴区 = {
+    箱庭托儿所 : {
+
+    },
+    市十三中 : {
+
+    },
+    金福酒家 : {
+
+    },
+    市第七医院 : {
+
+    },
+    派出所 : {
+
+    },
+    消防所 : {
+
+    },
+    怡安小区 : D.map.景南市.怡安小区.怡安小区,
+    嘉庆广场 : D.map.景南市.嘉庆广场.嘉庆广场,
+    商店街 : D.map.景南市.商店街.商店街,
+    地铁站 : D.map.通用.地铁站,
+    公交站 : D.map.通用.公交站,
+
 }

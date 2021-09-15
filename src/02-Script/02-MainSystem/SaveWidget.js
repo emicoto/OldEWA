@@ -196,14 +196,16 @@ window.SaveGame = function(slot, uid=null, metadata, check) {
     else{
 
         if(slot > 0){
-            //updateAchivement()
-            //updateGallery()
-            //V.achivement = {}
-            //V.bookmark = {}
+            updateAchivement()
+            updateGallery()
+            V.achivement = {}
+            V.bookmark = {}
+            V.titles = {}
             Save.slots.save(slot,null,metadata);
             setSaveDetail("normal",slot, metadata);
+            getAchivement()
+            getGallery()
             resetSaveMenu();
-
         }
     }
 
@@ -219,8 +221,6 @@ window.LoadGame = function(type, slot, check) {
     }
     else{
         Save.slots.load(slot)
-        //getAchivement()
-        //getGallery()
     }
 }
 

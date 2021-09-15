@@ -832,11 +832,13 @@ Config.saves.slots = 9;
 
 Config.saves.onLoad = function (save) {
 	window.versionUpdateCheck = true;
-	new Wikifier(null, '<<loadgame>>')
+	updateCloset()
+	getAchivement()
+	getGallery()
 }
 
 Config.saves.onSave = function (save) {
-	new Wikifier(null, '<<updateGame>>');
+
 }
 
 Config.saves.id = "EWA";
@@ -2099,7 +2101,9 @@ F.InitGame = function(){
     V.city = "景南市"
     V.mapgroup = "怡安小区"
     V.location = "单身公寓"
+
     V.local = D.map.景南市.怡安小区.单身公寓
+    V.local.last = "单身公寓"    
 
     V.map = D.mapdata.景南市.怡安小区
 
@@ -2248,40 +2252,40 @@ function XiuXianPlayer(){
 DefineMacroS("PCCard_Yun", XiuXianPlayer)
 
 
-
 F.InitClothes = function(){
     if(PC.info.gender == "m"){
         //衣柜
-        V.closet.over_up[1] = clone(A.over_up[4])
-        V.closet.over_bt[1] = clone(A.over_bt[4])
-        V.closet.inner_bt[1] = clone(A.inner_bt[1])
-        V.closet.legs[1] = clone(A.legs[1])
+        addCloset("over_up",4)
+        addCloset("inner_bt",1)
+        addCloset("legs",1)
 
-        F.getDress("over_up",1,"#F14660","红")
-        F.getDress("inner_bt",1)
-        F.getDress("over_bt",1)
-        F.getDress("shoes",1)
-        F.getDress("legs",1)
+        getDress("over_up",1,"#F14660","红")
+        getDress("inner_bt",1)
+        getDress("over_bt",1)
+        getDress("shoes",1)
+        getDress("legs",1)
 
     }else{
-        V.closet.over_up[1] = clone(A.over_up[4])
-        V.closet.over_bt[1] = clone(A.over_bt[4])
+        addCloset("over_up",4)
+        addCloset("over_bt",4)
+
 
         if(PC.info.breast > 2){
-            V.closet.inner_up[1] = clone(A.inner_up[2])
-            F.getDress("inner_up",2)
+            addCloset("inner_up",2)
+            getDress("inner_up",2)
         }
         else{
-            V.closet.inner_up[1] = clone(A.inner_up[1])
-            F.getDress("inner_up",1)
+            addCloset("inner_up",1)
+            getDress("inner_up",1)
         }
 
-        V.closet.inner_bt[1] = clone(A.inner_bt[2])
-        V.closet.legs[1] = clone(A.legs[1])
 
-        F.getDress("over_up",1,null,null,"heart")
-        F.getDress("over_bt",2)
-        F.getDress("shoes",2,"#E5A9FF","粉")
+        addCloset("inner_bt",2)
+        addCloset("legs",1)
+
+        getDress("over_up",1,null,null,"heart")
+        getDress("over_bt",2)
+        getDress("shoes",2,"#E5A9FF","粉")
     }
 
     V.TEquip = clone(V.Equip)
@@ -2541,8 +2545,6 @@ F.InitPlayer = function(){
         nipple : null,
     }
 
-    F.InitClothes()
-
 }
 /* twine-user-script #16: "Achivement.js" */
 D.Achivement = {}
@@ -2637,6 +2639,15 @@ A.categoryname = {
 
     neck:"颈饰", face:"脸饰", hand:"手饰", back:"背饰",
 }
+
+A.category = [
+    "hat",          "outter",
+    "over_up",      "over_bt",
+    "inner_up",     "inner_bt",
+    "legs",         "shoes",
+
+    "neck", "face", "hand", "back"]
+
 
 A.colorlist = [
     { name:"黑",    code:"#56545A" },
@@ -3400,7 +3411,7 @@ A.over_up = [
         cost : 120, reveal : 10,    hot : -1.5, cold : -1.5, 
         durable : 20,   maxdurable : 20,    beauty: 0.02,   defence: 0.5,
         fixcolor: false,    color:"#FDFFFF",    colorname: "白",
-        colors : ["mint"],
+        colors : [],
         
         category: "上衣",   layer : "over_up",
         shop : "all",
@@ -3467,6 +3478,7 @@ D.event = {
     支线:[],
     任务:[],
     日常:[],
+    地点:{},
     角色:{},
 }
 
@@ -3606,7 +3618,7 @@ setup.L.EN = {
 D.list.locatags = [
     "无",
 
-    "交通","公园","菜园","活动","停车场","景观","信仰","广场","餐厅","商店","便利店","仓库","夜店", 
+    "交通","公园","菜园","活动","停车点","景观","信仰","广场","餐厅","商店","便利店","仓库","夜店", 
 
     "家" , "厨房", "休息" , "沐浴" , "衣柜", "电脑" , "WIFI" , "学习" , "私宅" , //自己家是'家',别人家是私宅
 
@@ -3646,7 +3658,7 @@ D.map.通用 = {
     },
     加油站 : {
         place:"加油站", side:"室外", group: "通用",
-        tag:["交通","厕所","停车场"],
+        tag:["交通","厕所","停车点"],
         chara:[],
         car:true,
         img:null,
@@ -3666,8 +3678,29 @@ D.map.通用 = {
         img:"bathroom",
         situation:[],
     },
+    公共厕所 : {
+        place:"公共厕所", side:"室内", group:"通用",
+        tag:["厕所","狭窄"],
+        chara:[],
+        img:"dummy",
+        situation:[],
+    },
+    停车场 : {
+        place:"停车场", side:"室外", group:"通用",
+        tag:["停车点","宽敞"],
+        chara:[],
+        img:"dummy",
+        situation:[],
+    },
+    地下停车场 : {
+        place:"停车场", side:"室内", group:"通用",
+        tag:["停车点","宽敞","地下"],
+        chara:[],
+        img:"dummy",
+        situation:[],
+    },
     AW服装店 : {
-        place:"A&W", side:"室内", group: "通用",
+        place:"AW服装店", side:"室内", group: "通用",
         tag:["服装店","更衣间"],
         chara:[],
         img:"AWclothes",
@@ -3693,25 +3726,26 @@ D.map.通用 = {
 //公交车将移动时间缩减 5倍 +- 5,最少5分钟一趟
 D.mapdata.景南市 = {
     单身公寓:{
-        links:{  浴室:1, 阳台:1, 客厅:0, 睡房:1,  },
-        index: "怡安小区",
+        links:{  阳台:-1, 单身公寓:0, 浴室:1,  睡房:1,  },
+        index: "怡安小区", enter:"单身公寓",
     },
     怡安小区:{
-        links:{  怡安小区:0, 单身公寓:5,小区公园:2, 共享菜园:1, 公交站:-1, },
-        index:"南兴区",
+        links:{ 单身公寓:5, 怡安小区:0, 小卖部:-5, 小区公园:2, 共享菜园:1, 公交站:-3, },
+        index:"南兴区", enter: "怡安小区",
         },
     嘉庆广场:{
-        links:{ 嘉庆广场: 0, AW服装店:5, 汉堡王: 5, 公共厕所: 3, 停车场: -5, 地铁站: -3, 公交站: 2, },
-        index: "南兴区",
+        links:{  嘉庆广场: 0, 停车场: -5, 公交站: 2, 地铁站: -3, 景润超市:-4, 公共厕所: 3, 汉堡王: 4, AW服装店:5,},
+        index: "南兴区", enter:"嘉庆广场",
     },    
     商业街:{
-        links:{  商业街: 0, 早餐店: 3, 文具店: 2, 茶餐厅: 4, 蔬果店: 1, 药店: 5, 中医馆: 6,},
-        index: "南兴区",
+        links:{ 商业街: 0, 公交站:1, 生鲜市场: -15, 五金店: -2, 旺记茶铺: 2, 天地书店: 3, 开封菜: 4, 药店: 5, 发廊: 8 ,中医馆: 10, 逸安武馆: 12,},
+        index: "南兴区", enter:"商业街",
     },
 
+    //位于公交站或地铁站时是不会有 移动按钮. 而是显示路线图, 直接到全市各个站点.
     南兴区:{
         links: {
-            怡安小区: 0, 箱庭托儿所: 10, 商业街: 12, 市十三中: 25, 嘉庆广场: 20, 金福酒家: 30, 市十三医院: 150, 派出所: 100, 消防所: 120,
+            公交站:0, 地铁站:15, 怡安小区: 0, 商业街: -12, 箱庭托儿所: -10,  嘉庆广场: 15, 市十三中: 30, 金福酒家: 40, 市第七医院: 150, 派出所: 100, 消防所: 120, 
         },
         index:"景南市",
     }
@@ -3729,22 +3763,25 @@ D.map.景南市.怡安小区 = {
         homebutton: true,
         img:"neiborhood",
         description(){
-            return "位于景南市南兴区的一个住宅小区。<br>现代化设计的公寓高楼林立在住宅园区内，道路两侧种满了花草树木。小区中央有个公园，"+(V.Flag.chaos < 15 ? "时不时有人散布经过。" : "但已经没人在外散步。")+"<br>从小区大门往大道走，就能到达嘉庆广场和地铁站。小区门口的巴士站也能通向景南市各区。交通十分方便。<br>";
+            return "位于景南市南兴区的一个住宅小区。<br>现代化设计的公寓高楼林立在住宅园区内，道路两侧种满了花草树木。小区中央有个公园，"+(Flag.chaos < 15 ? "时不时有人散布经过。" : "但已经没人在外散步。")+"<br>从小区大门往大道走，就能到达嘉庆广场和地铁站。小区门口的巴士站也能通向景南市各区。交通十分方便。<br>";
         },
         situation:[]
     }, 
     单身公寓 : {
-        place:"单身公寓", side:"室内", group:"怡安小区",
+        place:"单身公寓", side:"室内", group:"怡安小区", passage:"你的家 单身公寓",
         tag:["家","煮食","休息","沐浴","衣柜","电脑","WIFI"], 
         chara:[], 
         img:"singleapartment",
+        description(){
+            return "一个60平方米左右的单身公寓。简约现代风的装修，巨大的落地窗，还有一个阳台，两个人住也相当舒适的公寓。"
+        },
         situation:[
             {id:0, series:"城市生活", phrase: 5, display:"content", /* display里是事件文本放置的位置，before是前置文本，content是正文，after是后置文本+选项 */
              condition(){
                  if(V.days <= 7) return "城市生活_1";
                  else if(V.days <= 14) return "城市生活_2";
                  else if(V.days <= 28) return "城市生活_3";
-                 else if(V.Flag.chaos < 20) return "城市生活_4";
+                 else if(Flag.chaos < 20) return "城市生活_4";
                  else return "城市生活_5";
              }},
             {id:1, series:"有宠物的日子", phrase: 5, display:"before",
@@ -3761,17 +3798,28 @@ D.map.景南市.怡安小区 = {
         img:"neiborhood_park",
         description(){
             let text = "绿意盎然，四周都种着花草树木。最吸引人的是南面一侧的用假山搭造的山泉景。<br>";
-            if(V.Flag.chaos < 15) return text+"公园中央有个宽敞的小广场，偶尔会有大妈们在这里跳舞。<br>西面有儿童玩耍的设施。时不时能听到孩子们的欢声笑语。<br>";
+            if(Flag.chaos < 15) return text+"公园中央有个宽敞的小广场，偶尔会有大妈们在这里跳舞。<br>西面有儿童玩耍的设施。时不时能听到孩子们的欢声笑语。<br>";
             else return text+"公园中央有个宽敞的小广场，现在只有心大的年轻人会在这里活动。<br>";
         },
         situation:[]
+    },
+
+    小卖部 : {
+        place: "小卖部", side:"室内", group: "怡安小区", passage: "怡安小区小卖部",
+        tag:["便利店","移动摊位"],
+        chara:[],
+        bike:true,
+        img:"conbini",
+        description(){
+            return "小区门前的便利店。基本的生活用品都能在这里找到。便利店旁时不时会有贩卖各种熟食的小摊。"
+        }
     },
 
     共享菜园 : {
         place: "共享菜园", side: "室外", group: "怡安小区",
         tag: ["光照", "菜园"],
         chara: [],
-        img: "neiborhood_park",
+        img: "saien",
         homebutton: true,
         description(){
             return "为了满足小区住户种植需求而特地建造的一个小菜园。"
@@ -3783,29 +3831,37 @@ D.map.景南市.怡安小区 = {
 D.map.景南市.嘉庆广场 = {
     嘉庆广场 : {
         place:"嘉庆广场", side:"室外", group: "嘉庆广场",
-        tag:["交通","商业广场","活动场所"],
+        tag:["交通","商业广场","活动场所","停车点","移动摊位","移动餐车"],
         chara:[],
         bus:true, subway:true, car:true, bike:true,
         img:"yiansquare",
         description(){
-            let text = "位于怡安小区东面的一个中型商业广场。<br>广场主体面积占地近12万平方米，周围都种着树木，同时路边都有适合乘凉休息的桌椅和小亭。<br>最引人瞩目的是，并排在南面入口广场两侧的、树龄上百的木棉花树，";
-            if(V.Flag.chaos < 15) return text+"每到花期会引来不少人聚集，广场上也会摆满小摊，让人一边享受美食一边观赏花景。<br>";
+            let text = "位于怡安小区东面的一个小型商业广场。<br>广场主体面积占地几万平方米，周围都种着树木，同时路边都有适合乘凉休息的桌椅和小亭。<br>最引人瞩目的是，并排在广场两侧的、树龄上百的木棉花树，";
+            if(Flag.chaos < 15) return text+"每到花期会引来不少人聚集，广场上也会摆满小摊，让人一边享受美食一边观赏花景。<br>";
             else return text + "，附近时不时会有人聚众闹事。";
         },
         situation:[
             {id:0, series:"商场的日常风景", phrase:3, display:"before",
              condition(){
-                 if(V.Flag.chaos < 15) return "商场的日常风景_1";
+                 if(Flag.chaos < 15) return "商场的日常风景_1";
              }},
 
             {id:1, series:"商场闲逛", phrase:3, display:"content",
              condition(){
-                 if(V.Flag.chaos < 15) return "商场闲逛_1";
+                 if(Flag.chaos < 15) return "商场闲逛_1";
              }},
         ],
     },
     景润超市 : {
-
+        place:"景润超市", side:"室内", group: "嘉庆广场",
+        tag:["交通","商店","快餐","通风口","逃生口"],
+        chara:[],
+        subway:true,
+        img:"supermark",
+        description(){
+            return "大型超市，各色商品琳琅满目。"
+        },
+        situation:[],
     },
     AW服装店: D.map.通用.AW服装店,
     汉堡王: D.map.通用.汉堡王,
@@ -3813,6 +3869,149 @@ D.map.景南市.嘉庆广场 = {
     停车场: D.map.通用.停车场,
     地铁站: D.map.通用.地铁站,
     公交站: D.map.通用.公交站,
+}
+
+D.map.景南市.商店街 = {
+    商店街 : {
+        place: "商店街", side: "室外", group: "商店街", passage: "宜兴步行街",
+        tag: ["交通","停车点","移动摊位","移动餐车","下水道出入口"],
+        chara: [],
+        img: "shoutenkai",
+        bus: true, bike: true, car: true,
+        description(){
+            return "怡安小区南面的宜兴步行街。都是老街坊开的店了，建筑复古，烟火气十足。"
+        },
+        situation:[],
+    },
+    生鲜市场 : {
+        place:"生鲜市场", side:"室外", group:"商店街",
+        tag: ["下水道出入口","宽敞","停车点"],
+        chara: [],
+        img: "ichiba",
+        bike: true, car: true,
+        description(){
+            return "这一带的本地生鲜市场，价格比超市的便宜还新鲜，只是卫生环境比超市差。"
+        },
+        situation:[],
+    },
+    五金店 : {
+        place: "五金店", side: "室内", group: "商店街",
+        tag: ["商店"],
+        chara: [],
+        img: "gokin",
+        bike: true, car: true,
+        description(){
+            return "相当有年代感的老建筑，贩售的工具十分齐全。"
+        },
+        situation:[],
+    },
+    //五金店能学开锁技能
+
+    旺记茶铺 : {
+        place: "旺记茶铺", side:"室内", group:"商店街",
+        tag: ["餐厅","休息"],
+        chara: [],
+        img: "chashi",
+        bike: true, car: true,
+        description(){
+            return "这附近的比较知名的茶点店。除了各种特色小点心，凉茶和糖水也很知名。"
+        },
+        situation:[],
+    },
+    天地书店 : {
+        place: "天地书店", side: "室内", group: "商店街",
+        tag: ["商店","WIFI","休息"],
+        chara: [],
+        img: "bookstore",
+        bike: true, car: true,
+        description(){
+            return "这附近的老牌书店，同时是一个网红店。开放式的两层结构，加上星光般的点点灯光，充满了浪漫氛围。除了图书，也有各种文具周边贩售。"
+        },
+    },
+    开封菜 : {
+        place: "开封菜", side: "室内", group: "商店街",
+        tag: ["餐厅","厕所"],
+        chara: [],
+        img: "famiresu",
+        bike: true, car: true,
+        description(){
+            return "具有本地特色的家庭餐馆。"
+        },
+        situation:[],
+    },
+    药店 : {
+        place: "药店", side: "室内", group: "商店街",
+        tag: ["商店"],
+        chara: [],
+        img: "phamacy",
+        bike: true, car: true,
+        description(){
+            return "到处可见的连锁药店。常用的药物这里都有。"
+        },
+        situation:[],
+    },
+    发廊 : {
+        place: "发廊", side: "室内", group: "商店街",
+        tag: ["理发","美容","厕所"],
+        chara: [],
+        img: "hairsalon",
+        bike: true, car: true,
+        description(){
+            return "这附近唯一的一家发廊。现代化的装修为这家有点年纪的发廊增添了些许时尚感。除了理发，也做点美容护肤、刺青之类的活。"
+        },
+        situation:[],
+    },
+    中医馆 :{
+        place: "中医馆", side: "室内", group: "商店街", title:"柳安堂",
+        tag: ["医疗"],
+        chara: [],
+        img: "zhongyi",
+        bike: true, car: true,
+        description(){
+            return "这一带比较知名的中医馆。现代化的中式装修，平静沉稳的色调能让人放松下来。"
+        },
+        situation:[],
+    },
+    逸安武馆 : {
+        place: "逸安武馆", side: "室内", group: "商店街",
+        tag: ["武馆","学习","格斗"],
+        chara: [],
+        img: "hairsalon",
+        bike: true, car: true,
+        description(){
+            if(Flag.chaos < 15) return "古色古香的武馆。这里能学习到真功夫。";
+            else return "附近有志之士的大本营。在杨馆主的镇压下这附近还算安稳。"
+        },
+        situation:[],
+    },
+    公交站 : D.map.通用.公交站,
+}
+
+D.map.景南市.南兴区 = {
+    箱庭托儿所 : {
+
+    },
+    市十三中 : {
+
+    },
+    金福酒家 : {
+
+    },
+    市第七医院 : {
+
+    },
+    派出所 : {
+
+    },
+    消防所 : {
+
+    },
+    怡安小区 : D.map.景南市.怡安小区.怡安小区,
+    嘉庆广场 : D.map.景南市.嘉庆广场.嘉庆广场,
+    商店街 : D.map.景南市.商店街.商店街,
+    地铁站 : D.map.通用.地铁站,
+    公交站 : D.map.通用.公交站,
+
 }
 /* twine-user-script #32: "00-SimpleBasicFunction.js" */
 function Random(min, max) {
@@ -5285,6 +5484,134 @@ window.zoom = function (size, set) {
 window.isImageOk = function (id) {
 	return jQuery(id).naturalWidth !== 0 || true;
 }
+
+/* hovertip v2.0 - Start */
+window.UpdateHoverTipTxt = function (container) {
+	if (Engine.isIdle()) {
+		clearInterval(HTTIntervalID);
+		if (container === undefined) {
+			container = $(document);
+		} else {
+			container = $(container);
+		}
+		var i, id, top, left, parent, elementList, element, hoverPos, boxPos, zindex;
+		elementList = container.find('span[id^="hoverTipTxt"]');
+		for (i = 0; i < elementList.length; i++) {
+			element = $(elementList[i]);
+			id = elementList[i].id.substring(11);
+			/* Find parent hoverTip item on the page. */
+			parent = $(container).find("#hoverTip" + (id));
+			/* Position bottom of hoverTipTxt just above the parent. */
+			top = Math.round(-element.outerHeight() - 6);
+			/* Center hoverTipTxt horizontally over parent. */
+			left = Math.round((parent.outerWidth() - element.outerWidth()) / 2);
+			/* See if the hoverTip is contained by something with a higher z-index. */
+			zindex = element.css("z-index");
+			if (zindex === "auto") {
+				zindex = 0;
+			} else {
+				zindex = parseInt(zindex, 10);
+			}
+			while (parent.parent()[0] !== document) {
+				if ((parent.parent().css("z-index") !== "auto") && (parseInt(parent.parent().css("z-index"), 10) > zindex)) {
+					/* Get container rect. */
+					boxPos = parent[0].getBoundingClientRect();
+					break;
+				}
+				parent = parent.parent();
+			}
+			/* Update position. */
+			element.css({ top: top, left: left });
+			hoverPos = element[0].getBoundingClientRect();
+			/* Make sure the text isn't outside the bottom of the screen. */
+			if (hoverPos.top > window.innerHeight - hoverPos.height - 10) {
+				top -= hoverPos.top - (window.innerHeight - hoverPos.height - 10);
+			}
+			/* Make sure the text isn't outside the top of the screen. */
+			if (hoverPos.top < 4) {
+				top -= hoverPos.top - 4;
+			}
+			/* Make sure the text isn't outside the right of the screen. */
+			if (hoverPos.left > window.innerWidth - hoverPos.width - 26) {
+				left -= hoverPos.left - (window.innerWidth - hoverPos.width - 26);
+			}
+			/* Make sure the text isn't outside the left of the screen. */
+			if (hoverPos.left < 4) {
+				left -= hoverPos.left - 4;
+			}
+			/* Update position. */
+			element.css({ top: Math.round(top), left: Math.round(left) });
+			hoverPos = element[0].getBoundingClientRect();
+			if (boxPos) {  /* Fit within dialog boxes and the like. */
+				/* Make sure the text isn't outside the bottom of the box. */
+				if (hoverPos.top > boxPos.bottom - hoverPos.height - 10) {
+					top -= hoverPos.top - (boxPos.bottom - hoverPos.height - 10);
+				}
+				/* Make sure the text isn't outside the top of the box. */
+				if (hoverPos.top < boxPos.top + 4) {
+					top -= hoverPos.top - (boxPos.top + 4);
+				}
+				/* Make sure the text isn't outside the right of the box. */
+				if (hoverPos.left > boxPos.right - hoverPos.width - 26) {
+					left -= hoverPos.left - (boxPos.right - hoverPos.width - 26);
+				}
+				/* Make sure the text isn't outside the left of the box. */
+				if (hoverPos.left < boxPos.left + 4) {
+					left -= hoverPos.left - boxPos.left - 4;
+				}
+				/* Update position. */
+				element.css({ top: Math.round(top), left: Math.round(left) });
+			}
+		}
+	} else {
+		clearInterval(HTTIntervalID);
+		HTTIntervalID = setInterval(UpdateHoverTipTxt, 300);
+	}
+};
+/*  Waits for passage to be fully rendered before doing anything.  */
+var HTTIntervalID = 0;
+$(document).on(":passageend", function (ev) {
+	UpdateHoverTipTxt();
+});
+$(window).on("resize scroll", function (ev) {
+	clearInterval(HTTIntervalID);
+	HTTIntervalID = setInterval(UpdateHoverTipTxt, 300);
+});
+$("#ui-bar-toggle").on("click", function (ev) {
+	clearInterval(HTTIntervalID);
+	HTTIntervalID = setInterval(UpdateHoverTipTxt, 300);
+});
+/* <<hovertip>> macro */
+Macro.add("hovertip", {
+	tags	 : null,
+	handler  : function () {
+		if (this.args.length > 0) {
+			var mw = "";
+			if ((this.args.length > 1) && (!isNaN(parseInt(this.args[1], 10)))) {
+				mw = ' style="max-width: ' + parseInt(this.args[1], 10) + 'px;"';
+			}
+			if (State.temporary.HoverTipCount == undefined) {
+				State.temporary.HoverTipCount = 1;
+			} else {
+				State.temporary.HoverTipCount++;
+			}
+			while ($("#hoverTip" + State.temporary.HoverTipCount).length) {
+				/* Found an existing hoverTip. */
+				State.temporary.HoverTipCount++;
+			}
+			var output = '<span id="hoverTip' + State.temporary.HoverTipCount +
+					'" class="hoverTipTxt hoverTip" tabindex="0" ' +
+					'onmouseenter="UpdateHoverTipTxt();">' +
+					this.payload[0].contents + '<span id="hoverTipTxt' +
+					State.temporary.HoverTipCount + '" class="hoverBox hoverTail"' +
+					mw + '>' + this.args[0] + '</span></span>';
+			$(this.output).wiki(output);
+		} else {
+			$(this.output).wiki(this.payload[0].contents);
+		}
+	}
+});
+/* hovertip v2.0 - End */
 /* twine-user-script #36: "canvasmodel-editor.js" */
 function copyToClipboard(textarea, data) {
 	textarea.value = data;
@@ -6518,7 +6845,150 @@ JSON.revive = function (reviverClass, data) {
   }
   return nextVal;
 }
-/* twine-user-script #43: "Avatar.js" */
+/* twine-user-script #43: "AShopWidget.js" */
+/* 商店处理 */
+
+window.setShowCaseUID = function(){
+    if(V.showcase){
+        V.showcase.uid = random(100000,999999)
+    }
+}
+
+
+function setShowCase(table) {
+    if (typeof(table) == "object") {
+        V.showcase = clone(table)
+        setShowCaseUID()
+
+        new Wikifier(null,"<<replace '#show_container'>><<ShowCase>><</replace>>")
+    }else{
+        console.log(table,"error: is not object")
+    }
+
+}
+window.setShowCase = setShowCase
+
+function setPatterns(arg) {
+    V.showcase.acc = arg
+    setShowCaseUID()
+
+    Avatar.setShop()
+    /*new Wikifier(null,"<<replace '#showcase'>><<ShowManequin>><</replace>>")*/
+}
+window.setPatterns = setPatterns
+
+function setColors(arg,name,change = false, mode="base") {
+    if (mode == "base") {
+        V.showcase.color = arg
+        V.showcase.colorname = name
+    }
+    if (mode == "acc") {
+        V.showcase.subcolor = arg
+    }
+    if (change) {
+        Avatar.setShop(arg, mode)
+        setShowCaseUID()
+        return
+    }
+    
+    setShowCaseUID()
+    Avatar.setShop()
+    /*new Wikifier(null,"<<replace '#showcase'>><<ShowManequin>><</replace>>")*/
+}
+window.setColors = setColors
+
+function tryoncheck() {
+    const group = A.category
+    var i,n
+    for ( i=0; i<group.length; i++){
+        if (V.tryon[group[i]]) return true;
+        else n++
+    }
+
+    if(n==group.length) return false
+}
+window.tryoncheck = tryoncheck
+
+function tryoncost() {
+    const group = Object.keys(V.tryon)
+    var n = 0
+
+    for (let i=0; i < group.length; i++){
+        if(V.tryon[group[i]] && V.tryon[group[i]].cost > 0) n += V.tryon[group[i]].cost;
+    }
+    return n
+}
+window.tryoncost = tryoncost
+
+window.putTryon = function(layer){
+    let clothes = clone(V.showcase)
+
+    clothes = clearAItems(clothes)
+
+    V.Equip[layer] = clone(clothes)
+    V.tryon[layer] = clone(clothes)
+
+    checkEquipSlot(Equip[layer])
+
+    FixValue()
+    stAvatar()
+}
+
+function BuyOutFit(args) {
+    var layer = V.showcase.layer
+    var leftslot = getClosetSlot(args)
+    var text
+
+    if(leftslot <= 0){
+        text = "衣柜的空位不够了,先回去整理下吧……"
+    }
+    else if (args=="select" && PC.money > V.showcase.cost) {
+        PC.money = PC.money - V.showcase.cost
+        let buystuff = clone(V.showcase)
+
+        buystuff = clearAItems(buystuff)
+        closet[layer].push(buystuff)
+
+        /* 如果买了就直接清除掉 */
+        if (V.tryon[layer] && V.tryon[layer].uid==Equip[layer].uid && V.tryon[layer].uid == V.showcase.uid){
+        V.tryon[layer] = null;
+        }
+
+        text = "你花费了"+V.showcase.cost+"元购买了"+V.showcase.name+"。"
+    }
+    else if (args=="tryon" && PC.money > tryoncost() ){
+        PC.money = PC.money - tryoncost()
+
+        let group = Object.keys(V.tryon)
+
+        for (let i=0; i < group.length; i++){
+            let n = group[i]
+
+            if (V.tryon[n] && V.TEquip[n]){
+                let leftstuff = clone(V.TEquip[n])
+                let layer = leftstuff.layer
+                closet[layer].push(leftstuff)
+            }
+        }
+        
+        text = "你花费了"+tryoncost()+"元购买了身上试穿的衣服。"
+        
+        V.tryon = {neck: null, hand: null, face: null,hat: null, outter: null, over_up: null,over_bt: null,inner_up: null, inner_bt: null,shoes: null, legs: null,}
+        V.TEquip = clone(V.Equip)
+        
+    }
+    else{
+        if (args =="select") text = "虽然你想买"+V.showcase.name+"，但钱不够……";
+        if (args == "tryon") text = "虽然你想买身上试穿的衣服，但钱不够……"
+    }
+
+    new Wikifier(null,"<<replace '#action-text'>>"+text+"<</replace>>")
+    new Wikifier(null,"<<replace '#action-text2'>>"+text+"<</replace>>")
+    ShowPopUP()
+    
+}
+window.BuyOutFit = BuyOutFit
+/* twine-user-script #44: "Avatar.js" */
 // Code/Avatar.ts
 window["BLENDMODE"] = {
   "SOURCE_OVER": "source-over",
@@ -8296,8 +8766,8 @@ window.Avatar = Avatar;
 window.setAvatar = (key, options, updates) => Avatar.setAvatar(key, options, updates);
 window["avatarEmoji"] = (FACE, option) => Avatar.avatarEmoji(FACE, option);
 window["RandomNPCEmoji"] = (FACE, option) => Avatar.RandomNPCEmoji(FACE, option);
-/* twine-user-script #44: "AvatarData.js" */
-/* twine-user-script #45: "AvatarWidget.js" */
+/* twine-user-script #45: "AvatarData.js" */
+/* twine-user-script #46: "AvatarWidget.js" */
 
 window.fixStuckAnimations = function() {
 	let scrollX = window.scrollX;
@@ -8375,266 +8845,6 @@ function warmth() {
 window.warmth = warmth
 F.warmth = warmth
 
-/* 商店处理 */
-
-window.setShowCaseUID = function(){
-    if(V.showcase){
-        V.showcase.uid = random(100000,999999)
-    }
-}
-
-
-function setShowCase(table) {
-    if (typeof(table) == "object") {
-        V.showcase = clone(table)
-        setShowCaseUID()
-
-        new Wikifier(null,"<<replace '#show_container'>><<ShowCase>><</replace>>")
-    }else{
-        console.log(table,"error: is not object")
-    }
-
-}
-window.setShowCase = setShowCase
-
-function setPatterns(arg) {
-    V.showcase.acc = arg
-    setShowCaseUID()
-
-    Avatar.setShop()
-    /*new Wikifier(null,"<<replace '#showcase'>><<ShowManequin>><</replace>>")*/
-}
-window.setPatterns = setPatterns
-
-function setColors(arg,name,change = false, mode="base") {
-    if (mode == "base") {
-        V.showcase.color = arg
-        V.showcase.colorname = name
-    }
-    if (mode == "acc") {
-        V.showcase.subcolor = arg
-    }
-    if (change) {
-        Avatar.setShop(arg, mode)
-        setShowCaseUID()
-        return
-    }
-    
-    setShowCaseUID()
-    Avatar.setShop()
-    /*new Wikifier(null,"<<replace '#showcase'>><<ShowManequin>><</replace>>")*/
-}
-window.setColors = setColors
-
-function tryoncost() {
-    const group = Object.keys(V.tryon)
-    var n = 0
-
-    for (let i=0; i < group.length; i++){
-        if(V.tryon[group[i]] && V.tryon[group[i]].cost > 0) n += V.tryon[group[i]].cost;
-    }
-    return n
-}
-window.tryoncost = tryoncost
-
-function BuyOutFit(args) {
-    var layer = V.showcase.layer
-    var text
-
-    if (args=="select" && PC.money > V.showcase.cost) {
-        PC.money = PC.money - V.showcase.cost
-        let buystuff = clone(V.showcase)
-        closet[layer].push(buystuff)
-
-        /* 如果买了就直接清除掉 */
-        if (V.tryon[layer] && V.tryon[layer].uid==Equip[layer].uid && V.tryon[layer].uid == V.showcase.uid){
-        V.tryon[layer] = null;
-        }
-
-        text = "你花费了"+V.showcase.cost+"元购买了"+V.showcase.name+"。"
-    }
-    else if (args=="tryon" && PC.money > tryoncost() ){
-        PC.money = PC.money - tryoncost()
-
-        let group = Object.keys(V.tryon)
-
-        for (let i=0; i < group.length; i++){
-            if (V.tryon[group[i]] && V.TEquip[group[i]]){
-                let leftstuff = clone(V.TEquip[group[i]])
-                let layer = leftstuff.layer
-                closet[layer].push(leftstuff)
-            }
-        }
-        
-        text = "你花费了"+tryoncost()+"元购买了身上试穿的衣服。"
-        
-        V.tryon = {neck: null, hand: null, face: null,hat: null, outter: null, over_up: null,over_bt: null,inner_up: null, inner_bt: null,shoes: null, legs: null,}
-        V.TEquip = clone(V.Equip)
-        
-    }
-    else{
-        if (args =="select") text = "虽然你想买"+V.showcase.name+"，但钱不够……";
-        if (args == "tryon") text = "虽然你想买身上试穿的衣服，但钱不够……"
-    }
-
-    new Wikifier(null,"<<replace '#action-text'>>"+text+"<</replace>>")
-    new Wikifier(null,"<<replace '#action-text2'>>"+text+"<</replace>>")
-    ShowPopUP()
-    
-}
-window.BuyOutFit = BuyOutFit
-
-function tryoncheck() {
-    const group = ["neck","hand","face","hat","outter","over_up","over_bt","inner_up","inner_bt","shoes","legs"]
-    var i,n
-    for ( i=0; i<group.length; i++){
-        if (V.tryon[group[i]]) return true;
-        else n++
-    }
-
-    if(n==group.length) return false
-}
-window.tryoncheck = tryoncheck
-
-/* 衣柜处理 */
-function strip(arg) {
-    if (Equip[arg]) {
-
-        var text = "你脱下了"+Equip[arg].name;
-
-        closet[arg].push(Equip[arg])
-        Equip[arg] = null
-    }else{
-        var text = "你打算脱下"+A.categoryname[arg]+"，但是你身上并没有穿任何"+A.categoryname[arg]+"。";
-    }
-
-    const group = ["face","neck","hand","back"]
-    let id = arg
-
-    if(group.includes(arg)){
-        new Wikifier(null,"<<replace '#accesory'>><<showcloset 'face'>><<showcloset 'neck'>><<showcloset 'hand'>><<showcloset 'back'>><</replace>>")
-    }
-    else{
-     new Wikifier(null,"<<replace '#"+id+"'>><<showcloset '"+id+"'>><</replace>>")   
-    }
-
-    
-    setreveal()
-
-    
-    new Wikifier(null,"<<replace '#action-text'>>"+text+"<</replace>>")
-    new Wikifier(null,"<<replace '#action-text2'>>"+text+"<</replace>>")
-    ShowPopUP()
-    stAvatar()
-}
-window.strip = strip
-F.strip = strip
-
-window.closetAct = function(args,arg) {
-    if (ui.closetmode == "穿"){
-        dressOn(args,arg)
-    }
-    if (ui.closetmode == "扔"){
-        discardDress(args,arg)
-    }
-}
-
-function discardDress(args,arg){
-    let text = "你把"+closet[args][arg].name+"扔掉了。";
-    closet[args].deleteAt(arg)
-
-    const group = ["face","neck","hand","back"]
-    let id = args
-    
-    if(group.includes(arg)){
-        new Wikifier(null,"<<replace '#accesory'>><<showcloset 'face'>><<showcloset 'neck'>><<showcloset 'hand'>><<showcloset 'back'>><</replace>>")
-    }
-    else{
-     new Wikifier(null,"<<replace '#"+id+"'>><<showcloset '"+id+"'>><</replace>>")   
-    }
-
-    new Wikifier(null,"<<replace '#action-text'>>"+text+"<</replace>>")
-    new Wikifier(null,"<<replace '#action-text2'>>"+text+"<</replace>>")
-    ShowPopUP()
-}
-F.discardDress = discardDress
-
-function dressOn(args, arg) {
-
-    var text = "你穿上了"+closet[args][arg].name+"。";
-
-    /* 身上没有衣服，直接穿上 */
-    if ( Equip[args] == null){
-     Equip[args] = closet[args][arg]
-     closet[args].deleteAt(arg)
-
-    }else if(Equip[args].index.length > 0){
-        let obj = clone(V.Equip[args])
-        Equip[args] = closet[args][arg]
-        closet[args].deleteAt(arg)
-        closet[args].push(obj)
-    }
-
-    if(args == "over_up"  && Equip.over_bt && Equip.over_up.slot == "onepiece"){
-        let obj = clone(Equip.over_bt)
-        closet.over_bt.push(obj)
-        Equip.over_bt = null
-        
-    }else if (args == "over_bt" && Equip.over_up && Equip.over_up.slot == "onepiece"){
-        let obj = clone(Equip.over_up)
-        closet.over_up.push(obj)
-        Equip.over_up = null
-
-    }else if (args == "inner_up" && Equip.inner_bt && Equip.inner_up.slot == "onepiece"){
-        let obj = clone(Equip.inner_bt)
-        closet.inner_bt.push(obj)
-        Equip.inner_bt = null
-
-    }else if (args == "inner_up" && Equip.inner_up.slot == "fullbody"){
-
-        if(Equip.inner_bt){
-            let obj = clone(Equip.inner_bt)
-            closet.inner_bt.push(obj)
-            Equip.inner_bt = null }
-
-        if(Equip.over_up){
-            let obj = clone(Equip.over_up)
-            closet.over_up.push(obj)
-            Equip.over_up = null
-        }
-        
-        if(Equip.over_bt){
-            let obj = clone(Equip.over_bt)
-            closet.over_bt.push(obj)
-            Equip.over_bt = null
-        }
-    }
-
-    if(Equip[args].functional){
-        Equip[args].effect()
-    }
-
-    const group = ["face","neck","hand","back"]
-    let id = args
-    
-    if(group.includes(arg)){
-        new Wikifier(null,"<<replace '#accesory'>><<showcloset 'face'>><<showcloset 'neck'>><<showcloset 'hand'>><<showcloset 'back'>><</replace>>")
-    }
-    else{
-     new Wikifier(null,"<<replace '#"+id+"'>><<showcloset '"+id+"'>><</replace>>")   
-    }
-
-    setreveal()
-
-    new Wikifier(null,"<<replace '#action-text'>>"+text+"<</replace>>")
-    new Wikifier(null,"<<replace '#action-text2'>>"+text+"<</replace>>")
-    ShowPopUP()
-    stAvatar()
-}
-
-window.dressOn = dressOn
-F.dressOn = dressOn
-
 function gonaked(mode){
 
     if((Equip.over_up && mode=="debug") || mode!="debug"){
@@ -8698,10 +8908,23 @@ DefineMacroS("redress",redress)
 function getClosetSlot(args){
     if(args == "tryon"){
         //遍历试穿部位的衣柜空位
+        let list = A.category
+        for(let i=0;i<list.length;i++){
+            let n = list[i]
+            let left = (closet.slot.level*closet.slot[n]) - closet[n].length +1
+
+            if(V.tryon[i]){
+                //确认空位,只要有一个的空位不足,就返回
+                if(left < 1)return left
+            }
+        }
+        //没中途返回就返回值 1
+        return 1
+
     }else{
         //返回showcase.layer位置的衣柜空位
         let layer = V.showcase.layer
-        return (closet.slot.level*closet.slot[layer]) - closet[layer].length
+        return (closet.slot.level*closet.slot[layer]) - closet[layer].length +1
     }
 }
 
@@ -8710,34 +8933,320 @@ function getClosetSlot(args){
  * @param {String} category 
  * @param {Number} id 
  */
- function getDress(category, id, color, colorname, acc, subcolor){
+ function getDress(category, id, color, colorname, acc, subcolor,cursed){
     let uid = random(100,100000)
-    V.Equip[category] = clone(A[category][id])
-    V.Equip[category].uid = uid
+    let newitem = clone(A[category][id])
+    newitem.uid = uid
 
-    if(color) V.Equip[category].color = color;
-    if(colorname) V.Equip[category].colorname = colorname;
-    if(acc) V.Equip[category].acc = acc;
-    if(subcolor && A[category][id].fixacc === false) V.Equip[category].subcolor = subcolor
+    if(color) newitem.color = color;
+    if(colorname) newitem.colorname = colorname;
 
-    if(category=="over_up" && A.over_up[id].slot=="onepiece"){
-        V.Equip.over_bt = null
-    }
-    if(category=="over_bt" && A.over_up[id].slot == "onepiece"){
-        V.Equip.over_up = null
-    }
-    if(category=="inner_up"){
-        if(A.inner_up[id].slot == "onepiece") V.Equip.inner_bt = null;
-        if(A.inner_up[id].slot == "fullbody"){
-            V.Equip.inner_bt = null
-            V.Equip.over_up = null
-            V.Equip.over_bt = null
-        }
-    }
+    if(acc) newitem.acc = acc;
+    if(subcolor && A[category][id].fixacc === false) newitem = subcolor;
+
+    if(cursed) newitem.cursed = true;
+
+    newitem = clearAItems(newitem)
+    V.Equip[category] = clone(newitem)
+
+    checkEquipSlot(V.Equip[category])
+
+    FixValue()
+    stAvatar()
 }
 F.getDress = getDress
+window.getDress = getDress
 DefineMacroS("getDress", getDress)
-/* twine-user-script #46: "SetAvatar.js" */
+
+//初始化 或 剧情中获得时
+function addCloset(index,id,color,colorname,acc,subcolor){
+    let newitem = clone(A[index][id])
+    let uid = random(100,100000)
+
+    newitem.uid = uid
+
+    if(color) newitem.color = color;
+    if(colorname) newitem.colorname = colorname;
+
+    if(acc) newitem.acc = acc;
+    if(subcolor && A[category][id].fixacc === false) newitem.subcolor = subcolor;
+
+    newitem = clearAItems(newitem)
+    V.closet[index].push(newitem)
+
+}
+F.addCloset = addCloset
+window.addCloset = addCloset
+
+window.clearAItems = function(obj){
+    //减少存档负担
+    delete obj.text
+    delete obj.text_en
+    delete obj.tag
+    delete obj.colors
+    delete obj.patterns
+    
+    if(obj.effect) delete obj.effect
+
+    return obj
+}
+
+//连衣裙之类的穿脱处理
+window.checkEquipSlot = function(obj,mode){
+    let layer = obj.layer
+
+    if(layer=="over_up" && Equip.over_bt && obj.slot=="onepiece"){
+        if(mode=="closet"){
+            let item = clone(Equip.over_bt)
+            closet.over_bt.push(item)
+        }
+        Equip.over_bt = null
+    }
+    if(layer=="over_bt" && Equip.over_up?.slot == "onepiece"){
+        if(mode=="closet"){
+            let item = clone(Equip.over_up)
+            closet.over_up.push(item)
+        }
+        Equip.over_up = null
+    }
+    if(layer=="inner_up" && Equip.inner_bt && obj.slot == "onepiece"){
+        if(mode=="closet"){
+            let item = clone(Equip.inner_bt)
+            closet.inner_bt.push(item)
+        }
+        Equip.inner_bt = null
+    }
+    if(layer=="inner_up" && Equip.inner_up.slot == "fullbody"){
+        if(mode=="closet"){
+            if(Equip.inner_bt){
+                let item = clone(Equip.inner_bt)
+                closet.inner_bt.push(item)
+            }
+            if(Equip.over_up){
+                let item = clone(Equip.over_up)
+                closet.over_up.push(item)
+            }
+            if(Equip.over_bt){
+                let item = clone(Equip.over_bt)
+                closet.over_bt.push(item)
+            }
+        }
+        Equip.inner_bt = null
+        Equip.over_up = null
+        Equip.over_bt = null
+    }
+
+}
+/* twine-user-script #47: "ClosetWidget.js" */
+/* 衣柜处理 */
+function getRandomCloset() {
+  const randomArray = (arr) => {
+    const arrs = []
+    for (let index = 0; index < 10; index++) {
+      arrs.push(parseInt(Math.random() * arr.length ))
+      
+    }
+    const legth = parseInt(Math.random() * arrs.length )
+    console.log(legth ,arrs,arrs[legth],arr[arrs[legth]]);
+    
+    return arr[arrs[legth]]
+  }
+  const cloth = {}
+  const __t =Object.entries(V.closet).filter(([name,value])=>!(name === "slot"))
+  // console.log(__t );
+  __t.forEach(([name,value])=>{
+    if (Array.isArray(value) && value.length) {
+      console.log(value);
+      const _a = value.filter(v=>v)
+      cloth[name] = randomArray(_a)
+    }
+  })
+  return cloth
+}
+
+window.getRandomCloset = getRandomCloset
+
+function updateCloset(){
+	let list = A.category
+	let update = function(obj){
+	let id = obj.id
+	let layer = obj.layer
+		//图片初次实装时, 直接初始化衣服
+		if(obj.hasImg===false && A[layer][id].hasImg === true){
+			obj = clone(A[layer][id])
+		}
+
+		//图片更新差分时只更新差分信息
+		if((obj.hasDif.breast===false && A[layer][id].breast === true) || (obj.hasDif.pregnant===false && A[layer][id].pregnant === true) ){
+			obj.hasDif = clone(A[layer][id].hasDif)
+		}
+
+		return obj
+	}
+
+	for (let i=0; i<list.length; i++){
+		let n = list[i]
+		if(V.closet[n].length > 0){
+			 
+			 for(let k=0; k<V.closet[n].length; k++){
+				 V.closet[n][k] = update(V.closet[n][k])
+			 }
+
+		}
+		if(V.Equip[n]){
+			V.Equip[n] = update(V.Equip[n])
+		}
+	}
+
+	return V.closet
+
+}
+window.updateCloset = updateCloset
+F.updateCloset = updateCloset
+
+
+window.closetAct = function(args,arg) {
+    if (ui.closetmode == "穿"){
+        dressOn(args,arg)
+    }
+    if (ui.closetmode == "扔"){
+        discardDress(args,arg)
+    }
+}
+
+function strip(arg) {
+    if (Equip[arg]) {
+
+        var text = "你脱下了"+Equip[arg].name;
+
+        closet[arg].push(Equip[arg])
+        Equip[arg] = null
+    }else{
+        var text = "你打算脱下"+A.categoryname[arg]+"，但是你身上并没有穿任何"+A.categoryname[arg]+"。";
+    }
+
+    const group = ["face","neck","hand","back"]
+    let id = arg
+
+    if(group.includes(arg)){
+        new Wikifier(null,"<<replace '#accesory'>><<showcloset 'face'>><<showcloset 'neck'>><<showcloset 'hand'>><<showcloset 'back'>><</replace>>")
+    }
+    else{
+     new Wikifier(null,"<<replace '#"+id+"'>><<showcloset '"+id+"'>><</replace>>")   
+    }
+    
+    FixValue()
+   
+    new Wikifier(null,"<<replace '#action-text'>>"+text+"<</replace>>")
+    new Wikifier(null,"<<replace '#action-text2'>>"+text+"<</replace>>")
+    ShowPopUP()
+    stAvatar()
+}
+window.strip = strip
+F.strip = strip
+
+function discardDress(args,arg){
+    let text = "你把"+closet[args][arg].name+"扔掉了。";
+    closet[args].deleteAt(arg)
+
+    const group = ["face","neck","hand","back"]
+    let id = args
+    
+    if(group.includes(arg)){
+        new Wikifier(null,"<<replace '#accesory'>><<showcloset 'face'>><<showcloset 'neck'>><<showcloset 'hand'>><<showcloset 'back'>><</replace>>")
+    }
+    else{
+     new Wikifier(null,"<<replace '#"+id+"'>><<showcloset '"+id+"'>><</replace>>")   
+    }
+
+    new Wikifier(null,"<<replace '#action-text'>>"+text+"<</replace>>")
+    new Wikifier(null,"<<replace '#action-text2'>>"+text+"<</replace>>")
+    ShowPopUP()
+}
+F.discardDress = discardDress
+
+function dressOn(args, arg) {
+
+    var text = "你穿上了"+closet[args][arg].name+"。";
+
+    /* 身上没有衣服，直接穿上 */
+    if ( Equip[args] == null){
+     Equip[args] = closet[args][arg]
+     closet[args].deleteAt(arg)
+
+    }else if(Equip[args].index.length > 0){
+        let obj = clone(V.Equip[args])
+        Equip[args] = closet[args][arg]
+        closet[args].deleteAt(arg)
+        closet[args].push(obj)
+    }
+
+    checkEquipSlot(Equip[args],"closet")
+
+    if(Equip[args].functional){
+        let id = Equip[args].id
+        A[args][id].effect()
+    }
+
+    const group = ["face","neck","hand","back"]
+    let id = args
+    
+    if(group.includes(arg)){
+        new Wikifier(null,"<<replace '#accesory'>><<showcloset 'face'>><<showcloset 'neck'>><<showcloset 'hand'>><<showcloset 'back'>><</replace>>")
+    }
+    else{
+     new Wikifier(null,"<<replace '#"+id+"'>><<showcloset '"+id+"'>><</replace>>")   
+    }
+
+    setreveal()
+
+    new Wikifier(null,"<<replace '#action-text'>>"+text+"<</replace>>")
+    new Wikifier(null,"<<replace '#action-text2'>>"+text+"<</replace>>")
+    ShowPopUP()
+    stAvatar()
+}
+
+window.dressOn = dressOn
+F.dressOn = dressOn
+
+window.showClosetItems = function(index,id){
+	let items = V.closet[index][id]
+	let mirror = A[index][items.id]
+	let img
+
+	if(mirror.hasImg === true) img = `image/avatar/${index}/${mirror.index}/thumb.png`
+	else img = `image/avatar/thumb.png`
+
+	let code = items.color
+	let cname = items.colorname
+	let des = Lang(mirror.text,mirror.text_en)
+    let iname = Lang(mirror.name,mirror.name_en)
+
+    let text =`<div id="W_showitems">`
+    + `<<hovertip "${des}">>`
+    + `<div class="W_thumb"><div class="itemthumb">`
+        + `<a onClick="closetAct('${index}',${id}); FixValue();"><img src="${img}"></a>`
+    + `</div></div>`
+        + `<</hovertip>>`    
+    + `<div class="W_color" style="background-color:${code}">${cname}</div>`
+
+    + (items.acc ? `<div class="W_pattern">${items.acc}</div>` : ``)
+
+    + ` <div class="W_itemname">${iname}</div>`
+    + `<div class="itemdurab"> 耐久：${items.durable}/${mirror.maxdurable}</div>`
+    + `<div class="itemdegree">`
+    + `<span style="color:blue">${(items.cold > 0? "+" : "")} ${items.cold}C</span>`
+    +  `  |  `
+    + `<span style="color:red">${(items.hot > 0? "+" : "")} ${items.hot}C</span>`
+    + `</div>`
+    + `<div class="itembuff">`
+    + (items.defence > 0 ? `<span style="color:brown">Def+</span>` : ``)
+    + (items.beauty > 0? `<span style="color:deeppink">Allure+</span>` : ``)
+    + `</div></div>`
+
+    return text
+}
+/* twine-user-script #48: "SetAvatar.js" */
 function SetFace(args,key) {
 
     if(A.facelist.includes(args)==true){
@@ -8854,7 +9363,7 @@ function stAvatar() {
 
     for(let i=0;i<layers.length;i++){
         let n = layers[i]
-
+        
         if(Equip[n] != null && Equip[n].hasImg==true){
             V.avatar[n] = setAvatar(n,{
                 fixcolor: Equip[n].fixcolor, color: Equip[n].color,
@@ -9075,35 +9584,7 @@ function stAvatar() {
 
 window.stAvatar = stAvatar
 F.stAvatar = stAvatar
-/* twine-user-script #47: "closet.js" */
-function getRandomCloset() {
-  const randomArray = (arr) => {
-    const arrs = []
-    for (let index = 0; index < 10; index++) {
-      arrs.push(parseInt(Math.random() * arr.length ))
-      
-    }
-    const legth = parseInt(Math.random() * arrs.length )
-    console.log(legth ,arrs,arrs[legth],arr[arrs[legth]]);
-    
-    return arr[arrs[legth]]
-  }
-  const cloth = {}
-  const __t =Object.entries(V.closet).filter(([name,value])=>!(name === "slot"))
-  // console.log(__t );
-  __t.forEach(([name,value])=>{
-    if (Array.isArray(value) && value.length) {
-      console.log(value);
-      const _a = value.filter(v=>v)
-      cloth[name] = randomArray(_a)
-    }
-  })
-  return cloth
-}
-
-
-window.getRandomCloset = getRandomCloset
-/* twine-user-script #48: "CharaWidget.js" */
+/* twine-user-script #49: "CharaWidget.js" */
 function setChara(args){
     if(args=="pc" || args=="player"){
         V.CChara = {
@@ -9139,7 +9620,7 @@ function setChara(args){
 }
 F.setChara = setChara
 DefineMacroS("setchara",setChara)
-/* twine-user-script #49: "EventWidget.js" */
+/* twine-user-script #50: "EventWidget.js" */
 function setEvent() {
     var event = V.event
     event.lang = V.lang
@@ -9345,7 +9826,7 @@ window.useitem = useitem
     print V.items[catgt][_keys[_i]].name
     useitem(catgr,_keys[_i])
 */
-/* twine-user-script #50: "FixValue.js" */
+/* twine-user-script #51: "FixValue.js" */
 window.fixfloat = function(v,n){
     return Math.floor(v*Math.pow(10,n))/Math.pow(10,n)
 }
@@ -9635,15 +10116,21 @@ function FixValue() {
 window.FixValue = FixValue
 F.FixValue = FixValue
 DefineMacroS("fixvalue",FixValue)
-/* twine-user-script #51: "Location.js" */
+/* twine-user-script #52: "Location.js" */
 /* 地点互动和事件相关 */
 /* 总之先粗略地做一下... 符合条件的就显示出来 */
 F.getsituation = function(args, series, key){
     let data = {}
 
-    if(D.map.景南市[V.mapgroup][args]) data = D.map.景南市[V.mapgroup][args].situation
-    else if(D.map.景南市[args]) data = D.map.景南市[args].situation
-    else if(D.map.通用[args]) data = D.map.通用[args].situation
+    if(D.map.景南市[V.mapgroup][args]){
+        data = D.map.景南市[V.mapgroup][args].situation
+    }
+    else if(D.map.景南市[args]){
+        data = D.map.景南市[args].situation
+    }
+    else if(D.map.通用[args]){
+        data = D.map.通用[args].situation
+    }
  
     let text = {
         before:[], after:[], content:[],
@@ -9667,6 +10154,14 @@ F.getsituation = function(args, series, key){
 
         return result
     }
+}
+
+F.getDescrips = function(args,group){
+    let data = {}
+    if(group) data = D.map.景南市[group][args]
+    else data = D.map.景南市[args]
+
+    return data.description()
 }
 
 /* 背景设置 */
@@ -9731,20 +10226,35 @@ window.setMap = setMap
 DefineMacroS("setmap",setMap)
 
 function setLocation(args) {
-    V.location = args
-    F.RER() /* 设置事件随机概率 RandomEventRate */
-
-    if(D.map.景南市[V.mapgroup][args]) V.local = D.map.景南市[V.mapgroup][args]
-    else if(D.map.景南市[args]) V.local = D.map.景南市[args]
-    else if(D.map.通用[args]) V.local = D.map.通用[args]
+    
+    //更新local信息
+    if(D.map.景南市[V.mapgroup][args]) V.local = clone(D.map.景南市[V.mapgroup][args])
+    else if(D.map.景南市[args]) V.local = clone(D.map.景南市[args])
+    else if(D.map.通用[args]) V.local = clone(D.map.通用[args])
     else {return "<div class='error-view'>error: 找不到对应地图: "+args+"</div>"}
+    //减少存档错误
     delete V.local.situation
+    delete V.local.description
 
+    //记录上一个地点
+    V.local.last = V.location
+
+    //把地点名扔回去
+    V.location = args
+
+    //重置移动按钮
     ui.movebutton = false
 
+     /* 设置事件随机概率 RandomEventRate */
+    F.RER()
+
+    //角色移动处理
     if(V.local){
         if(V.local.tag.includes("家"))V.local.chara.push("player");
     }
+
+    //事件CHECK
+
     return ""
 }
 
@@ -9752,22 +10262,91 @@ window.setLocation = setLocation
 DefineMacroS("location",setLocation)
 
 function navigation(){
-    let text
+    var text
     if(V.local && V.mapgroup){
+        text = ""
+
+        //先获取 出发点信息
+        let stpoint = V.local.place
+
+        //获取所在地图链接列表, 召唤当前地图范围内的快速链接
         let list = Object.keys(V.map.links)
-        for(let i=0; i < list; i++){
-            let n = D.map.景南市[V.mapgroup][n]
-            let t = V.map.links[V.local.place] - V.map.links[n.place]
-            let passage = n.place
-            if(n.passage) passage = n.passage
+        let linklist = []
 
-            if(n.tag.includes("家")) passage = "你的家 "+n.place
 
-            text += `<div class="links" title="移动时间：${t}分钟"><<link "・ ${n.place}" "${passage}" >><<passtime ${t}>><</link>></div>`
+        for(let i=0; i < list.length; i++){
+            let n = list[i]
+            if(n == V.local.place) continue;
+
+            //获取目的地详细资料
+            let dest = D.map.景南市[V.mapgroup][n]
+            if(V.coredebug)console.log(dest);
+
+            let name = dest.place
+            if(dest.tag.includes("家")) name = "回家"
+
+            let passage = name
+            if(dest.passage) passage = dest.passage;
+
+            //计算移动时间
+            let t = Math.abs(V.map.links[stpoint] - V.map.links[n])
+
+            text += `<div class="links" title="移动时间：${t}分钟"><<link "・ ${name}" "${passage}">><<passtime ${t}>><</link>></div>`
+
+            if(V.coredebug) {
+                console.log(`<div class="links" title="移动时间：${t}分钟"><<link "・ ${name}" "${passage}">><<passtime ${t}>><</link>></div>`)
+            }
+            linklist.push(n)
         }
+
+        //如果处于地图出入口区, 则显示附近步行 30分钟内的地点
+        if (V.local.place == V.map.enter) {
+            let mapgroup = V.map.index
+            let tmap = D.mapdata.景南市[mapgroup]
+            
+            console.log(mapgroup, tmap)
+            let list = Object.keys(tmap.links)
+
+            for(let i=0; i<list.length; i++){
+                let n = list[i]
+                if(n==V.local.place) continue;
+
+                //获取目的地详细资料
+                let dest = D.map.景南市[mapgroup][n]
+                if(V.coredebug) console.log(dest);
+
+                //排除还没实装的地图
+                if(!dest) continue;
+                //排除重复的通用地点链接
+                if(linklist.includes(n)) continue;
+
+                //计算移动时间
+                let t = Math.abs(tmap.links[stpoint] -tmap.links[n])
+                //大地图上,前往公交或地铁站的移动时间永远是 3~5分钟
+                if(["公交站","地铁站"].includes(n) && t > 5) t = rand(3,5);
+
+                if(t > 30) continue;
+
+                let name = dest.place
+                if(dest.tag.includes('家')) name = "回家"
+
+                let passage = name
+                if(dest.passage) passage = dest.passage;
+
+                text += `<div class="links" title="移动时间：${t}分钟"><<link "・ ${name}" "${passage}">><<passtime ${t}>><</link>></div>`
+
+                console.log(`<div class="links" title="移动时间：${t}分钟"><<link "・ ${name}" "${passage}">><<passtime ${t}>><</link>></div>`)
+
+            }
+
+            //如果有 car 或 bike 召唤对应的移动链接
+        }     
+        return text
     }
+    return false
 }
-/* twine-user-script #52: "SaveShow.js" */
+window.navigation = navigation
+/* twine-user-script #53: "SaveShow.js" */
 function showSavedCard(type,slot,obj){
 
     if(obj !== null){
@@ -9964,7 +10543,7 @@ window.DelAlert = function(type, slot){
     Dialog.append(Lang(text,text_en))
     Dialog.open()
 }
-/* twine-user-script #53: "SaveWidget.js" */
+/* twine-user-script #54: "SaveWidget.js" */
 window.initSaveData = function(forceRun){
 
     if('EWA.SaveDetails' in localStorage===false || forceRun === true){
@@ -10163,14 +10742,16 @@ window.SaveGame = function(slot, uid=null, metadata, check) {
     else{
 
         if(slot > 0){
-            //updateAchivement()
-            //updateGallery()
-            //V.achivement = {}
-            //V.bookmark = {}
+            updateAchivement()
+            updateGallery()
+            V.achivement = {}
+            V.bookmark = {}
+            V.titles = {}
             Save.slots.save(slot,null,metadata);
             setSaveDetail("normal",slot, metadata);
+            getAchivement()
+            getGallery()
             resetSaveMenu();
-
         }
     }
 
@@ -10186,8 +10767,6 @@ window.LoadGame = function(type, slot, check) {
     }
     else{
         Save.slots.load(slot)
-        //getAchivement()
-        //getGallery()
     }
 }
 
@@ -10261,7 +10840,7 @@ window.getGallery = function(){
         updateGallery()
     }
 }
-/* twine-user-script #54: "TimeProcess.js" */
+/* twine-user-script #55: "TimeProcess.js" */
 window.testpt = function(t){
 	V.time.passed += t
 	let m =dailyMultip()
@@ -10652,7 +11231,7 @@ function weather(){
 
 
 }
-/* twine-user-script #55: "save.js" */
+/* twine-user-script #56: "save.js" */
 
 
 window.getSaveDetails = function (saveSlot){
@@ -10775,7 +11354,7 @@ window.isJsonString = function(s) {
 	}
 	return true;
 }
-/* twine-user-script #56: "PlayerInfo.js" */
+/* twine-user-script #57: "PlayerInfo.js" */
 /* 名字和称呼的处理 */
 function gsplit(m,f,p="chara"){
   if (p=="player" || p=="pc"){
@@ -11049,7 +11628,7 @@ function it(){
 }
 DefineMacroS("it", it);
 
-/* twine-user-script #57: "SkillRank.js" */
+/* twine-user-script #58: "SkillRank.js" */
 function displayskillrank(num){
     const select = new SelectCase()
     select.add(0,100,"<span style='color:#839EC0;'><b>F</b></span>")
@@ -11135,7 +11714,7 @@ window.rankcolor = function(num){
         return "#D7A800";
     }
 }
-/* twine-user-script #58: "SimpleWidget.js" */
+/* twine-user-script #59: "SimpleWidget.js" */
 function printmoney(num) {
     return num && num.toString()
         .replace(/\d+/, function(s){
@@ -11232,7 +11811,7 @@ window.gametime = function(a){
     V.gametime = time
     return `${time.day}D.${time.hour}:${time.min}:${time.sec}`
 }
-/* twine-user-script #59: "UI Widget.js" */
+/* twine-user-script #60: "UI Widget.js" */
 /* 通用 */
 
 function weirdeffect(){
@@ -11355,7 +11934,7 @@ DefineMacroS("delay",delay)
 &lt;!-- 首先初始化资料库 --&gt;
 &lt;&lt;InitBGM&gt;&gt;
 
-&lt;!-- 游戏各种flag初始化 --&gt;
+&lt;!-- 游戏各种数据初始化 --&gt;
 &lt;&lt;run 
     F.InitGame();
     F.InitRecord();
@@ -11979,10 +12558,7 @@ DefineMacroS("delay",delay)
 
 　&lt;&lt;link &quot;&gt; 改变语言/Comfirm Language&quot; &quot;Start&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;
 &lt;/div&gt;
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="7" name="StoryDisplayTitle" tags="" position="850,100" size="100,100">EWA v&lt;&lt;print StartConfig.version&gt;&gt;</tw-passagedata><tw-passagedata pid="8" name="Start" tags="nosave" position="975,100" size="100,100">/* 镜像目录 */
-&lt;&lt;run setMirrorVariables()&gt;&gt;
-
-&lt;&lt;audio &quot;标题&quot; volume 0.5 play loop&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="7" name="StoryDisplayTitle" tags="" position="850,100" size="100,100">EWA v&lt;&lt;print StartConfig.version&gt;&gt;</tw-passagedata><tw-passagedata pid="8" name="Start" tags="nosave" position="975,100" size="100,100">&lt;&lt;audio &quot;标题&quot; volume 0.5 play loop&gt;&gt;
 &lt;div id=&quot;startpage&quot;&gt;
 &lt;span class=&quot;intro&quot;&gt;
 &lt;&lt;lang 
@@ -12194,7 +12770,7 @@ $(document).on(&#39;:passagerender&#39;, function (ev) {
 
 &lt;&lt;if $shoptype.includes(&quot;offline&quot;)&gt;&gt;
 &lt;div class=&quot;trybutton&quot;&gt;
-&lt;&lt;link &quot;试穿&quot;&gt;&gt;&lt;&lt;tryon $showcase.layer&gt;&gt;&lt;&lt;leavecheck&gt;&gt;&lt;&lt;/link&gt;&gt;
+&lt;&lt;link &quot;试穿&quot;&gt;&gt;&lt;&lt;run putTryon($showcase.layer)&gt;&gt;&lt;&lt;leavecheck&gt;&gt;&lt;&lt;/link&gt;&gt;
 &lt;/div&gt;
 
 &lt;div id=&quot;buyall&quot;&gt;
@@ -12434,32 +13010,6 @@ required:false,
 
 &lt;&lt;/widget&gt;&gt;
 
-&lt;&lt;widget &quot;tryon&quot;&gt;&gt;
-&lt;&lt;set _layer to $args[0]&gt;&gt;
-&lt;&lt;set $Equip[_layer] to clone($showcase)&gt;&gt;
-&lt;&lt;set $tryon[_layer] to clone($showcase)&gt;&gt;
-
-&lt;&lt;switch _layer&gt;&gt;
-    &lt;&lt;case &quot;over_up&quot;&gt;&gt;
-        &lt;&lt;if $showcase.slot is &quot;onepiece&quot;&gt;&gt;
-            &lt;&lt;set $Equip.over_bt = null, $tryon.over_bt = null&gt;&gt;
-        &lt;&lt;/if&gt;&gt;
-    &lt;&lt;case &quot;over_bt&quot;&gt;&gt;
-        &lt;&lt;if $Equip.over_up.slot is &quot;onepiece&quot;&gt;&gt;
-            &lt;&lt;set $Equip.over_up = null,$tryon.over_up = null&gt;&gt;
-        &lt;&lt;/if&gt;&gt;
-    &lt;&lt;case &quot;inner_up&quot;&gt;&gt;
-        &lt;&lt;if $showcase.slot is &quot;onepiece&quot;&gt;&gt;
-            &lt;&lt;set $Equip.inner_bt = null, $tryon.inner_bt = null&gt;&gt;
-        &lt;&lt;elseif $showcase.slot is &quot;fullbody&quot;&gt;&gt;
-            &lt;&lt;set 
-             $Equip.inner_bt = null, $tryon.inner_bt = null,
-             $Equip.over_up = null, $tryon.over_up = null,
-             $Equip.over_bt to null, $tryon.over_bt =null&gt;&gt;
-        &lt;&lt;/if&gt;&gt;
-&lt;&lt;/switch&gt;&gt;
-&lt;&lt;SetAvatar&gt;&gt;
-&lt;&lt;/widget&gt;&gt;
 
 &lt;&lt;widget &quot;showinner&quot;&gt;&gt;
     &lt;&lt;set $Equip.outter = null, $tryon.outter = null&gt;&gt;
@@ -12586,7 +13136,9 @@ required:false,
 &lt;&lt;set _placeholder to &quot;image/avatar/thumb.png&quot;&gt;&gt;
 
 &lt;div id=&quot;W_showitems&quot;&gt;
+    &lt;div class=&quot;W_thumb&quot;&gt;
     &lt;div class=&quot;itemthumb&quot;&gt;&lt;&lt;print &quot;&lt;&lt;link [img[_nakeimg]] &gt;&gt;&lt;&lt;run strip(&#39;&quot;+_catgr+&quot;&#39;)&gt;&gt;&lt;&lt;fixvalue&gt;&gt;&lt;&lt;/link&gt;&gt;&quot;&gt;&gt;&lt;/div&gt;
+    &lt;/div&gt;
     &lt;div class=&quot;W_itemname&quot;&gt;脱掉&lt;&lt;print _catgrname[$args[0]]&gt;&gt;&lt;/div&gt;
 &lt;/div&gt;
 
@@ -12595,36 +13147,7 @@ required:false,
         &lt;&lt;if $closet[_catgr][_i] is null&gt;&gt;
             &lt;&lt;continue&gt;&gt;
         &lt;&lt;/if&gt;&gt;
-        &lt;&lt;if $closet[_catgr][_i].hasImg is true&gt;&gt;
-            &lt;&lt;set _img to &quot;image/avatar/&quot;+_catgr+&quot;/&quot;+$closet[_catgr][_i].index + &quot;/thumb.png&quot;&gt;&gt;
-        &lt;&lt;else&gt;&gt;
-            &lt;&lt;set _img to _placeholder&gt;&gt;
-        &lt;&lt;/if&gt;&gt;
-        &lt;&lt;set _code to $closet[_catgr][_i].color&gt;&gt;
-        &lt;&lt;set _name to $closet[_catgr][_i].colorname&gt;&gt;
-        &lt;div id=&quot;W_showitems&quot;&gt;
-            &lt;div class=&quot;itemthumb&quot;&gt;
-            &lt;&lt;print &quot;&lt;&lt;link [img[_img]]&gt;&gt;&lt;&lt;run closetAct(&#39;&quot;+_catgr+&quot;&#39;,&quot;+_i+&quot;)&gt;&gt;&lt;&lt;fixvalue&gt;&gt;&lt;&lt;/link&gt;&gt;&quot;&gt;&gt;&lt;/div&gt;
-            &lt;div class=&quot;W_color&quot; @style=&quot;&#39;background-color:&#39;+_code&quot;&gt;&lt;&lt;print _name&gt;&gt;&lt;/div&gt;
-            &lt;&lt;if $closet[_catgr][_i].acc isnot null&gt;&gt;
-                &lt;div class=&quot;W_pattern&quot;&gt;&lt;&lt;print $closet[_catgr][_i].acc&gt;&gt;&lt;/div&gt;
-            &lt;&lt;/if&gt;&gt;
-            &lt;div class=&quot;W_itemname&quot;&gt;&lt;&lt;print $closet[_catgr][_i].name&gt;&gt;&lt;/div&gt;
-            &lt;div class=&quot;itemdurab&quot;&gt;
-            耐久：&lt;&lt;print $closet[_catgr][_i].durable&gt;&gt;/&lt;&lt;print $closet[_catgr][_i].maxdurable&gt;&gt;
-            &lt;/div&gt;
-
-            &lt;div class=&quot;itemdegree&quot;&gt;
-            &lt;span style=&quot;color:blue&quot;&gt;&lt;&lt;if $closet[_catgr][_i].cold gt 0&gt;&gt;+&lt;&lt;/if&gt;&gt;&lt;&lt;print $closet[_catgr][_i].cold&gt;&gt;C&lt;/span&gt;
-                | 
-            &lt;span style=&quot;color:red&quot;&gt;&lt;&lt;if $closet[_catgr][_i].hot gt 0&gt;&gt;+&lt;&lt;/if&gt;&gt;&lt;&lt;print $closet[_catgr][_i].hot&gt;&gt;C&lt;/span&gt;
-            &lt;/div&gt;
-
-            &lt;div class=&quot;itembuff&quot;&gt;
-            &lt;&lt;if $closet[_catgr][_i].defence gt 0&gt;&gt;&lt;span style=&quot;color:brown&quot;&gt;Def+&lt;/span&gt;&lt;&lt;/if&gt;&gt;
-            &lt;&lt;if $closet[_catgr][_i].beauty gt 0&gt;&gt;&lt;span style=&quot;color:deeppink&quot;&gt;Allure+&lt;/span&gt;&lt;&lt;/if&gt;&gt;
-            &lt;/div&gt;
-        &lt;/div&gt;
+        &lt;&lt;=showClosetItems(_catgr,_i)&gt;&gt;
     &lt;&lt;/for&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="20" name="StoryCaption" tags="" position="1225,225" size="100,100">&lt;div @class=&quot;(Errors.log.length==0?&#39;hidden&#39;:&#39;&#39;) + &#39; error-reporter-btn&#39;&quot; onclick=&quot;Errors.Reporter.toggle()&quot;&gt;&lt;/div&gt;
@@ -12717,7 +13240,10 @@ required:false,
 &lt;&lt;repeat 0.3s&gt;&gt;
 &lt;&lt;run $(&#39;#customOverlay&#39;).draggable({handle: &#39;.handle&#39;});$(&#39;#ui-dialog&#39;).draggable({handle: &#39;.handle&#39;});&gt;&gt;
 &lt;&lt;set _timer -= 1&gt;&gt;
-&lt;&lt;if _timer lte 0&gt;&gt;&lt;&lt;stop&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/repeat&gt;&gt;</tw-passagedata><tw-passagedata pid="21" name="SidebarWidget" tags="widget" position="100,350" size="100,100">&lt;&lt;widget &quot;showmoney&quot;&gt;&gt;
+&lt;&lt;if _timer lte 0&gt;&gt;&lt;&lt;stop&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/repeat&gt;&gt;
+
+/* 自动更新镜像目录 */
+&lt;&lt;run setMirrorVariables()&gt;&gt;</tw-passagedata><tw-passagedata pid="21" name="SidebarWidget" tags="widget" position="100,350" size="100,100">&lt;&lt;widget &quot;showmoney&quot;&gt;&gt;
 &lt;div class=&quot;points&quot;&gt;&lt;&lt;printmoney $PC.point&gt;&gt;P&lt;/div&gt;&lt;span class=&quot;slice&quot;&gt; | &lt;/span&gt;&lt;div class=&quot;money&quot;&gt;&lt;&lt;printmoney $PC.money&gt;&gt;&lt;&lt;icon &quot;moneyicon&quot;&gt;&gt;&lt;/div&gt;
 &lt;&lt;/widget&gt;&gt;
 
@@ -13432,7 +13958,6 @@ function wait(text) {
     }
 }
 &lt;/script&gt;</tw-passagedata><tw-passagedata pid="30" name="PassageFooter" tags="" position="1225,350" size="100,100">&lt;div id=&quot;gameVersionDisplay&quot;&gt;EWA ver&lt;&lt;print StartConfig.version&gt;&gt;&lt;/div&gt;
-&lt;&lt;run anounceAppend(&quot;&lt;&lt;you&gt;&gt;的病好了，已经恢复了健康。&lt;br&gt;&quot;)&gt;&gt;
 &lt;!-- 隐藏元素 */ --&gt;
 &lt;&lt;set $UI.currentOverlay to null&gt;&gt;
 &lt;div id=&quot;customOverlay&quot; class=&quot;customOverlay hidden&quot;&gt;
@@ -13780,7 +14305,7 @@ function wait(text) {
 &lt;&lt;=condtext([
     [inTime(6,8),&quot;一大早就起来了,要做点什么好呢……？&quot;],
     [inTime(8,11),&quot;&lt;&lt;you&gt;&gt;躺在懒人沙发上茫无目的地玩着手机……&quot;],
-    [inTime(11,12),&quot;中午了，肚子也饿起来了，要吃点什么好呢……？&quot;],
+    [inTime(11,13),&quot;中午了，肚子也饿起来了，要吃点什么好呢……？&quot;],
     [inTime(13,18),&quot;&lt;&lt;you&gt;&gt;坐在电脑前一边转着笔一边思考着接下来要做什么……&quot;],
     [inTime(18,19),&quot;晚餐时间了，到底是下厨好呢还是叫外卖呢……？&quot;],
     [inTime(19,23),&quot;到晚上了，该放学的早放学了，该下班的也下班了。网络迎来了高峰期……&lt;br&gt;嗨起来！&quot;],
@@ -13792,7 +14317,7 @@ function wait(text) {
 
 &lt;span class=&quot;title&quot;&gt;怡安小区&lt;/span&gt;&lt;br&gt;
 &lt;div class=&quot;lbox&quot;&gt;
-&lt;&lt;=D.map.景南市.怡安小区.怡安小区.description()&gt;&gt;
+&lt;&lt;=F.getDescrips(&quot;怡安小区&quot;,&quot;怡安小区&quot;)&gt;&gt;
 &lt;/div&gt;
 &lt;br&gt;
 
@@ -13808,7 +14333,7 @@ function wait(text) {
 /* 可以进行的互动 */
 &lt;&lt;link &quot;回家　　　　5m&quot; &quot;你的家 单身公寓&quot;&gt;&gt;&lt;&lt;passtime 5&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
 &lt;&lt;link &quot;共享菜园　　3m&quot;&gt;&gt;&lt;&lt;passtime 3&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
-&lt;&lt;link &quot;去公园散步　3m&quot; &quot;小区公园&quot;&gt;&gt;&lt;&lt;passtime 3&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
+&lt;&lt;link &quot;去公园散步　3m&quot; &quot;怡安小区公园&quot;&gt;&gt;&lt;&lt;passtime 3&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
 &lt;/div&gt;
 
 &lt;div id=&quot;navi&quot; class=&quot;navi_unable&quot;&gt;
@@ -13819,11 +14344,11 @@ function wait(text) {
 /* 景南市。一个位于周唐南方大省柳洲省的一级大城市。&lt;br&gt;
 有山有水，面朝大海，四季分明，是个风景优美的旅游城市。&lt;br&gt; */</tw-passagedata><tw-passagedata pid="40" name="怡安小区 links" tags="links" position="1225,475" size="100,100">&lt;div class=&quot;links&quot; title=&quot;移动时间：12分钟&quot;&gt;&lt;&lt;link &quot;・ 嘉庆广场&quot; &quot;嘉庆广场&quot;&gt;&gt;&lt;&lt;passtime 12&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
 &lt;div class=&quot;links&quot; title=&quot;移动时间：5分钟&quot;&gt;&lt;&lt;link &quot;・ 巴士站&quot; $passage&gt;&gt;&lt;&lt;passtime 5&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
-&lt;div class=&quot;links&quot; title=&quot;移动时间：10分钟&quot;&gt;&lt;&lt;link &quot;・ 地铁站&quot; $passage&gt;&gt;&lt;&lt;passtime 10&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="41" name="怡安小区公园" tags="location" position="100,600" size="100,100">&lt;&lt;location &quot;怡安小区公园&quot;&gt;&gt;&lt;&lt;mode &quot;location&quot;&gt;&gt;
+&lt;div class=&quot;links&quot; title=&quot;移动时间：10分钟&quot;&gt;&lt;&lt;link &quot;・ 地铁站&quot; $passage&gt;&gt;&lt;&lt;passtime 10&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="41" name="怡安小区公园" tags="location" position="100,600" size="100,100">&lt;&lt;location &quot;小区公园&quot;&gt;&gt;&lt;&lt;mode &quot;location&quot;&gt;&gt;
 
 &lt;span class=&quot;title&quot;&gt;怡安小区 - 公园&lt;/span&gt;&lt;br&gt;
 &lt;div class=&quot;lbox&quot;&gt;
-&lt;&lt;=D.map.景南市.怡安小区.怡安小区公园.description()&gt;&gt;
+&lt;&lt;=F.getDescrips(&quot;小区公园&quot;,&quot;怡安小区&quot;)&gt;&gt;
 &lt;/div&gt;
 &lt;br&gt;
 
@@ -13843,7 +14368,7 @@ function wait(text) {
 &lt;div class=&quot;links&quot; title=&quot;移动时间：15分钟&quot;&gt;&lt;&lt;link &quot;・ 嘉庆广场&quot; &quot;嘉庆广场&quot;&gt;&gt;&lt;&lt;passtime 15&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="43" name="嘉庆广场" tags="location" position="350,600" size="100,100">&lt;&lt;setmap &quot;嘉庆广场&quot;&gt;&gt;&lt;&lt;location &quot;嘉庆广场&quot;&gt;&gt;&lt;&lt;mode &quot;location&quot;&gt;&gt;
 &lt;span class=&quot;title&quot;&gt;嘉庆广场&lt;/span&gt;&lt;br&gt;
 &lt;div class=&quot;lbox&quot;&gt;
-&lt;&lt;=V.local.description()&gt;&gt;
+&lt;&lt;=F.getDescrips(&quot;嘉庆广场&quot;,&quot;嘉庆广场&quot;)&gt;&gt;
 &lt;/div&gt;
 &lt;br&gt;
 

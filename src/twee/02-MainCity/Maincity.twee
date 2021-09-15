@@ -3,7 +3,7 @@
 
 <span class="title">怡安小区</span><br>
 <div class="lbox">
-<<=D.map.景南市.怡安小区.怡安小区.description()>>
+<<=F.getDescrips("怡安小区","怡安小区")>>
 </div>
 <br>
 
@@ -37,11 +37,11 @@
 
 
 :: 怡安小区公园 [location]
-<<location "怡安小区公园">><<mode "location">>
+<<location "小区公园">><<mode "location">>
 
 <span class="title">怡安小区 - 公园</span><br>
 <div class="lbox">
-<<=D.map.景南市.怡安小区.怡安小区公园.description()>>
+<<=F.getDescrips("小区公园","怡安小区")>>
 </div>
 <br>
 
@@ -68,7 +68,7 @@
 <<setmap "嘉庆广场">><<location "嘉庆广场">><<mode "location">>
 <span class="title">嘉庆广场</span><br>
 <div class="lbox">
-<<=V.local.description()>>
+<<=F.getDescrips("嘉庆广场","嘉庆广场")>>
 </div>
 <br>
 

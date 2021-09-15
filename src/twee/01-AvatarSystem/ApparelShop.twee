@@ -85,7 +85,7 @@
 
 <<if $shoptype.includes("offline")>>
 <div class="trybutton">
-<<link "试穿">><<tryon $showcase.layer>><<leavecheck>><</link>>
+<<link "试穿">><<run putTryon($showcase.layer)>><<leavecheck>><</link>>
 </div>
 
 <div id="buyall">

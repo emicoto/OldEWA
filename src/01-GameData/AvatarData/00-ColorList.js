@@ -17,6 +17,15 @@ A.categoryname = {
     neck:"颈饰", face:"脸饰", hand:"手饰", back:"背饰",
 }
 
+A.category = [
+    "hat",          "outter",
+    "over_up",      "over_bt",
+    "inner_up",     "inner_bt",
+    "legs",         "shoes",
+
+    "neck", "face", "hand", "back"]
+
+
 A.colorlist = [
     { name:"黑",    code:"#56545A" },
     { name:"白",    code:"#FFFFFF" },

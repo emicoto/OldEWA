@@ -75,266 +75,6 @@ function warmth() {
 window.warmth = warmth
 F.warmth = warmth
 
-/* 商店处理 */
-
-window.setShowCaseUID = function(){
-    if(V.showcase){
-        V.showcase.uid = random(100000,999999)
-    }
-}
-
-
-function setShowCase(table) {
-    if (typeof(table) == "object") {
-        V.showcase = clone(table)
-        setShowCaseUID()
-
-        new Wikifier(null,"<<replace '#show_container'>><<ShowCase>><</replace>>")
-    }else{
-        console.log(table,"error: is not object")
-    }
-
-}
-window.setShowCase = setShowCase
-
-function setPatterns(arg) {
-    V.showcase.acc = arg
-    setShowCaseUID()
-
-    Avatar.setShop()
-    /*new Wikifier(null,"<<replace '#showcase'>><<ShowManequin>><</replace>>")*/
-}
-window.setPatterns = setPatterns
-
-function setColors(arg,name,change = false, mode="base") {
-    if (mode == "base") {
-        V.showcase.color = arg
-        V.showcase.colorname = name
-    }
-    if (mode == "acc") {
-        V.showcase.subcolor = arg
-    }
-    if (change) {
-        Avatar.setShop(arg, mode)
-        setShowCaseUID()
-        return
-    }
-    
-    setShowCaseUID()
-    Avatar.setShop()
-    /*new Wikifier(null,"<<replace '#showcase'>><<ShowManequin>><</replace>>")*/
-}
-window.setColors = setColors
-
-function tryoncost() {
-    const group = Object.keys(V.tryon)
-    var n = 0
-
-    for (let i=0; i < group.length; i++){
-        if(V.tryon[group[i]] && V.tryon[group[i]].cost > 0) n += V.tryon[group[i]].cost;
-    }
-    return n
-}
-window.tryoncost = tryoncost
-
-function BuyOutFit(args) {
-    var layer = V.showcase.layer
-    var text
-
-    if (args=="select" && PC.money > V.showcase.cost) {
-        PC.money = PC.money - V.showcase.cost
-        let buystuff = clone(V.showcase)
-        closet[layer].push(buystuff)
-
-        /* 如果买了就直接清除掉 */
-        if (V.tryon[layer] && V.tryon[layer].uid==Equip[layer].uid && V.tryon[layer].uid == V.showcase.uid){
-        V.tryon[layer] = null;
-        }
-
-        text = "你花费了"+V.showcase.cost+"元购买了"+V.showcase.name+"。"
-    }
-    else if (args=="tryon" && PC.money > tryoncost() ){
-        PC.money = PC.money - tryoncost()
-
-        let group = Object.keys(V.tryon)
-
-        for (let i=0; i < group.length; i++){
-            if (V.tryon[group[i]] && V.TEquip[group[i]]){
-                let leftstuff = clone(V.TEquip[group[i]])
-                let layer = leftstuff.layer
-                closet[layer].push(leftstuff)
-            }
-        }
-        
-        text = "你花费了"+tryoncost()+"元购买了身上试穿的衣服。"
-        
-        V.tryon = {neck: null, hand: null, face: null,hat: null, outter: null, over_up: null,over_bt: null,inner_up: null, inner_bt: null,shoes: null, legs: null,}
-        V.TEquip = clone(V.Equip)
-        
-    }
-    else{
-        if (args =="select") text = "虽然你想买"+V.showcase.name+"，但钱不够……";
-        if (args == "tryon") text = "虽然你想买身上试穿的衣服，但钱不够……"
-    }
-
-    new Wikifier(null,"<<replace '#action-text'>>"+text+"<</replace>>")
-    new Wikifier(null,"<<replace '#action-text2'>>"+text+"<</replace>>")
-    ShowPopUP()
-    
-}
-window.BuyOutFit = BuyOutFit
-
-function tryoncheck() {
-    const group = ["neck","hand","face","hat","outter","over_up","over_bt","inner_up","inner_bt","shoes","legs"]
-    var i,n
-    for ( i=0; i<group.length; i++){
-        if (V.tryon[group[i]]) return true;
-        else n++
-    }
-
-    if(n==group.length) return false
-}
-window.tryoncheck = tryoncheck
-
-/* 衣柜处理 */
-function strip(arg) {
-    if (Equip[arg]) {
-
-        var text = "你脱下了"+Equip[arg].name;
-
-        closet[arg].push(Equip[arg])
-        Equip[arg] = null
-    }else{
-        var text = "你打算脱下"+A.categoryname[arg]+"，但是你身上并没有穿任何"+A.categoryname[arg]+"。";
-    }
-
-    const group = ["face","neck","hand","back"]
-    let id = arg
-
-    if(group.includes(arg)){
-        new Wikifier(null,"<<replace '#accesory'>><<showcloset 'face'>><<showcloset 'neck'>><<showcloset 'hand'>><<showcloset 'back'>><</replace>>")
-    }
-    else{
-     new Wikifier(null,"<<replace '#"+id+"'>><<showcloset '"+id+"'>><</replace>>")   
-    }
-
-    
-    setreveal()
-
-    
-    new Wikifier(null,"<<replace '#action-text'>>"+text+"<</replace>>")
-    new Wikifier(null,"<<replace '#action-text2'>>"+text+"<</replace>>")
-    ShowPopUP()
-    stAvatar()
-}
-window.strip = strip
-F.strip = strip
-
-window.closetAct = function(args,arg) {
-    if (ui.closetmode == "穿"){
-        dressOn(args,arg)
-    }
-    if (ui.closetmode == "扔"){
-        discardDress(args,arg)
-    }
-}
-
-function discardDress(args,arg){
-    let text = "你把"+closet[args][arg].name+"扔掉了。";
-    closet[args].deleteAt(arg)
-
-    const group = ["face","neck","hand","back"]
-    let id = args
-    
-    if(group.includes(arg)){
-        new Wikifier(null,"<<replace '#accesory'>><<showcloset 'face'>><<showcloset 'neck'>><<showcloset 'hand'>><<showcloset 'back'>><</replace>>")
-    }
-    else{
-     new Wikifier(null,"<<replace '#"+id+"'>><<showcloset '"+id+"'>><</replace>>")   
-    }
-
-    new Wikifier(null,"<<replace '#action-text'>>"+text+"<</replace>>")
-    new Wikifier(null,"<<replace '#action-text2'>>"+text+"<</replace>>")
-    ShowPopUP()
-}
-F.discardDress = discardDress
-
-function dressOn(args, arg) {
-
-    var text = "你穿上了"+closet[args][arg].name+"。";
-
-    /* 身上没有衣服，直接穿上 */
-    if ( Equip[args] == null){
-     Equip[args] = closet[args][arg]
-     closet[args].deleteAt(arg)
-
-    }else if(Equip[args].index.length > 0){
-        let obj = clone(V.Equip[args])
-        Equip[args] = closet[args][arg]
-        closet[args].deleteAt(arg)
-        closet[args].push(obj)
-    }
-
-    if(args == "over_up"  && Equip.over_bt && Equip.over_up.slot == "onepiece"){
-        let obj = clone(Equip.over_bt)
-        closet.over_bt.push(obj)
-        Equip.over_bt = null
-        
-    }else if (args == "over_bt" && Equip.over_up && Equip.over_up.slot == "onepiece"){
-        let obj = clone(Equip.over_up)
-        closet.over_up.push(obj)
-        Equip.over_up = null
-
-    }else if (args == "inner_up" && Equip.inner_bt && Equip.inner_up.slot == "onepiece"){
-        let obj = clone(Equip.inner_bt)
-        closet.inner_bt.push(obj)
-        Equip.inner_bt = null
-
-    }else if (args == "inner_up" && Equip.inner_up.slot == "fullbody"){
-
-        if(Equip.inner_bt){
-            let obj = clone(Equip.inner_bt)
-            closet.inner_bt.push(obj)
-            Equip.inner_bt = null }
-
-        if(Equip.over_up){
-            let obj = clone(Equip.over_up)
-            closet.over_up.push(obj)
-            Equip.over_up = null
-        }
-        
-        if(Equip.over_bt){
-            let obj = clone(Equip.over_bt)
-            closet.over_bt.push(obj)
-            Equip.over_bt = null
-        }
-    }
-
-    if(Equip[args].functional){
-        Equip[args].effect()
-    }
-
-    const group = ["face","neck","hand","back"]
-    let id = args
-    
-    if(group.includes(arg)){
-        new Wikifier(null,"<<replace '#accesory'>><<showcloset 'face'>><<showcloset 'neck'>><<showcloset 'hand'>><<showcloset 'back'>><</replace>>")
-    }
-    else{
-     new Wikifier(null,"<<replace '#"+id+"'>><<showcloset '"+id+"'>><</replace>>")   
-    }
-
-    setreveal()
-
-    new Wikifier(null,"<<replace '#action-text'>>"+text+"<</replace>>")
-    new Wikifier(null,"<<replace '#action-text2'>>"+text+"<</replace>>")
-    ShowPopUP()
-    stAvatar()
-}
-
-window.dressOn = dressOn
-F.dressOn = dressOn
-
 function gonaked(mode){
 
     if((Equip.over_up && mode=="debug") || mode!="debug"){
@@ -398,10 +138,23 @@ DefineMacroS("redress",redress)
 function getClosetSlot(args){
     if(args == "tryon"){
         //遍历试穿部位的衣柜空位
+        let list = A.category
+        for(let i=0;i<list.length;i++){
+            let n = list[i]
+            let left = (closet.slot.level*closet.slot[n]) - closet[n].length +1
+
+            if(V.tryon[i]){
+                //确认空位,只要有一个的空位不足,就返回
+                if(left < 1)return left
+            }
+        }
+        //没中途返回就返回值 1
+        return 1
+
     }else{
         //返回showcase.layer位置的衣柜空位
         let layer = V.showcase.layer
-        return (closet.slot.level*closet.slot[layer]) - closet[layer].length
+        return (closet.slot.level*closet.slot[layer]) - closet[layer].length +1
     }
 }
 
@@ -410,30 +163,107 @@ function getClosetSlot(args){
  * @param {String} category 
  * @param {Number} id 
  */
- function getDress(category, id, color, colorname, acc, subcolor){
+ function getDress(category, id, color, colorname, acc, subcolor,cursed){
     let uid = random(100,100000)
-    V.Equip[category] = clone(A[category][id])
-    V.Equip[category].uid = uid
+    let newitem = clone(A[category][id])
+    newitem.uid = uid
 
-    if(color) V.Equip[category].color = color;
-    if(colorname) V.Equip[category].colorname = colorname;
-    if(acc) V.Equip[category].acc = acc;
-    if(subcolor && A[category][id].fixacc === false) V.Equip[category].subcolor = subcolor
+    if(color) newitem.color = color;
+    if(colorname) newitem.colorname = colorname;
 
-    if(category=="over_up" && A.over_up[id].slot=="onepiece"){
-        V.Equip.over_bt = null
-    }
-    if(category=="over_bt" && A.over_up[id].slot == "onepiece"){
-        V.Equip.over_up = null
-    }
-    if(category=="inner_up"){
-        if(A.inner_up[id].slot == "onepiece") V.Equip.inner_bt = null;
-        if(A.inner_up[id].slot == "fullbody"){
-            V.Equip.inner_bt = null
-            V.Equip.over_up = null
-            V.Equip.over_bt = null
-        }
-    }
+    if(acc) newitem.acc = acc;
+    if(subcolor && A[category][id].fixacc === false) newitem = subcolor;
+
+    if(cursed) newitem.cursed = true;
+
+    newitem = clearAItems(newitem)
+    V.Equip[category] = clone(newitem)
+
+    checkEquipSlot(V.Equip[category])
+
+    FixValue()
+    stAvatar()
 }
 F.getDress = getDress
+window.getDress = getDress
 DefineMacroS("getDress", getDress)
+
+//初始化 或 剧情中获得时
+function addCloset(index,id,color,colorname,acc,subcolor){
+    let newitem = clone(A[index][id])
+    let uid = random(100,100000)
+
+    newitem.uid = uid
+
+    if(color) newitem.color = color;
+    if(colorname) newitem.colorname = colorname;
+
+    if(acc) newitem.acc = acc;
+    if(subcolor && A[category][id].fixacc === false) newitem.subcolor = subcolor;
+
+    newitem = clearAItems(newitem)
+    V.closet[index].push(newitem)
+
+}
+F.addCloset = addCloset
+window.addCloset = addCloset
+
+window.clearAItems = function(obj){
+    //减少存档负担
+    delete obj.text
+    delete obj.text_en
+    delete obj.tag
+    delete obj.colors
+    delete obj.patterns
+    
+    if(obj.effect) delete obj.effect
+
+    return obj
+}
+
+//连衣裙之类的穿脱处理
+window.checkEquipSlot = function(obj,mode){
+    let layer = obj.layer
+
+    if(layer=="over_up" && Equip.over_bt && obj.slot=="onepiece"){
+        if(mode=="closet"){
+            let item = clone(Equip.over_bt)
+            closet.over_bt.push(item)
+        }
+        Equip.over_bt = null
+    }
+    if(layer=="over_bt" && Equip.over_up?.slot == "onepiece"){
+        if(mode=="closet"){
+            let item = clone(Equip.over_up)
+            closet.over_up.push(item)
+        }
+        Equip.over_up = null
+    }
+    if(layer=="inner_up" && Equip.inner_bt && obj.slot == "onepiece"){
+        if(mode=="closet"){
+            let item = clone(Equip.inner_bt)
+            closet.inner_bt.push(item)
+        }
+        Equip.inner_bt = null
+    }
+    if(layer=="inner_up" && Equip.inner_up.slot == "fullbody"){
+        if(mode=="closet"){
+            if(Equip.inner_bt){
+                let item = clone(Equip.inner_bt)
+                closet.inner_bt.push(item)
+            }
+            if(Equip.over_up){
+                let item = clone(Equip.over_up)
+                closet.over_up.push(item)
+            }
+            if(Equip.over_bt){
+                let item = clone(Equip.over_bt)
+                closet.over_bt.push(item)
+            }
+        }
+        Equip.inner_bt = null
+        Equip.over_up = null
+        Equip.over_bt = null
+    }
+
+}

@@ -92,3 +92,5 @@
 <<set _timer -= 1>>
 <<if _timer lte 0>><<stop>><</if>><</repeat>>
 
+/* 自动更新镜像目录 */
+<<run setMirrorVariables()>>

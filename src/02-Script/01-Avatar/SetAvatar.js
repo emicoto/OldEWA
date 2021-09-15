@@ -114,7 +114,7 @@ function stAvatar() {
 
     for(let i=0;i<layers.length;i++){
         let n = layers[i]
-
+        
         if(Equip[n] != null && Equip[n].hasImg==true){
             V.avatar[n] = setAvatar(n,{
                 fixcolor: Equip[n].fixcolor, color: Equip[n].color,

@@ -140,7 +140,9 @@ F.InitGame = function(){
     V.city = "景南市"
     V.mapgroup = "怡安小区"
     V.location = "单身公寓"
+
     V.local = D.map.景南市.怡安小区.单身公寓
+    V.local.last = "单身公寓"    
 
     V.map = D.mapdata.景南市.怡安小区
 

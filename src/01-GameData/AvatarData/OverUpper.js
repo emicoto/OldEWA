@@ -62,7 +62,7 @@ A.over_up = [
         cost : 120, reveal : 10,    hot : -1.5, cold : -1.5, 
         durable : 20,   maxdurable : 20,    beauty: 0.02,   defence: 0.5,
         fixcolor: false,    color:"#FDFFFF",    colorname: "白",
-        colors : ["mint"],
+        colors : [],
         
         category: "上衣",   layer : "over_up",
         shop : "all",

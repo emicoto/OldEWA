@@ -11,11 +11,13 @@ Config.saves.slots = 9;
 
 Config.saves.onLoad = function (save) {
 	window.versionUpdateCheck = true;
-	new Wikifier(null, '<<loadgame>>')
+	updateCloset()
+	getAchivement()
+	getGallery()
 }
 
 Config.saves.onSave = function (save) {
-	new Wikifier(null, '<<updateGame>>');
+
 }
 
 Config.saves.id = "EWA";

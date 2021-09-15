@@ -172,18 +172,18 @@ type locationtag = (
         "树丛" | "封闭" | "狭窄" | "开阔" | "高处" | "水源" | "地下" | "宽敞" | "藏匿点" | "历史" |  "神秘" | "特殊" | "光照" | "阴暗" | "风口" | "海边" | "高山" | "常雪" | "幻境" | "大道" | "小路" |
 
         /* 地点功能 */
-        "交通" | "公园" | "活动" | "停车场" | "景观" | "信仰" | "广场" | "餐厅" | "商店" | "便利店" | "仓库" |"夜店" | "菜园" | "无" );
+        "交通" | "公园" | "活动" | "停车点" | "景观" | "信仰" | "广场" | "餐厅" | "商店" | "便利店" | "仓库" |"夜店" | "菜园" | "医疗" | "理发" |"美容" | "其他" |"无" );
 
 type area = ( "东兴区" | "北兴区" | "南兴区" | "北昌区" | "南昌区" | "东昌区"| "景湾区" | "景中区" | "景禾区" | "景秀区" | "西乡区"   | "南岭区" |  "大马岛" | "柳明方向" | "长康方向" | "潘门方向" | "青松方向" | "通用" );
 
 type city = ("景南市" | "柳明市" | "青松市" | "潘门市" | "松江市" | "长康市" | "通用");
 
-type mapgroup = ("通用" | "独立" | "特殊" | "幻境" | "异界" | "怡安小区" | "嘉庆广场" | "中心大厦" | "军事基地" | "大学城" | "度假村" | "影视基地" | "工业园" | "游乐园" | "博物馆" | "西塘镇" | "城乡结合部" | "大马岛" | "柳明方向" | "长康方向" | "潘门方向" | "青松方向" );
+type mapgroup = ("通用" | "独立" | "特殊" | "幻境" | "异界" | "怡安小区" | "嘉庆广场" | "中心大厦" | "军事基地" | "大学城" | "度假村" | "影视基地" | "工业园" | "游乐园" | "博物馆" | "西塘镇" | "城乡结合部" | "大马岛" | "柳明方向" | "长康方向" | "潘门方向" | "青松方向" | "商店街" );
 
 declare interface LocationData {
     place: string, side: "室内" | "室外", group: mapgroup,
 
-    tag:[locationtag,locationtag?,locationtag?,locationtag?,locationtag?],
+    tag:[locationtag,locationtag?,locationtag?,locationtag?,locationtag?,locationtag?,locationtag?,locationtag?],
 
     chara: [] | [string],
 
@@ -281,12 +281,13 @@ const newfoods : FoodItems = {
 }
 
 const newplace : LocationData = {
-    place: "共享菜园", side: "室外", group: "怡安小区",
-    tag: ["光照", "菜园"],
+    place: "杨安武馆", side: "室内", group: "商店街",
+    tag: ["武馆","学习","格斗"],
     chara: [],
-    img: "neiborhood_park",
-    homebutton: true,
+    img: "hairsalon",
+    bike: true, car: true,
     description(){
-        return "为了满足小区住户种植需求而特地建造的一个小菜园。"
-    }
+        return "古色古香的武馆。这里能学习到真功夫。"
+    },
+    situation:[],
 }

@@ -97,7 +97,9 @@
 <<set _placeholder to "image/avatar/thumb.png">>
 
 <div id="W_showitems">
+    <div class="W_thumb">
     <div class="itemthumb"><<print "<<link [img[_nakeimg]] >><<run strip('"+_catgr+"')>><<fixvalue>><</link>>">></div>
+    </div>
     <div class="W_itemname">脱掉<<print _catgrname[$args[0]]>></div>
 </div>
 
@@ -106,36 +108,7 @@
         <<if $closet[_catgr][_i] is null>>
             <<continue>>
         <</if>>
-        <<if $closet[_catgr][_i].hasImg is true>>
-            <<set _img to "image/avatar/"+_catgr+"/"+$closet[_catgr][_i].index + "/thumb.png">>
-        <<else>>
-            <<set _img to _placeholder>>
-        <</if>>
-        <<set _code to $closet[_catgr][_i].color>>
-        <<set _name to $closet[_catgr][_i].colorname>>
-        <div id="W_showitems">
-            <div class="itemthumb">
-            <<print "<<link [img[_img]]>><<run closetAct('"+_catgr+"',"+_i+")>><<fixvalue>><</link>>">></div>
-            <div class="W_color" @style="'background-color:'+_code"><<print _name>></div>
-            <<if $closet[_catgr][_i].acc isnot null>>
-                <div class="W_pattern"><<print $closet[_catgr][_i].acc>></div>
-            <</if>>
-            <div class="W_itemname"><<print $closet[_catgr][_i].name>></div>
-            <div class="itemdurab">
-            耐久：<<print $closet[_catgr][_i].durable>>/<<print $closet[_catgr][_i].maxdurable>>
-            </div>
-
-            <div class="itemdegree">
-            <span style="color:blue"><<if $closet[_catgr][_i].cold gt 0>>+<</if>><<print $closet[_catgr][_i].cold>>C</span>
-                | 
-            <span style="color:red"><<if $closet[_catgr][_i].hot gt 0>>+<</if>><<print $closet[_catgr][_i].hot>>C</span>
-            </div>
-
-            <div class="itembuff">
-            <<if $closet[_catgr][_i].defence gt 0>><span style="color:brown">Def+</span><</if>>
-            <<if $closet[_catgr][_i].beauty gt 0>><span style="color:deeppink">Allure+</span><</if>>
-            </div>
-        </div>
+        <<=showClosetItems(_catgr,_i)>>
     <</for>>
 <</if>>
 <</widget>>

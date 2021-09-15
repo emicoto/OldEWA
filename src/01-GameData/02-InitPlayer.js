@@ -70,40 +70,40 @@ function XiuXianPlayer(){
 DefineMacroS("PCCard_Yun", XiuXianPlayer)
 
 
-
 F.InitClothes = function(){
     if(PC.info.gender == "m"){
         //衣柜
-        V.closet.over_up[1] = clone(A.over_up[4])
-        V.closet.over_bt[1] = clone(A.over_bt[4])
-        V.closet.inner_bt[1] = clone(A.inner_bt[1])
-        V.closet.legs[1] = clone(A.legs[1])
+        addCloset("over_up",4)
+        addCloset("inner_bt",1)
+        addCloset("legs",1)
 
-        F.getDress("over_up",1,"#F14660","红")
-        F.getDress("inner_bt",1)
-        F.getDress("over_bt",1)
-        F.getDress("shoes",1)
-        F.getDress("legs",1)
+        getDress("over_up",1,"#F14660","红")
+        getDress("inner_bt",1)
+        getDress("over_bt",1)
+        getDress("shoes",1)
+        getDress("legs",1)
 
     }else{
-        V.closet.over_up[1] = clone(A.over_up[4])
-        V.closet.over_bt[1] = clone(A.over_bt[4])
+        addCloset("over_up",4)
+        addCloset("over_bt",4)
+
 
         if(PC.info.breast > 2){
-            V.closet.inner_up[1] = clone(A.inner_up[2])
-            F.getDress("inner_up",2)
+            addCloset("inner_up",2)
+            getDress("inner_up",2)
         }
         else{
-            V.closet.inner_up[1] = clone(A.inner_up[1])
-            F.getDress("inner_up",1)
+            addCloset("inner_up",1)
+            getDress("inner_up",1)
         }
 
-        V.closet.inner_bt[1] = clone(A.inner_bt[2])
-        V.closet.legs[1] = clone(A.legs[1])
 
-        F.getDress("over_up",1,null,null,"heart")
-        F.getDress("over_bt",2)
-        F.getDress("shoes",2,"#E5A9FF","粉")
+        addCloset("inner_bt",2)
+        addCloset("legs",1)
+
+        getDress("over_up",1,null,null,"heart")
+        getDress("over_bt",2)
+        getDress("shoes",2,"#E5A9FF","粉")
     }
 
     V.TEquip = clone(V.Equip)
@@ -362,7 +362,5 @@ F.InitPlayer = function(){
         vagina : null, penis: null, ureth: null, anal: null,
         nipple : null,
     }
-
-    F.InitClothes()
 
 }

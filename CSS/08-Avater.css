@@ -244,6 +244,16 @@
     overflow: clip;    
 }
 
+.W_thumb{
+    width: 80px;
+    height: 80px;
+    position: absolute;
+    top:0px;
+    left:0px;
+    z-index: 0;
+    overflow:hidden;
+}
+
 .itemthumb {
     width: 80px;
     height: 80px;
@@ -252,6 +262,11 @@
     left:-5px;
     z-index: 0;
 }
+
+.W_thumb .itemthumb{
+    left: -10px
+}
+
 
 .itemthumb:hover {
     background-color: rgba(127, 255, 212, 0.2);
@@ -290,7 +305,6 @@
     position:relative;
     border: 1px solid #ccc;
     float: left;
-    overflow: clip;
     line-height: 16px;
     font-family: 新综艺;
 }
