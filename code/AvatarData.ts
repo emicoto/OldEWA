@@ -178,7 +178,7 @@ type area = ( "东兴区" | "北兴区" | "南兴区" | "北昌区" | "南昌区
 
 type city = ("景南市" | "柳明市" | "青松市" | "潘门市" | "松江市" | "长康市" | "通用");
 
-type mapgroup = ("通用" | "独立" | "特殊" | "幻境" | "异界" | "怡安小区" | "嘉庆广场" | "中心大厦" | "军事基地" | "大学城" | "度假村" | "影视基地" | "工业园" | "游乐园" | "博物馆" | "西塘镇" | "城乡结合部" | "大马岛" | "柳明方向" | "长康方向" | "潘门方向" | "青松方向" | "商店街" );
+type mapgroup = ("通用" | "独立" | "特殊" | "幻境" | "异界" | "怡安小区" | "嘉庆广场" | "中心大厦" | "军事基地" | "大学城" | "度假村" | "影视基地" | "工业园" | "游乐园" | "博物馆" | "西塘镇" | "城乡结合部" | "大马岛" | "柳明方向" | "长康方向" | "潘门方向" | "青松方向" | "商店街" | "南兴区" );
 
 declare interface LocationData {
     place: string, side: "室内" | "室外", group: mapgroup,
@@ -281,13 +281,13 @@ const newfoods : FoodItems = {
 }
 
 const newplace : LocationData = {
-    place: "杨安武馆", side: "室内", group: "商店街",
-    tag: ["武馆","学习","格斗"],
+    place: "消防所", side: "室外", group: "南兴区",
+    tag: ["消防","大道"],
     chara: [],
-    img: "hairsalon",
-    bike: true, car: true,
+    img: "firestation",
+    bike: true, car: true, bus:true, subway:true,
     description(){
-        return "古色古香的武馆。这里能学习到真功夫。"
+        return "这个管辖区的消防所。消防员们24小时待命，为人民服务。"
     },
     situation:[],
 }

@@ -3738,7 +3738,7 @@ D.mapdata.景南市 = {
         index: "南兴区", enter:"嘉庆广场",
     },    
     商业街:{
-        links:{ 商业街: 0, 公交站:1, 生鲜市场: -15, 五金店: -2, 旺记茶铺: 2, 天地书店: 3, 开封菜: 4, 药店: 5, 发廊: 8 ,中医馆: 10, 逸安武馆: 12,},
+        links:{ 商业街: 0, 公交站:1, 生鲜市场: -15, 五金店: -2, 旺记茶铺: 2, 天地书店: 3, 开封菜: 4, 药店: 5, 发廊: 8 ,中医馆: 10, 逸安武馆: 13,},
         index: "南兴区", enter:"商业街",
     },
 
@@ -3974,7 +3974,7 @@ D.map.景南市.商店街 = {
     },
     逸安武馆 : {
         place: "逸安武馆", side: "室内", group: "商店街",
-        tag: ["武馆","学习","格斗"],
+        tag: ["武馆","比武","江湖人士"],
         chara: [],
         img: "hairsalon",
         bike: true, car: true,
@@ -3989,22 +3989,70 @@ D.map.景南市.商店街 = {
 
 D.map.景南市.南兴区 = {
     箱庭托儿所 : {
-
+        place: "箱庭幼儿园", side: "室外", group: "南兴区",
+        tag: ["托儿所","儿童","大道","光照","停车点"],
+        chara: [],
+        img: "kidsgarden",
+        bike: true, car: true, bus:true,
+        description(){
+            return "这附近的一所中型幼儿园。明亮的色彩十分讨喜。"
+        },
+        situation:[],
     },
     市十三中 : {
-
+        place: "市十三中", side: "室外", group: "南兴区",
+        tag: ["学校","学习","大道","光照","停车点"],
+        chara: [],
+        img: "qischool",
+        bike: true, car: true, bus:true,
+        description(){
+            return "公立中学。虽然是建立在市镇中的学校，但占地面积也相当大。"
+        },
+        situation:[],
     },
     金福酒家 : {
-
+        place: "金福酒家", side: "室内", group: "南兴区",
+        tag: ["餐厅","大道","停车点","休息","厕所"],
+        chara: [],
+        img: "jiujia",
+        bike: true, car: true, bus:true,
+        description(){
+            return "这一带比较高级的中餐馆。华丽的装修和地道精湛的手艺让人流连忘返。"
+        },
+        situation:[],
     },
     市第七医院 : {
-
+        place: "市第七医院", side: "室外", group: "南兴区",
+        tag: ["医疗","大道","下水道出入口","光照","停车点"],
+        chara: [],
+        img: "hospital",
+        bike: true, car: true, bus:true, subway:true,
+        description(){
+            return "这一带最近的市立医院。据说曾经闹过鬼，也不知道是真是假。"
+        },
+        situation:[],
     },
     派出所 : {
-
+        place: "派出所", side: "室外", group: "南兴区",
+        tag: ["警察","大道"],
+        chara: [],
+        img: "police",
+        bike: true, car: true, bus:true,
+        description(){
+            return "这个管辖区的派出所。民警们24小时待命，为人民服务。"
+        },
+        situation:[],
     },
     消防所 : {
-
+        place: "消防所", side: "室外", group: "南兴区",
+        tag: ["消防","大道"],
+        chara: [],
+        img: "firestation",
+        bike: true, car: true, bus:true,
+        description(){
+            return "这个管辖区的消防所。消防员们24小时待命，为人民服务。"
+        },
+        situation:[],
     },
     怡安小区 : D.map.景南市.怡安小区.怡安小区,
     嘉庆广场 : D.map.景南市.嘉庆广场.嘉庆广场,
