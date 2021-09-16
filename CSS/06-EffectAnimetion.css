@@ -37,26 +37,6 @@
 }
 
 
-
-/* 图片滤镜*/
-.sunset {
-  background-color:#E26105;
-  opacity:0.2;
-  mix-blend-mode: multiply;
-}
-
-.night {
-  background-color:#180E9C;
-  opacity:0.2;
-  mix-blend-mode: multiply;
-}
-
-.reset {
-  background-color: transparent !important;
-  opacity: 0 !important;
-  mix-blend-mode: normal !important;
-}
-
 @keyframes fadefilter {
   0% {opacity:0;}
   100% {opacity:0.4;}
