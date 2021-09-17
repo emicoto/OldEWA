@@ -4,11 +4,6 @@
 
 :: 嘉庆广场 [location]
 <<setmap "嘉庆广场">><<location "嘉庆广场">><<mode "location">>
-<span class="title">嘉庆广场</span><br>
-<div class="lbox">
-<<=F.getDescrips("嘉庆广场","嘉庆广场")>>
-</div>
-<br>
 
 <div id="append-text" class="append-normal"></div>
 <div id="situation" class="situation"><<=F.getsituation("嘉庆广场")>></div>
@@ -16,7 +11,7 @@
 <br>
 <div class="tolink">
 <<link "打发时间 　 10m" $passage>><<passtime 10>><</link>><br><br>
-<<link "逛服装店　　5m" "商店">><<passtime 5>><</link>><br>
+<<link "逛服装店　　5m" "AW服装店">><<passtime 5>><</link>><br>
 <<link "汉堡王　　　5m" $passage>><<passtime 5>><</link>><br>
 </div>
 
@@ -44,13 +39,225 @@
 "<<you>>站在广场角落的报亭前，随手拿起一份报纸看了眼今天的新闻。",
 )>>
 
-:: 商店 [location]
+:: AW服装店 [location]
 <<location "AW服装店">><<mode "location">>
-
-<span class="title">服装店</span><br>
-<div class="lbox">
-商场里的服装店。商品琳琅满目，什么都有。<br>
-</div>
 <<set $shoptype to ["all","offline"]>>
+<<set $shopline to ["general"]>>
 
+<div id="append-text" class="append-normal"></div>
+<div id="situation" class="situation">
+<<you>>走在服装卖场中,看着各种各样的服饰。
+</div>
+
+<br>
+<div class="tolink">
+<<link "买衣服　 2m" "AW服装店-试衣间">><<passtime 5>><</link>><br>
+<<link "只是看看 10m" $passage>><<passtime 5>><</link>><br>
+</div>
+
+<div id="navi" class="navi_unable">
+    <<navi>>
+</div>
+
+
+:: AW服装店-试衣间
 <<include "试衣间">>
+
+:: 汉堡王 [location]
+<<location "汉堡王">><<mode "location">>
+
+<div id="append-text" class="append-normal"></div>
+<div id="situation" class="situation">
+<<you>>走到汉堡王的点单柜台前,看着上面的菜单思考要吃点什么。<br>
+</div>
+
+<br>
+<div class="tolink">
+<<link "点餐">><</link>><br>
+</div>
+
+<div id="navi" class="navi_unable">
+    <<navi>>
+</div>
+
+:: 停车场 [location]
+<<location "停车场">><<mode "location">>
+
+<div id="append-text" class="append-normal"></div>
+<div id="situation" class="situation">
+<<you>>来到了户外的停车场，看着停靠的车辆思考如果赚够钱买辆怎样的车。<br>
+</div>
+
+<br>
+<div class="tolink">
+<<link "恶作剧　　5m">><</link>><br>
+</div>
+
+<div id="navi" class="navi_unable">
+    <<navi>>
+</div>
+
+:: 地下停车场 [location]
+<<location "地下停车场">><<mode "location">>
+
+<div id="append-text" class="append-normal"></div>
+<div id="situation" class="situation">
+<<you>>来到了地下的停车场，看到阴暗的环境不禁打了个冷颤……总觉得有什么在这里徘徊，是错觉吗啊？<br>
+</div>
+
+<br>
+<div class="tolink">
+<<link "？？？　　5m">><</link>><br>
+</div>
+
+<div id="navi" class="navi_unable">
+    <<navi>>
+</div>
+
+:: 公交站 [transport]
+<<location "公交站">><<mode "transport">>
+
+<div id="append-text" class="append-normal"></div>
+<div id="situation" class="situation">
+<<you>>站在公交站前，看着牌子上的路线，看看要去哪里……<br>
+</div>
+
+<br>
+<div class="tolink">
+<<link "怡安小区　　2￥" "怡安小区">><</link>>　　
+<<link "嘉庆广场　　2￥" "嘉庆广场">><</link>><br>
+<<link "商店街　　　2￥" "宜兴步行街">><</link>>　　
+<<link "幼儿园　　　2￥" "箱庭幼儿园">><</link>><br>
+<<link "市十三中　　5￥" "市十三中">><</link>>　　
+<<link "金福酒家　　5￥" "金福酒家">><</link>><br>
+<<link "第七医院　　5￥" "市第七医院">><</link>>　　
+<<link "消防所　　　5￥" "消防所">><</link>><br>
+<<link "派出所　　　5￥" "派出所">><</link>><br>
+</div>
+
+:: 地铁站 [transport]
+<<location "地铁站">><<mode "transport">>
+
+
+<div id="append-text" class="append-normal"></div>
+<div id="situation" class="situation">
+<<you>>来到地铁站里面，看着牌子上的路线，看看要去哪里……<br>
+</div>
+
+<br>
+<div class="tolink">
+<<link "怡安小区　　2￥" "怡安小区">><</link>>　　
+<<link "嘉庆广场　　2￥" "嘉庆广场">><</link>><br>
+<<link "商店街　　　2￥" "宜兴步行街">><</link>>　　
+<<link "幼儿园　　　2￥" "箱庭幼儿园">><</link>><br>
+<<link "市十三中　　5￥" "市十三中">><</link>>　　
+<<link "金福酒家　　5￥" "金福酒家">><</link>><br>
+<<link "第七医院　　5￥" "市第七医院">><</link>>　　
+<<link "消防所　　　5￥" "消防所">><</link>><br>
+<<link "派出所　　　5￥" "派出所">><</link>><br>
+</div>
+
+:: 箱庭幼儿园 [location]
+<<setmap "南兴区">>
+<<location "箱庭幼儿园">><<mode "location">>
+<div id="append-text" class="append-normal"></div>
+<div id="situation" class="situation">
+<<you>>来到了箱庭幼儿园门口，听着孩子们的欢声笑语，感觉自己的心情也被感染了。<br>
+</div>
+
+<br>
+<div class="tolink">
+<<link "在附近闲逛　　5m">><</link>><br>
+</div>
+
+<div id="navi" class="navi_unable">
+    <<navi>>
+</div>
+
+:: 市十三中 [location]
+<<setmap "南兴区">>
+<<location "市十三中">><<mode "location">>
+<div id="append-text" class="append-normal"></div>
+<div id="situation" class="situation">
+<<you>>来到了景南市第十三中学前，听着学子们的喃喃读书声。<br>
+</div>
+
+<br>
+<div class="tolink">
+<<link "在附近闲逛　　5m">><</link>><br>
+</div>
+
+<div id="navi" class="navi_unable">
+    <<navi>>
+</div>
+
+:: 金福酒家 [location]
+<<setmap "南兴区">>
+<<location "金福酒家">><<mode "location">>
+<div id="append-text" class="append-normal"></div>
+<div id="situation" class="situation">
+<<you>>来到了金福酒家门前，如果钱够的话，倒是可以订个座去吃顿好的……<br>
+</div>
+
+<br>
+<div class="tolink">
+<<link "在附近闲逛　　5m">><</link>><br>
+</div>
+
+<div id="navi" class="navi_unable">
+    <<navi>>
+</div>
+
+:: 市第七医院 [location]
+<<setmap "南兴区">>
+<<location "市第七医院">><<mode "location">>
+<div id="append-text" class="append-normal"></div>
+<div id="situation" class="situation">
+<<you>>来到了景南市第七人民医院前，没病痛的话，还是不要靠近的好。<br>
+</div>
+
+<br>
+<div class="tolink">
+<<link "在附近闲逛　　5m">><</link>><br>
+</div>
+
+<div id="navi" class="navi_unable">
+    <<navi>>
+</div>
+
+:: 派出所 [location]
+<<setmap "南兴区">>
+<<location "派出所">><<mode "location">>
+<div id="append-text" class="append-normal"></div>
+<div id="situation" class="situation">
+<<you>>来到了派出所前面，跟门口值班的民警打了个招呼。<br>
+<br>
+“有什么需要帮忙的吗？” 值班民警走进了你，亲切地问话。<br>
+</div>
+
+<br>
+<div class="tolink">
+<<link "闲聊　　5m">><</link>><br>
+</div>
+
+<div id="navi" class="navi_unable">
+    <<navi>>
+</div>
+
+:: 消防所 [location]
+<<setmap "南兴区">>
+<<location "消防所">><<mode "location">>
+<div id="append-text" class="append-normal"></div>
+<div id="situation" class="situation">
+<<you>>来到了消防所前面，跟门口值班的人员打了个招呼。<br>
+<br>
+</div>
+
+<br>
+<div class="tolink">
+<<link "闲聊　　5m">><</link>><br>
+</div>
+
+<div id="navi" class="navi_unable">
+    <<navi>>
+</div>

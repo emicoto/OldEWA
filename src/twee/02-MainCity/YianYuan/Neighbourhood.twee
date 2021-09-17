@@ -48,7 +48,10 @@
 :: 共享菜园
 <<location "共享菜园">><<mode "location">>
 
-<<you>>站在菜地前,看着各种蔬菜徐徐生长着。<br>
+
+<div id="append-text" class="append-normal"></div>
+<div id="situation" class="situation"><<you>>站在菜地前,看着各种蔬菜徐徐生长着。<br></div>
+
 <br>
 <div class="tolink">
 <<link "浇水　　5m" $passage>><<passtime 5>><</link>>
@@ -61,11 +64,16 @@
 </div>
 
 
-:: 小卖部
+:: 虹猫小店
 <<location "小卖部">><<mode "location">>
 
+
+<div id="append-text" class="append-normal"></div>
+<div id="situation" class="situation">
 <<you>>站在小卖部门前，看着货车把一箱又一箱的物资往里面搬运。<br>
 最近似乎在整顿，距离开店还有点日子……<br>
+</div>
+
 <br>
 <div class="tolink">
 <<link "离开　　3m" "怡安小区">><</link>>
@@ -75,7 +83,7 @@
     <<navi>>
 </div>
 
-:: 虹猫小店
+:: 虹猫小店-内部
 <<location "虹猫小店">>
 
 <div id="append-text" class="append-normal"><span id="action-text2"><<you>>走进了虹猫小店，看着各种各样的物品思考着要买点什么。</span></div>

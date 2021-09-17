@@ -1,0 +1,168 @@
+﻿:: 宜兴步行街 [location]
+<<setmap "商店街">>
+<<location "商店街">><<mode "location">>
+<div id="append-text" class="append-normal"></div>
+<div id="situation" class="situation">
+<<you>>走在步行街的路上，看着来往的人潮，听着摊贩的吆喝声，享受着和平时代特有的烟火气息。<br>
+</div>
+
+<br>
+<div class="tolink">
+<<link "闲逛　　15m">><<passtime 15>><</link>><br>
+<br>
+</div>
+
+<div id="navi" class="navi_unable">
+    <<navi>>
+</div>
+
+:: 旺记茶铺 [shop]
+<<location "旺记茶铺">><<mode "location">>
+<div id="append-text" class="append-normal"></div>
+<div id="situation" class="situation">
+<<you>>找了个空位坐下，看着菜单。要吃点什么呢……？<br>
+</div>
+
+<br>
+<div class="tolink">
+<<link "糖水">><</link>><br>
+<<link "凉茶">><</link>><br>
+<<link "点心">><</link>><br>
+</div>
+
+<div id="navi" class="navi_unable">
+    <<navi>>
+</div>
+
+:: 天地书店 [shop]
+<<location "天地书店">><<mode "location">>
+<div id="append-text" class="append-normal"></div>
+<div id="situation" class="situation">
+<<you>>拿了本书，到窗边的阶梯沙发上坐下。<br>
+</div>
+
+<br>
+<div class="tolink">
+<<link "看书">><</link>><br>
+<<link "购物">><</link>><br>
+</div>
+
+<div id="navi" class="navi_unable">
+    <<navi>>
+</div>
+
+:: 开封菜 [shop]
+<<location "开封菜">><<mode "location">>
+<div id="append-text" class="append-normal"></div>
+<div id="situation" class="situation">
+<<you>>找了个位置坐下，看看要吃点什么。<br>
+</div>
+
+<br>
+<div class="tolink">
+<<link "点单">><</link>><br>
+</div>
+
+<div id="navi" class="navi_unable">
+    <<navi>>
+</div>
+
+:: 药店 [shop]
+<<location "药店">><<mode "location">>
+<div id="append-text" class="append-normal"></div>
+<div id="situation" class="situation">
+<<you>>来到药店，看看要不要买点常用药物回去备着。<br>
+</div>
+
+<br>
+<div class="tolink">
+<<link "购物">><</link>><br>
+</div>
+
+<div id="navi" class="navi_unable">
+    <<navi>>
+</div>
+
+:: 发廊 [shop]
+<<location "发廊">><<mode "location">>
+<div id="append-text" class="append-normal"></div>
+<div id="situation" class="situation">
+<<you>>坐在待客沙发上，听着店员给你介绍各种服务。<br>
+</div>
+
+<br>
+<div class="tolink">
+<<link "剪发">><</link>><br>
+<<link "美容">><</link>><br>
+<<link "按摩">><</link>><br>
+<<link "？？">><</link>><br>
+</div>
+
+<div id="navi" class="navi_unable">
+    <<navi>>
+</div>
+
+:: 中医馆 [shop]
+<<location "中医馆">><<mode "location">>
+<div id="append-text" class="append-normal"></div>
+<div id="situation" class="situation">
+<<you>>看着各种各样的药材，思索要不要买点什么寄给家里长辈。<br>
+</div>
+
+<br>
+<div class="tolink">
+<<link "购物">><</link>><br>
+</div>
+
+<div id="navi" class="navi_unable">
+    <<navi>>
+</div>
+
+:: 逸安武馆 [shop]
+<<location "逸安武馆">><<mode "location">>
+<div id="append-text" class="append-normal"></div>
+<div id="situation" class="situation">
+<<you>>来到武馆，看着穿着功夫装的人在大院里练功。<br>
+</div>
+
+<br>
+<div class="tolink">
+<<link "闲聊">><</link>><br>
+<<link "拜师学艺">><</link>><br>
+</div>
+
+<div id="navi" class="navi_unable">
+    <<navi>>
+</div>
+
+:: 生鲜市场 [shop]
+<<location "生鲜市场">><<mode "location">>
+<div id="append-text" class="append-normal"></div>
+<div id="situation" class="situation">
+<<you>>来到菜市场，看看有什么新鲜的。<br>
+</div>
+
+<br>
+<div class="tolink">
+<<link "买菜">><</link>><br>
+</div>
+
+<div id="navi" class="navi_unable">
+    <<navi>>
+</div>
+
+:: 五金店 [shop]
+<<location "五金店">><<mode "location">>
+<div id="append-text" class="append-normal"></div>
+<div id="situation" class="situation">
+<<you>>五金店，看看有什么趁手的工具。<br>
+</div>
+
+<br>
+<div class="tolink">
+<<link "购物">><</link>><br>
+</div>
+
+<div id="navi" class="navi_unable">
+    <<navi>>
+</div>

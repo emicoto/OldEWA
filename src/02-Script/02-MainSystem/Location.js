@@ -86,7 +86,7 @@ function setBG() {
         background.color= "#242C8A"
         document.getElementById('avatar-overlay').className = "Layer dark"
     }
-    else if(PC.state.睡觉 && V.local.tag.includes("家") && !between(V.date.time,300,1200)){
+    else if(PC.state.睡眠 && V.local.tag.includes("家") && !between(V.date.time,300,1200)){
          background.color= "#242C8A"
         document.getElementById('avatar-overlay').className = "Layer dark"       
     }
@@ -94,6 +94,7 @@ function setBG() {
         background.color = null;
         document.getElementById('avatar-overlay').className = "Layer"
     }
+
     V.avatar.background = setAvatar("background",background,true)
 }
 F.setBG = setBG
@@ -261,12 +262,16 @@ DefineMacroS("navi",navigation)
 //else time between open, close
 window.isOpenHour = function(obj){
 
-    if (obj.tag.includes["营业"]){
+    if (obj.tag.includes("营业")){
            let close = obj.close
            let open = obj.open 
+           
+           console.log("进来了")
 
            if (close < open) return (!between(V.date.time,close,open))
            else return (between(V.date.time,open,close))
     }
+    console.log("没进来")
+    return true
 
 }

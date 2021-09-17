@@ -3734,18 +3734,18 @@ D.mapdata.景南市 = {
         index:"南兴区", enter: "怡安小区",
         },
     嘉庆广场:{
-        links:{  嘉庆广场: 0, 停车场: -5, 公交站: 2, 地铁站: -3, 汉堡王: -1, 景润超市:-4, 公共厕所: 3, AW服装店:5,},
+        links:{  嘉庆广场: 0, 地下停车场: -5, 停车场:1, 公交站: 2, 地铁站: -3, 汉堡王: -1, 景润超市:-4, 公共厕所: 3, AW服装店:5,},
         index: "南兴区", enter:"嘉庆广场",
     },    
-    商业街:{
-        links:{ 商业街: 0, 公交站:1, 生鲜市场: -15, 五金店: -2, 旺记茶铺: 2, 天地书店: 3, 开封菜: 4, 药店: 5, 发廊: 8 ,中医馆: 10, 逸安武馆: 13,},
+    商店街:{
+        links:{ 商店街: 0, 公交站:1, 生鲜市场: -15, 五金店: -2, 旺记茶铺: 2, 天地书店: 3, 开封菜: 4, 药店: 5, 发廊: 8 ,中医馆: 10, 逸安武馆: 13,},
         index: "南兴区", enter:"商业街",
     },
 
     //位于公交站或地铁站时是不会有 移动按钮. 而是显示路线图, 直接到全市各个站点.
     南兴区:{
         links: {
-            公交站:0, 地铁站:15, 怡安小区: 0, 商店街: -12, 箱庭托儿所: -10,  嘉庆广场: 15, 市十三中: 30, 金福酒家: 40, 市第七医院: 150, 派出所: 100, 消防所: 120, 
+            公交站:0, 地铁站:15, 怡安小区: 0, 商店街: -12, 箱庭幼儿园: -10,  嘉庆广场: 15, 市十三中: 30, 金福酒家: 40, 市第七医院: 150, 派出所: 100, 消防所: 120, 
         },
         index:"景南市",
     }
@@ -3881,7 +3881,8 @@ D.map.景南市.嘉庆广场 = {
     AW服装店: D.map.通用.AW服装店,
     汉堡王: D.map.通用.汉堡王,
     公共厕所: D.map.通用.公共厕所,
-    停车场: D.map.通用.地下停车场,
+    停车场: D.map.通用.停车场,
+    地下停车场: D.map.通用.地下停车场,
     地铁站: D.map.通用.地铁站,
     公交站: D.map.通用.公交站,
 }
@@ -4005,7 +4006,7 @@ D.map.景南市.商店街 = {
         tag: ["武馆","比武","江湖人士"],
         open: 270, close: 1080, //晚上六点后就不开学堂了
         chara: [],
-        img: "hairsalon",
+        img: "dojo",
         bike: true, car: true,
         description(){
             if(Flag.chaos < 15) return "古色古香的武馆。这里能学习到真功夫。";
@@ -4017,7 +4018,7 @@ D.map.景南市.商店街 = {
 }
 
 D.map.景南市.南兴区 = {
-    箱庭托儿所 : {
+    箱庭幼儿园 : {
         place: "箱庭幼儿园", side: "室外", group: "南兴区",
         tag: ["托儿所","儿童","大道","光照","停车点","营业"],
         open: 540, close: 960,
@@ -10288,7 +10289,7 @@ function setBG() {
         background.color= "#242C8A"
         document.getElementById('avatar-overlay').className = "Layer dark"
     }
-    else if(PC.state.睡觉 && V.local.tag.includes("家") && !between(V.date.time,300,1200)){
+    else if(PC.state.睡眠 && V.local.tag.includes("家") && !between(V.date.time,300,1200)){
          background.color= "#242C8A"
         document.getElementById('avatar-overlay').className = "Layer dark"       
     }
@@ -10296,6 +10297,7 @@ function setBG() {
         background.color = null;
         document.getElementById('avatar-overlay').className = "Layer"
     }
+
     V.avatar.background = setAvatar("background",background,true)
 }
 F.setBG = setBG
@@ -10463,13 +10465,17 @@ DefineMacroS("navi",navigation)
 //else time between open, close
 window.isOpenHour = function(obj){
 
-    if (obj.tag.includes["营业"]){
+    if (obj.tag.includes("营业")){
            let close = obj.close
            let open = obj.open 
+           
+           console.log("进来了")
 
            if (close < open) return (!between(V.date.time,close,open))
            else return (between(V.date.time,open,close))
     }
+    console.log("没进来")
+    return true
 
 }
 /* twine-user-script #53: "SaveShow.js" */
@@ -14389,11 +14395,6 @@ function wait(text) {
     &lt;&lt;set _color to $args[1]&gt;&gt;
     &lt;&lt;meterbar _percent _color&gt;&gt;
 &lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="35" name="嘉庆广场" tags="location" position="600,475" size="100,100">&lt;&lt;setmap &quot;嘉庆广场&quot;&gt;&gt;&lt;&lt;location &quot;嘉庆广场&quot;&gt;&gt;&lt;&lt;mode &quot;location&quot;&gt;&gt;
-&lt;span class=&quot;title&quot;&gt;嘉庆广场&lt;/span&gt;&lt;br&gt;
-&lt;div class=&quot;lbox&quot;&gt;
-&lt;&lt;=F.getDescrips(&quot;嘉庆广场&quot;,&quot;嘉庆广场&quot;)&gt;&gt;
-&lt;/div&gt;
-&lt;br&gt;
 
 &lt;div id=&quot;append-text&quot; class=&quot;append-normal&quot;&gt;&lt;/div&gt;
 &lt;div id=&quot;situation&quot; class=&quot;situation&quot;&gt;&lt;&lt;=F.getsituation(&quot;嘉庆广场&quot;)&gt;&gt;&lt;/div&gt;
@@ -14401,7 +14402,7 @@ function wait(text) {
 &lt;br&gt;
 &lt;div class=&quot;tolink&quot;&gt;
 &lt;&lt;link &quot;打发时间 　 10m&quot; $passage&gt;&gt;&lt;&lt;passtime 10&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;&lt;br&gt;
-&lt;&lt;link &quot;逛服装店　　5m&quot; &quot;商店&quot;&gt;&gt;&lt;&lt;passtime 5&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
+&lt;&lt;link &quot;逛服装店　　5m&quot; &quot;AW服装店&quot;&gt;&gt;&lt;&lt;passtime 5&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
 &lt;&lt;link &quot;汉堡王　　　5m&quot; $passage&gt;&gt;&lt;&lt;passtime 5&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
 &lt;/div&gt;
 
@@ -14420,15 +14421,190 @@ function wait(text) {
 &quot;&lt;&lt;you&gt;&gt;走在广场上，观察着来来往往的人群，目光时不时被在路边派发传单的布偶人吸引。&quot;,
 &quot;&lt;&lt;you&gt;&gt;拿起手机，以商场为背景，给自己拍了张新的照片。&quot;,
 &quot;&lt;&lt;you&gt;&gt;站在广场角落的报亭前，随手拿起一份报纸看了眼今天的新闻。&quot;,
-)&gt;&gt;</tw-passagedata><tw-passagedata pid="38" name="商店" tags="location" position="975,475" size="100,100">&lt;&lt;location &quot;AW服装店&quot;&gt;&gt;&lt;&lt;mode &quot;location&quot;&gt;&gt;
-
-&lt;span class=&quot;title&quot;&gt;服装店&lt;/span&gt;&lt;br&gt;
-&lt;div class=&quot;lbox&quot;&gt;
-商场里的服装店。商品琳琅满目，什么都有。&lt;br&gt;
-&lt;/div&gt;
+)&gt;&gt;</tw-passagedata><tw-passagedata pid="38" name="AW服装店" tags="location" position="975,475" size="100,100">&lt;&lt;location &quot;AW服装店&quot;&gt;&gt;&lt;&lt;mode &quot;location&quot;&gt;&gt;
 &lt;&lt;set $shoptype to [&quot;all&quot;,&quot;offline&quot;]&gt;&gt;
+&lt;&lt;set $shopline to [&quot;general&quot;]&gt;&gt;
 
-&lt;&lt;include &quot;试衣间&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="39" name="你的家 单身公寓" tags="location" position="1100,475" size="100,100">&lt;&lt;location &quot;单身公寓&quot;&gt;&gt;&lt;&lt;mode &quot;location&quot;&gt;&gt;
+&lt;div id=&quot;append-text&quot; class=&quot;append-normal&quot;&gt;&lt;/div&gt;
+&lt;div id=&quot;situation&quot; class=&quot;situation&quot;&gt;
+&lt;&lt;you&gt;&gt;走在服装卖场中,看着各种各样的服饰。
+&lt;/div&gt;
+
+&lt;br&gt;
+&lt;div class=&quot;tolink&quot;&gt;
+&lt;&lt;link &quot;买衣服　 2m&quot; &quot;AW服装店-试衣间&quot;&gt;&gt;&lt;&lt;passtime 5&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
+&lt;&lt;link &quot;只是看看 10m&quot; $passage&gt;&gt;&lt;&lt;passtime 5&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
+&lt;/div&gt;
+
+&lt;div id=&quot;navi&quot; class=&quot;navi_unable&quot;&gt;
+    &lt;&lt;navi&gt;&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="39" name="AW服装店-试衣间" tags="" position="1100,475" size="100,100">&lt;&lt;include &quot;试衣间&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="40" name="汉堡王" tags="location" position="1225,475" size="100,100">&lt;&lt;location &quot;汉堡王&quot;&gt;&gt;&lt;&lt;mode &quot;location&quot;&gt;&gt;
+
+&lt;div id=&quot;append-text&quot; class=&quot;append-normal&quot;&gt;&lt;/div&gt;
+&lt;div id=&quot;situation&quot; class=&quot;situation&quot;&gt;
+&lt;&lt;you&gt;&gt;走到汉堡王的点单柜台前,看着上面的菜单思考要吃点什么。&lt;br&gt;
+&lt;/div&gt;
+
+&lt;br&gt;
+&lt;div class=&quot;tolink&quot;&gt;
+&lt;&lt;link &quot;点餐&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
+&lt;/div&gt;
+
+&lt;div id=&quot;navi&quot; class=&quot;navi_unable&quot;&gt;
+    &lt;&lt;navi&gt;&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="41" name="停车场" tags="location" position="100,600" size="100,100">&lt;&lt;location &quot;停车场&quot;&gt;&gt;&lt;&lt;mode &quot;location&quot;&gt;&gt;
+
+&lt;div id=&quot;append-text&quot; class=&quot;append-normal&quot;&gt;&lt;/div&gt;
+&lt;div id=&quot;situation&quot; class=&quot;situation&quot;&gt;
+&lt;&lt;you&gt;&gt;来到了户外的停车场，看着停靠的车辆思考如果赚够钱买辆怎样的车。&lt;br&gt;
+&lt;/div&gt;
+
+&lt;br&gt;
+&lt;div class=&quot;tolink&quot;&gt;
+&lt;&lt;link &quot;恶作剧　　5m&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
+&lt;/div&gt;
+
+&lt;div id=&quot;navi&quot; class=&quot;navi_unable&quot;&gt;
+    &lt;&lt;navi&gt;&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="42" name="地下停车场" tags="location" position="225,600" size="100,100">&lt;&lt;location &quot;地下停车场&quot;&gt;&gt;&lt;&lt;mode &quot;location&quot;&gt;&gt;
+
+&lt;div id=&quot;append-text&quot; class=&quot;append-normal&quot;&gt;&lt;/div&gt;
+&lt;div id=&quot;situation&quot; class=&quot;situation&quot;&gt;
+&lt;&lt;you&gt;&gt;来到了地下的停车场，看到阴暗的环境不禁打了个冷颤……总觉得有什么在这里徘徊，是错觉吗啊？&lt;br&gt;
+&lt;/div&gt;
+
+&lt;br&gt;
+&lt;div class=&quot;tolink&quot;&gt;
+&lt;&lt;link &quot;？？？　　5m&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
+&lt;/div&gt;
+
+&lt;div id=&quot;navi&quot; class=&quot;navi_unable&quot;&gt;
+    &lt;&lt;navi&gt;&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="43" name="公交站" tags="transport" position="350,600" size="100,100">&lt;&lt;location &quot;公交站&quot;&gt;&gt;&lt;&lt;mode &quot;transport&quot;&gt;&gt;
+
+&lt;div id=&quot;append-text&quot; class=&quot;append-normal&quot;&gt;&lt;/div&gt;
+&lt;div id=&quot;situation&quot; class=&quot;situation&quot;&gt;
+&lt;&lt;you&gt;&gt;站在公交站前，看着牌子上的路线，看看要去哪里……&lt;br&gt;
+&lt;/div&gt;
+
+&lt;br&gt;
+&lt;div class=&quot;tolink&quot;&gt;
+&lt;&lt;link &quot;怡安小区　　2￥&quot; &quot;怡安小区&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;　　
+&lt;&lt;link &quot;嘉庆广场　　2￥&quot; &quot;嘉庆广场&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
+&lt;&lt;link &quot;商店街　　　2￥&quot; &quot;宜兴步行街&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;　　
+&lt;&lt;link &quot;幼儿园　　　2￥&quot; &quot;箱庭幼儿园&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
+&lt;&lt;link &quot;市十三中　　5￥&quot; &quot;市十三中&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;　　
+&lt;&lt;link &quot;金福酒家　　5￥&quot; &quot;金福酒家&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
+&lt;&lt;link &quot;第七医院　　5￥&quot; &quot;市第七医院&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;　　
+&lt;&lt;link &quot;消防所　　　5￥&quot; &quot;消防所&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
+&lt;&lt;link &quot;派出所　　　5￥&quot; &quot;派出所&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="44" name="地铁站" tags="transport" position="475,600" size="100,100">&lt;&lt;location &quot;地铁站&quot;&gt;&gt;&lt;&lt;mode &quot;transport&quot;&gt;&gt;
+
+
+&lt;div id=&quot;append-text&quot; class=&quot;append-normal&quot;&gt;&lt;/div&gt;
+&lt;div id=&quot;situation&quot; class=&quot;situation&quot;&gt;
+&lt;&lt;you&gt;&gt;来到地铁站里面，看着牌子上的路线，看看要去哪里……&lt;br&gt;
+&lt;/div&gt;
+
+&lt;br&gt;
+&lt;div class=&quot;tolink&quot;&gt;
+&lt;&lt;link &quot;怡安小区　　2￥&quot; &quot;怡安小区&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;　　
+&lt;&lt;link &quot;嘉庆广场　　2￥&quot; &quot;嘉庆广场&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
+&lt;&lt;link &quot;商店街　　　2￥&quot; &quot;宜兴步行街&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;　　
+&lt;&lt;link &quot;幼儿园　　　2￥&quot; &quot;箱庭幼儿园&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
+&lt;&lt;link &quot;市十三中　　5￥&quot; &quot;市十三中&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;　　
+&lt;&lt;link &quot;金福酒家　　5￥&quot; &quot;金福酒家&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
+&lt;&lt;link &quot;第七医院　　5￥&quot; &quot;市第七医院&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;　　
+&lt;&lt;link &quot;消防所　　　5￥&quot; &quot;消防所&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
+&lt;&lt;link &quot;派出所　　　5￥&quot; &quot;派出所&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="45" name="箱庭幼儿园" tags="location" position="600,600" size="100,100">&lt;&lt;setmap &quot;南兴区&quot;&gt;&gt;
+&lt;&lt;location &quot;箱庭幼儿园&quot;&gt;&gt;&lt;&lt;mode &quot;location&quot;&gt;&gt;
+&lt;div id=&quot;append-text&quot; class=&quot;append-normal&quot;&gt;&lt;/div&gt;
+&lt;div id=&quot;situation&quot; class=&quot;situation&quot;&gt;
+&lt;&lt;you&gt;&gt;来到了箱庭幼儿园门口，听着孩子们的欢声笑语，感觉自己的心情也被感染了。&lt;br&gt;
+&lt;/div&gt;
+
+&lt;br&gt;
+&lt;div class=&quot;tolink&quot;&gt;
+&lt;&lt;link &quot;在附近闲逛　　5m&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
+&lt;/div&gt;
+
+&lt;div id=&quot;navi&quot; class=&quot;navi_unable&quot;&gt;
+    &lt;&lt;navi&gt;&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="46" name="市十三中" tags="location" position="725,600" size="100,100">&lt;&lt;setmap &quot;南兴区&quot;&gt;&gt;
+&lt;&lt;location &quot;市十三中&quot;&gt;&gt;&lt;&lt;mode &quot;location&quot;&gt;&gt;
+&lt;div id=&quot;append-text&quot; class=&quot;append-normal&quot;&gt;&lt;/div&gt;
+&lt;div id=&quot;situation&quot; class=&quot;situation&quot;&gt;
+&lt;&lt;you&gt;&gt;来到了景南市第十三中学前，听着学子们的喃喃读书声。&lt;br&gt;
+&lt;/div&gt;
+
+&lt;br&gt;
+&lt;div class=&quot;tolink&quot;&gt;
+&lt;&lt;link &quot;在附近闲逛　　5m&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
+&lt;/div&gt;
+
+&lt;div id=&quot;navi&quot; class=&quot;navi_unable&quot;&gt;
+    &lt;&lt;navi&gt;&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="47" name="金福酒家" tags="location" position="850,600" size="100,100">&lt;&lt;setmap &quot;南兴区&quot;&gt;&gt;
+&lt;&lt;location &quot;金福酒家&quot;&gt;&gt;&lt;&lt;mode &quot;location&quot;&gt;&gt;
+&lt;div id=&quot;append-text&quot; class=&quot;append-normal&quot;&gt;&lt;/div&gt;
+&lt;div id=&quot;situation&quot; class=&quot;situation&quot;&gt;
+&lt;&lt;you&gt;&gt;来到了金福酒家门前，如果钱够的话，倒是可以订个座去吃顿好的……&lt;br&gt;
+&lt;/div&gt;
+
+&lt;br&gt;
+&lt;div class=&quot;tolink&quot;&gt;
+&lt;&lt;link &quot;在附近闲逛　　5m&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
+&lt;/div&gt;
+
+&lt;div id=&quot;navi&quot; class=&quot;navi_unable&quot;&gt;
+    &lt;&lt;navi&gt;&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="48" name="市第七医院" tags="location" position="975,600" size="100,100">&lt;&lt;setmap &quot;南兴区&quot;&gt;&gt;
+&lt;&lt;location &quot;市第七医院&quot;&gt;&gt;&lt;&lt;mode &quot;location&quot;&gt;&gt;
+&lt;div id=&quot;append-text&quot; class=&quot;append-normal&quot;&gt;&lt;/div&gt;
+&lt;div id=&quot;situation&quot; class=&quot;situation&quot;&gt;
+&lt;&lt;you&gt;&gt;来到了景南市第七人民医院前，没病痛的话，还是不要靠近的好。&lt;br&gt;
+&lt;/div&gt;
+
+&lt;br&gt;
+&lt;div class=&quot;tolink&quot;&gt;
+&lt;&lt;link &quot;在附近闲逛　　5m&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
+&lt;/div&gt;
+
+&lt;div id=&quot;navi&quot; class=&quot;navi_unable&quot;&gt;
+    &lt;&lt;navi&gt;&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="49" name="派出所" tags="location" position="1100,600" size="100,100">&lt;&lt;setmap &quot;南兴区&quot;&gt;&gt;
+&lt;&lt;location &quot;派出所&quot;&gt;&gt;&lt;&lt;mode &quot;location&quot;&gt;&gt;
+&lt;div id=&quot;append-text&quot; class=&quot;append-normal&quot;&gt;&lt;/div&gt;
+&lt;div id=&quot;situation&quot; class=&quot;situation&quot;&gt;
+&lt;&lt;you&gt;&gt;来到了派出所前面，跟门口值班的民警打了个招呼。&lt;br&gt;
+&lt;br&gt;
+“有什么需要帮忙的吗？” 值班民警走进了你，亲切地问话。&lt;br&gt;
+&lt;/div&gt;
+
+&lt;br&gt;
+&lt;div class=&quot;tolink&quot;&gt;
+&lt;&lt;link &quot;闲聊　　5m&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
+&lt;/div&gt;
+
+&lt;div id=&quot;navi&quot; class=&quot;navi_unable&quot;&gt;
+    &lt;&lt;navi&gt;&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="50" name="消防所" tags="location" position="1225,600" size="100,100">&lt;&lt;setmap &quot;南兴区&quot;&gt;&gt;
+&lt;&lt;location &quot;消防所&quot;&gt;&gt;&lt;&lt;mode &quot;location&quot;&gt;&gt;
+&lt;div id=&quot;append-text&quot; class=&quot;append-normal&quot;&gt;&lt;/div&gt;
+&lt;div id=&quot;situation&quot; class=&quot;situation&quot;&gt;
+&lt;&lt;you&gt;&gt;来到了消防所前面，跟门口值班的人员打了个招呼。&lt;br&gt;
+&lt;br&gt;
+&lt;/div&gt;
+
+&lt;br&gt;
+&lt;div class=&quot;tolink&quot;&gt;
+&lt;&lt;link &quot;闲聊　　5m&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
+&lt;/div&gt;
+
+&lt;div id=&quot;navi&quot; class=&quot;navi_unable&quot;&gt;
+    &lt;&lt;navi&gt;&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="51" name="你的家 单身公寓" tags="location" position="100,725" size="100,100">&lt;&lt;location &quot;单身公寓&quot;&gt;&gt;&lt;&lt;mode &quot;location&quot;&gt;&gt;
 &lt;&lt;resetplaylist&gt;&gt;
 &lt;&lt;set $TEquip to clone($Equip)&gt;&gt;
 
@@ -14462,7 +14638,7 @@ function wait(text) {
 微信 -- 手机也有的功能，有可以联络的人时才能用
 自慰
 和宠物（床伴？）聊天
-*/</tw-passagedata><tw-passagedata pid="40" name="浴室" tags="" position="1225,475" size="100,100">&lt;&lt;location &quot;浴室&quot;&gt;&gt;
+*/</tw-passagedata><tw-passagedata pid="52" name="浴室" tags="" position="225,725" size="100,100">&lt;&lt;location &quot;浴室&quot;&gt;&gt;
 
 &lt;&lt;you&gt;&gt;来到了浴室。&lt;br&gt;
 
@@ -14472,7 +14648,7 @@ function wait(text) {
 &lt;&lt;link &quot;泡澡　　30m&quot; &quot;洗澡&quot;&gt;&gt;&lt;&lt;gonaked &quot;closet&quot;&gt;&gt;&lt;&lt;run D.COM.洗澡.act(30)&gt;&gt;&lt;&lt;passtime 30&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
 &lt;&lt;link &quot;做事前准备 10m&quot;&gt;&gt;&lt;&lt;gonaked &quot;closet&quot;&gt;&gt;&lt;&lt;passtime 10&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
 &lt;&lt;link &quot;离开浴室　 1m&quot; &quot;你的家 单身公寓&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="41" name="洗澡" tags="" position="100,600" size="100,100">&lt;span class=&quot;title&quot;&gt;浴室&lt;/span&gt;&lt;br&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="53" name="洗澡" tags="" position="350,725" size="100,100">&lt;span class=&quot;title&quot;&gt;浴室&lt;/span&gt;&lt;br&gt;
 
 &lt;img src=&#39;image/cg/bath.png&#39; class=&quot;border:1px solid #928348&quot;&gt;&lt;br&gt;
 &lt;&lt;you&gt;&gt;脱光衣服，整个人泡进浴缸里，放松着。&lt;br&gt;
@@ -14482,7 +14658,7 @@ function wait(text) {
 &lt;&lt;link &quot;自慰&quot; &quot;自慰&quot;&gt;&gt;&lt;&lt;passtime 1&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
 &lt;&lt;link &quot;玩泡沫　30m&quot; $passage&gt;&gt;&lt;&lt;passtime 30&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
 &lt;&lt;link &quot;出浴　　5m&quot; &quot;浴室&quot;&gt;&gt;&lt;&lt;passtime 5&gt;&gt;&lt;&lt;redress &quot;closet&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="42" name="城市生活_1" tags="" position="225,600" size="100,100">&lt;&lt;you&gt;&gt;最近离开父母家，独立出来自己住了。一切才刚开始各种不习惯……&lt;br&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="54" name="城市生活_1" tags="" position="475,725" size="100,100">&lt;&lt;you&gt;&gt;最近离开父母家，独立出来自己住了。一切才刚开始各种不习惯……&lt;br&gt;
 &lt;&lt;=condtext([
     [inTime(6,8),&quot;一大早就起来了,要做点什么好呢……？&quot;],
     [inTime(8,11),&quot;&lt;&lt;you&gt;&gt;躺在懒人沙发上茫无目的地玩着手机……&quot;],
@@ -14492,9 +14668,9 @@ function wait(text) {
     [inTime(19,23),&quot;到晚上了，该放学的早放学了，该下班的也下班了。网络迎来了高峰期……&lt;br&gt;嗨起来！&quot;],
     [&quot;else&quot;,&quot;很晚了，得睡觉了……&quot;]
 ])&gt;&gt;
-&lt;br&gt;</tw-passagedata><tw-passagedata pid="43" name="宠物的日常_1" tags="" position="350,600" size="100,100">最近多了个小家伙跟在身边, 虽然有点粘人但还是挺治愈的。&lt;br&gt;
+&lt;br&gt;</tw-passagedata><tw-passagedata pid="55" name="宠物的日常_1" tags="" position="600,725" size="100,100">最近多了个小家伙跟在身边, 虽然有点粘人但还是挺治愈的。&lt;br&gt;
 嗯……要跟宠物&lt;&lt;print $pet.name&gt;&gt;做点什么好呢？&lt;br&gt;
-&lt;br&gt;</tw-passagedata><tw-passagedata pid="44" name="怡安小区" tags="location" position="475,600" size="100,100">&lt;&lt;setmap &quot;怡安小区&quot;&gt;&gt;&lt;&lt;location &quot;怡安小区&quot;&gt;&gt;&lt;&lt;mode &quot;location&quot;&gt;&gt;
+&lt;br&gt;</tw-passagedata><tw-passagedata pid="56" name="怡安小区" tags="location" position="725,725" size="100,100">&lt;&lt;setmap &quot;怡安小区&quot;&gt;&gt;&lt;&lt;location &quot;怡安小区&quot;&gt;&gt;&lt;&lt;mode &quot;location&quot;&gt;&gt;
 
 &lt;div id=&quot;append-text&quot; class=&quot;append-normal&quot;&gt;&lt;/div&gt;
 &lt;div id=&quot;situation&quot; class=&quot;situation&quot;&gt;
@@ -14514,7 +14690,7 @@ function wait(text) {
 &lt;div id=&quot;navi&quot; class=&quot;navi_unable&quot;&gt;
     &lt;&lt;navi&gt;&gt;
 &lt;/div&gt;
-&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="45" name="怡安小区公园" tags="location" position="600,600" size="100,100">&lt;&lt;location &quot;小区公园&quot;&gt;&gt;&lt;&lt;mode &quot;location&quot;&gt;&gt;
+&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="57" name="怡安小区公园" tags="location" position="850,725" size="100,100">&lt;&lt;location &quot;小区公园&quot;&gt;&gt;&lt;&lt;mode &quot;location&quot;&gt;&gt;
 
 &lt;div id=&quot;append-text&quot; class=&quot;append-normal&quot;&gt;&lt;/div&gt;
 &lt;div id=&quot;situation&quot; class=&quot;situation&quot;&gt;
@@ -14528,11 +14704,14 @@ function wait(text) {
 
 &lt;div id=&quot;navi&quot; class=&quot;navi_unable&quot;&gt;
     &lt;&lt;navi&gt;&gt;
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="46" name="按门铃" tags="event" position="725,600" size="100,100">&lt;&lt;you&gt;&gt;按下了邻居的门铃,可惜没有任何回应。&lt;br&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="58" name="按门铃" tags="event" position="975,725" size="100,100">&lt;&lt;you&gt;&gt;按下了邻居的门铃,可惜没有任何回应。&lt;br&gt;
 &lt;br&gt;
-&lt;&lt;link &quot;离开&quot; &quot;怡安小区&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="47" name="共享菜园" tags="" position="850,600" size="100,100">&lt;&lt;location &quot;共享菜园&quot;&gt;&gt;&lt;&lt;mode &quot;location&quot;&gt;&gt;
+&lt;&lt;link &quot;离开&quot; &quot;怡安小区&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="59" name="共享菜园" tags="" position="1100,725" size="100,100">&lt;&lt;location &quot;共享菜园&quot;&gt;&gt;&lt;&lt;mode &quot;location&quot;&gt;&gt;
 
-&lt;&lt;you&gt;&gt;站在菜地前,看着各种蔬菜徐徐生长着。&lt;br&gt;
+
+&lt;div id=&quot;append-text&quot; class=&quot;append-normal&quot;&gt;&lt;/div&gt;
+&lt;div id=&quot;situation&quot; class=&quot;situation&quot;&gt;&lt;&lt;you&gt;&gt;站在菜地前,看着各种蔬菜徐徐生长着。&lt;br&gt;&lt;/div&gt;
+
 &lt;br&gt;
 &lt;div class=&quot;tolink&quot;&gt;
 &lt;&lt;link &quot;浇水　　5m&quot; $passage&gt;&gt;&lt;&lt;passtime 5&gt;&gt;&lt;&lt;/link&gt;&gt;
@@ -14542,10 +14721,15 @@ function wait(text) {
 
 &lt;div id=&quot;navi&quot; class=&quot;navi_unable&quot;&gt;
     &lt;&lt;navi&gt;&gt;
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="48" name="小卖部" tags="" position="975,600" size="100,100">&lt;&lt;location &quot;小卖部&quot;&gt;&gt;&lt;&lt;mode &quot;location&quot;&gt;&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="60" name="虹猫小店" tags="" position="1225,725" size="100,100">&lt;&lt;location &quot;小卖部&quot;&gt;&gt;&lt;&lt;mode &quot;location&quot;&gt;&gt;
 
+
+&lt;div id=&quot;append-text&quot; class=&quot;append-normal&quot;&gt;&lt;/div&gt;
+&lt;div id=&quot;situation&quot; class=&quot;situation&quot;&gt;
 &lt;&lt;you&gt;&gt;站在小卖部门前，看着货车把一箱又一箱的物资往里面搬运。&lt;br&gt;
 最近似乎在整顿，距离开店还有点日子……&lt;br&gt;
+&lt;/div&gt;
+
 &lt;br&gt;
 &lt;div class=&quot;tolink&quot;&gt;
 &lt;&lt;link &quot;离开　　3m&quot; &quot;怡安小区&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;
@@ -14553,11 +14737,150 @@ function wait(text) {
 
 &lt;div id=&quot;navi&quot; class=&quot;navi_unable&quot;&gt;
     &lt;&lt;navi&gt;&gt;
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="49" name="虹猫小店" tags="" position="1100,600" size="100,100">&lt;&lt;location &quot;虹猫小店&quot;&gt;&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="61" name="虹猫小店-内部" tags="" position="100,850" size="100,100">&lt;&lt;location &quot;虹猫小店&quot;&gt;&gt;
 
 &lt;div id=&quot;append-text&quot; class=&quot;append-normal&quot;&gt;&lt;span id=&quot;action-text2&quot;&gt;&lt;&lt;you&gt;&gt;走进了虹猫小店，看着各种各样的物品思考着要买点什么。&lt;/span&gt;&lt;/div&gt;
 
-/* &lt;&lt;include &quot;商店购物&quot;&gt;&gt; */</tw-passagedata><tw-passagedata pid="50" name="Event" tags="eventloop nosave" position="1225,600" size="100,100">&lt;&lt;mode &quot;event&quot;&gt;&gt;
+/* &lt;&lt;include &quot;商店购物&quot;&gt;&gt; */</tw-passagedata><tw-passagedata pid="62" name="宜兴步行街" tags="location" position="225,850" size="100,100">&lt;&lt;setmap &quot;商店街&quot;&gt;&gt;
+&lt;&lt;location &quot;商店街&quot;&gt;&gt;&lt;&lt;mode &quot;location&quot;&gt;&gt;
+&lt;div id=&quot;append-text&quot; class=&quot;append-normal&quot;&gt;&lt;/div&gt;
+&lt;div id=&quot;situation&quot; class=&quot;situation&quot;&gt;
+&lt;&lt;you&gt;&gt;走在步行街的路上，看着来往的人潮，听着摊贩的吆喝声，享受着和平时代特有的烟火气息。&lt;br&gt;
+&lt;/div&gt;
+
+&lt;br&gt;
+&lt;div class=&quot;tolink&quot;&gt;
+&lt;&lt;link &quot;闲逛　　15m&quot;&gt;&gt;&lt;&lt;passtime 15&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
+&lt;br&gt;
+&lt;/div&gt;
+
+&lt;div id=&quot;navi&quot; class=&quot;navi_unable&quot;&gt;
+    &lt;&lt;navi&gt;&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="63" name="旺记茶铺" tags="shop" position="350,850" size="100,100">&lt;&lt;location &quot;旺记茶铺&quot;&gt;&gt;&lt;&lt;mode &quot;location&quot;&gt;&gt;
+&lt;div id=&quot;append-text&quot; class=&quot;append-normal&quot;&gt;&lt;/div&gt;
+&lt;div id=&quot;situation&quot; class=&quot;situation&quot;&gt;
+&lt;&lt;you&gt;&gt;找了个空位坐下，看着菜单。要吃点什么呢……？&lt;br&gt;
+&lt;/div&gt;
+
+&lt;br&gt;
+&lt;div class=&quot;tolink&quot;&gt;
+&lt;&lt;link &quot;糖水&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
+&lt;&lt;link &quot;凉茶&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
+&lt;&lt;link &quot;点心&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
+&lt;/div&gt;
+
+&lt;div id=&quot;navi&quot; class=&quot;navi_unable&quot;&gt;
+    &lt;&lt;navi&gt;&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="64" name="天地书店" tags="shop" position="475,850" size="100,100">&lt;&lt;location &quot;天地书店&quot;&gt;&gt;&lt;&lt;mode &quot;location&quot;&gt;&gt;
+&lt;div id=&quot;append-text&quot; class=&quot;append-normal&quot;&gt;&lt;/div&gt;
+&lt;div id=&quot;situation&quot; class=&quot;situation&quot;&gt;
+&lt;&lt;you&gt;&gt;拿了本书，到窗边的阶梯沙发上坐下。&lt;br&gt;
+&lt;/div&gt;
+
+&lt;br&gt;
+&lt;div class=&quot;tolink&quot;&gt;
+&lt;&lt;link &quot;看书&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
+&lt;&lt;link &quot;购物&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
+&lt;/div&gt;
+
+&lt;div id=&quot;navi&quot; class=&quot;navi_unable&quot;&gt;
+    &lt;&lt;navi&gt;&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="65" name="开封菜" tags="shop" position="600,850" size="100,100">&lt;&lt;location &quot;开封菜&quot;&gt;&gt;&lt;&lt;mode &quot;location&quot;&gt;&gt;
+&lt;div id=&quot;append-text&quot; class=&quot;append-normal&quot;&gt;&lt;/div&gt;
+&lt;div id=&quot;situation&quot; class=&quot;situation&quot;&gt;
+&lt;&lt;you&gt;&gt;找了个位置坐下，看看要吃点什么。&lt;br&gt;
+&lt;/div&gt;
+
+&lt;br&gt;
+&lt;div class=&quot;tolink&quot;&gt;
+&lt;&lt;link &quot;点单&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
+&lt;/div&gt;
+
+&lt;div id=&quot;navi&quot; class=&quot;navi_unable&quot;&gt;
+    &lt;&lt;navi&gt;&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="66" name="药店" tags="shop" position="725,850" size="100,100">&lt;&lt;location &quot;药店&quot;&gt;&gt;&lt;&lt;mode &quot;location&quot;&gt;&gt;
+&lt;div id=&quot;append-text&quot; class=&quot;append-normal&quot;&gt;&lt;/div&gt;
+&lt;div id=&quot;situation&quot; class=&quot;situation&quot;&gt;
+&lt;&lt;you&gt;&gt;来到药店，看看要不要买点常用药物回去备着。&lt;br&gt;
+&lt;/div&gt;
+
+&lt;br&gt;
+&lt;div class=&quot;tolink&quot;&gt;
+&lt;&lt;link &quot;购物&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
+&lt;/div&gt;
+
+&lt;div id=&quot;navi&quot; class=&quot;navi_unable&quot;&gt;
+    &lt;&lt;navi&gt;&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="67" name="发廊" tags="shop" position="850,850" size="100,100">&lt;&lt;location &quot;发廊&quot;&gt;&gt;&lt;&lt;mode &quot;location&quot;&gt;&gt;
+&lt;div id=&quot;append-text&quot; class=&quot;append-normal&quot;&gt;&lt;/div&gt;
+&lt;div id=&quot;situation&quot; class=&quot;situation&quot;&gt;
+&lt;&lt;you&gt;&gt;坐在待客沙发上，听着店员给你介绍各种服务。&lt;br&gt;
+&lt;/div&gt;
+
+&lt;br&gt;
+&lt;div class=&quot;tolink&quot;&gt;
+&lt;&lt;link &quot;剪发&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
+&lt;&lt;link &quot;美容&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
+&lt;&lt;link &quot;按摩&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
+&lt;&lt;link &quot;？？&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
+&lt;/div&gt;
+
+&lt;div id=&quot;navi&quot; class=&quot;navi_unable&quot;&gt;
+    &lt;&lt;navi&gt;&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="68" name="中医馆" tags="shop" position="975,850" size="100,100">&lt;&lt;location &quot;中医馆&quot;&gt;&gt;&lt;&lt;mode &quot;location&quot;&gt;&gt;
+&lt;div id=&quot;append-text&quot; class=&quot;append-normal&quot;&gt;&lt;/div&gt;
+&lt;div id=&quot;situation&quot; class=&quot;situation&quot;&gt;
+&lt;&lt;you&gt;&gt;看着各种各样的药材，思索要不要买点什么寄给家里长辈。&lt;br&gt;
+&lt;/div&gt;
+
+&lt;br&gt;
+&lt;div class=&quot;tolink&quot;&gt;
+&lt;&lt;link &quot;购物&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
+&lt;/div&gt;
+
+&lt;div id=&quot;navi&quot; class=&quot;navi_unable&quot;&gt;
+    &lt;&lt;navi&gt;&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="69" name="逸安武馆" tags="shop" position="1100,850" size="100,100">&lt;&lt;location &quot;逸安武馆&quot;&gt;&gt;&lt;&lt;mode &quot;location&quot;&gt;&gt;
+&lt;div id=&quot;append-text&quot; class=&quot;append-normal&quot;&gt;&lt;/div&gt;
+&lt;div id=&quot;situation&quot; class=&quot;situation&quot;&gt;
+&lt;&lt;you&gt;&gt;来到武馆，看着穿着功夫装的人在大院里练功。&lt;br&gt;
+&lt;/div&gt;
+
+&lt;br&gt;
+&lt;div class=&quot;tolink&quot;&gt;
+&lt;&lt;link &quot;闲聊&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
+&lt;&lt;link &quot;拜师学艺&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
+&lt;/div&gt;
+
+&lt;div id=&quot;navi&quot; class=&quot;navi_unable&quot;&gt;
+    &lt;&lt;navi&gt;&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="70" name="生鲜市场" tags="shop" position="1225,850" size="100,100">&lt;&lt;location &quot;生鲜市场&quot;&gt;&gt;&lt;&lt;mode &quot;location&quot;&gt;&gt;
+&lt;div id=&quot;append-text&quot; class=&quot;append-normal&quot;&gt;&lt;/div&gt;
+&lt;div id=&quot;situation&quot; class=&quot;situation&quot;&gt;
+&lt;&lt;you&gt;&gt;来到菜市场，看看有什么新鲜的。&lt;br&gt;
+&lt;/div&gt;
+
+&lt;br&gt;
+&lt;div class=&quot;tolink&quot;&gt;
+&lt;&lt;link &quot;买菜&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
+&lt;/div&gt;
+
+&lt;div id=&quot;navi&quot; class=&quot;navi_unable&quot;&gt;
+    &lt;&lt;navi&gt;&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="71" name="五金店" tags="shop" position="100,975" size="100,100">&lt;&lt;location &quot;五金店&quot;&gt;&gt;&lt;&lt;mode &quot;location&quot;&gt;&gt;
+&lt;div id=&quot;append-text&quot; class=&quot;append-normal&quot;&gt;&lt;/div&gt;
+&lt;div id=&quot;situation&quot; class=&quot;situation&quot;&gt;
+&lt;&lt;you&gt;&gt;五金店，看看有什么趁手的工具。&lt;br&gt;
+&lt;/div&gt;
+
+&lt;br&gt;
+&lt;div class=&quot;tolink&quot;&gt;
+&lt;&lt;link &quot;购物&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
+&lt;/div&gt;
+
+&lt;div id=&quot;navi&quot; class=&quot;navi_unable&quot;&gt;
+    &lt;&lt;navi&gt;&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="72" name="Event" tags="eventloop nosave" position="225,975" size="100,100">&lt;&lt;mode &quot;event&quot;&gt;&gt;
 
 &lt;div id=&quot;eventsituation&quot;&gt;
 &lt;&lt;CallEvent&gt;&gt;
@@ -14576,7 +14899,7 @@ function wait(text) {
 
 &lt;div id=&quot;eventeffect&quot;&gt;
 &lt;&lt;CallEventEffect&gt;&gt;
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="51" name="EventSystem" tags="widget" position="100,725" size="100,100">/* 再现ERA口上系统的TRYCALL体系 主 */
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="73" name="EventSystem" tags="widget" position="350,975" size="100,100">/* 再现ERA口上系统的TRYCALL体系 主 */
 &lt;&lt;widget &quot;CallEvent&quot;&gt;&gt;
 &lt;&lt;if setEvent() isnot false&gt;&gt;
     &lt;&lt;set _passagename to setEvent()&gt;&gt;
@@ -14659,12 +14982,12 @@ function wait(text) {
 
 &lt;&lt;/if&gt;&gt;
 
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="52" name="主线 开幕：EventFirst" tags="" position="225,725" size="100,100">&lt;&lt;set $count to 0&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="74" name="主线 开幕：EventFirst" tags="" position="475,975" size="100,100">&lt;&lt;set $count to 0&gt;&gt;
 &lt;&lt;set $UI.nextbutton to false&gt;&gt;
 &lt;&lt;set $eventnext to 0&gt;&gt;
-&lt;&lt;bookmark &quot;主线开幕_初次&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="53" name="主线 开幕-初次" tags="" position="350,725" size="100,100">&lt;div id=&#39;opcontainer&#39;&gt;
+&lt;&lt;bookmark &quot;主线开幕_初次&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="75" name="主线 开幕-初次" tags="" position="600,975" size="100,100">&lt;div id=&#39;opcontainer&#39;&gt;
 &lt;div id=&quot;weirdtext&quot;&gt;&lt;&lt;Opening $count&gt;&gt;&lt;/div&gt;
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="54" name="主线 开幕-初次：E" tags="" position="475,725" size="100,100">&lt;&lt;if $count lt 8&gt;&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="76" name="主线 开幕-初次：E" tags="" position="725,975" size="100,100">&lt;&lt;if $count lt 8&gt;&gt;
 &lt;&lt;addclass &quot;#eventsituation&quot; &quot;weirdtext&quot;&gt;&gt;
 &lt;&lt;script&gt;&gt;
 //requires jQuery because I am lazy.
@@ -14675,7 +14998,7 @@ $(document).ready(function(){
 &lt;&lt;else&gt;&gt;
 &lt;&lt;removeclass &quot;#eventsituation&quot; &quot;weirdtext&quot;&gt;&gt;
 &lt;&lt;replace &#39;#opcontainer&#39;&gt;&gt;&lt;&lt;Opening $count&gt;&gt;&lt;&lt;/replace&gt;&gt;
-&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="55" name="主线 开幕-初次：W" tags="widget" position="600,725" size="100,100">&lt;&lt;widget &quot;Opening&quot;&gt;&gt;
+&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="77" name="主线 开幕-初次：W" tags="widget" position="850,975" size="100,100">&lt;&lt;widget &quot;Opening&quot;&gt;&gt;
 
 &lt;&lt;switch $args[0]&gt;&gt;
 &lt;&lt;case 0&gt;&gt;
@@ -14789,7 +15112,7 @@ $(document).ready(function(){
 
 &lt;&lt;/switch&gt;&gt;
 
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="56" name="主线 开幕-初次：S" tags="" position="725,725" size="100,100">&lt;&lt;switch $count&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="78" name="主线 开幕-初次：S" tags="" position="975,975" size="100,100">&lt;&lt;switch $count&gt;&gt;
 &lt;&lt;case 0&gt;&gt;
 	&lt;&lt;set _text to Lang(&quot;睁开眼睛&quot;,&quot;Open The Eyes&quot;)&gt;&gt;
 	&lt;div class=&quot;Wselect&quot;&gt;&lt;&lt;link _text&gt;&gt;&lt;&lt;set $count to 1&gt;&gt;&lt;&lt;Revent&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
@@ -14832,7 +15155,7 @@ $(document).ready(function(){
 	&lt;&lt;set _text to Lang(&quot;继续&quot;,&quot;Next&quot;)&gt;&gt;
 	&lt;div @class=&quot;($count &gt;= 8 ? &#39;Eselect&#39; : &#39;Wselect&#39; )&quot;&gt;&lt;&lt;link _text&gt;&gt;&lt;&lt;set $count to $eventnext&gt;&gt;&lt;&lt;Revent&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
 
-&lt;&lt;/switch&gt;&gt;</tw-passagedata><tw-passagedata pid="57" name="主线 开幕-初次-穿越版" tags="" position="850,725" size="100,100">&lt;&lt;Opening2 $count&gt;&gt;</tw-passagedata><tw-passagedata pid="58" name="主线 开幕-初次-穿越版：W" tags="widget" position="975,725" size="100,100">&lt;&lt;widget &quot;Opening2&quot;&gt;&gt;
+&lt;&lt;/switch&gt;&gt;</tw-passagedata><tw-passagedata pid="79" name="主线 开幕-初次-穿越版" tags="" position="1100,975" size="100,100">&lt;&lt;Opening2 $count&gt;&gt;</tw-passagedata><tw-passagedata pid="80" name="主线 开幕-初次-穿越版：W" tags="widget" position="1225,975" size="100,100">&lt;&lt;widget &quot;Opening2&quot;&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
 &lt;&lt;switch $count&gt;&gt;
 &lt;&lt;case 0&gt;&gt;
@@ -14954,7 +15277,7 @@ $(document).ready(function(){
 &lt;&lt;/switch&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
 
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="59" name="主线 开幕-初次-穿越版：S" tags="" position="1100,725" size="100,100">&lt;&lt;switch $count&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="81" name="主线 开幕-初次-穿越版：S" tags="" position="100,1100" size="100,100">&lt;&lt;switch $count&gt;&gt;
 &lt;&lt;case 1&gt;&gt;
 &lt;&lt;set _text to Lang(&quot;拿起手机&quot;,&quot;Pick up the phone&quot;)&gt;&gt;
 &lt;div class=&quot;Eselect&quot;&gt;&lt;&lt;link _text&gt;&gt;&lt;&lt;set $count to 2&gt;&gt;&lt;&lt;Revent&gt;&gt;&lt;&lt;passtime 2&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
@@ -15002,7 +15325,7 @@ $(document).ready(function(){
 &lt;&lt;set _text to Lang(&quot;继续&quot;,&quot;Next&quot;)&gt;&gt;
 &lt;div class=&quot;Eselect&quot;&gt;&lt;&lt;link _text&gt;&gt;&lt;&lt;set $count to $eventnext&gt;&gt;&lt;&lt;Revent&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
 
-&lt;&lt;/switch&gt;&gt;</tw-passagedata><tw-passagedata pid="60" name="主线 开幕-轮回" tags="" position="1225,725" size="100,100">&lt;&lt;bookmark &quot;主线开幕_轮回&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="61" name="PC 主线-开幕-房间描述" tags="nobr" position="100,850" size="100,100">&lt;&lt;lang 
+&lt;&lt;/switch&gt;&gt;</tw-passagedata><tw-passagedata pid="82" name="主线 开幕-轮回" tags="" position="225,1100" size="100,100">&lt;&lt;bookmark &quot;主线开幕_轮回&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="83" name="PC 主线-开幕-房间描述" tags="nobr" position="350,1100" size="100,100">&lt;&lt;lang 
 &quot;一睁开眼，首先看到的是茂绿的窗外，响亮的蝉鸣宣告着当前的季节。窗户旁摆放着一张大书桌，上面摆放着&lt;&lt;if $PC.type is 2&gt;&gt;一个宽屏大液显&lt;&lt;elseif $PC.type is 1&gt;&gt;新帝HQ24数位屏和数位板&lt;&lt;else&gt;&gt;一个电脑屏幕&lt;&lt;/if&gt;&gt;，书桌旁的小桌子上则是电脑主机。在靠近书桌的墙边，则整齐地摆放着两个书架，书架上是&lt;&lt;switch $PC.type&gt;&gt;&lt;&lt;case 1&gt;&gt;各种漫画和小说还有塑料小人&lt;&lt;case 2&gt;&gt;各种各样的书籍&lt;&lt;case 3&gt;&gt;各种修仙小说和漫画&lt;&lt;/switch&gt;&gt;，墙上则&lt;&lt;switch $PC.type&gt;&gt;&lt;&lt;case 1&gt;&gt;挂着一些远古生物的挂画和各种游戏海报&lt;&lt;case 2&gt;&gt;挂着一些漂亮的装饰画&lt;&lt;case 3&gt;&gt;挂着一个黑白两色的八卦阵和一些仙侠作品的海报&lt;&lt;/switch&gt;&gt;&quot;
 
 &quot;Across from the bed is the window, and outside the window is the loud sound of cicadas announcing the current season. Right next to the window sits a large desk with a computer with two screens, two bookshelves lined up side by side with various books and comics and some anime figurines, and posters of superheroes on the wall&quot;
