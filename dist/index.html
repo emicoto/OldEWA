@@ -2305,7 +2305,7 @@ F.InitPlayer = function(){
         trait:{}, state:{}, 
         base:{}, 
         rpg:{}, equip:{},
-        abl:{}, school:{}, eskl:{}, lewd:{},
+        abl:{}, school:{}, sexabl:{}, lewd:{},
         genital:{}, sens:{}, stretch:{}, produce:{}, bottom:{}, wet:{},
         vaginity:{}, mark:{}, rec:{}, exp:{},
     }
@@ -2400,7 +2400,12 @@ F.InitPlayer = function(){
         意志 : 0,  /* 影响各种耐性和抵抗力 */
     }
 
-    PC.eskl = {
+    //具体学会的技能。有才能进行相关行为。max 100
+    PC.skill = { 
+        开锁 : 0, 黑客:0, 潜行:0,
+    }
+
+    PC.sexabl = {
         性技巧 : 0,  /* 影响性攻击效果 */
         性耐性 : 0,   /* 影响性抵抗效果 */
         口技 : 0,
@@ -2440,12 +2445,7 @@ F.InitPlayer = function(){
 
     //现在状态
     PC.state = {}
-
-    for(let i=0; i< D.pcstatelist.length; i++){
-        let n = D.pcstatelist[i]
-        PC.state[n] = false
-    }
-
+    D.pcstatelist.forEach((n)=>{ PC.state[n]=false })
 
     /*  童贞/处女记录
         失去时记录日期、情况、对象。 
@@ -2457,11 +2457,7 @@ F.InitPlayer = function(){
     PC.vaginity = { "初吻" : 1, "童贞" : 1, "处女" : 1, "A处女" : 1}
 
     // 各种经验
-    for(let i=0; i < D.explist.length; i++){
-        let n = D.explist[i]
-        PC.exp[n] = 0
-    }
-
+    D.explist.forEach((n)=>{ PC.exp[n]=0 })
 
     /* 当前事件中的次数/数量，今天总数，累计总数 c=current,t=today,a=alltime*/
     PC.rec = {}
@@ -2481,10 +2477,7 @@ F.InitPlayer = function(){
 
     //皮肤上可刺青的图层
     PC.skin = {}
-    for(let i=0; i< D.skinlayer.length; i++){
-        let n = D.skinlayer[i]
-        PC.skin[n] = null
-    }
+    D.skinlayer.forEach((n)=>{ PC.skin[n]=null })
 
     //表情
     V.PFace = {
@@ -2517,14 +2510,8 @@ F.InitPlayer = function(){
     }
 
     PC.tcsv = {}
-    for(let i=0; i < D.tcsvflag.length; i++){
-        let n = D.tcsvflag[i]
-        PC.tcsv[n] = false
-    }
-    for(let i=0; i < D.tcsvnum.length; i++){
-        let n = D.tcsvnum[i]
-        PC.tcsv[n] = 0
-    }
+    D.tcsvflag.forEach((n)=>{ PC.tcsv[n]=false })
+    D.tcsvnum.forEach((n)=>{ PC.tcsv[n]=0 })
 
     //玩家角色对其他NPC的好感度
     PC.favor = {
@@ -3819,7 +3806,7 @@ D.map.景南市.怡安小区 = {
     },
 
     小卖部 : {
-        place: "小卖部", side:"室内", group: "怡安小区", passage: "怡安小区小卖部",
+        place: "小卖部", side:"室外", group: "怡安小区", passage: "虹猫小店",
         title: "虹猫小店",
         open: 360, close:1200,
         tag:["便利店","移动摊位","营业"],
@@ -3829,6 +3816,15 @@ D.map.景南市.怡安小区 = {
         description(){
             return "小区门前的便利店。基本的生活用品都能在这里找到。便利店旁时不时会有贩卖各种熟食的小摊。"
         }
+    },
+
+    虹猫小店 : {
+        place: "虹猫小店", side:"室内", group:"怡安小区", passage:"虹猫小店-内部",
+        open: 360, close:1200,
+        tag:["便利店","移动摊位","营业"],
+        chara:[],
+        bike:true,
+        img:"conbini_inter",
     },
 
     共享菜园 : {
@@ -10150,7 +10146,7 @@ function FixValue() {
     PC.rpg.MP[1] = PC.base.魔力[1]
     PC.rpg.MP[0] = PC.base.魔力[0]
 
-    PC.rpg.SP[1] = Math.round(Math.clamp(PC.rpg.SP[1],50,50+PC.eskl.性耐性/5))
+    PC.rpg.SP[1] = Math.round(Math.clamp(PC.rpg.SP[1],50,50+PC.sexabl.性耐性/5))
     PC.rpg.SP[0] = Math.clamp(PC.rpg.SP[0],0,PC.rpg.SP[1])
 
     PC.rpg.ATK = fixfloat(Math.clamp((10+PC.abl.战技/10),1,500),2)
@@ -10170,28 +10166,30 @@ function FixValue() {
     }
 
     const school = Object.keys(PC.school) //学校
-    for(let i=0; i< school.length; i++){
-        let n = school[i]
+    school.forEach((n)=>{
         PC.school[n] = Math.clamp(PC.school[n],0,1200)
-    }
+    })
+    
 
-    const abl = Object.keys(PC.abl) //技能
-    for(let i=0; i<abl.length; i++){
-        let n = abl[i]
+    const abl = Object.keys(PC.abl) //能力
+    abl.forEach((n)=>{
         PC.abl[n] = Math.clamp(PC.abl[n],0,max())
-    }
+    })
 
-    const eskl = Object.keys(PC.eskl) //性技
-    for(let i=0; i<eskl.length; i++){
-        let n = eskl[i]
-        PC.eskl[n] = Math.clamp(PC.eskl[n],0,1000)
-    }
+    const skill = Object.keys(PC.skill) //技能
+    skill.forEach((n)=>{
+        PC.skill[n] = Math.clamp(PC.skill[n],0,100)
+    })
+
+    const sexabl = Object.keys(PC.sexabl) //性技
+    sexabl.forEach((n)=>{
+        PC.sexabl[n] = Math.clamp(PC.sexabl[n],0,1000)
+    })
 
     const lewd = Object.keys(PC.lewd) //变态度
-    for(let i=0; i<lewd.length; i++){
-        let n = lewd[i]
+    lewd.forEach((n)=>{
         PC.lewd[n] = Math.clamp(PC.lewd[n],-1000,1000)
-    }
+    })
 
     setreveal()
 
@@ -10322,11 +10320,12 @@ window.setMap = setMap
 DefineMacroS("setmap",setMap)
 
 function setLocation(args) {
-    
+    let last = clone(V.local)
+
     //更新local信息
     if(D.map.景南市[V.mapgroup][args]) V.local = clone(D.map.景南市[V.mapgroup][args])
     else if(D.map.景南市[args]) V.local = clone(D.map.景南市[args])
-    else if(D.map.通用[args]) V.local = clone(D.map.通用[args])
+    else if(D.map.通用[args]) { V.local = clone(D.map.通用[args]) }
     else {return "<div class='error-view'>error: 找不到对应地图: "+args+"</div>"}
 
     //在页面上显示地点信息. 如果是自己家,则显示 XX家。 等日后可以搬家时，增加设置 >>  && V.home == V.local.place 
@@ -10343,14 +10342,13 @@ function setLocation(args) {
 
     //记录上一个地点
     V.local.last = V.location
+    if(last.group == "通用") V.local.exit = previous()
 
     //把地点名扔回去
     V.location = args
 
     //重置移动按钮
     ui.movebutton = false
-
-
 
      /* 设置事件随机概率 RandomEventRate */
     F.RER()
@@ -10389,8 +10387,8 @@ function navigation(){
             let dest = D.map.景南市[V.mapgroup][n]
             if(V.coredebug)console.log(dest);
 
-            //如果是营业地点,非营业时间无法通过快速移动链接进入,只能通过别的路径进入   
-            if(dest.tag.includes("营业") && !isOpenHour(dest)) continue;        
+            //如果是室内的营业地点,非营业时间无法通过快速移动链接进入,只能通过别的路径进入   
+            if(dest.tag.includes("营业") && dest.side=="室内" && !isOpenHour(dest)) continue;        
 
             let name = dest.place
             if(dest.tag.includes("家")) name = "回家"
@@ -10427,8 +10425,8 @@ function navigation(){
 
                 //排除重复的通用地点链接
                 if(linklist.includes(n)) continue;
-                //如果是营业地点,非营业时间无法通过快速移动链接进入,只能通过别的路径进入   
-                if(dest.tag.includes("营业") && !isOpenHour(dest)) continue;
+                //如果是室内的营业地点,非营业时间无法通过快速移动链接进入,只能通过别的路径进入   
+                if(dest.tag.includes("营业") && dest.side=="室内" && !isOpenHour(dest)) continue; 
 
                 //计算移动时间
                 let t = Math.abs(tmap.links[stpoint] -tmap.links[n])
@@ -12414,8 +12412,8 @@ DefineMacroS("delay",delay)
     &lt;label&gt; &lt;&lt;radiobutton &quot;$PC.sens.a&quot; 0.2 autocheck&gt;&gt; &lt;&lt;lang &quot;钝感&quot; &quot;bad&quot;&gt;&gt;　&lt;/label&gt;
     &lt;label&gt; &lt;&lt;radiobutton &quot;$PC.sens.a&quot; 1 autocheck&gt;&gt; &lt;&lt;lang &quot;普通&quot; &quot;normal&quot;&gt;&gt;　&lt;/label&gt;
     &lt;label&gt; &lt;&lt;radiobutton &quot;$PC.sens.a&quot; 2 autocheck&gt;&gt; &lt;&lt;lang &quot;敏感&quot; &quot;pretty&quot;&gt;&gt;　&lt;/label&gt;
-    &lt;label&gt; &lt;&lt;radiobutton &quot;$PC.sens.a&quot; 4 autocheck&gt;&gt; &lt;&lt;lang &quot;敏感&quot; &quot;very&quot;&gt;&gt;　&lt;/label&gt;
-    &lt;label&gt; &lt;&lt;radiobutton &quot;$PC.sens.a&quot; 6 autocheck&gt;&gt; &lt;&lt;lang &quot;敏感&quot; &quot;super&quot;&gt;&gt;　&lt;/label&gt;
+    &lt;label&gt; &lt;&lt;radiobutton &quot;$PC.sens.a&quot; 4 autocheck&gt;&gt; &lt;&lt;lang &quot;比较敏感&quot; &quot;very&quot;&gt;&gt;　&lt;/label&gt;
+    &lt;label&gt; &lt;&lt;radiobutton &quot;$PC.sens.a&quot; 6 autocheck&gt;&gt; &lt;&lt;lang &quot;十分敏感&quot; &quot;super&quot;&gt;&gt;　&lt;/label&gt;
 &lt;&lt;/widget&gt;&gt;
 
 
@@ -13805,9 +13803,9 @@ required:false,
 &lt;&lt;dashline&gt;&gt;
 ♦&lt;u&gt; &lt;b&gt; 性技&lt;/b&gt; &lt;/u&gt;&lt;br&gt;
 &lt;div id=&quot;skilldata&quot;&gt;
-&lt;&lt;showskilldata &quot;eskl&quot; &quot;性耐性&quot;&gt;&gt;　&lt;&lt;showskilldata &quot;eskl&quot; &quot;性技巧&quot;&gt;&gt;　&lt;&lt;showskilldata &quot;eskl&quot; &quot;口技&quot;&gt;&gt;
+&lt;&lt;showskilldata &quot;sexabl&quot; &quot;性耐性&quot;&gt;&gt;　&lt;&lt;showskilldata &quot;sexabl&quot; &quot;性技巧&quot;&gt;&gt;　&lt;&lt;showskilldata &quot;sexabl&quot; &quot;口技&quot;&gt;&gt;
 &lt;br&gt;&lt;br&gt;
-&lt;&lt;showskilldata &quot;eskl&quot; &quot;手技&quot;&gt;&gt;　&lt;&lt;showskilldata &quot;eskl&quot; &quot;脚技&quot;&gt;&gt;　&lt;&lt;showskilldata &quot;eskl&quot; &quot;腰技&quot;&gt;&gt;
+&lt;&lt;showskilldata &quot;sexabl&quot; &quot;手技&quot;&gt;&gt;　&lt;&lt;showskilldata &quot;sexabl&quot; &quot;脚技&quot;&gt;&gt;　&lt;&lt;showskilldata &quot;sexabl&quot; &quot;腰技&quot;&gt;&gt;
 &lt;br&gt;&lt;br&gt;
 &lt;/div&gt;
 
@@ -14409,9 +14407,7 @@ function wait(text) {
 
 &lt;div id=&quot;navi&quot; class=&quot;navi_unable&quot;&gt;
     &lt;&lt;navi&gt;&gt;
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="36" name="嘉庆广场 links" tags="" position="725,475" size="100,100">&lt;div class=&quot;links&quot; title=&quot;移动时间：15分钟&quot;&gt;&lt;&lt;link &quot;・ 怡安小区&quot; &quot;怡安小区&quot;&gt;&gt;&lt;&lt;passtime 15&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
-&lt;div class=&quot;links&quot; title=&quot;移动时间：2分钟&quot;&gt;&lt;&lt;link &quot;・ 地铁站&quot;&gt;&gt;&lt;&lt;passtime 2&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
-&lt;div class=&quot;links&quot; title=&quot;移动时间：1分钟&quot;&gt;&lt;&lt;link &quot;・ 巴士站&quot;&gt;&gt;&lt;&lt;passtime 1&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="37" name="商场的日常风景_1" tags="" position="850,475" size="100,100">&lt;&lt;=condtext([
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="36" name="商场的日常风景_1" tags="" position="725,475" size="100,100">&lt;&lt;=condtext([
 [inTime(8.5,10), &quot;明明距离商场开门的时间还很早，但已经有人陆陆续续聚集在入口广场上了。&quot;],
 [inTime(10,18), &quot;营业中的嘉庆广场，无论是广场外部还是商场内部，人来人往，十分热闹。&quot;],
 [inTime(18,20), &quot;已经到晚饭时间了，商场内的餐厅传来了美味的香气。比起白天，人已经少了很多，但依然热闹。&quot;],
@@ -14419,12 +14415,12 @@ function wait(text) {
 [&quot;else&quot;,&quot;商场建筑黑漆漆的，已经完全关闭。但广场上依然亮着点点灯光，夜晚的喷水广场在点点灯光下，十分好看。&quot;]
 ])&gt;&gt;
 
-&lt;br&gt;</tw-passagedata><tw-passagedata pid="38" name="商场闲逛_1" tags="" position="975,475" size="100,100">&lt;&lt;=either(
+&lt;br&gt;</tw-passagedata><tw-passagedata pid="37" name="商场闲逛_1" tags="" position="850,475" size="100,100">&lt;&lt;=either(
 &quot;&lt;&lt;you&gt;&gt;坐在南面入口广场一侧的椅子上，仰头看着绿茵茵的木棉树，偶尔会发现在树枝中跳窜的小麻雀。&quot;,
 &quot;&lt;&lt;you&gt;&gt;走在广场上，观察着来来往往的人群，目光时不时被在路边派发传单的布偶人吸引。&quot;,
 &quot;&lt;&lt;you&gt;&gt;拿起手机，以商场为背景，给自己拍了张新的照片。&quot;,
 &quot;&lt;&lt;you&gt;&gt;站在广场角落的报亭前，随手拿起一份报纸看了眼今天的新闻。&quot;,
-)&gt;&gt;</tw-passagedata><tw-passagedata pid="39" name="商店" tags="location" position="1100,475" size="100,100">&lt;&lt;location &quot;AW服装店&quot;&gt;&gt;&lt;&lt;mode &quot;location&quot;&gt;&gt;
+)&gt;&gt;</tw-passagedata><tw-passagedata pid="38" name="商店" tags="location" position="975,475" size="100,100">&lt;&lt;location &quot;AW服装店&quot;&gt;&gt;&lt;&lt;mode &quot;location&quot;&gt;&gt;
 
 &lt;span class=&quot;title&quot;&gt;服装店&lt;/span&gt;&lt;br&gt;
 &lt;div class=&quot;lbox&quot;&gt;
@@ -14432,7 +14428,7 @@ function wait(text) {
 &lt;/div&gt;
 &lt;&lt;set $shoptype to [&quot;all&quot;,&quot;offline&quot;]&gt;&gt;
 
-&lt;&lt;include &quot;试衣间&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="40" name="你的家 单身公寓" tags="location" position="1225,475" size="100,100">&lt;&lt;location &quot;单身公寓&quot;&gt;&gt;&lt;&lt;mode &quot;location&quot;&gt;&gt;
+&lt;&lt;include &quot;试衣间&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="39" name="你的家 单身公寓" tags="location" position="1100,475" size="100,100">&lt;&lt;location &quot;单身公寓&quot;&gt;&gt;&lt;&lt;mode &quot;location&quot;&gt;&gt;
 &lt;&lt;resetplaylist&gt;&gt;
 &lt;&lt;set $TEquip to clone($Equip)&gt;&gt;
 
@@ -14440,6 +14436,7 @@ function wait(text) {
 &lt;div id=&quot;situation&quot; class=&quot;situation&quot;&gt;&lt;&lt;=F.getsituation(&quot;单身公寓&quot;)&gt;&gt;&lt;/div&gt;
 
 &lt;br&gt;
+&lt;&lt;if $Flag.interactionlock isnot true&gt;&gt;
 &lt;div class=&quot;tolink&quot;&gt;
 &lt;&lt;link &quot;衣柜　 1m&quot; &quot;衣柜&quot;&gt;&gt;&lt;&lt;passtime 1&gt;&gt;&lt;&lt;/link&gt;&gt;　　
 &lt;&lt;link &quot;冰箱　 1m&quot; &quot;冰箱&quot;&gt;&gt;&lt;&lt;passtime 1&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
@@ -14456,6 +14453,7 @@ function wait(text) {
 &lt;&lt;link &quot;跳过时间　 23hr&quot; $passage&gt;&gt;&lt;&lt;passtime 1380&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
 &lt;&lt;link &quot;出门　 　　5m&quot; &quot;怡安小区&quot; &gt;&gt;&lt;&lt;passtime 5&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
 &lt;/div&gt;
+&lt;&lt;/if&gt;&gt;
 
 /*可以做的事情……
 网购 -- 手机也有的功能
@@ -14464,7 +14462,7 @@ function wait(text) {
 微信 -- 手机也有的功能，有可以联络的人时才能用
 自慰
 和宠物（床伴？）聊天
-*/</tw-passagedata><tw-passagedata pid="41" name="浴室" tags="" position="100,600" size="100,100">&lt;&lt;location &quot;浴室&quot;&gt;&gt;
+*/</tw-passagedata><tw-passagedata pid="40" name="浴室" tags="" position="1225,475" size="100,100">&lt;&lt;location &quot;浴室&quot;&gt;&gt;
 
 &lt;&lt;you&gt;&gt;来到了浴室。&lt;br&gt;
 
@@ -14474,7 +14472,7 @@ function wait(text) {
 &lt;&lt;link &quot;泡澡　　30m&quot; &quot;洗澡&quot;&gt;&gt;&lt;&lt;gonaked &quot;closet&quot;&gt;&gt;&lt;&lt;run D.COM.洗澡.act(30)&gt;&gt;&lt;&lt;passtime 30&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
 &lt;&lt;link &quot;做事前准备 10m&quot;&gt;&gt;&lt;&lt;gonaked &quot;closet&quot;&gt;&gt;&lt;&lt;passtime 10&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
 &lt;&lt;link &quot;离开浴室　 1m&quot; &quot;你的家 单身公寓&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="42" name="洗澡" tags="" position="225,600" size="100,100">&lt;span class=&quot;title&quot;&gt;浴室&lt;/span&gt;&lt;br&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="41" name="洗澡" tags="" position="100,600" size="100,100">&lt;span class=&quot;title&quot;&gt;浴室&lt;/span&gt;&lt;br&gt;
 
 &lt;img src=&#39;image/cg/bath.png&#39; class=&quot;border:1px solid #928348&quot;&gt;&lt;br&gt;
 &lt;&lt;you&gt;&gt;脱光衣服，整个人泡进浴缸里，放松着。&lt;br&gt;
@@ -14484,7 +14482,7 @@ function wait(text) {
 &lt;&lt;link &quot;自慰&quot; &quot;自慰&quot;&gt;&gt;&lt;&lt;passtime 1&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
 &lt;&lt;link &quot;玩泡沫　30m&quot; $passage&gt;&gt;&lt;&lt;passtime 30&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
 &lt;&lt;link &quot;出浴　　5m&quot; &quot;浴室&quot;&gt;&gt;&lt;&lt;passtime 5&gt;&gt;&lt;&lt;redress &quot;closet&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="43" name="城市生活_1" tags="" position="350,600" size="100,100">&lt;&lt;you&gt;&gt;最近离开父母家，独立出来自己住了。一切才刚开始各种不习惯……&lt;br&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="42" name="城市生活_1" tags="" position="225,600" size="100,100">&lt;&lt;you&gt;&gt;最近离开父母家，独立出来自己住了。一切才刚开始各种不习惯……&lt;br&gt;
 &lt;&lt;=condtext([
     [inTime(6,8),&quot;一大早就起来了,要做点什么好呢……？&quot;],
     [inTime(8,11),&quot;&lt;&lt;you&gt;&gt;躺在懒人沙发上茫无目的地玩着手机……&quot;],
@@ -14494,15 +14492,9 @@ function wait(text) {
     [inTime(19,23),&quot;到晚上了，该放学的早放学了，该下班的也下班了。网络迎来了高峰期……&lt;br&gt;嗨起来！&quot;],
     [&quot;else&quot;,&quot;很晚了，得睡觉了……&quot;]
 ])&gt;&gt;
-&lt;br&gt;</tw-passagedata><tw-passagedata pid="44" name="宠物的日常_1" tags="" position="475,600" size="100,100">最近多了个小家伙跟在身边, 虽然有点粘人但还是挺治愈的。&lt;br&gt;
+&lt;br&gt;</tw-passagedata><tw-passagedata pid="43" name="宠物的日常_1" tags="" position="350,600" size="100,100">最近多了个小家伙跟在身边, 虽然有点粘人但还是挺治愈的。&lt;br&gt;
 嗯……要跟宠物&lt;&lt;print $pet.name&gt;&gt;做点什么好呢？&lt;br&gt;
-&lt;br&gt;</tw-passagedata><tw-passagedata pid="45" name="怡安小区" tags="location" position="600,600" size="100,100">&lt;&lt;setmap &quot;怡安小区&quot;&gt;&gt;&lt;&lt;location &quot;怡安小区&quot;&gt;&gt;&lt;&lt;mode &quot;location&quot;&gt;&gt;
-
-&lt;span class=&quot;title&quot;&gt;怡安小区&lt;/span&gt;&lt;br&gt;
-&lt;div class=&quot;lbox&quot;&gt;
-&lt;&lt;=F.getDescrips(&quot;怡安小区&quot;,&quot;怡安小区&quot;)&gt;&gt;
-&lt;/div&gt;
-&lt;br&gt;
+&lt;br&gt;</tw-passagedata><tw-passagedata pid="44" name="怡安小区" tags="location" position="475,600" size="100,100">&lt;&lt;setmap &quot;怡安小区&quot;&gt;&gt;&lt;&lt;location &quot;怡安小区&quot;&gt;&gt;&lt;&lt;mode &quot;location&quot;&gt;&gt;
 
 &lt;div id=&quot;append-text&quot; class=&quot;append-normal&quot;&gt;&lt;/div&gt;
 &lt;div id=&quot;situation&quot; class=&quot;situation&quot;&gt;
@@ -14510,25 +14502,19 @@ function wait(text) {
 &lt;/div&gt;
 
 &lt;br&gt;
-
 &lt;&lt;if $Flag.interactionlock isnot true&gt;&gt;
 &lt;div class=&quot;tolink&quot;&gt;
 /* 可以进行的互动 */
-&lt;&lt;link &quot;回家　　　　5m&quot; &quot;你的家 单身公寓&quot;&gt;&gt;&lt;&lt;passtime 5&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
-&lt;&lt;link &quot;共享菜园　　3m&quot;&gt;&gt;&lt;&lt;passtime 3&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
-&lt;&lt;link &quot;去公园散步　3m&quot; &quot;怡安小区公园&quot;&gt;&gt;&lt;&lt;passtime 3&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
+&lt;&lt;link &quot;回家　　　 5m&quot; &quot;你的家 单身公寓&quot;&gt;&gt;&lt;&lt;passtime 5&gt;&gt;&lt;&lt;/link&gt;&gt;　　
+&lt;&lt;link &quot;按门铃　　 2m&quot; &quot;按门铃&quot;&gt;&gt;&lt;&lt;passtime 2&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
+&lt;&lt;link &quot;共享菜园　 3m&quot; &quot;共享菜园&quot;&gt;&gt;&lt;&lt;passtime 3&gt;&gt;&lt;&lt;/link&gt;&gt;　　
+&lt;&lt;link &quot;去公园散步 3m&quot; &quot;怡安小区公园&quot;&gt;&gt;&lt;&lt;passtime 3&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
 &lt;/div&gt;
 
 &lt;div id=&quot;navi&quot; class=&quot;navi_unable&quot;&gt;
     &lt;&lt;navi&gt;&gt;
 &lt;/div&gt;
-&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="46" name="怡安小区公园" tags="location" position="725,600" size="100,100">&lt;&lt;location &quot;小区公园&quot;&gt;&gt;&lt;&lt;mode &quot;location&quot;&gt;&gt;
-
-&lt;span class=&quot;title&quot;&gt;怡安小区 - 公园&lt;/span&gt;&lt;br&gt;
-&lt;div class=&quot;lbox&quot;&gt;
-&lt;&lt;=F.getDescrips(&quot;小区公园&quot;,&quot;怡安小区&quot;)&gt;&gt;
-&lt;/div&gt;
-&lt;br&gt;
+&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="45" name="怡安小区公园" tags="location" position="600,600" size="100,100">&lt;&lt;location &quot;小区公园&quot;&gt;&gt;&lt;&lt;mode &quot;location&quot;&gt;&gt;
 
 &lt;div id=&quot;append-text&quot; class=&quot;append-normal&quot;&gt;&lt;/div&gt;
 &lt;div id=&quot;situation&quot; class=&quot;situation&quot;&gt;
@@ -14542,7 +14528,36 @@ function wait(text) {
 
 &lt;div id=&quot;navi&quot; class=&quot;navi_unable&quot;&gt;
     &lt;&lt;navi&gt;&gt;
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="47" name="Event" tags="eventloop nosave" position="850,600" size="100,100">&lt;&lt;mode &quot;event&quot;&gt;&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="46" name="按门铃" tags="event" position="725,600" size="100,100">&lt;&lt;you&gt;&gt;按下了邻居的门铃,可惜没有任何回应。&lt;br&gt;
+&lt;br&gt;
+&lt;&lt;link &quot;离开&quot; &quot;怡安小区&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="47" name="共享菜园" tags="" position="850,600" size="100,100">&lt;&lt;location &quot;共享菜园&quot;&gt;&gt;&lt;&lt;mode &quot;location&quot;&gt;&gt;
+
+&lt;&lt;you&gt;&gt;站在菜地前,看着各种蔬菜徐徐生长着。&lt;br&gt;
+&lt;br&gt;
+&lt;div class=&quot;tolink&quot;&gt;
+&lt;&lt;link &quot;浇水　　5m&quot; $passage&gt;&gt;&lt;&lt;passtime 5&gt;&gt;&lt;&lt;/link&gt;&gt;
+&lt;&lt;link &quot;松土　　10m&quot; $passage&gt;&gt;&lt;&lt;passtime 10&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
+&lt;&lt;link &quot;离开　　3m&quot; &quot;怡安小区&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;
+&lt;/div&gt;
+
+&lt;div id=&quot;navi&quot; class=&quot;navi_unable&quot;&gt;
+    &lt;&lt;navi&gt;&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="48" name="小卖部" tags="" position="975,600" size="100,100">&lt;&lt;location &quot;小卖部&quot;&gt;&gt;&lt;&lt;mode &quot;location&quot;&gt;&gt;
+
+&lt;&lt;you&gt;&gt;站在小卖部门前，看着货车把一箱又一箱的物资往里面搬运。&lt;br&gt;
+最近似乎在整顿，距离开店还有点日子……&lt;br&gt;
+&lt;br&gt;
+&lt;div class=&quot;tolink&quot;&gt;
+&lt;&lt;link &quot;离开　　3m&quot; &quot;怡安小区&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;
+&lt;/div&gt;
+
+&lt;div id=&quot;navi&quot; class=&quot;navi_unable&quot;&gt;
+    &lt;&lt;navi&gt;&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="49" name="虹猫小店" tags="" position="1100,600" size="100,100">&lt;&lt;location &quot;虹猫小店&quot;&gt;&gt;
+
+&lt;div id=&quot;append-text&quot; class=&quot;append-normal&quot;&gt;&lt;span id=&quot;action-text2&quot;&gt;&lt;&lt;you&gt;&gt;走进了虹猫小店，看着各种各样的物品思考着要买点什么。&lt;/span&gt;&lt;/div&gt;
+
+/* &lt;&lt;include &quot;商店购物&quot;&gt;&gt; */</tw-passagedata><tw-passagedata pid="50" name="Event" tags="eventloop nosave" position="1225,600" size="100,100">&lt;&lt;mode &quot;event&quot;&gt;&gt;
 
 &lt;div id=&quot;eventsituation&quot;&gt;
 &lt;&lt;CallEvent&gt;&gt;
@@ -14561,7 +14576,7 @@ function wait(text) {
 
 &lt;div id=&quot;eventeffect&quot;&gt;
 &lt;&lt;CallEventEffect&gt;&gt;
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="48" name="EventSystem" tags="widget" position="975,600" size="100,100">/* 再现ERA口上系统的TRYCALL体系 主 */
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="51" name="EventSystem" tags="widget" position="100,725" size="100,100">/* 再现ERA口上系统的TRYCALL体系 主 */
 &lt;&lt;widget &quot;CallEvent&quot;&gt;&gt;
 &lt;&lt;if setEvent() isnot false&gt;&gt;
     &lt;&lt;set _passagename to setEvent()&gt;&gt;
@@ -14644,12 +14659,12 @@ function wait(text) {
 
 &lt;&lt;/if&gt;&gt;
 
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="49" name="主线 开幕：EventFirst" tags="" position="1100,600" size="100,100">&lt;&lt;set $count to 0&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="52" name="主线 开幕：EventFirst" tags="" position="225,725" size="100,100">&lt;&lt;set $count to 0&gt;&gt;
 &lt;&lt;set $UI.nextbutton to false&gt;&gt;
 &lt;&lt;set $eventnext to 0&gt;&gt;
-&lt;&lt;bookmark &quot;主线开幕_初次&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="50" name="主线 开幕-初次" tags="" position="1225,600" size="100,100">&lt;div id=&#39;opcontainer&#39;&gt;
+&lt;&lt;bookmark &quot;主线开幕_初次&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="53" name="主线 开幕-初次" tags="" position="350,725" size="100,100">&lt;div id=&#39;opcontainer&#39;&gt;
 &lt;div id=&quot;weirdtext&quot;&gt;&lt;&lt;Opening $count&gt;&gt;&lt;/div&gt;
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="51" name="主线 开幕-初次：E" tags="" position="100,725" size="100,100">&lt;&lt;if $count lt 8&gt;&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="54" name="主线 开幕-初次：E" tags="" position="475,725" size="100,100">&lt;&lt;if $count lt 8&gt;&gt;
 &lt;&lt;addclass &quot;#eventsituation&quot; &quot;weirdtext&quot;&gt;&gt;
 &lt;&lt;script&gt;&gt;
 //requires jQuery because I am lazy.
@@ -14660,7 +14675,7 @@ $(document).ready(function(){
 &lt;&lt;else&gt;&gt;
 &lt;&lt;removeclass &quot;#eventsituation&quot; &quot;weirdtext&quot;&gt;&gt;
 &lt;&lt;replace &#39;#opcontainer&#39;&gt;&gt;&lt;&lt;Opening $count&gt;&gt;&lt;&lt;/replace&gt;&gt;
-&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="52" name="主线 开幕-初次：W" tags="widget" position="225,725" size="100,100">&lt;&lt;widget &quot;Opening&quot;&gt;&gt;
+&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="55" name="主线 开幕-初次：W" tags="widget" position="600,725" size="100,100">&lt;&lt;widget &quot;Opening&quot;&gt;&gt;
 
 &lt;&lt;switch $args[0]&gt;&gt;
 &lt;&lt;case 0&gt;&gt;
@@ -14774,7 +14789,7 @@ $(document).ready(function(){
 
 &lt;&lt;/switch&gt;&gt;
 
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="53" name="主线 开幕-初次：S" tags="" position="350,725" size="100,100">&lt;&lt;switch $count&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="56" name="主线 开幕-初次：S" tags="" position="725,725" size="100,100">&lt;&lt;switch $count&gt;&gt;
 &lt;&lt;case 0&gt;&gt;
 	&lt;&lt;set _text to Lang(&quot;睁开眼睛&quot;,&quot;Open The Eyes&quot;)&gt;&gt;
 	&lt;div class=&quot;Wselect&quot;&gt;&lt;&lt;link _text&gt;&gt;&lt;&lt;set $count to 1&gt;&gt;&lt;&lt;Revent&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
@@ -14817,7 +14832,7 @@ $(document).ready(function(){
 	&lt;&lt;set _text to Lang(&quot;继续&quot;,&quot;Next&quot;)&gt;&gt;
 	&lt;div @class=&quot;($count &gt;= 8 ? &#39;Eselect&#39; : &#39;Wselect&#39; )&quot;&gt;&lt;&lt;link _text&gt;&gt;&lt;&lt;set $count to $eventnext&gt;&gt;&lt;&lt;Revent&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
 
-&lt;&lt;/switch&gt;&gt;</tw-passagedata><tw-passagedata pid="54" name="主线 开幕-初次-穿越版" tags="" position="475,725" size="100,100">&lt;&lt;Opening2 $count&gt;&gt;</tw-passagedata><tw-passagedata pid="55" name="主线 开幕-初次-穿越版：W" tags="widget" position="600,725" size="100,100">&lt;&lt;widget &quot;Opening2&quot;&gt;&gt;
+&lt;&lt;/switch&gt;&gt;</tw-passagedata><tw-passagedata pid="57" name="主线 开幕-初次-穿越版" tags="" position="850,725" size="100,100">&lt;&lt;Opening2 $count&gt;&gt;</tw-passagedata><tw-passagedata pid="58" name="主线 开幕-初次-穿越版：W" tags="widget" position="975,725" size="100,100">&lt;&lt;widget &quot;Opening2&quot;&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
 &lt;&lt;switch $count&gt;&gt;
 &lt;&lt;case 0&gt;&gt;
@@ -14939,7 +14954,7 @@ $(document).ready(function(){
 &lt;&lt;/switch&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
 
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="56" name="主线 开幕-初次-穿越版：S" tags="" position="725,725" size="100,100">&lt;&lt;switch $count&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="59" name="主线 开幕-初次-穿越版：S" tags="" position="1100,725" size="100,100">&lt;&lt;switch $count&gt;&gt;
 &lt;&lt;case 1&gt;&gt;
 &lt;&lt;set _text to Lang(&quot;拿起手机&quot;,&quot;Pick up the phone&quot;)&gt;&gt;
 &lt;div class=&quot;Eselect&quot;&gt;&lt;&lt;link _text&gt;&gt;&lt;&lt;set $count to 2&gt;&gt;&lt;&lt;Revent&gt;&gt;&lt;&lt;passtime 2&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
@@ -14987,7 +15002,7 @@ $(document).ready(function(){
 &lt;&lt;set _text to Lang(&quot;继续&quot;,&quot;Next&quot;)&gt;&gt;
 &lt;div class=&quot;Eselect&quot;&gt;&lt;&lt;link _text&gt;&gt;&lt;&lt;set $count to $eventnext&gt;&gt;&lt;&lt;Revent&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
 
-&lt;&lt;/switch&gt;&gt;</tw-passagedata><tw-passagedata pid="57" name="主线 开幕-轮回" tags="" position="850,725" size="100,100">&lt;&lt;bookmark &quot;主线开幕_轮回&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="58" name="PC 主线-开幕-房间描述" tags="nobr" position="975,725" size="100,100">&lt;&lt;lang 
+&lt;&lt;/switch&gt;&gt;</tw-passagedata><tw-passagedata pid="60" name="主线 开幕-轮回" tags="" position="1225,725" size="100,100">&lt;&lt;bookmark &quot;主线开幕_轮回&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="61" name="PC 主线-开幕-房间描述" tags="nobr" position="100,850" size="100,100">&lt;&lt;lang 
 &quot;一睁开眼，首先看到的是茂绿的窗外，响亮的蝉鸣宣告着当前的季节。窗户旁摆放着一张大书桌，上面摆放着&lt;&lt;if $PC.type is 2&gt;&gt;一个宽屏大液显&lt;&lt;elseif $PC.type is 1&gt;&gt;新帝HQ24数位屏和数位板&lt;&lt;else&gt;&gt;一个电脑屏幕&lt;&lt;/if&gt;&gt;，书桌旁的小桌子上则是电脑主机。在靠近书桌的墙边，则整齐地摆放着两个书架，书架上是&lt;&lt;switch $PC.type&gt;&gt;&lt;&lt;case 1&gt;&gt;各种漫画和小说还有塑料小人&lt;&lt;case 2&gt;&gt;各种各样的书籍&lt;&lt;case 3&gt;&gt;各种修仙小说和漫画&lt;&lt;/switch&gt;&gt;，墙上则&lt;&lt;switch $PC.type&gt;&gt;&lt;&lt;case 1&gt;&gt;挂着一些远古生物的挂画和各种游戏海报&lt;&lt;case 2&gt;&gt;挂着一些漂亮的装饰画&lt;&lt;case 3&gt;&gt;挂着一个黑白两色的八卦阵和一些仙侠作品的海报&lt;&lt;/switch&gt;&gt;&quot;
 
 &quot;Across from the bed is the window, and outside the window is the loud sound of cicadas announcing the current season. Right next to the window sits a large desk with a computer with two screens, two bookshelves lined up side by side with various books and comics and some anime figurines, and posters of superheroes on the wall&quot;
