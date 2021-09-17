@@ -14,14 +14,14 @@
 }
 /* 图片滤镜*/
 .sunset {
-  background-color:#fa7a11;
-  opacity:0.3;
+  background-color:#ffb71d;
+  opacity:0.5;
   mix-blend-mode: multiply;
 }
 
 .night {
   background-color:#21198a;
-  opacity:0.3;
+  opacity:0.5;
   mix-blend-mode: multiply;
 }
 

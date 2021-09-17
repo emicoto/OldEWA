@@ -1,6 +1,10 @@
 ﻿:: TimeProcess [widget]
 
 <<widget "TimeEffect">>
+<<if def $temp.t && $temp.t gt 0>>
+<<run F.TimeEffect(V.temp.t)>>
+<</if>>
+
 <<timeprocess>>
 
 /* 每日结束时的处理 */

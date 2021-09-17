@@ -1,0 +1,83 @@
+﻿:: 你的家 单身公寓 [location]
+<<location "单身公寓">><<mode "location">>
+<<resetplaylist>>
+<<set $TEquip to clone($Equip)>>
+
+<div id="append-text" class="append-normal"></div>
+<div id="situation" class="situation"><<=F.getsituation("单身公寓")>></div>
+
+<br>
+<<if $Flag.interactionlock isnot true>>
+<div class="tolink">
+<<link "衣柜　 1m" "衣柜">><<passtime 1>><</link>>　　
+<<link "冰箱　 1m" "冰箱">><<passtime 1>><</link>><br>
+<<link "杂物柜 1m" "玩家仓库">><<passtime 1>><</link>>　　
+<<link "浴室　 1m" "浴室">><<passtime 1>><</link>><br>
+<br>
+<<link "打开电脑" $passage>><<passtime 1>><</link>><br>
+<<link "煮食　　　15m" $passage>><<passtime 30>><</link>>
+<<link "打扫　　　15m" $passage>><<passtime 30>><</link>><br>
+<<link "看电视　　30m" $passage>><<passtime 30>><</link>>
+<<link "健身　　　30m" $passage>><<passtime 30>><</link>><br>
+<br>
+<<link "睡觉" $passage>><<passtime 0>><</link>><br>
+<<link "跳过时间　 23hr" $passage>><<passtime 1380>><</link>><br>
+<<link "出门　 　　5m" "怡安小区" >><<passtime 5>><</link>><br>
+</div>
+<</if>>
+
+/*可以做的事情……
+网购 -- 手机也有的功能
+刷微博/抖音 -- 手机也有的功能
+看新闻  -- 手机也有的功能
+微信 -- 手机也有的功能，有可以联络的人时才能用
+自慰
+和宠物（床伴？）聊天
+*/
+
+
+:: 浴室
+<<location "浴室">>
+
+<<you>>来到了浴室。<br>
+
+<div class="tolink">
+<<link "自慰" "自慰">><<passtime 1>><</link>><br>
+<<link "沐浴　　10m" "沐浴">><<gonaked "closet">><<run D.COM.洗澡.act(10)>><<passtime 10>><</link>>　　
+<<link "泡澡　　30m" "洗澡">><<gonaked "closet">><<run D.COM.洗澡.act(30)>><<passtime 30>><</link>><br>
+<<link "做事前准备 10m">><<gonaked "closet">><<passtime 10>><</link>><br>
+<<link "离开浴室　 1m" "你的家 单身公寓">><</link>>
+</div>
+
+:: 洗澡
+<span class="title">浴室</span><br>
+
+<img src='image/cg/bath.png' class="border:1px solid #928348"><br>
+<<you>>脱光衣服，整个人泡进浴缸里，放松着。<br>
+<br>
+<br>
+<div class="tolink">
+<<link "自慰" "自慰">><<passtime 1>><</link>><br>
+<<link "玩泡沫　30m" $passage>><<passtime 30>><</link>><br>
+<<link "出浴　　5m" "浴室">><<passtime 5>><<redress "closet">><</link>><br>
+</div>
+
+
+
+:: 城市生活_1
+<<you>>最近离开父母家，独立出来自己住了。一切才刚开始各种不习惯……<br>
+<<=condtext([
+    [inTime(6,8),"一大早就起来了,要做点什么好呢……？"],
+    [inTime(8,11),"<<you>>躺在懒人沙发上茫无目的地玩着手机……"],
+    [inTime(11,13),"中午了，肚子也饿起来了，要吃点什么好呢……？"],
+    [inTime(13,18),"<<you>>坐在电脑前一边转着笔一边思考着接下来要做什么……"],
+    [inTime(18,19),"晚餐时间了，到底是下厨好呢还是叫外卖呢……？"],
+    [inTime(19,23),"到晚上了，该放学的早放学了，该下班的也下班了。网络迎来了高峰期……<br>嗨起来！"],
+    ["else","很晚了，得睡觉了……"]
+])>>
+<br>
+
+:: 宠物的日常_1
+最近多了个小家伙跟在身边, 虽然有点粘人但还是挺治愈的。<br>
+嗯……要跟宠物<<print $pet.name>>做点什么好呢？<br>
+<br>

@@ -177,8 +177,8 @@
     <label> <<radiobutton "$PC.sens.a" 0.2 autocheck>> <<lang "钝感" "bad">>　</label>
     <label> <<radiobutton "$PC.sens.a" 1 autocheck>> <<lang "普通" "normal">>　</label>
     <label> <<radiobutton "$PC.sens.a" 2 autocheck>> <<lang "敏感" "pretty">>　</label>
-    <label> <<radiobutton "$PC.sens.a" 4 autocheck>> <<lang "敏感" "very">>　</label>
-    <label> <<radiobutton "$PC.sens.a" 6 autocheck>> <<lang "敏感" "super">>　</label>
+    <label> <<radiobutton "$PC.sens.a" 4 autocheck>> <<lang "比较敏感" "very">>　</label>
+    <label> <<radiobutton "$PC.sens.a" 6 autocheck>> <<lang "十分敏感" "super">>　</label>
 <</widget>>
 
 

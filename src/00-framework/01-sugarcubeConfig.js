@@ -228,5 +228,6 @@ Macro.add('widget', {
 		}
 	}
 });
+
 // delete parser that adds unneeded line breaks -ng
 Wikifier.Parser.delete("lineBreak");

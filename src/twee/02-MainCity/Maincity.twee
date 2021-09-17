@@ -1,68 +1,6 @@
-﻿:: 怡安小区 [location]
-<<setmap "怡安小区">><<location "怡安小区">><<mode "location">>
-
-<span class="title">怡安小区</span><br>
-<div class="lbox">
-<<=F.getDescrips("怡安小区","怡安小区")>>
-</div>
-<br>
-
-<div id="append-text" class="append-normal"></div>
-<div id="situation" class="situation">
-<<you>>站在公寓楼前，在手机上查看景南市的地图，思考着接下来去哪里。<br>
-</div>
-
-<br>
-
-<<if $Flag.interactionlock isnot true>>
-<div class="tolink">
-/* 可以进行的互动 */
-<<link "回家　　　　5m" "你的家 单身公寓">><<passtime 5>><</link>><br>
-<<link "共享菜园　　3m">><<passtime 3>><</link>><br>
-<<link "去公园散步　3m" "怡安小区公园">><<passtime 3>><</link>><br>
-</div>
-
-<div id="navi" class="navi_unable">
-    <<navi>>
-</div>
-<</if>>
-
+﻿
 /* 景南市。一个位于周唐南方大省柳洲省的一级大城市。<br>
 有山有水，面朝大海，四季分明，是个风景优美的旅游城市。<br> */
-
-:: 怡安小区 links [links]
-<div class="links" title="移动时间：12分钟"><<link "・ 嘉庆广场" "嘉庆广场">><<passtime 12>><</link>></div>
-<div class="links" title="移动时间：5分钟"><<link "・ 巴士站" $passage>><<passtime 5>><</link>></div>
-<div class="links" title="移动时间：10分钟"><<link "・ 地铁站" $passage>><<passtime 10>><</link>></div>
-
-
-:: 怡安小区公园 [location]
-<<location "小区公园">><<mode "location">>
-
-<span class="title">怡安小区 - 公园</span><br>
-<div class="lbox">
-<<=F.getDescrips("小区公园","怡安小区")>>
-</div>
-<br>
-
-<div id="append-text" class="append-normal"></div>
-<div id="situation" class="situation">
-<<you>>坐在公园的长椅上，悠闲地看着天上的云朵，偶然会被飞过的小鸟吸引目光。<br>
-</div>
-
-<br>
-<div class="tolink">
-<<link "散步　　10m">><<passtime 10>><</link>><br>
-</div>
-
-<div id="navi" class="navi_unable">
-    <<navi>>
-</div>
-
-:: 小区公园 links
-<div class="links" title="移动时间：3分钟"><<link "・ 小区大门" "怡安小区">><<passtime 3>><</link>></div>
-<div class="links" title="移动时间：15分钟"><<link "・ 嘉庆广场" "嘉庆广场">><<passtime 15>><</link>></div>
-
 
 :: 嘉庆广场 [location]
 <<setmap "嘉庆广场">><<location "嘉庆广场">><<mode "location">>
@@ -86,10 +24,6 @@
     <<navi>>
 </div>
 
-:: 嘉庆广场 links
-<div class="links" title="移动时间：15分钟"><<link "・ 怡安小区" "怡安小区">><<passtime 15>><</link>></div>
-<div class="links" title="移动时间：2分钟"><<link "・ 地铁站">><<passtime 2>><</link>></div>
-<div class="links" title="移动时间：1分钟"><<link "・ 巴士站">><<passtime 1>><</link>></div>
 
 :: 商场的日常风景_1
 <<=condtext([

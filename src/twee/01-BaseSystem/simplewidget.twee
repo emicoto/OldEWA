@@ -156,19 +156,6 @@
 
 /*<<dressup category id color pattern>>*/
 
-<<widget "navi">>
-<div id="links" class="hidden">
-    <<if def $local.homebutton or $local.homebutton is true>>
-        <div class="links"><<link "・ 回家" "你的家 单身公寓" >><<passtime 5>><</link>></div>
-    <</if>>
-    <<getlinks $location>>
-</div>
-
-<div id="movebutton">
-<<link "▷ 移动">><<run movebutton()>><</link>>
-</div>
-<</widget>>
-
 <<widget "getlinks">>
 <<set _local to $args[0] + " links">>
 <<include _local>>

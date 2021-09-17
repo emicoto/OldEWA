@@ -1049,6 +1049,7 @@ Macro.add('widget', {
 		}
 	}
 });
+
 // delete parser that adds unneeded line breaks -ng
 Wikifier.Parser.delete("lineBreak");
 /* twine-user-script #6: "02-Macros.js" */
@@ -2106,6 +2107,7 @@ F.InitGame = function(){
     V.local.last = "单身公寓"    
 
     V.map = D.mapdata.景南市.怡安小区
+    V.home = "单身公寓"
 
     //宠物
     V.pet = clone(D.pet.史莱姆)
@@ -3618,7 +3620,7 @@ setup.L.EN = {
 D.list.locatags = [
     "无",
 
-    "交通","公园","菜园","活动","停车点","景观","信仰","广场","餐厅","商店","便利店","仓库","夜店", 
+    "交通","公园","菜园","活动","停车点","景观","信仰","广场","餐厅","商店","便利店","仓库","夜店", "营业",
 
     "家" , "厨房", "休息" , "沐浴" , "衣柜", "电脑" , "WIFI" , "学习" , "私宅" , //自己家是'家',别人家是私宅
 
@@ -3643,6 +3645,7 @@ D.map.通用 = {
     公交站 : {
         place:"公交站", side:"室外", group: "通用",
         tag:["交通","大道"],
+        open: 300, close: 60,
         chara:[],
         bus:true, bike: true,
         img:"busstop",
@@ -3650,6 +3653,7 @@ D.map.通用 = {
     },
     地铁站 : {
         place:"地铁站", side:"室内", group: "通用",
+        open: 300, close: 60, 
         tag:["交通","地下"],
         chara:[],
         subway:true,
@@ -3678,6 +3682,13 @@ D.map.通用 = {
         img:"bathroom",
         situation:[],
     },
+    卧室 :{
+        place:"卧室", side:"室内", group: "通用",
+        tag:["休息","学习","电脑"],
+        chara:[],
+        img:"bedroom",
+        situation:[],
+    },
     公共厕所 : {
         place:"公共厕所", side:"室内", group:"通用",
         tag:["厕所","狭窄"],
@@ -3701,7 +3712,8 @@ D.map.通用 = {
     },
     AW服装店 : {
         place:"AW服装店", side:"室内", group: "通用",
-        tag:["服装店","更衣间"],
+        open:600, close: 1110, 
+        tag:["服装店","更衣间","营业"],
         chara:[],
         img:"AWclothes",
         description(){
@@ -3711,7 +3723,8 @@ D.map.通用 = {
     },
     汉堡王  : {
         place:"汉堡王", side:"室内", group: "通用",
-        tag:["快餐","休息"],
+        open: 360, close: 1380, 
+        tag:["快餐","休息","营业"],
         chara:[],
         img:"burgerking",
         description(){
@@ -3734,7 +3747,7 @@ D.mapdata.景南市 = {
         index:"南兴区", enter: "怡安小区",
         },
     嘉庆广场:{
-        links:{  嘉庆广场: 0, 停车场: -5, 公交站: 2, 地铁站: -3, 景润超市:-4, 公共厕所: 3, 汉堡王: 4, AW服装店:5,},
+        links:{  嘉庆广场: 0, 停车场: -5, 公交站: 2, 地铁站: -3, 汉堡王: -1, 景润超市:-4, 公共厕所: 3, AW服装店:5,},
         index: "南兴区", enter:"嘉庆广场",
     },    
     商业街:{
@@ -3745,7 +3758,7 @@ D.mapdata.景南市 = {
     //位于公交站或地铁站时是不会有 移动按钮. 而是显示路线图, 直接到全市各个站点.
     南兴区:{
         links: {
-            公交站:0, 地铁站:15, 怡安小区: 0, 商业街: -12, 箱庭托儿所: -10,  嘉庆广场: 15, 市十三中: 30, 金福酒家: 40, 市第七医院: 150, 派出所: 100, 消防所: 120, 
+            公交站:0, 地铁站:15, 怡安小区: 0, 商店街: -12, 箱庭托儿所: -10,  嘉庆广场: 15, 市十三中: 30, 金福酒家: 40, 市第七医院: 150, 派出所: 100, 消防所: 120, 
         },
         index:"景南市",
     }
@@ -3792,6 +3805,7 @@ D.map.景南市.怡安小区 = {
 
     小区公园 : {
         place:"小区公园", side:"室外", group:"怡安小区", passage: "怡安小区公园",
+        title: "怡安小区 - 公园",
         tag:["公园","树丛","活动场所","WIFI"],
         chara:[], 
         bike:true, homebutton: true,
@@ -3806,7 +3820,9 @@ D.map.景南市.怡安小区 = {
 
     小卖部 : {
         place: "小卖部", side:"室内", group: "怡安小区", passage: "怡安小区小卖部",
-        tag:["便利店","移动摊位"],
+        title: "虹猫小店",
+        open: 360, close:1200,
+        tag:["便利店","移动摊位","营业"],
         chara:[],
         bike:true,
         img:"conbini",
@@ -3817,6 +3833,7 @@ D.map.景南市.怡安小区 = {
 
     共享菜园 : {
         place: "共享菜园", side: "室外", group: "怡安小区",
+        title:"怡安小区 - 菜园",
         tag: ["光照", "菜园"],
         chara: [],
         img: "saien",
@@ -3832,6 +3849,7 @@ D.map.景南市.嘉庆广场 = {
     嘉庆广场 : {
         place:"嘉庆广场", side:"室外", group: "嘉庆广场",
         tag:["交通","商业广场","活动场所","停车点","移动摊位","移动餐车"],
+        open: 600, close:1260,
         chara:[],
         bus:true, subway:true, car:true, bike:true,
         img:"yiansquare",
@@ -3854,7 +3872,8 @@ D.map.景南市.嘉庆广场 = {
     },
     景润超市 : {
         place:"景润超市", side:"室内", group: "嘉庆广场",
-        tag:["交通","商店","快餐","通风口","逃生口"],
+        tag:["交通","商店","快餐","通风口","逃生口","营业"],
+        open: 600, close: 1200,
         chara:[],
         subway:true,
         img:"supermark",
@@ -3874,6 +3893,7 @@ D.map.景南市.嘉庆广场 = {
 D.map.景南市.商店街 = {
     商店街 : {
         place: "商店街", side: "室外", group: "商店街", passage: "宜兴步行街",
+        title:"宜兴商业步行街",
         tag: ["交通","停车点","移动摊位","移动餐车","下水道出入口"],
         chara: [],
         img: "shoutenkai",
@@ -3885,7 +3905,9 @@ D.map.景南市.商店街 = {
     },
     生鲜市场 : {
         place:"生鲜市场", side:"室外", group:"商店街",
+        title:"宜兴菜市场",
         tag: ["下水道出入口","宽敞","停车点"],
+        open: 270, close:1080,
         chara: [],
         img: "ichiba",
         bike: true, car: true,
@@ -3896,7 +3918,9 @@ D.map.景南市.商店街 = {
     },
     五金店 : {
         place: "五金店", side: "室内", group: "商店街",
-        tag: ["商店"],
+        title:"百合五金铺",
+        tag: ["商店","营业"],
+        open: 570, close:1080,
         chara: [],
         img: "gokin",
         bike: true, car: true,
@@ -3909,7 +3933,8 @@ D.map.景南市.商店街 = {
 
     旺记茶铺 : {
         place: "旺记茶铺", side:"室内", group:"商店街",
-        tag: ["餐厅","休息"],
+        tag: ["餐厅","休息","营业"],
+        open: 570, close: 1230,
         chara: [],
         img: "chashi",
         bike: true, car: true,
@@ -3920,7 +3945,8 @@ D.map.景南市.商店街 = {
     },
     天地书店 : {
         place: "天地书店", side: "室内", group: "商店街",
-        tag: ["商店","WIFI","休息"],
+        tag: ["商店","WIFI","休息","营业"],
+        open: 510, close: 1140,
         chara: [],
         img: "bookstore",
         bike: true, car: true,
@@ -3930,7 +3956,8 @@ D.map.景南市.商店街 = {
     },
     开封菜 : {
         place: "开封菜", side: "室内", group: "商店街",
-        tag: ["餐厅","厕所"],
+        tag: ["餐厅","厕所","营业"],
+        open: 660, close: 1290,
         chara: [],
         img: "famiresu",
         bike: true, car: true,
@@ -3941,7 +3968,9 @@ D.map.景南市.商店街 = {
     },
     药店 : {
         place: "药店", side: "室内", group: "商店街",
-        tag: ["商店"],
+        tag: ["商店","营业"],
+        title:"健康药房",
+        open: 450, close: 1110,
         chara: [],
         img: "phamacy",
         bike: true, car: true,
@@ -3952,18 +3981,21 @@ D.map.景南市.商店街 = {
     },
     发廊 : {
         place: "发廊", side: "室内", group: "商店街",
-        tag: ["理发","美容","厕所"],
+        tag: ["理发","美容","厕所","营业"],
+        title:"梦丽沙龙",
+        open: 600, close: 1320,
         chara: [],
         img: "hairsalon",
         bike: true, car: true,
         description(){
-            return "这附近唯一的一家发廊。现代化的装修为这家有点年纪的发廊增添了些许时尚感。除了理发，也做点美容护肤、刺青之类的活。"
+            return "这附近唯一的一家发廊。现代化的装修为这家有点年纪的发廊增添了些许时尚感。除了理发，也做点美容护肤、推拿按摩之类的活。"
         },
         situation:[],
     },
     中医馆 :{
         place: "中医馆", side: "室内", group: "商店街", title:"柳安堂",
-        tag: ["医疗"],
+        tag: ["医疗","营业"],
+        open: 480, close:1020,
         chara: [],
         img: "zhongyi",
         bike: true, car: true,
@@ -3975,6 +4007,7 @@ D.map.景南市.商店街 = {
     逸安武馆 : {
         place: "逸安武馆", side: "室内", group: "商店街",
         tag: ["武馆","比武","江湖人士"],
+        open: 270, close: 1080, //晚上六点后就不开学堂了
         chara: [],
         img: "hairsalon",
         bike: true, car: true,
@@ -3990,7 +4023,8 @@ D.map.景南市.商店街 = {
 D.map.景南市.南兴区 = {
     箱庭托儿所 : {
         place: "箱庭幼儿园", side: "室外", group: "南兴区",
-        tag: ["托儿所","儿童","大道","光照","停车点"],
+        tag: ["托儿所","儿童","大道","光照","停车点","营业"],
+        open: 540, close: 960,
         chara: [],
         img: "kidsgarden",
         bike: true, car: true, bus:true,
@@ -4002,6 +4036,7 @@ D.map.景南市.南兴区 = {
     市十三中 : {
         place: "市十三中", side: "室外", group: "南兴区",
         tag: ["学校","学习","大道","光照","停车点"],
+        open: 360, close: 1320,
         chara: [],
         img: "qischool",
         bike: true, car: true, bus:true,
@@ -4012,7 +4047,8 @@ D.map.景南市.南兴区 = {
     },
     金福酒家 : {
         place: "金福酒家", side: "室内", group: "南兴区",
-        tag: ["餐厅","大道","停车点","休息","厕所"],
+        tag: ["餐厅","大道","停车点","休息","厕所","营业"],
+        open: 540, close: 1320,
         chara: [],
         img: "jiujia",
         bike: true, car: true, bus:true,
@@ -4056,6 +4092,7 @@ D.map.景南市.南兴区 = {
     },
     怡安小区 : D.map.景南市.怡安小区.怡安小区,
     嘉庆广场 : D.map.景南市.嘉庆广场.嘉庆广场,
+
     商店街 : D.map.景南市.商店街.商店街,
     地铁站 : D.map.通用.地铁站,
     公交站 : D.map.通用.公交站,
@@ -8895,7 +8932,7 @@ F.warmth = warmth
 
 function gonaked(mode){
 
-    if((Equip.over_up && mode=="debug") || mode!="debug"){
+    if((Equip.over_up && mode=="debug") || !mode){
         V.TEquip = clone(V.Equip)
     }
 
@@ -10237,14 +10274,25 @@ function setBG() {
 
     if(V.local.side == "室外") background.outside = true;
 
-    if(between(V.date.time,1020,1140) && background.outside) {
-        background.color = "#D6981C"
+    if (between(V.date.time,480,600) && background.outside && V.weather.now=="晴朗"){
+        document.getElementById('avatar-overlay').className = "Layer shine"
+    }
+    else if(between(V.date.time,1020,1140) && background.outside) {
+        background.color = "#9E6A00"
         document.getElementById('avatar-overlay').className = "Layer sunset"
 
     }
     else if ((between(V.date.time,1140,1440)||between(V.date.time,0,240)) && background.outside){
         background.color = "#242C8A"
         document.getElementById('avatar-overlay').className = "Layer night"
+    }
+    else if(!background.outside && V.local.tag.includes("营业") && !isOpenHour(V.local)){
+        background.color= "#242C8A"
+        document.getElementById('avatar-overlay').className = "Layer dark"
+    }
+    else if(PC.state.睡觉 && V.local.tag.includes("家") && !between(V.date.time,300,1200)){
+         background.color= "#242C8A"
+        document.getElementById('avatar-overlay').className = "Layer dark"       
     }
     else{
         background.color = null;
@@ -10280,6 +10328,15 @@ function setLocation(args) {
     else if(D.map.景南市[args]) V.local = clone(D.map.景南市[args])
     else if(D.map.通用[args]) V.local = clone(D.map.通用[args])
     else {return "<div class='error-view'>error: 找不到对应地图: "+args+"</div>"}
+
+    //在页面上显示地点信息. 如果是自己家,则显示 XX家。 等日后可以搬家时，增加设置 >>  && V.home == V.local.place 
+    let text = `<span class="title">${( V.local.tag.includes("家") ? PC.info.name + "家"  : (V.local.title ? V.local.title : V.local.place ))}</span><br>`
+    
+    if(V.local.description) text += `<div class="lbox">${V.local.description()}</div><br>`
+
+    setTimeout(()=>{new Wikifier(null, `<<append #psheader>>${text}<</append>>`)},200)
+    
+
     //减少存档错误
     delete V.local.situation
     delete V.local.description
@@ -10292,6 +10349,8 @@ function setLocation(args) {
 
     //重置移动按钮
     ui.movebutton = false
+
+
 
      /* 设置事件随机概率 RandomEventRate */
     F.RER()
@@ -10312,7 +10371,7 @@ DefineMacroS("location",setLocation)
 function navigation(){
     var text
     if(V.local && V.mapgroup){
-        text = ""
+        text = `<div id="links" class="hidden">`
 
         //先获取 出发点信息
         let stpoint = V.local.place
@@ -10329,6 +10388,9 @@ function navigation(){
             //获取目的地详细资料
             let dest = D.map.景南市[V.mapgroup][n]
             if(V.coredebug)console.log(dest);
+
+            //如果是营业地点,非营业时间无法通过快速移动链接进入,只能通过别的路径进入   
+            if(dest.tag.includes("营业") && !isOpenHour(dest)) continue;        
 
             let name = dest.place
             if(dest.tag.includes("家")) name = "回家"
@@ -10361,17 +10423,17 @@ function navigation(){
 
                 //获取目的地详细资料
                 let dest = D.map.景南市[mapgroup][n]
-                if(V.coredebug) console.log(dest);
+                if(V.coredebug) console.log(n,dest);
 
-                //排除还没实装的地图
-                if(!dest) continue;
                 //排除重复的通用地点链接
                 if(linklist.includes(n)) continue;
+                //如果是营业地点,非营业时间无法通过快速移动链接进入,只能通过别的路径进入   
+                if(dest.tag.includes("营业") && !isOpenHour(dest)) continue;
 
                 //计算移动时间
                 let t = Math.abs(tmap.links[stpoint] -tmap.links[n])
                 //大地图上,前往公交或地铁站的移动时间永远是 3~5分钟
-                if(["公交站","地铁站"].includes(n) && t > 5) t = rand(3,5);
+                if(["公交站","地铁站"].includes(n) && t > 5) t = random(3,5);
 
                 if(t > 30) continue;
 
@@ -10383,17 +10445,35 @@ function navigation(){
 
                 text += `<div class="links" title="移动时间：${t}分钟"><<link "・ ${name}" "${passage}">><<passtime ${t}>><</link>></div>`
 
-                console.log(`<div class="links" title="移动时间：${t}分钟"><<link "・ ${name}" "${passage}">><<passtime ${t}>><</link>></div>`)
+                if(V.coredebug){console.log(`<div class="links" title="移动时间：${t}分钟"><<link "・ ${name}" "${passage}">><<passtime ${t}>><</link>></div>`)
+                }
 
             }
 
             //如果有 car 或 bike 召唤对应的移动链接
-        }     
+        }   
+        text += `</div><div id="movebutton"><<link "▷ 移动">><<run movebutton()>><</link>></div>`  
         return text
     }
     return false
 }
 window.navigation = navigation
+DefineMacroS("navi",navigation)
+
+//isOpenhour
+//if close < open, (time !between close, open)
+//else time between open, close
+window.isOpenHour = function(obj){
+
+    if (obj.tag.includes["营业"]){
+           let close = obj.close
+           let open = obj.open 
+
+           if (close < open) return (!between(V.date.time,close,open))
+           else return (between(V.date.time,open,close))
+    }
+
+}
 /* twine-user-script #53: "SaveShow.js" */
 function showSavedCard(type,slot,obj){
 
@@ -11402,6 +11482,19 @@ window.isJsonString = function(s) {
 	}
 	return true;
 }
+
+window.updateExported = function(){
+	if(V.SaveDetails != undefined){
+		V.SaveDetails.days = clone(V.days)
+		V.SaveDetails.exported ++
+	}
+}
+
+/*
+if(V.days > V.SaveDetails.days + V.SaveDetails.frequency){
+	//你已经有段时间没导出存档了，为了避免以意外发生，建议及时导出存档。
+}
+*/
 /* twine-user-script #57: "PlayerInfo.js" */
 /* 名字和称呼的处理 */
 function gsplit(m,f,p="chara"){
@@ -14020,14 +14113,22 @@ function wait(text) {
 &lt;&lt;SetAvatar&gt;&gt;</tw-passagedata><tw-passagedata pid="31" name="PassageHeader" tags="" position="100,475" size="100,100">&lt;&lt;set $passage to passage()&gt;&gt;&lt;&lt;set $tags to tags($passage)&gt;&gt;
 /* 时间经过处理, passtime内部不能直接显示内容. 只能绕一圈到 TimeEffect */
 &lt;&lt;TimeEffect&gt;&gt;
+
 /* 其他通用预处理 */
 /* AVATAR设定的更新检测 */
 &lt;&lt;SetAvatar&gt;&gt;
+
+/* 标题 */
+&lt;div id=&quot;psheader&quot;&gt;&lt;/div&gt;
 
 /* 通知弹出框 */
 &lt;div id=&quot;action-popup&quot; class=&quot;hide&quot;&gt;&lt;span id=&quot;action-text&quot;&gt;&lt;/span&gt;&lt;/div&gt;
 &lt;div id=&quot;hd-append-top&quot;&gt;&lt;/div&gt;
 &lt;div id=&quot;hd-append-text&quot; class=&quot;append-normal&quot;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="32" name="TimeProcess" tags="widget" position="225,475" size="100,100">&lt;&lt;widget &quot;TimeEffect&quot;&gt;&gt;
+&lt;&lt;if def $temp.t &amp;&amp; $temp.t gt 0&gt;&gt;
+&lt;&lt;run F.TimeEffect(V.temp.t)&gt;&gt;
+&lt;&lt;/if&gt;&gt;
+
 &lt;&lt;timeprocess&gt;&gt;
 
 /* 每日结束时的处理 */
@@ -14260,19 +14361,6 @@ function wait(text) {
 
 /*&lt;&lt;dressup category id color pattern&gt;&gt;*/
 
-&lt;&lt;widget &quot;navi&quot;&gt;&gt;
-&lt;div id=&quot;links&quot; class=&quot;hidden&quot;&gt;
-    &lt;&lt;if def $local.homebutton or $local.homebutton is true&gt;&gt;
-        &lt;div class=&quot;links&quot;&gt;&lt;&lt;link &quot;・ 回家&quot; &quot;你的家 单身公寓&quot; &gt;&gt;&lt;&lt;passtime 5&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
-    &lt;&lt;/if&gt;&gt;
-    &lt;&lt;getlinks $location&gt;&gt;
-&lt;/div&gt;
-
-&lt;div id=&quot;movebutton&quot;&gt;
-&lt;&lt;link &quot;▷ 移动&quot;&gt;&gt;&lt;&lt;run movebutton()&gt;&gt;&lt;&lt;/link&gt;&gt;
-&lt;/div&gt;
-&lt;&lt;/widget&gt;&gt;
-
 &lt;&lt;widget &quot;getlinks&quot;&gt;&gt;
 &lt;&lt;set _local to $args[0] + &quot; links&quot;&gt;&gt;
 &lt;&lt;include _local&gt;&gt;
@@ -14302,30 +14390,69 @@ function wait(text) {
     &lt;&lt;set _percent to percent(_num[0],_num[1])&gt;&gt;
     &lt;&lt;set _color to $args[1]&gt;&gt;
     &lt;&lt;meterbar _percent _color&gt;&gt;
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="35" name="你的家 单身公寓" tags="location" position="600,475" size="100,100">&lt;&lt;location &quot;单身公寓&quot;&gt;&gt;&lt;&lt;mode &quot;location&quot;&gt;&gt;
-
-&lt;&lt;resetplaylist&gt;&gt;
-&lt;&lt;set $TEquip to clone($Equip)&gt;&gt;
-&lt;span class=&quot;title&quot;&gt;&lt;&lt;print $PC.info.name&gt;&gt;家&lt;/span&gt;&lt;br&gt;
-&lt;div class=&quot;lbox&quot;&gt;&quot;一个60平方米左右的单身公寓。简约现代风的装修，巨大的落地窗，还有一个阳台，两个人住也相当舒适的公寓。&quot;&lt;br&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="35" name="嘉庆广场" tags="location" position="600,475" size="100,100">&lt;&lt;setmap &quot;嘉庆广场&quot;&gt;&gt;&lt;&lt;location &quot;嘉庆广场&quot;&gt;&gt;&lt;&lt;mode &quot;location&quot;&gt;&gt;
+&lt;span class=&quot;title&quot;&gt;嘉庆广场&lt;/span&gt;&lt;br&gt;
+&lt;div class=&quot;lbox&quot;&gt;
+&lt;&lt;=F.getDescrips(&quot;嘉庆广场&quot;,&quot;嘉庆广场&quot;)&gt;&gt;
 &lt;/div&gt;
 &lt;br&gt;
+
+&lt;div id=&quot;append-text&quot; class=&quot;append-normal&quot;&gt;&lt;/div&gt;
+&lt;div id=&quot;situation&quot; class=&quot;situation&quot;&gt;&lt;&lt;=F.getsituation(&quot;嘉庆广场&quot;)&gt;&gt;&lt;/div&gt;
+
+&lt;br&gt;
+&lt;div class=&quot;tolink&quot;&gt;
+&lt;&lt;link &quot;打发时间 　 10m&quot; $passage&gt;&gt;&lt;&lt;passtime 10&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;&lt;br&gt;
+&lt;&lt;link &quot;逛服装店　　5m&quot; &quot;商店&quot;&gt;&gt;&lt;&lt;passtime 5&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
+&lt;&lt;link &quot;汉堡王　　　5m&quot; $passage&gt;&gt;&lt;&lt;passtime 5&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
+&lt;/div&gt;
+
+&lt;div id=&quot;navi&quot; class=&quot;navi_unable&quot;&gt;
+    &lt;&lt;navi&gt;&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="36" name="嘉庆广场 links" tags="" position="725,475" size="100,100">&lt;div class=&quot;links&quot; title=&quot;移动时间：15分钟&quot;&gt;&lt;&lt;link &quot;・ 怡安小区&quot; &quot;怡安小区&quot;&gt;&gt;&lt;&lt;passtime 15&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
+&lt;div class=&quot;links&quot; title=&quot;移动时间：2分钟&quot;&gt;&lt;&lt;link &quot;・ 地铁站&quot;&gt;&gt;&lt;&lt;passtime 2&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
+&lt;div class=&quot;links&quot; title=&quot;移动时间：1分钟&quot;&gt;&lt;&lt;link &quot;・ 巴士站&quot;&gt;&gt;&lt;&lt;passtime 1&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="37" name="商场的日常风景_1" tags="" position="850,475" size="100,100">&lt;&lt;=condtext([
+[inTime(8.5,10), &quot;明明距离商场开门的时间还很早，但已经有人陆陆续续聚集在入口广场上了。&quot;],
+[inTime(10,18), &quot;营业中的嘉庆广场，无论是广场外部还是商场内部，人来人往，十分热闹。&quot;],
+[inTime(18,20), &quot;已经到晚饭时间了，商场内的餐厅传来了美味的香气。比起白天，人已经少了很多，但依然热闹。&quot;],
+[inTime(20,21), &quot;临近关闭时间了，但稀稀拉拉的依然有不少人在商场内部闲逛。广场上倒是多了些许移动小吃摊，给下班的人提供热量。&quot;],
+[&quot;else&quot;,&quot;商场建筑黑漆漆的，已经完全关闭。但广场上依然亮着点点灯光，夜晚的喷水广场在点点灯光下，十分好看。&quot;]
+])&gt;&gt;
+
+&lt;br&gt;</tw-passagedata><tw-passagedata pid="38" name="商场闲逛_1" tags="" position="975,475" size="100,100">&lt;&lt;=either(
+&quot;&lt;&lt;you&gt;&gt;坐在南面入口广场一侧的椅子上，仰头看着绿茵茵的木棉树，偶尔会发现在树枝中跳窜的小麻雀。&quot;,
+&quot;&lt;&lt;you&gt;&gt;走在广场上，观察着来来往往的人群，目光时不时被在路边派发传单的布偶人吸引。&quot;,
+&quot;&lt;&lt;you&gt;&gt;拿起手机，以商场为背景，给自己拍了张新的照片。&quot;,
+&quot;&lt;&lt;you&gt;&gt;站在广场角落的报亭前，随手拿起一份报纸看了眼今天的新闻。&quot;,
+)&gt;&gt;</tw-passagedata><tw-passagedata pid="39" name="商店" tags="location" position="1100,475" size="100,100">&lt;&lt;location &quot;AW服装店&quot;&gt;&gt;&lt;&lt;mode &quot;location&quot;&gt;&gt;
+
+&lt;span class=&quot;title&quot;&gt;服装店&lt;/span&gt;&lt;br&gt;
+&lt;div class=&quot;lbox&quot;&gt;
+商场里的服装店。商品琳琅满目，什么都有。&lt;br&gt;
+&lt;/div&gt;
+&lt;&lt;set $shoptype to [&quot;all&quot;,&quot;offline&quot;]&gt;&gt;
+
+&lt;&lt;include &quot;试衣间&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="40" name="你的家 单身公寓" tags="location" position="1225,475" size="100,100">&lt;&lt;location &quot;单身公寓&quot;&gt;&gt;&lt;&lt;mode &quot;location&quot;&gt;&gt;
+&lt;&lt;resetplaylist&gt;&gt;
+&lt;&lt;set $TEquip to clone($Equip)&gt;&gt;
 
 &lt;div id=&quot;append-text&quot; class=&quot;append-normal&quot;&gt;&lt;/div&gt;
 &lt;div id=&quot;situation&quot; class=&quot;situation&quot;&gt;&lt;&lt;=F.getsituation(&quot;单身公寓&quot;)&gt;&gt;&lt;/div&gt;
 
 &lt;br&gt;
 &lt;div class=&quot;tolink&quot;&gt;
-&lt;&lt;link &quot;弹出窗口测试&quot;&gt;&gt;
-&lt;&lt;run Dialog.setup(&quot;Character Sheet&quot;);Dialog.append(&quot;一个类似于我们现代地球2021年的世界，但在我们看不到的地方隐藏着超自然的存在--比如魔法、超能力、鬼魂、吸血鬼、人形动物等等。你醒来时发现自己身上有异常情况。你伸出双手，看到一双美丽、纤细的手，从骨节上看，你可以看出这是一双男性青少年的手。你从床上坐起来，抓了抓后脑勺，你发现你的头发长度比原来短了很多。当你的头脑完全清醒时，你想起了你记得的最后一幕：呼吸面罩罩在你的脸上，耳边传来医疗仪器的警报声--你可以肯定，原来的你已经死于一场大病。你站起来，看看你现在所在的地方，一个大约24平方米的房间，床的右侧有一个明亮的窗户，窗外盛开着美丽的樱花。除了一张一米五的大床足以让两个人睡觉外，还有一个书柜，上面摆满了各种日本漫画，书柜旁边有一张电脑桌，上面有两个大屏幕，桌上还有一个很酷的耳机。在电脑桌旁边的墙壁上，有一些超级英雄的海报。&quot;);Dialog.open();&gt;&gt;
-&lt;&lt;/link&gt;&gt;
-&lt;br&gt;&lt;br&gt;
-
-&lt;&lt;link &quot;打开衣柜　 1m&quot; &quot;衣柜&quot;&gt;&gt;&lt;&lt;passtime 1&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
+&lt;&lt;link &quot;衣柜　 1m&quot; &quot;衣柜&quot;&gt;&gt;&lt;&lt;passtime 1&gt;&gt;&lt;&lt;/link&gt;&gt;　　
+&lt;&lt;link &quot;冰箱　 1m&quot; &quot;冰箱&quot;&gt;&gt;&lt;&lt;passtime 1&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
+&lt;&lt;link &quot;杂物柜 1m&quot; &quot;玩家仓库&quot;&gt;&gt;&lt;&lt;passtime 1&gt;&gt;&lt;&lt;/link&gt;&gt;　　
+&lt;&lt;link &quot;浴室　 1m&quot; &quot;浴室&quot;&gt;&gt;&lt;&lt;passtime 1&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
 &lt;br&gt;
-&lt;&lt;link &quot;健身　　 　30m&quot; $passage&gt;&gt;&lt;&lt;passtime 30&gt;&gt;&lt;&lt;/link&gt;&gt;　　&lt;&lt;link &quot;打游戏 　　30m&quot; $passage&gt;&gt;&lt;&lt;passtime 30&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
-&lt;&lt;link &quot;洗澡　 　　30m&quot; &quot;洗澡&quot;&gt;&gt;&lt;&lt;gonaked &quot;closet&quot;&gt;&gt;&lt;&lt;run D.COM.洗澡.act(30)&gt;&gt;&lt;&lt;passtime 30&gt;&gt;&lt;&lt;/link&gt;&gt;　　
-&lt;&lt;link &quot;和宠物玩耍 60m&quot; $passage&gt;&gt;&lt;&lt;passtime 60&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
+&lt;&lt;link &quot;打开电脑&quot; $passage&gt;&gt;&lt;&lt;passtime 1&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
+&lt;&lt;link &quot;煮食　　　15m&quot; $passage&gt;&gt;&lt;&lt;passtime 30&gt;&gt;&lt;&lt;/link&gt;&gt;
+&lt;&lt;link &quot;打扫　　　15m&quot; $passage&gt;&gt;&lt;&lt;passtime 30&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
+&lt;&lt;link &quot;看电视　　30m&quot; $passage&gt;&gt;&lt;&lt;passtime 30&gt;&gt;&lt;&lt;/link&gt;&gt;
+&lt;&lt;link &quot;健身　　　30m&quot; $passage&gt;&gt;&lt;&lt;passtime 30&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
+&lt;br&gt;
+&lt;&lt;link &quot;睡觉&quot; $passage&gt;&gt;&lt;&lt;passtime 0&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
 &lt;&lt;link &quot;跳过时间　 23hr&quot; $passage&gt;&gt;&lt;&lt;passtime 1380&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
 &lt;&lt;link &quot;出门　 　　5m&quot; &quot;怡安小区&quot; &gt;&gt;&lt;&lt;passtime 5&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
 &lt;/div&gt;
@@ -14335,21 +14462,29 @@ function wait(text) {
 刷微博/抖音 -- 手机也有的功能
 看新闻  -- 手机也有的功能
 微信 -- 手机也有的功能，有可以联络的人时才能用
-睡觉
-换衣服
 自慰
-使用道具
 和宠物（床伴？）聊天
-学习 */</tw-passagedata><tw-passagedata pid="36" name="洗澡" tags="" position="725,475" size="100,100">&lt;&lt;set $location to &quot;浴室&quot;&gt;&gt;
+*/</tw-passagedata><tw-passagedata pid="41" name="浴室" tags="" position="100,600" size="100,100">&lt;&lt;location &quot;浴室&quot;&gt;&gt;
+
+&lt;&lt;you&gt;&gt;来到了浴室。&lt;br&gt;
+
+&lt;div class=&quot;tolink&quot;&gt;
+&lt;&lt;link &quot;自慰&quot; &quot;自慰&quot;&gt;&gt;&lt;&lt;passtime 1&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
+&lt;&lt;link &quot;沐浴　　10m&quot; &quot;沐浴&quot;&gt;&gt;&lt;&lt;gonaked &quot;closet&quot;&gt;&gt;&lt;&lt;run D.COM.洗澡.act(10)&gt;&gt;&lt;&lt;passtime 10&gt;&gt;&lt;&lt;/link&gt;&gt;　　
+&lt;&lt;link &quot;泡澡　　30m&quot; &quot;洗澡&quot;&gt;&gt;&lt;&lt;gonaked &quot;closet&quot;&gt;&gt;&lt;&lt;run D.COM.洗澡.act(30)&gt;&gt;&lt;&lt;passtime 30&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
+&lt;&lt;link &quot;做事前准备 10m&quot;&gt;&gt;&lt;&lt;gonaked &quot;closet&quot;&gt;&gt;&lt;&lt;passtime 10&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
+&lt;&lt;link &quot;离开浴室　 1m&quot; &quot;你的家 单身公寓&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="42" name="洗澡" tags="" position="225,600" size="100,100">&lt;span class=&quot;title&quot;&gt;浴室&lt;/span&gt;&lt;br&gt;
+
 &lt;img src=&#39;image/cg/bath.png&#39; class=&quot;border:1px solid #928348&quot;&gt;&lt;br&gt;
 &lt;&lt;you&gt;&gt;脱光衣服，整个人泡进浴缸里，放松着。&lt;br&gt;
 &lt;br&gt;
 &lt;br&gt;
 &lt;div class=&quot;tolink&quot;&gt;
-&lt;&lt;link &quot;自慰&quot; &quot;自慰&quot;&gt;&gt;&lt;&lt;passtime 5&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
+&lt;&lt;link &quot;自慰&quot; &quot;自慰&quot;&gt;&gt;&lt;&lt;passtime 1&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
 &lt;&lt;link &quot;玩泡沫　30m&quot; $passage&gt;&gt;&lt;&lt;passtime 30&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
-&lt;&lt;link &quot;出浴　　5m&quot; &quot;你的家 单身公寓&quot;&gt;&gt;&lt;&lt;passtime 5&gt;&gt;&lt;&lt;redress &quot;closet&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="37" name="城市生活_1" tags="" position="850,475" size="100,100">&lt;&lt;you&gt;&gt;最近离开父母家，独立出来自己住了。一切才刚开始各种不习惯……&lt;br&gt;
+&lt;&lt;link &quot;出浴　　5m&quot; &quot;浴室&quot;&gt;&gt;&lt;&lt;passtime 5&gt;&gt;&lt;&lt;redress &quot;closet&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="43" name="城市生活_1" tags="" position="350,600" size="100,100">&lt;&lt;you&gt;&gt;最近离开父母家，独立出来自己住了。一切才刚开始各种不习惯……&lt;br&gt;
 &lt;&lt;=condtext([
     [inTime(6,8),&quot;一大早就起来了,要做点什么好呢……？&quot;],
     [inTime(8,11),&quot;&lt;&lt;you&gt;&gt;躺在懒人沙发上茫无目的地玩着手机……&quot;],
@@ -14359,9 +14494,9 @@ function wait(text) {
     [inTime(19,23),&quot;到晚上了，该放学的早放学了，该下班的也下班了。网络迎来了高峰期……&lt;br&gt;嗨起来！&quot;],
     [&quot;else&quot;,&quot;很晚了，得睡觉了……&quot;]
 ])&gt;&gt;
-&lt;br&gt;</tw-passagedata><tw-passagedata pid="38" name="宠物的日常_1" tags="" position="975,475" size="100,100">最近多了个小家伙跟在身边, 虽然有点粘人但还是挺治愈的。&lt;br&gt;
+&lt;br&gt;</tw-passagedata><tw-passagedata pid="44" name="宠物的日常_1" tags="" position="475,600" size="100,100">最近多了个小家伙跟在身边, 虽然有点粘人但还是挺治愈的。&lt;br&gt;
 嗯……要跟宠物&lt;&lt;print $pet.name&gt;&gt;做点什么好呢？&lt;br&gt;
-&lt;br&gt;</tw-passagedata><tw-passagedata pid="39" name="怡安小区" tags="location" position="1100,475" size="100,100">&lt;&lt;setmap &quot;怡安小区&quot;&gt;&gt;&lt;&lt;location &quot;怡安小区&quot;&gt;&gt;&lt;&lt;mode &quot;location&quot;&gt;&gt;
+&lt;br&gt;</tw-passagedata><tw-passagedata pid="45" name="怡安小区" tags="location" position="600,600" size="100,100">&lt;&lt;setmap &quot;怡安小区&quot;&gt;&gt;&lt;&lt;location &quot;怡安小区&quot;&gt;&gt;&lt;&lt;mode &quot;location&quot;&gt;&gt;
 
 &lt;span class=&quot;title&quot;&gt;怡安小区&lt;/span&gt;&lt;br&gt;
 &lt;div class=&quot;lbox&quot;&gt;
@@ -14387,12 +14522,7 @@ function wait(text) {
 &lt;div id=&quot;navi&quot; class=&quot;navi_unable&quot;&gt;
     &lt;&lt;navi&gt;&gt;
 &lt;/div&gt;
-&lt;&lt;/if&gt;&gt;
-
-/* 景南市。一个位于周唐南方大省柳洲省的一级大城市。&lt;br&gt;
-有山有水，面朝大海，四季分明，是个风景优美的旅游城市。&lt;br&gt; */</tw-passagedata><tw-passagedata pid="40" name="怡安小区 links" tags="links" position="1225,475" size="100,100">&lt;div class=&quot;links&quot; title=&quot;移动时间：12分钟&quot;&gt;&lt;&lt;link &quot;・ 嘉庆广场&quot; &quot;嘉庆广场&quot;&gt;&gt;&lt;&lt;passtime 12&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
-&lt;div class=&quot;links&quot; title=&quot;移动时间：5分钟&quot;&gt;&lt;&lt;link &quot;・ 巴士站&quot; $passage&gt;&gt;&lt;&lt;passtime 5&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
-&lt;div class=&quot;links&quot; title=&quot;移动时间：10分钟&quot;&gt;&lt;&lt;link &quot;・ 地铁站&quot; $passage&gt;&gt;&lt;&lt;passtime 10&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="41" name="怡安小区公园" tags="location" position="100,600" size="100,100">&lt;&lt;location &quot;小区公园&quot;&gt;&gt;&lt;&lt;mode &quot;location&quot;&gt;&gt;
+&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="46" name="怡安小区公园" tags="location" position="725,600" size="100,100">&lt;&lt;location &quot;小区公园&quot;&gt;&gt;&lt;&lt;mode &quot;location&quot;&gt;&gt;
 
 &lt;span class=&quot;title&quot;&gt;怡安小区 - 公园&lt;/span&gt;&lt;br&gt;
 &lt;div class=&quot;lbox&quot;&gt;
@@ -14412,50 +14542,7 @@ function wait(text) {
 
 &lt;div id=&quot;navi&quot; class=&quot;navi_unable&quot;&gt;
     &lt;&lt;navi&gt;&gt;
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="42" name="小区公园 links" tags="" position="225,600" size="100,100">&lt;div class=&quot;links&quot; title=&quot;移动时间：3分钟&quot;&gt;&lt;&lt;link &quot;・ 小区大门&quot; &quot;怡安小区&quot;&gt;&gt;&lt;&lt;passtime 3&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
-&lt;div class=&quot;links&quot; title=&quot;移动时间：15分钟&quot;&gt;&lt;&lt;link &quot;・ 嘉庆广场&quot; &quot;嘉庆广场&quot;&gt;&gt;&lt;&lt;passtime 15&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="43" name="嘉庆广场" tags="location" position="350,600" size="100,100">&lt;&lt;setmap &quot;嘉庆广场&quot;&gt;&gt;&lt;&lt;location &quot;嘉庆广场&quot;&gt;&gt;&lt;&lt;mode &quot;location&quot;&gt;&gt;
-&lt;span class=&quot;title&quot;&gt;嘉庆广场&lt;/span&gt;&lt;br&gt;
-&lt;div class=&quot;lbox&quot;&gt;
-&lt;&lt;=F.getDescrips(&quot;嘉庆广场&quot;,&quot;嘉庆广场&quot;)&gt;&gt;
-&lt;/div&gt;
-&lt;br&gt;
-
-&lt;div id=&quot;append-text&quot; class=&quot;append-normal&quot;&gt;&lt;/div&gt;
-&lt;div id=&quot;situation&quot; class=&quot;situation&quot;&gt;&lt;&lt;=F.getsituation(&quot;嘉庆广场&quot;)&gt;&gt;&lt;/div&gt;
-
-&lt;br&gt;
-&lt;div class=&quot;tolink&quot;&gt;
-&lt;&lt;link &quot;打发时间 　 10m&quot; $passage&gt;&gt;&lt;&lt;passtime 10&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;&lt;br&gt;
-&lt;&lt;link &quot;逛服装店　　5m&quot; &quot;商店&quot;&gt;&gt;&lt;&lt;passtime 5&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
-&lt;&lt;link &quot;汉堡王　　　5m&quot; $passage&gt;&gt;&lt;&lt;passtime 5&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;br&gt;
-&lt;/div&gt;
-
-&lt;div id=&quot;navi&quot; class=&quot;navi_unable&quot;&gt;
-    &lt;&lt;navi&gt;&gt;
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="44" name="嘉庆广场 links" tags="" position="475,600" size="100,100">&lt;div class=&quot;links&quot; title=&quot;移动时间：15分钟&quot;&gt;&lt;&lt;link &quot;・ 怡安小区&quot; &quot;怡安小区&quot;&gt;&gt;&lt;&lt;passtime 15&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
-&lt;div class=&quot;links&quot; title=&quot;移动时间：2分钟&quot;&gt;&lt;&lt;link &quot;・ 地铁站&quot;&gt;&gt;&lt;&lt;passtime 2&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
-&lt;div class=&quot;links&quot; title=&quot;移动时间：1分钟&quot;&gt;&lt;&lt;link &quot;・ 巴士站&quot;&gt;&gt;&lt;&lt;passtime 1&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="45" name="商场的日常风景_1" tags="" position="600,600" size="100,100">&lt;&lt;=condtext([
-[inTime(8.5,10), &quot;明明距离商场开门的时间还很早，但已经有人陆陆续续聚集在入口广场上了。&quot;],
-[inTime(10,18), &quot;营业中的嘉庆广场，无论是广场外部还是商场内部，人来人往，十分热闹。&quot;],
-[inTime(18,20), &quot;已经到晚饭时间了，商场内的餐厅传来了美味的香气。比起白天，人已经少了很多，但依然热闹。&quot;],
-[inTime(20,21), &quot;临近关闭时间了，但稀稀拉拉的依然有不少人在商场内部闲逛。广场上倒是多了些许移动小吃摊，给下班的人提供热量。&quot;],
-[&quot;else&quot;,&quot;商场建筑黑漆漆的，已经完全关闭。但广场上依然亮着点点灯光，夜晚的喷水广场在点点灯光下，十分好看。&quot;]
-])&gt;&gt;
-
-&lt;br&gt;</tw-passagedata><tw-passagedata pid="46" name="商场闲逛_1" tags="" position="725,600" size="100,100">&lt;&lt;=either(
-&quot;&lt;&lt;you&gt;&gt;坐在南面入口广场一侧的椅子上，仰头看着绿茵茵的木棉树，偶尔会发现在树枝中跳窜的小麻雀。&quot;,
-&quot;&lt;&lt;you&gt;&gt;走在广场上，观察着来来往往的人群，目光时不时被在路边派发传单的布偶人吸引。&quot;,
-&quot;&lt;&lt;you&gt;&gt;拿起手机，以商场为背景，给自己拍了张新的照片。&quot;,
-&quot;&lt;&lt;you&gt;&gt;站在广场角落的报亭前，随手拿起一份报纸看了眼今天的新闻。&quot;,
-)&gt;&gt;</tw-passagedata><tw-passagedata pid="47" name="商店" tags="location" position="850,600" size="100,100">&lt;&lt;location &quot;AW服装店&quot;&gt;&gt;&lt;&lt;mode &quot;location&quot;&gt;&gt;
-
-&lt;span class=&quot;title&quot;&gt;服装店&lt;/span&gt;&lt;br&gt;
-&lt;div class=&quot;lbox&quot;&gt;
-商场里的服装店。商品琳琅满目，什么都有。&lt;br&gt;
-&lt;/div&gt;
-&lt;&lt;set $shoptype to [&quot;all&quot;,&quot;offline&quot;]&gt;&gt;
-
-&lt;&lt;include &quot;试衣间&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="48" name="Event" tags="eventloop nosave" position="975,600" size="100,100">&lt;&lt;mode &quot;event&quot;&gt;&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="47" name="Event" tags="eventloop nosave" position="850,600" size="100,100">&lt;&lt;mode &quot;event&quot;&gt;&gt;
 
 &lt;div id=&quot;eventsituation&quot;&gt;
 &lt;&lt;CallEvent&gt;&gt;
@@ -14474,7 +14561,7 @@ function wait(text) {
 
 &lt;div id=&quot;eventeffect&quot;&gt;
 &lt;&lt;CallEventEffect&gt;&gt;
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="49" name="EventSystem" tags="widget" position="1100,600" size="100,100">/* 再现ERA口上系统的TRYCALL体系 主 */
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="48" name="EventSystem" tags="widget" position="975,600" size="100,100">/* 再现ERA口上系统的TRYCALL体系 主 */
 &lt;&lt;widget &quot;CallEvent&quot;&gt;&gt;
 &lt;&lt;if setEvent() isnot false&gt;&gt;
     &lt;&lt;set _passagename to setEvent()&gt;&gt;
@@ -14557,12 +14644,12 @@ function wait(text) {
 
 &lt;&lt;/if&gt;&gt;
 
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="50" name="主线 开幕：EventFirst" tags="" position="1225,600" size="100,100">&lt;&lt;set $count to 0&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="49" name="主线 开幕：EventFirst" tags="" position="1100,600" size="100,100">&lt;&lt;set $count to 0&gt;&gt;
 &lt;&lt;set $UI.nextbutton to false&gt;&gt;
 &lt;&lt;set $eventnext to 0&gt;&gt;
-&lt;&lt;bookmark &quot;主线开幕_初次&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="51" name="主线 开幕-初次" tags="" position="100,725" size="100,100">&lt;div id=&#39;opcontainer&#39;&gt;
+&lt;&lt;bookmark &quot;主线开幕_初次&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="50" name="主线 开幕-初次" tags="" position="1225,600" size="100,100">&lt;div id=&#39;opcontainer&#39;&gt;
 &lt;div id=&quot;weirdtext&quot;&gt;&lt;&lt;Opening $count&gt;&gt;&lt;/div&gt;
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="52" name="主线 开幕-初次：E" tags="" position="225,725" size="100,100">&lt;&lt;if $count lt 8&gt;&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="51" name="主线 开幕-初次：E" tags="" position="100,725" size="100,100">&lt;&lt;if $count lt 8&gt;&gt;
 &lt;&lt;addclass &quot;#eventsituation&quot; &quot;weirdtext&quot;&gt;&gt;
 &lt;&lt;script&gt;&gt;
 //requires jQuery because I am lazy.
@@ -14573,7 +14660,7 @@ $(document).ready(function(){
 &lt;&lt;else&gt;&gt;
 &lt;&lt;removeclass &quot;#eventsituation&quot; &quot;weirdtext&quot;&gt;&gt;
 &lt;&lt;replace &#39;#opcontainer&#39;&gt;&gt;&lt;&lt;Opening $count&gt;&gt;&lt;&lt;/replace&gt;&gt;
-&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="53" name="主线 开幕-初次：W" tags="widget" position="350,725" size="100,100">&lt;&lt;widget &quot;Opening&quot;&gt;&gt;
+&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="52" name="主线 开幕-初次：W" tags="widget" position="225,725" size="100,100">&lt;&lt;widget &quot;Opening&quot;&gt;&gt;
 
 &lt;&lt;switch $args[0]&gt;&gt;
 &lt;&lt;case 0&gt;&gt;
@@ -14687,7 +14774,7 @@ $(document).ready(function(){
 
 &lt;&lt;/switch&gt;&gt;
 
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="54" name="主线 开幕-初次：S" tags="" position="475,725" size="100,100">&lt;&lt;switch $count&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="53" name="主线 开幕-初次：S" tags="" position="350,725" size="100,100">&lt;&lt;switch $count&gt;&gt;
 &lt;&lt;case 0&gt;&gt;
 	&lt;&lt;set _text to Lang(&quot;睁开眼睛&quot;,&quot;Open The Eyes&quot;)&gt;&gt;
 	&lt;div class=&quot;Wselect&quot;&gt;&lt;&lt;link _text&gt;&gt;&lt;&lt;set $count to 1&gt;&gt;&lt;&lt;Revent&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
@@ -14730,7 +14817,7 @@ $(document).ready(function(){
 	&lt;&lt;set _text to Lang(&quot;继续&quot;,&quot;Next&quot;)&gt;&gt;
 	&lt;div @class=&quot;($count &gt;= 8 ? &#39;Eselect&#39; : &#39;Wselect&#39; )&quot;&gt;&lt;&lt;link _text&gt;&gt;&lt;&lt;set $count to $eventnext&gt;&gt;&lt;&lt;Revent&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
 
-&lt;&lt;/switch&gt;&gt;</tw-passagedata><tw-passagedata pid="55" name="主线 开幕-初次-穿越版" tags="" position="600,725" size="100,100">&lt;&lt;Opening2 $count&gt;&gt;</tw-passagedata><tw-passagedata pid="56" name="主线 开幕-初次-穿越版：W" tags="widget" position="725,725" size="100,100">&lt;&lt;widget &quot;Opening2&quot;&gt;&gt;
+&lt;&lt;/switch&gt;&gt;</tw-passagedata><tw-passagedata pid="54" name="主线 开幕-初次-穿越版" tags="" position="475,725" size="100,100">&lt;&lt;Opening2 $count&gt;&gt;</tw-passagedata><tw-passagedata pid="55" name="主线 开幕-初次-穿越版：W" tags="widget" position="600,725" size="100,100">&lt;&lt;widget &quot;Opening2&quot;&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
 &lt;&lt;switch $count&gt;&gt;
 &lt;&lt;case 0&gt;&gt;
@@ -14852,7 +14939,7 @@ $(document).ready(function(){
 &lt;&lt;/switch&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
 
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="57" name="主线 开幕-初次-穿越版：S" tags="" position="850,725" size="100,100">&lt;&lt;switch $count&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="56" name="主线 开幕-初次-穿越版：S" tags="" position="725,725" size="100,100">&lt;&lt;switch $count&gt;&gt;
 &lt;&lt;case 1&gt;&gt;
 &lt;&lt;set _text to Lang(&quot;拿起手机&quot;,&quot;Pick up the phone&quot;)&gt;&gt;
 &lt;div class=&quot;Eselect&quot;&gt;&lt;&lt;link _text&gt;&gt;&lt;&lt;set $count to 2&gt;&gt;&lt;&lt;Revent&gt;&gt;&lt;&lt;passtime 2&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
@@ -14900,7 +14987,7 @@ $(document).ready(function(){
 &lt;&lt;set _text to Lang(&quot;继续&quot;,&quot;Next&quot;)&gt;&gt;
 &lt;div class=&quot;Eselect&quot;&gt;&lt;&lt;link _text&gt;&gt;&lt;&lt;set $count to $eventnext&gt;&gt;&lt;&lt;Revent&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
 
-&lt;&lt;/switch&gt;&gt;</tw-passagedata><tw-passagedata pid="58" name="主线 开幕-轮回" tags="" position="975,725" size="100,100">&lt;&lt;bookmark &quot;主线开幕_轮回&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="59" name="PC 主线-开幕-房间描述" tags="nobr" position="1100,725" size="100,100">&lt;&lt;lang 
+&lt;&lt;/switch&gt;&gt;</tw-passagedata><tw-passagedata pid="57" name="主线 开幕-轮回" tags="" position="850,725" size="100,100">&lt;&lt;bookmark &quot;主线开幕_轮回&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="58" name="PC 主线-开幕-房间描述" tags="nobr" position="975,725" size="100,100">&lt;&lt;lang 
 &quot;一睁开眼，首先看到的是茂绿的窗外，响亮的蝉鸣宣告着当前的季节。窗户旁摆放着一张大书桌，上面摆放着&lt;&lt;if $PC.type is 2&gt;&gt;一个宽屏大液显&lt;&lt;elseif $PC.type is 1&gt;&gt;新帝HQ24数位屏和数位板&lt;&lt;else&gt;&gt;一个电脑屏幕&lt;&lt;/if&gt;&gt;，书桌旁的小桌子上则是电脑主机。在靠近书桌的墙边，则整齐地摆放着两个书架，书架上是&lt;&lt;switch $PC.type&gt;&gt;&lt;&lt;case 1&gt;&gt;各种漫画和小说还有塑料小人&lt;&lt;case 2&gt;&gt;各种各样的书籍&lt;&lt;case 3&gt;&gt;各种修仙小说和漫画&lt;&lt;/switch&gt;&gt;，墙上则&lt;&lt;switch $PC.type&gt;&gt;&lt;&lt;case 1&gt;&gt;挂着一些远古生物的挂画和各种游戏海报&lt;&lt;case 2&gt;&gt;挂着一些漂亮的装饰画&lt;&lt;case 3&gt;&gt;挂着一个黑白两色的八卦阵和一些仙侠作品的海报&lt;&lt;/switch&gt;&gt;&quot;
 
 &quot;Across from the bed is the window, and outside the window is the loud sound of cicadas announcing the current season. Right next to the window sits a large desk with a computer with two screens, two bookshelves lined up side by side with various books and comics and some anime figurines, and posters of superheroes on the wall&quot;

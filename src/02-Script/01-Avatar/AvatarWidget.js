@@ -77,7 +77,7 @@ F.warmth = warmth
 
 function gonaked(mode){
 
-    if((Equip.over_up && mode=="debug") || mode!="debug"){
+    if((Equip.over_up && mode=="debug") || !mode){
         V.TEquip = clone(V.Equip)
     }
 

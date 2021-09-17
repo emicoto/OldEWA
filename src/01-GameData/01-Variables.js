@@ -145,6 +145,7 @@ F.InitGame = function(){
     V.local.last = "单身公寓"    
 
     V.map = D.mapdata.景南市.怡安小区
+    V.home = "单身公寓"
 
     //宠物
     V.pet = clone(D.pet.史莱姆)

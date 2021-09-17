@@ -1,0 +1,83 @@
+﻿:: 怡安小区 [location]
+<<setmap "怡安小区">><<location "怡安小区">><<mode "location">>
+
+<div id="append-text" class="append-normal"></div>
+<div id="situation" class="situation">
+<<you>>站在公寓楼前，在手机上查看景南市的地图，思考着接下来去哪里。<br>
+</div>
+
+<br>
+<<if $Flag.interactionlock isnot true>>
+<div class="tolink">
+/* 可以进行的互动 */
+<<link "回家　　　 5m" "你的家 单身公寓">><<passtime 5>><</link>>　　
+<<link "按门铃　　 2m" "按门铃">><<passtime 2>><</link>><br>
+<<link "共享菜园　 3m" "共享菜园">><<passtime 3>><</link>>　　
+<<link "去公园散步 3m" "怡安小区公园">><<passtime 3>><</link>><br>
+</div>
+
+<div id="navi" class="navi_unable">
+    <<navi>>
+</div>
+<</if>>
+
+
+:: 怡安小区公园 [location]
+<<location "小区公园">><<mode "location">>
+
+<div id="append-text" class="append-normal"></div>
+<div id="situation" class="situation">
+<<you>>坐在公园的长椅上，悠闲地看着天上的云朵，偶然会被飞过的小鸟吸引目光。<br>
+</div>
+
+<br>
+<div class="tolink">
+<<link "散步　　10m">><<passtime 10>><</link>><br>
+</div>
+
+<div id="navi" class="navi_unable">
+    <<navi>>
+</div>
+
+:: 按门铃 [event]
+
+<<you>>按下了邻居的门铃,可惜没有任何回应。<br>
+<br>
+<<link "离开" "怡安小区">><</link>>
+
+:: 共享菜园
+<<location "共享菜园">><<mode "location">>
+
+<<you>>站在菜地前,看着各种蔬菜徐徐生长着。<br>
+<br>
+<div class="tolink">
+<<link "浇水　　5m" $passage>><<passtime 5>><</link>>
+<<link "松土　　10m" $passage>><<passtime 10>><</link>><br>
+<<link "离开　　3m" "怡安小区">><</link>>
+</div>
+
+<div id="navi" class="navi_unable">
+    <<navi>>
+</div>
+
+
+:: 小卖部
+<<location "小卖部">><<mode "location">>
+
+<<you>>站在小卖部门前，看着货车把一箱又一箱的物资往里面搬运。<br>
+最近似乎在整顿，距离开店还有点日子……<br>
+<br>
+<div class="tolink">
+<<link "离开　　3m" "怡安小区">><</link>>
+</div>
+
+<div id="navi" class="navi_unable">
+    <<navi>>
+</div>
+
+:: 虹猫小店
+<<location "虹猫小店">>
+
+<div id="append-text" class="append-normal"><span id="action-text2"><<you>>走进了虹猫小店，看着各种各样的物品思考着要买点什么。</span></div>
+
+/* <<include "商店购物">> */

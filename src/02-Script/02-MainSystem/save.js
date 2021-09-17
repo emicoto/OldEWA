@@ -120,3 +120,16 @@ window.isJsonString = function(s) {
 	}
 	return true;
 }
+
+window.updateExported = function(){
+	if(V.SaveDetails != undefined){
+		V.SaveDetails.days = clone(V.days)
+		V.SaveDetails.exported ++
+	}
+}
+
+/*
+if(V.days > V.SaveDetails.days + V.SaveDetails.frequency){
+	//你已经有段时间没导出存档了，为了避免以意外发生，建议及时导出存档。
+}
+*/

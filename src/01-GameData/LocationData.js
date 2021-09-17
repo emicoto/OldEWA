@@ -1,7 +1,7 @@
 ﻿D.list.locatags = [
     "无",
 
-    "交通","公园","菜园","活动","停车点","景观","信仰","广场","餐厅","商店","便利店","仓库","夜店", 
+    "交通","公园","菜园","活动","停车点","景观","信仰","广场","餐厅","商店","便利店","仓库","夜店", "营业",
 
     "家" , "厨房", "休息" , "沐浴" , "衣柜", "电脑" , "WIFI" , "学习" , "私宅" , //自己家是'家',别人家是私宅
 
@@ -26,6 +26,7 @@ D.map.通用 = {
     公交站 : {
         place:"公交站", side:"室外", group: "通用",
         tag:["交通","大道"],
+        open: 300, close: 60,
         chara:[],
         bus:true, bike: true,
         img:"busstop",
@@ -33,6 +34,7 @@ D.map.通用 = {
     },
     地铁站 : {
         place:"地铁站", side:"室内", group: "通用",
+        open: 300, close: 60, 
         tag:["交通","地下"],
         chara:[],
         subway:true,
@@ -61,6 +63,13 @@ D.map.通用 = {
         img:"bathroom",
         situation:[],
     },
+    卧室 :{
+        place:"卧室", side:"室内", group: "通用",
+        tag:["休息","学习","电脑"],
+        chara:[],
+        img:"bedroom",
+        situation:[],
+    },
     公共厕所 : {
         place:"公共厕所", side:"室内", group:"通用",
         tag:["厕所","狭窄"],
@@ -84,7 +93,8 @@ D.map.通用 = {
     },
     AW服装店 : {
         place:"AW服装店", side:"室内", group: "通用",
-        tag:["服装店","更衣间"],
+        open:600, close: 1110, 
+        tag:["服装店","更衣间","营业"],
         chara:[],
         img:"AWclothes",
         description(){
@@ -94,7 +104,8 @@ D.map.通用 = {
     },
     汉堡王  : {
         place:"汉堡王", side:"室内", group: "通用",
-        tag:["快餐","休息"],
+        open: 360, close: 1380, 
+        tag:["快餐","休息","营业"],
         chara:[],
         img:"burgerking",
         description(){
@@ -117,7 +128,7 @@ D.mapdata.景南市 = {
         index:"南兴区", enter: "怡安小区",
         },
     嘉庆广场:{
-        links:{  嘉庆广场: 0, 停车场: -5, 公交站: 2, 地铁站: -3, 景润超市:-4, 公共厕所: 3, 汉堡王: 4, AW服装店:5,},
+        links:{  嘉庆广场: 0, 停车场: -5, 公交站: 2, 地铁站: -3, 汉堡王: -1, 景润超市:-4, 公共厕所: 3, AW服装店:5,},
         index: "南兴区", enter:"嘉庆广场",
     },    
     商业街:{
@@ -128,7 +139,7 @@ D.mapdata.景南市 = {
     //位于公交站或地铁站时是不会有 移动按钮. 而是显示路线图, 直接到全市各个站点.
     南兴区:{
         links: {
-            公交站:0, 地铁站:15, 怡安小区: 0, 商业街: -12, 箱庭托儿所: -10,  嘉庆广场: 15, 市十三中: 30, 金福酒家: 40, 市第七医院: 150, 派出所: 100, 消防所: 120, 
+            公交站:0, 地铁站:15, 怡安小区: 0, 商店街: -12, 箱庭托儿所: -10,  嘉庆广场: 15, 市十三中: 30, 金福酒家: 40, 市第七医院: 150, 派出所: 100, 消防所: 120, 
         },
         index:"景南市",
     }
@@ -175,6 +186,7 @@ D.map.景南市.怡安小区 = {
 
     小区公园 : {
         place:"小区公园", side:"室外", group:"怡安小区", passage: "怡安小区公园",
+        title: "怡安小区 - 公园",
         tag:["公园","树丛","活动场所","WIFI"],
         chara:[], 
         bike:true, homebutton: true,
@@ -188,8 +200,10 @@ D.map.景南市.怡安小区 = {
     },
 
     小卖部 : {
-        place: "小卖部", side:"室内", group: "怡安小区", passage: "怡安小区小卖部",
-        tag:["便利店","移动摊位"],
+        place: "小卖部", side:"室外", group: "怡安小区", passage: "虹猫小店",
+        title: "虹猫小店",
+        open: 360, close:1200,
+        tag:["便利店","移动摊位","营业"],
         chara:[],
         bike:true,
         img:"conbini",
@@ -198,8 +212,18 @@ D.map.景南市.怡安小区 = {
         }
     },
 
+    虹猫小店 : {
+        place: "虹猫小店", side:"室内", group:"怡安小区", passage:"虹猫小店-内部",
+        open: 360, close:1200,
+        tag:["便利店","移动摊位","营业"],
+        chara:[],
+        bike:true,
+        img:"conbini_inter",
+    },
+
     共享菜园 : {
         place: "共享菜园", side: "室外", group: "怡安小区",
+        title:"怡安小区 - 菜园",
         tag: ["光照", "菜园"],
         chara: [],
         img: "saien",
@@ -215,6 +239,7 @@ D.map.景南市.嘉庆广场 = {
     嘉庆广场 : {
         place:"嘉庆广场", side:"室外", group: "嘉庆广场",
         tag:["交通","商业广场","活动场所","停车点","移动摊位","移动餐车"],
+        open: 600, close:1260,
         chara:[],
         bus:true, subway:true, car:true, bike:true,
         img:"yiansquare",
@@ -237,7 +262,8 @@ D.map.景南市.嘉庆广场 = {
     },
     景润超市 : {
         place:"景润超市", side:"室内", group: "嘉庆广场",
-        tag:["交通","商店","快餐","通风口","逃生口"],
+        tag:["交通","商店","快餐","通风口","逃生口","营业"],
+        open: 600, close: 1200,
         chara:[],
         subway:true,
         img:"supermark",
@@ -257,6 +283,7 @@ D.map.景南市.嘉庆广场 = {
 D.map.景南市.商店街 = {
     商店街 : {
         place: "商店街", side: "室外", group: "商店街", passage: "宜兴步行街",
+        title:"宜兴商业步行街",
         tag: ["交通","停车点","移动摊位","移动餐车","下水道出入口"],
         chara: [],
         img: "shoutenkai",
@@ -268,7 +295,9 @@ D.map.景南市.商店街 = {
     },
     生鲜市场 : {
         place:"生鲜市场", side:"室外", group:"商店街",
+        title:"宜兴菜市场",
         tag: ["下水道出入口","宽敞","停车点"],
+        open: 270, close:1080,
         chara: [],
         img: "ichiba",
         bike: true, car: true,
@@ -279,7 +308,9 @@ D.map.景南市.商店街 = {
     },
     五金店 : {
         place: "五金店", side: "室内", group: "商店街",
-        tag: ["商店"],
+        title:"百合五金铺",
+        tag: ["商店","营业"],
+        open: 570, close:1080,
         chara: [],
         img: "gokin",
         bike: true, car: true,
@@ -292,7 +323,8 @@ D.map.景南市.商店街 = {
 
     旺记茶铺 : {
         place: "旺记茶铺", side:"室内", group:"商店街",
-        tag: ["餐厅","休息"],
+        tag: ["餐厅","休息","营业"],
+        open: 570, close: 1230,
         chara: [],
         img: "chashi",
         bike: true, car: true,
@@ -303,7 +335,8 @@ D.map.景南市.商店街 = {
     },
     天地书店 : {
         place: "天地书店", side: "室内", group: "商店街",
-        tag: ["商店","WIFI","休息"],
+        tag: ["商店","WIFI","休息","营业"],
+        open: 510, close: 1140,
         chara: [],
         img: "bookstore",
         bike: true, car: true,
@@ -313,7 +346,8 @@ D.map.景南市.商店街 = {
     },
     开封菜 : {
         place: "开封菜", side: "室内", group: "商店街",
-        tag: ["餐厅","厕所"],
+        tag: ["餐厅","厕所","营业"],
+        open: 660, close: 1290,
         chara: [],
         img: "famiresu",
         bike: true, car: true,
@@ -324,7 +358,9 @@ D.map.景南市.商店街 = {
     },
     药店 : {
         place: "药店", side: "室内", group: "商店街",
-        tag: ["商店"],
+        tag: ["商店","营业"],
+        title:"健康药房",
+        open: 450, close: 1110,
         chara: [],
         img: "phamacy",
         bike: true, car: true,
@@ -335,18 +371,21 @@ D.map.景南市.商店街 = {
     },
     发廊 : {
         place: "发廊", side: "室内", group: "商店街",
-        tag: ["理发","美容","厕所"],
+        tag: ["理发","美容","厕所","营业"],
+        title:"梦丽沙龙",
+        open: 600, close: 1320,
         chara: [],
         img: "hairsalon",
         bike: true, car: true,
         description(){
-            return "这附近唯一的一家发廊。现代化的装修为这家有点年纪的发廊增添了些许时尚感。除了理发，也做点美容护肤、刺青之类的活。"
+            return "这附近唯一的一家发廊。现代化的装修为这家有点年纪的发廊增添了些许时尚感。除了理发，也做点美容护肤、推拿按摩之类的活。"
         },
         situation:[],
     },
     中医馆 :{
         place: "中医馆", side: "室内", group: "商店街", title:"柳安堂",
-        tag: ["医疗"],
+        tag: ["医疗","营业"],
+        open: 480, close:1020,
         chara: [],
         img: "zhongyi",
         bike: true, car: true,
@@ -358,6 +397,7 @@ D.map.景南市.商店街 = {
     逸安武馆 : {
         place: "逸安武馆", side: "室内", group: "商店街",
         tag: ["武馆","比武","江湖人士"],
+        open: 270, close: 1080, //晚上六点后就不开学堂了
         chara: [],
         img: "hairsalon",
         bike: true, car: true,
@@ -373,7 +413,8 @@ D.map.景南市.商店街 = {
 D.map.景南市.南兴区 = {
     箱庭托儿所 : {
         place: "箱庭幼儿园", side: "室外", group: "南兴区",
-        tag: ["托儿所","儿童","大道","光照","停车点"],
+        tag: ["托儿所","儿童","大道","光照","停车点","营业"],
+        open: 540, close: 960,
         chara: [],
         img: "kidsgarden",
         bike: true, car: true, bus:true,
@@ -385,6 +426,7 @@ D.map.景南市.南兴区 = {
     市十三中 : {
         place: "市十三中", side: "室外", group: "南兴区",
         tag: ["学校","学习","大道","光照","停车点"],
+        open: 360, close: 1320,
         chara: [],
         img: "qischool",
         bike: true, car: true, bus:true,
@@ -395,7 +437,8 @@ D.map.景南市.南兴区 = {
     },
     金福酒家 : {
         place: "金福酒家", side: "室内", group: "南兴区",
-        tag: ["餐厅","大道","停车点","休息","厕所"],
+        tag: ["餐厅","大道","停车点","休息","厕所","营业"],
+        open: 540, close: 1320,
         chara: [],
         img: "jiujia",
         bike: true, car: true, bus:true,
@@ -439,6 +482,7 @@ D.map.景南市.南兴区 = {
     },
     怡安小区 : D.map.景南市.怡安小区.怡安小区,
     嘉庆广场 : D.map.景南市.嘉庆广场.嘉庆广场,
+
     商店街 : D.map.景南市.商店街.商店街,
     地铁站 : D.map.通用.地铁站,
     公交站 : D.map.通用.公交站,

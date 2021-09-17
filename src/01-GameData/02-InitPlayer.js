@@ -121,7 +121,7 @@ F.InitPlayer = function(){
         trait:{}, state:{}, 
         base:{}, 
         rpg:{}, equip:{},
-        abl:{}, school:{}, eskl:{}, lewd:{},
+        abl:{}, school:{}, sexabl:{}, lewd:{},
         genital:{}, sens:{}, stretch:{}, produce:{}, bottom:{}, wet:{},
         vaginity:{}, mark:{}, rec:{}, exp:{},
     }
@@ -216,7 +216,12 @@ F.InitPlayer = function(){
         意志 : 0,  /* 影响各种耐性和抵抗力 */
     }
 
-    PC.eskl = {
+    //具体学会的技能。有才能进行相关行为。max 100
+    PC.skill = { 
+        开锁 : 0, 黑客:0, 潜行:0,
+    }
+
+    PC.sexabl = {
         性技巧 : 0,  /* 影响性攻击效果 */
         性耐性 : 0,   /* 影响性抵抗效果 */
         口技 : 0,
@@ -256,12 +261,7 @@ F.InitPlayer = function(){
 
     //现在状态
     PC.state = {}
-
-    for(let i=0; i< D.pcstatelist.length; i++){
-        let n = D.pcstatelist[i]
-        PC.state[n] = false
-    }
-
+    D.pcstatelist.forEach((n)=>{ PC.state[n]=false })
 
     /*  童贞/处女记录
         失去时记录日期、情况、对象。 
@@ -273,11 +273,7 @@ F.InitPlayer = function(){
     PC.vaginity = { "初吻" : 1, "童贞" : 1, "处女" : 1, "A处女" : 1}
 
     // 各种经验
-    for(let i=0; i < D.explist.length; i++){
-        let n = D.explist[i]
-        PC.exp[n] = 0
-    }
-
+    D.explist.forEach((n)=>{ PC.exp[n]=0 })
 
     /* 当前事件中的次数/数量，今天总数，累计总数 c=current,t=today,a=alltime*/
     PC.rec = {}
@@ -297,10 +293,7 @@ F.InitPlayer = function(){
 
     //皮肤上可刺青的图层
     PC.skin = {}
-    for(let i=0; i< D.skinlayer.length; i++){
-        let n = D.skinlayer[i]
-        PC.skin[n] = null
-    }
+    D.skinlayer.forEach((n)=>{ PC.skin[n]=null })
 
     //表情
     V.PFace = {
@@ -333,14 +326,8 @@ F.InitPlayer = function(){
     }
 
     PC.tcsv = {}
-    for(let i=0; i < D.tcsvflag.length; i++){
-        let n = D.tcsvflag[i]
-        PC.tcsv[n] = false
-    }
-    for(let i=0; i < D.tcsvnum.length; i++){
-        let n = D.tcsvnum[i]
-        PC.tcsv[n] = 0
-    }
+    D.tcsvflag.forEach((n)=>{ PC.tcsv[n]=false })
+    D.tcsvnum.forEach((n)=>{ PC.tcsv[n]=0 })
 
     //玩家角色对其他NPC的好感度
     PC.favor = {

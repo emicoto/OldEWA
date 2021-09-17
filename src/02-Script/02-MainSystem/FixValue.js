@@ -236,7 +236,7 @@ function FixValue() {
     PC.rpg.MP[1] = PC.base.魔力[1]
     PC.rpg.MP[0] = PC.base.魔力[0]
 
-    PC.rpg.SP[1] = Math.round(Math.clamp(PC.rpg.SP[1],50,50+PC.eskl.性耐性/5))
+    PC.rpg.SP[1] = Math.round(Math.clamp(PC.rpg.SP[1],50,50+PC.sexabl.性耐性/5))
     PC.rpg.SP[0] = Math.clamp(PC.rpg.SP[0],0,PC.rpg.SP[1])
 
     PC.rpg.ATK = fixfloat(Math.clamp((10+PC.abl.战技/10),1,500),2)
@@ -256,28 +256,30 @@ function FixValue() {
     }
 
     const school = Object.keys(PC.school) //学校
-    for(let i=0; i< school.length; i++){
-        let n = school[i]
+    school.forEach((n)=>{
         PC.school[n] = Math.clamp(PC.school[n],0,1200)
-    }
+    })
+    
 
-    const abl = Object.keys(PC.abl) //技能
-    for(let i=0; i<abl.length; i++){
-        let n = abl[i]
+    const abl = Object.keys(PC.abl) //能力
+    abl.forEach((n)=>{
         PC.abl[n] = Math.clamp(PC.abl[n],0,max())
-    }
+    })
 
-    const eskl = Object.keys(PC.eskl) //性技
-    for(let i=0; i<eskl.length; i++){
-        let n = eskl[i]
-        PC.eskl[n] = Math.clamp(PC.eskl[n],0,1000)
-    }
+    const skill = Object.keys(PC.skill) //技能
+    skill.forEach((n)=>{
+        PC.skill[n] = Math.clamp(PC.skill[n],0,100)
+    })
+
+    const sexabl = Object.keys(PC.sexabl) //性技
+    sexabl.forEach((n)=>{
+        PC.sexabl[n] = Math.clamp(PC.sexabl[n],0,1000)
+    })
 
     const lewd = Object.keys(PC.lewd) //变态度
-    for(let i=0; i<lewd.length; i++){
-        let n = lewd[i]
+    lewd.forEach((n)=>{
         PC.lewd[n] = Math.clamp(PC.lewd[n],-1000,1000)
-    }
+    })
 
     setreveal()
 
